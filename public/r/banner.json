@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "banner",
+  "title": "Banner",
+  "description": "The Edgecom Banner component.",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "@edgecom/theme"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/banner.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst bannerVariants = cva(\"w-full\", {\n  variants: {\n    variant: {\n      default: \"bg-muted text-foreground\",\n      primary: \"bg-primary text-primary-foreground\",\n    },\n  },\n  defaultVariants: {\n    variant: \"default\",\n  },\n})\n\nfunction Banner({\n  className,\n  variant,\n  ...props\n}: React.ComponentProps<\"div\"> & VariantProps<typeof bannerVariants>) {\n  return (\n    <div\n      data-slot=\"banner\"\n      data-variant={variant ?? \"default\"}\n      className={cn(bannerVariants({ variant }), className)}\n      {...props}\n    />\n  )\n}\n\nfunction BannerContent({ className, ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <div className=\"container mx-auto px-4 md:px-6 2xl:max-w-[1400px]\">\n      <div\n        data-slot=\"banner-content\"\n        className={cn(\n          \"flex items-center justify-between gap-x-6 p-4\",\n          className\n        )}\n        {...props}\n      />\n    </div>\n  )\n}\n\nexport { Banner, BannerContent }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

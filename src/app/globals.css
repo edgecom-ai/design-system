@@ -1,26 +1,305 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-sans);
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  /* Commodity tint ramps (100 lightest → 900 darkest; 500 = categorical base) */
+  --color-chart-electricity-100: var(--chart-electricity-100);
+  --color-chart-electricity-300: var(--chart-electricity-300);
+  --color-chart-electricity-500: var(--chart-electricity-500);
+  --color-chart-electricity-700: var(--chart-electricity-700);
+  --color-chart-electricity-900: var(--chart-electricity-900);
+  --color-chart-water-100: var(--chart-water-100);
+  --color-chart-water-300: var(--chart-water-300);
+  --color-chart-water-500: var(--chart-water-500);
+  --color-chart-water-700: var(--chart-water-700);
+  --color-chart-water-900: var(--chart-water-900);
+  --color-chart-gas-100: var(--chart-gas-100);
+  --color-chart-gas-300: var(--chart-gas-300);
+  --color-chart-gas-500: var(--chart-gas-500);
+  --color-chart-gas-700: var(--chart-gas-700);
+  --color-chart-gas-900: var(--chart-gas-900);
+  --color-chart-temperature-100: var(--chart-temperature-100);
+  --color-chart-temperature-300: var(--chart-temperature-300);
+  --color-chart-temperature-500: var(--chart-temperature-500);
+  --color-chart-temperature-700: var(--chart-temperature-700);
+  --color-chart-temperature-900: var(--chart-temperature-900);
+  --color-chart-emissions-100: var(--chart-emissions-100);
+  --color-chart-emissions-300: var(--chart-emissions-300);
+  --color-chart-emissions-500: var(--chart-emissions-500);
+  --color-chart-emissions-700: var(--chart-emissions-700);
+  --color-chart-emissions-900: var(--chart-emissions-900);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-warning-emphasis: var(--warning-emphasis);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-info-emphasis: var(--info-emphasis);
+  /* Tinted "subtle" status surfaces + brand tint (banner / selected-row / pill) */
+  --color-primary-subtle: var(--primary-subtle);
+  --color-primary-subtle-foreground: var(--primary-subtle-foreground);
+  --color-success-emphasis: var(--success-emphasis);
+  --color-success-subtle: var(--success-subtle);
+  --color-success-subtle-foreground: var(--success-subtle-foreground);
+  --color-warning-subtle: var(--warning-subtle);
+  --color-warning-subtle-foreground: var(--warning-subtle-foreground);
+  --color-info-subtle: var(--info-subtle);
+  --color-info-subtle-foreground: var(--info-subtle-foreground);
+  --color-destructive-emphasis: var(--destructive-emphasis);
+  --color-destructive-subtle: var(--destructive-subtle);
+  --color-destructive-subtle-foreground: var(--destructive-subtle-foreground);
+  /* Elevated surface — above card (raised menus / popovers / hover panels) */
+  --color-elevated: var(--elevated);
+  --color-elevated-foreground: var(--elevated-foreground);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-emphasis: var(--primary-emphasis);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  /* Semantic type scale — size / line-height / weight in one token.
+     Use text-caption … text-display instead of ad-hoc text-xs/2xl. */
+  --text-caption: 0.75rem;
+  --text-caption--line-height: 1rem;
+  --text-caption--font-weight: 500;
+  --text-body: 0.875rem;
+  --text-body--line-height: 1.375rem;
+  --text-body-lg: 1rem;
+  --text-body-lg--line-height: 1.5rem;
+  --text-title: 1.125rem;
+  --text-title--line-height: 1.5rem;
+  --text-title--font-weight: 600;
+  --text-heading: 1.5rem;
+  --text-heading--line-height: 1.875rem;
+  --text-heading--font-weight: 600;
+  --text-heading--letter-spacing: -0.01em;
+  --text-display: 2.25rem;
+  --text-display--line-height: 2.5rem;
+  --text-display--font-weight: 700;
+  --text-display--letter-spacing: -0.02em;
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Tabular figures — align numeric columns in tables, KPIs, meter readouts. */
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+:root {
+  /* Pin native form controls (select, options, scrollbars) to the app theme
+     so they don't render dark on OS-dark machines while the app is in light. */
+  color-scheme: light;
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.16 0.01 254);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.16 0.01 254);
+  --primary: oklch(0.514 0.161 254.3);
+  --primary-foreground: oklch(0.985 0 0);
+  /* brand blue for text-on-light-surface use (links, subtle-fg) — 5.6:1 on white */
+  --primary-emphasis: oklch(0.5 0.161 254.3);
+  --secondary: oklch(0.967 0.003 254);
+  --secondary-foreground: oklch(0.21 0.01 254);
+  --muted: oklch(0.968 0.004 254);
+  --muted-foreground: oklch(0.55 0.02 254);
+  /* accent decoupled from primary — quiet cool-tinted hover/fill surface */
+  --accent: oklch(0.965 0.012 254);
+  --accent-foreground: oklch(0.35 0.03 254);
+  --destructive: oklch(0.577 0.245 27.325);
+  /* #00806C teal fill w/ white label text — 4.88:1 AA */
+  --success: oklch(0.536 0.1 176.6);
+  --success-foreground: oklch(0.985 0 0);
+  --success-emphasis: oklch(0.5 0.12 177.8);
+  /* #FFAA00 amber fill — too bright for white, so dark amber text — 11:1 AAA */
+  --warning: oklch(0.802 0.171 73.3);
+  --warning-foreground: oklch(0.28 0.05 80);
+  --warning-emphasis: oklch(0.52 0.12 70);
+  --info: oklch(0.53 0.13 220); /* darkened so white label text clears WCAG AA (~4.6:1) */
+  --info-foreground: oklch(0.985 0 0);
+  --info-emphasis: oklch(0.5 0.13 220);
+  /* Tinted status surfaces — light-mode banners / pills (AA text via *-emphasis) */
+  --primary-subtle: oklch(0.965 0.025 254);
+  --primary-subtle-foreground: var(--primary-emphasis);
+  --success-subtle: oklch(0.965 0.032 177.8);
+  --success-subtle-foreground: var(--success-emphasis);
+  --warning-subtle: oklch(0.965 0.05 85);
+  --warning-subtle-foreground: var(--warning-emphasis);
+  --info-subtle: oklch(0.965 0.032 220);
+  --info-subtle-foreground: var(--info-emphasis);
+  --destructive-emphasis: oklch(0.505 0.2 27);
+  --destructive-subtle: oklch(0.965 0.028 27);
+  --destructive-subtle-foreground: var(--destructive-emphasis);
+  /* Elevated surface above card */
+  --elevated: oklch(0.985 0.002 254);
+  --elevated-foreground: oklch(0.16 0.01 254);
+  --border: oklch(0.922 0.005 254);
+  --input: oklch(0.922 0.005 254);
+  --ring: oklch(0.514 0.161 254.3);
+  /* Commodity tint ramps — one hue per commodity, mode-independent */
+  --chart-electricity-100: oklch(0.94 0.05 75); /* amber */
+  --chart-electricity-300: oklch(0.86 0.11 75);
+  --chart-electricity-500: oklch(0.75 0.15 75);
+  --chart-electricity-700: oklch(0.6 0.13 75);
+  --chart-electricity-900: oklch(0.45 0.09 75);
+  --chart-water-100: oklch(0.94 0.035 254.3); /* blue — anchored to brand #0966C0 at 500 */
+  --chart-water-300: oklch(0.7 0.13 254.3);
+  --chart-water-500: oklch(0.514 0.161 254.3);
+  --chart-water-700: oklch(0.4 0.12 254.3);
+  --chart-water-900: oklch(0.31 0.09 254.3);
+  --chart-gas-100: oklch(0.93 0.04 25); /* red */
+  --chart-gas-300: oklch(0.82 0.1 25);
+  --chart-gas-500: oklch(0.62 0.2 25);
+  --chart-gas-700: oklch(0.5 0.18 25);
+  --chart-gas-900: oklch(0.4 0.13 25);
+  --chart-temperature-100: oklch(0.94 0.04 178); /* teal */
+  --chart-temperature-300: oklch(0.85 0.08 178);
+  --chart-temperature-500: oklch(0.68 0.12 178);
+  --chart-temperature-700: oklch(0.52 0.1 178);
+  --chart-temperature-900: oklch(0.4 0.07 178);
+  --chart-emissions-100: oklch(0.93 0.05 300); /* purple */
+  --chart-emissions-300: oklch(0.82 0.11 300);
+  --chart-emissions-500: oklch(0.55 0.18 300);
+  --chart-emissions-700: oklch(0.45 0.16 300);
+  --chart-emissions-900: oklch(0.35 0.12 300);
+  /* Categorical ramp = base (500) step of each commodity */
+  --chart-1: var(--chart-electricity-500);
+  --chart-2: var(--chart-water-500);
+  --chart-3: var(--chart-gas-500);
+  --chart-4: var(--chart-temperature-500);
+  --chart-5: var(--chart-emissions-500);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0.002 254);
+  --sidebar-foreground: oklch(0.16 0.01 254);
+  --sidebar-primary: oklch(0.514 0.161 254.3);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.965 0.012 254);
+  --sidebar-accent-foreground: oklch(0.35 0.03 254);
+  --sidebar-border: oklch(0.922 0.005 254);
+  --sidebar-ring: oklch(0.514 0.161 254.3);
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.16 0.01 254);
+}
+
+.dark {
+  color-scheme: dark;
+  --background: oklch(0.16 0.008 254);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0.008 254);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0.008 254);
+  --popover-foreground: oklch(0.985 0 0);
+  /* brand-exact #0966C0 fill — white label clears AA at 5.7:1 */
+  --primary: oklch(0.514 0.161 254.3);
+  --primary-foreground: oklch(0.985 0 0);
+  /* lighter brand tone for text-on-dark use (links, subtle-fg) — 7.8:1 on bg */
+  --primary-emphasis: oklch(0.72 0.14 254);
+  --secondary: oklch(0.28 0.01 254);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.27 0.008 254);
+  --muted-foreground: oklch(0.72 0.02 254);
+  /* accent decoupled from primary — quiet cool-tinted hover/fill surface */
+  --accent: oklch(0.278 0.018 254);
+  --accent-foreground: oklch(0.9 0.02 254);
+  /* deeper red so white label text clears AA — 4.74:1 (was 0.704 L, 2.77:1 FAIL) */
+  --destructive: oklch(0.57 0.2 22.216);
+  --success: oklch(0.7 0.12 177.8);
+  --success-foreground: oklch(0.18 0.02 178);
+  --success-emphasis: oklch(0.78 0.13 177.8);
+  --warning: oklch(0.82 0.16 80);
+  --warning-foreground: oklch(0.28 0.05 80);
+  --warning-emphasis: oklch(0.86 0.15 85);
+  --info: oklch(0.68 0.12 220);
+  --info-foreground: oklch(0.18 0.02 220);
+  --info-emphasis: oklch(0.75 0.12 220);
+  /* Tinted status surfaces — dark-mode banners / pills */
+  --primary-subtle: oklch(0.22 0.05 254);
+  --primary-subtle-foreground: var(--primary-emphasis);
+  --success-subtle: oklch(0.27 0.04 177.8);
+  --success-subtle-foreground: var(--success-emphasis);
+  --warning-subtle: oklch(0.27 0.05 80);
+  --warning-subtle-foreground: var(--warning-emphasis);
+  --info-subtle: oklch(0.27 0.045 220);
+  --info-subtle-foreground: var(--info-emphasis);
+  --destructive-emphasis: oklch(0.72 0.19 22);
+  --destructive-subtle: oklch(0.27 0.05 27);
+  --destructive-subtle-foreground: var(--destructive-emphasis);
+  /* Elevated surface above card (lighter than card in dark) */
+  --elevated: oklch(0.245 0.01 254);
+  --elevated-foreground: oklch(0.985 0 0);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.62 0.16 254.3);
+  /* chart tokens are mode-independent — defined once in :root */
+  --sidebar: oklch(0.205 0.008 254);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.514 0.161 254.3);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.278 0.018 254);
+  --sidebar-accent-foreground: oklch(0.9 0.02 254);
+  --sidebar-border: oklch(1 0 0 / 12%);
+  --sidebar-ring: oklch(0.62 0.16 254.3);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Shiki dual-theme code blocks (docs Code tabs). Source generated by
+   scripts/gen-docs-source.mjs with defaultColor:false, so each token carries
+   --shiki-light / --shiki-dark CSS variables the .dark class switches between. */
+.shiki,
+.shiki span {
+  color: var(--shiki-light);
+  background-color: transparent;
+}
+.dark .shiki,
+.dark .shiki span {
+  color: var(--shiki-dark);
+  background-color: transparent;
 }

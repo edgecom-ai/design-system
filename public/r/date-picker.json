@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "date-picker",
+  "title": "Date Picker",
+  "description": "The Edgecom Date Picker component.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "@edgecom/theme",
+    "@edgecom/button",
+    "@edgecom/calendar",
+    "@edgecom/popover"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/date-picker.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { CalendarIcon } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Button } from \"@/components/ui/button\"\nimport { Calendar } from \"@/components/ui/calendar\"\nimport { Popover, PopoverTrigger, PopoverContent } from \"@/components/ui/popover\"\n\nfunction DatePicker({\n  value,\n  defaultValue,\n  onValueChange,\n  placeholder = \"Pick a date\",\n  disabled,\n  className,\n}: {\n  value?: Date\n  defaultValue?: Date\n  onValueChange?: (date: Date | undefined) => void\n  placeholder?: string\n  disabled?: boolean\n  className?: string\n}) {\n  const [open, setOpen] = React.useState(false)\n  const [internal, setInternal] = React.useState<Date | undefined>(defaultValue)\n  const selected = value ?? internal\n\n  function handleSelect(date: Date | undefined) {\n    if (value === undefined) setInternal(date)\n    onValueChange?.(date)\n    if (date) setOpen(false)\n  }\n\n  return (\n    <Popover open={open} onOpenChange={setOpen}>\n      <PopoverTrigger\n        render={\n          <Button\n            variant=\"outline\"\n            disabled={disabled}\n            data-empty={!selected}\n            className={cn(\n              \"w-56 justify-start font-normal data-[empty=true]:text-muted-foreground\",\n              className\n            )}\n          >\n            <CalendarIcon data-icon=\"inline-start\" />\n            {selected\n              ? selected.toLocaleDateString(undefined, {\n                  year: \"numeric\",\n                  month: \"long\",\n                  day: \"numeric\",\n                })\n              : placeholder}\n          </Button>\n        }\n      />\n      <PopoverContent className=\"w-auto p-0\" align=\"start\">\n        <Calendar mode=\"single\" selected={selected} onSelect={handleSelect} autoFocus />\n      </PopoverContent>\n    </Popover>\n  )\n}\n\nexport { DatePicker }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "switch",
+  "title": "Switch",
+  "description": "The Edgecom Switch component.",
+  "dependencies": [
+    "@base-ui/react"
+  ],
+  "registryDependencies": [
+    "@edgecom/theme"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/switch.tsx",
+      "content": "import { Switch as SwitchPrimitive } from \"@base-ui/react/switch\"\n\nimport { cn } from \"@/lib/utils\"\n\ntype SwitchSize = \"default\" | \"sm\"\n\nconst switchRootSizes: Record<SwitchSize, string> = {\n  default: \"h-5 w-9\",\n  sm: \"h-4 w-7\",\n}\n\nconst switchThumbSizes: Record<SwitchSize, string> = {\n  default: \"size-4 data-[unchecked]:translate-x-0.5 data-[checked]:translate-x-4\",\n  sm: \"size-3 data-[unchecked]:translate-x-0.5 data-[checked]:translate-x-3.5\",\n}\n\nfunction Switch({\n  className,\n  size = \"default\",\n  ...props\n}: SwitchPrimitive.Root.Props & { size?: SwitchSize }) {\n  return (\n    <SwitchPrimitive.Root\n      data-slot=\"switch\"\n      className={cn(\n        \"peer inline-flex shrink-0 items-center rounded-full border border-transparent shadow-xs transition-colors outline-none\",\n        \"focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50\",\n        \"data-[unchecked]:bg-input data-[checked]:bg-primary\",\n        \"disabled:cursor-not-allowed disabled:opacity-50\",\n        switchRootSizes[size],\n        className\n      )}\n      {...props}\n    >\n      <SwitchPrimitive.Thumb\n        data-slot=\"switch-thumb\"\n        className={cn(\n          \"pointer-events-none block rounded-full bg-primary-foreground shadow-sm ring-0 transition-transform\",\n          switchThumbSizes[size]\n        )}\n      />\n    </SwitchPrimitive.Root>\n  )\n}\n\nexport { Switch }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

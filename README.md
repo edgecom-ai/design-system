@@ -1,3 +1,12 @@
+# ee-shadcn
+
+Edgecom Energy's design-system docs site **and** the source of truth for the private `@edgecom` shadcn component registry.
+
+- **Consuming, hosting, or updating the registry?** See **[REGISTRY.md](REGISTRY.md)**.
+- Design-system rules (tokens, typography, components) live in [CLAUDE.md](CLAUDE.md).
+
+---
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
@@ -5,13 +14,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 First, run the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
 pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.

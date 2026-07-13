@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "alert",
+  "title": "Alert",
+  "description": "The Edgecom Alert component.",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "@edgecom/theme"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/alert.tsx",
+      "content": "import { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst alertVariants = cva(\n  \"relative grid w-full grid-cols-[0_1fr] items-start gap-y-0.5 rounded-lg border px-4 py-3 text-sm has-[>svg]:grid-cols-[calc(var(--spacing)*4)_1fr] has-[>svg]:gap-x-3 has-data-[slot=alert-action]:pr-12 [&>svg]:size-4 [&>svg]:translate-y-0.5\",\n  {\n    variants: {\n      variant: {\n        default: \"border-border bg-card text-card-foreground [&>svg]:text-foreground\",\n        destructive:\n          \"border-destructive/30 bg-destructive/10 text-destructive-emphasis\",\n        success:\n          \"border-success/30 bg-success/10 text-success-emphasis\",\n        warning:\n          \"border-warning/40 bg-warning/10 text-warning-emphasis\",\n        info: \"border-info/30 bg-info/10 text-info-emphasis\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  }\n)\n\nfunction Alert({\n  className,\n  variant = \"default\",\n  ...props\n}: React.ComponentProps<\"div\"> & VariantProps<typeof alertVariants>) {\n  return (\n    <div\n      data-slot=\"alert\"\n      role=\"alert\"\n      className={cn(alertVariants({ variant, className }))}\n      {...props}\n    />\n  )\n}\n\nfunction AlertTitle({ className, ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      data-slot=\"alert-title\"\n      className={cn(\n        \"col-start-2 line-clamp-1 min-h-4 font-medium tracking-tight\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction AlertDescription({ className, ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      data-slot=\"alert-description\"\n      className={cn(\n        \"col-start-2 grid justify-items-start gap-1 text-sm [&_p]:leading-relaxed\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction AlertAction({ className, ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      data-slot=\"alert-action\"\n      className={cn(\n        \"absolute top-3 right-3 [&>button]:cursor-pointer [&>button]:opacity-70 [&>button]:transition-opacity [&>button]:hover:opacity-100\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nexport { Alert, AlertTitle, AlertDescription, AlertAction }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

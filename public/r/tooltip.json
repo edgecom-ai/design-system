@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tooltip",
+  "title": "Tooltip",
+  "description": "The Edgecom Tooltip component.",
+  "dependencies": [
+    "@base-ui/react"
+  ],
+  "registryDependencies": [
+    "@edgecom/theme"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/tooltip.tsx",
+      "content": "import { Tooltip as TooltipPrimitive } from \"@base-ui/react/tooltip\"\n\nimport { cn } from \"@/lib/utils\"\n\nfunction TooltipProvider({\n  delay = 200,\n  ...props\n}: TooltipPrimitive.Provider.Props) {\n  return <TooltipPrimitive.Provider delay={delay} {...props} />\n}\n\nfunction Tooltip(props: TooltipPrimitive.Root.Props) {\n  return <TooltipPrimitive.Root {...props} />\n}\n\nfunction TooltipTrigger(props: TooltipPrimitive.Trigger.Props) {\n  return <TooltipPrimitive.Trigger {...props} />\n}\n\nfunction TooltipContent({\n  className,\n  side = \"top\",\n  sideOffset = 6,\n  children,\n  ...props\n}: TooltipPrimitive.Popup.Props &\n  Pick<TooltipPrimitive.Positioner.Props, \"side\" | \"sideOffset\">) {\n  return (\n    <TooltipPrimitive.Portal>\n      <TooltipPrimitive.Positioner side={side} sideOffset={sideOffset}>\n        <TooltipPrimitive.Popup\n          data-slot=\"tooltip-content\"\n          className={cn(\n            \"z-50 w-fit origin-[var(--transform-origin)] rounded-md bg-foreground px-2.5 py-1 text-xs text-background shadow-md\",\n            \"transition-[transform,opacity] data-[ending-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:scale-95 data-[starting-style]:opacity-0\",\n            className\n          )}\n          {...props}\n        >\n          {children}\n          <TooltipPrimitive.Arrow className=\"fill-foreground [&_svg]:size-2.5\" />\n        </TooltipPrimitive.Popup>\n      </TooltipPrimitive.Positioner>\n    </TooltipPrimitive.Portal>\n  )\n}\n\nexport { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}
