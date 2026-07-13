@@ -56,6 +56,15 @@ export function DocsShell({ group, slug }: { group: string; slug: string }) {
   const active = findSection(group, slug) ?? sections[0];
   const api = getApi(active.id, active.description);
 
+  // The shell persists across navigations (it lives in the layout), so the
+  // content pane keeps its scroll position between sections. Reset it to the
+  // top whenever the active section changes so each page starts at the top —
+  // the sidebar's own scroll is deliberately left untouched.
+  const contentRef = React.useRef<HTMLDivElement>(null);
+  React.useLayoutEffect(() => {
+    contentRef.current?.scrollTo(0, 0);
+  }, [active.id]);
+
   // Drive the theme from <html> so portaled content (dropdown, popover,
   // tooltip, select, toast) — which renders at document.body, outside this
   // component's subtree — inherits the dark tokens too.
@@ -78,8 +87,8 @@ export function DocsShell({ group, slug }: { group: string; slug: string }) {
   }, []);
 
   return (
-    <SidebarProvider>
-      <Sidebar collapsible="none" className="sticky top-0 h-svh self-start">
+    <SidebarProvider className="h-svh overflow-hidden">
+      <Sidebar collapsible="none" className="h-svh">
         <SidebarHeader className="gap-1">
           <div className="flex items-center px-4 pt-2 pb-1">
             <Logo className="h-6 w-auto" />
@@ -113,8 +122,8 @@ export function DocsShell({ group, slug }: { group: string; slug: string }) {
         </SidebarContent>
       </Sidebar>
 
-      <SidebarInset>
-        <header className="sticky top-0 z-10 flex flex-col gap-2 border-b border-border bg-background/80 px-6 py-4 backdrop-blur">
+      <SidebarInset className="min-h-0 overflow-hidden">
+        <header className="z-10 flex flex-col gap-2 border-b border-border bg-background/80 px-6 py-4 backdrop-blur">
           <div className="flex items-center justify-between gap-4">
             <div className="flex min-w-0 items-baseline gap-3">
               <h2 className="shrink-0 text-lg font-semibold tracking-tight">
@@ -165,7 +174,7 @@ export function DocsShell({ group, slug }: { group: string; slug: string }) {
           )}
         </header>
 
-        <div className="flex-1 bg-background text-foreground">
+        <div ref={contentRef} className="min-h-0 flex-1 overflow-y-auto bg-background text-foreground">
           {active.variants ? (
             <div className="mx-auto flex w-full max-w-6xl gap-8 p-8">
               <div className="flex min-w-0 flex-1 flex-col gap-10">
