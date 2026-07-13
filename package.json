@@ -2,6 +2,7 @@
   "name": "edgecom-design-system",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@11.10.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,7 +10,8 @@
     "lint": "eslint",
     "docs:source": "node scripts/gen-docs-source.mjs",
     "docs:api": "node scripts/gen-api.mjs",
-    "docs:gen": "pnpm run docs:source && pnpm run docs:api",
+    "docs:routes": "node scripts/gen-routes.mjs",
+    "docs:gen": "pnpm run docs:source && pnpm run docs:api && pnpm run docs:routes",
     "registry:gen": "node scripts/gen-registry.mjs",
     "registry:build": "pnpm run registry:gen && shadcn build",
     "predev": "pnpm run docs:gen",

@@ -76,7 +76,7 @@ function CodePanel({ source }: { source: string }) {
   useEffect(() => {
     if (sourceCache.has(source)) return
     let active = true
-    fetch(`/docs-source/${source}.json`)
+    fetch(`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/docs-source/${source}.json`)
       .then((r) => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`)
         return r.json() as Promise<DemoSource>
