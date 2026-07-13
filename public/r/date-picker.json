@@ -7,10 +7,10 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "@edgecom/theme",
-    "@edgecom/button",
-    "@edgecom/calendar",
-    "@edgecom/popover"
+    "edgecom-ai/design-system/theme",
+    "edgecom-ai/design-system/button",
+    "edgecom-ai/design-system/calendar",
+    "edgecom-ai/design-system/popover"
   ],
   "files": [
     {

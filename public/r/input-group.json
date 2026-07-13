@@ -7,10 +7,10 @@
     "class-variance-authority"
   ],
   "registryDependencies": [
-    "@edgecom/theme",
-    "@edgecom/button",
-    "@edgecom/input",
-    "@edgecom/textarea"
+    "edgecom-ai/design-system/theme",
+    "edgecom-ai/design-system/button",
+    "edgecom-ai/design-system/input",
+    "edgecom-ai/design-system/textarea"
   ],
   "files": [
     {

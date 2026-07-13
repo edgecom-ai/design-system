@@ -7,9 +7,9 @@
     "class-variance-authority"
   ],
   "registryDependencies": [
-    "@edgecom/theme",
-    "@edgecom/label",
-    "@edgecom/separator"
+    "edgecom-ai/design-system/theme",
+    "edgecom-ai/design-system/label",
+    "edgecom-ai/design-system/separator"
   ],
   "files": [
     {

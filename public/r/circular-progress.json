@@ -4,7 +4,7 @@
   "title": "Circular Progress",
   "description": "The Edgecom Circular Progress component.",
   "registryDependencies": [
-    "@edgecom/theme"
+    "edgecom-ai/design-system/theme"
   ],
   "files": [
     {

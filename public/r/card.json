@@ -4,7 +4,7 @@
   "title": "Card",
   "description": "The Edgecom Card component.",
   "registryDependencies": [
-    "@edgecom/theme"
+    "edgecom-ai/design-system/theme"
   ],
   "files": [
     {

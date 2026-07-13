@@ -638,9 +638,10 @@ function GetStartedDoc() {
       <div className="flex flex-col gap-3">
         <h1 className="text-3xl font-bold tracking-tight">Installation</h1>
         <p className="leading-7 text-muted-foreground">
-          The Edgecom Design System is a private shadcn registry (<Code>@edgecom</Code>) that ships
-          our design tokens and <a className="font-medium text-primary dark:text-primary-emphasis underline underline-offset-4" href="https://base-ui.com" target="_blank" rel="noreferrer">Base UI</a> components.
-          Pull them straight into your app with the shadcn CLI — no copy-paste, no hardcoded hex.
+          The Edgecom Design System is a public shadcn registry, distributed straight from{" "}
+          <a className="font-medium text-primary dark:text-primary-emphasis underline underline-offset-4" href="https://ui.shadcn.com/docs/registry/github" target="_blank" rel="noreferrer">GitHub</a>.
+          It ships our design tokens and <a className="font-medium text-primary dark:text-primary-emphasis underline underline-offset-4" href="https://base-ui.com" target="_blank" rel="noreferrer">Base UI</a> components —
+          pull them into your app with the shadcn CLI, no copy-paste and no hardcoded hex.
         </p>
       </div>
 
@@ -649,7 +650,7 @@ function GetStartedDoc() {
         <p className="text-sm text-muted-foreground">
           Your app needs a shadcn-initialized project on{" "}
           <a className="font-medium text-primary underline underline-offset-4 dark:text-primary-emphasis" href="https://tailwindcss.com" target="_blank" rel="noreferrer">Tailwind&nbsp;v4</a>. If
-          you haven&rsquo;t already, run <Code>npx shadcn@latest init</Code> — it creates{" "}
+          you haven&rsquo;t already, run <Code>pnpm dlx shadcn@latest init</Code> — it creates{" "}
           <Code>components.json</Code>, adds <Code>@import &quot;tailwindcss&quot;;</Code> to your CSS,
           and sets up the <Code>@/*</Code> path alias our components import through.
         </p>
@@ -661,40 +662,35 @@ function GetStartedDoc() {
       </section>
 
       <section className="flex flex-col gap-3">
-        <StepHeading n={2}>Point your app at the registry</StepHeading>
+        <StepHeading n={2}>Install straight from GitHub</StepHeading>
         <p className="text-sm text-muted-foreground">
-          Add the <Code>@edgecom</Code> namespace to <Code>components.json</Code>. The token is read
-          from your environment (<Code>EDGECOM_REGISTRY_TOKEN</Code>) — put it in{" "}
-          <Code>.env.local</Code>; ask the design-system team for a value.
+          There&rsquo;s nothing to configure — no <Code>components.json</Code> entry and no token.
+          The public repo <em>is</em> the registry: reference any item by its GitHub address,{" "}
+          <Code>edgecom-ai/design-system/&lt;name&gt;</Code>, and the CLI fetches it plus everything
+          it depends on. Pin to a branch, tag, or commit by appending <Code>#ref</Code>.
         </p>
-        <Snippet>{`// components.json
-{
-  "registries": {
-    "@edgecom": {
-      "url": "https://registry.edgecom.ai/r/{name}.json",
-      "headers": {
-        "Authorization": "Bearer \${EDGECOM_REGISTRY_TOKEN}"
-      }
-    }
-  }
-}`}</Snippet>
+        <Snippet>{`# address format — no config, no auth
+edgecom-ai/design-system/<name>
+
+# pin to a tag, branch, or commit
+edgecom-ai/design-system/button#v1.0.0`}</Snippet>
       </section>
 
       <section className="flex flex-col gap-3">
         <StepHeading n={3}>Add components</StepHeading>
         <p className="text-sm text-muted-foreground">
           Add whatever you need — the theme comes with it. Every component depends on{" "}
-          <Code>@edgecom/theme</Code>, so the first install automatically writes the OKLCH tokens
+          <Code>theme</Code>, so the first install automatically writes the OKLCH tokens
           into your <Code>globals.css</Code> and drops <Code>cn</Code> into <Code>lib/utils.ts</Code>.
-          Cross-component dependencies, hooks, and npm packages all resolve on their own — adding{" "}
-          <Code>@edgecom/sidebar</Code>, for example, pulls its sub-components and the{" "}
+          Cross-component dependencies, hooks, and package deps all resolve on their own — adding{" "}
+          <Code>sidebar</Code>, for example, pulls its sub-components and the{" "}
           <Code>use-mobile</Code> hook too.
         </p>
         <Snippet>{`# theme + tokens ride along on the first component you add
-npx shadcn@latest add @edgecom/button @edgecom/card @edgecom/badge
+pnpm dlx shadcn@latest add edgecom-ai/design-system/button edgecom-ai/design-system/card
 
 # want just the tokens (no component)? add the theme on its own
-npx shadcn@latest add @edgecom/theme`}</Snippet>
+pnpm dlx shadcn@latest add edgecom-ai/design-system/theme`}</Snippet>
         <p className="text-sm text-muted-foreground">
           Re-running is safe: files already present are skipped, so shared pieces like the theme and{" "}
           <Code>button</Code> are never duplicated. Pass <Code>--overwrite</Code> only when you mean
@@ -897,9 +893,10 @@ function IntroductionDoc() {
           >
             shadcn
           </a>{" "}
-          and distributed as a private registry (<Code>@edgecom</Code>): you install real, owned
-          components straight into your app with the shadcn CLI instead of copying markup or taking
-          on a black-box dependency. Under the hood the primitives are composed with{" "}
+          and distributed as a public registry from{" "}
+          <a className="font-medium text-primary underline underline-offset-4 dark:text-primary-emphasis" href="https://ui.shadcn.com/docs/registry/github" target="_blank" rel="noreferrer">GitHub</a>:
+          you install real, owned components straight into your app with the shadcn CLI instead of
+          copying markup or taking on a black-box dependency. Under the hood the primitives are composed with{" "}
           <a
             className="font-medium text-primary underline underline-offset-4 dark:text-primary-emphasis"
             href="https://base-ui.com"
@@ -934,7 +931,7 @@ export type Section = {
   group: string;
   /** One-line summary shown under the page title. */
   description?: string;
-  /** shadcn registry item name(s) to `npx shadcn@latest add` for this section. */
+  /** shadcn registry item name(s) to `pnpm dlx shadcn@latest add` for this section. */
   install?: string;
   /** Structured variant previews (preferred). */
   variants?: Variant[];
@@ -1303,11 +1300,11 @@ export const sections: Section[] = [
           <span className="text-xs font-medium text-muted-foreground">Installation</span>
           <p className="text-sm leading-6 text-muted-foreground">
             <Code>lucide-react</Code> is a runtime dependency, not part of the CSS theme. You
-            don&rsquo;t add it by hand — the shadcn CLI installs it automatically whenever you add an{" "}
-            <Code>@edgecom</Code> component that uses an icon (<Code>components.json</Code> sets{" "}
+            don&rsquo;t add it by hand — the shadcn CLI installs it automatically whenever you add an
+            Edgecom component that uses an icon (<Code>components.json</Code> sets{" "}
             <Code>iconLibrary: &quot;lucide&quot;</Code>). To use icons on their own, add it directly:
           </p>
-          <Snippet>{`npm install lucide-react`}</Snippet>
+          <Snippet>{`pnpm add lucide-react`}</Snippet>
         </div>
       </div>
     ),

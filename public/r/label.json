@@ -4,7 +4,7 @@
   "title": "Label",
   "description": "The Edgecom Label component.",
   "registryDependencies": [
-    "@edgecom/theme"
+    "edgecom-ai/design-system/theme"
   ],
   "files": [
     {

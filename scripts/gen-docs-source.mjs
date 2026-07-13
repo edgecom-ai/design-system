@@ -1,6 +1,6 @@
 // Generates per-demo source snapshots under public/docs-source/ so the docs site
 // can show the exact usage-example source (raw + Shiki-highlighted dual-theme HTML)
-// next to each live preview. Run via `npm run docs:source`.
+// next to each live preview. Run via `pnpm run docs:source`.
 //
 // The page is a client component and cannot read the filesystem at runtime. We emit
 // ONE static JSON per demo file (served from /docs-source/<path>.json) rather than a

@@ -8,8 +8,8 @@
     "class-variance-authority"
   ],
   "registryDependencies": [
-    "@edgecom/theme",
-    "@edgecom/toggle"
+    "edgecom-ai/design-system/theme",
+    "edgecom-ai/design-system/toggle"
   ],
   "files": [
     {

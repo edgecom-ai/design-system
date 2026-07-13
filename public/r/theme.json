@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "theme",
   "title": "Edgecom Theme",
-  "description": "Edgecom Energy design tokens (light + dark), Tailwind theme mappings, and the cn() utility. Installed automatically as a dependency of every @edgecom component.",
+  "description": "Edgecom Energy design tokens (light + dark), Tailwind theme mappings, and the cn() utility. Installed automatically as a dependency of every Edgecom component.",
   "dependencies": [
     "clsx",
     "tailwind-merge"

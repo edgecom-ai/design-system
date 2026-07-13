@@ -12,11 +12,13 @@ import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard"
 import { cn } from "@/lib/utils"
 import { CheckIcon, CopyIcon, LinkIcon } from "lucide-react"
 
+import { installCommand } from "@/components/docs/component-preview"
+
 export type TocItem = { id: string; name: string }
 
 /** "Install primitive" button that copies the shadcn command and reveals it on hover. */
 function InstallPrimitive({ command }: { command: string }) {
-  const full = `npx shadcn@latest add ${command}`
+  const full = installCommand(command)
   const { copied, copy } = useCopyToClipboard()
   return (
     <HoverCard>

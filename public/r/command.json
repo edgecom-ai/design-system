@@ -8,9 +8,9 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "@edgecom/theme",
-    "@edgecom/dialog",
-    "@edgecom/input-group"
+    "edgecom-ai/design-system/theme",
+    "edgecom-ai/design-system/dialog",
+    "edgecom-ai/design-system/input-group"
   ],
   "files": [
     {

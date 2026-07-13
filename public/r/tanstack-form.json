@@ -7,13 +7,13 @@
     "@tanstack/react-form"
   ],
   "registryDependencies": [
-    "@edgecom/theme",
-    "@edgecom/button",
-    "@edgecom/checkbox",
-    "@edgecom/field",
-    "@edgecom/input",
-    "@edgecom/select",
-    "@edgecom/textarea"
+    "edgecom-ai/design-system/theme",
+    "edgecom-ai/design-system/button",
+    "edgecom-ai/design-system/checkbox",
+    "edgecom-ai/design-system/field",
+    "edgecom-ai/design-system/input",
+    "edgecom-ai/design-system/select",
+    "edgecom-ai/design-system/textarea"
   ],
   "files": [
     {

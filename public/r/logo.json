@@ -4,7 +4,7 @@
   "title": "Logo",
   "description": "The Edgecom Logo component.",
   "registryDependencies": [
-    "@edgecom/theme"
+    "edgecom-ai/design-system/theme"
   ],
   "files": [
     {

@@ -98,7 +98,7 @@ stage_data = [[
     stage("2. Author catalog", "registry.json"),
     Paragraph("&rarr;", style("arr2", fontName=SANS_B, fontSize=13,
                               textColor=ACCENT, alignment=TA_CENTER)),
-    stage("3. Build", "npx shadcn build"),
+    stage("3. Build", "pnpm exec shadcn build"),
     Paragraph("&rarr;", style("arr3", fontName=SANS_B, fontSize=13,
                               textColor=ACCENT, alignment=TA_CENTER)),
     stage("4. Serve", "public/r/*.json over HTTP"),
@@ -173,7 +173,7 @@ rows = [
     [Paragraph("Component primitives", cell_b), status_badge("IN PROGRESS", WARN),
      Paragraph("57 primitives built in <font face='Helvetica-Oblique'>src/</font>, not yet declared as registry items.", cell_b)],
     [Paragraph("Deploy &amp; wire consumers", cell_b), status_badge("PENDING", PEND),
-     Paragraph("Host at registry.edgecom.ai; wire portal, shadcn MCP, and Claude Design.", cell_b)],
+     Paragraph("Publish as a public GitHub registry; wire portal, shadcn MCP, and Claude Design.", cell_b)],
 ]
 st = Table(rows, colWidths=[1.85 * inch, 1.15 * inch, 4.0 * inch])
 st.setStyle(TableStyle([
@@ -196,7 +196,7 @@ story.append(Paragraph(
     "(with a clear description + dependency links), then rebuild so "
     "<font face='Helvetica-Oblique'>public/r/button.json</font>, "
     "<font face='Helvetica-Oblique'>card.json</font>, etc. exist.<br/>"
-    "2.&nbsp; Deploy the built JSON to <b>registry.edgecom.ai</b> (private, token-gated).<br/>"
+    "2.&nbsp; Push the public GitHub repo so items install via <b>edgecom-ai/design-system/&lt;name&gt;</b>.<br/>"
     "3.&nbsp; Wire the consumers: portal <font face='Helvetica-Oblique'>components.json</font>, "
     "the shadcn MCP server, and Claude Design <font face='Helvetica-Oblique'>/design-sync</font>.",
     body))

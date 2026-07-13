@@ -41,9 +41,22 @@ function CopyButton({
   )
 }
 
-/** Copyable `npx shadcn@latest add <command>` bar. */
+/** Copyable `pnpm dlx shadcn@latest add <command>` bar. */
+/** Public GitHub registry address (see https://ui.shadcn.com/docs/registry/github). */
+export const REGISTRY = "edgecom-ai/design-system"
+
+/**
+ * Build a `shadcn add` command for the public GitHub registry from a docs
+ * install spec. Specs reference items as `@edgecom/<name>` (optionally several,
+ * space-separated); each is rewritten to `<owner>/<repo>/<name>` so it installs
+ * with zero consumer configuration.
+ */
+export function installCommand(spec: string) {
+  return `pnpm dlx shadcn@latest add ${spec.replace(/@edgecom\//g, `${REGISTRY}/`)}`
+}
+
 export function InstallCommand({ command }: { command: string }) {
-  const full = `npx shadcn@latest add ${command}`
+  const full = installCommand(command)
   return (
     <div className="flex items-center justify-between gap-2 rounded-lg border border-border bg-muted/50 py-1.5 pr-1.5 pl-3">
       <code className="truncate font-mono text-xs text-foreground">{full}</code>

@@ -9,7 +9,7 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "@edgecom/theme"
+    "edgecom-ai/design-system/theme"
   ],
   "files": [
     {

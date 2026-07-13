@@ -4,7 +4,7 @@
   "title": "Table",
   "description": "The Edgecom Table component.",
   "registryDependencies": [
-    "@edgecom/theme"
+    "edgecom-ai/design-system/theme"
   ],
   "files": [
     {

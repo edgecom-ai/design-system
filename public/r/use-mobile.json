@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-mobile",
+  "title": "Use Mobile",
+  "description": "The Edgecom Use Mobile hook.",
+  "files": [
+    {
+      "path": "src/hooks/use-mobile.ts",
+      "content": "import * as React from \"react\"\n\nconst MOBILE_BREAKPOINT = 768\n\nfunction subscribe(onChange: () => void) {\n  const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`)\n  mql.addEventListener(\"change\", onChange)\n  return () => mql.removeEventListener(\"change\", onChange)\n}\n\nexport function useIsMobile() {\n  return React.useSyncExternalStore(\n    subscribe,\n    () => window.innerWidth < MOBILE_BREAKPOINT,\n    () => false,\n  )\n}\n",
+      "type": "registry:hook"
+    }
+  ],
+  "type": "registry:hook"
+}

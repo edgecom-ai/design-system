@@ -8,7 +8,7 @@
     "react-resizable-panels"
   ],
   "registryDependencies": [
-    "@edgecom/theme"
+    "edgecom-ai/design-system/theme"
   ],
   "files": [
     {

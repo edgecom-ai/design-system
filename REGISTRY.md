@@ -1,139 +1,129 @@
 # Edgecom Component Registry
 
-This repo is both the **design-system docs site** and the **source of truth for the `@edgecom` shadcn registry**. Developers pull Edgecom UI primitives into their own apps with the shadcn CLI:
+This repo is both the **design-system docs site** and the **source of truth for the Edgecom shadcn registry**. It is a [public GitHub registry](https://ui.shadcn.com/docs/registry/github): the repository itself is the registry — there is no server, no hosting, and no auth. Developers pull Edgecom UI primitives into their own apps with the shadcn CLI:
 
 ```bash
-npx shadcn@latest add @edgecom/button
+pnpm dlx shadcn@latest add edgecom-ai/design-system/button
 ```
 
-Every component ships with the Edgecom theme, its npm dependencies, any cross-component dependencies, and any hooks it needs — resolved automatically.
+Every component ships with the Edgecom theme, its package dependencies, any cross-component dependencies, and any hooks it needs — resolved automatically.
 
 ---
 
 ## 1. Consuming the registry (app developers)
 
-### One-time setup
+### No setup
 
-Add the `@edgecom` registry to your app's `components.json`:
+Nothing to configure — **no `components.json` registry entry and no token.** The public repo *is* the registry. Reference any item by its GitHub address:
 
-```jsonc
-{
-  "$schema": "https://ui.shadcn.com/schema.json",
-  "style": "new-york",
-  "rsc": true,
-  "tsx": true,
-  "tailwind": {
-    "config": "",
-    "css": "src/app/globals.css",
-    "baseColor": "neutral",
-    "cssVariables": true,
-    "prefix": ""
-  },
-  "iconLibrary": "lucide",
-  "aliases": {
-    "components": "@/components",
-    "utils": "@/lib/utils",
-    "ui": "@/components/ui",
-    "lib": "@/lib",
-    "hooks": "@/hooks"
-  },
-  "registries": {
-    "@edgecom": {
-      "url": "https://registry.edgecom.ai/r/{name}.json",
-      "headers": { "Authorization": "Bearer ${EDGECOM_REGISTRY_TOKEN}" }
-    }
-  }
-}
+```
+edgecom-ai/design-system/<name>
 ```
 
-Notes:
-- `${EDGECOM_REGISTRY_TOKEN}` is read from your environment — the shadcn CLI expands `${...}` in `headers`. Never commit the token.
-- If the registry is hosted **without** auth, drop the `headers` block.
-- During local development against this repo, point the URL at `http://localhost:3000/r/{name}.json` and run `npm run dev` here.
+Your app still needs a shadcn-initialized project (run `pnpm dlx shadcn@latest init` once) so the CLI knows your aliases and CSS entry.
 
 ### Installing components
 
 ```bash
-npx shadcn@latest add @edgecom/button
-npx shadcn@latest add @edgecom/dialog @edgecom/card @edgecom/sidebar
+pnpm dlx shadcn@latest add edgecom-ai/design-system/button
+pnpm dlx shadcn@latest add edgecom-ai/design-system/dialog edgecom-ai/design-system/card edgecom-ai/design-system/sidebar
+```
+
+Pin to a branch, tag, or commit with `#ref`:
+
+```bash
+pnpm dlx shadcn@latest add edgecom-ai/design-system/button#v1.0.0
+```
+
+Preview or list before installing:
+
+```bash
+pnpm dlx shadcn@latest list edgecom-ai/design-system
+pnpm dlx shadcn@latest view edgecom-ai/design-system/sidebar
+pnpm dlx shadcn@latest add edgecom-ai/design-system/sidebar --dry-run
 ```
 
 What happens on install:
 - The component file lands in `@/components/ui/<name>.tsx`.
-- **`@edgecom/theme` is pulled automatically** — it writes `@/lib/utils.ts` (the `cn` helper) and injects the Edgecom design tokens (light + dark OKLCH variables) into your `globals.css`.
+- **The `theme` item is pulled automatically** — it writes `@/lib/utils.ts` (the `cn` helper) and injects the Edgecom design tokens (light + dark OKLCH variables) into your `globals.css`.
 - **Cross-component deps** resolve automatically (e.g. `dialog` pulls `button`; `sidebar` pulls `input`, `separator`, `sheet`, `skeleton`, `tooltip`, and the `use-mobile` hook).
-- **npm deps** (e.g. `@base-ui/react`, `class-variance-authority`, `recharts`) are installed.
+- **Package deps** (e.g. `@base-ui/react`, `class-variance-authority`, `recharts`) are installed.
 - Already-present files are **skipped** (safe to re-run; use `--overwrite` only if you intend to discard local edits).
 
 ### Requirements in the consuming app
 
 - **Tailwind v4** with `@import "tailwindcss";` in your CSS entry.
-- A `@/*` path alias (`tsconfig.json` / `jsconfig.json`) matching the `aliases` above.
+- A `@/*` path alias (`tsconfig.json` / `jsconfig.json`) matching your `components.json` aliases.
 - React 19 / Next 16 (or compatible). Components are Base UI + Tailwind v4.
 
 ---
 
-## 2. Hosting the registry (platform/devops)
+## 2. Publishing the registry (platform/devops)
 
-The build produces **static JSON** in `public/r/`. There is no server-side logic — hosting is "serve these files over HTTPS," optionally behind an auth gate.
+There is nothing to deploy. To publish:
 
-### What to serve
+1. Keep the repository **public** on github.com.
+2. Keep `registry.json` **at the repo root** and valid (regenerated from source — see §3).
+3. Ensure the files each item references actually exist in the repo.
 
-- `npm run build` (or `npm run registry:build`) regenerates `public/r/*.json` — one file per item plus `registry.json` (the index).
-- Serve them at `https://<host>/r/<name>.json` so that `@edgecom/button` → `https://<host>/r/button.json`.
-- Update `homepage` in [`registry.json`](registry.json) to the real host if it changes (cosmetic — resolution uses the `@edgecom` namespace from the consumer's `components.json`, not this URL).
+That's it — the shadcn CLI reads `registry.json` from the repo root, follows its `include` list to each chunk, then fetches the source files a chunk references directly over `raw.githubusercontent.com`.
 
-### Deploy options
+Validate before pushing:
 
-- **Static host / CDN** (S3+CloudFront, Netlify, Vercel static, GitHub Pages): publish the built `public/r/` directory. Simplest if the registry can be public or gated at the CDN edge.
-- **Same Next.js app**: deploy this repo; `public/r/*.json` is served by Next automatically. Gives you a place to add the auth middleware below.
+```bash
+pnpm dlx shadcn@latest registry validate edgecom-ai/design-system
+```
 
-### Private access (auth gate)
-
-The registry is intended to be **private**. The consumer config sends `Authorization: Bearer ${EDGECOM_REGISTRY_TOKEN}`; the host must validate it. Nothing enforces this yet — pick one:
-
-- **Edge/CDN**: require the `Authorization` header (or a signed cookie) on `/r/*` at CloudFront/Cloudflare.
-- **Next middleware**: add `middleware.ts` matching `/r/:path*` that returns `401` unless the `Authorization` header equals `Bearer <EDGECOM_REGISTRY_TOKEN>` (token from a server env var). Keep the check constant-time.
-
-> **Status:** auth is **not implemented in this repo** — local serving is open. Standing it up behind the token is the main hosting task.
-
-### Build-on-deploy
-
-`prebuild` is already wired (see below), so any pipeline that runs `npm run build` before publishing gets a fresh registry automatically. Recommended: build on every push to `main` and publish `public/r/`.
+> The static JSON in `public/r/` (produced by `shadcn build`) is **optional** — a flattened, one-file-per-item mirror you can host on a CDN if you ever want a non-GitHub distribution. Public GitHub installs do not use it; they read the source chunks.
 
 ---
 
 ## 3. Updating the registry (design-system maintainer)
 
-**You never hand-edit `registry.json` or `public/r/`.** They are generated from source. The source of truth is:
+**You never hand-edit `registry.json`, the per-directory `registry.json` chunks, or `public/r/`.** They are generated from source. The source of truth is:
 
 | Source | Feeds |
 |---|---|
 | `src/components/ui/*.tsx` | one `registry:ui` item each (deps, cross-deps, hooks derived from imports) |
 | `src/app/globals.css` | the `theme` item's design tokens (`@theme` mappings + `:root` light + `.dark` dark) |
 | `src/lib/utils.ts` | shipped by the `theme` item (`cn` helper) |
-| `src/hooks/*.ts` | shipped alongside any component that imports them |
+| `src/hooks/*.ts` | any hook a component imports becomes its own item, depended on by that component |
+
+### Source layout — chunks live beside their sources
+
+The root `registry.json` is a tiny index that just `include`s one **chunk** per source directory. shadcn requires every included path to be named `registry.json`, and a chunk may only ship files inside its own directory (no `../`), so each chunk sits right next to the code it distributes:
+
+```
+registry.json                       # index: include: [ …the three below… ]
+src/lib/registry.json               # theme  -> ships utils.ts + design tokens
+src/components/ui/registry.json     # every component -> ships <name>.tsx
+src/hooks/registry.json             # hooks  -> ships <hook>.ts
+```
+
+Cross-item references (`registryDependencies`) use **full GitHub addresses** (`edgecom-ai/design-system/<name>`) so a bare `pnpm dlx shadcn add edgecom-ai/design-system/button` resolves the whole tree with zero consumer config. (Bare names like `button` would resolve to shadcn's built-ins, and `@namespace` refs would need consumer setup — neither works for a public GitHub install.)
 
 ### To add / change a component
 
-1. Add or edit the primitive in `src/components/ui/<name>.tsx`. Import other `@/components/ui/*`, `@/hooks/*`, and npm packages as normal — the generator reads these imports.
+1. Add or edit the primitive in `src/components/ui/<name>.tsx`. Import other `@/components/ui/*`, `@/hooks/*`, and packages as normal — the generator reads these imports.
 2. To change **tokens/theme**, edit `src/app/globals.css` (never hardcode hex — use the semantic OKLCH tokens).
 3. Regenerate + build:
    ```bash
-   npm run registry:build
+   pnpm run registry:build
    ```
-4. Commit the regenerated `registry.json` and `public/r/*.json` along with your source change, and push. Deploy picks it up.
+4. Commit the regenerated `registry.json` + the `src/**/registry.json` chunks + `public/r/*.json` along with your source change, and push. A push to the default branch is the release.
 
-That's it — deps, cross-component `registryDependencies`, hooks, and theme coupling are all inferred. **Every component automatically depends on `@edgecom/theme`.**
+Deps, cross-component `registryDependencies`, hooks, and theme coupling are all inferred. **Every component automatically depends on the `theme` item.**
 
-### npm scripts
+### pnpm scripts
 
 | Script | Does |
 |---|---|
-| `npm run registry:gen` | Regenerate `registry.json` from source (`scripts/gen-registry.mjs`) |
-| `npm run registry:build` | `registry:gen` **+** `shadcn build` → writes `public/r/*.json` |
-| `npm run build` | Full site build. **`prebuild` runs `docs:gen && registry:build` first**, so a normal build always ships a current registry. |
-| `npm run dev` | Docs site locally at `:3000`, serving `public/r/*.json` for local install testing. |
+| `pnpm run registry:gen` | Regenerate the root `registry.json` + the `src/**/registry.json` chunks from source (`scripts/gen-registry.mjs`) |
+| `pnpm run registry:build` | `registry:gen` **+** `shadcn build` → also writes the optional flattened `public/r/*.json` |
+| `pnpm run build` | Full site build. **`prebuild` runs `docs:gen && registry:build` first**, so a normal build always ships a current registry. |
+| `pnpm run dev` | Docs site locally at `:3000`. |
+
+To publish under a different repo, set `REGISTRY_GITHUB_REPO=owner/repo` before `registry:gen` (it defaults to `edgecom-ai/design-system`).
 
 Because `registry:build` is baked into `prebuild`, the registry **cannot silently drift** from source — a build regenerates it every time.
 
@@ -141,17 +131,14 @@ Because `registry:build` is baked into `prebuild`, the registry **cannot silentl
 
 ## 4. What's in the registry
 
-- **65 items:** 1 `theme` + 64 UI primitives (1:1 with `src/components/ui/*.tsx`).
+- **66 items:** 1 `theme` + 64 UI primitives (1:1 with `src/components/ui/*.tsx`) + 1 hook (`use-mobile`, depended on by `sidebar`).
 - **`theme`** (`registry:theme`): design tokens (light + dark) + `cn` (`src/lib/utils.ts`) + `clsx`/`tailwind-merge`. Pulled automatically by every component.
-- Item names match the file name: `src/components/ui/dialog.tsx` → `@edgecom/dialog`.
-
-Verified end-to-end with the shadcn CLI against a clean consumer app: a simple component (`dialog` → `theme` + `button`) and the deepest tree (`sidebar` → 6 cross-deps + `use-mobile` hook + `theme`) both install cleanly, dedupe shared files, inject tokens, install npm deps, and type-check (`tsc`) with no unresolved imports.
+- Item names match the file name: `src/components/ui/dialog.tsx` → `edgecom-ai/design-system/dialog`.
 
 ---
 
-## 5. Known gaps
+## 5. Notes
 
-- **Auth is not implemented** — hosting must add the `Bearer` token gate (§2) for private access.
 - **Two app-level CSS bits are not shipped** via theme tokens: the `color-scheme` pinning (native-select dark fix) and the `@utility tabular` helper. Everything token-driven works; ship a small extra CSS file in the `theme` item if these are needed downstream.
-- **Per-item `title`/`description`** in `registry.json` are generic ("The Edgecom X component") — cosmetic only.
-- Install was CLI-verified on the simplest and most complex components; the generator is uniform across all 64, but not every item was individually install-tested.
+- **Per-item `title`/`description`** in the chunks are generic ("The Edgecom X component") — cosmetic only.
+- `registry:build` was validated end-to-end with `shadcn build`: the `include` tree resolves, every item's colocated source file is found and embedded, and `registryDependencies` carry full GitHub addresses. Install against a clean consumer app should be spot-checked after the first public push (e.g. `sidebar`, which exercises 6 cross-deps + the `use-mobile` hook + `theme`).

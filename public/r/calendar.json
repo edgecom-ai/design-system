@@ -8,8 +8,8 @@
     "react-day-picker"
   ],
   "registryDependencies": [
-    "@edgecom/theme",
-    "@edgecom/button"
+    "edgecom-ai/design-system/theme",
+    "edgecom-ai/design-system/button"
   ],
   "files": [
     {

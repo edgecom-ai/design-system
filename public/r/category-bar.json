@@ -4,7 +4,7 @@
   "title": "Category Bar",
   "description": "The Edgecom Category Bar component.",
   "registryDependencies": [
-    "@edgecom/theme"
+    "edgecom-ai/design-system/theme"
   ],
   "files": [
     {
