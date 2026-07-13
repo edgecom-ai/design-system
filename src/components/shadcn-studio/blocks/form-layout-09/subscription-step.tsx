@@ -75,7 +75,7 @@ const SubscriptionStep = ({
                       Starter
                     </Label>
                     <p className='text-muted-foreground mb-3 text-center text-sm'>
-                      Up to 5 sites, dataTrack monitoring, email support
+                      Up to 5 sites, dataTrack™ monitoring, email support
                     </p>
                     <div className='flex items-baseline'>
                       <span className='text-muted-foreground mb-auto text-sm font-medium'>$</span>
@@ -100,7 +100,7 @@ const SubscriptionStep = ({
                       Professional
                     </Label>
                     <p className='text-muted-foreground mb-3 text-center text-sm'>
-                      Up to 25 sites, dataTrack + pTrack, priority support
+                      Up to 25 sites, dataTrack™ + pTrack®, priority support
                     </p>
                     <div className='flex items-baseline'>
                       <span className='text-muted-foreground mb-auto text-sm font-medium'>$</span>

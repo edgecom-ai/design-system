@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import Link from "next/link"
 import {
   CheckCircle2,
   AlertTriangle,
@@ -291,7 +292,6 @@ const swatches: { name: string; className: string; fgClass: string; bg: string; 
   { name: "warning", className: "bg-warning", fgClass: "text-warning-foreground", bg: "var(--warning)", fg: "var(--warning-foreground)" },
   { name: "info", className: "bg-info", fgClass: "text-info-foreground", bg: "var(--info)", fg: "var(--info-foreground)" },
   { name: "card", className: "bg-card border border-border", fgClass: "text-card-foreground", bg: "var(--card)", fg: "var(--card-foreground)" },
-  { name: "ring", className: "bg-ring", fgClass: "text-white", bg: "var(--ring)", fg: "white" },
 ];
 
 // Tinted "subtle" surfaces — banner / pill background + its -foreground text.
@@ -861,7 +861,7 @@ function IntroductionDoc() {
         <p className="leading-7 text-muted-foreground">
           This is <strong className="text-foreground">Edgecom Energy&rsquo;s design system</strong>{" "}
           for our software products — the shared foundation of design tokens, components, and
-          patterns behind dataTrack, pTrack, proTrack, and the tools around them. Its purpose is a
+          patterns behind dataTrack™, pTrack®, and the tools around them. Its purpose is a
           cohesive, consistent experience across every Edgecom application, so that a chart, a
           table, or a control looks and behaves the same way no matter which product a user is in.
         </p>
@@ -905,8 +905,14 @@ function IntroductionDoc() {
           >
             Base UI
           </a>
-          . Head to <span className="font-medium text-foreground">Overview</span> to install it and
-          start building.
+          . Head to{" "}
+          <Link
+            className="font-medium text-primary underline underline-offset-4 dark:text-primary-emphasis"
+            href="/getting-started/installation"
+          >
+            Installation
+          </Link>{" "}
+          to install it and start building.
         </p>
       </section>
     </div>

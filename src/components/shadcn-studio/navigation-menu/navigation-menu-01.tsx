@@ -21,7 +21,7 @@ const NavigationMenuDemo = () => {
                 <li>
                   <NavigationMenuLink render={<Link href='#' />}>
                     <div className='flex flex-col px-1'>
-                      <div className='font-medium'>dataTrack</div>
+                      <div className='font-medium'>dataTrack™</div>
                       <div className='text-muted-foreground text-sm'>
                         Track energy consumption, cost, and emissions across all your sites and meters.
                       </div>
@@ -31,7 +31,7 @@ const NavigationMenuDemo = () => {
                 <li>
                   <NavigationMenuLink render={<Link href='#' />}>
                     <div className='flex flex-col px-1'>
-                      <div className='font-medium'>pTrack</div>
+                      <div className='font-medium'>pTrack®</div>
                       <div className='text-muted-foreground text-sm'>
                         Monitor peak demand and production for the Ontario and Alberta markets.
                       </div>

@@ -14,7 +14,7 @@ export function FieldDemo() {
         <FieldLabel htmlFor="field-site">Site name</FieldLabel>
         <Input id="field-site" defaultValue="Toronto Distribution Center" />
         <FieldDescription>
-          Shown across dataTrack dashboards and reports.
+          Shown across dataTrack™ dashboards and reports.
         </FieldDescription>
       </Field>
       <Field>
