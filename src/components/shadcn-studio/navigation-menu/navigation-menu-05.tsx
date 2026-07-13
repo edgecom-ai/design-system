@@ -8,7 +8,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger
 } from '@/components/ui/navigation-menu'
-import { SparklesIcon, BoxIcon, PaintbrushIcon, ArrowRightIcon } from "lucide-react"
+import { SparklesIcon, BoxIcon, ArrowRightIcon } from "lucide-react"
 
 const products = [
   {
@@ -16,7 +16,7 @@ const products = [
       <SparklesIcon
       />
     ),
-    label: 'dataTrack',
+    label: 'dataTrack™',
     description: 'Consumption, cost, and emissions across your sites',
     href: '#'
   },
@@ -25,17 +25,8 @@ const products = [
       <BoxIcon
       />
     ),
-    label: 'pTrack',
+    label: 'pTrack®',
     description: 'Peak-demand and production monitoring',
-    href: '#'
-  },
-  {
-    icon: (
-      <PaintbrushIcon
-      />
-    ),
-    label: 'proTrack',
-    description: 'M&V, bill tracking, and utility connections',
     href: '#'
   }
 ]

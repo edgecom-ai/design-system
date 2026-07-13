@@ -17,7 +17,6 @@ import ActivityDialog from "@/components/shadcn-studio/blocks/dialog-activity"
 import {
   LayoutDashboard,
   Gauge,
-  Factory,
   Sparkles,
   FileText,
   BellRing,
@@ -31,9 +30,8 @@ import {
 
 const nav = [
   { label: "Overview", icon: LayoutDashboard },
-  { label: "dataTrack", icon: Gauge, active: true },
-  { label: "pTrack", icon: Activity },
-  { label: "proTrack", icon: Factory },
+  { label: "dataTrack™", icon: Gauge, active: true },
+  { label: "pTrack®", icon: Activity },
   { label: "CoPilot", icon: Sparkles },
   { label: "Reports", icon: FileText },
   { label: "Alarms", icon: BellRing },

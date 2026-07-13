@@ -97,7 +97,7 @@ const UpdateProductDialog = ({ defaultOpen = false, trigger, className }: Props)
             <div className='grid grid-cols-2 gap-4 md:grid-cols-4'>
               <div className='col-span-2 flex flex-col gap-2'>
                 <Label htmlFor='product-name'>Station Name</Label>
-                <Input id='product-name' type='text' placeholder='Station Name' defaultValue='NeuraCharge Bay 4' />
+                <Input id='product-name' type='text' placeholder='Station Name' defaultValue='NeuraCharge™ Bay 4' />
               </div>
 
               <div className='col-span-2 flex flex-col gap-2'>

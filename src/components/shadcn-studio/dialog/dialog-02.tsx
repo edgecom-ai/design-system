@@ -23,7 +23,7 @@ const AlertDialogWithIconDemo = () => {
           </div>
           <AlertDialogTitle>New Update is Available</AlertDialogTitle>
           <AlertDialogDescription>
-            A new release of dataTrack is available. Please update to the latest version to access the newest features.
+            A new release of dataTrack™ is available. Please update to the latest version to access the newest features.
           </AlertDialogDescription>
           <ol className='text-muted-foreground mt-4 flex list-decimal flex-col gap-2 pl-6 text-sm'>
             <li>New consumption widgets for daily/weekly kWh</li>

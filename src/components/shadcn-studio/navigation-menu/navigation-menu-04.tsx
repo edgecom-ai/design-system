@@ -18,7 +18,7 @@ const sections = [
           <BookOpenIcon
           />
         ),
-        label: 'dataTrack',
+        label: 'dataTrack™',
         description: 'Consumption, cost, and emissions tracking',
         href: '#'
       },
@@ -27,7 +27,7 @@ const sections = [
           <SparklesIcon
           />
         ),
-        label: 'pTrack',
+        label: 'pTrack®',
         description: 'Peak-demand and production monitoring',
         href: '#'
       }

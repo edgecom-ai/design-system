@@ -9,7 +9,7 @@ const items = [
     faqs: [
       {
         title: 'How do I track my consumption?',
-        content: `Open a site in dataTrack and go to the "Consumption" section. You can view interval data by commodity, compare against baseline, and drill down to individual meters and channels. Data refreshes as new interval reads arrive, typically every 15 minutes.`,
+        content: `Open a site in dataTrack™ and go to the "Consumption" section. You can view interval data by commodity, compare against baseline, and drill down to individual meters and channels. Data refreshes as new interval reads arrive, typically every 15 minutes.`,
         open: true
       },
       {
@@ -30,13 +30,13 @@ const items = [
       {
         title: 'How is my tariff applied to consumption?',
         content:
-          'Each site is linked to a rate plan defining energy and demand charges by time-of-use period. dataTrack applies these rates to your interval data automatically, so cost and savings always reflect your current tariff. Ask your energy manager to update a rate plan when your utility changes it.',
+          'Each site is linked to a rate plan defining energy and demand charges by time-of-use period. dataTrack™ applies these rates to your interval data automatically, so cost and savings always reflect your current tariff. Ask your energy manager to update a rate plan when your utility changes it.',
         open: true
       },
       {
         title: 'What is a bill anomaly and how are they detected?',
         content:
-          'A bill anomaly is a utility charge that deviates significantly from expected cost given your consumption and tariff. proTrack compares each bill against metered data and flags variances for review, helping you catch billing errors and unexpected demand charges before you pay.'
+          'A bill anomaly is a utility charge that deviates significantly from expected cost given your consumption and tariff. The platform compares each bill against metered data and flags variances for review, helping you catch billing errors and unexpected demand charges before you pay.'
       },
       {
         title: 'How are cost savings calculated?',
@@ -51,7 +51,7 @@ const items = [
       {
         title: 'How do I enroll a site in demand response?',
         content:
-          'Demand Response programs are managed in pTrack. Select the site, choose an available DR program for your market (Ontario or Alberta), and set your curtailment target. You will receive peak alerts and event notifications ahead of each scheduled DR event.',
+          'Demand Response programs are managed in pTrack®. Select the site, choose an available DR program for your market (Ontario or Alberta), and set your curtailment target. You will receive peak alerts and event notifications ahead of each scheduled DR event.',
         open: true
       },
       {
