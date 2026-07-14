@@ -65,6 +65,7 @@ import NativeSelectPlaceholderDemo from "@/components/shadcn-studio/select/selec
 import NativeSelectRequiredDemo from "@/components/shadcn-studio/select/select-06";
 import SelectWithOptionsGroupsDemo from "@/components/shadcn-studio/select/select-22";
 import MultipleSelectWithPlaceholderDemo from "@/components/shadcn-studio/select/select-33";
+import MultiSelectPreselectedDemo from "@/components/shadcn-studio/select/select-32";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { Label } from "@/components/ui/label";
 import { Logo } from "@/components/ui/logo";
@@ -2422,6 +2423,13 @@ export const sections: Section[] = [
         description: "A multi-select that accepts several values at once.",
         preview: <MultipleSelectWithPlaceholderDemo />,
         source: ss("select/select-33"),
+      },
+      {
+        id: "select-multiple-preselected",
+        name: "Multiple with preset values",
+        description: "A multi-select pre-populated with selected values and inline tags.",
+        preview: <MultiSelectPreselectedDemo />,
+        source: ss("select/select-32"),
       },
     ],
   },
