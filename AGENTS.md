@@ -74,6 +74,42 @@ Accessibility bar (mirror the site's **Accessibility** doc):
 - The type scale is in `rem` — don't pin sizes to px.
 - Focus rings use the `--ring` token (it's a focus-outline color, not a fill).
 
+## UI guardrails — building with the design system
+
+These apply whenever you build UI with these components (in this repo or a consuming app). The registry install address is configured per app — see [REGISTRY.md](REGISTRY.md); the commands below are generic.
+
+### Import from the registry — don't recreate
+
+- **Use the existing component.** Never hand-write your own version of something the design system already provides (button, dialog, input, table, …). Reuse over recreation.
+- **Discover first, then install.** Check what exists (`shadcn list` / `shadcn view` against the registry) — the installable set is the **64 UI primitives + `theme` + `use-mobile`** — then `shadcn add` it. Don't copy/paste or reimplement a primitive. The `theme` (OKLCH tokens) rides along on the first install.
+- **Compose, don't reinvent.** Build higher-level patterns (blocks, page sections) from the installed primitives — blocks are **not** registry items.
+- **No suitable component → STOP and ask (mandatory).** Do not silently hand-roll a bespoke component. Prompt the user with three options and proceed only after they choose: (a) adapt the closest existing registry component, (b) request it be added to the design system, or (c) get explicit approval for a documented, clearly-marked local one-off.
+- **In this repo** you author primitives rather than install them — the analog rule is: reuse or extend an existing [`src/components/ui/*`](src/components/ui) primitive (or a `shadcn-studio` demo pattern) before adding a new one; don't duplicate.
+
+### Responsiveness & scaling
+
+- **Mobile-first.** Build for small screens first and layer up with Tailwind breakpoints (`sm`/`md`/`lg`/`xl`/`2xl`); no desktop-only layouts.
+- **Relative units, not fixed px.** Use the `rem`-based type scale (`text-caption`…`text-display`) and the spacing / `radius-*` scales; don't pin font sizes or container dimensions to px.
+- **Fluid layout.** Flex/grid with `min-w-0`, `max-w-*`, and wrapping so content reflows — it must never clip or force horizontal page scroll. Wide content (tables, code) scrolls inside its own `overflow-x-auto` container.
+- **Reuse breakpoint logic.** Use the `use-mobile` hook (`useIsMobile`, 768px) for conditional rendering instead of ad-hoc `matchMedia`.
+- **Touch targets & media.** Keep adequate hit areas on touch; `max-w-full` on images/media so nothing overflows.
+
+### Dark mode & theming
+
+- **Every color is a semantic token** with both light (`:root`) and dark (`.dark`) values in [`globals.css`](src/app/globals.css) — never hardcode hex or one-off colors; they won't adapt to dark.
+- **Right token for the job.** Surfaces (`background`/`card`/`popover`/`elevated`) with their `-foreground` for text; `-emphasis` for a status color rendered as text or a thin icon; `-subtle` (+ `-subtle-foreground`) for tinted surfaces. Don't use a base fill color as a text color.
+- **Contrast in both themes.** Hold WCAG AA (4.5:1 text, 3:1 large text / UI) and AAA where the palette allows — light and dark alike. Verify new or tuned colors in both (the live **Semantic colors** page has a contrast meter).
+- **Mechanics.** Dark mode is the `.dark` class on the `<html>` root; portaled content (dropdown, popover, tooltip, toast) inherits it — don't build light-only components. Adding or adjusting a color means editing `globals.css` (both `:root` **and** `.dark`), not the call site.
+- **Always test both light and dark** before shipping anything visible.
+
+### Other guardrails
+
+- **Accessibility.** Rely on Base UI primitives for interactive widgets — don't reimplement them (you lose keyboard/ARIA support). Keep a visible focus ring via `--ring` (never `outline: none` with no replacement), label form fields, and give images alt text.
+- **Loading / empty / error states.** Use the provided `skeleton`, `spinner`, and `empty` components; don't ship raw loading gaps or unhandled empty/error states.
+- **Use the scales, not magic numbers.** Prefer the spacing, `radius-*`, and type scales over arbitrary px, Tailwind `[...]` arbitrary values, or inline `style`.
+- **Compose, don't fork.** Compose primitives and their `data-slot` hooks; don't copy a primitive to tweak it or reach into its internals fragilely.
+- **Motion.** Respect `prefers-reduced-motion`; use the available `motion` / `tw-animate-css` sparingly.
+
 ## Adding or changing a component
 
 1. Primitive → `src/components/ui/<name>.tsx` (follow the house style above).
@@ -103,12 +139,12 @@ These are **docs demos, not registry items** — vendor-imported from shadcn-stu
 
 ## Docs-site architecture (static export)
 
-The site is a **static export** (`output: "export"` in [`next.config.ts`](next.config.ts)) deployed to GitHub Pages via [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml) on push to `main`.
+The site is a **static export** (`output: "export"` in [`next.config.ts`](next.config.ts)), built and published on push to `main` (see [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml)) and served at its custom domain **[design.edgecom.ai](https://design.edgecom.ai)** (root path).
 
 - The chrome (sidebar + header + content) renders **once** from [`src/app/(docs)/layout.tsx`](src/app/(docs)/layout.tsx) — a route-group layout — so the sidebar persists across navigations instead of remounting.
 - [`src/app/(docs)/[group]/[slug]/page.tsx`](src/app/(docs)/[group]/[slug]/page.tsx) returns `null` but **must keep `generateStaticParams()`** (from `src/docs/generated/routes.ts`) — static export requires it to prerender one HTML file per section.
 - **Don't move `DocsShell` back into the page** (it remounts → the sidebar scroll jumps to top on every click) and **don't drop `generateStaticParams`** (the static build fails).
-- `basePath` / `NEXT_PUBLIC_BASE_PATH` prefix asset and runtime-fetch URLs for the `/design-system` GitHub Pages path; local `pnpm dev` stays at `/`.
+- `basePath` / `NEXT_PUBLIC_BASE_PATH` (from `PAGES_BASE_PATH`) prefix asset and runtime-fetch URLs when the site is served under a sub-path (e.g. the legacy `…github.io/design-system` path); the production domain and local `pnpm dev` both serve at `/`.
 
 ## Verifying changes
 
@@ -119,6 +155,9 @@ There is **no test framework** in this repo. The quality gates are:
 
 ## Do-nots
 
+- Don't hand-write a component the registry already provides — import it; if none fits, stop and ask.
+- Don't hardcode colors or ship light-only UI — every color is a light+dark token; test both.
+- Don't pin sizes to px — use the rem type / spacing / radius scales.
 - Don't hardcode hex — use semantic tokens.
 - Don't hand-edit generated files (see the table above).
 - Don't `--overwrite` custom primitives when pulling shadcn-studio components.
