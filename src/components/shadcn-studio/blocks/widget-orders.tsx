@@ -109,7 +109,7 @@ const OrdersCard = ({ className }: { className?: string }) => {
             <TabsTrigger
               key={tab.value}
               value={tab.value}
-              className='border-0 group-data-horizontal/tabs:after:-bottom-[0.5px]'
+              className='border-0 group-data-[orientation=horizontal]/tabs:after:-bottom-[0.5px]'
             >
               {tab.name}
             </TabsTrigger>
