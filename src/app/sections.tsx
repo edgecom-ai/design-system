@@ -153,6 +153,12 @@ import { ProgressLinearDemo } from "@/components/demo/progress-linear-demo";
 import { SelectSitesDemo } from "@/components/demo/select-sites-demo";
 import { SelectCommodityDemo } from "@/components/demo/select-commodity-demo";
 import { SelectCommodityPlaceholderDemo } from "@/components/demo/select-commodity-placeholder-demo";
+import { SidebarDemo } from "@/components/demo/sidebar-demo";
+import { CommandDemo } from "@/components/demo/command-demo";
+import { TimelineDemo } from "@/components/demo/timeline-demo";
+import { TableDemo } from "@/components/demo/table-demo";
+import { PaginationDemo } from "@/components/demo/pagination-demo";
+import { CategoryBarDemo } from "@/components/demo/category-bar-demo";
 import { TextareaNoteDemo } from "@/components/demo/textarea-note-demo";
 import { DatePickerDemo } from "@/components/demo/date-picker-demo";
 import DatePickerRangeDemo from "@/components/shadcn-studio/date-picker/date-picker-02";
@@ -2640,6 +2646,102 @@ export const sections: Section[] = [
         description: "A date-range picker with start and end time inputs.",
         preview: <DatePickerRangeTimeDemo />,
         source: ss("date-picker/date-picker-12"),
+      },
+    ],
+  },
+  {
+    id: "category-bar",
+    label: "Category bar",
+    group: "Components",
+    description: "A segmented proportion bar with an optional marker.",
+    install: "@edgecom/category-bar",
+    variants: [
+      {
+        id: "category-bar-usage",
+        name: "Budget usage",
+        description: "Commodity-mix segments with a marker at current budget usage.",
+        preview: <CategoryBarDemo />,
+        source: dm("category-bar-demo"),
+      },
+    ],
+  },
+  {
+    id: "command",
+    label: "Command",
+    group: "Components",
+    description: "A searchable command palette for fast navigation and actions.",
+    install: "@edgecom/command",
+    variants: [
+      {
+        id: "command-palette",
+        name: "Command menu",
+        description: "A filterable list of navigation targets and actions with shortcuts.",
+        preview: <CommandDemo />,
+        source: dm("command-demo"),
+      },
+    ],
+  },
+  {
+    id: "pagination",
+    label: "Pagination",
+    group: "Components",
+    description: "Page navigation controls for long lists and tables.",
+    install: "@edgecom/pagination",
+    variants: [
+      {
+        id: "pagination-basic",
+        name: "Basic",
+        description: "Previous / next controls with page numbers and an ellipsis.",
+        preview: <PaginationDemo />,
+        source: dm("pagination-demo"),
+      },
+    ],
+  },
+  {
+    id: "sidebar",
+    label: "Sidebar",
+    group: "Components",
+    description: "A composable application sidebar with header, grouped menu, and footer.",
+    install: "@edgecom/sidebar",
+    variants: [
+      {
+        id: "sidebar-basic",
+        name: "Dashboard sidebar",
+        description: "Logo header, a grouped navigation menu with an active item, and a settings footer.",
+        preview: <SidebarDemo />,
+        source: dm("sidebar-demo"),
+      },
+    ],
+  },
+  {
+    id: "table",
+    label: "Table",
+    group: "Components",
+    description: "A styled HTML table for tabular data.",
+    install: "@edgecom/table",
+    variants: [
+      {
+        id: "table-basic",
+        name: "Consumption by site",
+        description: "Header, body rows, a caption, and right-aligned numeric cells.",
+        preview: <TableDemo />,
+        source: dm("table-demo"),
+      },
+    ],
+  },
+  {
+    id: "timeline",
+    label: "Timeline",
+    group: "Components",
+    description: "A vertical sequence of events with status dots and connectors.",
+    install: "@edgecom/timeline",
+    variants: [
+      {
+        id: "timeline-activity",
+        name: "Site activity",
+        description: "Completed, in-progress, and pending events with status dots.",
+        preview: <TimelineDemo />,
+        source: dm("timeline-demo"),
       },
     ],
   },

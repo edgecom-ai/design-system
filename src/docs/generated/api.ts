@@ -507,6 +507,110 @@ export const generatedApi: Record<string, GeneratedApi> = {
     ],
     "props": []
   },
+  "category-bar": {
+    "parts": [
+      "CategoryBar"
+    ],
+    "props": []
+  },
+  "command": {
+    "parts": [
+      "Command",
+      "CommandDialog",
+      "CommandInput",
+      "CommandList",
+      "CommandEmpty",
+      "CommandGroup",
+      "CommandItem",
+      "CommandShortcut",
+      "CommandSeparator"
+    ],
+    "props": []
+  },
+  "pagination": {
+    "parts": [
+      "Pagination",
+      "PaginationContent",
+      "PaginationEllipsis",
+      "PaginationItem",
+      "PaginationLink",
+      "PaginationNext",
+      "PaginationPrevious"
+    ],
+    "props": []
+  },
+  "sidebar": {
+    "parts": [
+      "Sidebar",
+      "SidebarContent",
+      "SidebarFooter",
+      "SidebarGroup",
+      "SidebarGroupAction",
+      "SidebarGroupContent",
+      "SidebarGroupLabel",
+      "SidebarHeader",
+      "SidebarInput",
+      "SidebarInset",
+      "SidebarMenu",
+      "SidebarMenuAction",
+      "SidebarMenuBadge",
+      "SidebarMenuButton",
+      "SidebarMenuItem",
+      "SidebarMenuSkeleton",
+      "SidebarMenuSub",
+      "SidebarMenuSubButton",
+      "SidebarMenuSubItem",
+      "SidebarProvider",
+      "SidebarRail",
+      "SidebarSeparator",
+      "SidebarTrigger"
+    ],
+    "props": [
+      {
+        "part": "Sidebar",
+        "name": "variant",
+        "type": "\"default\" | \"outline\"",
+        "default": "\"default\""
+      },
+      {
+        "part": "Sidebar",
+        "name": "size",
+        "type": "\"default\" | \"sm\" | \"lg\"",
+        "default": "\"default\""
+      }
+    ]
+  },
+  "table": {
+    "parts": [
+      "Table",
+      "TableHeader",
+      "TableBody",
+      "TableFooter",
+      "TableHead",
+      "TableRow",
+      "TableCell",
+      "TableCaption"
+    ],
+    "props": []
+  },
+  "timeline": {
+    "parts": [
+      "Timeline",
+      "TimelineDot",
+      "TimelineItem",
+      "TimelineContent",
+      "TimelineHeading",
+      "TimelineLine",
+      "TimelineTag"
+    ],
+    "props": [
+      {
+        "part": "Timeline",
+        "name": "positions",
+        "type": "\"left\" | \"right\" | \"center\""
+      }
+    ]
+  },
   "checkbox": {
     "base": {
       "name": "Base UI Checkbox",

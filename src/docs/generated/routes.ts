@@ -174,6 +174,30 @@ export const staticParams: { group: string; slug: string }[] = [
   },
   {
     "group": "components",
+    "slug": "category-bar"
+  },
+  {
+    "group": "components",
+    "slug": "command"
+  },
+  {
+    "group": "components",
+    "slug": "pagination"
+  },
+  {
+    "group": "components",
+    "slug": "sidebar"
+  },
+  {
+    "group": "components",
+    "slug": "table"
+  },
+  {
+    "group": "components",
+    "slug": "timeline"
+  },
+  {
+    "group": "components",
     "slug": "checkbox"
   },
   {

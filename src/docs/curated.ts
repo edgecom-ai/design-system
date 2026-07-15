@@ -526,4 +526,90 @@ export const curatedApi: Record<string, CuratedApi> = {
       SelectScrollDownButton: "Scroll-down affordance shown when the list overflows.",
     },
   },
+  "category-bar": {
+    summary:
+      "A single horizontal bar split into proportional colored segments, with an optional marker and numeric labels.",
+    propDescriptions: {
+      "CategoryBar.values": "Segment magnitudes; each width is its share of their sum.",
+      "CategoryBar.colors": "Tailwind background classes, one per segment (use semantic tokens).",
+      "CategoryBar.marker": "Optional pointer at a value, with an optional tooltip.",
+      "CategoryBar.showLabels": "Show the numeric scale above the bar.",
+    },
+  },
+  command: {
+    summary:
+      "A searchable command palette; type to filter grouped, keyboard-navigable items. Wrap in CommandDialog for a ⌘K overlay.",
+    parts: {
+      Command: "Root container owning the filter state and keyboard navigation.",
+      CommandDialog: "Dialog wrapper that renders the menu as a ⌘K overlay.",
+      CommandInput: "Search field that filters the list as you type.",
+      CommandList: "Scrollable results region.",
+      CommandEmpty: "Fallback shown when nothing matches.",
+      CommandGroup: "A labelled group of related items (via heading).",
+      CommandItem: "A selectable action or navigation target.",
+      CommandSeparator: "A divider between groups.",
+      CommandShortcut: "Right-aligned keyboard-shortcut hint on an item.",
+    },
+  },
+  pagination: {
+    summary:
+      "Page navigation for long lists and tables — previous/next controls, numbered links, and an ellipsis.",
+    parts: {
+      Pagination: "Root nav landmark labelled for assistive tech.",
+      PaginationContent: "The row that lays out the page items.",
+      PaginationItem: "A single slot wrapping a link or control.",
+      PaginationLink: "A page-number link; mark the current page with isActive.",
+      PaginationPrevious: "Link to the previous page.",
+      PaginationNext: "Link to the next page.",
+      PaginationEllipsis: "Indicates skipped page ranges.",
+    },
+    propDescriptions: {
+      "PaginationLink.isActive": "Marks the current page (aria-current + active styling).",
+    },
+  },
+  sidebar: {
+    summary:
+      "A composable application sidebar. SidebarProvider supplies collapse state; Sidebar holds a header, a scrollable body of grouped menus, and a footer, alongside a SidebarInset for the main area.",
+    parts: {
+      SidebarProvider: "Context provider owning open/collapsed state; wrap the whole layout.",
+      Sidebar: "The sidebar container; collapsible offcanvas, icon, or none.",
+      SidebarHeader: "Top region, typically the logo or workspace switcher.",
+      SidebarContent: "Scrollable body holding the navigation groups.",
+      SidebarGroup: "A titled section of menu items.",
+      SidebarGroupLabel: "Heading for a group.",
+      SidebarMenu: "The list of menu items within a group.",
+      SidebarMenuItem: "A single menu row.",
+      SidebarMenuButton: "The interactive nav button; set isActive for the current page.",
+      SidebarFooter: "Bottom region, e.g. settings or the account menu.",
+      SidebarInset: "The main content area beside the sidebar.",
+      SidebarTrigger: "Button that toggles the sidebar open/collapsed.",
+    },
+  },
+  table: {
+    summary:
+      "A styled HTML table wrapped for horizontal overflow — header, body, optional footer, rows, cells, and a caption.",
+    parts: {
+      Table: "Root table, wrapped in an overflow-x container.",
+      TableHeader: "The thead grouping header rows.",
+      TableBody: "The tbody grouping data rows.",
+      TableFooter: "Optional tfoot for totals or summaries.",
+      TableRow: "A single row with hover and selected states.",
+      TableHead: "A header cell (th).",
+      TableCell: "A data cell (td).",
+      TableCaption: "A caption describing the table.",
+    },
+  },
+  timeline: {
+    summary:
+      "A vertical sequence of events. Each TimelineItem pairs a status TimelineDot with a TimelineHeading and TimelineContent, connected by a TimelineLine.",
+    parts: {
+      Timeline: "Root list; positions dots left, right, or center.",
+      TimelineItem: "One event row; status tints the text done or default.",
+      TimelineDot: "The status marker: default, current, done, error, or custom.",
+      TimelineLine: "The connector drawn between consecutive dots.",
+      TimelineHeading: "The event title.",
+      TimelineContent: "The event body / description.",
+      TimelineTag: "An optional side label aligned to the dot.",
+    },
+  },
 };
