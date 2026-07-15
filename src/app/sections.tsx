@@ -60,8 +60,6 @@ import RadioGroupDemo from "@/components/shadcn-studio/radio-group/radio-group-0
 import RadioGroupHorizontalDemo from "@/components/shadcn-studio/radio-group/radio-group-02";
 import RadioGroupCardRadioDemo from "@/components/shadcn-studio/radio-group/radio-group-11";
 import RadioGroupCardVerticalRadioDemo from "@/components/shadcn-studio/radio-group/radio-group-13";
-import NativeSelectDemo from "@/components/shadcn-studio/select/select-01";
-import NativeSelectPlaceholderDemo from "@/components/shadcn-studio/select/select-02";
 import NativeSelectRequiredDemo from "@/components/shadcn-studio/select/select-06";
 import SelectWithOptionsGroupsDemo from "@/components/shadcn-studio/select/select-22";
 import MultipleSelectWithPlaceholderDemo from "@/components/shadcn-studio/select/select-33";
@@ -153,6 +151,8 @@ import { ToggleFormattingDemo } from "@/components/demo/toggle-formatting-demo";
 import { SliderBasicDemo } from "@/components/demo/slider-basic-demo";
 import { ProgressLinearDemo } from "@/components/demo/progress-linear-demo";
 import { SelectSitesDemo } from "@/components/demo/select-sites-demo";
+import { SelectCommodityDemo } from "@/components/demo/select-commodity-demo";
+import { SelectCommodityPlaceholderDemo } from "@/components/demo/select-commodity-placeholder-demo";
 import { TextareaNoteDemo } from "@/components/demo/textarea-note-demo";
 import { DatePickerDemo } from "@/components/demo/date-picker-demo";
 import DatePickerRangeDemo from "@/components/shadcn-studio/date-picker/date-picker-02";
@@ -2390,18 +2390,18 @@ export const sections: Section[] = [
         source: dm("select-sites-demo"),
       },
       {
-        id: "select-native",
-        name: "Native select",
-        description: "The browser's native select element, styled to match.",
-        preview: <NativeSelectDemo />,
-        source: ss("select/select-01"),
+        id: "select-single",
+        name: "Single value",
+        description: "A single-value select styled to match the design system.",
+        preview: <SelectCommodityDemo />,
+        source: dm("select-commodity-demo"),
       },
       {
-        id: "select-native-placeholder",
-        name: "Native with placeholder",
-        description: "A native select with a non-selectable placeholder.",
-        preview: <NativeSelectPlaceholderDemo />,
-        source: ss("select/select-02"),
+        id: "select-placeholder",
+        name: "With placeholder",
+        description: "A select showing a placeholder until a value is chosen.",
+        preview: <SelectCommodityPlaceholderDemo />,
+        source: dm("select-commodity-placeholder-demo"),
       },
       {
         id: "select-native-required",
