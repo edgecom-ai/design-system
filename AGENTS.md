@@ -102,6 +102,18 @@ These apply whenever you build UI with these components (in this repo or a consu
 - **Mechanics.** Dark mode is the `.dark` class on the `<html>` root; portaled content (dropdown, popover, tooltip, toast) inherits it — don't build light-only components. Adding or adjusting a color means editing `globals.css` (both `:root` **and** `.dark`), not the call site.
 - **Always test both light and dark** before shipping anything visible.
 
+### Interaction patterns & feedback
+
+- **Buttons need real hover (and focus) states.** Use the design-system `button` — its variants ship hover + focus-ring styling for free. If you build any custom clickable control, it must have a visible `hover:` state and a focus ring (`--ring`); never ship a flat, stateless button.
+- **Pick the right overlay — dialog vs. sheet.** Match the surface to the amount of input:
+  - **Short create actions (1–4 fields) → modal `dialog`** — quick, centered, focused.
+  - **Longer edit/update actions (many fields) → right-side `sheet`** — room for dense forms without a cramped modal.
+  - Both are Base UI primitives: trigger via the `render` prop, and portaled content inherits dark mode.
+- **Always surface validation / error states — never fail silently.** If a required field is empty when the user tries to proceed, show inline error text that names what's missing (e.g. "Site name is required") next to the field — not just a generic toast or a blocked button with no explanation.
+  - Wire it through the `field` component's `FieldError` slot and set `aria-invalid` on the input; the `input` / `select` primitives already render the destructive border + ring from `aria-invalid`.
+  - Use the destructive token for the message (the `-emphasis` variant when it's text — see *Design tokens & accessibility*), and pair color with text/icon — never color alone.
+  - This complements the loading / empty / error-state guardrail (`skeleton` / `spinner` / `empty`).
+
 ### Other guardrails
 
 - **Accessibility.** Rely on Base UI primitives for interactive widgets — don't reimplement them (you lose keyboard/ARIA support). Keep a visible focus ring via `--ring` (never `outline: none` with no replacement), label form fields, and give images alt text.
@@ -156,6 +168,9 @@ There is **no test framework** in this repo. The quality gates are:
 ## Do-nots
 
 - Don't hand-write a component the registry already provides — import it; if none fits, stop and ask.
+- Don't ship a button or interactive control without a visible hover + focus state.
+- Don't cram a long, many-field form into a centered modal — use a right sheet; keep dialogs for short (1–4 field) create actions.
+- Don't block a user on validation without inline, specific error text (name the missing field) and `aria-invalid`.
 - Don't hardcode colors or ship light-only UI — every color is a light+dark token; test both.
 - Don't pin sizes to px — use the rem type / spacing / radius scales.
 - Don't hardcode hex — use semantic tokens.
