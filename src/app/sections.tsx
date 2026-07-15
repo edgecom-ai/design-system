@@ -20,7 +20,7 @@ import { cn } from "@/lib/utils";
 import { ComponentPreview, InstallCommand } from "@/components/docs/component-preview";
 import { Toc } from "@/components/docs/toc";
 import { SeparatorDemo } from "@/components/demo/separator-demo";
-import { ApplicationShellDemo } from "@/components/demo/application-shell-demo";
+import { ApplicationShellPreview } from "@/components/demo/application-shell-preview";
 import { AvatarBasicDemo, AvatarGroupDemo } from "@/components/demo/avatar-demo";
 import { ScrollAreaDemo } from "@/components/demo/scroll-area-demo";
 import { SheetDemo } from "@/components/demo/sheet-demo";
@@ -3420,7 +3420,7 @@ export const sections: Section[] = [
         name: "Dashboard shell",
         description:
           "Sidebar navigation, a top bar with search and account menus, and a scrollable content area — composed from registry primitives.",
-        preview: <ApplicationShellDemo />,
+        preview: <ApplicationShellPreview />,
         source: dm("application-shell-demo"),
       },
     ],
