@@ -36,10 +36,10 @@ const NotificationDropdown = ({ trigger, defaultOpen, align = 'end' }: Props) =>
               </div>
               <div className='-mb-0.5 flex items-center justify-between gap-4'>
                 <TabsList variant='line'>
-                  <TabsTrigger value='inbox' className='group-data-horizontal/tabs:after:-bottom-1'>
+                  <TabsTrigger value='inbox' className='group-data-[orientation=horizontal]/tabs:after:-bottom-1'>
                     Inbox
                   </TabsTrigger>
-                  <TabsTrigger value='general' className='group-data-horizontal/tabs:after:-bottom-1'>
+                  <TabsTrigger value='general' className='group-data-[orientation=horizontal]/tabs:after:-bottom-1'>
                     General
                   </TabsTrigger>
                 </TabsList>

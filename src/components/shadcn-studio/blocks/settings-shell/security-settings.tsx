@@ -16,7 +16,7 @@ const SecuritySettings = () => {
             <TabsTrigger
               key={tab.value}
               value={tab.value}
-              className='not-data-active:hover:group-data-horizontal/tabs:after:bg-muted-foreground/30 border-0 text-base group-data-horizontal/tabs:after:-bottom-[0.5px] not-data-active:hover:group-data-horizontal/tabs:after:opacity-100 sm:flex-0'
+              className='not-data-active:hover:group-data-[orientation=horizontal]/tabs:after:bg-muted-foreground/30 border-0 text-base group-data-[orientation=horizontal]/tabs:after:-bottom-[0.5px] not-data-active:hover:group-data-[orientation=horizontal]/tabs:after:opacity-100 sm:flex-0'
             >
               {tab.name}
             </TabsTrigger>
