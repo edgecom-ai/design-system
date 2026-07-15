@@ -17,11 +17,8 @@ import {
   ChevronsUpDown,
   Moon,
   Sun,
-  Maximize2,
-  Minimize2,
 } from "lucide-react"
 
-import { cn } from "@/lib/utils"
 import { Logo } from "@/components/ui/logo"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -67,18 +64,17 @@ const buildings = [
 ]
 
 /**
- * Inline preview of the full application shell — sidebar, top bar, and content
- * layout composed from registry primitives. Self-contained (no standalone
- * route): the persistent frame is structural markup styled with sidebar tokens,
+ * The full application shell — sidebar, top bar, and scrollable content, composed
+ * from registry primitives and sized to fill its container. Self-contained (no
+ * standalone route): the frame is structural markup styled with sidebar tokens,
  * while the top-bar menus are the real interactive block components.
  *
  * Interactive bits: a building/location switcher, a dark-mode toggle (flips the
- * real `.dark` class on <html>, as a consuming app would), an expand-to-full-
- * screen control (Escape to exit), and the account menu docked in the sidebar
- * footer. Language and notifications are wired as placeholders for future support.
+ * real `.dark` class on <html>, as a consuming app would), and the account menu
+ * docked in the sidebar footer. Language and notifications are wired as
+ * placeholders for future support.
  */
 export function ApplicationShellDemo() {
-  const [expanded, setExpanded] = React.useState(false)
   const [dark, setDark] = React.useState(false)
   const [building, setBuilding] = React.useState(buildings[0])
 
@@ -93,27 +89,10 @@ export function ApplicationShellDemo() {
     return () => obs.disconnect()
   }, [])
 
-  // Escape collapses the maximized shell.
-  React.useEffect(() => {
-    if (!expanded) return
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setExpanded(false)
-    }
-    document.addEventListener("keydown", onKey)
-    return () => document.removeEventListener("keydown", onKey)
-  }, [expanded])
-
   const toggleDark = () => document.documentElement.classList.toggle("dark")
 
   return (
-    <div
-      className={cn(
-        "flex overflow-hidden border border-border bg-background text-sm",
-        expanded
-          ? "fixed inset-0 z-50 rounded-none"
-          : "relative h-[560px] w-full rounded-xl"
-      )}
-    >
+    <div className="flex size-full overflow-hidden bg-background text-sm">
       {/* Sidebar */}
       <aside className="hidden w-56 shrink-0 flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground md:flex">
         <div className="flex h-14 items-center gap-2 border-b border-sidebar-border px-4">
@@ -234,7 +213,7 @@ export function ApplicationShellDemo() {
               }
             />
 
-            {/* Dark-mode toggle (replaces the activity feed) */}
+            {/* Dark-mode toggle */}
             <Button
               variant="ghost"
               size="icon"
@@ -243,20 +222,6 @@ export function ApplicationShellDemo() {
               aria-pressed={dark}
             >
               {dark ? <Sun className="size-4" /> : <Moon className="size-4" />}
-            </Button>
-
-            {/* Expand the shell to full screen */}
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setExpanded((v) => !v)}
-              aria-label={expanded ? "Exit full screen" : "Expand to full screen"}
-            >
-              {expanded ? (
-                <Minimize2 className="size-4" />
-              ) : (
-                <Maximize2 className="size-4" />
-              )}
             </Button>
           </div>
         </header>
