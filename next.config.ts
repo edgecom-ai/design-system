@@ -1,9 +1,9 @@
 import type { NextConfig } from "next";
 
-// The docs site is a fully static export deployed to GitHub Pages and served at
-// the custom domain https://design.edgecom.ai (root path) — no base path by
-// default. PAGES_BASE_PATH can still inject one for a sub-path deployment (e.g.
-// a project-pages URL); local `pnpm dev` stays at "/".
+// The docs site is deployed to GitHub Pages as a fully static export
+// (https://edgecom-ai.github.io/design-system/). The base path is injected at
+// build time via PAGES_BASE_PATH so local `pnpm dev` and any root-hosted build
+// stay at "/". The CI workflow sets PAGES_BASE_PATH=/design-system.
 const basePath = process.env.PAGES_BASE_PATH ?? "";
 
 const nextConfig: NextConfig = {
