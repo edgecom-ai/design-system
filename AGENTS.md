@@ -34,6 +34,7 @@ You rarely run the generators by hand — `predev`/`prebuild` do it. Run `pnpm r
   // ❌ not Radix-style
   <DialogTrigger asChild><Button>Open</Button></DialogTrigger>
   ```
+  Base UI exposes orientation as **`data-orientation="horizontal|vertical"`** — style it with the value-matched **`data-[orientation=…]`** variant (and its `group-data-[orientation=…]/name` composed forms), **never** bare `data-horizontal`/`data-vertical` (in Tailwind v4 those silently compile to `[data-horizontal]` presence selectors that never match, so the styles are dead).
 - **Tailwind v4 + OKLCH tokens.** There is no `tailwind.config.js`; `src/app/globals.css` is the single source of truth for tokens. **Never hardcode hex** — use a semantic utility (`bg-primary`, `text-muted-foreground`, …). Adding or tuning a color means editing `globals.css`, not the call site.
 - **lucide-react is the only icon library.** Don't add other icon packages.
 
@@ -81,7 +82,10 @@ These apply whenever you build UI with these components (in this repo or a consu
 ### Import from the registry — don't recreate
 
 - **Use the existing component.** Never hand-write your own version of something the design system already provides (button, dialog, input, table, …). Reuse over recreation.
-- **Discover first, then install.** Check what exists (`shadcn list` / `shadcn view` against the registry) — the installable set is the **64 UI primitives + `theme` + `use-mobile`** — then `shadcn add` it. Don't copy/paste or reimplement a primitive. The `theme` (OKLCH tokens) rides along on the first install.
+- **Discover before you build — don't reimplement what exists.** Find the component first:
+  - **In this repo:** the source of truth is [`src/components/ui/*`](src/components/ui) — grep there. You author primitives here, so don't `shadcn add`.
+  - **Catalog:** browse every component (light / dark, with code) at [edgecom-ai.github.io/design-system](https://edgecom-ai.github.io/design-system/) — useful for agents without a shell (e.g. Claude Design).
+  - The installable set is the **64 UI primitives + `theme` + `use-mobile`**; `theme` (OKLCH tokens) rides along on the first `add`. Don't copy/paste or reimplement a primitive.
 - **Compose, don't reinvent.** Build higher-level patterns (blocks, page sections) from the installed primitives — blocks are **not** registry items.
 - **No suitable component → STOP and ask (mandatory).** Do not silently hand-roll a bespoke component. Prompt the user with three options and proceed only after they choose: (a) adapt the closest existing registry component, (b) request it be added to the design system, or (c) get explicit approval for a documented, clearly-marked local one-off.
 - **In this repo** you author primitives rather than install them — the analog rule is: reuse or extend an existing [`src/components/ui/*`](src/components/ui) primitive (or a `shadcn-studio` demo pattern) before adding a new one; don't duplicate.
@@ -114,10 +118,25 @@ These apply whenever you build UI with these components (in this repo or a consu
   - Use the destructive token for the message (the `-emphasis` variant when it's text — see *Design tokens & accessibility*), and pair color with text/icon — never color alone.
   - This complements the loading / empty / error-state guardrail (`skeleton` / `spinner` / `empty`).
 
+- **Confirm immediate actions with a toast.** Any interaction that takes effect immediately (no explicit Save/Submit) needs `toast` (`sonner`) feedback — e.g. a `switch` / toggle must fire a toast confirming it was turned on or off. Actions that commit through a form/dialog don't need this; the immediate ones do.
+- **Keep a gap between menu items.** An active item and a hovered neighbor must read as two distinct rows, never one merged block — space items (e.g. `gap-1`) in `sidebar`, `dropdown-menu`, `command`, and any similar list so the active highlight and an adjacent hover highlight never touch.
+
+### Component usage conventions
+
+- **Badge variants — pick by meaning; default to `outline`.** The `badge` tone is not decorative.
+  - **Neutral labels → `outline`.** Any neutral badge uses `outline`; when unsure which to use, use `outline`.
+  - **Key highlight → `default` (primary).** Reserve the primary-colored `default` variant for a single key highlight (e.g. the current season/period) — not routine labels.
+  - **Commodities → the commodity variants only.** Use `electricity`, `water`, `gas`, `temperature`, `emissions` strictly to tag that commodity. Electricity-derived metrics (voltage, current, THD, power factor) may use `electricity`.
+  - **Info → `info`.** Use `info` for informational tags (and `success`/`warning`/`destructive` for genuine status).
+- **Tables.** Don't add icons to table cells unless explicitly asked — keep cells text-first and scannable. Badges inside cells follow the badge rules above.
+- **Density → reach for hover.** When a cell, chart, or any element would cram in too much, move the overflow into a `tooltip` (brief) or `hover-card` (richer) instead of shrinking text or clipping.
+- **No accent bars — ever.** Never add a colored strip along an edge/border (e.g. `border-l-4 border-l-destructive` on an alert or card) to signal status or draw attention. Use the component's own variant instead — a tinted `-subtle` surface with `-emphasis` text/icon — so status reads consistently and adapts to dark mode.
+
 ### Other guardrails
 
 - **Accessibility.** Rely on Base UI primitives for interactive widgets — don't reimplement them (you lose keyboard/ARIA support). Keep a visible focus ring via `--ring` (never `outline: none` with no replacement), label form fields, and give images alt text.
 - **Loading / empty / error states.** Use the provided `skeleton`, `spinner`, and `empty` components; don't ship raw loading gaps or unhandled empty/error states.
+- **Async / data-fetch failures.** On a failed request or network error, render an explicit error state with a **retry** action (an `empty` state with a retry `button`) — never a blank screen or a spinner that spins forever. For a failed *action* (e.g. a save), surface a `toast` (`sonner`) and keep the user's input intact so they can retry.
 - **Use the scales, not magic numbers.** Prefer the spacing, `radius-*`, and type scales over arbitrary px, Tailwind `[...]` arbitrary values, or inline `style`.
 - **Compose, don't fork.** Compose primitives and their `data-slot` hooks; don't copy a primitive to tweak it or reach into its internals fragilely.
 - **Motion.** Respect `prefers-reduced-motion`; use the available `motion` / `tw-animate-css` sparingly.
@@ -151,12 +170,12 @@ These are **docs demos, not registry items** — vendor-imported from shadcn-stu
 
 ## Docs-site architecture (static export)
 
-The site is a **static export** (`output: "export"` in [`next.config.ts`](next.config.ts)), built and published on push to `main` (see [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml)) and served at its custom domain **[design.edgecom.ai](https://design.edgecom.ai)** (root path).
+The site is a **static export** (`output: "export"` in [`next.config.ts`](next.config.ts)), built and published on push to `main` (see [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml)) and served from GitHub Pages at **[edgecom-ai.github.io/design-system](https://edgecom-ai.github.io/design-system/)** (CI builds with `PAGES_BASE_PATH=/design-system`).
 
 - The chrome (sidebar + header + content) renders **once** from [`src/app/(docs)/layout.tsx`](src/app/(docs)/layout.tsx) — a route-group layout — so the sidebar persists across navigations instead of remounting.
 - [`src/app/(docs)/[group]/[slug]/page.tsx`](src/app/(docs)/[group]/[slug]/page.tsx) returns `null` but **must keep `generateStaticParams()`** (from `src/docs/generated/routes.ts`) — static export requires it to prerender one HTML file per section.
 - **Don't move `DocsShell` back into the page** (it remounts → the sidebar scroll jumps to top on every click) and **don't drop `generateStaticParams`** (the static build fails).
-- `basePath` / `NEXT_PUBLIC_BASE_PATH` (from `PAGES_BASE_PATH`) prefix asset and runtime-fetch URLs when the site is served under a sub-path (e.g. the legacy `…github.io/design-system` path); the production domain and local `pnpm dev` both serve at `/`.
+- `basePath` / `NEXT_PUBLIC_BASE_PATH` (from `PAGES_BASE_PATH`) prefix asset and runtime-fetch URLs for the `/design-system` GitHub Pages path; local `pnpm dev` stays at `/`.
 
 ## Verifying changes
 
@@ -168,6 +187,12 @@ There is **no test framework** in this repo. The quality gates are:
 ## Do-nots
 
 - Don't hand-write a component the registry already provides — import it; if none fits, stop and ask.
+- Don't pick a colored or commodity badge variant for a neutral label — default to `outline`; commodity variants mean the commodity.
+- Don't put icons in table cells unless explicitly asked.
+- Don't add accent bars — colored border strips on alerts/cards; use the component's variant (`-subtle` surface + `-emphasis`) instead.
+- Don't leave async failures as a blank screen or an endless spinner — show an error state with a retry (or a `toast` for failed actions).
+- Don't run an immediate (no-Save) action without a confirming `toast` — e.g. toggles must confirm on/off.
+- Don't let menu/sidebar items sit flush — keep a gap so an active item and a hovered neighbor don't merge.
 - Don't ship a button or interactive control without a visible hover + focus state.
 - Don't cram a long, many-field form into a centered modal — use a right sheet; keep dialogs for short (1–4 field) create actions.
 - Don't block a user on validation without inline, specific error text (name the missing field) and `aria-invalid`.
