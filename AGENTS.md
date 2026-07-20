@@ -82,6 +82,7 @@ These apply whenever you build UI with these components (in this repo or a consu
 ### Import from the registry — don't recreate
 
 - **Use the existing component.** Never hand-write your own version of something the design system already provides (button, dialog, input, table, …). Reuse over recreation.
+- **No third-party components or dependencies unless asked or required.** Don't pull in an outside UI-component library or add an npm dependency unless (a) the user explicitly requests it, or (b) it's already required by a registry component (package deps and `registryDependencies` are inferred from imports — see [REGISTRY.md](REGISTRY.md) §3). Reach for the registry primitives and Base UI first.
 - **Discover before you build — don't reimplement what exists.** Find the component first:
   - **In this repo:** the source of truth is [`src/components/ui/*`](src/components/ui) — grep there. You author primitives here, so don't `shadcn add`.
   - **Catalog:** browse every component (light / dark, with code) at [edgecom-ai.github.io/design-system](https://edgecom-ai.github.io/design-system/) — useful for agents without a shell (e.g. Claude Design).
@@ -102,6 +103,7 @@ These apply whenever you build UI with these components (in this repo or a consu
 
 - **Every color is a semantic token** with both light (`:root`) and dark (`.dark`) values in [`globals.css`](src/app/globals.css) — never hardcode hex or one-off colors; they won't adapt to dark.
 - **Right token for the job.** Surfaces (`background`/`card`/`popover`/`elevated`) with their `-foreground` for text; `-emphasis` for a status color rendered as text or a thin icon; `-subtle` (+ `-subtle-foreground`) for tinted surfaces. Don't use a base fill color as a text color.
+- **Primary blue is mode-independent.** The brand blue (`--primary` — `bg-primary` fills and buttons) is deliberately the **same value in light and dark**; don't lighten or re-tune it in `.dark` the way most tokens shift. If you need a lighter primary as **text** in dark mode, use `--primary-emphasis`, never a lightened base.
 - **Contrast in both themes.** Hold WCAG AA (4.5:1 text, 3:1 large text / UI) and AAA where the palette allows — light and dark alike. Verify new or tuned colors in both (the live **Semantic colors** page has a contrast meter).
 - **Mechanics.** Dark mode is the `.dark` class on the `<html>` root; portaled content (dropdown, popover, tooltip, toast) inherits it — don't build light-only components. Adding or adjusting a color means editing `globals.css` (both `:root` **and** `.dark`), not the call site.
 - **Always test both light and dark** before shipping anything visible.
@@ -118,7 +120,7 @@ These apply whenever you build UI with these components (in this repo or a consu
   - Use the destructive token for the message (the `-emphasis` variant when it's text — see *Design tokens & accessibility*), and pair color with text/icon — never color alone.
   - This complements the loading / empty / error-state guardrail (`skeleton` / `spinner` / `empty`).
 
-- **Confirm immediate actions with a toast.** Any interaction that takes effect immediately (no explicit Save/Submit) needs `toast` (`sonner`) feedback — e.g. a `switch` / toggle must fire a toast confirming it was turned on or off. Actions that commit through a form/dialog don't need this; the immediate ones do.
+- **Confirm with a toast — using the semantic variant.** Any interaction that needs feedback fires a `toast` (`sonner`): immediate actions especially (a `switch` / toggle must confirm on/off), and a completed save/submit should `toast.success`. **Match the variant to the outcome** — `toast.success` on success, `toast.error` on failure, `toast.warning` for caution — never a neutral `toast()` for a success/error result.
 - **Keep a gap between menu items.** An active item and a hovered neighbor must read as two distinct rows, never one merged block — space items (e.g. `gap-1`) in `sidebar`, `dropdown-menu`, `command`, and any similar list so the active highlight and an adjacent hover highlight never touch.
 
 ### Component usage conventions
@@ -128,8 +130,9 @@ These apply whenever you build UI with these components (in this repo or a consu
   - **Key highlight → `default` (primary).** Reserve the primary-colored `default` variant for a single key highlight (e.g. the current season/period) — not routine labels.
   - **Commodities → the commodity variants only.** Use `electricity`, `water`, `gas`, `temperature`, `emissions` strictly to tag that commodity. Electricity-derived metrics (voltage, current, THD, power factor) may use `electricity`.
   - **Info → `info`.** Use `info` for informational tags (and `success`/`warning`/`destructive` for genuine status).
+- **Status colors — use strictly by meaning.** `destructive` for errors and destructive actions, `success` for positive confirmation, `warning` for caution, `info` for information — consistently across every surface (badges, alerts, toasts, text, icons). Never an arbitrary red / green / yellow, and never a status color used decoratively; pick the token by meaning and let *Design tokens & accessibility* choose the shade.
 - **Tables.** Don't add icons to table cells unless explicitly asked — keep cells text-first and scannable. Badges inside cells follow the badge rules above.
-- **Density → reach for hover.** When a cell, chart, or any element would cram in too much, move the overflow into a `tooltip` (brief) or `hover-card` (richer) instead of shrinking text or clipping.
+- **Density → reach for hover.** In data-dense **tables, metric tiles, and charts**, keep the primary value visible and move *secondary / detail* information into a `tooltip` (brief) or `hover-card` (richer) — don't cram, shrink text, or clip to fit it all inline.
 - **No accent bars — ever.** Never add a colored strip along an edge/border (e.g. `border-l-4 border-l-destructive` on an alert or card) to signal status or draw attention. Use the component's own variant instead — a tinted `-subtle` surface with `-emphasis` text/icon — so status reads consistently and adapts to dark mode.
 
 ### Other guardrails
@@ -192,15 +195,18 @@ There is **no test framework** in this repo. The quality gates are:
 - Don't add accent bars — colored border strips on alerts/cards; use the component's variant (`-subtle` surface + `-emphasis`) instead.
 - Don't leave async failures as a blank screen or an endless spinner — show an error state with a retry (or a `toast` for failed actions).
 - Don't run an immediate (no-Save) action without a confirming `toast` — e.g. toggles must confirm on/off.
+- Don't fire a neutral `toast()` for a success/failure outcome — use the matching semantic variant (`toast.success` / `toast.error` / `toast.warning`).
 - Don't let menu/sidebar items sit flush — keep a gap so an active item and a hovered neighbor don't merge.
 - Don't ship a button or interactive control without a visible hover + focus state.
 - Don't cram a long, many-field form into a centered modal — use a right sheet; keep dialogs for short (1–4 field) create actions.
 - Don't block a user on validation without inline, specific error text (name the missing field) and `aria-invalid`.
 - Don't hardcode colors or ship light-only UI — every color is a light+dark token; test both.
+- Don't lighten `--primary` in dark mode — the brand blue is mode-independent; use `-emphasis` for lighter primary *text*.
 - Don't pin sizes to px — use the rem type / spacing / radius scales.
 - Don't hardcode hex — use semantic tokens.
 - Don't hand-edit generated files (see the table above).
 - Don't `--overwrite` custom primitives when pulling shadcn-studio components.
 - Don't add icon libraries other than lucide-react.
+- Don't add third-party component libraries or dependencies unless explicitly requested or required by a registry component.
 - Never print the values in `.env.local`.
 - Keep the `nextjs-agent-rules` block at the top of this file intact.
