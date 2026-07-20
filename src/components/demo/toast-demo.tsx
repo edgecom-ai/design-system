@@ -24,12 +24,32 @@ export function ToastDemo() {
       <Button
         variant="outline"
         onClick={() =>
+          toast.success("Meter connected", {
+            description: "M-204 at Toronto DC is now reporting interval data.",
+          })
+        }
+      >
+        Success
+      </Button>
+      <Button
+        variant="outline"
+        onClick={() =>
+          toast.warning("Approaching peak", {
+            description: "Calgary Plant is within 5% of its demand threshold.",
+          })
+        }
+      >
+        Warning
+      </Button>
+      <Button
+        variant="outline"
+        onClick={() =>
           toast.error("Sync failed", {
             description: "Meter M-118 did not respond. Retrying…",
           })
         }
       >
-        Show error toast
+        Error
       </Button>
     </div>
   )

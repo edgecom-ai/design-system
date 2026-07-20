@@ -3112,7 +3112,7 @@ export const sections: Section[] = [
       {
         id: "toast-triggers",
         name: "Toast triggers",
-        description: "Buttons that fire success, error, and info toasts.",
+        description: "Rich-color success, warning, and error toasts.",
         preview: <ToastDemo />,
         source: dm("toast-demo"),
       },
