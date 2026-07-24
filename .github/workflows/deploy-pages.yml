@@ -32,10 +32,9 @@ jobs:
       - run: pnpm install --frozen-lockfile
 
       # `pnpm build` runs prebuild (docs:gen + registry:build) then the static
-      # export. PAGES_BASE_PATH makes assets/links resolve under /design-system.
+      # export. The site is served at the root of the custom domain
+      # (design.edgecom.ai), so no PAGES_BASE_PATH is set.
       - run: pnpm build
-        env:
-          PAGES_BASE_PATH: /design-system
 
       - uses: actions/configure-pages@v5
 
