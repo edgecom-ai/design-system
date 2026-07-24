@@ -111,9 +111,17 @@ These apply whenever you build UI with these components (in this repo or a consu
 ### Interaction patterns & feedback
 
 - **Buttons need real hover (and focus) states.** Use the design-system `button` — its variants ship hover + focus-ring styling for free. If you build any custom clickable control, it must have a visible `hover:` state and a focus ring (`--ring`); never ship a flat, stateless button.
+- **Ensure `cursor: pointer` on buttons (Tailwind v4).** Tailwind v4 dropped the default pointer cursor, so buttons look non-clickable. A base-layer rule in [`globals.css`](src/app/globals.css) restores it — keep it. It's **app-level CSS not shipped by the `theme` item** (like the `color-scheme` / `@utility tabular` bits), so every consuming app must add the same rule to its own `globals.css`:
+  ```css
+  @layer base {
+    button:not(:disabled),
+    [role="button"]:not(:disabled) { cursor: pointer; }
+  }
+  ```
 - **Pick the right overlay — dialog vs. sheet.** Match the surface to the amount of input:
   - **Short create actions (1–4 fields) → modal `dialog`** — quick, centered, focused.
   - **Longer edit/update actions (many fields) → right-side `sheet`** — room for dense forms without a cramped modal.
+  - **Right-sheet width: default to 420px** (`w-[420px]` / `sm:max-w-[420px]`, full-width on mobile). The primitive ships wider (`w-3/4`, `sm:max-w-sm`), so set this explicitly; only go wider when specific content genuinely needs the room.
   - Both are Base UI primitives: trigger via the `render` prop, and portaled content inherits dark mode.
 - **Always surface validation / error states — never fail silently.** If a required field is empty when the user tries to proceed, show inline error text that names what's missing (e.g. "Site name is required") next to the field — not just a generic toast or a blocked button with no explanation.
   - Wire it through the `field` component's `FieldError` slot and set `aria-invalid` on the input; the `input` / `select` primitives already render the destructive border + ring from `aria-invalid`.
@@ -132,6 +140,8 @@ These apply whenever you build UI with these components (in this repo or a consu
   - **Info → `info`.** Use `info` for informational tags (and `success`/`warning`/`destructive` for genuine status).
 - **Status colors — use strictly by meaning.** `destructive` for errors and destructive actions, `success` for positive confirmation, `warning` for caution, `info` for information — consistently across every surface (badges, alerts, toasts, text, icons). Never an arbitrary red / green / yellow, and never a status color used decoratively; pick the token by meaning and let *Design tokens & accessibility* choose the shade.
 - **Tables.** Don't add icons to table cells unless explicitly asked — keep cells text-first and scannable. Badges inside cells follow the badge rules above.
+- **Table surfaces.** Body rows get a light-blue hover highlight (a subtle `primary` tint). Keep this on the `table` primitive's `TableRow` so every table matches — rely on it rather than restyling per-table.
+- **Horizontally-scrolling tables + row menus.** A table wrapped in `overflow-x-auto` will clip an open row action/context menu (or any popover). While such a menu is open, toggle the wrapper to `overflow: visible` so the menu escapes the table instead of clipping or forcing a scrollbar; restore `overflow-x-auto` on close. **Never** fix this with a `min-height`.
 - **Density → reach for hover.** In data-dense **tables, metric tiles, and charts**, keep the primary value visible and move *secondary / detail* information into a `tooltip` (brief) or `hover-card` (richer) — don't cram, shrink text, or clip to fit it all inline.
 - **No accent bars — ever.** Never add a colored strip along an edge/border (e.g. `border-l-4 border-l-destructive` on an alert or card) to signal status or draw attention. Use the component's own variant instead — a tinted `-subtle` surface with `-emphasis` text/icon — so status reads consistently and adapts to dark mode.
 
@@ -141,6 +151,7 @@ These apply whenever you build UI with these components (in this repo or a consu
 - **Loading / empty / error states.** Use the provided `skeleton`, `spinner`, and `empty` components; don't ship raw loading gaps or unhandled empty/error states.
 - **Async / data-fetch failures.** On a failed request or network error, render an explicit error state with a **retry** action (an `empty` state with a retry `button`) — never a blank screen or a spinner that spins forever. For a failed *action* (e.g. a save), surface a `toast` (`sonner`) and keep the user's input intact so they can retry.
 - **Use the scales, not magic numbers.** Prefer the spacing, `radius-*`, and type scales over arbitrary px, Tailwind `[...]` arbitrary values, or inline `style`.
+- **Adhere to a component's built-in sizing & classes.** Use the sizes and variants a component already exposes (its `cva` variants and `size` props) plus the shared scales — don't invent new sizes or override/replace a component's own Tailwind classes unless the user explicitly asks. Extend through the provided variants, not ad-hoc `className` overrides.
 - **Compose, don't fork.** Compose primitives and their `data-slot` hooks; don't copy a primitive to tweak it or reach into its internals fragilely.
 - **Motion.** Respect `prefers-reduced-motion`; use the available `motion` / `tw-animate-css` sparingly.
 
@@ -192,17 +203,20 @@ There is **no test framework** in this repo. The quality gates are:
 - Don't hand-write a component the registry already provides — import it; if none fits, stop and ask.
 - Don't pick a colored or commodity badge variant for a neutral label — default to `outline`; commodity variants mean the commodity.
 - Don't put icons in table cells unless explicitly asked.
+- Don't fix a row menu/popover clipped by an `overflow-x-auto` table with `min-height` — toggle the wrapper to `overflow: visible` while it's open.
 - Don't add accent bars — colored border strips on alerts/cards; use the component's variant (`-subtle` surface + `-emphasis`) instead.
 - Don't leave async failures as a blank screen or an endless spinner — show an error state with a retry (or a `toast` for failed actions).
 - Don't run an immediate (no-Save) action without a confirming `toast` — e.g. toggles must confirm on/off.
 - Don't fire a neutral `toast()` for a success/failure outcome — use the matching semantic variant (`toast.success` / `toast.error` / `toast.warning`).
 - Don't let menu/sidebar items sit flush — keep a gap so an active item and a hovered neighbor don't merge.
 - Don't ship a button or interactive control without a visible hover + focus state.
+- Don't leave buttons with the Tailwind v4 default (no pointer) — keep the `cursor: pointer` base rule in `globals.css` (and add it in consuming apps).
 - Don't cram a long, many-field form into a centered modal — use a right sheet; keep dialogs for short (1–4 field) create actions.
 - Don't block a user on validation without inline, specific error text (name the missing field) and `aria-invalid`.
 - Don't hardcode colors or ship light-only UI — every color is a light+dark token; test both.
 - Don't lighten `--primary` in dark mode — the brand blue is mode-independent; use `-emphasis` for lighter primary *text*.
 - Don't pin sizes to px — use the rem type / spacing / radius scales.
+- Don't invent new sizes or override a component's built-in Tailwind classes unless explicitly told — use its existing variants / `size` props.
 - Don't hardcode hex — use semantic tokens.
 - Don't hand-edit generated files (see the table above).
 - Don't `--overwrite` custom primitives when pulling shadcn-studio components.
