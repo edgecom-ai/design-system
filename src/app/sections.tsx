@@ -60,7 +60,6 @@ import RadioGroupDemo from "@/components/shadcn-studio/radio-group/radio-group-0
 import RadioGroupHorizontalDemo from "@/components/shadcn-studio/radio-group/radio-group-02";
 import RadioGroupCardRadioDemo from "@/components/shadcn-studio/radio-group/radio-group-11";
 import RadioGroupCardVerticalRadioDemo from "@/components/shadcn-studio/radio-group/radio-group-13";
-import NativeSelectRequiredDemo from "@/components/shadcn-studio/select/select-06";
 import SelectWithOptionsGroupsDemo from "@/components/shadcn-studio/select/select-22";
 import MultipleSelectWithPlaceholderDemo from "@/components/shadcn-studio/select/select-33";
 import MultiSelectPreselectedDemo from "@/components/shadcn-studio/select/select-32";
@@ -154,6 +153,7 @@ import { SelectSitesDemo } from "@/components/demo/select-sites-demo";
 import { SelectCommodityDemo } from "@/components/demo/select-commodity-demo";
 import { SelectCommodityPlaceholderDemo } from "@/components/demo/select-commodity-placeholder-demo";
 import { SidebarDemo } from "@/components/demo/sidebar-demo";
+import { SidebarSubmenuDemo } from "@/components/demo/sidebar-submenu-demo";
 import { CommandDemo } from "@/components/demo/command-demo";
 import { TimelineDemo } from "@/components/demo/timeline-demo";
 import { TableDemo } from "@/components/demo/table-demo";
@@ -2389,13 +2389,6 @@ export const sections: Section[] = [
     install: "@edgecom/select",
     variants: [
       {
-        id: "select-grouped-sites",
-        name: "Grouped sites",
-        description: "A styled select with options organized into groups.",
-        preview: <SelectSitesDemo />,
-        source: dm("select-sites-demo"),
-      },
-      {
         id: "select-single",
         name: "Single value",
         description: "A single-value select styled to match the design system.",
@@ -2403,18 +2396,18 @@ export const sections: Section[] = [
         source: dm("select-commodity-demo"),
       },
       {
+        id: "select-grouped-sites",
+        name: "Grouped sites",
+        description: "A styled select with options organized into groups.",
+        preview: <SelectSitesDemo />,
+        source: dm("select-sites-demo"),
+      },
+      {
         id: "select-placeholder",
         name: "With placeholder",
         description: "A select showing a placeholder until a value is chosen.",
         preview: <SelectCommodityPlaceholderDemo />,
         source: dm("select-commodity-placeholder-demo"),
-      },
-      {
-        id: "select-native-required",
-        name: "Native required",
-        description: "A native select marked as required.",
-        preview: <NativeSelectRequiredDemo />,
-        source: ss("select/select-06"),
       },
       {
         id: "select-option-groups",
@@ -2710,6 +2703,13 @@ export const sections: Section[] = [
         description: "Logo header, a grouped navigation menu with an active item, and a settings footer.",
         preview: <SidebarDemo />,
         source: dm("sidebar-demo"),
+      },
+      {
+        id: "sidebar-submenu",
+        name: "Collapsible submenu",
+        description: "A top-level item expanded into subpages (Energy, Bill, Production).",
+        preview: <SidebarSubmenuDemo />,
+        source: dm("sidebar-submenu-demo"),
       },
     ],
   },
