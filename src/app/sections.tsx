@@ -157,6 +157,7 @@ import { SidebarSubmenuDemo } from "@/components/demo/sidebar-submenu-demo";
 import { CommandDemo } from "@/components/demo/command-demo";
 import { TimelineDemo } from "@/components/demo/timeline-demo";
 import { TableDemo } from "@/components/demo/table-demo";
+import { TableCompactDemo } from "@/components/demo/table-compact-demo";
 import { PaginationDemo } from "@/components/demo/pagination-demo";
 import { CategoryBarDemo } from "@/components/demo/category-bar-demo";
 import { TextareaNoteDemo } from "@/components/demo/textarea-note-demo";
@@ -2726,6 +2727,13 @@ export const sections: Section[] = [
         description: "Header, body rows, a caption, and right-aligned numeric cells.",
         preview: <TableDemo />,
         source: dm("table-demo"),
+      },
+      {
+        id: "table-compact",
+        name: "Compact density",
+        description: "The `density=\"compact\"` prop tightens row padding for dense, text-heavy datasets.",
+        preview: <TableCompactDemo />,
+        source: dm("table-compact-demo"),
       },
     ],
   },
