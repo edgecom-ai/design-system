@@ -598,6 +598,9 @@ export const curatedApi: Record<string, CuratedApi> = {
       TableCell: "A data cell (td).",
       TableCaption: "A caption describing the table.",
     },
+    propDescriptions: {
+      "Table.density": "Row density: default (8px cell padding) or compact (tighter 4px vertical) for dense, text-heavy datasets.",
+    },
   },
   timeline: {
     summary:
