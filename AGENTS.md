@@ -141,6 +141,7 @@ These apply whenever you build UI with these components (in this repo or a consu
 - **Status colors — use strictly by meaning.** `destructive` for errors and destructive actions, `success` for positive confirmation, `warning` for caution, `info` for information — consistently across every surface (badges, alerts, toasts, text, icons). Never an arbitrary red / green / yellow, and never a status color used decoratively; pick the token by meaning and let *Design tokens & accessibility* choose the shade.
 - **Tables.** Don't add icons to table cells unless explicitly asked — keep cells text-first and scannable. Badges inside cells follow the badge rules above.
 - **Table surfaces.** Body rows get a light-blue hover highlight (a subtle `primary` tint). Keep this on the `table` primitive's `TableRow` so every table matches — rely on it rather than restyling per-table.
+- **Table edge alignment.** The first and last cell in every row (`th` and `td`) take the container card's horizontal padding (**1.5rem**) on their outer side — not the inner cell padding (**0.75rem**). Column headers, edge-column values, and footer/total rows all sit on the card's content line; never flush to the card border.
 - **Horizontally-scrolling tables + row menus.** A table wrapped in `overflow-x-auto` will clip an open row action/context menu (or any popover). While such a menu is open, toggle the wrapper to `overflow: visible` so the menu escapes the table instead of clipping or forcing a scrollbar; restore `overflow-x-auto` on close. **Never** fix this with a `min-height`.
 - **Density → reach for hover.** In data-dense **tables, metric tiles, and charts**, keep the primary value visible and move *secondary / detail* information into a `tooltip` (brief) or `hover-card` (richer) — don't cram, shrink text, or clip to fit it all inline.
 - **No accent bars — ever.** Never add a colored strip along an edge/border (e.g. `border-l-4 border-l-destructive` on an alert or card) to signal status or draw attention. Use the component's own variant instead — a tinted `-subtle` surface with `-emphasis` text/icon — so status reads consistently and adapts to dark mode.
@@ -203,6 +204,7 @@ There is **no test framework** in this repo. The quality gates are:
 - Don't hand-write a component the registry already provides — import it; if none fits, stop and ask.
 - Don't pick a colored or commodity badge variant for a neutral label — default to `outline`; commodity variants mean the commodity.
 - Don't put icons in table cells unless explicitly asked.
+- Don't let edge table cells (first/last `th`/`td`) sit flush to the card border — their outer side aligns to the card's content padding (1.5rem), not the 0.75rem cell padding.
 - Don't fix a row menu/popover clipped by an `overflow-x-auto` table with `min-height` — toggle the wrapper to `overflow: visible` while it's open.
 - Don't add accent bars — colored border strips on alerts/cards; use the component's variant (`-subtle` surface + `-emphasis`) instead.
 - Don't leave async failures as a blank screen or an endless spinner — show an error state with a retry (or a `toast` for failed actions).
