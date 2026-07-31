@@ -88,6 +88,7 @@
   --color-primary: var(--primary);
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
+  --color-scrim: var(--scrim);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
   /* Semantic type scale — size / line-height / weight in one token.
@@ -132,6 +133,7 @@
   --card-foreground: oklch(0.16 0.01 254);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.16 0.01 254);
+  --scrim: oklch(0.16 0.01 254 / 0.4);
   --primary: oklch(0.514 0.161 254.3);
   --primary-foreground: oklch(0.985 0 0);
   /* brand blue for text-on-light-surface use (links, subtle-fg) — 5.6:1 on white */
@@ -224,8 +226,9 @@
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0.008 254);
   --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0.008 254);
+  --popover: oklch(0.265 0.008 254);
   --popover-foreground: oklch(0.985 0 0);
+  --scrim: oklch(0.08 0.008 254 / 0.7);
   /* brand-exact #0966C0 fill — white label clears AA at 5.7:1 */
   --primary: oklch(0.514 0.161 254.3);
   --primary-foreground: oklch(0.985 0 0);
@@ -259,10 +262,10 @@
   --info-subtle: oklch(0.27 0.045 220);
   --info-subtle-foreground: var(--info-emphasis);
   --destructive-emphasis: oklch(0.72 0.19 22);
-  --destructive-subtle: oklch(0.27 0.05 27);
-  --destructive-subtle-foreground: var(--destructive-emphasis);
+  --destructive-subtle: oklch(0.27 0.072 27);
+  --destructive-subtle-foreground: oklch(0.87 0.11 22);
   /* Elevated surface above card (lighter than card in dark) */
-  --elevated: oklch(0.245 0.01 254);
+  --elevated: oklch(0.29 0.01 254);
   --elevated-foreground: oklch(0.985 0 0);
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 15%);
