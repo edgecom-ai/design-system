@@ -105,6 +105,9 @@ These apply whenever you build UI with these components (in this repo or a consu
 - **Right token for the job.** Surfaces (`background`/`card`/`popover`/`elevated`) with their `-foreground` for text; `-emphasis` for a status color rendered as text or a thin icon; `-subtle` (+ `-subtle-foreground`) for tinted surfaces. Don't use a base fill color as a text color.
 - **Primary blue is mode-independent.** The brand blue (`--primary` — `bg-primary` fills and buttons) is deliberately the **same value in light and dark**; don't lighten or re-tune it in `.dark` the way most tokens shift. If you need a lighter primary as **text** in dark mode, use `--primary-emphasis`, never a lightened base.
 - **Contrast in both themes.** Hold WCAG AA (4.5:1 text, 3:1 large text / UI) and AAA where the palette allows — light and dark alike. Verify new or tuned colors in both (the live **Semantic colors** page has a contrast meter).
+- **Overlay surfaces sit *above* cards in dark mode.** `--popover` must be lighter than `--card`, not equal to it — an overlay at the same lightness as the cards behind it reads flat and the dialog edge disappears. Dark values: `--card` 0.205, `--popover` 0.265, `--elevated` 0.29.
+- **Modal scrims use the `--scrim` token**, never an inline `oklch(… / 0.4)`. Light `oklch(0.16 0.01 254 / 0.4)`; dark `oklch(0.08 0.008 254 / 0.7)` — dark needs the deeper scrim because the surfaces themselves are close in lightness.
+- **`-subtle` status pairs must clear 4.5:1 in dark too.** A `-subtle` surface and its `-subtle-foreground` must clear 4.5:1 in dark as well as light. Where the light pair is `-subtle` + `-emphasis`, dark usually needs its **own explicit `-subtle-foreground`** — the light-mode `-emphasis` value is often too dark against a dark tinted surface. e.g. dark destructive: surface `oklch(0.27 0.072 27)`, text `oklch(0.87 0.11 22)`.
 - **Mechanics.** Dark mode is the `.dark` class on the `<html>` root; portaled content (dropdown, popover, tooltip, toast) inherits it — don't build light-only components. Adding or adjusting a color means editing `globals.css` (both `:root` **and** `.dark`), not the call site.
 - **Always test both light and dark** before shipping anything visible.
 
@@ -123,12 +126,15 @@ These apply whenever you build UI with these components (in this repo or a consu
   - **Longer edit/update actions (many fields) → right-side `sheet`** — room for dense forms without a cramped modal.
   - **Right-sheet width: default to 420px** (`w-[420px]` / `sm:max-w-[420px]`, full-width on mobile). The primitive ships wider (`w-3/4`, `sm:max-w-sm`), so set this explicitly; only go wider when specific content genuinely needs the room.
   - Both are Base UI primitives: trigger via the `render` prop, and portaled content inherits dark mode.
+- **Overlays: hidden by default, mounted at the root.** An overlay's hidden state must be the authored default (`display: none` in the style) with the visible state applied on top — never rely on a bound value alone to hide a `position: fixed; inset: 0` element; an unresolved value leaves the modal stuck open over the app. Mount overlays at the app/template root, not inside a screen/tab subtree, so their fixed positioning and visibility never depend on the current view.
 - **Always surface validation / error states — never fail silently.** If a required field is empty when the user tries to proceed, show inline error text that names what's missing (e.g. "Site name is required") next to the field — not just a generic toast or a blocked button with no explanation.
   - Wire it through the `field` component's `FieldError` slot and set `aria-invalid` on the input; the `input` / `select` primitives already render the destructive border + ring from `aria-invalid`.
   - Use the destructive token for the message (the `-emphasis` variant when it's text — see *Design tokens & accessibility*), and pair color with text/icon — never color alone.
   - This complements the loading / empty / error-state guardrail (`skeleton` / `spinner` / `empty`).
 
-- **Confirm with a toast — using the semantic variant.** Any interaction that needs feedback fires a `toast` (`sonner`): immediate actions especially (a `switch` / toggle must confirm on/off), and a completed save/submit should `toast.success`. **Match the variant to the outcome** — `toast.success` on success, `toast.error` on failure, `toast.warning` for caution — never a neutral `toast()` for a success/error result.
+- **Confirm with a toast — using the semantic variant.** Any interaction that needs feedback fires a `toast` (`sonner`): immediate actions especially (a `switch` / toggle must confirm on/off), and a completed save/submit should `toast.success`. **Match the variant to the outcome** (see [`toast-demo.tsx`](src/components/demo/toast-demo.tsx)) — `toast.success` for confirmation, `toast.warning` for caution or a negative-but-expected outcome (e.g. a declined request), `toast.error` **only** for genuine failures (a sync or save that didn't complete). Never a neutral `toast()` for a success/error result.
+- **One toast surface per app.** Two independently mounted toasters both anchored bottom-right overlap and render on top of each other — mount a single `<Toaster>` and route every call through the same helper.
+- **A toast always carries a title;** the description row is conditionally rendered and collapses when empty — never an icon-and-dismiss card with no text.
 - **Keep a gap between menu items.** An active item and a hovered neighbor must read as two distinct rows, never one merged block — space items (e.g. `gap-1`) in `sidebar`, `dropdown-menu`, `command`, and any similar list so the active highlight and an adjacent hover highlight never touch.
 
 ### Component usage conventions
@@ -212,6 +218,8 @@ There is **no test framework** in this repo. The quality gates are:
 - Don't leave async failures as a blank screen or an endless spinner — show an error state with a retry (or a `toast` for failed actions).
 - Don't run an immediate (no-Save) action without a confirming `toast` — e.g. toggles must confirm on/off.
 - Don't fire a neutral `toast()` for a success/failure outcome — use the matching semantic variant (`toast.success` / `toast.error` / `toast.warning`).
+- Don't mount two toasters or ship a titleless toast — one toast surface per app; every toast has a title.
+- Don't make dark `--popover` equal to `--card`, hardcode a modal scrim (`oklch(… / 0.4)`), or hide a `fixed inset-0` overlay with a bound value alone — overlays sit above cards, scrims use `--scrim`, and overlays default to `display: none` mounted at the root.
 - Don't let menu/sidebar items sit flush — keep a gap so an active item and a hovered neighbor don't merge.
 - Don't recolor active/selected nav items with primary/blue text or icons — use the component's built-in neutral highlight (`isActive` / `data-active`); keep text/icon `foreground`.
 - Don't ship a button or interactive control without a visible hover + focus state.
