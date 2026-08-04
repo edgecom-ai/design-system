@@ -153,6 +153,7 @@ These apply whenever you build UI with these components (in this repo or a consu
 - **Horizontally-scrolling tables + row menus.** A table wrapped in `overflow-x-auto` will clip an open row action/context menu (or any popover). While such a menu is open, toggle the wrapper to `overflow: visible` so the menu escapes the table instead of clipping or forcing a scrollbar; restore `overflow-x-auto` on close. **Never** fix this with a `min-height`.
 - **Secondary/utility actions use icon buttons.** On table toolbars and page headers, secondary actions (export, upload, download, refresh, filter, print, …) use the design-system `button` as an **icon button** (`size="icon-sm"` / `icon-lg`, usually `variant="outline"` or `ghost`) — not full text buttons. Reserve a labeled button for the page's single primary action. Every icon button needs an `aria-label` and ideally a `tooltip`. (This is toolbar/header chrome — distinct from the no-icons-in-*cells* rule for table content.)
 - **Density → reach for hover.** In data-dense **tables, metric tiles, and charts**, keep the primary value visible and move *secondary / detail* information into a `tooltip` (brief) or `hover-card` (richer) — don't cram, shrink text, or clip to fit it all inline.
+- **Tooltip width fits its content.** A `tooltip` shrink-wraps (`w-fit`) — don't add a `max-w-*` or a fixed width that forces the text to wrap. The only reason to widen is to keep each **row of data** on a single line (e.g. a label–value pair) — do that with `whitespace-nowrap` on the rows, not a hardcoded width.
 - **No accent bars — ever.** Never add a colored strip along an edge/border (e.g. `border-l-4 border-l-destructive` on an alert or card) to signal status or draw attention. Use the component's own variant instead — a tinted `-subtle` surface with `-emphasis` text/icon — so status reads consistently and adapts to dark mode.
 
 ### Other guardrails
@@ -215,6 +216,7 @@ There is **no test framework** in this repo. The quality gates are:
 - Don't put icons in table cells unless explicitly asked.
 - Don't let edge table cells (first/last `th`/`td`) sit flush to the card border — their outer side aligns to the card's content padding (1.5rem), not the 0.75rem cell padding.
 - Don't use full text buttons for secondary table/page actions (export/upload/download/refresh) — use icon buttons (`size="icon-*"`) with an `aria-label`/`tooltip`; keep the labeled button for the primary action.
+- Don't give tooltips a `max-w`/fixed width that wraps the text — they fit content; widen only (via `whitespace-nowrap` on rows) to keep a data row on one line.
 - Don't fix a row menu/popover clipped by an `overflow-x-auto` table with `min-height` — toggle the wrapper to `overflow: visible` while it's open.
 - Don't add accent bars — colored border strips on alerts/cards; use the component's variant (`-subtle` surface + `-emphasis`) instead.
 - Don't leave async failures as a blank screen or an endless spinner — show an error state with a retry (or a `toast` for failed actions).
