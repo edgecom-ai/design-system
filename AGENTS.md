@@ -127,6 +127,7 @@ These apply whenever you build UI with these components (in this repo or a consu
   - **Right-sheet width: default to 420px** (`w-[420px]` / `sm:max-w-[420px]`, full-width on mobile). The primitive ships wider (`w-3/4`, `sm:max-w-sm`), so set this explicitly; only go wider when specific content genuinely needs the room.
   - Both are Base UI primitives: trigger via the `render` prop, and portaled content inherits dark mode.
 - **Overlays: hidden by default, mounted at the root.** An overlay's hidden state must be the authored default (`display: none` in the style) with the visible state applied on top — never rely on a bound value alone to hide a `position: fixed; inset: 0` element; an unresolved value leaves the modal stuck open over the app. Mount overlays at the app/template root, not inside a screen/tab subtree, so their fixed positioning and visibility never depend on the current view.
+- **Dialogs & sheets keep their close (X).** The `dialog` and `sheet` primitives render the top-right X by default (`showCloseButton`) — don't pass `showCloseButton={false}`, and don't hand-roll an overlay without one; a modal must always be dismissible. The **only** exception is the `alert-dialog`, which intentionally omits the X so a destructive/confirmation flow forces an explicit Cancel/confirm choice.
 - **Always surface validation / error states — never fail silently.** If a required field is empty when the user tries to proceed, show inline error text that names what's missing (e.g. "Site name is required") next to the field — not just a generic toast or a blocked button with no explanation.
   - Wire it through the `field` component's `FieldError` slot and set `aria-invalid` on the input; the `input` / `select` primitives already render the destructive border + ring from `aria-invalid`.
   - Use the destructive token for the message (the `-emphasis` variant when it's text — see *Design tokens & accessibility*), and pair color with text/icon — never color alone.
@@ -223,6 +224,7 @@ There is **no test framework** in this repo. The quality gates are:
 - Don't leave async failures as a blank screen or an endless spinner — show an error state with a retry (or a `toast` for failed actions).
 - Don't run an immediate (no-Save) action without a confirming `toast` — e.g. toggles must confirm on/off.
 - Don't wire a destructive/irreversible action straight to its trigger — require an `alert-dialog` confirmation (type-to-confirm for high-impact ones).
+- Don't ship a dialog/sheet without its close X (`showCloseButton={false}` or a hand-rolled overlay) — only `alert-dialog` confirmations omit it.
 - Don't fire a neutral `toast()` for a success/failure outcome — use the matching semantic variant (`toast.success` / `toast.error` / `toast.warning`).
 - Don't mount two toasters or ship a titleless toast — one toast surface per app; every toast has a title.
 - Don't make dark `--popover` equal to `--card`, hardcode a modal scrim (`oklch(… / 0.4)`), or hide a `fixed inset-0` overlay with a bound value alone — overlays sit above cards, scrims use `--scrim`, and overlays default to `display: none` mounted at the root.
