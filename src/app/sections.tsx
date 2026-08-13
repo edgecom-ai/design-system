@@ -226,12 +226,12 @@ import UserOrderCard from "@/components/shadcn-studio/blocks/widget-user-order";
 import CustomerActivityCard from "@/components/shadcn-studio/blocks/widget-component-20/widget-customer-activity";
 import MonthlyCampaignCard from "@/components/shadcn-studio/blocks/widget-monthly-campaign";
 import ProductInsightsCard from "@/components/shadcn-studio/blocks/widget-product-insights";
-import StatisticsFinancePreview from "@/app/statistics-component-13/page";
+import StatisticsUsagePreview from "@/app/statistics-component-15/page";
 import StatisticsScorePreview from "@/app/statistics-component-14/page";
 import StatisticsHealthPreview from "@/app/statistics-component-22/page";
 import StatisticsLineTrendsPreview from "@/app/statistics-component-21/page";
 import StatisticsRevenueChannelPreview from "@/app/statistics-component-19/page";
-import StatisticsWithStatusPreview from "@/app/statistics-component-12/page";
+import StatisticsKpiPreview from "@/app/statistics-component-02/page";
 import StatisticsExpenseIncomePreview from "@/app/statistics-component-07/page";
 import StatisticsOverviewPreview from "@/app/statistics-component-09/page";
 import StatisticsActivityPreview from "@/app/statistics-component-10/page";
@@ -3414,10 +3414,10 @@ export const sections: Section[] = [
     group: "Blocks",
     description: "Metric tiles and KPI blocks for dashboards.",
     install:
-      "@ss-blocks/statistics-component-13 @ss-blocks/statistics-component-14 @ss-blocks/statistics-component-22 @ss-blocks/statistics-component-21 @ss-blocks/statistics-component-19 @ss-blocks/statistics-component-12 @ss-blocks/statistics-component-07 @ss-blocks/statistics-component-09 @ss-blocks/statistics-component-10",
+      "@ss-blocks/statistics-component-15 @ss-blocks/statistics-component-02 @ss-blocks/statistics-component-14 @ss-blocks/statistics-component-22 @ss-blocks/statistics-component-21 @ss-blocks/statistics-component-19 @ss-blocks/statistics-component-07 @ss-blocks/statistics-component-09 @ss-blocks/statistics-component-10",
     toc: [
-      { id: "stats-finance", name: "Finance / goal-status" },
-      { id: "stats-status", name: "Status-tagged KPIs" },
+      { id: "stats-usage", name: "Usage / allocation meters" },
+      { id: "stats-kpi", name: "KPI tiles with period" },
       { id: "stats-score", name: "Score gauge" },
       { id: "stats-health", name: "Service-health meters" },
       { id: "stats-line-trend", name: "Line-trend KPIs" },
@@ -3431,11 +3431,11 @@ export const sections: Section[] = [
     // remapped to semantic tokens (success/warning/destructive/info).
     node: (
       <div className="flex flex-col gap-12 [&_[class*='py-8']]:!py-0">
-        <StatBlock id="stats-finance" label="Finance / goal-status cards (component-13)">
-          <StatisticsFinancePreview />
+        <StatBlock id="stats-usage" label="Usage / allocation meters (component-15)">
+          <StatisticsUsagePreview />
         </StatBlock>
-        <StatBlock id="stats-status" label="Status-tagged KPIs (component-12)">
-          <StatisticsWithStatusPreview />
+        <StatBlock id="stats-kpi" label="KPI tiles with period selector (component-02)">
+          <StatisticsKpiPreview />
         </StatBlock>
         <StatBlock id="stats-score" label="Score gauge (component-14)">
           <StatisticsScorePreview />
