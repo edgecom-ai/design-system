@@ -5,9 +5,7 @@ description: >-
   energy management & monitoring platform (dataTrack™, pTrack®, NeuraCharge™).
   Read this before generating or designing any Edgecom UI, then follow it.
 version: 1.0
-# Tokens below are the LIGHT (canonical) values as OKLCH. Dark mode overrides a
-# subset — see the "Colors → Dark mode" section of the body for the deltas.
-# The runtime source of truth is src/app/globals.css; keep this in sync with it.
+# @@GENERATED:tokens — colors/typography/rounded are generated from src/app/globals.css by scripts/gen-design-md.mjs (run `pnpm docs:gen`); do not hand-edit until the closing marker. Light (canonical) OKLCH values; dark deltas are in the body.
 colors:
   background: oklch(1 0 0)
   foreground: oklch(0.16 0.01 254)
@@ -29,7 +27,7 @@ colors:
   muted-foreground: oklch(0.55 0.02 254)
   accent: oklch(0.965 0.012 254)
   accent-foreground: oklch(0.35 0.03 254)
-  # Status — each has {base, -foreground, -emphasis, -subtle, -subtle-foreground}
+  # Status — each also has -foreground / -subtle-foreground (see body)
   success: oklch(0.536 0.1 176.6)
   success-emphasis: oklch(0.5 0.12 177.8)
   success-subtle: oklch(0.965 0.032 177.8)
@@ -53,21 +51,22 @@ colors:
   chart-emissions: oklch(0.55 0.18 300)
 typography:
   font-family: SF Pro / system-ui sans (var --font-sans)
-  caption:  { size: 0.75rem,  line-height: 1rem,     weight: 500 }
-  body:     { size: 0.875rem, line-height: 1.375rem, weight: 400 }
-  body-lg:  { size: 1rem,     line-height: 1.5rem,   weight: 400 }
-  title:    { size: 1.125rem, line-height: 1.5rem,   weight: 600 }
-  heading:  { size: 1.5rem,   line-height: 1.875rem, weight: 600, tracking: -0.01em }
-  display:  { size: 2.25rem,  line-height: 2.5rem,   weight: 700, tracking: -0.02em }
+  caption: { size: 0.75rem, line-height: 1rem, weight: 500 }
+  body: { size: 0.875rem, line-height: 1.375rem, weight: 400 }
+  body-lg: { size: 1rem, line-height: 1.5rem, weight: 400 }
+  title: { size: 1.125rem, line-height: 1.5rem, weight: 600 }
+  heading: { size: 1.5rem, line-height: 1.875rem, weight: 600, tracking: -0.01em }
+  display: { size: 2.25rem, line-height: 2.5rem, weight: 700, tracking: -0.02em }
 rounded:
   base: 0.625rem   # --radius
-  sm: 0.375rem     # base * 0.6
-  md: 0.5rem       # base * 0.8
-  lg: 0.625rem     # base
-  xl: 0.875rem     # base * 1.4
-  2xl: 1.125rem    # base * 1.8
-  3xl: 1.375rem    # base * 2.2
-  4xl: 1.625rem    # base * 2.6
+  sm: 0.375rem   # base * 0.6
+  md: 0.5rem   # base * 0.8
+  lg: 0.625rem   # base
+  xl: 0.875rem   # base * 1.4
+  2xl: 1.125rem   # base * 1.8
+  3xl: 1.375rem   # base * 2.2
+  4xl: 1.625rem   # base * 2.6
+# @@GENERATED:end
 spacing:
   scale: Tailwind default (0.25rem step) — use the scale, never arbitrary px
 components:
