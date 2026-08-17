@@ -1,1 +1,2 @@
-@AGENTS.md
+@MAINTAINERS.md
+@design.md
