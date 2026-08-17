@@ -1,0 +1,22 @@
+# Edgecom Design System
+
+> The design system for Edgecom Energy's product UI (dataTrack™, pTrack®, NeuraCharge™) — an energy management & monitoring platform. A public shadcn component registry plus a design language documented for both humans and agents. This file routes you to the right document; read the one that matches your task before generating UI.
+
+## Guides
+
+- [design.md](https://design.edgecom.ai/design.md): The design language and usage rules — colors/tokens, typography, layout, elevation, shape, per-component conventions, and accessibility. Read this before designing or generating any Edgecom UI.
+- [AGENTS.md](https://github.com/edgecom-ai/design-system/blob/main/AGENTS.md): Building an app **with** the design system — installing components from the registry, composing primitives, token sync, responsiveness. The "how to implement".
+- [REGISTRY.md](https://github.com/edgecom-ai/design-system/blob/main/REGISTRY.md): Registry install mechanics in depth — the install address, the `theme` item, and how dependencies are inferred.
+- [MAINTAINERS.md](https://github.com/edgecom-ai/design-system/blob/main/MAINTAINERS.md): Developing the design-system repo itself — authoring primitives, tuning tokens, the Next.js docs site, and the registry build.
+
+## Docs site
+
+- [Component catalog](https://design.edgecom.ai): Browse every component in light/dark with copyable code — the source of truth for what exists.
+- Foundations: [Semantic colors](https://design.edgecom.ai/foundations/colors/), [Typography](https://design.edgecom.ai/foundations/typography/), [Chart ramp](https://design.edgecom.ai/foundations/charts/), [Icons](https://design.edgecom.ai/foundations/icons/), [Logo](https://design.edgecom.ai/foundations/logo/)
+- Components: individual primitives are at `https://design.edgecom.ai/components/<name>/` (e.g. [button](https://design.edgecom.ai/components/button/), [dialog](https://design.edgecom.ai/components/dialog/), [table](https://design.edgecom.ai/components/table/)).
+- Blocks: composed patterns such as [Statistic Cards](https://design.edgecom.ai/blocks/statistics/) and [Widgets](https://design.edgecom.ai/blocks/widgets/).
+
+## Notes
+
+- Install a component: `pnpm dlx shadcn@latest add edgecom-ai/design-system/<name>` (the repo is the registry — no server or auth).
+- This index is curated (not an exhaustive per-component list). Browse the catalog above for the full set.
