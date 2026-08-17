@@ -9,14 +9,94 @@
 - [REGISTRY.md](https://github.com/edgecom-ai/design-system/blob/main/REGISTRY.md): Registry install mechanics in depth — the install address, the `theme` item, and how dependencies are inferred.
 - [MAINTAINERS.md](https://github.com/edgecom-ai/design-system/blob/main/MAINTAINERS.md): Developing the design-system repo itself — authoring primitives, tuning tokens, the Next.js docs site, and the registry build.
 
-## Docs site
+Browse every component in light/dark with copyable code at [design.edgecom.ai](https://design.edgecom.ai) — the source of truth for what exists. The full catalog:
 
-- [Component catalog](https://design.edgecom.ai): Browse every component in light/dark with copyable code — the source of truth for what exists.
-- Foundations: [Semantic colors](https://design.edgecom.ai/foundations/colors/), [Typography](https://design.edgecom.ai/foundations/typography/), [Chart ramp](https://design.edgecom.ai/foundations/charts/), [Icons](https://design.edgecom.ai/foundations/icons/), [Logo](https://design.edgecom.ai/foundations/logo/)
-- Components: individual primitives are at `https://design.edgecom.ai/components/<name>/` (e.g. [button](https://design.edgecom.ai/components/button/), [dialog](https://design.edgecom.ai/components/dialog/), [table](https://design.edgecom.ai/components/table/)).
-- Blocks: composed patterns such as [Statistic Cards](https://design.edgecom.ai/blocks/statistics/) and [Widgets](https://design.edgecom.ai/blocks/widgets/).
+<!-- @@GENERATED:catalog — grouped from src/app/sections.tsx by scripts/gen-llms.mjs (run `pnpm docs:gen`); do not hand-edit until the closing marker -->
+
+## Getting Started
+
+- [Introduction](https://design.edgecom.ai/getting-started/introduction/): A design system for building cohesive, data-dense, energy applications
+- [Installation](https://design.edgecom.ai/getting-started/installation/): Everything you need to install the Edgecom design system and start building with it.
+- [Accessibility](https://design.edgecom.ai/getting-started/accessibility/): Contrast, scalable type, and balancing accessibility with visual design.
+
+## Foundations
+
+- [Semantic colors](https://design.edgecom.ai/foundations/colors/): Semantic color tokens that adapt automatically between light and dark themes.
+- [Chart ramp](https://design.edgecom.ai/foundations/charts/): Categorical hues and sequential tint ramps for charting each commodity.
+- [Typography](https://design.edgecom.ai/foundations/typography/): The type scale, tabular figures, and heading styles used across the platform.
+- [Logo](https://design.edgecom.ai/foundations/logo/): The Edgecom wordmark and glyph, with clear-space and color guidance.
+- [Icons](https://design.edgecom.ai/foundations/icons/): Lucide icons — sizing conventions and usage.
+
+## Components
+
+- [Button](https://design.edgecom.ai/components/button/): Trigger actions with a range of variants, sizes, and icon layouts.
+- [Input](https://design.edgecom.ai/components/input/): Single-line text fields with labels, icons, add-ons, and validation states.
+- [List](https://design.edgecom.ai/components/list/): Structured lists for content, settings, and navigation.
+- [Card](https://design.edgecom.ai/components/card/): A flexible container with header, content, and footer regions.
+- [Badge & status tags](https://design.edgecom.ai/components/badge/): Compact labels for statuses, counts, and commodity tags.
+- [Alert](https://design.edgecom.ai/components/alert/): Inline messages that communicate status, warnings, and errors.
+- [Dialog](https://design.edgecom.ai/components/dialog/): Modal dialogs for confirmations, forms, and focused tasks.
+- [Dropdown menu](https://design.edgecom.ai/components/dropdown-menu/): Menus of actions and options triggered from a button.
+- [Context menu](https://design.edgecom.ai/components/context-menu/): A menu of actions revealed by right-clicking (or long-pressing) a target region.
+- [Navigation menu](https://design.edgecom.ai/components/navigation-menu/): Horizontal top-level navigation with dropdown panels for links, features, and calls to action.
+- [Resizable](https://design.edgecom.ai/components/resizable/): Draggable panel groups for building split views and master–detail layouts.
+- [Empty state](https://design.edgecom.ai/components/empty/): A composable zero-state layout for empty lists, no-results searches, and first-run screens.
+- [Drawer](https://design.edgecom.ai/components/drawer/): Panels that slide in from any edge of the screen.
+- [Breadcrumb](https://design.edgecom.ai/components/breadcrumb/): Shows the user's location within a nested hierarchy.
+- [Label & textarea](https://design.edgecom.ai/components/label-textarea/): Multi-line text input paired with accessible labels.
+- [Spinner](https://design.edgecom.ai/components/spinner/): Indeterminate loading indicators for in-progress work.
+- [Skeleton](https://design.edgecom.ai/components/skeleton/): Placeholder shapes that stand in for content while it loads.
+- [Switch](https://design.edgecom.ai/components/switch/): Toggle a single setting on or off.
+- [Toggle](https://design.edgecom.ai/components/toggle/): Buttons that hold a pressed state, individually or as a group.
+- [Slider](https://design.edgecom.ai/components/slider/): Select a numeric value or range by dragging along a track.
+- [Sortable](https://design.edgecom.ai/components/sortable/): Drag-and-drop lists and boards for reordering items.
+- [Stepper](https://design.edgecom.ai/components/stepper/): Guide users through a sequence of steps in a process.
+- [Progress](https://design.edgecom.ai/components/progress/): Communicate the completion of a task or a determinate value.
+- [Avatar](https://design.edgecom.ai/components/avatar/): A user or contact image with a text fallback and grouping.
+- [Field](https://design.edgecom.ai/components/field/): Label, description, and error scaffolding for form controls.
+- [Input group](https://design.edgecom.ai/components/input-group/): Attach icons, text, or buttons to an input.
+- [Scroll area](https://design.edgecom.ai/components/scroll-area/): A scrollable region with a styled scrollbar.
+- [Separator](https://design.edgecom.ai/components/separator/): A thin divider for separating content, horizontally or vertically.
+- [Sheet](https://design.edgecom.ai/components/sheet/): A dialog panel that slides in from an edge of the screen.
+- [Select](https://design.edgecom.ai/components/select/): Choose one or more options from a dropdown list.
+- [Banner](https://design.edgecom.ai/components/banner/): A full-width announcement bar for promotions, events, and product news.
+- [Accordion](https://design.edgecom.ai/components/accordion/): Collapsible sections that expand to reveal their content.
+- [Collapsible](https://design.edgecom.ai/components/collapsible/): A single region that toggles between shown and hidden.
+- [Calendar](https://design.edgecom.ai/components/calendar/): Date selection for scheduling, pricing, and pickers.
+- [Date picker](https://design.edgecom.ai/components/date-picker/): A calendar in a popover, triggered by an input, for selecting a single date or a range.
+- [Category bar](https://design.edgecom.ai/components/category-bar/): A segmented proportion bar with an optional marker.
+- [Command](https://design.edgecom.ai/components/command/): A searchable command palette for fast navigation and actions.
+- [Pagination](https://design.edgecom.ai/components/pagination/): Page navigation controls for long lists and tables.
+- [Sidebar](https://design.edgecom.ai/components/sidebar/): A composable application sidebar with header, grouped menu, and footer.
+- [Table](https://design.edgecom.ai/components/table/): A styled HTML table for tabular data.
+- [Timeline](https://design.edgecom.ai/components/timeline/): A vertical sequence of events with status dots and connectors.
+- [Checkbox](https://design.edgecom.ai/components/checkbox/): Select one or many options, with grouped and indeterminate states.
+- [Combobox](https://design.edgecom.ai/components/combobox/): A searchable select for choosing from long option lists.
+- [Tags](https://design.edgecom.ai/components/tags-input/): A free-text field that turns typed values into removable tags — no option list required.
+- [Button group](https://design.edgecom.ai/components/button-group/): Related buttons joined into a single control.
+- [Tabs](https://design.edgecom.ai/components/tabs/): Switch between related views within the same context.
+- [Popover](https://design.edgecom.ai/components/popover/): Floating panels anchored to a trigger for forms and details.
+- [Radio group](https://design.edgecom.ai/components/radio-group/): Choose exactly one option from a set.
+- [Tooltip](https://design.edgecom.ai/components/tooltip/): Contextual hints and rich previews shown on hover.
+- [Toast](https://design.edgecom.ai/components/toast/): Brief, dismissible notifications for feedback and events.
+
+## Blocks
+
+- [Authorization](https://design.edgecom.ai/blocks/authorization/): A connection-progress screen for OAuth-style utility linking flows.
+- [Detail dialog](https://design.edgecom.ai/blocks/detail-dialog/): Composed, opinionated dialogs that assemble many primitives into a full editing screen.
+- [Charts](https://design.edgecom.ai/blocks/chart-blocks/): Prebuilt chart blocks themed with the commodity color ramps.
+- [Data table](https://design.edgecom.ai/blocks/datatable/): Full-featured tables with sorting, filtering, pagination, and selection.
+- [Form](https://design.edgecom.ai/blocks/form/): Composed form layouts, from single-step to multi-step wizards.
+- [Page header](https://design.edgecom.ai/blocks/page-header/): A breadcrumb above the H1, plus optional tab and toolbar rows. Any crumb — including the current page — can open a dropdown to pivot between peers.
+- [File upload](https://design.edgecom.ai/blocks/file-upload/): Drag-and-drop and browse controls for uploading files.
+- [Statistic Cards](https://design.edgecom.ai/blocks/statistics/): Metric tiles and KPI blocks for dashboards.
+- [Widgets](https://design.edgecom.ai/blocks/widgets/): Composed dashboard widgets combining stats, charts, and lists.
+- [Application shell](https://design.edgecom.ai/blocks/application-shell/): The full page frame — sidebar, top bar, and content layout.
+- [Settings](https://design.edgecom.ai/blocks/settings/): Account settings pages plus the settings shell that frames them with a grouped sub-nav.
+
+<!-- @@GENERATED:catalog-end -->
 
 ## Notes
 
 - Install a component: `pnpm dlx shadcn@latest add edgecom-ai/design-system/<name>` (the repo is the registry — no server or auth).
-- This index is curated (not an exhaustive per-component list). Browse the catalog above for the full set.
+- The catalog above is generated from the docs-site sections (`src/app/sections.tsx`) — it lists every documented page.
