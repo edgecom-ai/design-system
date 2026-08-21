@@ -235,6 +235,7 @@ export const apiHighlight: Record<string, string> = {
   "SidebarMenuSub": "<span style=\"--shiki-light:#24292E;--shiki-dark:#E1E4E8\">SidebarMenuSub</span>",
   "SidebarMenuSubButton": "<span style=\"--shiki-light:#24292E;--shiki-dark:#E1E4E8\">SidebarMenuSubButton</span>",
   "SidebarMenuSubItem": "<span style=\"--shiki-light:#24292E;--shiki-dark:#E1E4E8\">SidebarMenuSubItem</span>",
+  "SidebarMenuSubmenu": "<span style=\"--shiki-light:#24292E;--shiki-dark:#E1E4E8\">SidebarMenuSubmenu</span>",
   "SidebarProvider": "<span style=\"--shiki-light:#24292E;--shiki-dark:#E1E4E8\">SidebarProvider</span>",
   "SidebarRail": "<span style=\"--shiki-light:#24292E;--shiki-dark:#E1E4E8\">SidebarRail</span>",
   "SidebarSeparator": "<span style=\"--shiki-light:#24292E;--shiki-dark:#E1E4E8\">SidebarSeparator</span>",

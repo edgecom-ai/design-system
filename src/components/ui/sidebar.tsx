@@ -23,6 +23,16 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 import { PanelLeftIcon } from "lucide-react"
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state"
@@ -694,6 +704,79 @@ function SidebarMenuSubButton({
   })
 }
 
+// A submenu parent that adapts to the sidebar state: an inline collapsible
+// submenu when the rail is expanded, and a hover/focus flyout anchored off the
+// rail when it's collapsed to icons (where the inline submenu is hidden and a
+// plain tooltip couldn't hold the sub-links). `trigger` is the parent
+// SidebarMenuButton; the sub-items are the children (SidebarMenuSubItem /
+// SidebarMenuSubButton), rendered in both modes.
+function SidebarMenuSubmenu({
+  trigger,
+  label,
+  open,
+  onOpenChange,
+  defaultOpen,
+  children,
+}: {
+  trigger: React.ReactElement
+  label?: React.ReactNode
+  open?: boolean
+  onOpenChange?: (open: boolean) => void
+  defaultOpen?: boolean
+  children?: React.ReactNode
+}) {
+  const { state, isMobile } = useSidebar()
+
+  // Collapsed rail (desktop): the inline submenu is hidden, so a hover/focus
+  // flyout anchored off the rail replaces both it and the icon tooltip. Base UI
+  // opens it on hover and on keyboard focus, with a bridge over the gap.
+  if (state === "collapsed" && !isMobile) {
+    return (
+      <Popover>
+        <PopoverTrigger
+          openOnHover
+          delay={100}
+          closeDelay={150}
+          render={trigger}
+        />
+        <PopoverContent
+          data-slot="sidebar-menu-flyout"
+          side="right"
+          align="start"
+          sideOffset={12}
+          className="w-48 min-w-48 rounded-lg p-1"
+        >
+          {label ? (
+            <div
+              data-slot="sidebar-menu-flyout-label"
+              className="px-2 pt-1 pb-1.5 text-xs font-medium text-muted-foreground"
+            >
+              {label}
+            </div>
+          ) : null}
+          <ul
+            data-slot="sidebar-menu-flyout-list"
+            data-sidebar="menu-flyout"
+            className="flex w-full min-w-0 flex-col gap-1"
+          >
+            {children}
+          </ul>
+        </PopoverContent>
+      </Popover>
+    )
+  }
+
+  // Expanded rail (and the mobile sheet): the classic inline collapsible submenu.
+  return (
+    <Collapsible open={open} onOpenChange={onOpenChange} defaultOpen={defaultOpen}>
+      <CollapsibleTrigger render={trigger} />
+      <CollapsibleContent>
+        <SidebarMenuSub>{children}</SidebarMenuSub>
+      </CollapsibleContent>
+    </Collapsible>
+  )
+}
+
 export {
   Sidebar,
   SidebarContent,
@@ -714,6 +797,7 @@ export {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
+  SidebarMenuSubmenu,
   SidebarProvider,
   SidebarRail,
   SidebarSeparator,
