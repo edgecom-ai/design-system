@@ -580,6 +580,7 @@ export const curatedApi: Record<string, CuratedApi> = {
       SidebarMenu: "The list of menu items within a group.",
       SidebarMenuItem: "A single menu row.",
       SidebarMenuButton: "The interactive nav button; set isActive for the current page.",
+      SidebarMenuSubmenu: "A parent with subpages: an inline collapsible submenu when expanded, and an off-rail hover/focus flyout when the rail is collapsed to icons. Pass the parent button as `trigger` and the SidebarMenuSubItem rows as children.",
       SidebarFooter: "Bottom region, e.g. settings or the account menu.",
       SidebarInset: "The main content area beside the sidebar.",
       SidebarTrigger: "Button that toggles the sidebar open/collapsed.",

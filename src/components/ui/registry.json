@@ -877,7 +877,9 @@
       "registryDependencies": [
         "edgecom-ai/design-system/theme",
         "edgecom-ai/design-system/button",
+        "edgecom-ai/design-system/collapsible",
         "edgecom-ai/design-system/input",
+        "edgecom-ai/design-system/popover",
         "edgecom-ai/design-system/separator",
         "edgecom-ai/design-system/sheet",
         "edgecom-ai/design-system/skeleton",

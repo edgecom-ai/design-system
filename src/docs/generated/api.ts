@@ -560,6 +560,7 @@ export const generatedApi: Record<string, GeneratedApi> = {
       "SidebarMenuSub",
       "SidebarMenuSubButton",
       "SidebarMenuSubItem",
+      "SidebarMenuSubmenu",
       "SidebarProvider",
       "SidebarRail",
       "SidebarSeparator",

@@ -6,11 +6,6 @@ import { Gauge, Activity, FileText, Bell, Settings, ChevronRight } from "lucide-
 import { cn } from "@/lib/utils"
 import { Logo } from "@/components/ui/logo"
 import {
-  Collapsible,
-  CollapsibleTrigger,
-  CollapsibleContent,
-} from "@/components/ui/collapsible"
-import {
   SidebarProvider,
   Sidebar,
   SidebarHeader,
@@ -21,24 +16,35 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
-  SidebarMenuSub,
+  SidebarMenuSubmenu,
   SidebarMenuSubItem,
   SidebarMenuSubButton,
   SidebarFooter,
   SidebarInset,
+  SidebarTrigger,
 } from "@/components/ui/sidebar"
 
 const subPages = ["Energy", "Bill", "Production"]
+const leaves = [
+  { title: "pTrack®", icon: Activity },
+  { title: "Reports", icon: FileText },
+  { title: "Alarms", icon: Bell },
+]
 
 export function SidebarSubmenuDemo() {
   const [open, setOpen] = React.useState(true)
 
   return (
-    <SidebarProvider className="h-[420px] min-h-0 w-full overflow-hidden rounded-xl border border-border">
-      <Sidebar collapsible="none" className="h-full">
+    <SidebarProvider className="relative h-[420px] min-h-0 w-full overflow-hidden rounded-xl border border-border [&_[data-slot=sidebar-container]]:absolute [&_[data-slot=sidebar-container]]:h-full">
+      {/* collapsible="icon" collapses the rail to icons; hovering dataTrack™ then
+          shows its subpages in an off-rail flyout instead of a tooltip. */}
+      <Sidebar collapsible="icon" className="h-full">
         <SidebarHeader>
-          <div className="flex items-center px-2 py-1">
-            <Logo className="h-6 w-auto" />
+          <div className="flex items-center justify-between gap-2 group-data-[collapsible=icon]:justify-center">
+            <div className="flex items-center px-1 group-data-[collapsible=icon]:hidden">
+              <Logo className="h-6 w-auto" />
+            </div>
+            <SidebarTrigger />
           </div>
         </SidebarHeader>
         <SidebarContent>
@@ -46,55 +52,45 @@ export function SidebarSubmenuDemo() {
             <SidebarGroupLabel>Monitoring</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
-                {/* dataTrack expands into its subpages */}
+                {/* Parent with subpages: inline collapsible when expanded,
+                    off-rail hover flyout when collapsed. */}
                 <SidebarMenuItem>
-                  <Collapsible open={open} onOpenChange={setOpen}>
-                    <CollapsibleTrigger
-                      render={
-                        <SidebarMenuButton isActive>
-                          <Gauge />
-                          <span>dataTrack™</span>
-                          <ChevronRight
-                            className={cn(
-                              "ml-auto transition-transform",
-                              open && "rotate-90"
-                            )}
-                          />
-                        </SidebarMenuButton>
-                      }
-                    />
-                    <CollapsibleContent>
-                      <SidebarMenuSub>
-                        {subPages.map((page, i) => (
-                          <SidebarMenuSubItem key={page}>
-                            <SidebarMenuSubButton isActive={i === 0}>
-                              <span>{page}</span>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                        ))}
-                      </SidebarMenuSub>
-                    </CollapsibleContent>
-                  </Collapsible>
+                  <SidebarMenuSubmenu
+                    label="dataTrack™"
+                    open={open}
+                    onOpenChange={setOpen}
+                    trigger={
+                      <SidebarMenuButton isActive>
+                        <Gauge />
+                        <span>dataTrack™</span>
+                        <ChevronRight
+                          className={cn(
+                            "ml-auto transition-transform",
+                            open && "rotate-90"
+                          )}
+                        />
+                      </SidebarMenuButton>
+                    }
+                  >
+                    {subPages.map((page, i) => (
+                      <SidebarMenuSubItem key={page}>
+                        <SidebarMenuSubButton isActive={i === 0}>
+                          <span>{page}</span>
+                        </SidebarMenuSubButton>
+                      </SidebarMenuSubItem>
+                    ))}
+                  </SidebarMenuSubmenu>
                 </SidebarMenuItem>
 
-                <SidebarMenuItem>
-                  <SidebarMenuButton>
-                    <Activity />
-                    <span>pTrack®</span>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-                <SidebarMenuItem>
-                  <SidebarMenuButton>
-                    <FileText />
-                    <span>Reports</span>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-                <SidebarMenuItem>
-                  <SidebarMenuButton>
-                    <Bell />
-                    <span>Alarms</span>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
+                {/* Leaf items keep the icon tooltip when collapsed. */}
+                {leaves.map(({ title, icon: Icon }) => (
+                  <SidebarMenuItem key={title}>
+                    <SidebarMenuButton tooltip={title}>
+                      <Icon />
+                      <span>{title}</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
@@ -102,7 +98,7 @@ export function SidebarSubmenuDemo() {
         <SidebarFooter>
           <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton>
+              <SidebarMenuButton tooltip="Settings">
                 <Settings />
                 <span>Settings</span>
               </SidebarMenuButton>
@@ -116,6 +112,11 @@ export function SidebarSubmenuDemo() {
         </h2>
         <p className="mt-1 text-sm text-muted-foreground">
           dataTrack™ · Toronto Distribution Center
+        </p>
+        <p className="mt-4 max-w-sm text-sm text-muted-foreground">
+          Toggle the rail with the header button. When collapsed, hover
+          <span className="font-medium text-foreground"> dataTrack™ </span>
+          to open its subpages in an off-rail flyout; leaf items show a tooltip.
         </p>
       </SidebarInset>
     </SidebarProvider>
