@@ -5,12 +5,12 @@
    them here rather than rewriting third-party code and risking behavior drift. */
 /* eslint-disable react-hooks/preserve-manual-memoization, react-hooks/set-state-in-effect */
 
-import * as React from 'react'
+import * as React from "react"
 
-import type { Transition } from 'motion/react'
-import { AnimatePresence, motion } from 'motion/react'
+import type { Transition } from "motion/react"
+import { AnimatePresence, motion } from "motion/react"
 
-import { cn } from '@/lib/utils'
+import { cn } from "@/lib/utils"
 
 type MotionHighlightMode = 'children' | 'parent'
 

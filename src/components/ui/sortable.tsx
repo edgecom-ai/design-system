@@ -1,7 +1,7 @@
 'use client'
 
-import * as React from 'react'
-import type { CSSProperties, HTMLAttributes, ReactElement, ReactNode } from 'react'
+import * as React from "react"
+import type { CSSProperties, HTMLAttributes, ReactElement, ReactNode } from "react"
 import {
   Children,
   cloneElement,
@@ -12,7 +12,7 @@ import {
   useLayoutEffect,
   useMemo,
   useState
-} from 'react'
+} from "react"
 
 import {
   defaultDropAnimationSideEffects,
@@ -24,7 +24,7 @@ import {
   TouchSensor,
   useSensor,
   useSensors
-} from '@dnd-kit/core'
+} from "@dnd-kit/core"
 import type {
   DragEndEvent,
   DragStartEvent,
@@ -32,8 +32,8 @@ import type {
   Modifiers,
   UniqueIdentifier,
   DraggableSyntheticListeners
-} from '@dnd-kit/core'
-import type { AnimateLayoutChanges } from '@dnd-kit/sortable'
+} from "@dnd-kit/core"
+import type { AnimateLayoutChanges } from "@dnd-kit/sortable"
 import {
   arrayMove,
   defaultAnimateLayoutChanges,
@@ -42,12 +42,12 @@ import {
   sortableKeyboardCoordinates,
   useSortable,
   verticalListSortingStrategy
-} from '@dnd-kit/sortable'
-import { CSS } from '@dnd-kit/utilities'
-import { useRender } from '@base-ui/react/use-render'
-import { createPortal } from 'react-dom'
+} from "@dnd-kit/sortable"
+import { CSS } from "@dnd-kit/utilities"
+import { useRender } from "@base-ui/react/use-render"
+import { createPortal } from "react-dom"
 
-import { cn } from '@/lib/utils'
+import { cn } from "@/lib/utils"
 
 // Base UI equivalent of Radix's `Slot`: merges props onto a single child element
 // so components can support an `asChild`-style pass-through without pulling in Radix.

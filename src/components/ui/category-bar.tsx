@@ -1,10 +1,10 @@
 'use client'
 
-import React from 'react'
+import React from "react"
 
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 
-import { cn } from '@/lib/utils'
+import { cn } from "@/lib/utils"
 
 const DEFAULT_BAR_COLOR = 'bg-muted'
 

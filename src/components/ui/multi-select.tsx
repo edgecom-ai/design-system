@@ -1,12 +1,12 @@
 'use client'
 
-import * as React from 'react'
+import * as React from "react"
 
-import { useEffect } from 'react'
+import { useEffect } from "react"
 
-import { Command as CommandPrimitive, useCommandState } from 'cmdk'
-import { Command, CommandGroup, CommandItem, CommandList } from '@/components/ui/command'
-import { cn } from '@/lib/utils'
+import { Command as CommandPrimitive, useCommandState } from "cmdk"
+import { Command, CommandGroup, CommandItem, CommandList } from "@/components/ui/command"
+import { cn } from "@/lib/utils"
 import { XIcon } from "lucide-react"
 
 export interface Option {

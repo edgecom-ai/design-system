@@ -1,7 +1,7 @@
 'use client'
 
-import type React from 'react'
-import { useCallback, useRef, useState, type ChangeEvent, type DragEvent, type InputHTMLAttributes } from 'react'
+import type React from "react"
+import { useCallback, useRef, useState, type ChangeEvent, type DragEvent, type InputHTMLAttributes } from "react"
 
 export type FileMetadata = {
   name: string

@@ -87,7 +87,7 @@ pnpm dlx shadcn@latest registry validate edgecom-ai/design-system
 | `src/components/ui/*.tsx` | one `registry:ui` item each (deps, cross-deps, hooks derived from imports) |
 | `src/app/globals.css` | the `theme` item's design tokens (`@theme` mappings + `:root` light + `.dark` dark) |
 | `src/lib/utils.ts` | shipped by the `theme` item (`cn` helper) |
-| `src/hooks/*.ts` | any hook a component imports becomes its own item, depended on by that component |
+| `src/hooks/*.ts` | any hook a component imports becomes its own item, depended on by that component (its own deps derived from its imports too) |
 
 ### Source layout — chunks live beside their sources
 
@@ -114,12 +114,15 @@ Cross-item references (`registryDependencies`) use **full GitHub addresses** (`e
 
 Deps, cross-component `registryDependencies`, hooks, and theme coupling are all inferred. **Every component automatically depends on the `theme` item.**
 
+Inference reads the **import specifiers** — either quote style, plus side-effect and dynamic `import()` — through the shared scanner in [`scripts/lib/imports.mjs`](scripts/lib/imports.mjs). `registry:check` re-audits the *built* `public/r/*.json` afterwards **through that same scanner**, so the derivation and the audit can't disagree about what a file imports. It fails the build if an item imports a package or sibling component its manifest doesn't declare, or declares a `registryDependency` the registry emits no item for. The check exists because both defects are invisible here — an undeclared dependency only breaks in a consumer tree that doesn't already have the package.
+
 ### pnpm scripts
 
 | Script | Does |
 |---|---|
 | `pnpm run registry:gen` | Regenerate the root `registry.json` + the `src/**/registry.json` chunks from source (`scripts/gen-registry.mjs`) |
-| `pnpm run registry:build` | `registry:gen` **+** `shadcn build` → also writes the optional flattened `public/r/*.json` |
+| `pnpm run registry:build` | `registry:gen` **+** `shadcn build` **+** `registry:check` → also writes the optional flattened `public/r/*.json` |
+| `pnpm run registry:check` | Audit every built item's imports against its declared `dependencies`/`registryDependencies`, and every declared registry dependency against the items that exist (`scripts/check-registry.mjs`); non-zero exit on a gap |
 | `pnpm run build` | Full site build. **`prebuild` runs `docs:gen && registry:build` first**, so a normal build always ships a current registry. |
 | `pnpm run dev` | Docs site locally at `:3000`. |
 
