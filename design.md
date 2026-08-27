@@ -196,6 +196,18 @@ Surfaces stack by lightness, and the stack must stay legible in **dark mode**, w
 - **Modal scrims use the `scrim` token**, never an inline `oklch(… / 0.4)`. Dark needs the deeper scrim because surfaces are close in lightness.
 - **No accent bars.** Never add a colored strip along an edge/border (e.g. `border-l-4 border-l-destructive`) to signal status — use the component's own variant (a `-subtle` surface with `-emphasis` text/icon) so status reads consistently and adapts to dark.
 
+### Stacking order (z-index)
+
+Portalled surfaces mount at the end of `<body>`, so **within a layer the most recently opened surface paints on top** — a `popover` or `combobox` opened from inside a `dialog` is a later sibling and wins without needing a higher z-index. Only three layers exist; don't invent a fourth:
+
+| Layer | `z` | Surfaces |
+|---|---|---|
+| Page | `0`–`20` | Sticky headers, action bars, table chrome |
+| Overlay | `z-50` | `dialog`, `alert-dialog`, `sheet`, `drawer` (scrim + popup), and every anchored surface: `popover`, `select`, `dropdown-menu`, `combobox`, `context-menu`, `hover-card`, `navigation-menu` |
+| Tooltip | `z-60` | `tooltip` only — transient, never interactive, must never be occluded by the overlay it annotates |
+
+**Put the z-index on the element that establishes the stacking context.** A Base UI `Positioner` is `position: absolute` with a `transform`; the `Popup` inside it computes `position: static`, so a z-index on the popup is inert and the surface paints at `auto` — losing to any positioned page content. Every portalled component sets `isolate z-*` on its **Positioner**.
+
 ## Shapes
 
 Radius scale, all derived from `--radius` (0.625rem): `sm` (0.6×), `md` (0.8×), `lg` (1×), `xl` (1.4×), `2xl` (1.8×), `3xl` (2.2×), `4xl` (2.6×). Use the scale — don't invent radii. Cards use `xl`; buttons/inputs `md`; pills/badges `sm`.
