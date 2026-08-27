@@ -199,6 +199,7 @@ export const apiHighlight: Record<string, string> = {
   "Calendar": "<span style=\"--shiki-light:#24292E;--shiki-dark:#E1E4E8\">Calendar</span>",
   "CalendarDayButton": "<span style=\"--shiki-light:#24292E;--shiki-dark:#E1E4E8\">CalendarDayButton</span>",
   "DatePicker": "<span style=\"--shiki-light:#24292E;--shiki-dark:#E1E4E8\">DatePicker</span>",
+  "MonthRangePicker": "<span style=\"--shiki-light:#24292E;--shiki-dark:#E1E4E8\">MonthRangePicker</span>",
   "CategoryBar": "<span style=\"--shiki-light:#24292E;--shiki-dark:#E1E4E8\">CategoryBar</span>",
   "Command": "<span style=\"--shiki-light:#24292E;--shiki-dark:#E1E4E8\">Command</span>",
   "CommandDialog": "<span style=\"--shiki-light:#24292E;--shiki-dark:#E1E4E8\">CommandDialog</span>",
