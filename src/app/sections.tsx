@@ -13,12 +13,9 @@ import {
   Leaf,
   TrendingUp,
   Bell,
-  Search,
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import { ComponentPreview, InstallCommand } from "@/components/docs/component-preview";
-import { Toc } from "@/components/docs/toc";
 import { Changelog } from "@/components/docs/changelog";
 import { changelog } from "@/docs/generated/changelog";
 import { SeparatorDemo } from "@/components/demo/separator-demo";
@@ -70,28 +67,6 @@ import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { Label } from "@/components/ui/label";
 import { Logo } from "@/components/ui/logo";
 import { Separator } from "@/components/ui/separator";
-import {
-  SidebarProvider,
-  Sidebar,
-  SidebarContent,
-  SidebarHeader,
-  SidebarGroup,
-  SidebarGroupLabel,
-  SidebarGroupContent,
-  SidebarMenu,
-  SidebarMenuItem,
-  SidebarMenuButton,
-  SidebarInset,
-} from "@/components/ui/sidebar";
-import {
-  CommandDialog,
-  CommandInput,
-  CommandList,
-  CommandEmpty,
-  CommandGroup,
-  CommandItem,
-  CommandShortcut,
-} from "@/components/ui/command";
 import SkeletonText from "@/components/shadcn-studio/skeleton/skeleton-02";
 import SkeletonForm from "@/components/shadcn-studio/skeleton/skeleton-04";
 import SkeletonAccordion from "@/components/shadcn-studio/skeleton/skeleton-07";
