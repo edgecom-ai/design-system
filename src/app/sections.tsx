@@ -2458,7 +2458,7 @@ export const sections: Section[] = [
       {
         id: "multi-select-listbox",
         name: "Multi-select listbox",
-        description: "The `multi-select-listbox` component — a count-summary trigger + checkbox listbox with Select all / Clear. The control chart toolbars use to pick which device series to plot.",
+        description: "The `multi-select-listbox` component — a trigger + searchable checkbox listbox with Select all / Clear (static label by default, optional count summary). The control chart toolbars use to pick which device series to plot.",
         preview: <MultiSelectDemo />,
         source: dm("multi-select-demo"),
       },

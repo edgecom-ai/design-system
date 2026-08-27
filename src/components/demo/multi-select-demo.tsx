@@ -13,8 +13,6 @@ const devices: MultiSelectOption[] = [
   { id: "l-01", label: "Lighting ON-L-01", meta: "112 kW", swatch: "var(--chart-water-700)" },
 ]
 
-const allIds = devices.map((d) => d.id)
-
 function Field({ caption, children }: { caption: string; children: React.ReactNode }) {
   return (
     <div className="flex flex-col gap-1.5">
@@ -25,37 +23,28 @@ function Field({ caption, children }: { caption: string; children: React.ReactNo
 }
 
 export function MultiSelectDemo() {
-  const [empty, setEmpty] = React.useState<string[]>([])
-  const [partial, setPartial] = React.useState<string[]>(["c-02"])
-  const [all, setAll] = React.useState<string[]>(allIds)
+  const [staticLabel, setStaticLabel] = React.useState<string[]>(["c-02"])
+  const [withCount, setWithCount] = React.useState<string[]>(["c-02"])
 
   return (
     <div className="flex flex-wrap items-start gap-6">
-      <Field caption="Empty">
+      <Field caption="Static label (default)">
         <MultiSelect
           options={devices}
-          value={empty}
-          onChange={setEmpty}
+          value={staticLabel}
+          onChange={setStaticLabel}
           placeholder="Select device data"
           itemNoun="devices"
         />
       </Field>
-      <Field caption="Partial">
+      <Field caption="Count summary (showCount)">
         <MultiSelect
           options={devices}
-          value={partial}
-          onChange={setPartial}
+          value={withCount}
+          onChange={setWithCount}
           placeholder="Select device data"
           itemNoun="devices"
-        />
-      </Field>
-      <Field caption="All selected">
-        <MultiSelect
-          options={devices}
-          value={all}
-          onChange={setAll}
-          placeholder="Select device data"
-          itemNoun="devices"
+          showCount
         />
       </Field>
     </div>

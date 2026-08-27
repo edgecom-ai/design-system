@@ -32,6 +32,7 @@ function MultiSelect({
   itemNoun = "items",
   showFooterActions = true,
   showSearch = true,
+  showCount = false,
   align = "end",
   className,
   ...props
@@ -42,6 +43,8 @@ function MultiSelect({
   placeholder?: string
   itemNoun?: string
   showFooterActions?: boolean
+  /** Show a "{n} of {total}" / "All {total}" count on the trigger instead of the static placeholder. */
+  showCount?: boolean
   showSearch?: boolean
   align?: "start" | "end"
   className?: string
@@ -61,8 +64,10 @@ function MultiSelect({
     return q ? options.filter((o) => o.label.toLowerCase().includes(q)) : options
   }, [options, query])
 
-  const label =
-    count === 0
+  // Static placeholder label by default; opt into a count summary with showCount.
+  const label = !showCount
+    ? placeholder
+    : count === 0
       ? placeholder
       : count === total
         ? `All ${total} ${itemNoun}`
@@ -82,7 +87,7 @@ function MultiSelect({
     >
       <SelectPrimitive.Trigger
         data-slot="multi-select-trigger"
-        data-empty={count === 0}
+        data-empty={showCount && count === 0}
         className={cn(
           "flex h-8 min-w-48 items-center gap-1.5 rounded-md border border-input bg-background pr-2 pl-2.5 text-left text-sm transition-colors outline-none hover:bg-accent focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 data-[empty=true]:text-muted-foreground",
           className
