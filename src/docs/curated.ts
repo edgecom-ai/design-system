@@ -502,7 +502,8 @@ export const curatedApi: Record<string, CuratedApi> = {
     parts: {
       Sheet: "Root managing the sheet's open state.",
       SheetTrigger: "Opens the sheet; pass a Button via the render prop.",
-      SheetContent: "The sliding panel; takes a side prop (default right).",
+      SheetContent:
+        "The sliding panel; takes a side prop (default right). Width is the --sheet-width custom property (420px for left/right, none for top/bottom) — resize with a plain [--sheet-width:64rem] or sm:max-w-* class.",
       SheetHeader: "Top section for the title and description.",
       SheetFooter: "Bottom section for action buttons.",
       SheetTitle: "Accessible heading for the panel.",
