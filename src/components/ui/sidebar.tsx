@@ -727,11 +727,12 @@ function SidebarMenuSubmenu({
   open?: boolean
   onOpenChange?: (open: boolean) => void
   defaultOpen?: boolean
-  // Mirrors Base UI's PopoverTrigger prop. Set false when `trigger` renders
-  // something other than a <button> — e.g. a SidebarMenuButton with
-  // render={<Link />}, the common case for a parent row that also navigates.
-  // Base UI asserts the rendered tag against this in both directions, so the
-  // default has to stay true for the plain-button trigger.
+  // Set false when `trigger` renders something other than a <button> — e.g. a
+  // SidebarMenuButton with render={<Link />}, the common case for a parent row
+  // that also navigates. Forwarded to both branches: PopoverTrigger (collapsed
+  // rail) and CollapsibleTrigger (expanded) each run Base UI's useButton, which
+  // asserts the rendered tag against this in both directions — so the default
+  // has to stay true for the plain-button trigger.
   nativeButton?: boolean
   children?: React.ReactNode
 }) {
@@ -780,7 +781,7 @@ function SidebarMenuSubmenu({
   // Expanded rail (and the mobile sheet): the classic inline collapsible submenu.
   return (
     <Collapsible open={open} onOpenChange={onOpenChange} defaultOpen={defaultOpen}>
-      <CollapsibleTrigger render={trigger} />
+      <CollapsibleTrigger nativeButton={nativeButton} render={trigger} />
       <CollapsibleContent>
         <SidebarMenuSub>{children}</SidebarMenuSub>
       </CollapsibleContent>

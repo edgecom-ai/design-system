@@ -121,9 +121,15 @@ export const curatedApi: Record<string, CuratedApi> = {
     },
   },
   checkbox: {
-    summary: "A checkbox styled as a small box with a check-icon indicator.",
+    summary:
+      "A checkbox styled as a small box, with a tick when selected and a dash when indeterminate.",
     parts: {
-      Checkbox: "Checkbox root with a check-icon indicator when selected.",
+      Checkbox:
+        "Checkbox root. Selected shows a tick; pass indeterminate (or use a CheckboxGroup parent) for the dash. inline-flex, so a centred cell centres it without a wrapper.",
+    },
+    propDescriptions: {
+      "Checkbox.indeterminate":
+        "Mixed state — neither ticked nor unticked. Renders a dash, for a select-all that covers only some rows.",
     },
   },
   collapsible: {
@@ -507,7 +513,7 @@ export const curatedApi: Record<string, CuratedApi> = {
       Sheet: "Root managing the sheet's open state.",
       SheetTrigger: "Opens the sheet; pass a Button via the render prop.",
       SheetContent:
-        "The sliding panel; takes a side prop (default right). Width is the --sheet-width custom property (420px for left/right, none for top/bottom) — resize with a plain [--sheet-width:<length>] or sm:max-w-* class.",
+        "The sliding panel; takes a side prop (default right). 420px wide for left/right, uncapped for top/bottom — resize with a plain sm:max-w-* class, or set the --sheet-width custom property.",
       SheetHeader: "Top section for the title and description.",
       SheetFooter: "Bottom section for action buttons.",
       SheetTitle: "Accessible heading for the panel.",
