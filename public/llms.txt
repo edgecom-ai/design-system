@@ -8,6 +8,7 @@
 - [AGENTS.md](https://github.com/edgecom-ai/design-system/blob/main/AGENTS.md): Building an app **with** the design system — installing components from the registry, composing primitives, token sync, responsiveness. The "how to implement".
 - [REGISTRY.md](https://github.com/edgecom-ai/design-system/blob/main/REGISTRY.md): Registry install mechanics in depth — the install address, the `theme` item, and how dependencies are inferred.
 - [MAINTAINERS.md](https://github.com/edgecom-ai/design-system/blob/main/MAINTAINERS.md): Developing the design-system repo itself — authoring primitives, tuning tokens, the Next.js docs site, and the registry build.
+- [changelog.md](https://design.edgecom.ai/changelog.md): What changed and when — every release, generated from the commit history, with the registry items each change touched. Check it before assuming an API or token still looks the way you remember.
 
 Browse every component in light/dark with copyable code at [design.edgecom.ai](https://design.edgecom.ai) — the source of truth for what exists. The full catalog:
 
@@ -18,6 +19,7 @@ Browse every component in light/dark with copyable code at [design.edgecom.ai](h
 - [Introduction](https://design.edgecom.ai/getting-started/introduction/): A design system for building cohesive, data-dense, energy applications
 - [Installation](https://design.edgecom.ai/getting-started/installation/): Everything you need to install the Edgecom design system and start building with it.
 - [Accessibility](https://design.edgecom.ai/getting-started/accessibility/): Contrast, scalable type, and balancing accessibility with visual design.
+- [Changelog](https://design.edgecom.ai/getting-started/changelog/): Every release of the design system, generated from the commit history.
 
 ## Foundations
 
