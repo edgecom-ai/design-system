@@ -13,6 +13,7 @@ function DatePicker({
   defaultValue,
   onValueChange,
   placeholder = "Pick a date",
+  compact = false,
   disabled,
   className,
 }: {
@@ -20,6 +21,8 @@ function DatePicker({
   defaultValue?: Date
   onValueChange?: (date: Date | undefined) => void
   placeholder?: string
+  /** Render the trigger as an icon-only button instead of the full field. */
+  compact?: boolean
   disabled?: boolean
   className?: string
 }) {
@@ -37,24 +40,36 @@ function DatePicker({
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger
         render={
-          <Button
-            variant="outline"
-            disabled={disabled}
-            data-empty={!selected}
-            className={cn(
-              "w-56 justify-start font-normal data-[empty=true]:text-muted-foreground",
-              className
-            )}
-          >
-            <CalendarIcon data-icon="inline-start" />
-            {selected
-              ? selected.toLocaleDateString(undefined, {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })
-              : placeholder}
-          </Button>
+          compact ? (
+            <Button
+              variant="outline"
+              size="icon"
+              disabled={disabled}
+              aria-label={placeholder}
+              className={className}
+            >
+              <CalendarIcon />
+            </Button>
+          ) : (
+            <Button
+              variant="outline"
+              disabled={disabled}
+              data-empty={!selected}
+              className={cn(
+                "w-56 justify-start font-normal data-[empty=true]:text-muted-foreground",
+                className
+              )}
+            >
+              <CalendarIcon data-icon="inline-start" />
+              {selected
+                ? selected.toLocaleDateString(undefined, {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })
+                : placeholder}
+            </Button>
+          )
         }
       />
       <PopoverContent className="w-auto p-0" align="start">
@@ -78,6 +93,7 @@ function MonthRangePicker({
   defaultValue,
   onValueChange,
   placeholder = "Pick a month range",
+  compact = false,
   disabled,
   className,
 }: {
@@ -85,6 +101,8 @@ function MonthRangePicker({
   defaultValue?: MonthRange
   onValueChange?: (range: MonthRange) => void
   placeholder?: string
+  /** Render the trigger as an icon-only button instead of the full field. */
+  compact?: boolean
   disabled?: boolean
   className?: string
 }) {
@@ -137,19 +155,32 @@ function MonthRangePicker({
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger
         render={
-          <Button
-            variant="outline"
-            disabled={disabled}
-            data-slot="month-range-picker-trigger"
-            data-empty={!from}
-            className={cn(
-              "w-56 justify-start font-normal data-[empty=true]:text-muted-foreground",
-              className
-            )}
-          >
-            <CalendarIcon data-icon="inline-start" />
-            {label}
-          </Button>
+          compact ? (
+            <Button
+              variant="outline"
+              size="icon"
+              disabled={disabled}
+              data-slot="month-range-picker-trigger"
+              aria-label={placeholder}
+              className={className}
+            >
+              <CalendarIcon />
+            </Button>
+          ) : (
+            <Button
+              variant="outline"
+              disabled={disabled}
+              data-slot="month-range-picker-trigger"
+              data-empty={!from}
+              className={cn(
+                "w-56 justify-start font-normal data-[empty=true]:text-muted-foreground",
+                className
+              )}
+            >
+              <CalendarIcon data-icon="inline-start" />
+              {label}
+            </Button>
+          )
         }
       />
       <PopoverContent data-slot="month-range-picker" align="start" className="w-64 p-3">

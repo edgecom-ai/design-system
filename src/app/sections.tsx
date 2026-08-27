@@ -144,6 +144,7 @@ import { TextareaNoteDemo } from "@/components/demo/textarea-note-demo";
 import { DatePickerDemo } from "@/components/demo/date-picker-demo";
 import DatePickerRangeDemo from "@/components/shadcn-studio/date-picker/date-picker-02";
 import { DatePickerMonthRangeDemo } from "@/components/demo/date-picker-month-range-demo";
+import { DatePickerCompactDemo } from "@/components/demo/date-picker-compact-demo";
 import DatePickerNaturalLanguageDemo from "@/components/shadcn-studio/date-picker/date-picker-05";
 import DatePickerTimeDemo from "@/components/shadcn-studio/date-picker/date-picker-08";
 import DatePickerDateTimeDemo from "@/components/shadcn-studio/date-picker/date-picker-10";
@@ -2627,6 +2628,13 @@ export const sections: Section[] = [
         description: "A month-granularity range picker — pick a start and end month across years.",
         preview: <DatePickerMonthRangeDemo />,
         source: dm("date-picker-month-range-demo"),
+      },
+      {
+        id: "date-picker-compact",
+        name: "Compact (icon trigger)",
+        description: "Any of our pickers with `compact` — an icon-only trigger that opens the same calendar; each keeps its own dropdown logic and UI.",
+        preview: <DatePickerCompactDemo />,
+        source: dm("date-picker-compact-demo"),
       },
       {
         id: "date-picker-natural-language",
