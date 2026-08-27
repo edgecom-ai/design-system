@@ -36,7 +36,7 @@ export function MultiSelectDemo() {
           options={devices}
           value={empty}
           onChange={setEmpty}
-          placeholder="Add devices"
+          placeholder="Select device data"
           itemNoun="devices"
         />
       </Field>
@@ -45,7 +45,7 @@ export function MultiSelectDemo() {
           options={devices}
           value={partial}
           onChange={setPartial}
-          placeholder="Add devices"
+          placeholder="Select device data"
           itemNoun="devices"
         />
       </Field>
@@ -54,7 +54,7 @@ export function MultiSelectDemo() {
           options={devices}
           value={all}
           onChange={setAll}
-          placeholder="Add devices"
+          placeholder="Select device data"
           itemNoun="devices"
         />
       </Field>
