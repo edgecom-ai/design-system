@@ -376,7 +376,7 @@ function StepperIndicator({ children, className, variant = 'default' }: StepperI
   const { indicators } = useStepper()
 
   const base =
-    'relative flex size-8 shrink-0 items-center justify-center overflow-hidden transition-all duration-300 rounded-md text-sm font-medium'
+    'relative flex size-8 shrink-0 items-center justify-center overflow-hidden transition-all duration-300 rounded-md text-body-sm font-medium'
 
   const defaultClasses = cn(
     'border-background bg-muted data-[state=completed]:bg-primary data-[state=completed]:text-primary-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground ring-offset-background group-data-[state=active]/step:ring-primary/30 group-data-[state=active]/step:ring-2 group-data-[state=active]/step:ring-offset-3',
@@ -419,7 +419,7 @@ function StepperTitle({ children, className }: React.ComponentProps<'h3'>) {
   const { state } = useStepItem()
 
   return (
-    <h3 data-slot='stepper-title' data-state={state} className={cn('text-sm font-medium', className)}>
+    <h3 data-slot='stepper-title' data-state={state} className={cn('text-body-sm font-medium', className)}>
       {children}
     </h3>
   )
@@ -432,7 +432,7 @@ function StepperDescription({ children, className }: React.ComponentProps<'div'>
     <div
       data-slot='stepper-description'
       data-state={state}
-      className={cn('text-muted-foreground text-xs font-medium', className)}
+ className={cn('text-muted-foreground text-caption ', className)}
     >
       {children}
     </div>

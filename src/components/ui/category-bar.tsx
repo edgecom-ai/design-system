@@ -73,7 +73,7 @@ const BarLabels = ({ values }: { values: number[] }) => {
   return (
     <div
       className={cn(
-        'relative mb-2 flex h-5 w-full text-sm font-medium',
+        'relative mb-2 flex h-5 w-full text-body-sm font-medium',
 
         // text color
         'text-muted-foreground'
@@ -87,7 +87,7 @@ const BarLabels = ({ values }: { values: number[] }) => {
           style={{ width: `${label.widthPositionLeft}%` }}
         >
           {label.showLabel ? (
-            <span className={cn('block translate-x-1/2 text-sm tabular-nums')}>{formatNumber(label.prefixSum)}</span>
+            <span className={cn('block translate-x-1/2 text-body-sm tabular-nums')}>{formatNumber(label.prefixSum)}</span>
           ) : null}
         </div>
       ))}
