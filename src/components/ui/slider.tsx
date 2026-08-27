@@ -43,7 +43,7 @@ function Slider({
             key={index}
             index={index}
             data-slot="slider-thumb"
-            className="block size-4 shrink-0 rounded-full border border-primary bg-background shadow-sm outline-none transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50"
+            className="block size-4 shrink-0 rounded-full border border-primary bg-background shadow-sm outline-none transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 data-disabled:pointer-events-none data-disabled:opacity-50"
           />
         ))}
       </SliderPrimitive.Control>

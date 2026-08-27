@@ -26,7 +26,7 @@ function Switch({
         "peer inline-flex shrink-0 items-center rounded-full border border-transparent shadow-xs transition-colors outline-none",
         "focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50",
         "data-[unchecked]:bg-input data-[checked]:bg-primary",
-        "disabled:cursor-not-allowed disabled:opacity-50",
+        "disabled:cursor-not-allowed disabled:opacity-50 data-disabled:cursor-not-allowed data-disabled:opacity-50",
         switchRootSizes[size],
         className
       )}
