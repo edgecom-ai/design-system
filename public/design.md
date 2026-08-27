@@ -53,6 +53,7 @@ typography:
   font-family: SF Pro / system-ui sans (var --font-sans)
   font-family-mono: SF Mono / ui-monospace (var --font-mono)
   caption: { size: 0.75rem, line-height: 1rem, weight: 500 }
+  body-sm: { size: 0.875rem, line-height: 1.25rem, weight: 400 }
   body: { size: 0.875rem, line-height: 1.375rem, weight: 400 }
   body-lg: { size: 1rem, line-height: 1.5rem, weight: 400 }
   title: { size: 1.125rem, line-height: 1.5rem, weight: 600 }
@@ -166,14 +167,19 @@ Dark is the `.dark` class on the root; portaled content (dropdowns, popovers, to
 
 Use the **semantic type scale** — one token sets size + line-height + weight + tracking. Don't reach for ad-hoc `text-xs`/`text-2xl` or pin sizes to px.
 
-| Token | Size | Use |
+| Token | Size / line-height | Use |
 |---|---|---|
-| `caption` | 0.75rem | Labels, meta, table captions |
-| `body` | 0.875rem | Default body / table cells |
-| `body-lg` | 1rem | Emphasized body, lead-in |
-| `title` | 1.125rem | Card / section titles |
-| `heading` | 1.5rem | Page headings |
-| `display` | 2.25rem | Hero / display numerals |
+| `caption` | 0.75rem / 1rem | Labels, meta, table captions, shortcuts (carries weight 500) |
+| `body-sm` | 0.875rem / 1.25rem | **Dense chrome** — controls, menu items, table cells, tabs, single-line UI text |
+| `body` | 0.875rem / 1.375rem | **Running prose** — descriptions, helper and error text, empty states |
+| `body-lg` | 1rem / 1.5rem | Emphasized body, lead-in |
+| `title` | 1.125rem / 1.5rem | Card / section titles (weight 600) |
+| `heading` | 1.5rem / 1.875rem | Page headings (weight 600) |
+| `display` | 2.25rem / 2.5rem | Hero / display numerals (weight 700) |
+
+`body-sm` and `body` are the **same size on different line boxes**. Pick by what the text is, not how big it is: anything that wraps to a second line and is meant to be *read* takes `body`; anything that sits on one line inside a control takes `body-sm`. Two slots that swap in the same position (a `FieldDescription` giving way to a `FieldError`) must take the *same* token, or the layout shifts under the user.
+
+The tokens carry their own line-height and weight — **don't pair them with `leading-*`**, and don't restate a weight the token already sets. `leading-snug` is Tailwind's unitless ratio 1.375, not `1.375rem`; reaching for it where a token was meant is a silent 3px error.
 
 The scale is in `rem` — it respects user font settings. Font family is SF Pro / system sans via `--font-sans`; `--font-mono` is a real monospace stack, for code, identifiers, and tabular figures. Both tokens are defaults — an app that wants its own face redefines them in its own `:root`.
 

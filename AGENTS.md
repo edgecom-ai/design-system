@@ -38,7 +38,7 @@
 ## Responsiveness & scaling
 
 - **Mobile-first.** Build for small screens first and layer up with Tailwind breakpoints (`sm`/`md`/`lg`/`xl`/`2xl`); no desktop-only layouts.
-- **Relative units, not fixed px.** Use the `rem`-based type scale (`text-caption`…`text-display`) and the spacing / `radius-*` scales; don't pin font sizes or container dimensions to px.
+- **Relative units, not fixed px.** Use the `rem`-based type scale (`text-caption`…`text-display`) and the spacing / `radius-*` scales; don't pin font sizes or container dimensions to px. Reach for the semantic token, never `text-sm`/`text-xs` — the tokens carry their own line-height and weight, so **don't pair them with `leading-*`** or restate a weight they already set. `body-sm` and `body` are the same size on different line boxes: single-line UI text takes `body-sm`, running prose takes `body`, and two slots that swap in one position must take the same token.
 - **Fluid layout.** Flex/grid with `min-w-0`, `max-w-*`, and wrapping so content reflows — it must never clip or force horizontal page scroll. Wide content (tables, code) scrolls inside its own `overflow-x-auto` container.
 - **Reuse breakpoint logic.** Use the `use-mobile` hook (`useIsMobile`, 768px) for conditional rendering instead of ad-hoc `matchMedia`.
 - **Touch targets & media.** Keep adequate hit areas on touch; `max-w-full` on images/media so nothing overflows.

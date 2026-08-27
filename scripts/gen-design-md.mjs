@@ -41,7 +41,7 @@ const COLOR_GROUPS = [
   { comment: null, keys: ["border", "input", "ring"] },
 ];
 const COMMODITIES = ["electricity", "water", "gas", "temperature", "emissions"];
-const TYPE_SCALE = ["caption", "body", "body-lg", "title", "heading", "display"];
+const TYPE_SCALE = ["caption", "body-sm", "body", "body-lg", "title", "heading", "display"];
 const RADII = ["sm", "md", "lg", "xl", "2xl", "3xl", "4xl"];
 
 function val(name) {
