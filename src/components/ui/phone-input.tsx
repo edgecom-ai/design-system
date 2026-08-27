@@ -1,11 +1,11 @@
 'use client'
 
-import type { ComponentProps } from 'react'
-import { createContext, useContext, useMemo, useState } from 'react'
+import type { ComponentProps } from "react"
+import { createContext, useContext, useMemo, useState } from "react"
 
-import * as BasePhoneInput from 'react-phone-number-input'
-import flags from 'react-phone-number-input/flags'
-import { Button } from '@/components/ui/button'
+import * as BasePhoneInput from "react-phone-number-input"
+import flags from "react-phone-number-input/flags"
+import { Button } from "@/components/ui/button"
 import {
   Combobox,
   ComboboxContent,
@@ -16,10 +16,10 @@ import {
   ComboboxSeparator,
   ComboboxTrigger,
   ComboboxValue
-} from '@/components/ui/combobox'
-import { Input } from '@/components/ui/input'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { cn } from '@/lib/utils'
+} from "@/components/ui/combobox"
+import { Input } from "@/components/ui/input"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { cn } from "@/lib/utils"
 import { EarthIcon } from "lucide-react"
 
 type PhoneInputSize = 'sm' | 'default' | 'lg'
@@ -51,6 +51,17 @@ type PhoneInputProps = Omit<ComponentProps<'input'>, 'onChange' | 'value' | 'ref
     scrollAreaClassName?: string
     inputClassName?: string
     triggerClassName?: string
+    extensionClassName?: string
+    /**
+     * A desk extension, kept as its own value: E.164 — what `onChange` emits —
+     * cannot carry one, so packing it into the phone string would lose it on the
+     * next round-trip. The field renders as soon as either of these is passed.
+     */
+    extension?: string
+    onExtensionChange?: (extension: string) => void
+    extensionPlaceholder?: string
+    extensionLabel?: string
+    maxExtensionLength?: number
   }
 
 const PhoneInput = ({
@@ -60,12 +71,44 @@ const PhoneInput = ({
   scrollAreaClassName,
   inputClassName,
   triggerClassName,
+  extensionClassName,
+  extension,
+  onExtensionChange,
+  extensionPlaceholder = 'Ext.',
+  extensionLabel = 'Phone extension',
+  maxExtensionLength = 8,
   onChange,
   value,
   ...props
 }: PhoneInputProps) => {
   const phoneInputSize = variant || 'default'
+  const hasExtension = extension !== undefined || onExtensionChange !== undefined
 
+  // `smartCaret` is deliberately left to the library's `true` default: it keeps
+  // the caret next to the digit you are editing when a correction mid-number
+  // reflows the format. A consumer hitting the old Samsung caret bug can still
+  // pass `smartCaret={false}` — `{...props}` below carries it through.
+  const phoneField = (
+    <BasePhoneInput.default
+      className={cn(
+        'flex',
+        hasExtension && 'min-w-0 flex-1',
+        props['aria-invalid'] &&
+          '[&_*[data-slot=combobox-trigger]]:border-destructive [&_*[data-slot=combobox-trigger]]:ring-destructive/50',
+        !hasExtension && className
+      )}
+      flagComponent={FlagComponent}
+      countrySelectComponent={CountrySelect}
+      inputComponent={InputComponent}
+      value={value || undefined}
+      onChange={value => onChange?.(value || ('' as BasePhoneInput.Value))}
+      {...props}
+    />
+  )
+
+  // `className` always lands on the component's root element — the wrapper when
+  // there is an extension, the phone field itself when there isn't — so a
+  // consumer's `hidden` or `w-64` governs the whole control either way.
   return (
     <PhoneInputContext.Provider
       value={{
@@ -77,21 +120,29 @@ const PhoneInput = ({
         readOnly: props.readOnly
       }}
     >
-      <BasePhoneInput.default
-        className={cn(
-          'flex',
-          props['aria-invalid'] &&
-            '[&_*[data-slot=combobox-trigger]]:border-destructive [&_*[data-slot=combobox-trigger]]:ring-destructive/50',
-          className
-        )}
-        flagComponent={FlagComponent}
-        countrySelectComponent={CountrySelect}
-        inputComponent={InputComponent}
-        smartCaret={false}
-        value={value || undefined}
-        onChange={value => onChange?.(value || ('' as BasePhoneInput.Value))}
-        {...props}
-      />
+      {hasExtension ? (
+        <div data-slot='phone-input-group' className={cn('flex items-stretch', className)}>
+          {phoneField}
+          <Input
+            data-slot='phone-input-extension'
+            className={cn('ml-2 h-auto w-24 shrink-0', extensionClassName)}
+            inputMode='numeric'
+            autoComplete='tel-extension'
+            placeholder={extensionPlaceholder}
+            aria-label={extensionLabel}
+            // The pair reads as one control, so it goes destructive as one.
+            aria-invalid={props['aria-invalid']}
+            value={extension ?? ''}
+            disabled={props.disabled}
+            readOnly={props.readOnly}
+            onChange={event =>
+              onExtensionChange?.(event.target.value.replace(/\D/g, '').slice(0, maxExtensionLength))
+            }
+          />
+        </div>
+      ) : (
+        phoneField
+      )}
     </PhoneInputContext.Provider>
   )
 }

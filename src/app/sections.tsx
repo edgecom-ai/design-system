@@ -63,6 +63,7 @@ import SelectWithOptionsGroupsDemo from "@/components/shadcn-studio/select/selec
 import MultipleSelectWithPlaceholderDemo from "@/components/shadcn-studio/select/select-33";
 import MultiSelectPreselectedDemo from "@/components/shadcn-studio/select/select-32";
 import { MultiSelectDemo } from "@/components/demo/multi-select-demo";
+import { PhoneInputExtensionDemo } from "@/components/demo/phone-input-extension-demo";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { Label } from "@/components/ui/label";
 import { Logo } from "@/components/ui/logo";
@@ -1414,6 +1415,7 @@ export const sections: Section[] = [
       { id: "input-stepper", name: "Stepper (plus / minus)", description: "A numeric input with increment and decrement buttons.", preview: <InputWithPlusMinusButtonsDemo />, source: ss("input/input-40") },
       { id: "input-otp", name: "OTP", description: "A segmented one-time-passcode entry field.", preview: <InputOTPNumberDemo />, source: ss("input-otp/input-otp-01") },
       { id: "input-phone", name: "Phone number", description: "A phone field with a country-code selector.", preview: <PhoneInputWithLabel />, source: ss("phone-input/phone-input-02") },
+      { id: "input-phone-extension", name: "Phone number with extension", description: "A phone field with a separate desk-extension value.", preview: <PhoneInputExtensionDemo />, source: dm("phone-input-extension-demo") },
     ],
   },
   {
