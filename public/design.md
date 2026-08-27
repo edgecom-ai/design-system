@@ -215,6 +215,8 @@ Radius scale, all derived from `--radius` (0.625rem): `sm` (0.6×), `md` (0.8×)
 
 ## Components (usage conventions)
 
+**Same job → same component.** Pick one component for a given job and reuse it everywhere — the same kind of control, in the same placement, size, and behaviour, across every screen and graph. Consistency of *kind* matters as much as consistency of *style*: a data-series selector, a date range, or a row-action menu should be the **identical** component wherever it appears — never a `select` in one place and a segmented control or `dropdown-menu` in another for the same task. If a job already has a component elsewhere in the product, reuse that one rather than introducing a parallel pattern.
+
 ### Badge — pick by meaning; default to `outline`
 
 - **Neutral labels → `outline`.** When unsure, use `outline`.
@@ -231,7 +233,7 @@ Radius scale, all derived from `--radius` (0.625rem): `sm` (0.6×), `md` (0.8×)
 
 - **Short create actions (1–4 fields) → modal `dialog`** — quick, centered, focused.
 - **Longer edit/update actions (many fields) → right-side `sheet`** — default width **420px**, full-width on mobile; go wider only when content genuinely needs it.
-- **Dialogs & sheets keep their close (X)** — a modal must always be dismissible. The **only** exception is the `alert-dialog`, which omits the X so a destructive/confirmation flow forces an explicit choice.
+- **Dialogs & sheets keep a close (X) in the top-right corner** — the `dialog`/`sheet` primitives render it there by default (`showCloseButton`, positioned `absolute top-2 right-2`); never pass `showCloseButton={false}`, move it elsewhere, or hand-roll a modal without one. A modal must always be dismissible. The **only** exception is the `alert-dialog`, which omits the X so a destructive/confirmation flow forces an explicit choice.
 - Overlays are **hidden by default** and **mounted at the app/template root**, so their visibility never depends on the current view.
 
 ### Feedback — toasts
@@ -254,9 +256,42 @@ Any destructive/irreversible action (delete, remove, disconnect, reset, purge) p
 - **Active/selected states use the built-in neutral highlight — not brand blue.** An active nav/menu/tab/sidebar item is signalled by the component's own active styling (`isActive`/`data-active` → the neutral `accent`/`sidebar-accent` surface) while its **text and icon stay `foreground`**. Brand blue is reserved for CTAs and a single key highlight, not routine active states. Compose navigation from the primitive's parts (e.g. `SidebarGroupLabel`, `SidebarMenuButton isActive`, `SidebarMenuSub`) — don't hand-roll the highlight.
 - **Keep a gap between menu items** (e.g. `gap-1`) in `sidebar`, `dropdown-menu`, `command`, and similar lists so an active item and a hovered neighbor never merge into one block.
 
+### Select — no checkmark on the selected item
+
+- **A single-select `select` shows its value in the trigger and highlights the current option in the list — it does _not_ mark the selected item with a check/tick icon.** The chosen value in the trigger plus the option's built-in highlight already communicate the selection; **don't add a checkmark unless explicitly asked.** (Design tools tend to add one by default — don't; the primitive deliberately omits it.)
+- **Multi-select is the only exception.** When several values can be chosen at once, show each option's on/off state (a check or checkbox) so the selected set is legible — that's the one place a check belongs.
+
 ### Tooltips
 
-A `tooltip` shrink-wraps its content — don't add a `max-w` or fixed width that forces wrapping. Widen only to keep a **row of data** on one line (via `whitespace-nowrap` on the rows), not a hardcoded width.
+A `tooltip` **shrink-wraps its content**, sizing to its text — don't add a `max-w` or fixed width that forces wrapping. Each item/row should sit on a **single line**; widen only to keep a label–value **row of data** together (via `whitespace-nowrap` on the rows), never a hardcoded width.
+
+- **Viewport-aware positioning.** The tooltip must stay inside the current viewport: if it would overflow the **right** edge it flips to the **left** of the trigger/cursor (and likewise flips top↔bottom), and shifts along the edge to stay fully visible. The `tooltip` primitive's positioner does this collision handling by default — keep it; never pin a side that lets the tooltip run off-screen.
+- **Never clipped by its container.** A tooltip is **portaled to the app root**, so it escapes the triggering element's box — an `overflow: hidden` / `overflow-x-auto` ancestor (a card, a table, a `scroll-area`) must never clip it. Don't render a tooltip inline inside a clipping container or with portalling disabled.
+
+### Charts & graphs
+
+Every chart/graph carries a **consistent control cluster** in its header — the same set across all charts on a view, present **by default unless a chart explicitly opts out**:
+
+- **Shared date range.** All charts on a view are driven by **one** range control — the `date-picker` in range mode plus quick presets (`1W` / `1M` / …). Never give each chart its own range that drifts out of sync; changing the range updates every chart together.
+- **Interpolation toggle — smooth vs. step.** Line/area charts expose a toggle to switch between a smooth curve and stepped segments. Default to **smooth** for continuous series; use step for discrete/stateful data.
+- **Statistical overlays.** Offer the analytics tools as toggleable overlays — period average (a reference line labelled with its value in the legend), min/max, and trend — so a reading carries context. Draw reference lines in a **neutral/`muted`** tone (dashed), never a status or commodity color.
+- **Export / download.** A single icon button opening a `dropdown-menu` in the header offers the export options (image + data — e.g. PNG / SVG / CSV) — not a row of buttons. (This is header chrome — an icon button per *Buttons & interaction*.)
+- **Series / metric selector — identical across every graph.** Choosing which data series or metric a chart shows uses the **same** control on every graph: the same component (a `select` for one choice; a multi-select for several; `tabs` only for a small fixed set), in the same place and size. A user should never meet a dropdown on one chart and a segmented control on another for the same job (see *Same job → same component* above).
+
+Only omit one of these five when the spec explicitly says so.
+
+**Legible bars — size the bar width and gap to the data density.** A bar chart reads clearly only when bars keep a comfortable width and never touch. Think in terms of each category's **slot** (plot width ÷ number of bars): the bar fills part of the slot, the rest is the gap. Default to a bar at **~65% of its slot** (≈35% gap), then adjust by how many bars there are:
+
+| Bars (categories) | Bar width | Gap between bars | Also |
+|---|---|---|---|
+| **Few** (≤ 8) | cap at **~48–64px** — don't let them balloon | wide — bar ≤ ~55% of the slot | center the set; a handful of bars shouldn't become fat blocks |
+| **Normal** (9–30) | ~60–70% of the slot | ~30–40% of the slot, **≥ 2px** | the default ratio |
+| **Dense** (31–60) | thinner, but **≥ ~4px** | **≥ ~2px** | drop per-bar value labels → move them to a `tooltip` / `hover-card` |
+| **Very dense** (> 60, or bars would fall below the min width/gap) | hold the min width | hold the min gap | **stop shrinking** — aggregate/bucket (daily → weekly) *or* scroll horizontally in an `overflow-x-auto` container at a fixed per-bar width |
+
+Never a **zero gap** — touching bars read as one solid block. Keep the bar corner-radius small (**≤ ~2px**) at high density so rounding doesn't eat the width. For **grouped / stacked** bars, make the gap **between groups** larger than the gap **within** a group so each group reads as a unit. The goal is constant: a reader can pick out an individual bar and its neighbours at a glance — if they can't, widen the gap, cap the width, aggregate, or scroll; never shrink bars into indistinct slivers.
+
+- **Colors, detail, themes.** Tag series with the commodity hues by meaning (`chart-*`); move point/detail readouts into a `tooltip` / `hover-card` (see *Layout → Density*); keep axis labels, grid lines, and the value legend legible in **both** themes.
 
 ## Accessibility
 
@@ -273,12 +308,16 @@ A `tooltip` shrink-wraps its content — don't add a `max-w` or fixed width that
 - Pick status/commodity colors strictly by meaning.
 - Default badges to `outline`; reserve primary `default` for one key highlight.
 - Use the rem type, spacing, and radius scales.
-- Keep overlays dismissible (close X) except the `alert-dialog`.
+- Keep overlays dismissible — a top-right close (X) on every dialog/sheet, except the `alert-dialog`.
 - Confirm actions with the matching semantic `toast` variant; always give a toast a title.
 - Gate destructive actions behind an `alert-dialog` (type-to-confirm for high-impact).
 - Show inline, specific validation errors with `aria-invalid`.
 - Move secondary/detail info into tooltips/hover-cards in dense UI.
+- Let tooltips shrink-wrap (one line per row) and flip/shift within the viewport; keep them portaled so no container clips them.
 - Use icon buttons for secondary table/page actions.
+- Give every chart the standard controls by default — one shared date range, a smooth/step toggle, statistical overlays, and an export dropdown.
+- Use the same component for the same job everywhere (e.g. one series-selector control shared across all charts).
+- Size bar width and gap to the data density (bar ~65% of its slot; gap ≥ 2px; cap width for few bars; aggregate or scroll past ~60).
 
 **Don't**
 - Don't hardcode hex or ship light-only UI — every color is a light+dark token.
@@ -288,7 +327,7 @@ A `tooltip` shrink-wraps its content — don't add a `max-w` or fixed width that
 - Don't make dark `popover` equal to `card`, and don't hardcode a modal scrim — overlays sit above cards; scrims use the `scrim` token.
 - Don't add accent bars (colored border strips) to signal status — use the component's `-subtle`/`-emphasis` variant.
 - Don't put icons in table cells unless asked; don't let edge cells sit flush to the card border (align to 1.5rem).
-- Don't give tooltips a `max-w`/fixed width that wraps the text.
+- Don't give tooltips a `max-w`/fixed width that wraps the text; don't pin a side that lets one run off-screen (let it flip/shift within the viewport); don't let a container clip one (keep it portaled).
 - Don't fix a row menu clipped by an `overflow-x-auto` table with `min-height` — toggle the wrapper to `overflow: visible` while open.
 - Don't fire a neutral `toast()` for a success/failure; don't mount two toasters or ship a titleless toast.
 - Don't wire a destructive action straight to its trigger.
@@ -297,3 +336,9 @@ A `tooltip` shrink-wraps its content — don't add a `max-w` or fixed width that
 - Don't pin sizes to px; don't invent new sizes or override a component's built-in classes — use its variants / `size` props.
 - Don't ship a button or clickable control without a visible hover + focus state (and `cursor: pointer`).
 - Don't cram a long, many-field form into a centered modal — use a right `sheet`.
+- Don't add a checkmark to the selected item in a single-select `select` — the trigger value plus the highlighted option already show it; reserve checks for multi-select.
+- Don't ship a dialog/sheet without its top-right close (X), or move it off the top-right corner (`showCloseButton={false}`) — only the `alert-dialog` omits it.
+- Don't ship a chart without the standard controls, or give each chart its own date range that drifts out of sync with the others on the view.
+- Don't solve the same job with different components across screens or graphs (a `select` here, a segmented control there) — pick one and reuse it.
+- Don't pack many bars edge-to-edge into a solid block — widen the inter-bar gap (or aggregate) so they stay legible.
+- Don't color a statistical reference line (period average / min / max) with a status or commodity hue — keep it neutral/muted.
