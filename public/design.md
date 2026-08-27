@@ -286,12 +286,12 @@ Every chart/graph carries a **consistent control cluster** in its header — the
 
 Only omit one of these five when the spec explicitly says so.
 
-**Legible bars — size the bar width and gap to the data density.** A bar chart reads clearly only when bars keep a comfortable width and never touch. Think in terms of each category's **slot** (plot width ÷ number of bars): the bar fills part of the slot, the rest is the gap. Default to a bar at **~65% of its slot** (≈35% gap), then adjust by how many bars there are:
+**Legible bars — size the bar width and gap to the data density.** A bar chart reads clearly only when bars keep a comfortable width and never touch. Think in terms of each category's **slot** (plot width ÷ number of bars): the bar fills part of the slot, the rest is the gap. Default to a bar at **~75% of its slot** (≈25% gap), then adjust by how many bars there are:
 
 | Bars (categories) | Bar width | Gap between bars | Also |
 |---|---|---|---|
 | **Few** (≤ 8) | cap at **~48–64px** — don't let them balloon | wide — bar ≤ ~55% of the slot | center the set; a handful of bars shouldn't become fat blocks |
-| **Normal** (9–30) | ~60–70% of the slot | ~30–40% of the slot, **≥ 2px** | the default ratio |
+| **Normal** (9–30) | ~70–80% of the slot | ~20–30% of the slot, **≥ 2px** | the default ratio |
 | **Dense** (31–60) | thinner, but **≥ ~4px** | **≥ ~2px** | drop per-bar value labels → move them to a `tooltip` / `hover-card` |
 | **Very dense** (> 60, or bars would fall below the min width/gap) | hold the min width | hold the min gap | **stop shrinking** — aggregate/bucket (daily → weekly) *or* scroll horizontally in an `overflow-x-auto` container at a fixed per-bar width |
 
@@ -323,7 +323,7 @@ Never a **zero gap** — touching bars read as one solid block. **Round only the
 - Use icon buttons for secondary table/page actions.
 - Give every chart the standard controls by default — one shared date range, a smooth/step toggle, statistical overlays, and an export dropdown.
 - Use the same component for the same job everywhere (e.g. one series-selector control shared across all charts).
-- Size bar width and gap to the data density (bar ~65% of its slot; gap ≥ 2px; cap width for few bars; aggregate or scroll past ~60).
+- Size bar width and gap to the data density (bar ~75% of its slot; gap ≥ 2px; cap width for few bars; aggregate or scroll past ~60).
 - Round only the top corners of bars (small, uniform ~2–4px radius); keep the bottom square on the baseline, and use the same radius/thickness across every bar chart.
 
 **Don't**
