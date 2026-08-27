@@ -11,6 +11,7 @@ The semantic type scale becomes real: tokens carry their own size, line-height, 
 
 ### Added
 
+- **phone-input:** Smart caret on by default, plus an optional extension field ([`7e74af4`](https://github.com/edgecom-ai/design-system/commit/7e74af4))
 - **docs:** Self-maintaining changelog page generated from git history ([`edf2c8f`](https://github.com/edgecom-ai/design-system/commit/edf2c8f))
 - **multi-select-listbox:** Count-summary checkbox listbox multi-select ([`7d40f6f`](https://github.com/edgecom-ai/design-system/commit/7d40f6f))
 - **theme:** Add the body-sm compact step to the type scale ([`b70b38c`](https://github.com/edgecom-ai/design-system/commit/b70b38c))
@@ -19,6 +20,8 @@ The semantic type scale becomes real: tokens carry their own size, line-height, 
 
 ### Fixed
 
+- **scroll-area:** Drop the unused React import that breaks noUnusedLocals builds ([`f101283`](https://github.com/edgecom-ai/design-system/commit/f101283))
+- **registry:** Derive every item's dependencies from all of its imports ([`ad1c77c`](https://github.com/edgecom-ai/design-system/commit/ad1c77c))
 - **theme:** Teach cn() the semantic type scale, which it was silently deleting ([`a22e7b9`](https://github.com/edgecom-ai/design-system/commit/a22e7b9))
 - Corrections from verifying the fixes in the browser ([`f3b7527`](https://github.com/edgecom-ai/design-system/commit/f3b7527))
 - **theme:** Give the font tokens real values instead of self-references ([`ebf2cc6`](https://github.com/edgecom-ai/design-system/commit/ebf2cc6))
