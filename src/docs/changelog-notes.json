@@ -1,0 +1,16 @@
+{
+  "//": "Hand-written overrides for the generated changelog (scripts/gen-changelog.mjs). Git history is the source of truth; this file only retitles, retells, or hides parts of it. Run `pnpm docs:changelog` after editing.",
+  "//hide": "Commit shas (short or full) to leave out entirely — noise that landed without a `Changelog: skip` trailer.",
+  "hide": ["79d8fe3"],
+  "//rewrite": "sha -> a better headline than the commit subject, for entries worth reading closely.",
+  "rewrite": {
+    "3b2633a": "Serve the docs from the design.edgecom.ai root — the /design-system base path is gone",
+    "bc54269": "Replace the Create Next App boilerplate in the README"
+  },
+  "//releases": "Release key (git tag, or the YYYY-MM-DD date while the repo is untagged, or \"unreleased\") -> a title and a lead-in paragraph for that release.",
+  "releases": {
+    "2026-08-27": {
+      "summary": "The semantic type scale becomes real: tokens carry their own size, line-height, and weight, cn() stops dropping them, and every primitive in the registry now uses them."
+    }
+  }
+}

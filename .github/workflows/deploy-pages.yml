@@ -19,7 +19,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      # Full history: scripts/gen-changelog.mjs derives the changelog from the
+      # commit log, and a shallow checkout would report a single commit.
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       # Reads the pnpm version from package.json "packageManager".
       - uses: pnpm/action-setup@v4

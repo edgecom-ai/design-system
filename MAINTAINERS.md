@@ -24,7 +24,8 @@ This repo is two things at once: a **Next.js 16 docs site** and the **source of 
 | `pnpm build` | Static export to `out/`. `prebuild` runs `docs:gen` **and** `registry:build` first. |
 | `pnpm lint` | ESLint (Next core-web-vitals + TypeScript). |
 | `pnpm registry:build` | Regenerate registry from source, then `shadcn build`. |
-| `pnpm docs:gen` | Regenerate all docs-source / api / routes artifacts. |
+| `pnpm docs:gen` | Regenerate all docs-source / api / routes / changelog artifacts. |
+| `pnpm docs:changelog` | Regenerate the changelog from git history (part of `docs:gen`). |
 
 You rarely run the generators by hand — `predev`/`prebuild` do it. Run `pnpm registry:build` yourself after changing a component or token so the generated registry reflects it.
 
@@ -90,8 +91,31 @@ Edit the **sources**, then run `pnpm registry:build` (or `pnpm docs:gen`). `preb
 | `public/r/*.json` | `shadcn build` | the registry chunks |
 | `src/docs/generated/{api,api-highlight,routes}.ts` | `docs:api` / `docs:routes` | `sections.tsx`, `ui/*`, `docs/api.ts` |
 | `public/docs-source/*` (git-**ignored**) | `docs:source` | `components/demo/*`, `components/shadcn-studio/*` |
+| `src/docs/generated/changelog.ts`, `CHANGELOG.md`, `public/changelog.md` | `docs:changelog` | git history + `src/docs/changelog-notes.json` |
 
-Note: `src/docs/api.ts` and `src/docs/curated.ts` are **hand-written** sources — distinct from the generated `src/docs/generated/*`.
+Note: `src/docs/api.ts`, `src/docs/curated.ts`, and `src/docs/changelog-notes.json` are **hand-written** sources — distinct from the generated `src/docs/generated/*`.
+
+## The changelog maintains itself
+
+The **Getting Started → Changelog** page is derived from git, not hand-written, so it can't drift from what the registry ships. [`scripts/gen-changelog.mjs`](scripts/gen-changelog.mjs) runs inside `docs:gen` — every `pnpm dev` and every CI deploy rewrites it from the commits on `main`.
+
+What that asks of you when you commit:
+
+- **Write a conventional-commit subject** — `type(scope): summary`. The `type` picks the group the entry lands in (`feat` → Added, `fix` → Fixed, `perf` → Performance, `refactor`/`revert`/`style` → Changed, `docs` → Documentation, `build`/`chore`/`ci`/`test` → Internal; anything unparsed falls into Changed). A `!` before the colon, or a `BREAKING CHANGE:` body line, promotes it to **Breaking**.
+- **Write the summary for a reader of the docs site**, not for the diff — it is published verbatim.
+- The **affected registry items are inferred from the files you touched** (`src/components/ui/*.tsx`, `src/hooks/*`, and `globals.css` → `theme`), so they're right without you listing them.
+
+Two curation escape hatches:
+
+- A **`Changelog:` commit trailer** — `Changelog: skip` drops the commit from the page; any other value replaces its headline. Use it at commit time.
+- [`src/docs/changelog-notes.json`](src/docs/changelog-notes.json) — retroactive `hide` / `rewrite` by sha, plus a `title` and `summary` per release. Use it for history that is already written; a release `summary` is the one place to say *why* a batch of commits matters.
+
+Releases are cut at **git tags** (`git tag v1.2.0` — the tagged commit is the newest of its release, commits after the newest tag show as **Unreleased**). Until the repo is tagged, entries group **by date** instead, so the page works from day one.
+
+Two things to keep intact:
+
+- The Pages workflow checks out with **`fetch-depth: 0`**. A shallow checkout sees one commit; the generator detects that (and a non-git tree) and keeps the committed changelog rather than truncating it, but the deploy would then go stale.
+- `CHANGELOG.md` and `public/changelog.md` are **generated mirrors** — served at [design.edgecom.ai/changelog.md](https://design.edgecom.ai/changelog.md) and linked from `llms.txt` so consuming agents can diff against what they remember. Edit `changelog-notes.json`, never the markdown.
 
 ## shadcn-studio components (`src/components/shadcn-studio/**`)
 
@@ -117,6 +141,7 @@ There is **no test framework** in this repo. The quality gates are:
 ## Do-nots (maintainer)
 
 - Don't hand-edit generated files (see the table above) — edit the source and regenerate.
+- Don't hand-edit `CHANGELOG.md` / `public/changelog.md`, and don't drop `fetch-depth: 0` from the Pages workflow — both break the self-maintaining changelog.
 - Don't `--overwrite` our custom `src/components/ui` primitives when pulling shadcn-studio components, and don't reformat vendored studio files.
 - Don't add icon libraries other than lucide-react.
 - Don't edit a token in only one of `:root` / `.dark` — set both (or confirm the light value is meant to inherit).

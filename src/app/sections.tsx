@@ -19,6 +19,8 @@ import {
 import { cn } from "@/lib/utils";
 import { ComponentPreview, InstallCommand } from "@/components/docs/component-preview";
 import { Toc } from "@/components/docs/toc";
+import { Changelog } from "@/components/docs/changelog";
+import { changelog } from "@/docs/generated/changelog";
 import { SeparatorDemo } from "@/components/demo/separator-demo";
 import { ApplicationShellPreview } from "@/components/demo/application-shell-preview";
 import { AvatarBasicDemo, AvatarGroupDemo } from "@/components/demo/avatar-demo";
@@ -993,6 +995,24 @@ export const sections: Section[] = [
       { id: "a11y-balance", name: "Balancing visual design & accessibility" },
       { id: "a11y-type", name: "Scalable, legible type" },
     ],
+  },
+  {
+    id: "changelog",
+    label: "Changelog",
+    group: "Getting Started",
+    description:
+      "Every release of the design system, generated from the commit history.",
+    toc: changelog.slice(0, 12).map((r) => ({ id: r.id, name: r.title })),
+    node: (
+      <Changelog
+        itemHref={(item) => {
+          // globals.css ships as the `theme` registry item; its reference page
+          // is Foundations -> Semantic colors.
+          const target = sections.find((s) => s.id === (item === "theme" ? "colors" : item));
+          return target ? sectionPath(target) : undefined;
+        }}
+      />
+    ),
   },
   {
     id: "colors",

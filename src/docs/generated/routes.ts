@@ -13,6 +13,10 @@ export const staticParams: { group: string; slug: string }[] = [
     "slug": "accessibility"
   },
   {
+    "group": "getting-started",
+    "slug": "changelog"
+  },
+  {
     "group": "foundations",
     "slug": "colors"
   },
