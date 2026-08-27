@@ -56,6 +56,7 @@ The full guardrails — status-color meaning, badges, dialog-vs-sheet, toasts, d
 - **Confirm actions with the matching semantic `toast`** variant; one `<Toaster>` per app; every toast has a title.
 - **Surface validation inline** (`FieldError` + `aria-invalid`); handle **loading/empty/error** with `skeleton`/`spinner`/`empty` (+ retry on async failure).
 - **Active nav/menu items use the built-in neutral highlight**, not brand blue.
+- **Don't restack overlays.** Three layers only: page `0`–`20`, overlay `z-50` (modals *and* anchored surfaces), tooltip `z-60`. Portals mount at the end of `<body>`, so a popover opened from inside a dialog already paints above it — reach for a higher z-index and you'll break something else instead.
 
 ## Do-nots (consumer)
 
