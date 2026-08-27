@@ -642,6 +642,26 @@
       ]
     },
     {
+      "name": "multi-select-listbox",
+      "type": "registry:ui",
+      "title": "Multi Select Listbox",
+      "description": "The Edgecom Multi Select Listbox component.",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "edgecom-ai/design-system/theme",
+        "edgecom-ai/design-system/button"
+      ],
+      "files": [
+        {
+          "path": "multi-select-listbox.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "native-select",
       "type": "registry:ui",
       "title": "Native Select",

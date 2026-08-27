@@ -63,6 +63,7 @@ import RadioGroupCardVerticalRadioDemo from "@/components/shadcn-studio/radio-gr
 import SelectWithOptionsGroupsDemo from "@/components/shadcn-studio/select/select-22";
 import MultipleSelectWithPlaceholderDemo from "@/components/shadcn-studio/select/select-33";
 import MultiSelectPreselectedDemo from "@/components/shadcn-studio/select/select-32";
+import { MultiSelectDemo } from "@/components/demo/multi-select-demo";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { Label } from "@/components/ui/label";
 import { Logo } from "@/components/ui/logo";
@@ -2433,6 +2434,13 @@ export const sections: Section[] = [
         description: "A multi-select pre-populated with selected values and inline tags.",
         preview: <MultiSelectPreselectedDemo />,
         source: ss("select/select-32"),
+      },
+      {
+        id: "multi-select-listbox",
+        name: "Multi-select listbox",
+        description: "The `multi-select-listbox` component — a count-summary trigger + checkbox listbox with Select all / Clear. The control chart toolbars use to pick which device series to plot.",
+        preview: <MultiSelectDemo />,
+        source: dm("multi-select-demo"),
       },
     ],
   },
