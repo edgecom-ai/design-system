@@ -51,6 +51,7 @@ colors:
   chart-emissions: oklch(0.55 0.18 300)
 typography:
   font-family: SF Pro / system-ui sans (var --font-sans)
+  font-family-mono: SF Mono / ui-monospace (var --font-mono)
   caption: { size: 0.75rem, line-height: 1rem, weight: 500 }
   body: { size: 0.875rem, line-height: 1.375rem, weight: 400 }
   body-lg: { size: 1rem, line-height: 1.5rem, weight: 400 }
@@ -174,7 +175,7 @@ Use the **semantic type scale** — one token sets size + line-height + weight +
 | `heading` | 1.5rem | Page headings |
 | `display` | 2.25rem | Hero / display numerals |
 
-The scale is in `rem` — it respects user font settings. Font family is SF Pro / system sans via `--font-sans`.
+The scale is in `rem` — it respects user font settings. Font family is SF Pro / system sans via `--font-sans`; `--font-mono` is a real monospace stack, for code, identifiers, and tabular figures. Both tokens are defaults — an app that wants its own face redefines them in its own `:root`.
 
 ## Layout
 

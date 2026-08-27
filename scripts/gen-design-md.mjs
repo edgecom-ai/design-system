@@ -66,6 +66,7 @@ for (const c of COMMODITIES) lines.push(`  chart-${c}: ${val(`chart-${c}-500`)}`
 
 lines.push("typography:");
 lines.push("  font-family: SF Pro / system-ui sans (var --font-sans)");
+lines.push("  font-family-mono: SF Mono / ui-monospace (var --font-mono)");
 for (const name of TYPE_SCALE) {
   const size = themeVars[`text-${name}`];
   const lh = themeVars[`text-${name}--line-height`];

@@ -47,7 +47,8 @@ function blockVars(re) {
   if (!m) return {};
   const vars = {};
   for (const d of m[1].matchAll(/--([\w-]+):\s*([^;]+);/g)) {
-    vars[d[1]] = d[2].trim();
+    // Values may wrap across lines (e.g. font stacks); ship them on one line.
+    vars[d[1]] = d[2].trim().replace(/\s+/g, " ");
   }
   return vars;
 }
