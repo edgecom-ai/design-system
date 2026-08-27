@@ -159,6 +159,7 @@ import { TimelineDemo } from "@/components/demo/timeline-demo";
 import { TableDemo } from "@/components/demo/table-demo";
 import { TableCompactDemo } from "@/components/demo/table-compact-demo";
 import { PaginationDemo } from "@/components/demo/pagination-demo";
+import { PaginationBoundaryDemo } from "@/components/demo/pagination-boundary-demo";
 import { CategoryBarDemo } from "@/components/demo/category-bar-demo";
 import { TextareaNoteDemo } from "@/components/demo/textarea-note-demo";
 import { DatePickerDemo } from "@/components/demo/date-picker-demo";
@@ -250,6 +251,7 @@ import ProgressChecklistDemo from "@/components/shadcn-studio/progress/progress-
 import DrawerWithSides from "@/components/shadcn-studio/drawer/drawer-04";
 import AnimatedUnderlineTabsDemo from "@/components/shadcn-studio/tabs/tabs-29";
 import AnimatedTabsDemo from "@/components/shadcn-studio/tabs/tabs-27";
+import { TabsDemo } from "@/components/demo/tabs-demo";
 import AccordionDemo from "@/components/shadcn-studio/accordion/accordion-01";
 import AccordionOutlineDemo from "@/components/shadcn-studio/accordion/accordion-09";
 import AccordionMultilevelIconDemo from "@/components/shadcn-studio/accordion/accordion-16";
@@ -2689,6 +2691,14 @@ export const sections: Section[] = [
         preview: <PaginationDemo />,
         source: dm("pagination-demo"),
       },
+      {
+        id: "pagination-boundary",
+        name: "At a boundary",
+        description:
+          "First page — Previous is disabled, so it reads as unavailable and can't be clicked or tabbed to.",
+        preview: <PaginationBoundaryDemo />,
+        source: dm("pagination-boundary-demo"),
+      },
     ],
   },
   {
@@ -2901,16 +2911,26 @@ export const sections: Section[] = [
       {
         id: "tabs-default",
         name: "Default",
-        description: "Standard tabs with an animated active indicator.",
-        preview: <AnimatedTabsDemo />,
-        source: ss("tabs/tabs-27"),
+        description: "Standard tabs — the active tab gets a raised surface.",
+        preview: <TabsDemo />,
+        source: dm("tabs-demo"),
       },
       {
         id: "tabs-animated-underline",
         name: "Animated underline",
-        description: "Tabs with a sliding underline that follows the active tab.",
+        description:
+          "TabsIndicator inside a line-variant TabsList — one bar slides to the active tab.",
         preview: <AnimatedUnderlineTabsDemo />,
         source: ss("tabs/tabs-29"),
+      },
+      {
+        id: "tabs-motion",
+        name: "Motion",
+        description:
+          "The separate motion-tabs item: a spring-animated highlight behind the active tab, with height-animated panels.",
+        preview: <AnimatedTabsDemo />,
+        source: ss("tabs/tabs-27"),
+        install: "@edgecom/motion-tabs",
       },
     ],
   },

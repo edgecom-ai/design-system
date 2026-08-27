@@ -719,6 +719,7 @@ function SidebarMenuSubmenu({
   open,
   onOpenChange,
   defaultOpen,
+  nativeButton = true,
   children,
 }: {
   trigger: React.ReactElement
@@ -726,6 +727,12 @@ function SidebarMenuSubmenu({
   open?: boolean
   onOpenChange?: (open: boolean) => void
   defaultOpen?: boolean
+  // Mirrors Base UI's PopoverTrigger prop. Set false when `trigger` renders
+  // something other than a <button> — e.g. a SidebarMenuButton with
+  // render={<Link />}, the common case for a parent row that also navigates.
+  // Base UI asserts the rendered tag against this in both directions, so the
+  // default has to stay true for the plain-button trigger.
+  nativeButton?: boolean
   children?: React.ReactNode
 }) {
   const { state, isMobile } = useSidebar()
@@ -740,6 +747,7 @@ function SidebarMenuSubmenu({
           openOnHover
           delay={100}
           closeDelay={150}
+          nativeButton={nativeButton}
           render={trigger}
         />
         <PopoverContent

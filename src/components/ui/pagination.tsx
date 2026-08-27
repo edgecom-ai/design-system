@@ -35,6 +35,7 @@ function PaginationItem({ ...props }: React.ComponentProps<"li">) {
 
 type PaginationLinkProps = {
   isActive?: boolean
+  disabled?: boolean
 } & Pick<React.ComponentProps<typeof Button>, "size"> &
   React.ComponentProps<"a">
 
@@ -42,6 +43,7 @@ function PaginationLink({
   className,
   isActive,
   size = "icon",
+  disabled,
   ...props
 }: PaginationLinkProps) {
   return (
@@ -49,6 +51,10 @@ function PaginationLink({
       variant={isActive ? "outline" : "ghost"}
       size={size}
       className={cn(className)}
+      // `disabled` goes to Button, not to the anchor `{...props}` is spread on:
+      // Base UI then sets aria-disabled + tabIndex=-1 and preventDefaults the
+      // click, which is what stops an <a href> from navigating.
+      disabled={disabled}
       nativeButton={false}
       render={
         <a

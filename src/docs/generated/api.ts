@@ -672,6 +672,7 @@ export const generatedApi: Record<string, GeneratedApi> = {
       "Tabs",
       "TabsList",
       "TabsTrigger",
+      "TabsIndicator",
       "TabsContent"
     ],
     "props": [
