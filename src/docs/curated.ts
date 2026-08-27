@@ -372,10 +372,14 @@ export const curatedApi: Record<string, CuratedApi> = {
       Tabs: "Root managing the orientation and active tab value.",
       TabsList: "Container arranging the tab triggers.",
       TabsTrigger: "Clickable tab that activates its panel.",
+      TabsIndicator:
+        "Optional single bar that slides to the active tab. Render it as the last child of TabsList; the line variant's per-trigger bars switch off automatically when it is present.",
       TabsContent: "Panel content shown for the active tab.",
     },
     propDescriptions: {
       "Tabs.variant": "TabsList style: filled (default) or underlined (line).",
+      "TabsIndicator.renderBeforeHydration":
+        "Paint the bar before hydration to avoid a flash after SSR. Injects an inline script — leave it off under a strict CSP.",
     },
   },
   "tags-input": {
@@ -503,7 +507,7 @@ export const curatedApi: Record<string, CuratedApi> = {
       Sheet: "Root managing the sheet's open state.",
       SheetTrigger: "Opens the sheet; pass a Button via the render prop.",
       SheetContent:
-        "The sliding panel; takes a side prop (default right). Width is the --sheet-width custom property (420px for left/right, none for top/bottom) — resize with a plain [--sheet-width:64rem] or sm:max-w-* class.",
+        "The sliding panel; takes a side prop (default right). Width is the --sheet-width custom property (420px for left/right, none for top/bottom) — resize with a plain [--sheet-width:<length>] or sm:max-w-* class.",
       SheetHeader: "Top section for the title and description.",
       SheetFooter: "Bottom section for action buttons.",
       SheetTitle: "Accessible heading for the panel.",
@@ -566,6 +570,8 @@ export const curatedApi: Record<string, CuratedApi> = {
     },
     propDescriptions: {
       "PaginationLink.isActive": "Marks the current page (aria-current + active styling).",
+      "PaginationLink.disabled":
+        "Marks an edge control unavailable — aria-disabled, out of the tab order, and the click blocked. Use it on PaginationPrevious at the first page and PaginationNext at the last.",
     },
   },
   sidebar: {
@@ -581,7 +587,7 @@ export const curatedApi: Record<string, CuratedApi> = {
       SidebarMenu: "The list of menu items within a group.",
       SidebarMenuItem: "A single menu row.",
       SidebarMenuButton: "The interactive nav button; set isActive for the current page.",
-      SidebarMenuSubmenu: "A parent with subpages: an inline collapsible submenu when expanded, and an off-rail hover/focus flyout when the rail is collapsed to icons. Pass the parent button as `trigger` and the SidebarMenuSubItem rows as children.",
+      SidebarMenuSubmenu: "A parent with subpages: an inline collapsible submenu when expanded, and an off-rail hover/focus flyout when the rail is collapsed to icons. Pass the parent button as `trigger` and the SidebarMenuSubItem rows as children. If the trigger renders something other than a <button> — a SidebarMenuButton with render={<Link />}, say — pass nativeButton={false} so Base UI does not warn on the collapsed-rail flyout.",
       SidebarFooter: "Bottom region, e.g. settings or the account menu.",
       SidebarInset: "The main content area beside the sidebar.",
       SidebarTrigger: "Button that toggles the sidebar open/collapsed.",
