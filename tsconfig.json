@@ -5,6 +5,10 @@
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
+    // Registry items are installed verbatim into consumer trees, many of which
+    // build with noUnusedLocals — a dead import here is a hard TS6133 there
+    // (see #34). Keep the flag on so that fails our build first.
+    "noUnusedLocals": true,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
