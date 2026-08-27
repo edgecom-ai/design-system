@@ -10,7 +10,7 @@
   "files": [
     {
       "path": "src/lib/utils.ts",
-      "content": "import { clsx, type ClassValue } from \"clsx\"\nimport { twMerge } from \"tailwind-merge\"\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs))\n}\n",
+      "content": "import { clsx, type ClassValue } from \"clsx\"\nimport { extendTailwindMerge } from \"tailwind-merge\"\n\n// tailwind-merge only knows Tailwind's own font-size scale, so it reads a\n// `text-<name>` it doesn't recognise as a *colour*. Left unconfigured, the\n// semantic type tokens land in the text-color group and any real colour class on\n// the same element silently deletes them — `cn(\"text-body text-muted-foreground\")`\n// returns just the colour, and the element ends up with no font-size at all.\n// Registering them as font-size keeps both, and still lets one size override\n// another (including Tailwind's own).\nconst twMerge = extendTailwindMerge({\n  extend: {\n    classGroups: {\n      \"font-size\": [\n        {\n          text: [\n            \"caption\",\n            \"body-sm\",\n            \"body\",\n            \"body-lg\",\n            \"title\",\n            \"heading\",\n            \"display\",\n          ],\n        },\n      ],\n    },\n  },\n})\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs))\n}\n",
       "type": "registry:lib"
     }
   ],
@@ -102,6 +102,8 @@
       "text-caption": "0.75rem",
       "text-caption--line-height": "1rem",
       "text-caption--font-weight": "500",
+      "text-body-sm": "0.875rem",
+      "text-body-sm--line-height": "1.25rem",
       "text-body": "0.875rem",
       "text-body--line-height": "1.375rem",
       "text-body-lg": "1rem",
