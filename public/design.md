@@ -295,7 +295,7 @@ Only omit one of these five when the spec explicitly says so.
 | **Dense** (31–60) | thinner, but **≥ ~4px** | **≥ ~2px** | drop per-bar value labels → move them to a `tooltip` / `hover-card` |
 | **Very dense** (> 60, or bars would fall below the min width/gap) | hold the min width | hold the min gap | **stop shrinking** — aggregate/bucket (daily → weekly) *or* scroll horizontally in an `overflow-x-auto` container at a fixed per-bar width |
 
-Never a **zero gap** — touching bars read as one solid block. Keep the bar corner-radius small (**≤ ~2px**) at high density so rounding doesn't eat the width. For **grouped / stacked** bars, make the gap **between groups** larger than the gap **within** a group so each group reads as a unit. The goal is constant: a reader can pick out an individual bar and its neighbours at a glance — if they can't, widen the gap, cap the width, aggregate, or scroll; never shrink bars into indistinct slivers.
+Never a **zero gap** — touching bars read as one solid block. **Round only the top corners.** Bars grow up from the axis, so give the two **top** corners a small, uniform radius (**≈2–4px**, `radius-sm`) and keep the **bottom square** on the baseline — never fully-rounded or pill-shaped bars, and never round the bottom. Reduce the radius toward **≤ ~2px** at high density so rounding doesn't eat the bar width, and apply the **same** radius (and the same slot ratio) across **every** bar chart so they read as one system. For **grouped / stacked** bars, make the gap **between groups** larger than the gap **within** a group so each group reads as a unit; round only the topmost segment of a stack. The goal is constant: a reader can pick out an individual bar and its neighbours at a glance — if they can't, widen the gap, cap the width, aggregate, or scroll; never shrink bars into indistinct slivers.
 
 - **Colors, detail, themes.** Tag series with the commodity hues by meaning (`chart-*`); move point/detail readouts into a `tooltip` / `hover-card` (see *Layout → Density*); keep axis labels, grid lines, and the value legend legible in **both** themes.
 
@@ -324,6 +324,7 @@ Never a **zero gap** — touching bars read as one solid block. Keep the bar cor
 - Give every chart the standard controls by default — one shared date range, a smooth/step toggle, statistical overlays, and an export dropdown.
 - Use the same component for the same job everywhere (e.g. one series-selector control shared across all charts).
 - Size bar width and gap to the data density (bar ~65% of its slot; gap ≥ 2px; cap width for few bars; aggregate or scroll past ~60).
+- Round only the top corners of bars (small, uniform ~2–4px radius); keep the bottom square on the baseline, and use the same radius/thickness across every bar chart.
 
 **Don't**
 - Don't hardcode hex or ship light-only UI — every color is a light+dark token.
@@ -347,4 +348,5 @@ Never a **zero gap** — touching bars read as one solid block. Keep the bar cor
 - Don't ship a chart without the standard controls, or give each chart its own date range that drifts out of sync with the others on the view.
 - Don't solve the same job with different components across screens or graphs (a `select` here, a segmented control there) — pick one and reuse it.
 - Don't pack many bars edge-to-edge into a solid block — widen the inter-bar gap (or aggregate) so they stay legible.
+- Don't fully-round, pill-shape, or bottom-round bars, and don't vary the bar radius or thickness between charts — round only the top corners with one uniform radius.
 - Don't color a statistical reference line (period average / min / max) with a status or commodity hue — keep it neutral/muted.
