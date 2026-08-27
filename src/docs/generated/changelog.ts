@@ -73,6 +73,56 @@ export const changelog: ChangelogRelease[] = [
     "summary": "The semantic type scale becomes real: tokens carry their own size, line-height, and weight, cn() stops dropping them, and every primitive in the registry now uses them.",
     "entries": [
       {
+        "sha": "7e74af4",
+        "date": "2026-08-27",
+        "type": "feat",
+        "group": "added",
+        "scopes": [
+          "phone-input"
+        ],
+        "summary": "Smart caret on by default, plus an optional extension field",
+        "items": [
+          "phone-input"
+        ],
+        "breaking": false
+      },
+      {
+        "sha": "f101283",
+        "date": "2026-08-27",
+        "type": "fix",
+        "group": "fixed",
+        "scopes": [
+          "scroll-area"
+        ],
+        "summary": "Drop the unused React import that breaks noUnusedLocals builds",
+        "items": [
+          "scroll-area"
+        ],
+        "breaking": false
+      },
+      {
+        "sha": "ad1c77c",
+        "date": "2026-08-27",
+        "type": "fix",
+        "group": "fixed",
+        "scopes": [
+          "registry"
+        ],
+        "summary": "Derive every item's dependencies from all of its imports",
+        "items": [
+          "category-bar",
+          "circular-progress",
+          "motion-highlight",
+          "motion-tabs",
+          "multi-select",
+          "sortable",
+          "stepper",
+          "timeline",
+          "use-file-upload"
+        ],
+        "breaking": false
+      },
+      {
         "sha": "edf2c8f",
         "date": "2026-08-27",
         "type": "feat",
