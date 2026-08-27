@@ -92,10 +92,15 @@
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
   /* Semantic type scale — size / line-height / weight in one token.
-     Use text-caption … text-display instead of ad-hoc text-xs/2xl. */
+     Use text-caption … text-display instead of ad-hoc text-xs/2xl.
+     body-sm is the dense-chrome step: same size as body on a tighter line box,
+     for single-line UI text (controls, menu items, table cells). body is for
+     running prose. */
   --text-caption: 0.75rem;
   --text-caption--line-height: 1rem;
   --text-caption--font-weight: 500;
+  --text-body-sm: 0.875rem;
+  --text-body-sm--line-height: 1.25rem;
   --text-body: 0.875rem;
   --text-body--line-height: 1.375rem;
   --text-body-lg: 1rem;
