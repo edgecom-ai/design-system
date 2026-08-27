@@ -16,7 +16,8 @@
     "docs:changelog": "node scripts/gen-changelog.mjs",
     "docs:gen": "pnpm run docs:changelog && pnpm run docs:source && pnpm run docs:api && pnpm run docs:routes && pnpm run docs:design-md && pnpm run docs:llms",
     "registry:gen": "node scripts/gen-registry.mjs",
-    "registry:build": "pnpm run registry:gen && shadcn build",
+    "registry:check": "node scripts/check-registry.mjs",
+    "registry:build": "pnpm run registry:gen && shadcn build && pnpm run registry:check",
     "predev": "pnpm run docs:gen",
     "prebuild": "pnpm run docs:gen && pnpm run registry:build"
   },

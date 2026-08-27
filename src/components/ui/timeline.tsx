@@ -1,7 +1,7 @@
-import * as React from 'react'
+import * as React from "react"
 
-import { cva, type VariantProps } from 'class-variance-authority'
-import { cn } from '@/lib/utils'
+import { cva, type VariantProps } from "class-variance-authority"
+import { cn } from "@/lib/utils"
 import { CircleIcon, CheckIcon, XIcon } from "lucide-react"
 
 const timelineVariants = cva('grid', {

@@ -23,7 +23,8 @@ This repo is two things at once: a **Next.js 16 docs site** and the **source of 
 | `pnpm dev` | Docs site at `:3000`. `predev` runs `docs:gen` first. |
 | `pnpm build` | Static export to `out/`. `prebuild` runs `docs:gen` **and** `registry:build` first. |
 | `pnpm lint` | ESLint (Next core-web-vitals + TypeScript). |
-| `pnpm registry:build` | Regenerate registry from source, then `shadcn build`. |
+| `pnpm registry:build` | Regenerate registry from source, `shadcn build`, then `registry:check`. |
+| `pnpm registry:check` | Audit built items for imports their manifest doesn't declare, and for registry dependencies no item provides. |
 | `pnpm docs:gen` | Regenerate all docs-source / api / routes / changelog artifacts. |
 | `pnpm docs:changelog` | Regenerate the changelog from git history (part of `docs:gen`). |
 
@@ -48,7 +49,7 @@ You rarely run the generators by hand — `predev`/`prebuild` do it. Run `pnpm r
 Match the existing files — canonical examples are [`button.tsx`](src/components/ui/button.tsx), [`alert.tsx`](src/components/ui/alert.tsx), [`badge.tsx`](src/components/ui/badge.tsx):
 
 - **Function declarations, not `forwardRef`.** React 19 passes `ref` as a normal prop; Base UI primitives already accept it.
-- **Double quotes, no semicolons.**
+- **Double quotes, no semicolons.** This matters beyond style for the **import specifiers**: `shadcn add` rewrites `@/components/ui/*` to the consumer's alias, and single-quoted specifiers have been reported to rewrite wrong (a path that resolves to nothing). Registry-shipped sources — `src/components/ui/*`, `src/hooks/*` — keep double-quoted specifiers even where a vendored file is otherwise single-quoted.
 - **`cva`** (`class-variance-authority`) for variants; type props as `React.ComponentProps<"div">` (plain elements) or the primitive's own type (e.g. `ButtonPrimitive.Props`, `DialogPrimitive.Popup.Props`) **intersected with** `VariantProps<typeof xVariants>`. Add component-specific props via intersection (e.g. `& { size?: "sm" | "default" }`).
 - **`cn()`** from [`@/lib/utils`](src/lib/utils.ts) to compose classes.
 - **A `data-slot` on every element** — styling hooks and sibling/child selectors depend on them.

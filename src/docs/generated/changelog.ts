@@ -73,6 +73,32 @@ export const changelog: ChangelogRelease[] = [
     "summary": "The semantic type scale becomes real: tokens carry their own size, line-height, and weight, cn() stops dropping them, and every primitive in the registry now uses them.",
     "entries": [
       {
+        "sha": "edf2c8f",
+        "date": "2026-08-27",
+        "type": "feat",
+        "group": "added",
+        "scopes": [
+          "docs"
+        ],
+        "summary": "Self-maintaining changelog page generated from git history",
+        "items": [],
+        "breaking": false
+      },
+      {
+        "sha": "7d40f6f",
+        "date": "2026-08-27",
+        "type": "feat",
+        "group": "added",
+        "scopes": [
+          "multi-select-listbox"
+        ],
+        "summary": "Count-summary checkbox listbox multi-select",
+        "items": [
+          "multi-select-listbox"
+        ],
+        "breaking": false
+      },
+      {
         "sha": "1cb3248",
         "date": "2026-08-27",
         "type": "refactor",

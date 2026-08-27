@@ -26,6 +26,8 @@ import { readFileSync, writeFileSync, readdirSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { specifiersOf, classify } from "./lib/imports.mjs";
+
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const uiDir = resolve(root, "src/components/ui");
 const hooksDir = resolve(root, "src/hooks");
@@ -58,34 +60,17 @@ const lightVars = blockVars(/^:root\s*\{([\s\S]*?)\n\}/m);
 const darkVars = blockVars(/^\.dark\s*\{([\s\S]*?)\n\}/m);
 
 // --- import analysis --------------------------------------------------------
-function pkgOf(spec) {
-  if (spec.startsWith("@")) {
-    const [scope, name] = spec.split("/");
-    return `${scope}/${name}`;
-  }
-  return spec.split("/")[0];
-}
-
-function analyze(src) {
-  const specs = new Set();
-  for (const m of src.matchAll(/from\s*"([^"]+)"/g)) specs.add(m[1]);
-  for (const m of src.matchAll(/import\s*"([^"]+)"/g)) specs.add(m[1]);
-
+// The scanner is shared with scripts/check-registry.mjs so the derivation and
+// the audit can never disagree about what a file imports (#35).
+function analyze(src, source) {
   const pkgs = new Set();
   const uiDeps = new Set();
   const hooks = new Set();
-  for (const s of specs) {
-    if (s.startsWith("@/components/ui/")) {
-      uiDeps.add(s.replace("@/components/ui/", "").split("/")[0]);
-    } else if (s.startsWith("@/hooks/")) {
-      hooks.add(s.replace("@/hooks/", "").split("/")[0]);
-    } else if (s.startsWith("@/") || s.startsWith(".") || s.startsWith("/")) {
-      // other local (@/lib/utils comes via the theme item)
-    } else if (s === "react" || s === "react-dom" || s.startsWith("react/") || s.startsWith("react-dom/")) {
-      // provided by the app
-    } else {
-      pkgs.add(pkgOf(s));
-    }
+  for (const spec of specifiersOf(src, source)) {
+    const { kind, name } = classify(spec);
+    if (kind === "ui") uiDeps.add(name);
+    else if (kind === "hook") hooks.add(name);
+    else if (kind === "pkg") pkgs.add(name);
   }
   return { pkgs: [...pkgs].sort(), uiDeps: [...uiDeps].sort(), hooks: [...hooks].sort() };
 }
@@ -131,7 +116,7 @@ const componentItems = [];
 
 for (const name of uiFiles) {
   const src = readFileSync(resolve(uiDir, `${name}.tsx`), "utf8");
-  const { pkgs, uiDeps, hooks } = analyze(src);
+  const { pkgs, uiDeps, hooks } = analyze(src, `${name}.tsx`);
   hooks.forEach((h) => usedHooks.add(h));
 
   // Hooks live in another directory, so a component can't ship the hook file in
@@ -156,13 +141,40 @@ writeChunk(uiDir, componentItems);
 include.push("src/components/ui/registry.json");
 
 // --- hook chunk (beside src/hooks/*.ts) -------------------------------------
-const hookItems = [...usedHooks].sort().map((hook) => ({
-  name: hook,
-  type: "registry:hook",
-  title: titleCase(hook),
-  description: `The Edgecom ${titleCase(hook)} hook.`,
-  files: [{ path: `${hook}.ts`, type: "registry:hook" }],
-}));
+// Hooks get the same import-derived dependencies as components — a hook that
+// reaches for a package or a sibling component has to declare it too.
+//
+// Worked transitively: a hook another hook imports is a registryDependency, and
+// a dependency the registry never emits an item for is one `shadcn add` follows
+// to nothing. Components seed the list; each hook can add more.
+const hookItems = [];
+const seenHooks = new Set();
+const hookQueue = [...usedHooks].sort();
+
+while (hookQueue.length) {
+  const hook = hookQueue.shift();
+  if (seenHooks.has(hook)) continue;
+  seenHooks.add(hook);
+
+  const src = readFileSync(resolve(hooksDir, `${hook}.ts`), "utf8");
+  const { pkgs, uiDeps, hooks } = analyze(src, `${hook}.ts`);
+  for (const h of hooks) if (h !== hook && !seenHooks.has(h)) hookQueue.push(h);
+
+  const registryDependencies = [
+    ...uiDeps.map(ref),
+    ...hooks.filter((h) => h !== hook).map(ref),
+  ];
+  hookItems.push({
+    name: hook,
+    type: "registry:hook",
+    title: titleCase(hook),
+    description: `The Edgecom ${titleCase(hook)} hook.`,
+    ...(pkgs.length ? { dependencies: pkgs } : {}),
+    ...(registryDependencies.length ? { registryDependencies } : {}),
+    files: [{ path: `${hook}.ts`, type: "registry:hook" }],
+  });
+}
+hookItems.sort((a, b) => a.name.localeCompare(b.name));
 if (hookItems.length) {
   writeChunk(hooksDir, hookItems);
   include.push("src/hooks/registry.json");
@@ -178,8 +190,8 @@ const registry = {
 
 writeFileSync(resolve(root, "registry.json"), JSON.stringify(registry, null, 2) + "\n");
 console.log(
-  `gen-registry — ${include.length} chunk files · ${1 + uiFiles.length + usedHooks.size} items ` +
-    `(1 theme + ${uiFiles.length} components + ${usedHooks.size} hooks), ` +
+  `gen-registry — ${include.length} chunk files · ${1 + uiFiles.length + hookItems.length} items ` +
+    `(1 theme + ${uiFiles.length} components + ${hookItems.length} hooks), ` +
     `${Object.keys(lightVars).length} light / ${Object.keys(darkVars).length} dark / ` +
     `${Object.keys(themeVars).length} theme vars`
 );

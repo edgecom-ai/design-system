@@ -11,6 +11,8 @@ The semantic type scale becomes real: tokens carry their own size, line-height, 
 
 ### Added
 
+- **docs:** Self-maintaining changelog page generated from git history ([`edf2c8f`](https://github.com/edgecom-ai/design-system/commit/edf2c8f))
+- **multi-select-listbox:** Count-summary checkbox listbox multi-select ([`7d40f6f`](https://github.com/edgecom-ai/design-system/commit/7d40f6f))
 - **theme:** Add the body-sm compact step to the type scale ([`b70b38c`](https://github.com/edgecom-ai/design-system/commit/b70b38c))
 - **date-picker:** Month-to-month range picker ([`706e5e0`](https://github.com/edgecom-ai/design-system/commit/706e5e0))
 - **tabs, pagination, sidebar:** Ship the parts consumers were forking ([`a143170`](https://github.com/edgecom-ai/design-system/commit/a143170))

@@ -211,7 +211,8 @@
       "title": "Category Bar",
       "description": "The Edgecom Category Bar component.",
       "registryDependencies": [
-        "edgecom-ai/design-system/theme"
+        "edgecom-ai/design-system/theme",
+        "edgecom-ai/design-system/tooltip"
       ],
       "files": [
         {
@@ -598,6 +599,9 @@
       "type": "registry:ui",
       "title": "Motion Highlight",
       "description": "The Edgecom Motion Highlight component.",
+      "dependencies": [
+        "motion"
+      ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
       ],
@@ -613,8 +617,12 @@
       "type": "registry:ui",
       "title": "Motion Tabs",
       "description": "The Edgecom Motion Tabs component.",
+      "dependencies": [
+        "motion"
+      ],
       "registryDependencies": [
-        "edgecom-ai/design-system/theme"
+        "edgecom-ai/design-system/theme",
+        "edgecom-ai/design-system/motion-highlight"
       ],
       "files": [
         {
@@ -629,10 +637,12 @@
       "title": "Multi Select",
       "description": "The Edgecom Multi Select component.",
       "dependencies": [
+        "cmdk",
         "lucide-react"
       ],
       "registryDependencies": [
-        "edgecom-ai/design-system/theme"
+        "edgecom-ai/design-system/theme",
+        "edgecom-ai/design-system/command"
       ],
       "files": [
         {
@@ -724,10 +734,15 @@
       "title": "Phone Input",
       "description": "The Edgecom Phone Input component.",
       "dependencies": [
-        "lucide-react"
+        "lucide-react",
+        "react-phone-number-input"
       ],
       "registryDependencies": [
-        "edgecom-ai/design-system/theme"
+        "edgecom-ai/design-system/theme",
+        "edgecom-ai/design-system/button",
+        "edgecom-ai/design-system/combobox",
+        "edgecom-ai/design-system/input",
+        "edgecom-ai/design-system/scroll-area"
       ],
       "files": [
         {
@@ -969,6 +984,12 @@
       "type": "registry:ui",
       "title": "Sortable",
       "description": "The Edgecom Sortable component.",
+      "dependencies": [
+        "@base-ui/react",
+        "@dnd-kit/core",
+        "@dnd-kit/sortable",
+        "@dnd-kit/utilities"
+      ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
       ],
@@ -1002,6 +1023,9 @@
       "type": "registry:ui",
       "title": "Stepper",
       "description": "The Edgecom Stepper component.",
+      "dependencies": [
+        "@stepperize/react"
+      ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
       ],
@@ -1128,6 +1152,7 @@
       "title": "Timeline",
       "description": "The Edgecom Timeline component.",
       "dependencies": [
+        "class-variance-authority",
         "lucide-react"
       ],
       "registryDependencies": [
