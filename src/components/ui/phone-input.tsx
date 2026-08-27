@@ -170,7 +170,7 @@ const CountrySelect = ({ disabled, value: selectedCountry, options: countryList,
           className='border-input focus-visible:border-border rounded-none border-0 px-0 py-2.5 shadow-none ring-0! outline-none! focus-visible:ring-0 focus-visible:ring-offset-0'
         />
         <ComboboxSeparator />
-        <ComboboxEmpty className='px-4 py-2.5 text-sm'>No country found.</ComboboxEmpty>
+        <ComboboxEmpty className='px-4 py-2.5 text-body-sm'>No country found.</ComboboxEmpty>
         <ComboboxList>
           <div className='relative flex max-h-full'>
             <div className='flex max-h-[min(var(--available-height),24rem)] w-full scroll-pt-2 scroll-pb-2 flex-col overscroll-contain'>
@@ -179,8 +179,8 @@ const CountrySelect = ({ disabled, value: selectedCountry, options: countryList,
                   item.value ? (
                     <ComboboxItem key={item.value} value={item.value} className='flex items-center gap-2'>
                       <FlagComponent country={item.value} countryName={item.label} />
-                      <span className='flex-1 text-sm'>{item.label}</span>
-                      <span className='text-foreground/50 text-sm'>
+                      <span className='flex-1 text-body-sm'>{item.label}</span>
+                      <span className='text-foreground/50 text-body-sm'>
                         {`+${BasePhoneInput.getCountryCallingCode(item.value)}`}
                       </span>
                     </ComboboxItem>
