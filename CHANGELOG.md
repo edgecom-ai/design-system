@@ -9,7 +9,13 @@ Every change to the Edgecom design system, derived from git history. Also publis
 
 ### Added
 
-- **date-picker:** Rolling-window variant with hover preview ([`0dbd67a`](https://github.com/edgecom-ai/design-system/commit/0dbd67a))
+- **date-picker:** Rolling-window variant with hover preview ([`26b11b0`](https://github.com/edgecom-ai/design-system/commit/26b11b0))
+
+### Fixed
+
+- **registry:** Ship every dependency at the version it was built against ([`26ebcec`](https://github.com/edgecom-ai/design-system/commit/26ebcec))
+- **sortable:** Declare the react-dom it imports for its drag overlay ([`a8574e6`](https://github.com/edgecom-ai/design-system/commit/a8574e6))
+- **resizable:** Migrate to the react-resizable-panels v4 API ([`28a7a6b`](https://github.com/edgecom-ai/design-system/commit/28a7a6b))
 
 ## August 27, 2026
 
