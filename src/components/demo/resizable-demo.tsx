@@ -9,10 +9,10 @@ import {
 export function ResizableDemo() {
   return (
     <ResizablePanelGroup
-      direction="horizontal"
+      orientation="horizontal"
       className="min-h-52 w-full max-w-md rounded-lg border border-border"
     >
-      <ResizablePanel defaultSize={30} minSize={20}>
+      <ResizablePanel defaultSize="30" minSize="20">
         <div className="flex h-full flex-col gap-1 p-4">
           <span className="text-caption text-muted-foreground">Sites</span>
           <span className="text-sm font-medium">Substation A</span>
@@ -21,7 +21,7 @@ export function ResizableDemo() {
         </div>
       </ResizablePanel>
       <ResizableHandle withHandle />
-      <ResizablePanel defaultSize={70}>
+      <ResizablePanel defaultSize="70">
         <div className="flex h-full flex-col gap-1 p-4">
           <span className="text-caption text-muted-foreground">
             Substation A · detail
