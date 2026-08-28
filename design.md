@@ -130,7 +130,7 @@ Colors are semantic tokens. Reach for the token by **role**, not by how it looks
 - **Brand / neutral:** `primary` (+ `-foreground`, `-emphasis`, `-subtle`, `-subtle-foreground`), `secondary`, `muted`, `accent`.
 - **Status:** `success`, `warning`, `info`, `destructive` — each with the full set `{ base, -foreground, -emphasis, -subtle, -subtle-foreground }`.
 - **Form / outline:** `border`, `input`, `ring`.
-- **Interaction:** `ghost-hover`, `outline-surface`, `outline-hover` — the resting and hover surfaces of the quiet control variants (`button` `ghost` / `outline`). Each is one theme-aware token rather than a light value plus a `dark:` override, so an app can re-tint a quiet control with a single `bg-*` / `hover:bg-*` and have it win in **both** themes.
+- **Interaction:** `ghost-hover` (quiet controls with no resting fill — `button`/`badge` `ghost`), `outline-surface` + `outline-hover` (`button` `outline`), `input-surface` + `input-hover` (the field triggers — `select`, `native-select`, which rest transparent so a tinted row shows through). Each is one theme-aware token rather than a light value plus a `dark:` override, so an app can re-tint a quiet control with a single `bg-*` / `hover:bg-*` and have it win in **both** themes.
 - **Charts / commodities:** `chart-1..5` alias the `500` step of the commodity ramps `chart-{electricity,water,gas,temperature,emissions}-{100..900}` (mode-independent — one hue per commodity).
 - **Sidebar:** `sidebar`, `sidebar-foreground`, `sidebar-primary`, `sidebar-accent`, `sidebar-border`, `sidebar-ring` (+ foregrounds).
 

@@ -81,10 +81,13 @@
   --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
   --color-muted: var(--muted);
-  /* Surfaces of the quiet control variants (button ghost / outline) */
+  /* Surfaces of the quiet controls (button ghost / outline, badge ghost, and
+     the select-style field triggers) */
   --color-ghost-hover: var(--ghost-hover);
   --color-outline-surface: var(--outline-surface);
   --color-outline-hover: var(--outline-hover);
+  --color-input-surface: var(--input-surface);
+  --color-input-hover: var(--input-hover);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-secondary: var(--secondary);
   --color-primary-foreground: var(--primary-foreground);
@@ -207,6 +210,11 @@
   --outline-surface: var(--background);
   --ghost-hover: var(--muted);
   --outline-hover: var(--muted);
+  /* A field trigger (select / native-select) rests transparent so a tinted row
+     or panel shows through, and hovers to the same surface as an outline
+     button — light had no hover at all until the `dark:` classes came out. */
+  --input-surface: transparent;
+  --input-hover: var(--outline-hover);
   /* Commodity tint ramps — one hue per commodity, mode-independent */
   --chart-electricity-100: oklch(0.94 0.05 75); /* amber */
   --chart-electricity-300: oklch(0.86 0.11 75);
@@ -307,6 +315,7 @@
   --outline-surface: color-mix(in oklab, var(--input) 30%, transparent);
   --ghost-hover: color-mix(in oklab, var(--muted) 50%, transparent);
   --outline-hover: color-mix(in oklab, var(--input) 50%, transparent);
+  --input-surface: color-mix(in oklab, var(--input) 30%, transparent);
   /* chart tokens are mode-independent — defined once in :root */
   --sidebar: oklch(0.205 0.008 254);
   --sidebar-foreground: oklch(0.985 0 0);
