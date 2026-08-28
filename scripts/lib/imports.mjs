@@ -45,8 +45,14 @@ export function specifiersOf(src, source = "imports") {
 //   "ui"      a sibling component -> a registryDependency
 //   "hook"    a hook              -> a registryDependency
 //   "local"   another local file  -> nothing (@/lib/utils ships with the theme)
-//   "ambient" provided by the consuming app (React) -> nothing
+//   "ambient" provided by the consuming app (React itself) -> nothing
 //   "pkg"     an npm package      -> a dependency
+//
+// Only `react` is ambient. `react-dom` is a separately-installable package, and
+// a consumer whose project is a *component package* rather than an app may
+// declare `react` as a peer and not have `react-dom` at all — so a component
+// that imports it (sortable, for its `createPortal` overlay) has to say so, or
+// the consumer gets a TS2307 pointing at a file they never wrote (#41).
 export function classify(spec) {
   if (spec.startsWith("@/components/ui/")) {
     return { kind: "ui", name: spec.replace("@/components/ui/", "").split("/")[0] };
@@ -57,7 +63,7 @@ export function classify(spec) {
   if (spec.startsWith("@/") || spec.startsWith(".") || spec.startsWith("/")) {
     return { kind: "local", name: spec };
   }
-  if (/^(react|react-dom)(\/|$)/.test(spec)) {
+  if (/^react(\/|$)/.test(spec)) {
     return { kind: "ambient", name: spec };
   }
   return { kind: "pkg", name: pkgOf(spec) };
