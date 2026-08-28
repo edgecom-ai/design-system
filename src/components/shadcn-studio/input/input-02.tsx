@@ -9,7 +9,7 @@ const InputLabelDemo = () => {
   return (
     <div className='w-full max-w-xs space-y-2'>
       <Label htmlFor={id}>Work email</Label>
-      <Input id={id} type='email' placeholder='name@edgecom.ai' />
+      <Input id={id} type='email' placeholder='name@example.com' />
     </div>
   )
 }

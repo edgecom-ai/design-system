@@ -25,17 +25,17 @@ const tabs = [
     ),
     contentData: [
       {
-        label: 'Toronto Distribution Center',
+        label: 'Distribution Center',
         value: 4250,
         progress: 80
       },
       {
-        label: 'Calgary Plant 2',
+        label: 'Plant 2',
         value: 2150,
         progress: 60
       },
       {
-        label: 'HQ – Bay Street',
+        label: 'HQ – Main Campus',
         value: 1750,
         progress: 40
       }

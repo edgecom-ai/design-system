@@ -12,10 +12,10 @@ const events: {
   heading: string
   detail: string
 }[] = [
-  { dot: "done", heading: "Meter provisioned", detail: "Toronto DC · main electricity meter online" },
+  { dot: "done", heading: "Meter provisioned", detail: "Distribution Center · main electricity meter online" },
   { dot: "done", heading: "Baseline established", detail: "14-day interval baseline computed" },
-  { dot: "current", heading: "DR event dispatched", detail: "IESO Ontario · 480 kW curtailment target" },
-  { dot: "default", heading: "Settlement pending", detail: "Awaiting IESO performance report" },
+  { dot: "current", heading: "DR event dispatched", detail: "Grid operator · 480 kW curtailment target" },
+  { dot: "default", heading: "Settlement pending", detail: "Awaiting grid operator performance report" },
 ]
 
 export function TimelineDemo() {

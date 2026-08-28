@@ -12,7 +12,7 @@ export function FieldDemo() {
     <FieldGroup className="w-full max-w-sm">
       <Field>
         <FieldLabel htmlFor="field-site">Site name</FieldLabel>
-        <Input id="field-site" defaultValue="Toronto Distribution Center" />
+        <Input id="field-site" defaultValue="Distribution Center" />
         <FieldDescription>
           Shown across dataTrack™ dashboards and reports.
         </FieldDescription>

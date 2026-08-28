@@ -7,7 +7,7 @@ const AlertSoftWarningDemo = () => {
       <CircleAlertIcon />
       <AlertTitle>Bill anomaly detected</AlertTitle>
       <AlertDescription>
-        The latest utility bill for Calgary Plant 2 is 18% above expected cost. Review the charges before payment.
+        The latest utility bill for Plant 2 is 18% above expected cost. Review the charges before payment.
       </AlertDescription>
     </Alert>
   )

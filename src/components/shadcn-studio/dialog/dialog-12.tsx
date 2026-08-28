@@ -68,11 +68,11 @@ const DialogOTPVerificationDemo = () => {
             <DialogDescription className='text-center'>
               {hasGuessed ? (
                 <span>
-                  Congratulations! your email account <strong>p***a@edgecom.ai</strong> has been verified
+                  Congratulations! your email account <strong>p***a@example.com</strong> has been verified
                 </span>
               ) : (
                 <span>
-                  We have sent a verification code to <strong>p***a@edgecom.ai</strong>. Please check your inbox and
+                  We have sent a verification code to <strong>p***a@example.com</strong>. Please check your inbox and
                   input the code below to activate your account. Try {CORRECT_CODE}
                 </span>
               )}

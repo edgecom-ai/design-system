@@ -18,39 +18,39 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { cn } from '@/lib/utils'
 
 const consumptionData = [
-  { timestamp: new Date('2026-02-01').getTime(), toronto: 60, calgary: 22, ottawa: 40 },
-  { timestamp: new Date('2026-02-02').getTime(), toronto: 50, calgary: 34, ottawa: 42 },
-  { timestamp: new Date('2026-02-03').getTime(), toronto: 52, calgary: 65, ottawa: 38 },
-  { timestamp: new Date('2026-02-04').getTime(), toronto: 54, calgary: 67, ottawa: 36 },
-  { timestamp: new Date('2026-02-05').getTime(), toronto: 70, calgary: 42, ottawa: 56 },
-  { timestamp: new Date('2026-02-06').getTime(), toronto: 72, calgary: 65, ottawa: 58 },
-  { timestamp: new Date('2026-02-07').getTime(), toronto: 68, calgary: 75, ottawa: 52 },
-  { timestamp: new Date('2026-02-08').getTime(), toronto: 45, calgary: 95, ottawa: 70 },
-  { timestamp: new Date('2026-02-09').getTime(), toronto: 58, calgary: 78, ottawa: 72 },
-  { timestamp: new Date('2026-02-10').getTime(), toronto: 85, calgary: 65, ottawa: 105 },
-  { timestamp: new Date('2026-02-11').getTime(), toronto: 88, calgary: 62, ottawa: 75 },
-  { timestamp: new Date('2026-02-12').getTime(), toronto: 100, calgary: 55, ottawa: 80 },
-  { timestamp: new Date('2026-02-13').getTime(), toronto: 75, calgary: 95, ottawa: 62 },
-  { timestamp: new Date('2026-02-14').getTime(), toronto: 118, calgary: 98, ottawa: 55 },
-  { timestamp: new Date('2026-02-15').getTime(), toronto: 110, calgary: 80, ottawa: 60 },
-  { timestamp: new Date('2026-02-16').getTime(), toronto: 108, calgary: 82, ottawa: 70 },
-  { timestamp: new Date('2026-02-17').getTime(), toronto: 102, calgary: 85, ottawa: 75 },
-  { timestamp: new Date('2026-02-18').getTime(), toronto: 88, calgary: 112, ottawa: 62 },
-  { timestamp: new Date('2026-02-19').getTime(), toronto: 118, calgary: 105, ottawa: 98 },
-  { timestamp: new Date('2026-02-20').getTime(), toronto: 125, calgary: 72, ottawa: 95 },
-  { timestamp: new Date('2026-02-21').getTime(), toronto: 130, calgary: 95, ottawa: 100 },
-  { timestamp: new Date('2026-02-22').getTime(), toronto: 98, calgary: 125, ottawa: 82 },
-  { timestamp: new Date('2026-02-23').getTime(), toronto: 110, calgary: 135, ottawa: 65 },
-  { timestamp: new Date('2026-02-24').getTime(), toronto: 140, calgary: 100, ottawa: 118 },
-  { timestamp: new Date('2026-02-25').getTime(), toronto: 135, calgary: 98, ottawa: 120 },
-  { timestamp: new Date('2026-02-26').getTime(), toronto: 115, calgary: 140, ottawa: 100 },
-  { timestamp: new Date('2026-02-27').getTime(), toronto: 145, calgary: 108, ottawa: 130 },
-  { timestamp: new Date('2026-02-28').getTime(), toronto: 148, calgary: 122, ottawa: 135 }
+  { timestamp: new Date('2026-02-01').getTime(), siteA: 60, siteB: 22, siteC: 40 },
+  { timestamp: new Date('2026-02-02').getTime(), siteA: 50, siteB: 34, siteC: 42 },
+  { timestamp: new Date('2026-02-03').getTime(), siteA: 52, siteB: 65, siteC: 38 },
+  { timestamp: new Date('2026-02-04').getTime(), siteA: 54, siteB: 67, siteC: 36 },
+  { timestamp: new Date('2026-02-05').getTime(), siteA: 70, siteB: 42, siteC: 56 },
+  { timestamp: new Date('2026-02-06').getTime(), siteA: 72, siteB: 65, siteC: 58 },
+  { timestamp: new Date('2026-02-07').getTime(), siteA: 68, siteB: 75, siteC: 52 },
+  { timestamp: new Date('2026-02-08').getTime(), siteA: 45, siteB: 95, siteC: 70 },
+  { timestamp: new Date('2026-02-09').getTime(), siteA: 58, siteB: 78, siteC: 72 },
+  { timestamp: new Date('2026-02-10').getTime(), siteA: 85, siteB: 65, siteC: 105 },
+  { timestamp: new Date('2026-02-11').getTime(), siteA: 88, siteB: 62, siteC: 75 },
+  { timestamp: new Date('2026-02-12').getTime(), siteA: 100, siteB: 55, siteC: 80 },
+  { timestamp: new Date('2026-02-13').getTime(), siteA: 75, siteB: 95, siteC: 62 },
+  { timestamp: new Date('2026-02-14').getTime(), siteA: 118, siteB: 98, siteC: 55 },
+  { timestamp: new Date('2026-02-15').getTime(), siteA: 110, siteB: 80, siteC: 60 },
+  { timestamp: new Date('2026-02-16').getTime(), siteA: 108, siteB: 82, siteC: 70 },
+  { timestamp: new Date('2026-02-17').getTime(), siteA: 102, siteB: 85, siteC: 75 },
+  { timestamp: new Date('2026-02-18').getTime(), siteA: 88, siteB: 112, siteC: 62 },
+  { timestamp: new Date('2026-02-19').getTime(), siteA: 118, siteB: 105, siteC: 98 },
+  { timestamp: new Date('2026-02-20').getTime(), siteA: 125, siteB: 72, siteC: 95 },
+  { timestamp: new Date('2026-02-21').getTime(), siteA: 130, siteB: 95, siteC: 100 },
+  { timestamp: new Date('2026-02-22').getTime(), siteA: 98, siteB: 125, siteC: 82 },
+  { timestamp: new Date('2026-02-23').getTime(), siteA: 110, siteB: 135, siteC: 65 },
+  { timestamp: new Date('2026-02-24').getTime(), siteA: 140, siteB: 100, siteC: 118 },
+  { timestamp: new Date('2026-02-25').getTime(), siteA: 135, siteB: 98, siteC: 120 },
+  { timestamp: new Date('2026-02-26').getTime(), siteA: 115, siteB: 140, siteC: 100 },
+  { timestamp: new Date('2026-02-27').getTime(), siteA: 145, siteB: 108, siteC: 130 },
+  { timestamp: new Date('2026-02-28').getTime(), siteA: 148, siteB: 122, siteC: 135 }
 ]
 
 const summaryData = [
   {
-    name: 'Toronto DC',
+    name: 'Distribution Center',
     meters: 42,
     consumption: 2140,
     change: -3.2,
@@ -59,7 +59,7 @@ const summaryData = [
     bgColor: 'bg-chart-1'
   },
   {
-    name: 'Calgary Plant',
+    name: 'Plant 1',
     meters: 28,
     consumption: 1297,
     change: 1.8,
@@ -68,7 +68,7 @@ const summaryData = [
     bgColor: 'bg-chart-3'
   },
   {
-    name: 'Ottawa Office',
+    name: 'Regional Office',
     meters: 15,
     consumption: 467,
     change: -0.9,
@@ -79,9 +79,9 @@ const summaryData = [
 ]
 
 const chartConfig = {
-  toronto: { label: 'Toronto DC', color: 'var(--chart-water-700)' },
-  calgary: { label: 'Calgary Plant', color: 'var(--chart-water-500)' },
-  ottawa: { label: 'Ottawa Office', color: 'var(--chart-water-300)' }
+  siteA: { label: 'Distribution Center', color: 'var(--chart-water-700)' },
+  siteB: { label: 'Plant 1', color: 'var(--chart-water-500)' },
+  siteC: { label: 'Regional Office', color: 'var(--chart-water-300)' }
 } satisfies ChartConfig
 
 const EnergyConsumptionMetrics = ({ className }: { className?: string }) => {
@@ -118,25 +118,25 @@ const EnergyConsumptionMetrics = ({ className }: { className?: string }) => {
             />
             <ChartTooltip cursor={false} content={<ChartTooltipContent className='w-40' hideLabel />} />
             <Line
-              dataKey='toronto'
+              dataKey='siteA'
               type='monotone'
-              stroke='var(--color-toronto)'
+              stroke='var(--color-siteA)'
               strokeWidth={2}
               dot={false}
               connectNulls
             />
             <Line
-              dataKey='calgary'
+              dataKey='siteB'
               type='monotone'
-              stroke='var(--color-calgary)'
+              stroke='var(--color-siteB)'
               strokeWidth={2}
               dot={false}
               connectNulls
             />
             <Line
-              dataKey='ottawa'
+              dataKey='siteC'
               type='monotone'
-              stroke='var(--color-ottawa)'
+              stroke='var(--color-siteC)'
               strokeWidth={2}
               dot={false}
               connectNulls

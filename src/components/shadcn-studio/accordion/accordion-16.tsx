@@ -51,7 +51,7 @@ const items = [
       {
         title: 'How do I enroll a site in demand response?',
         content:
-          'Demand Response programs are managed in pTrack®. Select the site, choose an available DR program for your market (Ontario or Alberta), and set your curtailment target. You will receive peak alerts and event notifications ahead of each scheduled DR event.',
+          'Demand Response programs are managed in pTrack®. Select the site, choose an available DR program for your market (East or West), and set your curtailment target. You will receive peak alerts and event notifications ahead of each scheduled DR event.',
         open: true
       },
       {

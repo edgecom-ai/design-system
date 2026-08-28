@@ -98,7 +98,7 @@ const AccountSetupStep = ({
                   id={field.name}
                   type='email'
                   aria-invalid={fieldState.invalid}
-                  placeholder='priya.sharma@edgecom.ai'
+                  placeholder='priya.sharma@example.com'
                 />
                 {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
               </Field>

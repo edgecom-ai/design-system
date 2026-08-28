@@ -20,13 +20,13 @@ import {
 } from "lucide-react"
 
 const utilities = [
-  "Toronto Hydro",
-  "Alectra Utilities",
-  "Hydro One",
-  "Hydro Ottawa",
-  "ENMAX",
-  "EPCOR",
-  "BC Hydro",
+  "North Grid Utility",
+  "Lakeshore Utilities",
+  "Provincial Grid",
+  "Rivergate Hydro",
+  "Foothills Energy",
+  "Prairie Power",
+  "West Grid Utility",
 ] as const
 
 const permissions = [
@@ -46,7 +46,7 @@ export function AuthorizationRequestDemo() {
           </div>
           <ArrowLeftRightIcon className="size-4 text-muted-foreground" />
           <div className="flex size-12 items-center justify-center rounded-xl bg-foreground text-base font-semibold text-background">
-            TH
+            NG
           </div>
         </div>
 
@@ -55,7 +55,7 @@ export function AuthorizationRequestDemo() {
             Connect your utility
           </h3>
           <p className="text-sm text-muted-foreground">
-            Edgecom Energy is asking to connect to your Toronto Hydro account so
+            Edgecom Energy is asking to connect to your North Grid Utility account so
             it can import your energy data.
           </p>
         </div>
@@ -81,7 +81,7 @@ export function AuthorizationRequestDemo() {
         {/* Utility selector (search + select) */}
         <div className="space-y-2 rounded-lg bg-muted/50 p-4">
           <Label htmlFor="utility">Connecting utility</Label>
-          <Combobox items={utilities} defaultValue="Toronto Hydro">
+          <Combobox items={utilities} defaultValue="North Grid Utility">
             <ComboboxInput id="utility" placeholder="Search utilities…" />
             <ComboboxContent>
               <ComboboxEmpty>No utilities found.</ComboboxEmpty>
@@ -97,7 +97,7 @@ export function AuthorizationRequestDemo() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <Button>Connect Toronto Hydro</Button>
+          <Button>Connect North Grid Utility</Button>
           <Button variant="outline">Cancel</Button>
         </div>
 
@@ -105,7 +105,7 @@ export function AuthorizationRequestDemo() {
 
         <p className="text-sm text-muted-foreground">
           You can revoke this access any time from Settings, then Utility
-          connections. Revoking disconnects Toronto Hydro within a minute.
+          connections. Revoking disconnects North Grid Utility within a minute.
         </p>
       </CardContent>
     </Card>

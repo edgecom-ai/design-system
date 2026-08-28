@@ -35,7 +35,7 @@ const DrawerWithSides = () => {
             <div className='grid flex-1 auto-rows-min gap-6 px-4'>
               <div className='grid gap-3'>
                 <Label htmlFor='drawer-demo-name'>Site name</Label>
-                <Input id='drawer-demo-name' defaultValue='HQ – Bay Street' />
+                <Input id='drawer-demo-name' defaultValue='HQ – Main Campus' />
               </div>
               <div className='grid gap-3'>
                 <Label htmlFor='drawer-demo-username'>Site code</Label>

@@ -46,7 +46,7 @@ const SubscriptionStep = ({
     <div className='flex flex-col gap-6'>
       <div className='flex flex-col items-start'>
         <h2 className='text-lg font-semibold'>Choose Your Plan</h2>
-        <p className='text-muted-foreground'>Select the plan that fits your site portfolio</p>
+        <p className='text-muted-foreground'>Select the plan that fits your portfolio</p>
       </div>
       <form onSubmit={form.handleSubmit(onSubmit)} className='flex flex-col gap-6'>
         <Controller
@@ -75,7 +75,7 @@ const SubscriptionStep = ({
                       Starter
                     </Label>
                     <p className='text-muted-foreground mb-3 text-center text-sm'>
-                      Up to 5 sites, dataTrack™ monitoring, email support
+                      Core monitoring for a small portfolio, email support
                     </p>
                     <div className='flex items-baseline'>
                       <span className='text-muted-foreground mb-auto text-sm font-medium'>$</span>
@@ -100,7 +100,7 @@ const SubscriptionStep = ({
                       Professional
                     </Label>
                     <p className='text-muted-foreground mb-3 text-center text-sm'>
-                      Up to 25 sites, dataTrack™ + pTrack®, priority support
+                      Advanced analytics for a growing portfolio, priority support
                     </p>
                     <div className='flex items-baseline'>
                       <span className='text-muted-foreground mb-auto text-sm font-medium'>$</span>
@@ -125,7 +125,7 @@ const SubscriptionStep = ({
                       Enterprise
                     </Label>
                     <p id='enterprise-description' className='text-muted-foreground mb-3 text-center text-sm'>
-                      Unlimited sites, full suite + CoPilot, 24/7 support
+                      Full platform access, dedicated onboarding, 24/7 support
                     </p>
                     <div className='flex items-baseline'>
                       <span className='text-muted-foreground mb-auto text-sm font-medium'>$</span>

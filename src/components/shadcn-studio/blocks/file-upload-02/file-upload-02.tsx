@@ -167,7 +167,7 @@ function FileUpload() {
       <CardContent className='flex justify-between gap-2'>
         <div className='w-full max-w-xs space-y-2'>
           <Label htmlFor='studio-name'>Site Name</Label>
-          <Input id='studio-name' type='text' className='max-sm:placeholder:text-sm' placeholder='Toronto Distribution Center' />
+          <Input id='studio-name' type='text' className='max-sm:placeholder:text-sm' placeholder='Distribution Center' />
         </div>
         <div className='w-full max-w-xs space-y-2'>
           <Label htmlFor='user-select'>Site Manager</Label>

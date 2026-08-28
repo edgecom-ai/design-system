@@ -33,7 +33,7 @@ const ProfileDropdown = ({ trigger, defaultOpen, align = 'end' }: Props) => {
             </div>
             <div className='flex flex-1 flex-col items-start'>
               <span className='text-foreground text-lg font-semibold'>Priya Sharma</span>
-              <span className='text-muted-foreground text-base'>priya.sharma@edgecom.ai</span>
+              <span className='text-muted-foreground text-base'>priya.sharma@example.com</span>
             </div>
           </DropdownMenuLabel>
         </DropdownMenuGroup>

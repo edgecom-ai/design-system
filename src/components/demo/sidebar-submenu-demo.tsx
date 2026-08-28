@@ -111,7 +111,7 @@ export function SidebarSubmenuDemo() {
           Energy
         </h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          dataTrack™ · Toronto Distribution Center
+          dataTrack™ · Distribution Center
         </p>
         <p className="mt-4 max-w-sm text-sm text-muted-foreground">
           Toggle the rail with the header button. When collapsed, hover

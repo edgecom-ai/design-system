@@ -9,10 +9,10 @@ import {
 } from "@/components/ui/table"
 
 const rows = [
-  { site: "Toronto Distribution Center", commodity: "Electricity", usage: "1,284 MWh", cost: "$182,940" },
-  { site: "Hamilton Manufacturing Plant", commodity: "Gas", usage: "94,500 m³", cost: "$61,220" },
-  { site: "Mississauga Cold Storage", commodity: "Electricity", usage: "612 MWh", cost: "$88,010" },
-  { site: "Ottawa Head Office", commodity: "Water", usage: "3,410 m³", cost: "$9,740" },
+  { site: "Distribution Center", commodity: "Electricity", usage: "1,284 MWh", cost: "$182,940" },
+  { site: "Manufacturing Plant", commodity: "Gas", usage: "94,500 m³", cost: "$61,220" },
+  { site: "Cold Storage Facility", commodity: "Electricity", usage: "612 MWh", cost: "$88,010" },
+  { site: "Head Office", commodity: "Water", usage: "3,410 m³", cost: "$9,740" },
 ]
 
 export function TableDemo() {

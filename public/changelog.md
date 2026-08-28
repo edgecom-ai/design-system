@@ -25,6 +25,10 @@ Every change to the Edgecom design system, derived from git history. Also publis
 - **sortable:** Declare the react-dom it imports for its drag overlay ([`2a11c72`](https://github.com/edgecom-ai/design-system/commit/2a11c72))
 - **resizable:** Migrate to the react-resizable-panels v4 API ([`65c0e17`](https://github.com/edgecom-ai/design-system/commit/65c0e17))
 
+### Internal
+
+- **docs:** Regenerate the changelog artifacts ([`6923e3b`](https://github.com/edgecom-ai/design-system/commit/6923e3b))
+
 ## August 27, 2026
 
 The semantic type scale becomes real: tokens carry their own size, line-height, and weight, cn() stops dropping them, and every primitive in the registry now uses them.

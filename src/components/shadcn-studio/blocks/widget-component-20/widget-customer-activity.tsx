@@ -34,17 +34,17 @@ type Props = {
 const customerData = [
   {
     id: 4821,
-    name: 'Toronto Distribution Center',
+    name: 'Distribution Center',
     lastSeen: '20/02/2026 14:32'
   },
   {
     id: 3047,
-    name: 'Calgary Plant 2',
+    name: 'Plant 2',
     lastSeen: '20/02/2026 11:15'
   },
   {
     id: 5193,
-    name: 'HQ – Bay Street',
+    name: 'HQ – Main Campus',
     lastSeen: '19/02/2026 22:48'
   },
   {
@@ -69,22 +69,22 @@ const customerData = [
   },
   {
     id: 9023,
-    name: 'Edmonton Substation',
+    name: 'Substation A',
     lastSeen: '17/02/2026 23:11'
   },
   {
     id: 3358,
-    name: 'Ottawa Office',
+    name: 'Regional Office',
     lastSeen: '17/02/2026 16:44'
   },
   {
     id: 8145,
-    name: 'Montreal Cold Storage',
+    name: 'Cold Storage B',
     lastSeen: '16/02/2026 13:02'
   },
   {
     id: 2201,
-    name: 'Hamilton Steel Mill',
+    name: 'Steel Mill',
     lastSeen: '16/02/2026 10:28'
   },
   {
@@ -94,7 +94,7 @@ const customerData = [
   },
   {
     id: 4490,
-    name: 'Vancouver Port Terminal',
+    name: 'Port Terminal',
     lastSeen: '15/02/2026 08:17'
   },
   {
@@ -104,7 +104,7 @@ const customerData = [
   },
   {
     id: 3312,
-    name: 'London Assembly Plant',
+    name: 'Assembly Plant B',
     lastSeen: '14/02/2026 11:50'
   },
   {
@@ -114,7 +114,7 @@ const customerData = [
   },
   {
     id: 1023,
-    name: 'Quebec City Depot',
+    name: 'Depot A',
     lastSeen: '13/02/2026 09:41'
   },
   {
@@ -124,17 +124,17 @@ const customerData = [
   },
   {
     id: 2539,
-    name: 'Kitchener Data Hall',
+    name: 'Data Hall',
     lastSeen: '12/02/2026 14:29'
   },
   {
     id: 7405,
-    name: 'Windsor Auto Plant',
+    name: 'Auto Plant',
     lastSeen: '11/02/2026 18:53'
   },
   {
     id: 4167,
-    name: 'Mississauga Logistics',
+    name: 'Logistics Center',
     lastSeen: '11/02/2026 07:37'
   },
   {
@@ -159,12 +159,12 @@ const customerData = [
   },
   {
     id: 6037,
-    name: 'Brampton Depot',
+    name: 'Depot B',
     lastSeen: '08/02/2026 21:30'
   },
   {
     id: 2918,
-    name: 'Markham Office Tower',
+    name: 'Office Tower',
     lastSeen: '08/02/2026 14:47'
   }
 ]

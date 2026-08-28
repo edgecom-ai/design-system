@@ -16,7 +16,7 @@ type FileTreeItem = {
 
 const fileTree: FileTreeItem[] = [
   {
-    name: 'Toronto Distribution Center',
+    name: 'Distribution Center',
     type: 'folder',
     children: [
       {
@@ -32,12 +32,12 @@ const fileTree: FileTreeItem[] = [
     ]
   },
   {
-    name: 'Calgary Plant 2',
+    name: 'Plant 2',
     type: 'folder',
     children: [{ name: 'Chiller Plant', type: 'file' }]
   },
   {
-    name: 'HQ – Bay Street',
+    name: 'HQ – Main Campus',
     type: 'folder',
     children: [{ name: 'Floor 3 Submeter', type: 'file' }]
   },

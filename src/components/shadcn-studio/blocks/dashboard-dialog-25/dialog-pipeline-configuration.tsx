@@ -29,8 +29,8 @@ const steps = [
     number: 2,
     title: 'Choose Market & Program',
     description: 'Select the pTrack® market and DR program.',
-    options: ['Ontario IESO (Capacity Auction)', 'Ontario IESO (DR Auction)', 'Alberta (AESO)', 'Custom Utility Program'],
-    defaultValue: 'Ontario IESO (Capacity Auction)'
+    options: ['Grid operator (Capacity Auction)', 'Grid operator (DR Auction)', 'Western region program', 'Custom Utility Program'],
+    defaultValue: 'Grid operator (Capacity Auction)'
   },
   {
     number: 3,
@@ -43,7 +43,7 @@ const steps = [
     number: 4,
     title: 'Set Dispatch & Notifications',
     description: 'Choose how DR events are dispatched and who is alerted.',
-    options: ['Auto-dispatch (all events)', 'Manual approval per event', 'Email & SMS alerts only', 'CoPilot-assisted dispatch'],
+    options: ['Auto-dispatch (all events)', 'Manual approval per event', 'Email & SMS alerts only', 'AI-assisted dispatch'],
     defaultValue: 'Auto-dispatch (all events)'
   }
 ]

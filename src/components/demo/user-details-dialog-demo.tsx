@@ -74,9 +74,9 @@ export function UserDetailsDialogDemo() {
                 />
                 <Input
                   type="email"
-                  placeholder="user@edgecom.ai"
+                  placeholder="user@example.com"
                   className="sm:col-span-2"
-                  defaultValue="maya@edgecom.ai"
+                  defaultValue="maya@example.com"
                 />
               </div>
             </div>
@@ -146,8 +146,8 @@ export function UserDetailsDialogDemo() {
                 <Input
                   id="location"
                   type="text"
-                  placeholder="e.g. 123 King St W, Toronto, ON"
-                  defaultValue="123 King St W, Toronto, ON"
+                  placeholder="e.g. 123 Industrial Ave"
+                  defaultValue="123 Industrial Ave"
                 />
               </div>
 

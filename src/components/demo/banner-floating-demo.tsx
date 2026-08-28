@@ -18,7 +18,7 @@ export function BannerFloatingDemo() {
             >
               <circle cx={1} cy={1} r={1} />
             </svg>
-            Reduce load at HQ – Bay Street to earn savings
+            Reduce load at HQ – Main Campus to earn savings
           </p>
           <Button size="sm" variant="secondary">
             View event

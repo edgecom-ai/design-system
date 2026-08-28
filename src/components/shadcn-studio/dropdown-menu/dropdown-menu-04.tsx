@@ -14,31 +14,31 @@ const listItems = [
     src: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-6.png',
     fallback: 'PS',
     name: 'Priya Sharma',
-    mail: 'priya@edgecom.ai'
+    mail: 'priya@example.com'
   },
   {
     src: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-7.png',
     fallback: 'ML',
     name: 'Marcus Lee',
-    mail: 'marcus@edgecom.ai'
+    mail: 'marcus@example.com'
   },
   {
     src: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-8.png',
     fallback: 'DB',
     name: 'Dulce Botosh',
-    mail: 'dulce@edgecom.ai'
+    mail: 'dulce@example.com'
   },
   {
     src: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-9.png',
     fallback: 'AS',
     name: 'Ahmad Stanton',
-    mail: 'ahmad@edgecom.ai'
+    mail: 'ahmad@example.com'
   },
   {
     src: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-10.png',
     fallback: 'RG',
     name: 'Randy Gouse',
-    mail: 'randy@edgecom.ai'
+    mail: 'randy@example.com'
   }
 ]
 

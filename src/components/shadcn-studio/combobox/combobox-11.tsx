@@ -21,9 +21,9 @@ const frameworks = [
   'Warehouse B',
   'Chiller Plant',
   'Data Center',
-  'HQ – Bay Street',
-  'Toronto Distribution Center',
-  'Calgary Plant 2',
+  'HQ – Main Campus',
+  'Distribution Center',
+  'Plant 2',
   'Pump Station 4',
   'Boiler Room',
   'Rooftop HVAC'

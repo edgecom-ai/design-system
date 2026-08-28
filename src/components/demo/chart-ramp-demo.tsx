@@ -57,7 +57,7 @@ const tintConfig = {
   z2: { label: "Warehouse B", color: "var(--chart-water-300)" },
   z3: { label: "Chiller Plant", color: "var(--chart-water-500)" },
   z4: { label: "Data Center", color: "var(--chart-water-700)" },
-  z5: { label: "HQ – Bay Street", color: "var(--chart-water-900)" },
+  z5: { label: "HQ – Main Campus", color: "var(--chart-water-900)" },
 } satisfies ChartConfig
 
 export function ChartRampDemo() {

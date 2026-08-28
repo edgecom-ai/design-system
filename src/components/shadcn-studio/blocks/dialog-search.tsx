@@ -36,7 +36,7 @@ const SearchDialog = ({ defaultOpen = false, trigger, className }: Props) => {
       icon: (
         <GaugeIcon className='text-foreground size-4.5!' />
       ),
-      label: 'Peak forecast — Ontario (pTrack®)'
+      label: 'Peak forecast — East region (pTrack®)'
     },
     {
       id: 'consumption-overview',
@@ -58,7 +58,7 @@ const SearchDialog = ({ defaultOpen = false, trigger, className }: Props) => {
     {
       id: 'downtown-substation',
       name: 'Downtown Substation',
-      description: 'dataTrack™ · 12 meters · Toronto, ON',
+      description: 'dataTrack™ · 12 meters · East region',
       logo: 'https://cdn.shadcnstudio.com/ss-assets/blocks/dashboard-application/dashboard-dialog/jira.png',
       avatars: [
         { src: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-1.png', alt: 'Aaron Larson', fallback: 'AL' },
@@ -95,7 +95,7 @@ const SearchDialog = ({ defaultOpen = false, trigger, className }: Props) => {
     {
       id: 'maria-donin',
       name: 'Maria Donin',
-      email: 'Energy analyst · pTrack® Alberta',
+      email: 'Energy analyst · pTrack® West region',
       avatar: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-2.png',
       fallback: 'MD',
       status: 'Away',

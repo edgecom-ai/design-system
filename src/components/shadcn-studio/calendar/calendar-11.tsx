@@ -11,7 +11,7 @@ import { Card, CardContent, CardFooter } from '@/components/ui/card'
 
 const events = [
   {
-    title: 'DR event – HQ Bay Street',
+    title: 'DR event – HQ Main Campus',
     from: '2025-06-12T09:00:00',
     to: '2025-06-12T10:00:00'
   },

@@ -73,6 +73,18 @@ export const changelog: ChangelogRelease[] = [
     "summary": null,
     "entries": [
       {
+        "sha": "6923e3b",
+        "date": "2026-08-28",
+        "type": "chore",
+        "group": "internal",
+        "scopes": [
+          "docs"
+        ],
+        "summary": "Regenerate the changelog artifacts",
+        "items": [],
+        "breaking": false
+      },
+      {
         "sha": "dd33777",
         "date": "2026-08-28",
         "type": "fix",

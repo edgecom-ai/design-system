@@ -63,7 +63,7 @@ const nav = [
   { label: "Overview", icon: LayoutDashboard },
   { label: "dataTrack™", icon: Gauge, active: true, sub: ["Energy", "Bill", "Production"] },
   { label: "pTrack®", icon: Activity },
-  { label: "CoPilot", icon: Sparkles },
+  { label: "Assistant", icon: Sparkles },
   { label: "Reports", icon: FileText },
   { label: "Alarms", icon: BellRing },
 ]
@@ -75,10 +75,10 @@ const stats = [
 ]
 
 const buildings = [
-  "Toronto Distribution Center",
-  "Hamilton Manufacturing Plant",
-  "Mississauga Cold Storage",
-  "Ottawa Head Office",
+  "Distribution Center",
+  "Manufacturing Plant",
+  "Cold Storage Facility",
+  "Head Office",
 ]
 
 /**
@@ -194,7 +194,7 @@ export function ApplicationShellDemo() {
                         Priya Sharma
                       </span>
                       <span className="truncate text-[11px] text-sidebar-foreground/60">
-                        priya.sharma@edgecom.ai
+                        priya.sharma@example.com
                       </span>
                     </div>
                     <ChevronsUpDown className="ml-auto size-3.5 shrink-0 text-sidebar-foreground/60" />
