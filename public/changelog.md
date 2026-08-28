@@ -13,6 +13,8 @@ Every change to the Edgecom design system, derived from git history. Also publis
 
 ### Fixed
 
+- **theme:** Stop overriding the line-height and weight the type tokens own ([`90a0425`](https://github.com/edgecom-ai/design-system/commit/90a0425))
+- **button:** A quiet destructive variant, and hover surfaces a consumer can re-tint ([`9050804`](https://github.com/edgecom-ai/design-system/commit/9050804))
 - **registry:** Ship every dependency at the version it was built against ([`26ebcec`](https://github.com/edgecom-ai/design-system/commit/26ebcec))
 - **sortable:** Declare the react-dom it imports for its drag overlay ([`a8574e6`](https://github.com/edgecom-ai/design-system/commit/a8574e6))
 - **resizable:** Migrate to the react-resizable-panels v4 API ([`28a7a6b`](https://github.com/edgecom-ai/design-system/commit/28a7a6b))
