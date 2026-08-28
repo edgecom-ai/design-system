@@ -66,6 +66,29 @@ export const commitUrl = (sha: string) => `https://github.com/edgecom-ai/design-
 
 export const changelog: ChangelogRelease[] = [
   {
+    "id": "release-2026-08-28",
+    "version": null,
+    "date": "2026-08-28",
+    "title": "August 28, 2026",
+    "summary": null,
+    "entries": [
+      {
+        "sha": "0dbd67a",
+        "date": "2026-08-28",
+        "type": "feat",
+        "group": "added",
+        "scopes": [
+          "date-picker"
+        ],
+        "summary": "Rolling-window variant with hover preview",
+        "items": [
+          "date-picker"
+        ],
+        "breaking": false
+      }
+    ]
+  },
+  {
     "id": "release-2026-08-27",
     "version": null,
     "date": "2026-08-27",
@@ -73,7 +96,21 @@ export const changelog: ChangelogRelease[] = [
     "summary": "The semantic type scale becomes real: tokens carry their own size, line-height, and weight, cn() stops dropping them, and every primitive in the registry now uses them.",
     "entries": [
       {
-        "sha": "7e74af4",
+        "sha": "e61fe64",
+        "date": "2026-08-27",
+        "type": "feat",
+        "group": "added",
+        "scopes": [
+          "date-picker"
+        ],
+        "summary": "Compact icon-trigger variant",
+        "items": [
+          "date-picker"
+        ],
+        "breaking": false
+      },
+      {
+        "sha": "60b1076",
         "date": "2026-08-27",
         "type": "feat",
         "group": "added",
@@ -87,7 +124,7 @@ export const changelog: ChangelogRelease[] = [
         "breaking": false
       },
       {
-        "sha": "f101283",
+        "sha": "bca9735",
         "date": "2026-08-27",
         "type": "fix",
         "group": "fixed",
@@ -101,7 +138,7 @@ export const changelog: ChangelogRelease[] = [
         "breaking": false
       },
       {
-        "sha": "ad1c77c",
+        "sha": "920ffe1",
         "date": "2026-08-27",
         "type": "fix",
         "group": "fixed",
@@ -119,6 +156,58 @@ export const changelog: ChangelogRelease[] = [
           "stepper",
           "timeline",
           "use-file-upload"
+        ],
+        "breaking": false
+      },
+      {
+        "sha": "4b57c0f",
+        "date": "2026-08-27",
+        "type": "feat",
+        "group": "added",
+        "scopes": [
+          "multi-select-listbox"
+        ],
+        "summary": "Static trigger label by default",
+        "items": [
+          "multi-select-listbox"
+        ],
+        "breaking": false
+      },
+      {
+        "sha": "61c38e6",
+        "date": "2026-08-27",
+        "type": "docs",
+        "group": "docs",
+        "scopes": [
+          "design"
+        ],
+        "summary": "Bar default slot ratio ~65% -> ~75%",
+        "items": [],
+        "breaking": false
+      },
+      {
+        "sha": "f1a35d4",
+        "date": "2026-08-27",
+        "type": "docs",
+        "group": "docs",
+        "scopes": [
+          "design"
+        ],
+        "summary": "Bar-chart top-corner radius + uniform styling",
+        "items": [],
+        "breaking": false
+      },
+      {
+        "sha": "2529056",
+        "date": "2026-08-27",
+        "type": "fix",
+        "group": "fixed",
+        "scopes": [
+          "multi-select-listbox"
+        ],
+        "summary": "Visible selection, search field, placeholder",
+        "items": [
+          "multi-select-listbox"
         ],
         "breaking": false
       },

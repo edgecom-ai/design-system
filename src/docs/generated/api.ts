@@ -504,7 +504,8 @@ export const generatedApi: Record<string, GeneratedApi> = {
   "date-picker": {
     "parts": [
       "DatePicker",
-      "MonthRangePicker"
+      "MonthRangePicker",
+      "WindowRangePicker"
     ],
     "props": []
   },

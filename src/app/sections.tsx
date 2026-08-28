@@ -145,6 +145,7 @@ import { DatePickerDemo } from "@/components/demo/date-picker-demo";
 import DatePickerRangeDemo from "@/components/shadcn-studio/date-picker/date-picker-02";
 import { DatePickerMonthRangeDemo } from "@/components/demo/date-picker-month-range-demo";
 import { DatePickerCompactDemo } from "@/components/demo/date-picker-compact-demo";
+import { DatePickerWindowDemo } from "@/components/demo/date-picker-window-demo";
 import DatePickerNaturalLanguageDemo from "@/components/shadcn-studio/date-picker/date-picker-05";
 import DatePickerTimeDemo from "@/components/shadcn-studio/date-picker/date-picker-08";
 import DatePickerDateTimeDemo from "@/components/shadcn-studio/date-picker/date-picker-10";
@@ -2628,6 +2629,13 @@ export const sections: Section[] = [
         description: "A month-granularity range picker — pick a start and end month across years.",
         preview: <DatePickerMonthRangeDemo />,
         source: dm("date-picker-month-range-demo"),
+      },
+      {
+        id: "date-picker-window",
+        name: "Rolling window",
+        description: "Pick a start day and select a fixed-length window running forward from it — hovering previews the whole window; `maxDate` disables days whose window would run past it.",
+        preview: <DatePickerWindowDemo />,
+        source: dm("date-picker-window-demo"),
       },
       {
         id: "date-picker-compact",

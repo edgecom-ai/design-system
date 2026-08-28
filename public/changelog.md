@@ -5,13 +5,21 @@
 Every change to the Edgecom design system, derived from git history. Also published at
 [design.edgecom.ai/changelog](https://design.edgecom.ai/getting-started/changelog).
 
+## August 28, 2026
+
+### Added
+
+- **date-picker:** Rolling-window variant with hover preview ([`0dbd67a`](https://github.com/edgecom-ai/design-system/commit/0dbd67a))
+
 ## August 27, 2026
 
 The semantic type scale becomes real: tokens carry their own size, line-height, and weight, cn() stops dropping them, and every primitive in the registry now uses them.
 
 ### Added
 
-- **phone-input:** Smart caret on by default, plus an optional extension field ([`7e74af4`](https://github.com/edgecom-ai/design-system/commit/7e74af4))
+- **date-picker:** Compact icon-trigger variant ([`e61fe64`](https://github.com/edgecom-ai/design-system/commit/e61fe64))
+- **phone-input:** Smart caret on by default, plus an optional extension field ([`60b1076`](https://github.com/edgecom-ai/design-system/commit/60b1076))
+- **multi-select-listbox:** Static trigger label by default ([`4b57c0f`](https://github.com/edgecom-ai/design-system/commit/4b57c0f))
 - **docs:** Self-maintaining changelog page generated from git history ([`edf2c8f`](https://github.com/edgecom-ai/design-system/commit/edf2c8f))
 - **multi-select-listbox:** Count-summary checkbox listbox multi-select ([`7d40f6f`](https://github.com/edgecom-ai/design-system/commit/7d40f6f))
 - **theme:** Add the body-sm compact step to the type scale ([`b70b38c`](https://github.com/edgecom-ai/design-system/commit/b70b38c))
@@ -20,8 +28,9 @@ The semantic type scale becomes real: tokens carry their own size, line-height, 
 
 ### Fixed
 
-- **scroll-area:** Drop the unused React import that breaks noUnusedLocals builds ([`f101283`](https://github.com/edgecom-ai/design-system/commit/f101283))
-- **registry:** Derive every item's dependencies from all of its imports ([`ad1c77c`](https://github.com/edgecom-ai/design-system/commit/ad1c77c))
+- **scroll-area:** Drop the unused React import that breaks noUnusedLocals builds ([`bca9735`](https://github.com/edgecom-ai/design-system/commit/bca9735))
+- **registry:** Derive every item's dependencies from all of its imports ([`920ffe1`](https://github.com/edgecom-ai/design-system/commit/920ffe1))
+- **multi-select-listbox:** Visible selection, search field, placeholder ([`2529056`](https://github.com/edgecom-ai/design-system/commit/2529056))
 - **theme:** Teach cn() the semantic type scale, which it was silently deleting ([`a22e7b9`](https://github.com/edgecom-ai/design-system/commit/a22e7b9))
 - Corrections from verifying the fixes in the browser ([`f3b7527`](https://github.com/edgecom-ai/design-system/commit/f3b7527))
 - **theme:** Give the font tokens real values instead of self-references ([`ebf2cc6`](https://github.com/edgecom-ai/design-system/commit/ebf2cc6))
@@ -35,6 +44,8 @@ The semantic type scale becomes real: tokens carry their own size, line-height, 
 
 ### Documentation
 
+- **design:** Bar default slot ratio ~65% -> ~75% ([`61c38e6`](https://github.com/edgecom-ai/design-system/commit/61c38e6))
+- **design:** Bar-chart top-corner radius + uniform styling ([`f1a35d4`](https://github.com/edgecom-ai/design-system/commit/f1a35d4))
 - **design:** Chart, select, dialog, bar-density, consistency & tooltip guardrails ([`5d8a86e`](https://github.com/edgecom-ai/design-system/commit/5d8a86e))
 
 ## August 21, 2026

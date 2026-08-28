@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { getDefaultClassNames, type DayButton } from "react-day-picker"
 import { CalendarIcon, ChevronLeftIcon, ChevronRightIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -234,5 +235,247 @@ function MonthRangePicker({
   )
 }
 
-export { DatePicker, MonthRangePicker }
-export type { MonthRange }
+// A rolling-window picker: the user picks a start day and the control selects a
+// fixed-length window running forward from it (default 7 days). Unlike a
+// calendar-week range it is *not* week-aligned — hovering a Wednesday previews
+// Wed–Tue, not Sun–Sat. Hovering (or keyboard-focusing) any enabled day previews
+// the whole window it would select in the neutral `accent` tone (nothing is
+// committed yet); the committed window uses `primary` on its two endpoints and
+// `muted` between, matching the day-range variant. `maxDate` disables any day
+// whose window would run past it (disabled by window *end*, not the day itself).
+type WindowRange = { start: Date; end: Date }
+
+const addDays = (date: Date, n: number) => {
+  const d = new Date(date)
+  d.setDate(d.getDate() + n)
+  return d
+}
+
+const dayStart = (date: Date) => {
+  const d = new Date(date)
+  d.setHours(0, 0, 0, 0)
+  return d
+}
+
+const isSameDay = (a: Date, b: Date) =>
+  a.getFullYear() === b.getFullYear() &&
+  a.getMonth() === b.getMonth() &&
+  a.getDate() === b.getDate()
+
+const isLastOfMonth = (d: Date) => d.getMonth() !== addDays(d, 1).getMonth()
+
+const within = (day: Date, start: Date, end: Date) => {
+  const t = dayStart(day).getTime()
+  return t >= dayStart(start).getTime() && t <= dayStart(end).getTime()
+}
+
+const WindowBandContext = React.createContext<{
+  committed?: WindowRange
+  preview?: WindowRange
+} | null>(null)
+
+// Custom day button that paints the committed and preview window bands. The band
+// wraps across grid rows: outer corners round at each row edge (Sunday, Saturday,
+// first/last of the month) so a window spanning two rows reads as a continuous
+// band rather than two floating pills.
+function WindowDayButton({
+  className,
+  day,
+  modifiers,
+  ...props
+}: React.ComponentProps<typeof DayButton>) {
+  const defaultClassNames = getDefaultClassNames()
+  const bands = React.useContext(WindowBandContext)
+
+  const ref = React.useRef<HTMLButtonElement>(null)
+  React.useEffect(() => {
+    if (modifiers.focused) ref.current?.focus()
+  }, [modifiers.focused])
+
+  const date = day.date
+
+  // Committed wins over preview where the two overlap.
+  let band: "committed" | "preview" | null = null
+  let start: Date | undefined
+  let end: Date | undefined
+  if (bands?.committed && within(date, bands.committed.start, bands.committed.end)) {
+    band = "committed"
+    start = bands.committed.start
+    end = bands.committed.end
+  } else if (bands?.preview && within(date, bands.preview.start, bands.preview.end)) {
+    band = "preview"
+    start = bands.preview.start
+    end = bands.preview.end
+  }
+
+  const inBand = band !== null
+  const isStart = inBand && isSameDay(date, start!)
+  const isEnd = inBand && isSameDay(date, end!)
+  const dow = date.getDay()
+  const roundLeft = inBand && (isStart || dow === 0 || date.getDate() === 1)
+  const roundRight = inBand && (isEnd || dow === 6 || isLastOfMonth(date))
+
+  return (
+    <Button
+      ref={ref}
+      variant="ghost"
+      size="icon"
+      data-day={date.toLocaleDateString()}
+      data-window-endpoint={
+        band === "committed" && (isStart || isEnd) ? true : undefined
+      }
+      data-window-middle={
+        band === "committed" && !isStart && !isEnd ? true : undefined
+      }
+      data-window-preview={band === "preview" ? true : undefined}
+      className={cn(
+        "relative isolate z-10 flex aspect-square size-auto w-full min-w-(--cell-size) flex-col gap-1 border-0 leading-none font-normal",
+        "group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-10 group-data-[focused=true]/day:border-ring group-data-[focused=true]/day:ring-[3px] group-data-[focused=true]/day:ring-ring/50",
+        "data-[window-endpoint=true]:bg-primary data-[window-endpoint=true]:text-primary-foreground data-[window-endpoint=true]:hover:bg-primary data-[window-endpoint=true]:hover:text-primary-foreground",
+        "data-[window-middle=true]:bg-muted data-[window-middle=true]:text-foreground data-[window-middle=true]:hover:bg-muted data-[window-middle=true]:hover:text-foreground",
+        "data-[window-preview=true]:bg-accent data-[window-preview=true]:text-accent-foreground data-[window-preview=true]:hover:bg-accent data-[window-preview=true]:hover:text-accent-foreground",
+        inBand && (roundLeft ? "rounded-l-(--cell-radius)" : "rounded-l-none"),
+        inBand && (roundRight ? "rounded-r-(--cell-radius)" : "rounded-r-none"),
+        "dark:hover:text-foreground [&>span]:text-caption [&>span]:opacity-70",
+        defaultClassNames.day,
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function WindowRangePicker({
+  value,
+  defaultValue,
+  onValueChange,
+  windowLength = 7,
+  maxDate,
+  minDate,
+  placeholder = "Pick a window",
+  compact = false,
+  disabled,
+  className,
+}: {
+  /** The window start date (controlled). */
+  value?: Date
+  defaultValue?: Date
+  /** Emits the start date plus the computed `{ start, end }` window. */
+  onValueChange?: (start: Date, range: WindowRange) => void
+  /** Length of the rolling window in days. */
+  windowLength?: number
+  /** Disable any day whose window would extend past this date. */
+  maxDate?: Date
+  /** Disable any day before this date. */
+  minDate?: Date
+  placeholder?: string
+  /** Render the trigger as an icon-only button instead of the full field. */
+  compact?: boolean
+  disabled?: boolean
+  className?: string
+}) {
+  const [open, setOpen] = React.useState(false)
+  const [internal, setInternal] = React.useState<Date | undefined>(defaultValue)
+  const [active, setActive] = React.useState<Date | undefined>(undefined)
+  const start = value ?? internal
+
+  const windowEnd = React.useCallback(
+    (date: Date) => addDays(date, windowLength - 1),
+    [windowLength]
+  )
+
+  const isDayDisabled = React.useCallback(
+    (date: Date) => {
+      if (maxDate && dayStart(windowEnd(date)).getTime() > dayStart(maxDate).getTime())
+        return true
+      if (minDate && dayStart(date).getTime() < dayStart(minDate).getTime())
+        return true
+      return false
+    },
+    [maxDate, minDate, windowEnd]
+  )
+
+  const committed: WindowRange | undefined = start
+    ? { start, end: windowEnd(start) }
+    : undefined
+  const preview: WindowRange | undefined = active
+    ? { start: active, end: windowEnd(active) }
+    : undefined
+
+  function commit(date: Date) {
+    if (value === undefined) setInternal(date)
+    onValueChange?.(date, { start: date, end: windowEnd(date) })
+    setActive(undefined)
+    setOpen(false)
+  }
+
+  function handleOpenChange(next: boolean) {
+    setOpen(next)
+    if (!next) setActive(undefined)
+  }
+
+  const fmt = (d: Date) =>
+    d.toLocaleDateString(undefined, { month: "short", day: "numeric" })
+  const label = committed
+    ? `${fmt(committed.start)} – ${fmt(committed.end)}`
+    : placeholder
+
+  return (
+    <Popover open={open} onOpenChange={handleOpenChange}>
+      <PopoverTrigger
+        render={
+          compact ? (
+            <Button
+              variant="outline"
+              size="icon"
+              disabled={disabled}
+              data-slot="window-range-picker-trigger"
+              aria-label={label}
+              title={label}
+              className={className}
+            >
+              <CalendarIcon />
+            </Button>
+          ) : (
+            <Button
+              variant="outline"
+              disabled={disabled}
+              data-slot="window-range-picker-trigger"
+              data-empty={!committed}
+              className={cn(
+                "w-56 justify-start font-normal data-[empty=true]:text-muted-foreground",
+                className
+              )}
+            >
+              <CalendarIcon data-icon="inline-start" />
+              {label}
+            </Button>
+          )
+        }
+      />
+      <PopoverContent data-slot="window-range-picker" align="start" className="w-auto p-0">
+        <WindowBandContext.Provider value={{ committed, preview }}>
+          <Calendar
+            mode="single"
+            selected={start}
+            onSelect={(date) => date && commit(date)}
+            disabled={isDayDisabled}
+            onDayMouseEnter={(date, m) => {
+              if (!m.disabled) setActive(date)
+            }}
+            onDayMouseLeave={() => setActive(undefined)}
+            onDayFocus={(date, m) => {
+              if (!m.disabled) setActive(date)
+            }}
+            onDayBlur={() => setActive(undefined)}
+            components={{ DayButton: WindowDayButton }}
+            autoFocus
+          />
+        </WindowBandContext.Provider>
+      </PopoverContent>
+    </Popover>
+  )
+}
+
+export { DatePicker, MonthRangePicker, WindowRangePicker }
+export type { MonthRange, WindowRange }
