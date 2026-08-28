@@ -73,7 +73,21 @@ export const changelog: ChangelogRelease[] = [
     "summary": null,
     "entries": [
       {
-        "sha": "508245b",
+        "sha": "dd33777",
+        "date": "2026-08-28",
+        "type": "fix",
+        "group": "fixed",
+        "scopes": [
+          "tabs"
+        ],
+        "summary": "Let an overflowing tab strip scroll itself",
+        "items": [
+          "tabs"
+        ],
+        "breaking": false
+      },
+      {
+        "sha": "334b04e",
         "date": "2026-08-28",
         "type": "fix",
         "group": "fixed",
@@ -85,7 +99,7 @@ export const changelog: ChangelogRelease[] = [
         "breaking": false
       },
       {
-        "sha": "8ed84e3",
+        "sha": "5f8c202",
         "date": "2026-08-28",
         "type": "fix",
         "group": "fixed",
@@ -99,7 +113,7 @@ export const changelog: ChangelogRelease[] = [
         "breaking": false
       },
       {
-        "sha": "50e44e3",
+        "sha": "f58c074",
         "date": "2026-08-28",
         "type": "fix",
         "group": "fixed",
@@ -111,7 +125,7 @@ export const changelog: ChangelogRelease[] = [
         "breaking": false
       },
       {
-        "sha": "6297b8c",
+        "sha": "8dff8ca",
         "date": "2026-08-28",
         "type": "fix",
         "group": "fixed",
@@ -123,7 +137,7 @@ export const changelog: ChangelogRelease[] = [
         "breaking": false
       },
       {
-        "sha": "6f28203",
+        "sha": "14ae4d9",
         "date": "2026-08-28",
         "type": "fix",
         "group": "fixed",
@@ -142,7 +156,7 @@ export const changelog: ChangelogRelease[] = [
         "breaking": false
       },
       {
-        "sha": "90a0425",
+        "sha": "6b7a3ab",
         "date": "2026-08-28",
         "type": "fix",
         "group": "fixed",
@@ -164,7 +178,7 @@ export const changelog: ChangelogRelease[] = [
         "breaking": false
       },
       {
-        "sha": "9050804",
+        "sha": "6dbe6d9",
         "date": "2026-08-28",
         "type": "fix",
         "group": "fixed",
@@ -179,7 +193,7 @@ export const changelog: ChangelogRelease[] = [
         "breaking": false
       },
       {
-        "sha": "26ebcec",
+        "sha": "bb6756b",
         "date": "2026-08-28",
         "type": "fix",
         "group": "fixed",
@@ -191,7 +205,7 @@ export const changelog: ChangelogRelease[] = [
         "breaking": false
       },
       {
-        "sha": "a8574e6",
+        "sha": "2a11c72",
         "date": "2026-08-28",
         "type": "fix",
         "group": "fixed",
@@ -203,7 +217,7 @@ export const changelog: ChangelogRelease[] = [
         "breaking": false
       },
       {
-        "sha": "28a7a6b",
+        "sha": "65c0e17",
         "date": "2026-08-28",
         "type": "fix",
         "group": "fixed",
