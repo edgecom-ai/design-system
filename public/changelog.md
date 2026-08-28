@@ -13,16 +13,17 @@ Every change to the Edgecom design system, derived from git history. Also publis
 
 ### Fixed
 
-- **docs:** Model the empty state in the destructive row-action demo ([`508245b`](https://github.com/edgecom-ai/design-system/commit/508245b))
-- **native-select:** Let a consumer's classes reach the select ([`8ed84e3`](https://github.com/edgecom-ai/design-system/commit/8ed84e3))
-- **registry:** Audit whole class expressions for type-token overrides ([`50e44e3`](https://github.com/edgecom-ai/design-system/commit/50e44e3))
-- **registry:** Ship the @types companion a dependency needs ([`6297b8c`](https://github.com/edgecom-ai/design-system/commit/6297b8c))
-- **badge, select, native-select:** Hover surfaces a consumer can re-tint in dark ([`6f28203`](https://github.com/edgecom-ai/design-system/commit/6f28203))
-- **theme:** Stop overriding the line-height and weight the type tokens own ([`90a0425`](https://github.com/edgecom-ai/design-system/commit/90a0425))
-- **button:** A quiet destructive variant, and hover surfaces a consumer can re-tint ([`9050804`](https://github.com/edgecom-ai/design-system/commit/9050804))
-- **registry:** Ship every dependency at the version it was built against ([`26ebcec`](https://github.com/edgecom-ai/design-system/commit/26ebcec))
-- **sortable:** Declare the react-dom it imports for its drag overlay ([`a8574e6`](https://github.com/edgecom-ai/design-system/commit/a8574e6))
-- **resizable:** Migrate to the react-resizable-panels v4 API ([`28a7a6b`](https://github.com/edgecom-ai/design-system/commit/28a7a6b))
+- **tabs:** Let an overflowing tab strip scroll itself ([`dd33777`](https://github.com/edgecom-ai/design-system/commit/dd33777))
+- **docs:** Model the empty state in the destructive row-action demo ([`334b04e`](https://github.com/edgecom-ai/design-system/commit/334b04e))
+- **native-select:** Let a consumer's classes reach the select ([`5f8c202`](https://github.com/edgecom-ai/design-system/commit/5f8c202))
+- **registry:** Audit whole class expressions for type-token overrides ([`f58c074`](https://github.com/edgecom-ai/design-system/commit/f58c074))
+- **registry:** Ship the @types companion a dependency needs ([`8dff8ca`](https://github.com/edgecom-ai/design-system/commit/8dff8ca))
+- **badge, select, native-select:** Hover surfaces a consumer can re-tint in dark ([`14ae4d9`](https://github.com/edgecom-ai/design-system/commit/14ae4d9))
+- **theme:** Stop overriding the line-height and weight the type tokens own ([`6b7a3ab`](https://github.com/edgecom-ai/design-system/commit/6b7a3ab))
+- **button:** A quiet destructive variant, and hover surfaces a consumer can re-tint ([`6dbe6d9`](https://github.com/edgecom-ai/design-system/commit/6dbe6d9))
+- **registry:** Ship every dependency at the version it was built against ([`bb6756b`](https://github.com/edgecom-ai/design-system/commit/bb6756b))
+- **sortable:** Declare the react-dom it imports for its drag overlay ([`2a11c72`](https://github.com/edgecom-ai/design-system/commit/2a11c72))
+- **resizable:** Migrate to the react-resizable-panels v4 API ([`65c0e17`](https://github.com/edgecom-ai/design-system/commit/65c0e17))
 
 ## August 27, 2026
 
