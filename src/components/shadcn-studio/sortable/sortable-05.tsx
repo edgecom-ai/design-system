@@ -37,7 +37,7 @@ interface TaskItem {
 const pendingTaskItems: TaskItem[] = [
   {
     id: 'pending-1',
-    title: 'Investigate peak demand alarm at HQ – Bay Street.',
+    title: 'Investigate peak demand alarm at HQ – Main Campus.',
     avatarSrc: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-1.png',
     avatarFallback: 'PS'
   },
@@ -70,7 +70,7 @@ const pendingTaskItems: TaskItem[] = [
 const completedTaskItems: TaskItem[] = [
   {
     id: 'completed-1',
-    title: 'Onboard Calgary Plant 2 meters.',
+    title: 'Onboard Plant 2 meters.',
     avatarSrc: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-6.png',
     avatarFallback: 'SP'
   },
@@ -88,13 +88,13 @@ const completedTaskItems: TaskItem[] = [
   },
   {
     id: 'completed-4',
-    title: 'Verify utility bill anomaly for Toronto DC.',
+    title: 'Verify utility bill anomaly for Distribution Center.',
     avatarSrc: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-3.png',
     avatarFallback: 'TC'
   },
   {
     id: 'completed-5',
-    title: 'Review tariff change for Alberta market.',
+    title: 'Review tariff change for West region market.',
     avatarSrc: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png',
     avatarFallback: 'KP'
   }

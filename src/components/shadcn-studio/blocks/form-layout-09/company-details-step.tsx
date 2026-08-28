@@ -181,7 +181,7 @@ const CompanyDetailsStep = ({
                   {...field}
                   id={field.name}
                   aria-invalid={fieldState.invalid}
-                  placeholder='100 Bay Street, Suite 400'
+                  placeholder='100 Main Street, Suite 400'
                 />
                 {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
               </Field>

@@ -36,9 +36,9 @@ declare module '@tanstack/react-table' {
 const initialData: Person[] = [
   {
     id: '1',
-    firstName: 'HQ – Bay Street',
+    firstName: 'HQ – Main Campus',
     lastName: 'MTR-1001',
-    email: 'priya.sharma@edgecom.ai',
+    email: 'priya.sharma@example.com',
     status: 'active',
     progress: 75
   },
@@ -46,23 +46,23 @@ const initialData: Person[] = [
     id: '2',
     firstName: 'Warehouse B',
     lastName: 'MTR-2004',
-    email: 'marcus.lee@edgecom.ai',
+    email: 'marcus.lee@example.com',
     status: 'inactive',
     progress: 45
   },
   {
     id: '3',
-    firstName: 'Toronto Distribution Center',
+    firstName: 'Distribution Center',
     lastName: 'MTR-2001',
-    email: 'rose.chan@edgecom.ai',
+    email: 'rose.chan@example.com',
     status: 'active',
     progress: 90
   },
   {
     id: '4',
-    firstName: 'Calgary Plant 2',
+    firstName: 'Plant 2',
     lastName: 'MTR-3001',
-    email: 'silas.reed@edgecom.ai',
+    email: 'silas.reed@example.com',
     status: 'pending',
     progress: 60
   },
@@ -70,7 +70,7 @@ const initialData: Person[] = [
     id: '5',
     firstName: 'Chiller Plant',
     lastName: 'MTR-4002',
-    email: 'ben.tan@edgecom.ai',
+    email: 'ben.tan@example.com',
     status: 'active',
     progress: 80
   }

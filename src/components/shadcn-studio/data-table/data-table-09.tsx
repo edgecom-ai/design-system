@@ -28,90 +28,90 @@ type Team = {
 
 const data: Team[] = [
   {
-    teamName: 'HQ – Bay Street',
+    teamName: 'HQ – Main Campus',
     department: 'Electricity',
-    location: 'Toronto',
+    location: 'East',
     nextMilestone: 'Launch DR Program',
     budget: 30000,
     members: [
       {
         name: 'Main Building Meter',
         role: 'Primary Feed',
-        email: 'MTR-1001@edgecom.ai',
+        email: 'MTR-1001@example.com',
         hireDate: '2020-01-15',
         dob: '480 kW'
       },
       {
         name: 'Chiller Submeter',
         role: 'HVAC Load',
-        email: 'MTR-1002@edgecom.ai',
+        email: 'MTR-1002@example.com',
         hireDate: '2021-03-22',
         dob: '180 kW'
       },
       {
         name: 'Lighting Submeter',
         role: 'Lighting Load',
-        email: 'MTR-1003@edgecom.ai',
+        email: 'MTR-1003@example.com',
         hireDate: '2022-07-30',
         dob: '95 kW'
       }
     ]
   },
   {
-    teamName: 'Toronto Distribution Center',
+    teamName: 'Distribution Center',
     department: 'Gas',
-    location: 'Mississauga',
+    location: 'East',
     nextMilestone: 'Complete M&V Baseline',
     budget: 50000,
     members: [
       {
         name: 'Boiler Meter',
         role: 'Heating Load',
-        email: 'MTR-2001@edgecom.ai',
+        email: 'MTR-2001@example.com',
         hireDate: '2019-05-10',
         dob: '220 GJ'
       },
       {
         name: 'Process Gas Meter',
         role: 'Process Load',
-        email: 'MTR-2002@edgecom.ai',
+        email: 'MTR-2002@example.com',
         hireDate: '2020-08-15',
         dob: '140 GJ'
       },
       {
         name: 'Backup Generator',
         role: 'Standby Load',
-        email: 'MTR-2003@edgecom.ai',
+        email: 'MTR-2003@example.com',
         hireDate: '2021-01-20',
         dob: '60 GJ'
       }
     ]
   },
   {
-    teamName: 'Calgary Plant 2',
+    teamName: 'Plant 2',
     department: 'Water',
-    location: 'Calgary',
+    location: 'West',
     nextMilestone: 'Reduce Peak Demand',
     budget: 40000,
     members: [
       {
         name: 'Intake Meter',
         role: 'Supply Line',
-        email: 'MTR-3001@edgecom.ai',
+        email: 'MTR-3001@example.com',
         hireDate: '2021-05-12',
         dob: '1,200 m³'
       },
       {
         name: 'Cooling Tower Meter',
         role: 'Cooling Load',
-        email: 'MTR-3002@edgecom.ai',
+        email: 'MTR-3002@example.com',
         hireDate: '2020-11-01',
         dob: '640 m³'
       },
       {
         name: 'Wash Bay Submeter',
         role: 'Process Load',
-        email: 'MTR-3003@edgecom.ai',
+        email: 'MTR-3003@example.com',
         hireDate: '2021-09-15',
         dob: '210 m³'
       }

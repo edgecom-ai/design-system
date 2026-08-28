@@ -59,7 +59,7 @@ const NotificationDropdown = ({ trigger, defaultOpen, align = 'end' }: Props) =>
                 <AvatarFallback>MB</AvatarFallback>
               </Avatar>
               <div className='flex w-full flex-col items-start'>
-                <span className='text-base font-medium'>Peak demand alert — Toronto Distribution Center</span>
+                <span className='text-base font-medium'>Peak demand alert — Distribution Center</span>
                 <div className='flex items-center gap-2.5'>
                   <span className='text-muted-foreground text-sm'>12 Minutes ago</span>
                   <div className='bg-primary/30 size-1.5 rounded-full' />
@@ -78,7 +78,7 @@ const NotificationDropdown = ({ trigger, defaultOpen, align = 'end' }: Props) =>
                 <AvatarFallback>AB</AvatarFallback>
               </Avatar>
               <div className='flex w-full flex-col items-start'>
-                <span className='text-base font-medium'>Meter offline — Calgary Plant 2</span>
+                <span className='text-base font-medium'>Meter offline — Plant 2</span>
                 <div className='flex items-center gap-2.5'>
                   <span className='text-muted-foreground text-sm'>27 Minutes ago</span>
                   <div className='bg-primary/30 size-1.5 rounded-full' />
@@ -101,7 +101,7 @@ const NotificationDropdown = ({ trigger, defaultOpen, align = 'end' }: Props) =>
                 <div className='flex items-center gap-2.5'>
                   <span className='text-muted-foreground text-sm'>2 hours ago</span>
                   <div className='bg-primary/30 size-1.5 rounded-full' />
-                  <span className='text-muted-foreground text-sm'>IESO Ontario program</span>
+                  <span className='text-muted-foreground text-sm'>Grid operator program</span>
                 </div>
                 <div className='mt-3 flex items-center gap-4'>
                   <Button variant='secondary' size='sm'>
@@ -120,7 +120,7 @@ const NotificationDropdown = ({ trigger, defaultOpen, align = 'end' }: Props) =>
                 <AvatarFallback>J</AvatarFallback>
               </Avatar>
               <div className='flex w-full flex-col items-start'>
-                <span className='text-base font-medium'>Bill anomaly detected — HQ Bay Street</span>
+                <span className='text-base font-medium'>Bill anomaly detected — HQ Main Campus</span>
                 <div className='flex items-center gap-2.5'>
                   <span className='text-muted-foreground text-sm'>6 hours ago</span>
                   <div className='bg-primary/30 size-1.5 rounded-full' />
@@ -198,7 +198,7 @@ const NotificationDropdown = ({ trigger, defaultOpen, align = 'end' }: Props) =>
                 <AvatarFallback>R</AvatarFallback>
               </Avatar>
               <div className='flex w-full flex-col items-start'>
-                <span className='text-base font-medium'>New DR program invitation — AESO Alberta</span>
+                <span className='text-base font-medium'>New DR program invitation — Western region</span>
                 <div className='flex items-center gap-2.5'>
                   <span className='text-muted-foreground text-sm'>8 hours ago</span>
                   <div className='bg-primary/30 size-1.5 rounded-full' />

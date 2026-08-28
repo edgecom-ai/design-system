@@ -27,7 +27,7 @@ const DialogStickyFooterDemo = () => {
                     <strong>Meter Name:</strong> Main Building – Utility Feed
                   </p>
                   <p>
-                    The Main Building utility feed is the primary electricity meter for HQ – Bay Street, capturing
+                    The Main Building utility feed is the primary electricity meter for HQ – Main Campus, capturing
                     interval consumption and demand for the whole facility.
                   </p>
                 </div>
@@ -41,7 +41,7 @@ const DialogStickyFooterDemo = () => {
                     <li>Peak demand: 480 kW</li>
                     <li>Rated capacity: 750 kVA</li>
                     <li>Voltage: 600 V, 3-phase</li>
-                    <li>Utility: Toronto Hydro</li>
+                    <li>Utility: North Grid Utility</li>
                   </ul>
                 </div>
                 <div className='space-y-1'>

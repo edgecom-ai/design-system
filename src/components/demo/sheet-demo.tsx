@@ -20,7 +20,7 @@ export function SheetDemo() {
       <SheetTrigger render={<Button variant="outline">Site details</Button>} />
       <SheetContent side="right">
         <SheetHeader>
-          <SheetTitle>Toronto DC</SheetTitle>
+          <SheetTitle>Distribution Center</SheetTitle>
           <SheetDescription>
             Review and update this site&apos;s metering configuration.
           </SheetDescription>
@@ -29,11 +29,11 @@ export function SheetDemo() {
         <div className="flex flex-col gap-4 px-4">
           <div className="flex flex-col gap-2">
             <Label htmlFor="site-name">Site name</Label>
-            <Input id="site-name" defaultValue="Toronto DC" />
+            <Input id="site-name" defaultValue="Distribution Center" />
           </div>
           <div className="flex flex-col gap-2">
             <Label htmlFor="site-address">Address</Label>
-            <Input id="site-address" defaultValue="123 King St W, Toronto, ON" />
+            <Input id="site-address" defaultValue="123 Industrial Ave" />
           </div>
           <div className="flex flex-col gap-2">
             <Label htmlFor="site-capacity">Peak capacity (kW)</Label>

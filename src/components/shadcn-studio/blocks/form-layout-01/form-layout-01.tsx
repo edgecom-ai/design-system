@@ -36,12 +36,12 @@ const FormLayout = () => {
 
         <Field className='gap-2 sm:col-span-2'>
           <FieldLabel htmlFor='multi-step-personal-info-address'>Address</FieldLabel>
-          <Input id='multi-step-personal-info-address' placeholder='100 Bay Street' />
+          <Input id='multi-step-personal-info-address' placeholder='100 Main Street' />
         </Field>
 
         <Field className='gap-2 sm:col-span-2'>
           <FieldLabel htmlFor='multi-step-personal-info-landmark'>Landmark</FieldLabel>
-          <Input id='multi-step-personal-info-landmark' placeholder='Near Union Station, Toronto' />
+          <Input id='multi-step-personal-info-landmark' placeholder='Near Central Station' />
         </Field>
 
         <Field className='gap-2'>

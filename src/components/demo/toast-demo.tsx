@@ -25,7 +25,7 @@ export function ToastDemo() {
         variant="outline"
         onClick={() =>
           toast.success("Meter connected", {
-            description: "M-204 at Toronto DC is now reporting interval data.",
+            description: "M-204 at Distribution Center is now reporting interval data.",
           })
         }
       >
@@ -35,7 +35,7 @@ export function ToastDemo() {
         variant="outline"
         onClick={() =>
           toast.warning("Approaching peak", {
-            description: "Calgary Plant is within 5% of its demand threshold.",
+            description: "Plant 1 is within 5% of its demand threshold.",
           })
         }
       >

@@ -9,7 +9,7 @@ const InputDisabledDemo = () => {
   return (
     <div className='w-full max-w-xs space-y-2'>
       <Label htmlFor={id}>Work email</Label>
-      <Input id={id} type='email' placeholder='name@edgecom.ai' disabled />
+      <Input id={id} type='email' placeholder='name@example.com' disabled />
     </div>
   )
 }

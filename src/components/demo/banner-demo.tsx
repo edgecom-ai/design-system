@@ -10,7 +10,7 @@ export function BannerDemo() {
               href="#"
               className="font-semibold underline-offset-4 hover:underline"
             >
-              Introducing the AI CoPilot for energy insights
+              Introducing AI-assisted energy insights
             </a>
             <span className="hidden sm:inline">
               {" "}

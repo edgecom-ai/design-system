@@ -30,7 +30,7 @@ const ActivityDialog = ({ defaultOpen = false, trigger }: Props) => {
             <div className='flex w-full flex-col items-start gap-2.5'>
               <div className='text-muted-foreground flex flex-col items-start text-sm'>
                 <p>
-                  <span className='text-foreground font-semibold'>Joe Lincoln</span> mentioned you on the Toronto DC peak alert
+                  <span className='text-foreground font-semibold'>Joe Lincoln</span> mentioned you on the Distribution Center peak alert
                 </p>
                 <p>18 mins ago</p>
               </div>

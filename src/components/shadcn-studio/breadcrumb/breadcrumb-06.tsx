@@ -31,7 +31,7 @@ const BreadcrumbWithDropdownDemo = () => {
         <BreadcrumbItem>
           <BreadcrumbLink href='#'>
             <Badge variant='outline' className='text-muted-foreground hover:text-foreground'>
-              HQ – Bay Street
+              HQ – Main Campus
             </Badge>
           </BreadcrumbLink>
         </BreadcrumbItem>

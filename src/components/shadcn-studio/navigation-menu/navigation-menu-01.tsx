@@ -33,7 +33,7 @@ const NavigationMenuDemo = () => {
                     <div className='flex flex-col px-1'>
                       <div className='font-medium'>pTrack®</div>
                       <div className='text-muted-foreground text-sm'>
-                        Monitor peak demand and production for the Ontario and Alberta markets.
+                        Monitor peak demand and production for regional energy markets.
                       </div>
                     </div>
                   </NavigationMenuLink>

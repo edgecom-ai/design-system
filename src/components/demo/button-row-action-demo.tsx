@@ -39,9 +39,9 @@ import {
 } from "@/components/ui/tooltip"
 
 const initialSites = [
-  { name: "Toronto Distribution Center", meters: 14, load: "1.24 MW" },
-  { name: "Hamilton Manufacturing Plant", meters: 9, load: "982 kW" },
-  { name: "Mississauga Cold Storage", meters: 6, load: "410 kW" },
+  { name: "Distribution Center", meters: 14, load: "1.24 MW" },
+  { name: "Manufacturing Plant", meters: 9, load: "982 kW" },
+  { name: "Cold Storage Facility", meters: 6, load: "410 kW" },
 ]
 
 export function ButtonRowActionDemo() {

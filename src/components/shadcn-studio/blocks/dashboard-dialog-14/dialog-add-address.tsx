@@ -39,10 +39,10 @@ const countries = [
         <span className='flex items-center gap-2'>
           <img
             src='https://cdn.shadcnstudio.com/ss-assets/flags/india.png'
-            alt={`Ontario region`}
+            alt={`East region`}
             className='h-4 w-5 shrink-0'
           />
-          <span className='truncate'>Ontario</span>
+          <span className='truncate'>East</span>
         </span>
       </>
     )
@@ -54,10 +54,10 @@ const countries = [
         <span className='flex items-center gap-2'>
           <img
             src='https://cdn.shadcnstudio.com/ss-assets/flags/china.png'
-            alt={`Alberta region`}
+            alt={`West region`}
             className='h-4 w-5 shrink-0'
           />
-          <span className='truncate'>Alberta</span>
+          <span className='truncate'>West</span>
         </span>
       </>
     )
@@ -84,10 +84,10 @@ const countries = [
         <span className='flex items-center gap-2'>
           <img
             src='https://cdn.shadcnstudio.com/ss-assets/flags/serbia.png'
-            alt={`Quebec region`}
+            alt={`Central region`}
             className='h-4 w-5 shrink-0'
           />
-          <span className='truncate'>Quebec</span>
+          <span className='truncate'>Central</span>
         </span>
       </>
     )
@@ -275,7 +275,7 @@ const AddAddressDialog = ({ defaultOpen = false, trigger, className }: Props) =>
 
               <div className='space-y-2'>
                 <Label htmlFor='state'>Utility provider</Label>
-                <Input id='state' type='text' placeholder='Toronto Hydro' />
+                <Input id='state' type='text' placeholder='North Grid Utility' />
               </div>
 
               <div className='space-y-2'>

@@ -11,7 +11,7 @@ const MAX = 5
 
 const TagsInputEmailsDemo = () => {
   const id = useId()
-  const [emails, setEmails] = useState<string[]>(['ops@edgecom.ai'])
+  const [emails, setEmails] = useState<string[]>(['ops@example.com'])
 
   return (
     <Field className='w-full max-w-xs'>

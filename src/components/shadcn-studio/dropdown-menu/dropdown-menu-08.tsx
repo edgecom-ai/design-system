@@ -26,7 +26,7 @@ const DropdownMenuUserProfileDemo = () => {
             </Avatar>
             <div className='flex flex-1 flex-col'>
               <span className='text-popover-foreground'>Phillip George</span>
-              <span className='text-muted-foreground text-xs'>phillip@edgecom.ai</span>
+              <span className='text-muted-foreground text-xs'>phillip@example.com</span>
             </div>
           </DropdownMenuLabel>{' '}
         </DropdownMenuGroup>{' '}

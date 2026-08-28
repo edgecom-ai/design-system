@@ -66,7 +66,7 @@ export function SidebarDemo() {
           Portfolio overview
         </h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          Toronto Distribution Center · 14 metered sites
+          Distribution Center · 14 metered sites
         </p>
       </SidebarInset>
     </SidebarProvider>

@@ -18,38 +18,38 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 const data: Payment[] = [
   {
     id: '1',
-    name: 'HQ – Bay Street',
+    name: 'HQ – Main Campus',
     amount: 8420,
     status: 'success',
-    email: 'priya.sharma@edgecom.ai'
+    email: 'priya.sharma@example.com'
   },
   {
     id: '2',
-    name: 'Toronto Distribution Center',
+    name: 'Distribution Center',
     amount: 12480,
     status: 'success',
-    email: 'marcus.lee@edgecom.ai'
+    email: 'marcus.lee@example.com'
   },
   {
     id: '3',
     name: 'Warehouse B',
     amount: 4655,
     status: 'processing',
-    email: 'rose.chan@edgecom.ai'
+    email: 'rose.chan@example.com'
   },
   {
     id: '4',
-    name: 'Calgary Plant 2',
+    name: 'Plant 2',
     amount: 9874,
     status: 'success',
-    email: 'silas.reed@edgecom.ai'
+    email: 'silas.reed@example.com'
   },
   {
     id: '5',
     name: 'Chiller Plant',
     amount: 5410,
     status: 'failed',
-    email: 'ben.tan@edgecom.ai'
+    email: 'ben.tan@example.com'
   }
 ]
 

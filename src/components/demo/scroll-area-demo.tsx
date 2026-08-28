@@ -26,7 +26,7 @@ export function ScrollAreaDemo() {
     <ScrollArea className="h-56 w-64 rounded-lg border border-border">
       <div className="p-3">
         <p className="mb-2 px-2 text-xs font-medium text-muted-foreground">
-          Toronto DC — meters
+          Distribution Center — meters
         </p>
         <ul className="flex flex-col gap-0.5 text-sm">
           {meters.map((m) => (

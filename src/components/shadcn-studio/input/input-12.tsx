@@ -12,7 +12,7 @@ const InputErrorDemo = () => {
       <Input
         id={id}
         type='email'
-        placeholder='name@edgecom.ai'
+        placeholder='name@example.com'
         className='peer'
         defaultValue='invalid@edgecom'
         aria-invalid

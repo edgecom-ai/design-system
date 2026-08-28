@@ -44,7 +44,7 @@ const defaultOptionGroups: OptionGroup[] = [
     id: '3',
     name: 'Sites',
     values: [
-      { id: '3-1', value: 'HQ – Bay Street' },
+      { id: '3-1', value: 'HQ – Main Campus' },
       { id: '3-2', value: 'Warehouse B' },
       { id: '3-3', value: 'Chiller Plant' }
     ]

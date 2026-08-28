@@ -11,7 +11,7 @@ const InputRequiredDemo = () => {
       <Label htmlFor={id} className='gap-1'>
         Work email <span className='text-destructive'>*</span>
       </Label>
-      <Input id={id} type='email' placeholder='name@edgecom.ai' required />
+      <Input id={id} type='email' placeholder='name@example.com' required />
     </div>
   )
 }

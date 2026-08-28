@@ -28,14 +28,14 @@ const tabs = [
     content: [
       {
         sender: 'DR Event #418',
-        senderContent: 'Toronto Distribution Center, ON — 480 kW target',
-        receiver: 'IESO Ontario',
+        senderContent: 'Distribution Center, East — 480 kW target',
+        receiver: 'Regional grid operator',
         receiverContent: 'Curtailment window 4:00 PM – 7:00 PM'
       },
       {
         sender: 'DR Event #421',
-        senderContent: 'Calgary Plant 2, AB — 320 kW target',
-        receiver: 'AESO Alberta',
+        senderContent: 'Plant 2, West — 320 kW target',
+        receiver: 'Western grid operator',
         receiverContent: 'Curtailment window 5:00 PM – 8:00 PM'
       }
     ]
@@ -53,7 +53,7 @@ const tabs = [
       {
         sender: 'DR Event #405',
         senderContent: 'Dispatch notice sent to site operator',
-        receiver: 'HQ – Bay Street',
+        receiver: 'HQ – Main Campus',
         receiverContent: 'Load shed confirmed today at 12:30 PM'
       }
     ]
