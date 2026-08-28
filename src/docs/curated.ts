@@ -376,7 +376,8 @@ export const curatedApi: Record<string, CuratedApi> = {
       "A tabbed interface: a List of Triggers reveals matching Content panels.",
     parts: {
       Tabs: "Root managing the orientation and active tab value.",
-      TabsList: "Container arranging the tab triggers.",
+      TabsList:
+        "Container arranging the tab triggers. It is also the scroll port: a strip wider than its container scrolls inside the list — horizontally when horizontal, vertically when vertical — instead of widening the page, fades whichever edge still hides a tab, and scrolls a newly activated tab into view. Don't wrap it in your own overflow container; that would put the scroll offset on the wrong side of the active bar.",
       TabsTrigger: "Clickable tab that activates its panel.",
       TabsIndicator:
         "Optional single bar that slides to the active tab. Render it as the last child of TabsList; the line variant's per-trigger bars switch off automatically when it is present.",

@@ -235,6 +235,7 @@ import DrawerWithSides from "@/components/shadcn-studio/drawer/drawer-04";
 import AnimatedUnderlineTabsDemo from "@/components/shadcn-studio/tabs/tabs-29";
 import AnimatedTabsDemo from "@/components/shadcn-studio/tabs/tabs-27";
 import { TabsDemo } from "@/components/demo/tabs-demo";
+import { TabsScrollableDemo } from "@/components/demo/tabs-scrollable-demo";
 import AccordionDemo from "@/components/shadcn-studio/accordion/accordion-01";
 import AccordionOutlineDemo from "@/components/shadcn-studio/accordion/accordion-09";
 import AccordionMultilevelIconDemo from "@/components/shadcn-studio/accordion/accordion-16";
@@ -2951,6 +2952,14 @@ export const sections: Section[] = [
         description: "Standard tabs — the active tab gets a raised surface.",
         preview: <TabsDemo />,
         source: dm("tabs-demo"),
+      },
+      {
+        id: "tabs-scrollable",
+        name: "Overflowing strip",
+        description:
+          "More tabs than the container fits — the list scrolls itself instead of widening the page, fades the edge that still hides a tab, and pulls a newly activated tab into view.",
+        preview: <TabsScrollableDemo />,
+        source: dm("tabs-scrollable-demo"),
       },
       {
         id: "tabs-animated-underline",
