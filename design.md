@@ -130,6 +130,7 @@ Colors are semantic tokens. Reach for the token by **role**, not by how it looks
 - **Brand / neutral:** `primary` (+ `-foreground`, `-emphasis`, `-subtle`, `-subtle-foreground`), `secondary`, `muted`, `accent`.
 - **Status:** `success`, `warning`, `info`, `destructive` — each with the full set `{ base, -foreground, -emphasis, -subtle, -subtle-foreground }`.
 - **Form / outline:** `border`, `input`, `ring`.
+- **Interaction:** `ghost-hover`, `outline-surface`, `outline-hover` — the resting and hover surfaces of the quiet control variants (`button` `ghost` / `outline`). Each is one theme-aware token rather than a light value plus a `dark:` override, so an app can re-tint a quiet control with a single `bg-*` / `hover:bg-*` and have it win in **both** themes.
 - **Charts / commodities:** `chart-1..5` alias the `500` step of the commodity ramps `chart-{electricity,water,gas,temperature,emissions}-{100..900}` (mode-independent — one hue per commodity).
 - **Sidebar:** `sidebar`, `sidebar-foreground`, `sidebar-primary`, `sidebar-accent`, `sidebar-border`, `sidebar-ring` (+ foregrounds).
 
@@ -234,6 +235,7 @@ Radius scale, all derived from `--radius` (0.625rem): `sm` (0.6×), `md` (0.8×)
 
 - **Real hover + focus states, always.** The `button` ships them; any custom clickable control must have a visible `hover:` state and a focus ring (`ring`). Never a flat, stateless button. Buttons must show `cursor: pointer`.
 - **Secondary/utility actions use icon buttons.** On table toolbars and page headers, secondary actions (export, upload, download, refresh, filter, print, …) are **icon buttons** (`size="icon-sm"`/`icon-lg`, usually `outline`/`ghost`) with an `aria-label` + ideally a `tooltip` — not full text buttons. Reserve a labeled button for the single primary action. (This is chrome — distinct from the no-icons-in-cells rule.)
+- **Destructive row actions use the `ghost-destructive` button variant.** A delete/remove action inside a table row has to stay quiet until the pointer reaches it: `destructive` is a solid fill and `destructive-subtle` a permanent tint, so either paints a red chip on every row. `ghost-destructive` is the quiet form — `destructive-emphasis` label at rest, `destructive-subtle` surface with `destructive-subtle-foreground` label on hover — and it already handles all four states in both themes. **Don't hand-compose it from `ghost` plus destructive utilities**: `ghost` re-asserts `hover:text-foreground`, so the label goes neutral at exactly the moment the tint turns red. (Still gate the action behind an `alert-dialog` — see *Destructive actions*.)
 
 ### Overlays — dialog vs. sheet
 
@@ -320,7 +322,7 @@ Never a **zero gap** — touching bars read as one solid block. **Round only the
 - Show inline, specific validation errors with `aria-invalid`.
 - Move secondary/detail info into tooltips/hover-cards in dense UI.
 - Let tooltips shrink-wrap (one line per row) and flip/shift within the viewport; keep them portaled so no container clips them.
-- Use icon buttons for secondary table/page actions.
+- Use icon buttons for secondary table/page actions, and `ghost-destructive` for a quiet destructive row action.
 - Give every chart the standard controls by default — one shared date range, a smooth/step toggle, statistical overlays, and an export dropdown.
 - Use the same component for the same job everywhere (e.g. one series-selector control shared across all charts).
 - Size bar width and gap to the data density (bar ~75% of its slot; gap ≥ 2px; cap width for few bars; aggregate or scroll past ~60).
@@ -342,6 +344,7 @@ Never a **zero gap** — touching bars read as one solid block. **Round only the
 - Don't leave async failures as a blank screen or endless spinner — show an error + retry.
 - Don't pin sizes to px; don't invent new sizes or override a component's built-in classes — use its variants / `size` props.
 - Don't ship a button or clickable control without a visible hover + focus state (and `cursor: pointer`).
+- Don't hand-compose a quiet destructive button from `ghost` + destructive utilities — use the `ghost-destructive` variant, which keeps the label red on hover.
 - Don't cram a long, many-field form into a centered modal — use a right `sheet`.
 - Don't add a checkmark to the selected item in a single-select `select` — the trigger value plus the highlighted option already show it; reserve checks for multi-select.
 - Don't ship a dialog/sheet without its top-right close (X), or move it off the top-right corner (`showCloseButton={false}`) — only the `alert-dialog` omits it.

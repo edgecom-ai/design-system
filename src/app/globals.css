@@ -81,6 +81,10 @@
   --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
   --color-muted: var(--muted);
+  /* Surfaces of the quiet control variants (button ghost / outline) */
+  --color-ghost-hover: var(--ghost-hover);
+  --color-outline-surface: var(--outline-surface);
+  --color-outline-hover: var(--outline-hover);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-secondary: var(--secondary);
   --color-primary-foreground: var(--primary-foreground);
@@ -192,6 +196,17 @@
   --border: oklch(0.922 0.005 254);
   --input: oklch(0.922 0.005 254);
   --ring: oklch(0.514 0.161 254.3);
+  /* Surfaces of the quiet control variants (button ghost / outline). One token
+     per surface, so each variant carries a single unmodified `bg-*`/`hover:bg-*`
+     that tailwind-merge can resolve against a consumer's own colour — a
+     `dark:`-modified class shares no modifier set with their override, so it
+     survived the merge and then won in dark on source order.
+     The same order decides `dark:bg-*` vs `hover:bg-*`: both weigh the same, so
+     a `dark:` resting surface would outrank the hover and the control would stop
+     reacting in dark. Both surfaces are tokens for that reason. */
+  --outline-surface: var(--background);
+  --ghost-hover: var(--muted);
+  --outline-hover: var(--muted);
   /* Commodity tint ramps — one hue per commodity, mode-independent */
   --chart-electricity-100: oklch(0.94 0.05 75); /* amber */
   --chart-electricity-300: oklch(0.86 0.11 75);
@@ -287,6 +302,11 @@
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.62 0.16 254.3);
+  /* Dark keeps the translucent surfaces the variants used to apply themselves
+     with `dark:` modifiers — see :root for why they live in tokens now */
+  --outline-surface: color-mix(in oklab, var(--input) 30%, transparent);
+  --ghost-hover: color-mix(in oklab, var(--muted) 50%, transparent);
+  --outline-hover: color-mix(in oklab, var(--input) 50%, transparent);
   /* chart tokens are mode-independent — defined once in :root */
   --sidebar: oklch(0.205 0.008 254);
   --sidebar-foreground: oklch(0.985 0 0);

@@ -168,6 +168,7 @@ import { ButtonVariantsDemo } from "@/components/demo/button-variants-demo";
 import { ButtonSizesDemo } from "@/components/demo/button-sizes-demo";
 import { ButtonIconsDemo } from "@/components/demo/button-icons-demo";
 import { ButtonIconButtonsDemo } from "@/components/demo/button-icon-buttons-demo";
+import { ButtonRowActionDemo } from "@/components/demo/button-row-action-demo";
 import { ButtonLoadingDemo } from "@/components/demo/button-loading-demo";
 import { ChartRampDemo } from "@/components/demo/chart-ramp-demo";
 import { ContextMenuDemo } from "@/components/demo/context-menu-demo";
@@ -1336,7 +1337,7 @@ export const sections: Section[] = [
       {
         id: "button-variants",
         name: "Variants",
-        description: "The full set of visual styles: neutral variants, then each semantic in a solid fill and a subtle tint.",
+        description: "The full set of visual styles: neutral variants (including the quiet ghost-destructive), then each semantic in a solid fill and a subtle tint.",
         preview: <ButtonVariantsDemo />,
         source: dm("button-variants-demo"),
       },
@@ -1360,6 +1361,13 @@ export const sections: Section[] = [
         description: "Square icon-only buttons across sizes, with accessible labels.",
         preview: <ButtonIconButtonsDemo />,
         source: dm("button-icon-buttons-demo"),
+      },
+      {
+        id: "button-row-actions",
+        name: "Destructive row action",
+        description: "Quiet ghost-destructive icon buttons in a table row — red at rest, tinted on hover, and gated behind a confirmation.",
+        preview: <ButtonRowActionDemo />,
+        source: dm("button-row-action-demo"),
       },
       {
         id: "button-loading",
