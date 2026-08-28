@@ -1,5 +1,6 @@
 // Fails the registry build when a built item imports something its own manifest
-// doesn't declare, or declares a registry dependency the registry never emits.
+// doesn't declare, declares a dependency without a version range, or declares a
+// registry dependency the registry never emits.
 // `shadcn add <item>` installs exactly what the item declares, so an undeclared
 // import ships a package that can't resolve in the consumer's tree (#35) — and a
 // declared-but-missing sibling is a dependency the CLI follows to nothing.
@@ -15,6 +16,7 @@ import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { specifiersOf, classify } from "./lib/imports.mjs";
+import { pkgName, UNPINNED } from "./lib/deps.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const builtDir = resolve(root, "public/r");
@@ -25,7 +27,8 @@ const items = files.map((f) => JSON.parse(readFileSync(resolve(builtDir, f), "ut
 const known = new Set(items.map((i) => i.name));
 
 for (const item of items) {
-  const deps = new Set(item.dependencies ?? []);
+  const declared = item.dependencies ?? [];
+  const deps = new Set(declared.map(pkgName));
   // Registry deps are full addresses (`edgecom-ai/design-system/button`).
   const registryDeps = new Set((item.registryDependencies ?? []).map((d) => d.split("/").pop()));
   const undeclared = { npm: new Set(), registry: new Set() };
@@ -38,8 +41,8 @@ for (const item of items) {
       } else if (kind === "pkg" && !deps.has(name)) {
         undeclared.npm.add(name);
       }
-      // "local" (@/lib/utils comes via the theme item) and "ambient" (React,
-      // provided by the consuming app) are never declared.
+      // "local" (@/lib/utils comes via the theme item) and "ambient" (React
+      // itself, which every consumer has by definition) are never declared.
     }
   }
 
@@ -47,7 +50,12 @@ for (const item of items) {
   // as hard as a missing one.
   const dangling = [...registryDeps].filter((d) => !known.has(d));
 
-  if (undeclared.npm.size || undeclared.registry.size || dangling.length) {
+  // A dependency with no version range installs whatever `latest` is the day a
+  // consumer runs `shadcn add` — which is how a component written against v3 of
+  // a package met v4 in someone else's tree (#40).
+  const unpinned = declared.filter((d) => pkgName(d) === d && !UNPINNED.has(d));
+
+  if (undeclared.npm.size || undeclared.registry.size || dangling.length || unpinned.length) {
     problems.push(
       `  ${item.name}: ` +
         [
@@ -56,6 +64,7 @@ for (const item of items) {
             ? `undeclared registryDependencies ${[...undeclared.registry].join(", ")}`
             : "",
           dangling.length ? `registryDependencies with no item: ${dangling.join(", ")}` : "",
+          unpinned.length ? `dependencies with no version range: ${unpinned.join(", ")}` : "",
         ]
           .filter(Boolean)
           .join(" · ")
@@ -73,5 +82,5 @@ if (problems.length) {
 }
 
 console.log(
-  `check-registry — ${items.length} built items declare every import, and every registry dependency resolves`
+  `check-registry — ${items.length} built items declare every import at a pinned version, and every registry dependency resolves`
 );

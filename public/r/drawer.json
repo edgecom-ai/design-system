@@ -4,7 +4,7 @@
   "title": "Drawer",
   "description": "The Edgecom Drawer component.",
   "dependencies": [
-    "@base-ui/react"
+    "@base-ui/react@^1.6.0"
   ],
   "registryDependencies": [
     "edgecom-ai/design-system/theme"

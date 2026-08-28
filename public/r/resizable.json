@@ -4,8 +4,8 @@
   "title": "Resizable",
   "description": "The Edgecom Resizable component.",
   "dependencies": [
-    "lucide-react",
-    "react-resizable-panels"
+    "lucide-react@^1.23.0",
+    "react-resizable-panels@^4.12.3"
   ],
   "registryDependencies": [
     "edgecom-ai/design-system/theme"

@@ -4,8 +4,8 @@
   "title": "Phone Input",
   "description": "The Edgecom Phone Input component.",
   "dependencies": [
-    "lucide-react",
-    "react-phone-number-input"
+    "lucide-react@^1.23.0",
+    "react-phone-number-input@^3.4.17"
   ],
   "registryDependencies": [
     "edgecom-ai/design-system/theme",

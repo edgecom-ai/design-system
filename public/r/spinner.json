@@ -4,7 +4,7 @@
   "title": "Spinner",
   "description": "The Edgecom Spinner component.",
   "dependencies": [
-    "lucide-react"
+    "lucide-react@^1.23.0"
   ],
   "registryDependencies": [
     "edgecom-ai/design-system/theme"

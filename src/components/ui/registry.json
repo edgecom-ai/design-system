@@ -7,8 +7,8 @@
       "title": "Accordion",
       "description": "The Edgecom Accordion component.",
       "dependencies": [
-        "@base-ui/react",
-        "lucide-react"
+        "@base-ui/react@^1.6.0",
+        "lucide-react@^1.23.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -26,7 +26,7 @@
       "title": "Alert",
       "description": "The Edgecom Alert component.",
       "dependencies": [
-        "class-variance-authority"
+        "class-variance-authority@^0.7.1"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -44,7 +44,7 @@
       "title": "Alert Dialog",
       "description": "The Edgecom Alert Dialog component.",
       "dependencies": [
-        "@base-ui/react"
+        "@base-ui/react@^1.6.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme",
@@ -63,7 +63,7 @@
       "title": "Avatar",
       "description": "The Edgecom Avatar component.",
       "dependencies": [
-        "@base-ui/react"
+        "@base-ui/react@^1.6.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -81,8 +81,8 @@
       "title": "Badge",
       "description": "The Edgecom Badge component.",
       "dependencies": [
-        "@base-ui/react",
-        "class-variance-authority"
+        "@base-ui/react@^1.6.0",
+        "class-variance-authority@^0.7.1"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -100,7 +100,7 @@
       "title": "Banner",
       "description": "The Edgecom Banner component.",
       "dependencies": [
-        "class-variance-authority"
+        "class-variance-authority@^0.7.1"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -118,8 +118,8 @@
       "title": "Breadcrumb",
       "description": "The Edgecom Breadcrumb component.",
       "dependencies": [
-        "@base-ui/react",
-        "lucide-react"
+        "@base-ui/react@^1.6.0",
+        "lucide-react@^1.23.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -137,8 +137,8 @@
       "title": "Button",
       "description": "The Edgecom Button component.",
       "dependencies": [
-        "@base-ui/react",
-        "class-variance-authority"
+        "@base-ui/react@^1.6.0",
+        "class-variance-authority@^0.7.1"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -156,8 +156,8 @@
       "title": "Button Group",
       "description": "The Edgecom Button Group component.",
       "dependencies": [
-        "@base-ui/react",
-        "class-variance-authority"
+        "@base-ui/react@^1.6.0",
+        "class-variance-authority@^0.7.1"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme",
@@ -176,8 +176,8 @@
       "title": "Calendar",
       "description": "The Edgecom Calendar component.",
       "dependencies": [
-        "lucide-react",
-        "react-day-picker"
+        "lucide-react@^1.23.0",
+        "react-day-picker@^10.0.1"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme",
@@ -227,7 +227,7 @@
       "title": "Chart",
       "description": "The Edgecom Chart component.",
       "dependencies": [
-        "recharts"
+        "recharts@^3.8.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -245,8 +245,8 @@
       "title": "Checkbox",
       "description": "The Edgecom Checkbox component.",
       "dependencies": [
-        "@base-ui/react",
-        "lucide-react"
+        "@base-ui/react@^1.6.0",
+        "lucide-react@^1.23.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -279,7 +279,7 @@
       "title": "Collapsible",
       "description": "The Edgecom Collapsible component.",
       "dependencies": [
-        "@base-ui/react"
+        "@base-ui/react@^1.6.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -297,8 +297,8 @@
       "title": "Combobox",
       "description": "The Edgecom Combobox component.",
       "dependencies": [
-        "@base-ui/react",
-        "lucide-react"
+        "@base-ui/react@^1.6.0",
+        "lucide-react@^1.23.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme",
@@ -318,8 +318,8 @@
       "title": "Command",
       "description": "The Edgecom Command component.",
       "dependencies": [
-        "cmdk",
-        "lucide-react"
+        "cmdk@^1.1.1",
+        "lucide-react@^1.23.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme",
@@ -339,8 +339,8 @@
       "title": "Context Menu",
       "description": "The Edgecom Context Menu component.",
       "dependencies": [
-        "@base-ui/react",
-        "lucide-react"
+        "@base-ui/react@^1.6.0",
+        "lucide-react@^1.23.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -358,8 +358,8 @@
       "title": "Date Picker",
       "description": "The Edgecom Date Picker component.",
       "dependencies": [
-        "lucide-react",
-        "react-day-picker"
+        "lucide-react@^1.23.0",
+        "react-day-picker@^10.0.1"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme",
@@ -380,8 +380,8 @@
       "title": "Dialog",
       "description": "The Edgecom Dialog component.",
       "dependencies": [
-        "@base-ui/react",
-        "lucide-react"
+        "@base-ui/react@^1.6.0",
+        "lucide-react@^1.23.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme",
@@ -400,7 +400,7 @@
       "title": "Drawer",
       "description": "The Edgecom Drawer component.",
       "dependencies": [
-        "@base-ui/react"
+        "@base-ui/react@^1.6.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -418,8 +418,8 @@
       "title": "Dropdown Menu",
       "description": "The Edgecom Dropdown Menu component.",
       "dependencies": [
-        "@base-ui/react",
-        "lucide-react"
+        "@base-ui/react@^1.6.0",
+        "lucide-react@^1.23.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -437,7 +437,7 @@
       "title": "Empty",
       "description": "The Edgecom Empty component.",
       "dependencies": [
-        "class-variance-authority"
+        "class-variance-authority@^0.7.1"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -455,7 +455,7 @@
       "title": "Field",
       "description": "The Edgecom Field component.",
       "dependencies": [
-        "class-variance-authority"
+        "class-variance-authority@^0.7.1"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme",
@@ -475,7 +475,7 @@
       "title": "Hover Card",
       "description": "The Edgecom Hover Card component.",
       "dependencies": [
-        "@base-ui/react"
+        "@base-ui/react@^1.6.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -493,7 +493,7 @@
       "title": "Input",
       "description": "The Edgecom Input component.",
       "dependencies": [
-        "@base-ui/react"
+        "@base-ui/react@^1.6.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -511,7 +511,7 @@
       "title": "Input Group",
       "description": "The Edgecom Input Group component.",
       "dependencies": [
-        "class-variance-authority"
+        "class-variance-authority@^0.7.1"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme",
@@ -532,8 +532,8 @@
       "title": "Input Otp",
       "description": "The Edgecom Input Otp component.",
       "dependencies": [
-        "input-otp",
-        "lucide-react"
+        "input-otp@^1.4.2",
+        "lucide-react@^1.23.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -551,8 +551,8 @@
       "title": "Item",
       "description": "The Edgecom Item component.",
       "dependencies": [
-        "@base-ui/react",
-        "class-variance-authority"
+        "@base-ui/react@^1.6.0",
+        "class-variance-authority@^0.7.1"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme",
@@ -601,7 +601,7 @@
       "title": "Motion Highlight",
       "description": "The Edgecom Motion Highlight component.",
       "dependencies": [
-        "motion"
+        "motion@^12.42.2"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -619,7 +619,7 @@
       "title": "Motion Tabs",
       "description": "The Edgecom Motion Tabs component.",
       "dependencies": [
-        "motion"
+        "motion@^12.42.2"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme",
@@ -638,8 +638,8 @@
       "title": "Multi Select",
       "description": "The Edgecom Multi Select component.",
       "dependencies": [
-        "cmdk",
-        "lucide-react"
+        "cmdk@^1.1.1",
+        "lucide-react@^1.23.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme",
@@ -658,8 +658,8 @@
       "title": "Multi Select Listbox",
       "description": "The Edgecom Multi Select Listbox component.",
       "dependencies": [
-        "@base-ui/react",
-        "lucide-react"
+        "@base-ui/react@^1.6.0",
+        "lucide-react@^1.23.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme",
@@ -678,7 +678,7 @@
       "title": "Native Select",
       "description": "The Edgecom Native Select component.",
       "dependencies": [
-        "lucide-react"
+        "lucide-react@^1.23.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -696,9 +696,9 @@
       "title": "Navigation Menu",
       "description": "The Edgecom Navigation Menu component.",
       "dependencies": [
-        "@base-ui/react",
-        "class-variance-authority",
-        "lucide-react"
+        "@base-ui/react@^1.6.0",
+        "class-variance-authority@^0.7.1",
+        "lucide-react@^1.23.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -716,7 +716,7 @@
       "title": "Pagination",
       "description": "The Edgecom Pagination component.",
       "dependencies": [
-        "lucide-react"
+        "lucide-react@^1.23.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme",
@@ -735,8 +735,8 @@
       "title": "Phone Input",
       "description": "The Edgecom Phone Input component.",
       "dependencies": [
-        "lucide-react",
-        "react-phone-number-input"
+        "lucide-react@^1.23.0",
+        "react-phone-number-input@^3.4.17"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme",
@@ -758,7 +758,7 @@
       "title": "Popover",
       "description": "The Edgecom Popover component.",
       "dependencies": [
-        "@base-ui/react"
+        "@base-ui/react@^1.6.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -776,7 +776,7 @@
       "title": "Progress",
       "description": "The Edgecom Progress component.",
       "dependencies": [
-        "@base-ui/react"
+        "@base-ui/react@^1.6.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -794,7 +794,7 @@
       "title": "Radio Group",
       "description": "The Edgecom Radio Group component.",
       "dependencies": [
-        "@base-ui/react"
+        "@base-ui/react@^1.6.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -812,8 +812,8 @@
       "title": "Resizable",
       "description": "The Edgecom Resizable component.",
       "dependencies": [
-        "lucide-react",
-        "react-resizable-panels"
+        "lucide-react@^1.23.0",
+        "react-resizable-panels@^4.12.3"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -831,7 +831,7 @@
       "title": "Scroll Area",
       "description": "The Edgecom Scroll Area component.",
       "dependencies": [
-        "@base-ui/react"
+        "@base-ui/react@^1.6.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -849,8 +849,8 @@
       "title": "Select",
       "description": "The Edgecom Select component.",
       "dependencies": [
-        "@base-ui/react",
-        "lucide-react"
+        "@base-ui/react@^1.6.0",
+        "lucide-react@^1.23.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -868,7 +868,7 @@
       "title": "Separator",
       "description": "The Edgecom Separator component.",
       "dependencies": [
-        "@base-ui/react"
+        "@base-ui/react@^1.6.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -886,8 +886,8 @@
       "title": "Sheet",
       "description": "The Edgecom Sheet component.",
       "dependencies": [
-        "@base-ui/react",
-        "lucide-react"
+        "@base-ui/react@^1.6.0",
+        "lucide-react@^1.23.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme",
@@ -906,9 +906,9 @@
       "title": "Sidebar",
       "description": "The Edgecom Sidebar component.",
       "dependencies": [
-        "@base-ui/react",
-        "class-variance-authority",
-        "lucide-react"
+        "@base-ui/react@^1.6.0",
+        "class-variance-authority@^0.7.1",
+        "lucide-react@^1.23.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme",
@@ -950,7 +950,7 @@
       "title": "Slider",
       "description": "The Edgecom Slider component.",
       "dependencies": [
-        "@base-ui/react"
+        "@base-ui/react@^1.6.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -968,7 +968,7 @@
       "title": "Sonner",
       "description": "The Edgecom Sonner component.",
       "dependencies": [
-        "sonner"
+        "sonner@^2.0.7"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -986,10 +986,10 @@
       "title": "Sortable",
       "description": "The Edgecom Sortable component.",
       "dependencies": [
-        "@base-ui/react",
-        "@dnd-kit/core",
-        "@dnd-kit/sortable",
-        "@dnd-kit/utilities",
+        "@base-ui/react@^1.6.0",
+        "@dnd-kit/core@^6.3.1",
+        "@dnd-kit/sortable@^10.0.0",
+        "@dnd-kit/utilities@^3.2.2",
         "react-dom"
       ],
       "registryDependencies": [
@@ -1008,7 +1008,7 @@
       "title": "Spinner",
       "description": "The Edgecom Spinner component.",
       "dependencies": [
-        "lucide-react"
+        "lucide-react@^1.23.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -1026,7 +1026,7 @@
       "title": "Stepper",
       "description": "The Edgecom Stepper component.",
       "dependencies": [
-        "@stepperize/react"
+        "@stepperize/react@^7.0.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -1044,7 +1044,7 @@
       "title": "Switch",
       "description": "The Edgecom Switch component.",
       "dependencies": [
-        "@base-ui/react"
+        "@base-ui/react@^1.6.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -1077,8 +1077,8 @@
       "title": "Tabs",
       "description": "The Edgecom Tabs component.",
       "dependencies": [
-        "@base-ui/react",
-        "class-variance-authority"
+        "@base-ui/react@^1.6.0",
+        "class-variance-authority@^0.7.1"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -1096,7 +1096,7 @@
       "title": "Tags Input",
       "description": "The Edgecom Tags Input component.",
       "dependencies": [
-        "lucide-react"
+        "lucide-react@^1.23.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme",
@@ -1115,7 +1115,7 @@
       "title": "Tanstack Form",
       "description": "The Edgecom Tanstack Form component.",
       "dependencies": [
-        "@tanstack/react-form"
+        "@tanstack/react-form@^1.33.1"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme",
@@ -1154,8 +1154,8 @@
       "title": "Timeline",
       "description": "The Edgecom Timeline component.",
       "dependencies": [
-        "class-variance-authority",
-        "lucide-react"
+        "class-variance-authority@^0.7.1",
+        "lucide-react@^1.23.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -1173,8 +1173,8 @@
       "title": "Toggle",
       "description": "The Edgecom Toggle component.",
       "dependencies": [
-        "@base-ui/react",
-        "class-variance-authority"
+        "@base-ui/react@^1.6.0",
+        "class-variance-authority@^0.7.1"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -1192,8 +1192,8 @@
       "title": "Toggle Group",
       "description": "The Edgecom Toggle Group component.",
       "dependencies": [
-        "@base-ui/react",
-        "class-variance-authority"
+        "@base-ui/react@^1.6.0",
+        "class-variance-authority@^0.7.1"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme",
@@ -1212,7 +1212,7 @@
       "title": "Tooltip",
       "description": "The Edgecom Tooltip component.",
       "dependencies": [
-        "@base-ui/react"
+        "@base-ui/react@^1.6.0"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"

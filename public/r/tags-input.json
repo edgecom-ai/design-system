@@ -4,7 +4,7 @@
   "title": "Tags Input",
   "description": "The Edgecom Tags Input component.",
   "dependencies": [
-    "lucide-react"
+    "lucide-react@^1.23.0"
   ],
   "registryDependencies": [
     "edgecom-ai/design-system/theme",

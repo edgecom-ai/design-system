@@ -4,7 +4,7 @@
   "title": "Motion Highlight",
   "description": "The Edgecom Motion Highlight component.",
   "dependencies": [
-    "motion"
+    "motion@^12.42.2"
   ],
   "registryDependencies": [
     "edgecom-ai/design-system/theme"

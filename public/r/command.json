@@ -4,8 +4,8 @@
   "title": "Command",
   "description": "The Edgecom Command component.",
   "dependencies": [
-    "cmdk",
-    "lucide-react"
+    "cmdk@^1.1.1",
+    "lucide-react@^1.23.0"
   ],
   "registryDependencies": [
     "edgecom-ai/design-system/theme",

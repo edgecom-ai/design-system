@@ -19,7 +19,8 @@
 //   - theme       <- src/app/globals.css (@theme mappings + :root/.dark tokens) + lib/utils
 //   - one item per src/components/ui/*.tsx, with package dependencies, cross-component
 //     registryDependencies and hook registryDependencies derived from its imports.
-//     Every component depends on the theme.
+//     Every component depends on the theme. Package dependencies carry the
+//     version range this repo builds against (see scripts/lib/deps.mjs).
 // Then `pnpm exec shadcn build` flattens the include tree into public/r/*.json.
 
 import { readFileSync, writeFileSync, readdirSync } from "node:fs";
@@ -27,6 +28,7 @@ import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { specifiersOf, classify } from "./lib/imports.mjs";
+import { withVersion } from "./lib/deps.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const uiDir = resolve(root, "src/components/ui");
@@ -98,7 +100,7 @@ writeChunk(libDir, [
     title: "Edgecom Theme",
     description:
       "Edgecom Energy design tokens (light + dark), Tailwind theme mappings, and the cn() utility. Installed automatically as a dependency of every Edgecom component.",
-    dependencies: ["clsx", "tailwind-merge"],
+    dependencies: ["clsx", "tailwind-merge"].map(withVersion),
     files: [{ path: "utils.ts", type: "registry:lib" }],
     cssVars: { theme: themeVars, light: lightVars, dark: darkVars },
   },
@@ -132,7 +134,7 @@ for (const name of uiFiles) {
     type: "registry:ui",
     title: titleCase(name),
     description: `The Edgecom ${titleCase(name)} component.`,
-    ...(pkgs.length ? { dependencies: pkgs } : {}),
+    ...(pkgs.length ? { dependencies: pkgs.map(withVersion) } : {}),
     registryDependencies,
     files: [{ path: `${name}.tsx`, type: "registry:ui" }],
   });
@@ -169,7 +171,7 @@ while (hookQueue.length) {
     type: "registry:hook",
     title: titleCase(hook),
     description: `The Edgecom ${titleCase(hook)} hook.`,
-    ...(pkgs.length ? { dependencies: pkgs } : {}),
+    ...(pkgs.length ? { dependencies: pkgs.map(withVersion) } : {}),
     ...(registryDependencies.length ? { registryDependencies } : {}),
     files: [{ path: `${hook}.ts`, type: "registry:hook" }],
   });

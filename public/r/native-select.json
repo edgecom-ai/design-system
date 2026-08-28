@@ -4,7 +4,7 @@
   "title": "Native Select",
   "description": "The Edgecom Native Select component.",
   "dependencies": [
-    "lucide-react"
+    "lucide-react@^1.23.0"
   ],
   "registryDependencies": [
     "edgecom-ai/design-system/theme"
