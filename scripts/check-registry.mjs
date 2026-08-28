@@ -1,8 +1,8 @@
 // Two audits of the BUILT registry, both failing the build:
 //
 // 1. Manifests — an item that imports something it doesn't declare, declares a
-//    dependency without a version range, or declares a registry dependency the
-//    registry never emits.
+//    dependency without a version range or without the @types companion it
+//    needs, or declares a registry dependency the registry never emits.
 // 2. Semantic type tokens — a shipped source that pairs a type token with a
 //    `leading-*`, a `text-<token>/<modifier>`, or a weight the token already
 //    owns.
@@ -27,7 +27,7 @@ import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { specifiersOf, classify } from "./lib/imports.mjs";
-import { pkgName, UNPINNED } from "./lib/deps.mjs";
+import { pkgName, typesFor, UNPINNED } from "./lib/deps.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const builtDir = resolve(root, "public/r");
@@ -39,7 +39,9 @@ const known = new Set(items.map((i) => i.name));
 
 for (const item of items) {
   const declared = item.dependencies ?? [];
+  const declaredDev = item.devDependencies ?? [];
   const deps = new Set(declared.map(pkgName));
+  const devDeps = new Set(declaredDev.map(pkgName));
   // Registry deps are full addresses (`edgecom-ai/design-system/button`).
   const registryDeps = new Set((item.registryDependencies ?? []).map((d) => d.split("/").pop()));
   const undeclared = { npm: new Set(), registry: new Set() };
@@ -64,9 +66,24 @@ for (const item of items) {
   // A dependency with no version range installs whatever `latest` is the day a
   // consumer runs `shadcn add` — which is how a component written against v3 of
   // a package met v4 in someone else's tree (#40).
-  const unpinned = declared.filter((d) => pkgName(d) === d && !UNPINNED.has(d));
+  const unpinned = [...declared, ...declaredDev].filter(
+    (d) => pkgName(d) === d && !UNPINNED.has(d)
+  );
 
-  if (undeclared.npm.size || undeclared.registry.size || dangling.length || unpinned.length) {
+  // Shipping a runtime package whose types live in a separate @types package,
+  // without that companion, leaves a strict consumer with a TS7016 on the file
+  // we just installed for them — #41's failure one step further along.
+  const missingTypes = [...deps]
+    .map(typesFor)
+    .filter((t) => t && !devDeps.has(t));
+
+  if (
+    undeclared.npm.size ||
+    undeclared.registry.size ||
+    dangling.length ||
+    unpinned.length ||
+    missingTypes.length
+  ) {
     problems.push(
       `  ${item.name}: ` +
         [
@@ -76,6 +93,9 @@ for (const item of items) {
             : "",
           dangling.length ? `registryDependencies with no item: ${dangling.join(", ")}` : "",
           unpinned.length ? `dependencies with no version range: ${unpinned.join(", ")}` : "",
+          missingTypes.length
+            ? `dependencies missing their type companion: ${missingTypes.join(", ")}`
+            : "",
         ]
           .filter(Boolean)
           .join(" · ")
@@ -150,6 +170,6 @@ if (problems.length || typeProblems.length) {
 }
 
 console.log(
-  `check-registry — ${items.length} built items declare every import at a pinned version, ` +
-    `every registry dependency resolves, and no source overrides a type token's line box`
+  `check-registry — ${items.length} built items declare every import at a pinned version ` +
+    `with its types, every registry dependency resolves, and no source overrides a type token's line box`
 );

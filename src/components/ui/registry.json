@@ -992,6 +992,9 @@
         "@dnd-kit/utilities@^3.2.2",
         "react-dom"
       ],
+      "devDependencies": [
+        "@types/react-dom"
+      ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
       ],
