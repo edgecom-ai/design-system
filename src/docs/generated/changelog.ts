@@ -73,7 +73,45 @@ export const changelog: ChangelogRelease[] = [
     "summary": null,
     "entries": [
       {
-        "sha": "0dbd67a",
+        "sha": "26ebcec",
+        "date": "2026-08-28",
+        "type": "fix",
+        "group": "fixed",
+        "scopes": [
+          "registry"
+        ],
+        "summary": "Ship every dependency at the version it was built against",
+        "items": [],
+        "breaking": false
+      },
+      {
+        "sha": "a8574e6",
+        "date": "2026-08-28",
+        "type": "fix",
+        "group": "fixed",
+        "scopes": [
+          "sortable"
+        ],
+        "summary": "Declare the react-dom it imports for its drag overlay",
+        "items": [],
+        "breaking": false
+      },
+      {
+        "sha": "28a7a6b",
+        "date": "2026-08-28",
+        "type": "fix",
+        "group": "fixed",
+        "scopes": [
+          "resizable"
+        ],
+        "summary": "Migrate to the react-resizable-panels v4 API",
+        "items": [
+          "resizable"
+        ],
+        "breaking": false
+      },
+      {
+        "sha": "26b11b0",
         "date": "2026-08-28",
         "type": "feat",
         "group": "added",
