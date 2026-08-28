@@ -73,6 +73,43 @@ export const changelog: ChangelogRelease[] = [
     "summary": null,
     "entries": [
       {
+        "sha": "90a0425",
+        "date": "2026-08-28",
+        "type": "fix",
+        "group": "fixed",
+        "scopes": [
+          "theme"
+        ],
+        "summary": "Stop overriding the line-height and weight the type tokens own",
+        "items": [
+          "calendar",
+          "card",
+          "chart",
+          "circular-progress",
+          "dialog",
+          "empty",
+          "item",
+          "label",
+          "tooltip"
+        ],
+        "breaking": false
+      },
+      {
+        "sha": "9050804",
+        "date": "2026-08-28",
+        "type": "fix",
+        "group": "fixed",
+        "scopes": [
+          "button"
+        ],
+        "summary": "A quiet destructive variant, and hover surfaces a consumer can re-tint",
+        "items": [
+          "button",
+          "theme"
+        ],
+        "breaking": false
+      },
+      {
         "sha": "26ebcec",
         "date": "2026-08-28",
         "type": "fix",
