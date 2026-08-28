@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { PencilIcon, Trash2Icon } from "lucide-react"
+import { BuildingIcon, PencilIcon, RotateCcwIcon, Trash2Icon } from "lucide-react"
 import { toast } from "sonner"
 
 import {
@@ -15,6 +15,14 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty"
 import {
   Table,
   TableBody,
@@ -70,6 +78,34 @@ export function ButtonRowActionDemo() {
           </TableRow>
         </TableHeader>
         <TableBody>
+          {sites.length === 0 && (
+            <TableRow className="hover:bg-transparent">
+              <TableCell colSpan={4} className="p-0">
+                <Empty className="rounded-none border-0">
+                  <EmptyHeader>
+                    <EmptyMedia variant="icon">
+                      <BuildingIcon />
+                    </EmptyMedia>
+                    <EmptyTitle>No sites left</EmptyTitle>
+                    <EmptyDescription>
+                      Every site has been removed from monitoring. Add one back
+                      to start tracking consumption again.
+                    </EmptyDescription>
+                  </EmptyHeader>
+                  <EmptyContent>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setSites(initialSites)}
+                    >
+                      <RotateCcwIcon />
+                      Restore sites
+                    </Button>
+                  </EmptyContent>
+                </Empty>
+              </TableCell>
+            </TableRow>
+          )}
           {sites.map((site) => (
             <TableRow key={site.name}>
               <TableCell className="font-medium">{site.name}</TableCell>
