@@ -73,6 +73,56 @@ export const changelog: ChangelogRelease[] = [
     "summary": null,
     "entries": [
       {
+        "sha": "508245b",
+        "date": "2026-08-28",
+        "type": "fix",
+        "group": "fixed",
+        "scopes": [
+          "docs"
+        ],
+        "summary": "Model the empty state in the destructive row-action demo",
+        "items": [],
+        "breaking": false
+      },
+      {
+        "sha": "8ed84e3",
+        "date": "2026-08-28",
+        "type": "fix",
+        "group": "fixed",
+        "scopes": [
+          "native-select"
+        ],
+        "summary": "Let a consumer's classes reach the select",
+        "items": [
+          "native-select"
+        ],
+        "breaking": false
+      },
+      {
+        "sha": "50e44e3",
+        "date": "2026-08-28",
+        "type": "fix",
+        "group": "fixed",
+        "scopes": [
+          "registry"
+        ],
+        "summary": "Audit whole class expressions for type-token overrides",
+        "items": [],
+        "breaking": false
+      },
+      {
+        "sha": "6297b8c",
+        "date": "2026-08-28",
+        "type": "fix",
+        "group": "fixed",
+        "scopes": [
+          "registry"
+        ],
+        "summary": "Ship the @types companion a dependency needs",
+        "items": [],
+        "breaking": false
+      },
+      {
         "sha": "6f28203",
         "date": "2026-08-28",
         "type": "fix",

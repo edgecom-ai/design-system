@@ -13,6 +13,10 @@ Every change to the Edgecom design system, derived from git history. Also publis
 
 ### Fixed
 
+- **docs:** Model the empty state in the destructive row-action demo ([`508245b`](https://github.com/edgecom-ai/design-system/commit/508245b))
+- **native-select:** Let a consumer's classes reach the select ([`8ed84e3`](https://github.com/edgecom-ai/design-system/commit/8ed84e3))
+- **registry:** Audit whole class expressions for type-token overrides ([`50e44e3`](https://github.com/edgecom-ai/design-system/commit/50e44e3))
+- **registry:** Ship the @types companion a dependency needs ([`6297b8c`](https://github.com/edgecom-ai/design-system/commit/6297b8c))
 - **badge, select, native-select:** Hover surfaces a consumer can re-tint in dark ([`6f28203`](https://github.com/edgecom-ai/design-system/commit/6f28203))
 - **theme:** Stop overriding the line-height and weight the type tokens own ([`90a0425`](https://github.com/edgecom-ai/design-system/commit/90a0425))
 - **button:** A quiet destructive variant, and hover surfaces a consumer can re-tint ([`9050804`](https://github.com/edgecom-ai/design-system/commit/9050804))
