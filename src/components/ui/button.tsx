@@ -10,11 +10,27 @@ const buttonVariants = cva(
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary/80",
         outline:
-          "border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
+          "border-border bg-outline-surface hover:bg-outline-hover hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input",
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)] aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
+        // Quiet variants. Their surfaces are single unmodified `bg-*`/`hover:bg-*`
+        // classes reading theme-aware tokens, so a consumer re-tinting one wins
+        // in both themes: a `dark:`-modified class shares no modifier set with
+        // their override, so tailwind-merge kept both and the `dark:` one won in
+        // dark on source order — silently, and in one theme only. Source order
+        // is also why the resting surface can't stay `dark:bg-*` while the hover
+        // is a plain `hover:bg-*`: they weigh the same, the `dark:` one is
+        // emitted later, and the control would stop reacting to hover in dark.
         ghost:
-          "hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50",
+          "hover:bg-ghost-hover hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground",
+        // The quiet destructive: invisible until hovered, red throughout. For
+        // row actions (a trash icon button in a table row), where a solid
+        // `destructive` fill or a resting `destructive-subtle` tint would paint
+        // every row red. The hover label is -subtle-foreground, not -emphasis:
+        // the two match in light, and dark parts them for contrast against the
+        // dark tint.
+        "ghost-destructive":
+          "text-destructive-emphasis hover:bg-destructive-subtle hover:text-destructive-subtle-foreground aria-expanded:bg-destructive-subtle aria-expanded:text-destructive-subtle-foreground focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40",
         // Solid semantic fills — filled background + contrasting label.
         destructive:
           "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40",

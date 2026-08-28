@@ -14,20 +14,7 @@ export const generatedApi: Record<string, GeneratedApi> = {
     "parts": [
       "Button"
     ],
-    "props": [
-      {
-        "part": "Button",
-        "name": "variant",
-        "type": "\"default\" | \"outline\" | \"secondary\" | \"ghost\" | \"destructive\" | \"success\" | \"warning\" | \"info\" | \"destructive-subtle\" | \"success-subtle\" | \"warning-subtle\" | \"info-subtle\" | \"link\"",
-        "default": "\"default\""
-      },
-      {
-        "part": "Button",
-        "name": "size",
-        "type": "\"default\" | \"xs\" | \"sm\" | \"lg\" | \"icon\" | \"icon-xs\" | \"icon-sm\" | \"icon-lg\"",
-        "default": "\"default\""
-      }
-    ]
+    "props": []
   },
   "input": {
     "base": {

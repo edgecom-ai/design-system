@@ -53,6 +53,7 @@ The full guardrails — status-color meaning, badges, dialog-vs-sheet, toasts, d
 
 - **Status/commodity colors strictly by meaning** — never decorative.
 - **Keep overlays dismissible** (dialog/sheet close X); gate **destructive actions** behind an `alert-dialog`.
+- **A destructive row action is the `ghost-destructive` button variant** — quiet at rest, tinted on hover, correct in both themes. Don't compose one from `ghost` plus destructive utilities.
 - **Confirm actions with the matching semantic `toast`** variant; one `<Toaster>` per app; every toast has a title.
 - **Surface validation inline** (`FieldError` + `aria-invalid`); handle **loading/empty/error** with `skeleton`/`spinner`/`empty` (+ retry on async failure).
 - **Active nav/menu items use the built-in neutral highlight**, not brand blue.
