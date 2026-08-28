@@ -122,7 +122,9 @@ The practical consequence for you: **`pnpm add`-ing a package here is what consu
 
 `react-dom` is the one deliberate exception ([`scripts/lib/deps.mjs`](scripts/lib/deps.mjs) `UNPINNED`) — its version is dictated by the consumer's own `react`, so it ships as a bare name. `react` itself is never declared at all: every consumer has it by definition. (`react-dom` isn't ambient, though — a consumer whose project is a *component package* may declare `react` as a peer and have no `react-dom` until `sortable`'s `createPortal` overlay asks for one, #41.)
 
-Inference reads the **import specifiers** — either quote style, plus side-effect and dynamic `import()` — through the shared scanner in [`scripts/lib/imports.mjs`](scripts/lib/imports.mjs). `registry:check` re-audits the *built* `public/r/*.json` afterwards **through that same scanner**, so the derivation and the audit can't disagree about what a file imports. It fails the build if an item imports a package or sibling component its manifest doesn't declare, declares a package dependency without a version range, or declares a `registryDependency` the registry emits no item for. The check exists because both defects are invisible here — an undeclared dependency only breaks in a consumer tree that doesn't already have the package.
+Inference reads the **import specifiers** — either quote style, plus side-effect and dynamic `import()` — through the shared scanner in [`scripts/lib/imports.mjs`](scripts/lib/imports.mjs). `registry:check` re-audits the *built* `public/r/*.json` afterwards **through that same scanner**, so the derivation and the audit can't disagree about what a file imports. It fails the build if an item imports a package or sibling component its manifest doesn't declare, declares a package dependency without a version range, or declares a `registryDependency` the registry emits no item for.
+
+It also audits the shipped **sources** for one design-rule violation that a consumer can't fix downstream: a semantic type token paired with a `leading-*` utility, a `text-<token>/<modifier>`, or a font weight the token already sets. The tokens own their line box (and some their weight), a registry item installs verbatim, and `cn` is `twMerge` — so an override in a primitive can only be fought call site by call site in the consumer's app. The token list comes from the built `theme` item, so adding a token to `globals.css` extends the check on its own. The check exists because both defects are invisible here — an undeclared dependency only breaks in a consumer tree that doesn't already have the package.
 
 ### pnpm scripts
 
@@ -130,7 +132,7 @@ Inference reads the **import specifiers** — either quote style, plus side-effe
 |---|---|
 | `pnpm run registry:gen` | Regenerate the root `registry.json` + the `src/**/registry.json` chunks from source (`scripts/gen-registry.mjs`) |
 | `pnpm run registry:build` | `registry:gen` **+** `shadcn build` **+** `registry:check` → also writes the optional flattened `public/r/*.json` |
-| `pnpm run registry:check` | Audit every built item's imports against its declared `dependencies`/`registryDependencies`, every declared dependency for a version range, and every declared registry dependency against the items that exist (`scripts/check-registry.mjs`); non-zero exit on a gap |
+| `pnpm run registry:check` | Audit every built item's imports against its declared `dependencies`/`registryDependencies`, every declared dependency for a version range, every declared registry dependency against the items that exist, and every shipped source for type-token overrides (`scripts/check-registry.mjs`); non-zero exit on a gap |
 | `pnpm run build` | Full site build. **`prebuild` runs `docs:gen && registry:build` first**, so a normal build always ships a current registry. |
 | `pnpm run dev` | Docs site locally at `:3000`. |
 

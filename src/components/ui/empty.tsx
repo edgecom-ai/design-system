@@ -77,7 +77,7 @@ function EmptyDescription({
     <p
       data-slot="empty-description"
       className={cn(
-        "text-body/relaxed text-muted-foreground [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-primary",
+        "text-body text-muted-foreground [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-primary",
         className
       )}
       {...props}

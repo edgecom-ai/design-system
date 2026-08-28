@@ -24,7 +24,7 @@ This repo is two things at once: a **Next.js 16 docs site** and the **source of 
 | `pnpm build` | Static export to `out/`. `prebuild` runs `docs:gen` **and** `registry:build` first. |
 | `pnpm lint` | ESLint (Next core-web-vitals + TypeScript). |
 | `pnpm registry:build` | Regenerate registry from source, `shadcn build`, then `registry:check`. |
-| `pnpm registry:check` | Audit built items for imports their manifest doesn't declare, dependencies with no version range, and registry dependencies no item provides. |
+| `pnpm registry:check` | Audit built items for imports their manifest doesn't declare, dependencies with no version range, registry dependencies no item provides, and type tokens paired with a `leading-*`/weight override. |
 | `pnpm docs:gen` | Regenerate all docs-source / api / routes / changelog artifacts. |
 | `pnpm docs:changelog` | Regenerate the changelog from git history (part of `docs:gen`). |
 

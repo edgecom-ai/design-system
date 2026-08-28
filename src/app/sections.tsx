@@ -1162,8 +1162,8 @@ export const sections: Section[] = [
                 <TokenHint token="text-display tabular">
                   <span className="w-fit text-display tabular">1.24 MW</span>
                 </TokenHint>
-                <TokenHint token="text-caption font-medium text-success-emphasis">
-                  <span className="w-fit text-caption font-medium text-success-emphasis">
+                <TokenHint token="text-caption text-success-emphasis">
+                  <span className="w-fit text-caption text-success-emphasis">
                     ↓ 12% vs. last peak
                   </span>
                 </TokenHint>
@@ -1172,8 +1172,8 @@ export const sections: Section[] = [
                 <TokenHint token="text-title">
                   <h4 className="w-fit text-title">Understanding demand charges</h4>
                 </TokenHint>
-                <TokenHint token="text-body leading-7">
-                  <p className="text-body leading-7">
+                <TokenHint token="text-body">
+                  <p className="text-body">
                     A demand charge is based on the highest 15-minute average load
                     recorded during the billing period. Shaving that peak by even a
                     few percent can meaningfully lower the bill.
