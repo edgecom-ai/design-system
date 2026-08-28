@@ -73,6 +73,25 @@ export const changelog: ChangelogRelease[] = [
     "summary": null,
     "entries": [
       {
+        "sha": "6f28203",
+        "date": "2026-08-28",
+        "type": "fix",
+        "group": "fixed",
+        "scopes": [
+          "badge",
+          "select",
+          "native-select"
+        ],
+        "summary": "Hover surfaces a consumer can re-tint in dark",
+        "items": [
+          "badge",
+          "native-select",
+          "select",
+          "theme"
+        ],
+        "breaking": false
+      },
+      {
         "sha": "90a0425",
         "date": "2026-08-28",
         "type": "fix",
