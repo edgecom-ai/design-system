@@ -20,7 +20,8 @@
 //   - one item per src/components/ui/*.tsx, with package dependencies, cross-component
 //     registryDependencies and hook registryDependencies derived from its imports.
 //     Every component depends on the theme. Package dependencies carry the
-//     version range this repo builds against (see scripts/lib/deps.mjs).
+//     version range this repo builds against, plus any @types companion the
+//     package needs (see scripts/lib/deps.mjs).
 // Then `pnpm exec shadcn build` flattens the include tree into public/r/*.json.
 
 import { readFileSync, writeFileSync, readdirSync } from "node:fs";
@@ -28,7 +29,7 @@ import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { specifiersOf, classify } from "./lib/imports.mjs";
-import { withVersion } from "./lib/deps.mjs";
+import { withVersion, typesFor } from "./lib/deps.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const uiDir = resolve(root, "src/components/ui");
@@ -76,6 +77,16 @@ function analyze(src, source) {
   }
   return { pkgs: [...pkgs].sort(), uiDeps: [...uiDeps].sort(), hooks: [...hooks].sort() };
 }
+
+// A package whose declarations live in a separate @types package needs that
+// companion installed too, or a strict consumer can't compile the file we just
+// shipped them. The registry has a `devDependencies` field for exactly this.
+const typeCompanions = (pkgs) =>
+  pkgs
+    .map(typesFor)
+    .filter(Boolean)
+    .sort()
+    .map(withVersion);
 
 const titleCase = (s) =>
   s.replace(/(^|-)([a-z])/g, (_, sep, c) => (sep ? " " : "") + c.toUpperCase()).trim();
@@ -135,6 +146,9 @@ for (const name of uiFiles) {
     title: titleCase(name),
     description: `The Edgecom ${titleCase(name)} component.`,
     ...(pkgs.length ? { dependencies: pkgs.map(withVersion) } : {}),
+    ...(typeCompanions(pkgs).length
+      ? { devDependencies: typeCompanions(pkgs) }
+      : {}),
     registryDependencies,
     files: [{ path: `${name}.tsx`, type: "registry:ui" }],
   });
@@ -172,6 +186,9 @@ while (hookQueue.length) {
     title: titleCase(hook),
     description: `The Edgecom ${titleCase(hook)} hook.`,
     ...(pkgs.length ? { dependencies: pkgs.map(withVersion) } : {}),
+    ...(typeCompanions(pkgs).length
+      ? { devDependencies: typeCompanions(pkgs) }
+      : {}),
     ...(registryDependencies.length ? { registryDependencies } : {}),
     files: [{ path: `${hook}.ts`, type: "registry:hook" }],
   });

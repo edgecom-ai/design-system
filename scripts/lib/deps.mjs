@@ -27,14 +27,27 @@ const declaredRanges = { ...pkgJson.devDependencies, ...pkgJson.dependencies };
 // Dependencies deliberately shipped unpinned. `react-dom`'s version is dictated
 // by the consumer's own `react`, never by ours (this repo pins React exactly for
 // the docs site) — pinning it would let a component install downgrade a
-// consumer's React DOM out from under them.
-export const UNPINNED = new Set(["react-dom"]);
+// consumer's React DOM out from under them. Its type companion tracks it, so a
+// range there would just contradict the runtime package it describes.
+export const UNPINNED = new Set(["react-dom", "@types/react-dom"]);
 
 // The package a manifest dependency refers to: "zod@^3.25.76" -> "zod",
 // "@dnd-kit/core@^6.3.1" -> "@dnd-kit/core".
 export function pkgName(dep) {
   const at = dep.lastIndexOf("@");
   return at > 0 ? dep.slice(0, at) : dep;
+}
+
+// The DefinitelyTyped companion a package needs, or null. Installing the runtime
+// package is not enough for a strict consumer: `react-dom` ships no declarations
+// of its own, so `import { createPortal } from "react-dom"` is a TS7016 —
+// #41's TS2307 one step further along — until `@types/react-dom` is there too.
+// This repo installing the companion itself is the signal that one is needed.
+export function typesFor(pkg) {
+  const companion = pkg.startsWith("@")
+    ? `@types/${pkg.slice(1).replace("/", "__")}`
+    : `@types/${pkg}`;
+  return companion in declaredRanges ? companion : null;
 }
 
 // A package name as it should appear in a manifest's `dependencies`.
