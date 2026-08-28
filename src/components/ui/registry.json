@@ -989,7 +989,8 @@
         "@base-ui/react",
         "@dnd-kit/core",
         "@dnd-kit/sortable",
-        "@dnd-kit/utilities"
+        "@dnd-kit/utilities",
+        "react-dom"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
