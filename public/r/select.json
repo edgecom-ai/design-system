@@ -4,8 +4,8 @@
   "title": "Select",
   "description": "The Edgecom Select component.",
   "dependencies": [
-    "@base-ui/react",
-    "lucide-react"
+    "@base-ui/react@^1.6.0",
+    "lucide-react@^1.23.0"
   ],
   "registryDependencies": [
     "edgecom-ai/design-system/theme"

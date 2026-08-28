@@ -114,7 +114,15 @@ Cross-item references (`registryDependencies`) use **full GitHub addresses** (`e
 
 Deps, cross-component `registryDependencies`, hooks, and theme coupling are all inferred. **Every component automatically depends on the `theme` item.**
 
-Inference reads the **import specifiers** — either quote style, plus side-effect and dynamic `import()` — through the shared scanner in [`scripts/lib/imports.mjs`](scripts/lib/imports.mjs). `registry:check` re-audits the *built* `public/r/*.json` afterwards **through that same scanner**, so the derivation and the audit can't disagree about what a file imports. It fails the build if an item imports a package or sibling component its manifest doesn't declare, or declares a `registryDependency` the registry emits no item for. The check exists because both defects are invisible here — an undeclared dependency only breaks in a consumer tree that doesn't already have the package.
+### Dependency versions come from this repo's `package.json`
+
+Every derived package dependency ships **with the version range this repo builds against** — `public/r/resizable.json` declares `react-resizable-panels@^4.12.3`, not a bare `react-resizable-panels`. A bare name is what `shadcn add` hands the consumer's package manager, so the consumer would install whatever `latest` is the day they run it: that is how `resizable`, written against v3, met v4's renamed exports in other people's trees (#40).
+
+The practical consequence for you: **`pnpm add`-ing a package here is what consumers install.** Bump a dependency, migrate the components that use it, and regenerate — an upstream major becomes a deliberate registry change instead of a silent break elsewhere. `registry:check` fails the build on any dependency that carries no range.
+
+`react-dom` is the one deliberate exception ([`scripts/lib/deps.mjs`](scripts/lib/deps.mjs) `UNPINNED`) — its version is dictated by the consumer's own `react`, so it ships as a bare name. `react` itself is never declared at all: every consumer has it by definition. (`react-dom` isn't ambient, though — a consumer whose project is a *component package* may declare `react` as a peer and have no `react-dom` until `sortable`'s `createPortal` overlay asks for one, #41.)
+
+Inference reads the **import specifiers** — either quote style, plus side-effect and dynamic `import()` — through the shared scanner in [`scripts/lib/imports.mjs`](scripts/lib/imports.mjs). `registry:check` re-audits the *built* `public/r/*.json` afterwards **through that same scanner**, so the derivation and the audit can't disagree about what a file imports. It fails the build if an item imports a package or sibling component its manifest doesn't declare, declares a package dependency without a version range, or declares a `registryDependency` the registry emits no item for. The check exists because both defects are invisible here — an undeclared dependency only breaks in a consumer tree that doesn't already have the package.
 
 ### pnpm scripts
 
@@ -122,7 +130,7 @@ Inference reads the **import specifiers** — either quote style, plus side-effe
 |---|---|
 | `pnpm run registry:gen` | Regenerate the root `registry.json` + the `src/**/registry.json` chunks from source (`scripts/gen-registry.mjs`) |
 | `pnpm run registry:build` | `registry:gen` **+** `shadcn build` **+** `registry:check` → also writes the optional flattened `public/r/*.json` |
-| `pnpm run registry:check` | Audit every built item's imports against its declared `dependencies`/`registryDependencies`, and every declared registry dependency against the items that exist (`scripts/check-registry.mjs`); non-zero exit on a gap |
+| `pnpm run registry:check` | Audit every built item's imports against its declared `dependencies`/`registryDependencies`, every declared dependency for a version range, and every declared registry dependency against the items that exist (`scripts/check-registry.mjs`); non-zero exit on a gap |
 | `pnpm run build` | Full site build. **`prebuild` runs `docs:gen && registry:build` first**, so a normal build always ships a current registry. |
 | `pnpm run dev` | Docs site locally at `:3000`. |
 

@@ -4,8 +4,8 @@
   "title": "Date Picker",
   "description": "The Edgecom Date Picker component.",
   "dependencies": [
-    "lucide-react",
-    "react-day-picker"
+    "lucide-react@^1.23.0",
+    "react-day-picker@^10.0.1"
   ],
   "registryDependencies": [
     "edgecom-ai/design-system/theme",

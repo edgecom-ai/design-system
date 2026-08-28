@@ -4,7 +4,7 @@
   "title": "Banner",
   "description": "The Edgecom Banner component.",
   "dependencies": [
-    "class-variance-authority"
+    "class-variance-authority@^0.7.1"
   ],
   "registryDependencies": [
     "edgecom-ai/design-system/theme"

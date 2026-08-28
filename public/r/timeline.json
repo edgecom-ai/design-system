@@ -4,8 +4,8 @@
   "title": "Timeline",
   "description": "The Edgecom Timeline component.",
   "dependencies": [
-    "class-variance-authority",
-    "lucide-react"
+    "class-variance-authority@^0.7.1",
+    "lucide-react@^1.23.0"
   ],
   "registryDependencies": [
     "edgecom-ai/design-system/theme"

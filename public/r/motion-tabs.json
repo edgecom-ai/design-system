@@ -4,7 +4,7 @@
   "title": "Motion Tabs",
   "description": "The Edgecom Motion Tabs component.",
   "dependencies": [
-    "motion"
+    "motion@^12.42.2"
   ],
   "registryDependencies": [
     "edgecom-ai/design-system/theme",

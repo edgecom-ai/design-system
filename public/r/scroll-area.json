@@ -4,7 +4,7 @@
   "title": "Scroll Area",
   "description": "The Edgecom Scroll Area component.",
   "dependencies": [
-    "@base-ui/react"
+    "@base-ui/react@^1.6.0"
   ],
   "registryDependencies": [
     "edgecom-ai/design-system/theme"

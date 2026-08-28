@@ -4,7 +4,7 @@
   "title": "Tanstack Form",
   "description": "The Edgecom Tanstack Form component.",
   "dependencies": [
-    "@tanstack/react-form"
+    "@tanstack/react-form@^1.33.1"
   ],
   "registryDependencies": [
     "edgecom-ai/design-system/theme",

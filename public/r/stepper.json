@@ -4,7 +4,7 @@
   "title": "Stepper",
   "description": "The Edgecom Stepper component.",
   "dependencies": [
-    "@stepperize/react"
+    "@stepperize/react@^7.0.0"
   ],
   "registryDependencies": [
     "edgecom-ai/design-system/theme"

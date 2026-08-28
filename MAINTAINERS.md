@@ -24,7 +24,7 @@ This repo is two things at once: a **Next.js 16 docs site** and the **source of 
 | `pnpm build` | Static export to `out/`. `prebuild` runs `docs:gen` **and** `registry:build` first. |
 | `pnpm lint` | ESLint (Next core-web-vitals + TypeScript). |
 | `pnpm registry:build` | Regenerate registry from source, `shadcn build`, then `registry:check`. |
-| `pnpm registry:check` | Audit built items for imports their manifest doesn't declare, and for registry dependencies no item provides. |
+| `pnpm registry:check` | Audit built items for imports their manifest doesn't declare, dependencies with no version range, and registry dependencies no item provides. |
 | `pnpm docs:gen` | Regenerate all docs-source / api / routes / changelog artifacts. |
 | `pnpm docs:changelog` | Regenerate the changelog from git history (part of `docs:gen`). |
 
@@ -80,7 +80,7 @@ All tokens live in [`src/app/globals.css`](src/app/globals.css): `@theme inline`
 4. Curated API copy → [`src/docs/curated.ts`](src/docs/curated.ts) (shape: `summary` / `parts` / `propDescriptions` / `omitProps`; note this file uses **semicolons + double quotes**).
 5. `pnpm registry:build`.
 
-Package deps, cross-component `registryDependencies`, hooks, and the always-on `theme` dependency are all **inferred from imports** — you don't declare them. See [REGISTRY.md](REGISTRY.md) §3 for the full mechanics.
+Package deps, cross-component `registryDependencies`, hooks, and the always-on `theme` dependency are all **inferred from imports** — you don't declare them. Each package dep ships with **the version range this repo's `package.json` declares**, so `pnpm add`-ing a package here is what consumers install: bump the dependency and migrate the components that use it in the same change, rather than letting a consumer's `latest` meet a component written against the previous major. See [REGISTRY.md](REGISTRY.md) §3 for the full mechanics.
 
 ## Generated files — do NOT hand-edit
 

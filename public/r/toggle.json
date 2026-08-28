@@ -4,8 +4,8 @@
   "title": "Toggle",
   "description": "The Edgecom Toggle component.",
   "dependencies": [
-    "@base-ui/react",
-    "class-variance-authority"
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@^0.7.1"
   ],
   "registryDependencies": [
     "edgecom-ai/design-system/theme"

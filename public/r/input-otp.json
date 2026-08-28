@@ -4,8 +4,8 @@
   "title": "Input Otp",
   "description": "The Edgecom Input Otp component.",
   "dependencies": [
-    "input-otp",
-    "lucide-react"
+    "input-otp@^1.4.2",
+    "lucide-react@^1.23.0"
   ],
   "registryDependencies": [
     "edgecom-ai/design-system/theme"
