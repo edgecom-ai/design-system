@@ -33,7 +33,7 @@ const PageHeaderTabsDemo = () => {
       description='Electricity submeter · 3-phase · 400A'
     >
       <Tabs value={tab} onValueChange={setTab} className='max-w-full'>
-        <TabsList className='max-w-full overflow-x-auto overflow-y-hidden'>
+        <TabsList>
           {tabs.map(t => (
             <TabsTrigger key={t} value={t}>
               {t}
