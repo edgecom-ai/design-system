@@ -111,42 +111,94 @@ for (const item of items) {
 const themeVars = items.find((i) => i.name === "theme")?.cssVars?.theme ?? {};
 const typeTokens = Object.keys(themeVars)
   .filter((k) => k.startsWith("text-") && !k.includes("--"))
-  // Longest first: `text-body` must not match inside `text-body-sm`.
-  .sort((a, b) => b.length - a.length)
-  .map((name) => name.replace(/^text-/, ""));
+  .map((name) => name.replace(/^text-/, ""))
+  // Longest first so the `$`-anchored alternation prefers `body-sm` over `body`.
+  .sort((a, b) => b.length - a.length);
 const weightTokens = new Set(
   typeTokens.filter((t) => `text-${t}--font-weight` in themeVars)
 );
 
-// A utility, optionally variant-prefixed (`group-data-[x]:leading-6`) and
-// optionally with a trailing modifier (`text-body/relaxed`).
-const utility = (body) => new RegExp(`(?:^|[\\s"'\`])(?:[\\w[\\]-]+:)*${body}`);
-const LEADING = utility("leading-[\\w./[\\]-]+");
-const WEIGHT = utility(
-  "font-(?:thin|extralight|light|normal|medium|semibold|bold|extrabold|black|\\[[^\\]]*\\])"
-);
+// One whitespace-separated class at a time, so any variant prefix is skipped
+// whatever it contains (`group-data-[state=open]:leading-6`, `[&>p]:text-body`)
+// and a color with an alpha (`text-foreground/60`) can't pose as a type token.
+const TOKEN = new RegExp(`(?:^|:)text-(${typeTokens.join("|")})(/[^\\s:]+)?$`);
+const LEADING = /(?:^|:)leading-[^\s:]+$/;
+const WEIGHT =
+  /(?:^|:)font-(?:thin|extralight|light|normal|medium|semibold|bold|extrabold|black|\[[^\]]*\])$/;
+
+// Which element a class lands on, so only classes that meet on the SAME element
+// are compared. A selector-bearing prefix (`[&>span]:`, `**:`, `*:`) retargets
+// the class at a descendant — calendar's `[&>span]:text-caption` beside a bare
+// `font-normal` is two elements, and the span keeps the weight its own token
+// sets. State prefixes (`hover:`, `group-data-[…]:`) stay on the element, so a
+// `hover:leading-6` really does override the token's line box and still counts.
+const elementOf = (cls) =>
+  cls
+    .split(":")
+    .slice(0, -1)
+    .filter((segment) => /[&*]/.test(segment))
+    .join(":");
+
+// Class expressions, not source lines. `cn("text-caption", "leading-none")`
+// wrapped across two lines applies both classes at runtime, and a line-at-a-time
+// scan waves it through — so consecutive string literals separated by nothing
+// but whitespace and commas are audited as the one expression they compose into.
+// (Classes that meet only across cva variants, or across files through a shared
+// base like `buttonVariants`, are out of reach of any static grouping.)
+function classExpressions(content) {
+  const literals = [...content.matchAll(/"((?:[^"\\\n]|\\.)*)"|'((?:[^'\\\n]|\\.)*)'/g)];
+  const expressions = [];
+  let current = null;
+  let prevEnd = -1;
+  for (const m of literals) {
+    const joins = prevEnd !== -1 && /^[\s,]*$/.test(content.slice(prevEnd, m.index));
+    if (current && joins) {
+      current.classes.push(m[1] ?? m[2] ?? "");
+    } else {
+      current = { index: m.index, classes: [m[1] ?? m[2] ?? ""] };
+      expressions.push(current);
+    }
+    prevEnd = m.index + m[0].length;
+  }
+  return expressions;
+}
 
 const typeProblems = [];
 for (const item of items) {
   for (const f of item.files ?? []) {
-    const lines = (f.content ?? "").split("\n");
-    lines.forEach((line, i) => {
-      const found = typeTokens.filter((t) =>
-        utility(`text-${t}(?:/[\\w.[\\]-]+)?(?![\\w-])`).test(line)
-      );
-      if (!found.length) return;
-      const token = found[0]; // longest match wins
-      const where = `  ${f.path}:${i + 1} (${item.name})`;
-      const sliced = utility(`text-${token}/[\\w.[\\]-]+`).test(line);
-      if (sliced) {
-        typeProblems.push(`${where}: text-${token}/… overrides the line-height the token owns`);
-      } else if (LEADING.test(line)) {
-        typeProblems.push(`${where}: text-${token} paired with a leading-* utility`);
+    const content = f.content ?? "";
+    for (const expression of classExpressions(content)) {
+      const classes = expression.classes.join(" ").split(/\s+/).filter(Boolean);
+      const byElement = new Map();
+      for (const cls of classes) {
+        const element = elementOf(cls);
+        if (!byElement.has(element)) byElement.set(element, []);
+        byElement.get(element).push(cls);
       }
-      if (weightTokens.has(token) && WEIGHT.test(line)) {
-        typeProblems.push(`${where}: text-${token} paired with a font-weight it already sets`);
+      const line = content.slice(0, expression.index).split("\n").length;
+      const where = `  ${f.path}:${line} (${item.name})`;
+
+      for (const [element, onElement] of byElement) {
+        const tokenHit = onElement.map((c) => c.match(TOKEN)).find(Boolean);
+        if (!tokenHit) continue;
+        const [, token, modifier] = tokenHit;
+        const on = element ? ` on \`${element}:\`` : "";
+        if (modifier) {
+          typeProblems.push(
+            `${where}: text-${token}${modifier}${on} overrides the line-height the token owns`
+          );
+        } else if (onElement.some((c) => LEADING.test(c))) {
+          typeProblems.push(
+            `${where}: text-${token}${on} paired with a leading-* utility`
+          );
+        }
+        if (weightTokens.has(token) && onElement.some((c) => WEIGHT.test(c))) {
+          typeProblems.push(
+            `${where}: text-${token}${on} paired with a font-weight it already sets`
+          );
+        }
       }
-    });
+    }
   }
 }
 
