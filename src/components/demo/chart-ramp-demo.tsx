@@ -19,6 +19,7 @@ const commodityRamps = [
   { name: "Gas", key: "gas" },
   { name: "Temperature", key: "temperature" },
   { name: "Emissions", key: "emissions" },
+  { name: "Miscellaneous", key: "misc" },
 ]
 
 const rampSteps = ["100", "300", "500", "700", "900"]

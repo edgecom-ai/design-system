@@ -40,7 +40,7 @@ const COLOR_GROUPS = [
   { comment: "Status — each also has -foreground / -subtle-foreground (see body)", keys: ["success", "success-emphasis", "success-subtle", "warning", "warning-emphasis", "warning-subtle", "info", "info-emphasis", "info-subtle", "destructive", "destructive-emphasis", "destructive-subtle"] },
   { comment: null, keys: ["border", "input", "ring"] },
 ];
-const COMMODITIES = ["electricity", "water", "gas", "temperature", "emissions"];
+const COMMODITIES = ["electricity", "water", "gas", "temperature", "emissions", "misc"];
 const TYPE_SCALE = ["caption", "body-sm", "body", "body-lg", "title", "heading", "display"];
 const RADII = ["sm", "md", "lg", "xl", "2xl", "3xl", "4xl"];
 

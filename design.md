@@ -48,7 +48,8 @@ colors:
   chart-water: oklch(0.514 0.161 254.3)
   chart-gas: oklch(0.62 0.2 25)
   chart-temperature: oklch(0.68 0.12 178)
-  chart-emissions: oklch(0.55 0.18 300)
+  chart-emissions: oklch(0.58 0.16 10)
+  chart-misc: oklch(0.55 0.18 300)
 typography:
   font-family: SF Pro / system-ui sans (var --font-sans)
   font-family-mono: SF Mono / ui-monospace (var --font-mono)
@@ -131,7 +132,7 @@ Colors are semantic tokens. Reach for the token by **role**, not by how it looks
 - **Status:** `success`, `warning`, `info`, `destructive` — each with the full set `{ base, -foreground, -emphasis, -subtle, -subtle-foreground }`.
 - **Form / outline:** `border`, `input`, `ring`.
 - **Interaction:** `ghost-hover` (quiet controls with no resting fill — `button`/`badge` `ghost`), `outline-surface` + `outline-hover` (`button` `outline`), `input-surface` + `input-hover` (the field triggers — `select`, `native-select`, which rest transparent so a tinted row shows through). Each is one theme-aware token rather than a light value plus a `dark:` override, so an app can re-tint a quiet control with a single `bg-*` / `hover:bg-*` and have it win in **both** themes.
-- **Charts / commodities:** `chart-1..5` alias the `500` step of the commodity ramps `chart-{electricity,water,gas,temperature,emissions}-{100..900}` (mode-independent — one hue per commodity).
+- **Charts / commodities:** `chart-1..5` alias the `500` step of the five named commodity ramps `chart-{electricity,water,gas,temperature,emissions}-{100..900}` (one hue per commodity); `chart-misc-{100..900}` is a sixth ramp (violet) for miscellaneous/uncategorized data, outside the `chart-1..5` rotation. All commodity ramps are mode-independent — `100` is the lightest step in both themes.
 - **Sidebar:** `sidebar`, `sidebar-foreground`, `sidebar-primary`, `sidebar-accent`, `sidebar-border`, `sidebar-ring` (+ foregrounds).
 
 ### Which shade to use
@@ -144,9 +145,17 @@ Colors are semantic tokens. Reach for the token by **role**, not by how it looks
 
 `destructive` = errors & destructive actions · `success` = positive confirmation · `warning` = caution / negative-but-expected · `info` = information. Apply consistently across every surface (badges, alerts, toasts, text, icons). Never an arbitrary red/green/yellow, and never a status color used decoratively.
 
+`destructive` is the palette's **only** red that means "error or destructive action" — it is reserved for that meaning and nothing else. Two commodity ramps (`chart-gas`, `chart-emissions`) now also live in the warm-red band; they tag data, never status. Never reach for `destructive` to color a chart series because it looks red, and never repurpose a commodity red to signal an error — pick the token by meaning, not by hue. See *Commodities* for the three-way distinction.
+
 ### Commodities
 
-`electricity`, `water`, `gas`, `temperature`, `emissions` tag *that commodity* only. Electricity-derived metrics (voltage, current, THD, power factor) may use `electricity`.
+`electricity`, `water`, `gas`, `temperature`, `emissions` tag *that commodity* only. Electricity-derived metrics (voltage, current, THD, power factor) may use `electricity`. `chart-misc` (violet) is the catch-all for **miscellaneous / uncategorized data** — IAQ, occupancy, and any series that isn't one of the five named commodities; it is a sixth ramp, not part of the `chart-1..5` categorical rotation.
+
+Three families sit in the warm-red band and must not be substituted for one another. `chart-gas` (hue 27) tags the gas commodity; `chart-emissions` (hue 10) tags carbon and emissions series; `destructive` (hue 27.3) means an error or a destructive action and is never a chart series. They are close in hue and lightness, so:
+
+* Never use `destructive` to color an emissions or gas series, and never use a commodity red to signal an error — the meaning, not the appearance, picks the token.
+* Where gas and emissions appear in the same chart, separate them in the categorical order so they are not adjacent segments, and rely on the legend rather than hue alone to tell them apart.
+* Emissions as text or a thin icon uses `chart-emissions-700`; the `500` step is for fills.
 
 ### Brand blue is mode-independent
 
@@ -353,3 +362,4 @@ Never a **zero gap** — touching bars read as one solid block. **Round only the
 - Don't pack many bars edge-to-edge into a solid block — widen the inter-bar gap (or aggregate) so they stay legible.
 - Don't fully-round, pill-shape, or bottom-round bars, and don't vary the bar radius or thickness between charts — round only the top corners with one uniform radius.
 - Don't color a statistical reference line (period average / min / max) with a status or commodity hue — keep it neutral/muted.
+- Don't put a commodity red (`chart-gas`, `chart-emissions`) and `destructive` in the same visual role — a red series next to a red error state reads as one signal.
