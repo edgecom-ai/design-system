@@ -103,7 +103,7 @@ const CircularProgress = ({
           />
         </svg>
         {showLabel && (
-          <div className={cn('absolute inset-0 flex items-center justify-center text-title font-medium', labelClassName)}>
+          <div className={cn('absolute inset-0 flex items-center justify-center text-title', labelClassName)}>
             {renderLabel ? renderLabel(value) : `${value}%`}
           </div>
         )}
