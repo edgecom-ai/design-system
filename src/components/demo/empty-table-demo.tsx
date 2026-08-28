@@ -16,7 +16,7 @@ import { InboxIcon, PlusIcon } from "lucide-react"
 export function EmptyTableDemo() {
   return (
     <div className="w-full max-w-lg overflow-hidden rounded-lg border border-border">
-      <div className="grid grid-cols-3 gap-4 border-b border-border bg-muted/40 px-4 py-2 text-caption font-medium text-muted-foreground">
+      <div className="grid grid-cols-3 gap-4 border-b border-border bg-muted/40 px-4 py-2 text-caption text-muted-foreground">
         <span>Sensor</span>
         <span>Site</span>
         <span className="text-right">Reading</span>
