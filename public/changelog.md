@@ -7,8 +7,13 @@ Every change to the Edgecom design system, derived from git history. Also publis
 
 ## August 31, 2026
 
+### Documentation
+
+- **demos:** Complete the demo-copy sanitization and unify the region model ([`24c6606`](https://github.com/edgecom-ai/design-system/commit/24c6606))
+
 ### Internal
 
+- **docs:** Regenerate the changelog artifacts ([`6ed826d`](https://github.com/edgecom-ai/design-system/commit/6ed826d))
 - **docs:** Regenerate the changelog artifacts ([`18722c1`](https://github.com/edgecom-ai/design-system/commit/18722c1))
 
 ## August 28, 2026

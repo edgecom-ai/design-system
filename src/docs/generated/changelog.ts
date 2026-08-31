@@ -73,6 +73,30 @@ export const changelog: ChangelogRelease[] = [
     "summary": null,
     "entries": [
       {
+        "sha": "6ed826d",
+        "date": "2026-08-31",
+        "type": "chore",
+        "group": "internal",
+        "scopes": [
+          "docs"
+        ],
+        "summary": "Regenerate the changelog artifacts",
+        "items": [],
+        "breaking": false
+      },
+      {
+        "sha": "24c6606",
+        "date": "2026-08-31",
+        "type": "docs",
+        "group": "docs",
+        "scopes": [
+          "demos"
+        ],
+        "summary": "Complete the demo-copy sanitization and unify the region model",
+        "items": [],
+        "breaking": false
+      },
+      {
         "sha": "18722c1",
         "date": "2026-08-31",
         "type": "chore",
