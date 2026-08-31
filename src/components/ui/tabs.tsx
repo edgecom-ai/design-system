@@ -189,7 +189,10 @@ function TabsTrigger({ className, ...props }: TabsPrimitive.Tab.Props) {
         // stretches its trigger to meet it, so the bar stays on the list's edge
         // whatever padding the list is given; the -1px only cancels the
         // trigger's own transparent border.
-        "after:absolute after:bg-foreground after:opacity-0 after:transition-opacity group-data-[variant=line]/tabs-list:h-full group-data-[orientation=horizontal]/tabs:after:inset-x-0 group-data-[orientation=horizontal]/tabs:after:bottom-[-1px] group-data-[orientation=horizontal]/tabs:after:h-0.5 group-data-[orientation=vertical]/tabs:after:inset-y-0 group-data-[orientation=vertical]/tabs:after:-right-px group-data-[orientation=vertical]/tabs:after:w-0.5 group-data-[variant=line]/tabs-list:data-active:after:opacity-100 group-has-[[data-slot=tabs-indicator]]/tabs-list:after:hidden",
+        // Brand blue, and `primary` is mode-independent — a 2px hairline of it
+        // on the dark background is only ~3.9:1, so dark takes the lighter
+        // `primary-emphasis` step (the same reason thin brand marks do).
+        "after:absolute after:bg-primary after:opacity-0 after:transition-opacity dark:after:bg-primary-emphasis group-data-[variant=line]/tabs-list:h-full group-data-[orientation=horizontal]/tabs:after:inset-x-0 group-data-[orientation=horizontal]/tabs:after:bottom-[-1px] group-data-[orientation=horizontal]/tabs:after:h-0.5 group-data-[orientation=vertical]/tabs:after:inset-y-0 group-data-[orientation=vertical]/tabs:after:-right-px group-data-[orientation=vertical]/tabs:after:w-0.5 group-data-[variant=line]/tabs-list:data-active:after:opacity-100 group-has-[[data-slot=tabs-indicator]]/tabs-list:after:hidden",
         className
       )}
       {...props}
@@ -207,12 +210,13 @@ function TabsTrigger({ className, ...props }: TabsPrimitive.Tab.Props) {
 // bars above switch themselves off when it's present.
 // Pass renderBeforeHydration to paint it before hydration (injects an inline
 // script — leave it off under a strict CSP).
+// Same blue as the line variant's bars, incl. the `primary-emphasis` dark step.
 function TabsIndicator({ className, ...props }: TabsPrimitive.Indicator.Props) {
   return (
     <TabsPrimitive.Indicator
       data-slot="tabs-indicator"
       className={cn(
-        "pointer-events-none absolute bg-foreground transition-[translate,width,height] duration-200 ease-out",
+        "pointer-events-none absolute bg-primary transition-[translate,width,height] duration-200 ease-out dark:bg-primary-emphasis",
         "group-data-[orientation=horizontal]/tabs:bottom-0 group-data-[orientation=horizontal]/tabs:left-0 group-data-[orientation=horizontal]/tabs:h-0.5 group-data-[orientation=horizontal]/tabs:w-(--active-tab-width) group-data-[orientation=horizontal]/tabs:translate-x-(--active-tab-left)",
         "group-data-[orientation=vertical]/tabs:top-0 group-data-[orientation=vertical]/tabs:right-0 group-data-[orientation=vertical]/tabs:h-(--active-tab-height) group-data-[orientation=vertical]/tabs:w-0.5 group-data-[orientation=vertical]/tabs:translate-y-(--active-tab-top)",
         className
