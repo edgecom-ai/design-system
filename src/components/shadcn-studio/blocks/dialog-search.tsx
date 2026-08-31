@@ -32,7 +32,7 @@ const SearchDialog = ({ defaultOpen = false, trigger, className }: Props) => {
 
   const suggestions = [
     {
-      id: 'peak-forecast-ontario',
+      id: 'peak-forecast-east',
       icon: (
         <GaugeIcon className='text-foreground size-4.5!' />
       ),

@@ -73,7 +73,7 @@ const data: Payment[] = [
   },
   {
     id: '7',
-    name: 'HQ – Front Street',
+    name: 'HQ – South Campus',
     amount: 7890,
     status: 'success',
     email: 'bob.johnson@example.com'

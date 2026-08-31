@@ -21,11 +21,11 @@ import {
 
 const utilities = [
   "North Grid Utility",
-  "Lakeshore Utilities",
-  "Provincial Grid",
-  "Rivergate Hydro",
-  "Foothills Energy",
-  "Prairie Power",
+  "East Grid Utility",
+  "South Grid Utility",
+  "Central Grid Utility",
+  "Coastal Grid Utility",
+  "Inland Grid Utility",
   "West Grid Utility",
 ] as const
 

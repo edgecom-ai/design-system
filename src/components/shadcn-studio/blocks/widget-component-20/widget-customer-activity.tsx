@@ -89,7 +89,7 @@ const customerData = [
   },
   {
     id: 5567,
-    name: 'Winnipeg Depot',
+    name: 'Depot C',
     lastSeen: '15/02/2026 19:55'
   },
   {
@@ -99,7 +99,7 @@ const customerData = [
   },
   {
     id: 7781,
-    name: 'Halifax Water Plant',
+    name: 'Water Treatment Plant',
     lastSeen: '14/02/2026 21:33'
   },
   {
@@ -109,7 +109,7 @@ const customerData = [
   },
   {
     id: 6698,
-    name: 'Regina Grain Elevator',
+    name: 'Grain Elevator',
     lastSeen: '13/02/2026 17:06'
   },
   {
@@ -119,7 +119,7 @@ const customerData = [
   },
   {
     id: 8874,
-    name: 'Saskatoon Warehouse',
+    name: 'Warehouse D',
     lastSeen: '12/02/2026 22:14'
   },
   {
@@ -139,22 +139,22 @@ const customerData = [
   },
   {
     id: 5981,
-    name: 'Burnaby Campus',
+    name: 'West Campus',
     lastSeen: '10/02/2026 20:02'
   },
   {
     id: 3744,
-    name: 'Red Deer Refinery',
+    name: 'Refinery',
     lastSeen: '10/02/2026 12:44'
   },
   {
     id: 8260,
-    name: 'Guelph Manufacturing',
+    name: 'Manufacturing Plant B',
     lastSeen: '09/02/2026 16:18'
   },
   {
     id: 1655,
-    name: 'Laval Distribution',
+    name: 'Distribution Center B',
     lastSeen: '09/02/2026 09:05'
   },
   {

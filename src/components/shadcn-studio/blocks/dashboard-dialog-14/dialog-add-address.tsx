@@ -27,13 +27,13 @@ type Props = {
   className?: string
 }
 
-const countries = [
+const regions = [
   {
     value: null,
     label: 'Select market / region'
   },
   {
-    value: 'ontario',
+    value: 'region-east',
     label: (
       <>
         <span className='flex items-center gap-2'>
@@ -48,7 +48,7 @@ const countries = [
     )
   },
   {
-    value: 'alberta',
+    value: 'region-west',
     label: (
       <>
         <span className='flex items-center gap-2'>
@@ -63,22 +63,22 @@ const countries = [
     )
   },
   {
-    value: 'british-columbia',
+    value: 'region-coastal',
     label: (
       <>
         <span className='flex items-center gap-2'>
           <img
             src='https://cdn.shadcnstudio.com/ss-assets/flags/monaco.png'
-            alt={`British Columbia region`}
+            alt={`Coastal region`}
             className='h-4 w-5 shrink-0'
           />
-          <span className='truncate'>British Columbia</span>
+          <span className='truncate'>Coastal</span>
         </span>
       </>
     )
   },
   {
-    value: 'quebec',
+    value: 'region-central',
     label: (
       <>
         <span className='flex items-center gap-2'>
@@ -93,91 +93,91 @@ const countries = [
     )
   },
   {
-    value: 'manitoba',
+    value: 'region-inland',
     label: (
       <>
         <span className='flex items-center gap-2'>
           <img
             src='https://cdn.shadcnstudio.com/ss-assets/flags/romania.png'
-            alt={`Manitoba region`}
+            alt={`Inland region`}
             className='h-4 w-5 shrink-0'
           />
-          <span className='truncate'>Manitoba</span>
+          <span className='truncate'>Inland</span>
         </span>
       </>
     )
   },
   {
-    value: 'saskatchewan',
+    value: 'region-north',
     label: (
       <>
         <span className='flex items-center gap-2'>
           <img
             src='https://cdn.shadcnstudio.com/ss-assets/flags/mayotte.png'
-            alt={`Saskatchewan region`}
+            alt={`North region`}
             className='h-4 w-5 shrink-0'
           />
-          <span className='truncate'>Saskatchewan</span>
+          <span className='truncate'>North</span>
         </span>
       </>
     )
   },
   {
-    value: 'nova-scotia',
+    value: 'region-south',
     label: (
       <>
         <span className='flex items-center gap-2'>
           <img
             src='https://cdn.shadcnstudio.com/ss-assets/flags/iraq.png'
-            alt={`Nova Scotia region`}
+            alt={`South region`}
             className='h-4 w-5 shrink-0'
           />
-          <span className='truncate'>Nova Scotia</span>
+          <span className='truncate'>South</span>
         </span>
       </>
     )
   },
   {
-    value: 'new-brunswick',
+    value: 'region-southeast',
     label: (
       <>
         <span className='flex items-center gap-2'>
           <img
             src='https://cdn.shadcnstudio.com/ss-assets/flags/syria.png'
-            alt={`New Brunswick region`}
+            alt={`Southeast region`}
             className='h-4 w-5 shrink-0'
           />
-          <span className='truncate'>New Brunswick</span>
+          <span className='truncate'>Southeast</span>
         </span>
       </>
     )
   },
   {
-    value: 'newfoundland',
+    value: 'region-northeast',
     label: (
       <>
         <span className='flex items-center gap-2'>
           <img
             src='https://cdn.shadcnstudio.com/ss-assets/flags/korea.png'
-            alt={`Newfoundland and Labrador region`}
+            alt={`Northeast region`}
             className='h-4 w-5 shrink-0'
           />
-          <span className='truncate'>Newfoundland and Labrador</span>
+          <span className='truncate'>Northeast</span>
         </span>
       </>
     )
   },
   {
-    value: 'pei',
+    value: 'region-metro',
     label: (
       <>
         <span className='flex items-center gap-2'>
           <img
             src='https://cdn.shadcnstudio.com/ss-assets/flags/zimbabwe.png'
-            alt={`Prince Edward Island region`}
+            alt={`Metro region`}
             className='h-4 w-5 shrink-0'
           />
-          <span className='truncate'>Prince Edward Island</span>
+          <span className='truncate'>Metro</span>
         </span>
       </>
     )
@@ -238,15 +238,15 @@ const AddAddressDialog = ({ defaultOpen = false, trigger, className }: Props) =>
               </div>
 
               <div className='flex flex-col gap-2 md:col-span-2'>
-                <Label htmlFor='country'>Market / region</Label>
-                <Select items={countries}>
-                  <SelectTrigger id='country' className='w-full'>
+                <Label htmlFor='market-region'>Market / region</Label>
+                <Select items={regions}>
+                  <SelectTrigger id='market-region' className='w-full'>
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent className='max-h-100 p-1'>
-                    {countries.slice(1).map(country => (
-                      <SelectItem key={country.value} value={country.value} className='*:items-center'>
-                        {country.label}
+                    {regions.slice(1).map(region => (
+                      <SelectItem key={region.value} value={region.value} className='*:items-center'>
+                        {region.label}
                       </SelectItem>
                     ))}
                   </SelectContent>
