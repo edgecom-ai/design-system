@@ -66,6 +66,27 @@ export const commitUrl = (sha: string) => `https://github.com/edgecom-ai/design-
 
 export const changelog: ChangelogRelease[] = [
   {
+    "id": "release-2026-08-31",
+    "version": null,
+    "date": "2026-08-31",
+    "title": "August 31, 2026",
+    "summary": null,
+    "entries": [
+      {
+        "sha": "18722c1",
+        "date": "2026-08-31",
+        "type": "chore",
+        "group": "internal",
+        "scopes": [
+          "docs"
+        ],
+        "summary": "Regenerate the changelog artifacts",
+        "items": [],
+        "breaking": false
+      }
+    ]
+  },
+  {
     "id": "release-2026-08-28",
     "version": null,
     "date": "2026-08-28",

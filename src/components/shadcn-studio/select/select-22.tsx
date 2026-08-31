@@ -11,25 +11,25 @@ import {
   SelectValue
 } from '@/components/ui/select'
 
-const ontario = [
+const east = [
   { label: 'HQ – Main Campus', value: '1' },
   { label: 'Distribution Center', value: '2' },
   { label: 'Warehouse B', value: '3' }
 ]
 
-const alberta = [
+const west = [
   { label: 'Plant 2', value: '4' },
   { label: 'Chiller Plant', value: '5' },
-  { label: 'Red Deer Data Center', value: '6' }
+  { label: 'Data Center West', value: '6' }
 ]
 
-const quebec = [
+const central = [
   { label: 'Main Building', value: '7' },
-  { label: 'Laval Substation', value: '8' },
+  { label: 'Substation B', value: '8' },
   { label: 'Depot A', value: '9' }
 ]
 
-const items = [{ label: 'Select site', value: null }, ...ontario, ...alberta, ...quebec]
+const items = [{ label: 'Select site', value: null }, ...east, ...west, ...central]
 
 const SelectWithOptionsGroupsDemo = () => {
   const id = useId()
@@ -44,7 +44,7 @@ const SelectWithOptionsGroupsDemo = () => {
         <SelectContent>
           <SelectGroup>
             <SelectLabel>East</SelectLabel>
-            {ontario.map(item => (
+            {east.map(item => (
               <SelectItem key={item.value} value={item.value}>
                 {item.label}
               </SelectItem>
@@ -52,7 +52,7 @@ const SelectWithOptionsGroupsDemo = () => {
           </SelectGroup>
           <SelectGroup>
             <SelectLabel>West</SelectLabel>
-            {alberta.map(item => (
+            {west.map(item => (
               <SelectItem key={item.value} value={item.value}>
                 {item.label}
               </SelectItem>
@@ -60,7 +60,7 @@ const SelectWithOptionsGroupsDemo = () => {
           </SelectGroup>
           <SelectGroup>
             <SelectLabel>Central</SelectLabel>
-            {quebec.map(item => (
+            {central.map(item => (
               <SelectItem key={item.value} value={item.value}>
                 {item.label}
               </SelectItem>
