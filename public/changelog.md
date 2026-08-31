@@ -5,6 +5,12 @@
 Every change to the Edgecom design system, derived from git history. Also published at
 [design.edgecom.ai/changelog](https://design.edgecom.ai/getting-started/changelog).
 
+## August 31, 2026
+
+### Internal
+
+- **docs:** Regenerate the changelog artifacts ([`18722c1`](https://github.com/edgecom-ai/design-system/commit/18722c1))
+
 ## August 28, 2026
 
 ### Added
