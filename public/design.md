@@ -272,6 +272,7 @@ Any destructive/irreversible action (delete, remove, disconnect, reset, purge) p
 
 - **Active/selected states use the built-in neutral highlight — not brand blue.** An active nav/menu/tab/sidebar item is signalled by the component's own active styling (`isActive`/`data-active` → the neutral `accent`/`sidebar-accent` surface) while its **text and icon stay `foreground`**. Brand blue is reserved for CTAs and a single key highlight, not routine active states. Compose navigation from the primitive's parts (e.g. `SidebarGroupLabel`, `SidebarMenuButton isActive`, `SidebarMenuSub`) — don't hand-roll the highlight.
 - **Keep a gap between menu items** (e.g. `gap-1`) in `sidebar`, `dropdown-menu`, `command`, and similar lists so an active item and a hovered neighbor never merge into one block.
+- **A `dropdown-menu` sizes to its widest item, not to its trigger.** The menu shrink-wraps its content (`w-auto`, floored at a small `min-w`), so the width fits the items inside. Don't stretch it to the trigger width or pad items to a fixed width: both leave trailing whitespace, and a wide icon button opening a menu of short actions should still give a compact menu. (Contrast `select`, whose list intentionally matches the trigger width so options line up under the shown value.)
 
 ### Select — no checkmark on the selected item
 
@@ -292,7 +293,7 @@ Every chart/graph carries a **consistent control cluster** in its header — the
 - **Shared date range.** All charts on a view are driven by **one** range control — the `date-picker` in range mode plus quick presets (`1W` / `1M` / …). Never give each chart its own range that drifts out of sync; changing the range updates every chart together.
 - **Interpolation toggle — smooth vs. step.** Line/area charts expose a toggle to switch between a smooth curve and stepped segments. Default to **smooth** for continuous series; use step for discrete/stateful data.
 - **Statistical overlays.** Offer the analytics tools as toggleable overlays — period average (a reference line labelled with its value in the legend), min/max, and trend — so a reading carries context. Draw reference lines in a **neutral/`muted`** tone (dashed), never a status or commodity color.
-- **Export / download.** A single icon button opening a `dropdown-menu` in the header offers the export options (image + data — e.g. PNG / SVG / CSV) — not a row of buttons. (This is header chrome — an icon button per *Buttons & interaction*.)
+- **Export / download.** Always a single **icon button** in the header (never a text button or a row of buttons) opening a `dropdown-menu`. The default menu is the **same on every graph, in this order**: **Download PNG**, **Download SVG**, **Download PDF**, **Download CSV**, **Print**. Keep this set and order identical across all charts so the export affordance is the same everywhere; omit an item only when a chart genuinely cannot produce it. (This is header chrome, an icon button per *Buttons & interaction*.)
 - **Series / metric selector — identical across every graph.** Choosing which data series or metric a chart shows uses the **same** control on every graph: the same component (a `select` for one choice; a multi-select for several; `tabs` only for a small fixed set), in the same place and size. A user should never meet a dropdown on one chart and a segmented control on another for the same job (see *Same job → same component* above).
 
 Only omit one of these five when the spec explicitly says so.
@@ -332,7 +333,8 @@ Never a **zero gap** — touching bars read as one solid block. **Round only the
 - Move secondary/detail info into tooltips/hover-cards in dense UI.
 - Let tooltips shrink-wrap (one line per row) and flip/shift within the viewport; keep them portaled so no container clips them.
 - Use icon buttons for secondary table/page actions, and `ghost-destructive` for a quiet destructive row action.
-- Give every chart the standard controls by default — one shared date range, a smooth/step toggle, statistical overlays, and an export dropdown.
+- Let a `dropdown-menu` shrink-wrap to its widest item; never stretch it to the trigger width or pad items with trailing whitespace.
+- Give every chart the standard controls by default: one shared date range, a smooth/step toggle, statistical overlays, and one export icon-button dropdown (Download PNG / SVG / PDF / CSV / Print).
 - Use the same component for the same job everywhere (e.g. one series-selector control shared across all charts).
 - Size bar width and gap to the data density (bar ~75% of its slot; gap ≥ 2px; cap width for few bars; aggregate or scroll past ~60).
 - Round only the top corners of bars (small, uniform ~2–4px radius); keep the bottom square on the baseline, and use the same radius/thickness across every bar chart.
@@ -347,6 +349,8 @@ Never a **zero gap** — touching bars read as one solid block. **Round only the
 - Don't put icons in table cells unless asked; don't let edge cells sit flush to the card border (align to 1.5rem).
 - Don't give tooltips a `max-w`/fixed width that wraps the text; don't pin a side that lets one run off-screen (let it flip/shift within the viewport); don't let a container clip one (keep it portaled).
 - Don't fix a row menu clipped by an `overflow-x-auto` table with `min-height` — toggle the wrapper to `overflow: visible` while open.
+- Don't stretch a `dropdown-menu` to its trigger width or pad its items with trailing whitespace; it shrink-wraps to its widest item.
+- Don't give charts different export sets, or a row of export buttons: use one icon-button dropdown with the standard Download PNG / SVG / PDF / CSV / Print items on every graph.
 - Don't fire a neutral `toast()` for a success/failure; don't mount two toasters or ship a titleless toast.
 - Don't wire a destructive action straight to its trigger.
 - Don't block a user on validation without inline, specific error text.
