@@ -503,13 +503,82 @@ function ColorsPage() {
   return (
     <div className="flex flex-col gap-10">
       <p className="max-w-2xl text-sm text-muted-foreground">
-        Live WCAG 2.1 contrast, measured from rendered pixels in the current theme —
-        toggle{" "}
+        Live WCAG 2.1 contrast, measured from rendered pixels in the current theme.
+        Toggle{" "}
         <span className="font-medium text-foreground">light / dark</span> above to
         recompute. Targets:{" "}
         <span className="font-medium text-foreground">AA ≥ 4.5:1</span> for text,{" "}
         <span className="font-medium text-foreground">3:1</span> for large text / UI.
       </p>
+
+      <section id="colors-usage" className="flex scroll-mt-24 flex-col gap-3">
+        <h3 className="text-title">Reach for a token by meaning</h3>
+        <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
+          Every color here is a semantic token named for a{" "}
+          <span className="font-medium text-foreground">role</span> (a surface, a
+          status, a piece of emphasis), not for how it looks. Reach for the token
+          whose meaning matches the job and it resolves correctly in both themes
+          and stays consistent across every screen. Picking by appearance (grabbing
+          a red because you want something red) is exactly what breaks dark mode and
+          blurs status. That is also why you never hardcode a hex: the token is the
+          contract.
+        </p>
+        <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
+          Most families carry the same shades, each for one job. The trio exists so
+          a single color can play three roles (fill, text, and tint), each already
+          paired with a foreground that clears the contrast bar, so you never
+          hand-mix a lighter or darker variant:
+        </p>
+        <ul className="ml-4 flex max-w-2xl list-disc flex-col gap-1.5 text-sm text-muted-foreground marker:text-muted-foreground/60">
+          <li>
+            <Code>base</Code> fill with its <Code>-foreground</Code>, for a solid
+            element and the text or icon on it (a filled button, a solid status
+            chip).
+          </li>
+          <li>
+            <Code>-emphasis</Code>, when the color is{" "}
+            <span className="font-medium text-foreground">text or a thin icon</span>{" "}
+            on a neutral surface. It is tuned to stay legible at small sizes; the
+            base fill is too light as text and fails AA.
+          </li>
+          <li>
+            <Code>-subtle</Code> with <Code>-subtle-foreground</Code>, for a{" "}
+            <span className="font-medium text-foreground">tinted surface</span>: a
+            banner, a selected row, a pill. Never use a base fill color directly as
+            a text color.
+          </li>
+        </ul>
+      </section>
+
+      <section id="colors-status" className="flex scroll-mt-24 flex-col gap-3">
+        <h3 className="text-title">Status colors carry meaning</h3>
+        <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
+          <Code>destructive</Code> = errors and destructive actions ·{" "}
+          <Code>success</Code> = positive confirmation · <Code>warning</Code> =
+          caution or a negative-but-expected outcome · <Code>info</Code> =
+          information. Apply the same token on every surface (badge, alert, toast,
+          text, icon) so a color always means the same thing. Never an arbitrary
+          red, green, or yellow, and never a status color used decoratively.
+        </p>
+        <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
+          <span className="font-medium text-foreground">
+            <Code>destructive</Code> is the palette&rsquo;s only red that means an
+            error or a destructive action.
+          </span>{" "}
+          The commodity ramps <Code>chart-gas</Code> and <Code>chart-emissions</Code>{" "}
+          (on{" "}
+          <Link
+            className="font-medium text-primary underline underline-offset-4 dark:text-primary-emphasis"
+            href="/foundations/charts/"
+          >
+            Chart ramp
+          </Link>
+          ) now sit in the same warm-red band, but they tag{" "}
+          <span className="font-medium text-foreground">data</span>, never status.
+          Keep them apart, since a red data series next to a red error state reads
+          as one signal. Pick the token by meaning, not by hue.
+        </p>
+      </section>
 
       <section id="colors-solid" className="flex scroll-mt-24 flex-col gap-3">
         <h3 className="text-title">Solid fills</h3>
@@ -1002,6 +1071,8 @@ export const sections: Section[] = [
       "Semantic color tokens that adapt automatically between light and dark themes.",
     install: "@edgecom/theme",
     toc: [
+      { id: "colors-usage", name: "Reach for a token by meaning" },
+      { id: "colors-status", name: "Status colors carry meaning" },
       { id: "colors-solid", name: "Solid fills" },
       { id: "colors-subtle", name: "Status & brand surfaces" },
       { id: "colors-emphasis", name: "Emphasis colors as text" },
