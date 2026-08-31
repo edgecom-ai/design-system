@@ -73,7 +73,33 @@ export const changelog: ChangelogRelease[] = [
     "summary": null,
     "entries": [
       {
-        "sha": "6923e3b",
+        "sha": "e8cf67e",
+        "date": "2026-08-28",
+        "type": "docs",
+        "group": "docs",
+        "scopes": [
+          "demos"
+        ],
+        "summary": "Use fictional utilities, sites, and contacts in demo copy",
+        "items": [],
+        "breaking": false
+      },
+      {
+        "sha": "31a32e7",
+        "date": "2026-08-28",
+        "type": "feat",
+        "group": "added",
+        "scopes": [
+          "theme"
+        ],
+        "summary": "Move emissions from violet to crimson red, add chart-misc from the former violet",
+        "items": [
+          "theme"
+        ],
+        "breaking": false
+      },
+      {
+        "sha": "387f291",
         "date": "2026-08-28",
         "type": "chore",
         "group": "internal",
@@ -85,7 +111,7 @@ export const changelog: ChangelogRelease[] = [
         "breaking": false
       },
       {
-        "sha": "dd33777",
+        "sha": "a6c763a",
         "date": "2026-08-28",
         "type": "fix",
         "group": "fixed",

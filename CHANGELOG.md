@@ -9,11 +9,12 @@ Every change to the Edgecom design system, derived from git history. Also publis
 
 ### Added
 
+- **theme:** Move emissions from violet to crimson red, add chart-misc from the former violet ([`31a32e7`](https://github.com/edgecom-ai/design-system/commit/31a32e7))
 - **date-picker:** Rolling-window variant with hover preview ([`26b11b0`](https://github.com/edgecom-ai/design-system/commit/26b11b0))
 
 ### Fixed
 
-- **tabs:** Let an overflowing tab strip scroll itself ([`dd33777`](https://github.com/edgecom-ai/design-system/commit/dd33777))
+- **tabs:** Let an overflowing tab strip scroll itself ([`a6c763a`](https://github.com/edgecom-ai/design-system/commit/a6c763a))
 - **docs:** Model the empty state in the destructive row-action demo ([`334b04e`](https://github.com/edgecom-ai/design-system/commit/334b04e))
 - **native-select:** Let a consumer's classes reach the select ([`5f8c202`](https://github.com/edgecom-ai/design-system/commit/5f8c202))
 - **registry:** Audit whole class expressions for type-token overrides ([`f58c074`](https://github.com/edgecom-ai/design-system/commit/f58c074))
@@ -25,9 +26,13 @@ Every change to the Edgecom design system, derived from git history. Also publis
 - **sortable:** Declare the react-dom it imports for its drag overlay ([`2a11c72`](https://github.com/edgecom-ai/design-system/commit/2a11c72))
 - **resizable:** Migrate to the react-resizable-panels v4 API ([`65c0e17`](https://github.com/edgecom-ai/design-system/commit/65c0e17))
 
+### Documentation
+
+- **demos:** Use fictional utilities, sites, and contacts in demo copy ([`e8cf67e`](https://github.com/edgecom-ai/design-system/commit/e8cf67e))
+
 ### Internal
 
-- **docs:** Regenerate the changelog artifacts ([`6923e3b`](https://github.com/edgecom-ai/design-system/commit/6923e3b))
+- **docs:** Regenerate the changelog artifacts ([`387f291`](https://github.com/edgecom-ai/design-system/commit/387f291))
 
 ## August 27, 2026
 
