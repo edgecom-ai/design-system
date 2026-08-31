@@ -290,13 +290,17 @@ A `tooltip` **shrink-wraps its content**, sizing to its text — don't add a `ma
 
 Every chart/graph carries a **consistent control cluster** in its header — the same set across all charts on a view, present **by default unless a chart explicitly opts out**:
 
-- **Shared date range.** All charts on a view are driven by **one** range control — the `date-picker` in range mode plus quick presets (`1W` / `1M` / …). Never give each chart its own range that drifts out of sync; changing the range updates every chart together.
+- **Shared date range.** All charts on a view are driven by **one** range control — the `date-picker` in range mode plus quick presets (`1W` / `1M` / …). In the chart header the picker defaults to its **compact icon-button** trigger (the calendar icon), opening the same range calendar, so the header stays chrome-light. Never give each chart its own range that drifts out of sync; changing the range updates every chart together.
 - **Interpolation toggle — smooth vs. step.** Line/area charts expose a toggle to switch between a smooth curve and stepped segments. Default to **smooth** for continuous series; use step for discrete/stateful data.
 - **Statistical overlays.** Offer the analytics tools as toggleable overlays — period average (a reference line labelled with its value in the legend), min/max, and trend — so a reading carries context. Draw reference lines in a **neutral/`muted`** tone (dashed), never a status or commodity color.
 - **Export / download.** Always a single **icon button** in the header (never a text button or a row of buttons) opening a `dropdown-menu`. The default menu is the **same on every graph, in this order**: **Download PNG**, **Download SVG**, **Download PDF**, **Download CSV**, **Print**. Keep this set and order identical across all charts so the export affordance is the same everywhere; omit an item only when a chart genuinely cannot produce it. (This is header chrome, an icon button per *Buttons & interaction*.)
 - **Series / metric selector — identical across every graph.** Choosing which data series or metric a chart shows uses the **same** control on every graph: the same component (a `select` for one choice; a multi-select for several; `tabs` only for a small fixed set), in the same place and size. A user should never meet a dropdown on one chart and a segmented control on another for the same job (see *Same job → same component* above).
 
 Only omit one of these five when the spec explicitly says so.
+
+**Header chrome is icon buttons.** The date-range picker and the export control both sit in the header as **icon buttons** by default (the compact `date-picker` trigger and the export `dropdown-menu` icon button), not full-width fields or text buttons, so the header reads as a tight row of affordances. Reserve a labeled control for a genuine primary action only.
+
+**Legend — always centered.** Center the legend horizontally relative to the plot on **every** chart (below the plot by default), and keep that placement identical across all charts on a view. A centered legend keeps single- and multi-series charts balanced and consistent; never left- or right-align it on one chart and center it on another.
 
 **Legible bars — size the bar width and gap to the data density.** A bar chart reads clearly only when bars keep a comfortable width and never touch. Think in terms of each category's **slot** (plot width ÷ number of bars): the bar fills part of the slot, the rest is the gap. Default to a bar at **~75% of its slot** (≈25% gap), then adjust by how many bars there are:
 
@@ -335,6 +339,7 @@ Never a **zero gap** — touching bars read as one solid block. **Round only the
 - Use icon buttons for secondary table/page actions, and `ghost-destructive` for a quiet destructive row action.
 - Let a `dropdown-menu` shrink-wrap to its widest item; never stretch it to the trigger width or pad items with trailing whitespace.
 - Give every chart the standard controls by default: one shared date range, a smooth/step toggle, statistical overlays, and one export icon-button dropdown (Download PNG / SVG / PDF / CSV / Print).
+- In a chart header, default to icon buttons for the date-range picker and export control, and center every chart's legend.
 - Use the same component for the same job everywhere (e.g. one series-selector control shared across all charts).
 - Size bar width and gap to the data density (bar ~75% of its slot; gap ≥ 2px; cap width for few bars; aggregate or scroll past ~60).
 - Round only the top corners of bars (small, uniform ~2–4px radius); keep the bottom square on the baseline, and use the same radius/thickness across every bar chart.
@@ -351,6 +356,7 @@ Never a **zero gap** — touching bars read as one solid block. **Round only the
 - Don't fix a row menu clipped by an `overflow-x-auto` table with `min-height` — toggle the wrapper to `overflow: visible` while open.
 - Don't stretch a `dropdown-menu` to its trigger width or pad its items with trailing whitespace; it shrink-wraps to its widest item.
 - Don't give charts different export sets, or a row of export buttons: use one icon-button dropdown with the standard Download PNG / SVG / PDF / CSV / Print items on every graph.
+- Don't put a full-width date-picker field or a text export button in a chart header, and don't left- or right-align a chart legend: use compact icon buttons and center the legend.
 - Don't fire a neutral `toast()` for a success/failure; don't mount two toasters or ship a titleless toast.
 - Don't wire a destructive action straight to its trigger.
 - Don't block a user on validation without inline, specific error text.
