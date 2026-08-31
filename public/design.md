@@ -273,6 +273,7 @@ Any destructive/irreversible action (delete, remove, disconnect, reset, purge) p
 - **Active/selected states use the built-in neutral highlight — not brand blue.** An active nav/menu/tab/sidebar item is signalled by the component's own active styling (`isActive`/`data-active` → the neutral `accent`/`sidebar-accent` surface) while its **text and icon stay `foreground`**. Brand blue is reserved for CTAs and a single key highlight, not routine active states. Compose navigation from the primitive's parts (e.g. `SidebarGroupLabel`, `SidebarMenuButton isActive`, `SidebarMenuSub`) — don't hand-roll the highlight.
 - **Keep a gap between menu items** (e.g. `gap-1`) in `sidebar`, `dropdown-menu`, `command`, and similar lists so an active item and a hovered neighbor never merge into one block.
 - **A `dropdown-menu` sizes to its widest item, not to its trigger.** The menu shrink-wraps its content (`w-auto`, floored at a small `min-w`), so the width fits the items inside. Don't stretch it to the trigger width or pad items to a fixed width: both leave trailing whitespace, and a wide icon button opening a menu of short actions should still give a compact menu. (Contrast `select`, whose list intentionally matches the trigger width so options line up under the shown value.)
+- **A `dropdown-menu` is portaled to the app root, so no parent container ever clips it.** The menu mounts at the app root rather than inside the trigger's box, so an ancestor with `overflow: hidden` / `overflow-x-auto` / `overflow-y-auto` (a card, a table, a `scroll-area`, a toolbar) can never crop it. Its positioner also flips and shifts to stay inside the viewport, and caps its own height to the available space (scrolling internally) instead of overflowing the screen. Don't disable portalling, render the menu inline inside a clipping or scrolling container, or pin a side that lets it run off-screen. The same holds for every other anchored surface — `select`, `combobox`, `context-menu`, `popover`, `hover-card`, `navigation-menu`.
 
 ### Select — no checkmark on the selected item
 
@@ -338,6 +339,7 @@ Never a **zero gap** — touching bars read as one solid block. **Round only the
 - Let tooltips shrink-wrap (one line per row) and flip/shift within the viewport; keep them portaled so no container clips them.
 - Use icon buttons for secondary table/page actions, and `ghost-destructive` for a quiet destructive row action.
 - Let a `dropdown-menu` shrink-wrap to its widest item; never stretch it to the trigger width or pad items with trailing whitespace.
+- Keep dropdowns and other anchored surfaces (`select`, `combobox`, `context-menu`, `popover`, `hover-card`) portaled so no `overflow` ancestor clips them; let them flip/shift within the viewport.
 - Give every chart the standard controls by default: one shared date range, a smooth/step toggle, statistical overlays, and one export icon-button dropdown (Download PNG / SVG / PDF / CSV / Print).
 - In a chart header, default to icon buttons for the date-range picker and export control, and center every chart's legend.
 - Use the same component for the same job everywhere (e.g. one series-selector control shared across all charts).
@@ -355,6 +357,7 @@ Never a **zero gap** — touching bars read as one solid block. **Round only the
 - Don't give tooltips a `max-w`/fixed width that wraps the text; don't pin a side that lets one run off-screen (let it flip/shift within the viewport); don't let a container clip one (keep it portaled).
 - Don't fix a row menu clipped by an `overflow-x-auto` table with `min-height` — toggle the wrapper to `overflow: visible` while open.
 - Don't stretch a `dropdown-menu` to its trigger width or pad its items with trailing whitespace; it shrink-wraps to its widest item.
+- Don't render a `dropdown-menu` (or other anchored surface) inline in an `overflow-hidden` / scrolling container or with portalling disabled; it must portal to the app root so no parent clips it and stay within the viewport.
 - Don't give charts different export sets, or a row of export buttons: use one icon-button dropdown with the standard Download PNG / SVG / PDF / CSV / Print items on every graph.
 - Don't put a full-width date-picker field or a text export button in a chart header, and don't left- or right-align a chart legend: use compact icon buttons and center the legend.
 - Don't fire a neutral `toast()` for a success/failure; don't mount two toasters or ship a titleless toast.
