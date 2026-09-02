@@ -213,6 +213,21 @@ Surfaces stack by lightness, and the stack must stay legible in **dark mode**, w
 - **Modal scrims use the `scrim` token**, never an inline `oklch(… / 0.4)`. Dark needs the deeper scrim because surfaces are close in lightness.
 - **No accent bars.** Never add a colored strip along an edge/border (e.g. `border-l-4 border-l-destructive`) to signal status — use the component's own variant (a `-subtle` surface with `-emphasis` text/icon) so status reads consistently and adapts to dark.
 
+### Tint-on-surface contrast
+
+The elevation rule above governs *surfaces*. This governs a tint painted **on** a surface, which is where a whole class of dark-mode bug lives (a state tint that is legible on the page but vanishes once the component sits inside an overlay).
+
+- **A state tint must clear the surface it sits on by ≥ 0.04 lightness in both modes, measured against the _actual_ parent surface.** Range bands, selected or hovered rows, tinted table rows, and badge fills inside a `popover`/`dialog` are measured against `card`, `popover`, or `elevated` — whichever they actually land on — not against `background`. A pair that reads on `background` can still collapse on `popover`.
+- **`--muted` does not clear `--popover` in dark** (0.27 vs 0.265). It is fine on `background` and `card`, but unusable as a state tint inside a `popover`, `elevated`, or dialog surface. The same caution applies to `--ghost-hover` (a 50% `--muted` mix) on `popover`, and to `--muted` on `--elevated` (dialogs, sheets).
+- **Fix a collapsed pair with a job-named alias, never by retuning the shared token.** Editing `--muted` (or a commodity ramp step) to rescue one pairing breaks every other use that depends on its value. Add an alias named after the *job* whose value differs by mode, and point the component at it:
+
+  ```css
+  :root { --range-band: var(--muted); }              /* reads on white */
+  .dark { --range-band: oklch(0.335 0.01 254); }     /* neutral, one step above --popover */
+  ```
+
+  Name it after the job (`--range-band`, `--row-selected`, `--chip-tint`), never after the token it replaces.
+
 ### Stacking order (z-index)
 
 Portalled surfaces mount at the end of `<body>`, so **within a layer the most recently opened surface paints on top** — a `popover` or `combobox` opened from inside a `dialog` is a later sibling and wins without needing a higher z-index. Only three layers exist; don't invent a fourth:
@@ -279,6 +294,7 @@ Any destructive/irreversible action (delete, remove, disconnect, reset, purge) p
 
 - **A single-select `select` shows its value in the trigger and highlights the current option in the list — it does _not_ mark the selected item with a check/tick icon.** The chosen value in the trigger plus the option's built-in highlight already communicate the selection; **don't add a checkmark unless explicitly asked.** (Design tools tend to add one by default — don't; the primitive deliberately omits it.)
 - **Multi-select is the only exception.** When several values can be chosen at once, show each option's on/off state (a check or checkbox) so the selected set is legible — that's the one place a check belongs.
+- **The highlighted/selected option uses `--accent`, in both modes — never a `--primary-subtle` (brand) fill.** The `select` primitive marks the current option with the neutral `accent` surface, the same token hover uses, so the selected row and a hovered row read as one family. Don't repaint the selected option with `--primary-subtle`: in dark it is ~0.12 lightness below `--accent` (`0.22` vs `0.34`), so the selected row ends up **darker than the row being hovered** — inverted from what selection should feel like. This is a common design-tool default; keep the built-in `accent` highlight.
 
 ### Tooltips
 
@@ -328,6 +344,7 @@ Never a **zero gap** — touching bars read as one solid block. **Round only the
 
 **Do**
 - Use semantic tokens for every color; test in light **and** dark.
+- Make a state tint clear its **actual** parent surface (`card` / `popover` / `elevated`) by ≥ 0.04 lightness in both modes; when a shared token collapses, add a job-named per-mode alias.
 - Pick status/commodity colors strictly by meaning.
 - Default badges to `outline`; reserve primary `default` for one key highlight.
 - Use the rem type, spacing, and radius scales.
@@ -353,6 +370,8 @@ Never a **zero gap** — touching bars read as one solid block. **Round only the
 - Don't recolor active/selected nav items with primary/blue text or icons — use the built-in neutral highlight; keep text/icon `foreground`.
 - Don't make dark `popover` equal to `card`, and don't hardcode a modal scrim — overlays sit above cards; scrims use the `scrim` token.
 - Don't add accent bars (colored border strips) to signal status — use the component's `-subtle`/`-emphasis` variant.
+- Don't paint a state tint with `--muted` inside a `popover` / `elevated` / dialog in dark: it collapses against the surface (0.27 vs 0.265). Clear the actual parent surface by ≥ 0.04 lightness in both modes.
+- Don't retune a shared token (`--muted`, a commodity step) to fix one surface pairing; add a job-named per-mode alias (`--range-band`) and point the component at it.
 - Don't put icons in table cells unless asked; don't let edge cells sit flush to the card border (align to 1.5rem).
 - Don't give tooltips a `max-w`/fixed width that wraps the text; don't pin a side that lets one run off-screen (let it flip/shift within the viewport); don't let a container clip one (keep it portaled).
 - Don't fix a row menu clipped by an `overflow-x-auto` table with `min-height` — toggle the wrapper to `overflow: visible` while open.
@@ -369,6 +388,7 @@ Never a **zero gap** — touching bars read as one solid block. **Round only the
 - Don't hand-compose a quiet destructive button from `ghost` + destructive utilities — use the `ghost-destructive` variant, which keeps the label red on hover.
 - Don't cram a long, many-field form into a centered modal — use a right `sheet`.
 - Don't add a checkmark to the selected item in a single-select `select` — the trigger value plus the highlighted option already show it; reserve checks for multi-select.
+- Don't paint a selected `select` option (or menu row) with `--primary-subtle` or any brand fill — use the built-in `--accent` highlight in both modes, or the selected row reads darker than a hovered one in dark.
 - Don't ship a dialog/sheet without its top-right close (X), or move it off the top-right corner (`showCloseButton={false}`) — only the `alert-dialog` omits it.
 - Don't ship a chart without the standard controls, or give each chart its own date range that drifts out of sync with the others on the view.
 - Don't solve the same job with different components across screens or graphs (a `select` here, a segmented control there) — pick one and reuse it.

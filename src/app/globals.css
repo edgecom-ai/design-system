@@ -86,6 +86,10 @@
   --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
   --color-muted: var(--muted);
+  /* Neutral state tint for the calendar range band. Job-named alias, not a
+     retune of --muted: --muted (dark L 0.27) collapses against --popover (0.265),
+     so the band was invisible on the popover the calendar sits in. */
+  --color-range-band: var(--range-band);
   /* Surfaces of the quiet controls (button ghost / outline, badge ghost, and
      the select-style field triggers) */
   --color-ghost-hover: var(--ghost-hover);
@@ -171,6 +175,9 @@
   --secondary-foreground: oklch(0.21 0.01 254);
   --muted: oklch(0.968 0.004 254);
   --muted-foreground: oklch(0.55 0.02 254);
+  /* Calendar range-band tint. Light: the muted surface reads on white; dark
+     overrides to a neutral one step above --popover (see .dark). */
+  --range-band: var(--muted);
   /* accent decoupled from primary — quiet cool-tinted hover/fill surface */
   --accent: oklch(0.965 0.012 254);
   --accent-foreground: oklch(0.35 0.03 254);
@@ -288,6 +295,9 @@
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.27 0.008 254);
   --muted-foreground: oklch(0.72 0.02 254);
+  /* One step above --popover (0.265) so the range band clears the surface the
+     calendar sits on; --muted (0.27) would sit 0.005 away and vanish. */
+  --range-band: oklch(0.335 0.01 254);
   /* accent decoupled from primary — quiet cool-tinted hover/fill surface */
   --accent: oklch(0.34 0.06 254);
   --accent-foreground: oklch(0.9 0.02 254);
