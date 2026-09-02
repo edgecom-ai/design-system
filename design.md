@@ -213,6 +213,21 @@ Surfaces stack by lightness, and the stack must stay legible in **dark mode**, w
 - **Modal scrims use the `scrim` token**, never an inline `oklch(… / 0.4)`. Dark needs the deeper scrim because surfaces are close in lightness.
 - **No accent bars.** Never add a colored strip along an edge/border (e.g. `border-l-4 border-l-destructive`) to signal status — use the component's own variant (a `-subtle` surface with `-emphasis` text/icon) so status reads consistently and adapts to dark.
 
+### Tint-on-surface contrast
+
+The elevation rule above governs *surfaces*. This governs a tint painted **on** a surface, which is where a whole class of dark-mode bug lives (a state tint that is legible on the page but vanishes once the component sits inside an overlay).
+
+- **A state tint must clear the surface it sits on by ≥ 0.04 lightness in both modes, measured against the _actual_ parent surface.** Range bands, selected or hovered rows, tinted table rows, and badge fills inside a `popover`/`dialog` are measured against `card`, `popover`, or `elevated` — whichever they actually land on — not against `background`. A pair that reads on `background` can still collapse on `popover`.
+- **`--muted` does not clear `--popover` in dark** (0.27 vs 0.265). It is fine on `background` and `card`, but unusable as a state tint inside a `popover`, `elevated`, or dialog surface. The same caution applies to `--ghost-hover` (a 50% `--muted` mix) on `popover`, and to `--muted` on `--elevated` (dialogs, sheets).
+- **Fix a collapsed pair with a job-named alias, never by retuning the shared token.** Editing `--muted` (or a commodity ramp step) to rescue one pairing breaks every other use that depends on its value. Add an alias named after the *job* whose value differs by mode, and point the component at it:
+
+  ```css
+  :root { --range-band: var(--muted); }              /* reads on white */
+  .dark { --range-band: oklch(0.335 0.01 254); }     /* neutral, one step above --popover */
+  ```
+
+  Name it after the job (`--range-band`, `--row-selected`, `--chip-tint`), never after the token it replaces.
+
 ### Stacking order (z-index)
 
 Portalled surfaces mount at the end of `<body>`, so **within a layer the most recently opened surface paints on top** — a `popover` or `combobox` opened from inside a `dialog` is a later sibling and wins without needing a higher z-index. Only three layers exist; don't invent a fourth:
@@ -328,6 +343,7 @@ Never a **zero gap** — touching bars read as one solid block. **Round only the
 
 **Do**
 - Use semantic tokens for every color; test in light **and** dark.
+- Make a state tint clear its **actual** parent surface (`card` / `popover` / `elevated`) by ≥ 0.04 lightness in both modes; when a shared token collapses, add a job-named per-mode alias.
 - Pick status/commodity colors strictly by meaning.
 - Default badges to `outline`; reserve primary `default` for one key highlight.
 - Use the rem type, spacing, and radius scales.
@@ -353,6 +369,8 @@ Never a **zero gap** — touching bars read as one solid block. **Round only the
 - Don't recolor active/selected nav items with primary/blue text or icons — use the built-in neutral highlight; keep text/icon `foreground`.
 - Don't make dark `popover` equal to `card`, and don't hardcode a modal scrim — overlays sit above cards; scrims use the `scrim` token.
 - Don't add accent bars (colored border strips) to signal status — use the component's `-subtle`/`-emphasis` variant.
+- Don't paint a state tint with `--muted` inside a `popover` / `elevated` / dialog in dark: it collapses against the surface (0.27 vs 0.265). Clear the actual parent surface by ≥ 0.04 lightness in both modes.
+- Don't retune a shared token (`--muted`, a commodity step) to fix one surface pairing; add a job-named per-mode alias (`--range-band`) and point the component at it.
 - Don't put icons in table cells unless asked; don't let edge cells sit flush to the card border (align to 1.5rem).
 - Don't give tooltips a `max-w`/fixed width that wraps the text; don't pin a side that lets one run off-screen (let it flip/shift within the viewport); don't let a container clip one (keep it portaled).
 - Don't fix a row menu clipped by an `overflow-x-auto` table with `min-height` — toggle the wrapper to `overflow: visible` while open.

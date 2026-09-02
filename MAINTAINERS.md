@@ -67,6 +67,7 @@ Match the existing files — canonical examples are [`button.tsx`](src/component
 All tokens live in [`src/app/globals.css`](src/app/globals.css): `@theme inline` maps each Tailwind utility to a CSS var, with light values in `:root` and dark in `.dark`. The token families, the WCAG bar, and *which token to reach for* are documented in [design.md](design.md) — this section is the mechanics of changing them here.
 
 - **Adding or adjusting a color means editing `globals.css` (both `:root` **and** `.dark`), not the call site.** `:root` is the complete light token set; `.dark` overrides only the tokens that differ (the rest inherit). If a new token needs a distinct dark value, add it to `.dark` too — don't assume the light value carries.
+- **When a tint collapses against its surface in one mode, don't retune the shared token — add a job-named alias.** A state tint (range band, selected/hovered row, chip fill) must clear its *actual* parent surface (`card` / `popover` / `elevated`) by ≥ 0.04 lightness in both modes (see [design.md](design.md) → *Tint-on-surface contrast*). If it doesn't, editing `--muted` (or a commodity ramp step) to fix it would break every other use that depends on that token's value. Instead add an alias named after the job — `--range-band`, `--row-selected`, `--chip-tint` — with a per-mode value (`var(--muted)` in `:root`, a surface-clearing value in `.dark`), expose it via `@theme` if a utility is needed, and point the component at that. `--range-band` (the calendar range band) is the worked example.
 - Expose a new token to Tailwind by adding its `--color-*: var(--…)` mapping in the `@theme inline` block.
 - Some rules in `globals.css` are **app-level CSS the `theme` registry item does _not_ ship** — the `cursor: pointer` base-layer rule, `color-scheme`, and the `@utility tabular` helper. Keep them here; consuming apps must add their own (see [AGENTS.md](AGENTS.md)).
 - After any token change, run `pnpm registry:build` so the `theme` item regenerates.
@@ -122,6 +123,8 @@ Two things to keep intact:
 
 These are **docs demos, not registry items** — vendor-imported from shadcn-studio, so they use default exports, arrow functions, and a single-quote style that differs from the house style. Leave that style as-is (don't reformat), and **don't `--overwrite`** our custom `src/components/ui` primitives when pulling upstream studio components. They're consumed only by the doc pages.
 
+- **Lift-time surface check.** An upstream component is usually demoed on `background`, but in this system the same component often lands inside a `popover`, `dialog`, `sheet`, or tinted row. Before accepting its tokens, check every color it paints against the surface it will *actually* sit on, in **both** modes (see [design.md](design.md) → *Tint-on-surface contrast*). If a pair collapses, apply the job-named-alias fix from *Editing tokens* rather than shipping the upstream value, and leave a comment at the swap site so the next sync doesn't "correct" it back.
+
 ## Docs-site architecture (static export)
 
 The site is a **static export** (`output: "export"` in [`next.config.ts`](next.config.ts)), built and published on push to `main` (see [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml)) and served at the **root of the custom domain [design.edgecom.ai](https://design.edgecom.ai)** (no base path in the CI deploy). Files placed in `public/` get clean URLs at that root — e.g. `public/design.md` → `https://design.edgecom.ai/design.md`, `public/llms.txt` → `https://design.edgecom.ai/llms.txt`.
@@ -137,6 +140,7 @@ The site is a **static export** (`output: "export"` in [`next.config.ts`](next.c
 There is **no test framework** in this repo. The quality gates are:
 - `pnpm lint` (ESLint) and TypeScript **strict** (`npx tsc --noEmit`, or via `pnpm build`).
 - For anything visible, use the browser preview and check **both light and dark**.
+- **Dark mode is part of done for overlays and tints.** Any change that adds or restyles an overlay, popover, menu, calendar, badge, or state tint is verified in **both** themes before it ships — a light-only review does not count for these. This class of component is where a tint can read on the page yet vanish once it sits on a `popover`/`elevated` surface (see [design.md](design.md) → *Tint-on-surface contrast*).
 - A full `pnpm build` also validates the static-export prerender end-to-end.
 
 ## Do-nots (maintainer)

@@ -332,7 +332,7 @@ function WindowDayButton({
         "relative isolate z-10 flex aspect-square size-auto w-full min-w-(--cell-size) flex-col gap-1 border-0 leading-none font-normal",
         "group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-10 group-data-[focused=true]/day:border-ring group-data-[focused=true]/day:ring-[3px] group-data-[focused=true]/day:ring-ring/50",
         "data-[window-endpoint=true]:bg-primary data-[window-endpoint=true]:text-primary-foreground data-[window-endpoint=true]:hover:bg-primary data-[window-endpoint=true]:hover:text-primary-foreground",
-        "data-[window-middle=true]:bg-muted data-[window-middle=true]:text-foreground data-[window-middle=true]:hover:bg-muted data-[window-middle=true]:hover:text-foreground",
+        "data-[window-middle=true]:bg-range-band data-[window-middle=true]:text-foreground data-[window-middle=true]:hover:bg-range-band data-[window-middle=true]:hover:text-foreground",
         "data-[window-preview=true]:bg-accent data-[window-preview=true]:text-accent-foreground data-[window-preview=true]:hover:bg-accent data-[window-preview=true]:hover:text-accent-foreground",
         inBand && (roundLeft ? "rounded-l-(--cell-radius)" : "rounded-l-none"),
         inBand && (roundRight ? "rounded-r-(--cell-radius)" : "rounded-r-none"),
