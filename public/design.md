@@ -294,6 +294,7 @@ Any destructive/irreversible action (delete, remove, disconnect, reset, purge) p
 
 - **A single-select `select` shows its value in the trigger and highlights the current option in the list — it does _not_ mark the selected item with a check/tick icon.** The chosen value in the trigger plus the option's built-in highlight already communicate the selection; **don't add a checkmark unless explicitly asked.** (Design tools tend to add one by default — don't; the primitive deliberately omits it.)
 - **Multi-select is the only exception.** When several values can be chosen at once, show each option's on/off state (a check or checkbox) so the selected set is legible — that's the one place a check belongs.
+- **The highlighted/selected option uses `--accent`, in both modes — never a `--primary-subtle` (brand) fill.** The `select` primitive marks the current option with the neutral `accent` surface, the same token hover uses, so the selected row and a hovered row read as one family. Don't repaint the selected option with `--primary-subtle`: in dark it is ~0.12 lightness below `--accent` (`0.22` vs `0.34`), so the selected row ends up **darker than the row being hovered** — inverted from what selection should feel like. This is a common design-tool default; keep the built-in `accent` highlight.
 
 ### Tooltips
 
@@ -387,6 +388,7 @@ Never a **zero gap** — touching bars read as one solid block. **Round only the
 - Don't hand-compose a quiet destructive button from `ghost` + destructive utilities — use the `ghost-destructive` variant, which keeps the label red on hover.
 - Don't cram a long, many-field form into a centered modal — use a right `sheet`.
 - Don't add a checkmark to the selected item in a single-select `select` — the trigger value plus the highlighted option already show it; reserve checks for multi-select.
+- Don't paint a selected `select` option (or menu row) with `--primary-subtle` or any brand fill — use the built-in `--accent` highlight in both modes, or the selected row reads darker than a hovered one in dark.
 - Don't ship a dialog/sheet without its top-right close (X), or move it off the top-right corner (`showCloseButton={false}`) — only the `alert-dialog` omits it.
 - Don't ship a chart without the standard controls, or give each chart its own date range that drifts out of sync with the others on the view.
 - Don't solve the same job with different components across screens or graphs (a `select` here, a segmented control there) — pick one and reuse it.
