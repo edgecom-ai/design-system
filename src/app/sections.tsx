@@ -236,6 +236,7 @@ import AnimatedUnderlineTabsDemo from "@/components/shadcn-studio/tabs/tabs-29";
 import AnimatedTabsDemo from "@/components/shadcn-studio/tabs/tabs-27";
 import { TabsDemo } from "@/components/demo/tabs-demo";
 import { TabsScrollableDemo } from "@/components/demo/tabs-scrollable-demo";
+import { TabsSurfacesDemo } from "@/components/demo/tabs-surfaces-demo";
 import AccordionDemo from "@/components/shadcn-studio/accordion/accordion-01";
 import AccordionOutlineDemo from "@/components/shadcn-studio/accordion/accordion-09";
 import AccordionMultilevelIconDemo from "@/components/shadcn-studio/accordion/accordion-16";
@@ -3031,6 +3032,14 @@ export const sections: Section[] = [
           "More tabs than the container fits — the list scrolls itself instead of widening the page, fades the edge that still hides a tab, and pulls a newly activated tab into view.",
         preview: <TabsScrollableDemo />,
         source: dm("tabs-scrollable-demo"),
+      },
+      {
+        id: "tabs-surfaces",
+        name: "On a tinted surface",
+        description:
+          "The default variant reads as a group by lightness alone — an absolute muted track with the active tab raised on it — so it needs a plain host: on a muted or secondary panel, a bg-muted/50 card footer, or (in dark) inside any overlay, the track lands on its own value and the strip disappears. The adaptive variant is the same strip in a second colour set whose track and thumb are an alpha over whatever is behind them, so the two steps survive any surface; line, which signals the active tab with a bar instead, needs no step at all.",
+        preview: <TabsSurfacesDemo />,
+        source: dm("tabs-surfaces-demo"),
       },
       {
         id: "tabs-animated-underline",

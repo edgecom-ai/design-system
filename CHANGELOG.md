@@ -7,14 +7,37 @@ Every change to the Edgecom design system, derived from git history. Also publis
 
 ## August 31, 2026
 
+### Added
+
+- **dropdown-menu:** Shrink-wrap to widest item; add menu-width + chart-export guidelines ([`2787b19`](https://github.com/edgecom-ai/design-system/commit/2787b19))
+
+### Fixed
+
+- **tabs:** Color the active-tab underline brand blue instead of near-black ([`31b1c0d`](https://github.com/edgecom-ai/design-system/commit/31b1c0d))
+
 ### Documentation
 
-- **demos:** Complete the demo-copy sanitization and unify the region model ([`24c6606`](https://github.com/edgecom-ai/design-system/commit/24c6606))
+- **dropdown-menu:** Document that menus portal to the app root and never clip ([`22a0968`](https://github.com/edgecom-ai/design-system/commit/22a0968))
+- **charts:** Default header date-picker/export to icon buttons; center legends ([`d14ab98`](https://github.com/edgecom-ai/design-system/commit/d14ab98))
+- **demos:** Complete the demo-copy sanitization and unify the region model ([`895b668`](https://github.com/edgecom-ai/design-system/commit/895b668))
 
 ### Internal
 
-- **docs:** Regenerate the changelog artifacts ([`6ed826d`](https://github.com/edgecom-ai/design-system/commit/6ed826d))
-- **docs:** Regenerate the changelog artifacts ([`18722c1`](https://github.com/edgecom-ai/design-system/commit/18722c1))
+- **docs:** Regenerate the changelog artifacts ([`3dac69e`](https://github.com/edgecom-ai/design-system/commit/3dac69e))
+- **docs:** Regenerate the changelog artifacts ([`8665079`](https://github.com/edgecom-ai/design-system/commit/8665079))
+- **docs:** Regenerate the changelog artifacts ([`7520189`](https://github.com/edgecom-ai/design-system/commit/7520189))
+
+## August 28, 2026
+
+### Documentation
+
+- **demos:** Use fictional utilities, sites, and contacts in demo copy ([`c22a08b`](https://github.com/edgecom-ai/design-system/commit/c22a08b))
+
+## August 31, 2026
+
+### Documentation
+
+- **colors:** Add usage guidance + reasoning to the Semantic colors page ([`74042d1`](https://github.com/edgecom-ai/design-system/commit/74042d1))
 
 ## August 28, 2026
 
@@ -36,10 +59,6 @@ Every change to the Edgecom design system, derived from git history. Also publis
 - **registry:** Ship every dependency at the version it was built against ([`bb6756b`](https://github.com/edgecom-ai/design-system/commit/bb6756b))
 - **sortable:** Declare the react-dom it imports for its drag overlay ([`2a11c72`](https://github.com/edgecom-ai/design-system/commit/2a11c72))
 - **resizable:** Migrate to the react-resizable-panels v4 API ([`65c0e17`](https://github.com/edgecom-ai/design-system/commit/65c0e17))
-
-### Documentation
-
-- **demos:** Use fictional utilities, sites, and contacts in demo copy ([`e8cf67e`](https://github.com/edgecom-ai/design-system/commit/e8cf67e))
 
 ### Internal
 

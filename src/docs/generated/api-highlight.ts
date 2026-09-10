@@ -284,7 +284,6 @@ export const apiHighlight: Record<string, string> = {
   "TabsTrigger": "<span style=\"--shiki-light:#24292E;--shiki-dark:#E1E4E8\">TabsTrigger</span>",
   "TabsIndicator": "<span style=\"--shiki-light:#24292E;--shiki-dark:#E1E4E8\">TabsIndicator</span>",
   "TabsContent": "<span style=\"--shiki-light:#24292E;--shiki-dark:#E1E4E8\">TabsContent</span>",
-  "\"default\" | \"line\"": "<span style=\"--shiki-light:#032F62;--shiki-dark:#9ECBFF\">\"default\"</span><span style=\"--shiki-light:#D73A49;--shiki-dark:#F97583\"> |</span><span style=\"--shiki-light:#032F62;--shiki-dark:#9ECBFF\"> \"line\"</span>",
   "Popover": "<span style=\"--shiki-light:#24292E;--shiki-dark:#E1E4E8\">Popover</span>",
   "PopoverTrigger": "<span style=\"--shiki-light:#24292E;--shiki-dark:#E1E4E8\">PopoverTrigger</span>",
   "PopoverContent": "<span style=\"--shiki-light:#24292E;--shiki-dark:#E1E4E8\">PopoverContent</span>",

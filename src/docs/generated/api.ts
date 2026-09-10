@@ -664,14 +664,7 @@ export const generatedApi: Record<string, GeneratedApi> = {
       "TabsIndicator",
       "TabsContent"
     ],
-    "props": [
-      {
-        "part": "Tabs",
-        "name": "variant",
-        "type": "\"default\" | \"line\"",
-        "default": "\"default\""
-      }
-    ]
+    "props": []
   },
   "popover": {
     "base": {

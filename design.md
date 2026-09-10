@@ -132,6 +132,7 @@ Colors are semantic tokens. Reach for the token by **role**, not by how it looks
 - **Status:** `success`, `warning`, `info`, `destructive` — each with the full set `{ base, -foreground, -emphasis, -subtle, -subtle-foreground }`.
 - **Form / outline:** `border`, `input`, `ring`.
 - **Interaction:** `ghost-hover` (quiet controls with no resting fill — `button`/`badge` `ghost`), `outline-surface` + `outline-hover` (`button` `outline`), `input-surface` + `input-hover` (the field triggers — `select`, `native-select`, which rest transparent so a tinted row shows through). Each is one theme-aware token rather than a light value plus a `dark:` override, so an app can re-tint a quiet control with a single `bg-*` / `hover:bg-*` and have it win in **both** themes.
+- **Relative surfaces:** `track` + `track-active` — the sunken segmented strip and the tab raised on it, in the `tabs` `adaptive` variant. Unlike every other surface token these are an **alpha over whatever is behind them**, not a fixed value: a strip that must read as "one step below my parent" has no absolute lightness, so an opaque one collapses to 1.00:1 the moment it lands on a surface of its own value. Light darkens, dark lightens (dark `background` is already near-black and has nowhere to go). They are the second colour set for that strip, not a replacement — the `default` variant's absolute `muted` track stays the right choice on a plain surface.
 - **Charts / commodities:** `chart-1..5` alias the `500` step of the five named commodity ramps `chart-{electricity,water,gas,temperature,emissions}-{100..900}` (one hue per commodity); `chart-misc-{100..900}` is a sixth ramp (violet) for miscellaneous/uncategorized data, outside the `chart-1..5` rotation. All commodity ramps are mode-independent — `100` is the lightest step in both themes.
 - **Sidebar:** `sidebar`, `sidebar-foreground`, `sidebar-primary`, `sidebar-accent`, `sidebar-border`, `sidebar-ring` (+ foregrounds).
 
@@ -270,10 +271,19 @@ Any destructive/irreversible action (delete, remove, disconnect, reset, purge) p
 
 ### Navigation & menus
 
-- **Active/selected states use the built-in neutral highlight — not brand blue.** An active nav/menu/tab/sidebar item is signalled by the component's own active styling (`isActive`/`data-active` → the neutral `accent`/`sidebar-accent` surface) while its **text and icon stay `foreground`**. Brand blue is reserved for CTAs and a single key highlight, not routine active states. Compose navigation from the primitive's parts (e.g. `SidebarGroupLabel`, `SidebarMenuButton isActive`, `SidebarMenuSub`) — don't hand-roll the highlight.
+- **Active/selected states use the built-in neutral highlight — not brand blue.** An active nav/menu/tab/sidebar item is signalled by the component's own active styling (`isActive`/`data-active` → the neutral `accent`/`sidebar-accent` surface) while its **text and icon stay `foreground`**. Brand blue is reserved for CTAs and a single key highlight, not routine active states. **The one exception is an underline bar** — the `tabs` `line` variant's active bar and `TabsIndicator` are `primary` (`primary-emphasis` in dark, where a 2px hairline of the mode-independent brand blue clears only ~3.9:1). A 2px rule under a label is not a surface or a label recolour; the rule above governs fills, text, and icons. Compose navigation from the primitive's parts (e.g. `SidebarGroupLabel`, `SidebarMenuButton isActive`, `SidebarMenuSub`) — don't hand-roll the highlight.
 - **Keep a gap between menu items** (e.g. `gap-1`) in `sidebar`, `dropdown-menu`, `command`, and similar lists so an active item and a hovered neighbor never merge into one block.
 - **A `dropdown-menu` sizes to its widest item, not to its trigger.** The menu shrink-wraps its content (`w-auto`, floored at a small `min-w`), so the width fits the items inside. Don't stretch it to the trigger width or pad items to a fixed width: both leave trailing whitespace, and a wide icon button opening a menu of short actions should still give a compact menu. (Contrast `select`, whose list intentionally matches the trigger width so options line up under the shown value.)
 - **A `dropdown-menu` is portaled to the app root, so no parent container ever clips it.** The menu mounts at the app root rather than inside the trigger's box, so an ancestor with `overflow: hidden` / `overflow-x-auto` / `overflow-y-auto` (a card, a table, a `scroll-area`, a toolbar) can never crop it. Its positioner also flips and shifts to stay inside the viewport, and caps its own height to the available space (scrolling internally) instead of overflowing the screen. Don't disable portalling, render the menu inline inside a clipping or scrolling container, or pin a side that lets it run off-screen. The same holds for every other anchored surface — `select`, `combobox`, `context-menu`, `popover`, `hover-card`, `navigation-menu`.
+
+### Tabs — pick the variant by the surface underneath
+
+The segmented strip reads as a group by **lightness alone** — a sunken track with the active tab raised on it, roughly 1.1–1.4:1 per step. That whole budget belongs to the strip, so what's *under* it decides the variant:
+
+- **Plain surface (`background`, `card`) → `default`.** The absolute `muted` track is correct here and is what every existing strip uses.
+- **Tinted surface or an overlay → `adaptive` or `line`.** A `muted`/`secondary` panel, a `bg-muted/50` card footer, a selected (`accent`) row — and every overlay, since dark `popover` (0.265) and `elevated` (0.29) sit within a hair of `muted` (0.27). A `default` track there lands on its own value (1.00–1.07:1) and the strip vanishes, leaving loose labels and, in dark, an active tab identifiable only by its border. `adaptive` is the same strip in the relative `track`/`track-active` pair (plus a hairline), so both steps survive any host; `line` drops the strip for an underline bar and needs no step at all. Prefer `line` where an underline suits the layout, `adaptive` where the segmented look is doing work (a control cluster in a chart header, a toolbar).
+- **Never re-tint a strip by hand** to fix this — no `bg-*` override on `TabsList`, and no `-subtle` status surface as a track. Switch the variant.
+- **One tab strip, one job.** A `tabs` is for a small fixed set of panels or series; a longer or growing set is a `select` (see *Same job → same component*).
 
 ### Select — no checkmark on the selected item
 
@@ -350,7 +360,9 @@ Never a **zero gap** — touching bars read as one solid block. **Round only the
 - Don't hardcode hex or ship light-only UI — every color is a light+dark token.
 - Don't lighten `primary` in dark mode — the brand blue is mode-independent; use `-emphasis` for lighter primary *text*.
 - Don't use a base fill color as a text color — use `-emphasis` for text, `-subtle`(+`-subtle-foreground`) for tinted surfaces.
-- Don't recolor active/selected nav items with primary/blue text or icons — use the built-in neutral highlight; keep text/icon `foreground`.
+- Don't recolor active/selected nav items with primary/blue text or icons — use the built-in neutral highlight; keep text/icon `foreground` (a `tabs` underline bar is the one brand-blue exception).
+- Don't leave a segmented `tabs` strip on `variant="default"` over a tinted surface or inside an overlay — the `muted` track has no lightness step left there; switch to `adaptive` or `line`.
+- Don't hand-tint a `TabsList` with a `bg-*` override to make it visible on its host — that's what the `adaptive` colour set is for.
 - Don't make dark `popover` equal to `card`, and don't hardcode a modal scrim — overlays sit above cards; scrims use the `scrim` token.
 - Don't add accent bars (colored border strips) to signal status — use the component's `-subtle`/`-emphasis` variant.
 - Don't put icons in table cells unless asked; don't let edge cells sit flush to the card border (align to 1.5rem).

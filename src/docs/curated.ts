@@ -384,7 +384,8 @@ export const curatedApi: Record<string, CuratedApi> = {
       TabsContent: "Panel content shown for the active tab.",
     },
     propDescriptions: {
-      "Tabs.variant": "TabsList style: filled (default) or underlined (line).",
+      "Tabs.variant":
+        "TabsList style. `default` is the filled segmented strip — a `muted` track with the active tab raised on it — and reads as a group by lightness alone, so it wants a plain host (`background`, `card`). `adaptive` is that same strip in a second colour set: its `track`/`track-active` surfaces are an alpha over whatever is behind them, plus a hairline, so the strip keeps its step on a surface the `muted` track would collide with — a `muted`/`secondary` panel, a `bg-muted/50` card footer, a selected row, or (in dark) inside any overlay, where `popover` and `elevated` sit within a hair of `muted`. `line` replaces the strip with an underline bar and needs no lightness step at all.",
       "TabsIndicator.renderBeforeHydration":
         "Paint the bar before hydration to avoid a flash after SSR. Injects an inline script — leave it off under a strict CSP.",
     },

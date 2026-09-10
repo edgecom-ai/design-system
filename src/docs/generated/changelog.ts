@@ -73,7 +73,59 @@ export const changelog: ChangelogRelease[] = [
     "summary": null,
     "entries": [
       {
-        "sha": "6ed826d",
+        "sha": "22a0968",
+        "date": "2026-08-31",
+        "type": "docs",
+        "group": "docs",
+        "scopes": [
+          "dropdown-menu"
+        ],
+        "summary": "Document that menus portal to the app root and never clip",
+        "items": [],
+        "breaking": false
+      },
+      {
+        "sha": "d14ab98",
+        "date": "2026-08-31",
+        "type": "docs",
+        "group": "docs",
+        "scopes": [
+          "charts"
+        ],
+        "summary": "Default header date-picker/export to icon buttons; center legends",
+        "items": [],
+        "breaking": false
+      },
+      {
+        "sha": "2787b19",
+        "date": "2026-08-31",
+        "type": "feat",
+        "group": "added",
+        "scopes": [
+          "dropdown-menu"
+        ],
+        "summary": "Shrink-wrap to widest item; add menu-width + chart-export guidelines",
+        "items": [
+          "dropdown-menu"
+        ],
+        "breaking": false
+      },
+      {
+        "sha": "31b1c0d",
+        "date": "2026-08-31",
+        "type": "fix",
+        "group": "fixed",
+        "scopes": [
+          "tabs"
+        ],
+        "summary": "Color the active-tab underline brand blue instead of near-black",
+        "items": [
+          "tabs"
+        ],
+        "breaking": false
+      },
+      {
+        "sha": "3dac69e",
         "date": "2026-08-31",
         "type": "chore",
         "group": "internal",
@@ -85,7 +137,19 @@ export const changelog: ChangelogRelease[] = [
         "breaking": false
       },
       {
-        "sha": "24c6606",
+        "sha": "8665079",
+        "date": "2026-08-31",
+        "type": "chore",
+        "group": "internal",
+        "scopes": [
+          "docs"
+        ],
+        "summary": "Regenerate the changelog artifacts",
+        "items": [],
+        "breaking": false
+      },
+      {
+        "sha": "895b668",
         "date": "2026-08-31",
         "type": "docs",
         "group": "docs",
@@ -97,7 +161,7 @@ export const changelog: ChangelogRelease[] = [
         "breaking": false
       },
       {
-        "sha": "18722c1",
+        "sha": "7520189",
         "date": "2026-08-31",
         "type": "chore",
         "group": "internal",
@@ -118,7 +182,7 @@ export const changelog: ChangelogRelease[] = [
     "summary": null,
     "entries": [
       {
-        "sha": "e8cf67e",
+        "sha": "c22a08b",
         "date": "2026-08-28",
         "type": "docs",
         "group": "docs",
@@ -128,7 +192,37 @@ export const changelog: ChangelogRelease[] = [
         "summary": "Use fictional utilities, sites, and contacts in demo copy",
         "items": [],
         "breaking": false
-      },
+      }
+    ]
+  },
+  {
+    "id": "release-2026-08-31",
+    "version": null,
+    "date": "2026-08-31",
+    "title": "August 31, 2026",
+    "summary": null,
+    "entries": [
+      {
+        "sha": "74042d1",
+        "date": "2026-08-31",
+        "type": "docs",
+        "group": "docs",
+        "scopes": [
+          "colors"
+        ],
+        "summary": "Add usage guidance + reasoning to the Semantic colors page",
+        "items": [],
+        "breaking": false
+      }
+    ]
+  },
+  {
+    "id": "release-2026-08-28",
+    "version": null,
+    "date": "2026-08-28",
+    "title": "August 28, 2026",
+    "summary": null,
+    "entries": [
       {
         "sha": "31a32e7",
         "date": "2026-08-28",

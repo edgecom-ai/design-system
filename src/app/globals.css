@@ -93,6 +93,9 @@
   --color-outline-hover: var(--outline-hover);
   --color-input-surface: var(--input-surface);
   --color-input-hover: var(--input-hover);
+  /* Sunken strip + the raised thumb on it (the segmented `tabs` track) */
+  --color-track: var(--track);
+  --color-track-active: var(--track-active);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-secondary: var(--secondary);
   --color-primary-foreground: var(--primary-foreground);
@@ -220,6 +223,21 @@
      button — light had no hover at all until the `dark:` classes came out. */
   --input-surface: transparent;
   --input-hover: var(--outline-hover);
+  /* Second colour set for the segmented `tabs` strip (`variant="adaptive"`) —
+     the sunken track and the tab raised on it. The `default` variant paints an
+     absolute `muted` track, which is right on `background`/`card` and gone the
+     moment the host surface is also `muted` or `secondary` (in dark, also
+     `popover` / `elevated` — i.e. inside every overlay): same value, 1.00:1, no
+     strip. These two are *relative* instead — an alpha over whatever is behind
+     them — because "one step below my parent" has no fixed lightness, and an
+     alpha always steps. Light darkens the track and lifts the thumb to
+     `background`, the top of the light stack.
+     A literal alpha, not a `color-mix()` off `--foreground`: same result, it
+     matches dark `--border` (`oklch(1 0 0 / 12%)`), and the mix would compile
+     to a `@supports` guard whose pre-guard fallback is the *opaque* base
+     colour — a near-black strip on anything that lacks `color-mix()`. */
+  --track: oklch(0.16 0.01 254 / 5%);
+  --track-active: var(--background);
   /* Commodity tint ramps — one hue per commodity, mode-independent */
   --chart-electricity-100: oklch(0.94 0.05 75); /* amber */
   --chart-electricity-300: oklch(0.86 0.11 75);
@@ -326,6 +344,13 @@
   --ghost-hover: color-mix(in oklab, var(--muted) 50%, transparent);
   --outline-hover: color-mix(in oklab, var(--input) 50%, transparent);
   --input-surface: color-mix(in oklab, var(--input) 30%, transparent);
+  /* Dark *lightens* both: `background` is already near-black, so a darkening
+     track has nowhere to go (1.02:1 on `background`). White alpha holds a
+     1.20–1.28:1 step on every dark surface, and the thumb another 1.36:1 over
+     the track — where the `default` variant's absolute pair lands at 1.14:1 on
+     a matching host. The active tab's `border-input` edge still reads. */
+  --track: oklch(1 0 0 / 8%);
+  --track-active: oklch(1 0 0 / 10%);
   /* chart tokens are mode-independent — defined once in :root */
   --sidebar: oklch(0.205 0.008 254);
   --sidebar-foreground: oklch(0.985 0 0);

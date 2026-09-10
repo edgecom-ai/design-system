@@ -47,6 +47,17 @@ const tabsListVariants = cva(
     variants: {
       variant: {
         default: "bg-muted",
+        // Second colour set for the same segmented strip: `track` /
+        // `track-active` are an alpha over whatever is behind them rather than
+        // a fixed value, so the strip keeps its step on a surface that `muted`
+        // would collide with — a `muted`/`secondary` panel, a `bg-muted/50`
+        // card footer, or (in dark) any overlay, where `popover` sits 0.005
+        // from `muted` and the default track flattens to 1.02:1. The inset
+        // hairline backs the fill up: `border` is itself relative in dark
+        // (white 12%), so the group outline reads even where a fill can't.
+        // Inset because the ring must not paint past the edge the list clips,
+        // and inset-ring rather than a border to leave the box model whole.
+        adaptive: "bg-track inset-ring-1 inset-ring-border",
         line:
           "gap-1 bg-transparent group-data-[orientation=horizontal]/tabs:pb-0 group-data-[orientation=vertical]/tabs:pr-0",
       },
@@ -183,6 +194,11 @@ function TabsTrigger({ className, ...props }: TabsPrimitive.Tab.Props) {
         // The same ring drawn inwards stays whole.
         "group-data-[variant=line]/tabs-list:[--tw-ring-inset:inset] group-data-[variant=line]/tabs-list:focus-visible:-outline-offset-1",
         "data-active:bg-background data-active:text-foreground dark:data-active:border-input dark:data-active:bg-input/30 dark:data-active:text-foreground",
+        // The adaptive list's thumb rides the same relative scale as its track,
+        // so the sunken-track/raised-tab pair holds its two steps on any host
+        // surface. Dark needs its own rule to outrank `dark:data-active:bg-input/30`
+        // — same reason the line variant carries a `dark:` twin below.
+        "group-data-[variant=adaptive]/tabs-list:data-active:bg-track-active group-data-[variant=adaptive]/tabs-list:data-active:shadow-sm dark:group-data-[variant=adaptive]/tabs-list:data-active:bg-track-active",
         // The bar sits on the list's own bottom/right edge rather than outside
         // it — the list scrolls its overflow, so anything drawn past that edge
         // is clipped away. The line variant drops the padding on that edge and
