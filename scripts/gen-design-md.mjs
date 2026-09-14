@@ -41,12 +41,11 @@ const COLOR_GROUPS = [
   { comment: null, keys: ["border", "input", "ring"] },
 ];
 const COMMODITIES = ["electricity", "water", "gas", "temperature", "emissions", "misc"];
-// Demand-chart palette roles. Aliased roles resolve to the hue they share.
-const DEMAND_ROLES = [
-  "demand-live", "demand-hourly", "demand-projected", "demand-forecast", "demand-short-forecast",
-  "demand-facility", "demand-interval-1", "demand-interval-5", "demand-interval-15",
+// Line palette (neutral colour names), peak-rank aliases, and window bands.
+const LINE_ROLES = [
+  "line-teal", "line-green", "line-brown", "line-orange", "line-red", "line-magenta",
+  "line-sky", "line-yellow", "line-lime", "line-wine", "line-olive", "line-steel",
   "peak-1", "peak-2", "peak-3", "peak-4", "peak-5", "peak-6", "peak-7",
-  "threshold-peak-to-date", "threshold-action", "threshold-projected",
   "window-high", "window-normal", "window-low",
 ];
 const TYPE_SCALE = ["caption", "body-sm", "body", "body-lg", "title", "heading", "display"];
@@ -74,8 +73,8 @@ for (const group of COLOR_GROUPS) {
 }
 lines.push("  # Commodity categorical ramp (chart series) — mode-independent");
 for (const c of COMMODITIES) lines.push(`  chart-${c}: ${val(`chart-${c}-500`)}`);
-lines.push("  # Demand-chart palette (line hues by role; light values, dark re-tunes in the body)");
-for (const r of DEMAND_ROLES) lines.push(`  chart-${r}: ${val(`chart-${r}`)}`);
+lines.push("  # Line palette (plot-line hues; light values, dark re-tunes in the body) + peak-rank aliases + window bands");
+for (const r of LINE_ROLES) lines.push(`  chart-${r}: ${val(`chart-${r}`)}`);
 
 lines.push("typography:");
 lines.push("  font-family: SF Pro / system-ui sans (var --font-sans)");
@@ -117,7 +116,7 @@ const out = md.replace(re, block);
 writeFileSync(designPath, out);
 copyFileSync(designPath, publicPath);
 
-const colorCount = COLOR_GROUPS.reduce((n, g) => n + g.keys.length, 0) + COMMODITIES.length + DEMAND_ROLES.length;
+const colorCount = COLOR_GROUPS.reduce((n, g) => n + g.keys.length, 0) + COMMODITIES.length + LINE_ROLES.length;
 console.log(
   `gen-design-md — ${colorCount} colors + ${TYPE_SCALE.length} type steps + ${RADII.length + 1} radii → design.md (+ public/design.md)`
 );

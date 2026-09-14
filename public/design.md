@@ -50,16 +50,19 @@ colors:
   chart-temperature: oklch(0.68 0.12 178)
   chart-emissions: oklch(0.58 0.16 10)
   chart-misc: oklch(0.55 0.18 300)
-  # Demand-chart palette (line hues by role; light values, dark re-tunes in the body)
-  chart-demand-live: oklch(0.483 0.082 201.5)
-  chart-demand-hourly: oklch(0.649 0.157 142.6)
-  chart-demand-projected: oklch(0.649 0.157 142.6)
-  chart-demand-forecast: oklch(0.564 0.126 60.4)
-  chart-demand-short-forecast: oklch(0.672 0.143 70.7)
-  chart-demand-facility: oklch(0.612 0.227 29.2)
-  chart-demand-interval-1: oklch(0.672 0.143 70.7)
-  chart-demand-interval-5: oklch(0.626 0.268 322.6)
-  chart-demand-interval-15: oklch(0.588 0.099 245.7)
+  # Line palette (plot-line hues; light values, dark re-tunes in the body) + peak-rank aliases + window bands
+  chart-line-teal: oklch(0.483 0.082 201.5)
+  chart-line-green: oklch(0.649 0.157 142.6)
+  chart-line-brown: oklch(0.564 0.126 60.4)
+  chart-line-orange: oklch(0.672 0.143 70.7)
+  chart-line-red: oklch(0.612 0.227 29.2)
+  chart-line-magenta: oklch(0.626 0.268 322.6)
+  chart-line-sky: oklch(0.659 0.135 236.6)
+  chart-line-yellow: oklch(0.662 0.139 104.2)
+  chart-line-lime: oklch(0.56 0.16 133.9)
+  chart-line-wine: oklch(0.452 0.158 4.9)
+  chart-line-olive: oklch(0.452 0.098 110.5)
+  chart-line-steel: oklch(0.588 0.099 245.7)
   chart-peak-1: oklch(0.626 0.268 322.6)
   chart-peak-2: oklch(0.659 0.135 236.6)
   chart-peak-3: oklch(0.612 0.227 29.2)
@@ -67,9 +70,6 @@ colors:
   chart-peak-5: oklch(0.56 0.16 133.9)
   chart-peak-6: oklch(0.452 0.158 4.9)
   chart-peak-7: oklch(0.452 0.098 110.5)
-  chart-threshold-peak-to-date: oklch(0.588 0.099 245.7)
-  chart-threshold-action: oklch(0.626 0.268 322.6)
-  chart-threshold-projected: oklch(0.672 0.143 70.7)
   chart-window-high: oklch(0.612 0.176 23.9)
   chart-window-normal: oklch(0.704 0.128 20.8)
   chart-window-low: oklch(0.861 0.057 18.3)
@@ -157,7 +157,7 @@ Colors are semantic tokens. Reach for the token by **role**, not by how it looks
 - **Interaction:** `ghost-hover` (quiet controls with no resting fill — `button`/`badge` `ghost`), `outline-surface` + `outline-hover` (`button` `outline`), `input-surface` + `input-hover` (the field triggers — `select`, `native-select`, which rest transparent so a tinted row shows through). Each is one theme-aware token rather than a light value plus a `dark:` override, so an app can re-tint a quiet control with a single `bg-*` / `hover:bg-*` and have it win in **both** themes.
 - **Relative surfaces:** `track` + `track-active` — the sunken segmented strip and the tab raised on it, in the `tabs` `adaptive` variant. Unlike every other surface token these are an **alpha over whatever is behind them**, not a fixed value: a strip that must read as "one step below my parent" has no absolute lightness, so an opaque one collapses to 1.00:1 the moment it lands on a surface of its own value. Light darkens, dark lightens (dark `background` is already near-black and has nowhere to go). They are the second colour set for that strip, not a replacement — the `default` variant's absolute `muted` track stays the right choice on a plain surface.
 - **Charts / commodities:** `chart-1..5` alias the `500` step of the five named commodity ramps `chart-{electricity,water,gas,temperature,emissions}-{100..900}` (one hue per commodity); `chart-misc-{100..900}` is a sixth ramp (violet) for miscellaneous/uncategorized data, outside the `chart-1..5` rotation. All commodity ramps are mode-independent — `100` is the lightest step in both themes.
-- **Demand-chart palette:** `chart-demand-{live,hourly,projected,forecast,short-forecast,facility,interval-1,interval-5,interval-15}`, `chart-peak-1..7`, `chart-threshold-{peak-to-date,action,projected}`, `chart-window-{high,normal,low}` — the hues operators read a demand plot by, each a **role**, tuned as 1.5–2 px lines to 3:1 on `card` in both themes (see *Demand-chart palette*).
+- **Line palette:** `chart-line-{teal,green,brown,orange,red,magenta,sky,yellow,lime,wine,olive,steel}` — twelve plot-line hues tuned as 1.5–2 px lines to 3:1 on `card` in both themes; `chart-peak-1..7` alias them in rank order; `chart-window-{high,normal,low}` are the peak-window band fills (see *Line palette*).
 - **Sidebar:** `sidebar`, `sidebar-foreground`, `sidebar-primary`, `sidebar-accent`, `sidebar-border`, `sidebar-ring` (+ foregrounds).
 
 ### Which shade to use
@@ -182,17 +182,17 @@ Three families sit in the warm-red band and must not be substituted for one anot
 * Where gas and emissions appear in the same chart, separate them in the categorical order so they are not adjacent segments, and rely on the legend rather than hue alone to tell them apart.
 * Emissions as text or a thin icon uses `chart-emissions-700`; the `500` step is for fills.
 
-### Demand-chart palette — legacy hues by role
+### Line palette — plot-line hues named by colour
 
-A demand plot (readings, forecasts, ranked peak lines, thresholds, peak-window bands) is read by colour: operators have identified each line by its hue across years of screenshots and reports, and the commodity ramp cannot stand in because these series tag no commodity. The design system owns that palette so no product hardcodes it.
+A demand plot is read by colour: operators have identified each line by its hue across years of screenshots and reports, and the commodity ramp cannot stand in because those series tag no commodity. The design system owns that palette so no product hardcodes it — and names it **by colour on purpose**. Which hue a given series takes is a product's own convention, so a token here carries no meaning of its own; the one exception is the peak ranks, whose order *is* the identity.
 
-- **Take a colour by role, never by appearance.** `chart-demand-live` is the live reading, `chart-demand-hourly` the hourly reading, `chart-demand-projected` the market's own projection (hourly's hue, drawn dashed), `chart-demand-forecast` the platform's forecast, `chart-demand-short-forecast` a short-horizon forecast, `chart-demand-facility` the site's own draw, `chart-demand-interval-{1,5,15}` a reading at that interval. `chart-peak-1..7` are the ranked peak lines — **rank is the identity, so the order never rotates**. `chart-threshold-{peak-to-date,action,projected}` are the lines the operator steers between; `chart-window-{high,normal,low}` grade the peak-window bands by rank (ranks 1–2, rank 3, rank 4 and past).
-- **Roles that share a hue alias it**, so every hue is defined once and a re-tune lands everywhere: `demand-projected` → `demand-hourly`; `peak-3` → `demand-facility`; `demand-interval-5` and `threshold-action` → `peak-1`; `demand-interval-1` and `threshold-projected` → `demand-short-forecast`; `demand-interval-15` → `threshold-peak-to-date`. Keep drawing through the role, not the token it resolves to — the alias is what lets a role be separated later.
-- **The bar is 3:1 on `card`, in both themes.** These are plot lines, not text. The light values are the legacy hues; the ones that fell under 3:1 on white were lowered in **lightness only** (hue kept, chroma clipped only where the gamut forced it) — `demand-short-forecast`, `peak-2`, `peak-4`, `peak-5` — and `peak-5` is held below `demand-hourly` so the two greens stay apart. Dark keeps the hue operators know, lifting only the lines a dark card swallowed (`demand-live`, `demand-forecast`, `peak-6`, `peak-7`). Don't re-tune a role in a product; tune the token here.
-- **Not a second categorical palette.** A series with no role here takes the commodity ramp or `chart-misc`; don't pull a peak or threshold hue onto unrelated data because it is a distinct colour.
-- **Threshold lines are the exception to the neutral-overlay rule.** A statistical overlay (period average, min/max) stays neutral/`muted`; a *threshold* the operator acts on (`chart-threshold-*`) is read by colour and takes its role token.
-- **Reds tag data here, not status.** `chart-demand-facility` (hue 29) and the `chart-window-*` reds sit in `destructive`'s band, alongside `chart-gas` and `chart-emissions`. They mean a site's own draw and a peak window, never an error — and `destructive` is never a line on a demand plot.
-- **Window bands are fills, not lines.** `chart-window-*` are read against the lines drawn over them, so they carry no contrast bar of their own; light grades toward white, dark toward the card, so the softest band never becomes the brightest thing on a dark plot.
+- **A product maps its series onto the hues in one place** (one constants file, one lookup by hue) and takes each line through that mapping — never a literal, and never a hue chosen ad hoc at a call site. Keep the mapping stable: a line changing hue is the thing operators notice first.
+- **`chart-peak-1..7` are the ranked peak lines**, aliasing `magenta, sky, red, yellow, lime, wine, olive` in that order. Rank is the identity, so the order never rotates, and a peak line always draws through its rank token, not the hue it resolves to.
+- **The bar is 3:1 on `card`, in both themes.** These are plot lines, not text. The light values are the legacy hues; the ones that fell under 3:1 on white were lowered in **lightness only** (hue kept, chroma clipped only where the gamut forced it) — `orange`, `sky`, `yellow`, `lime` — and `lime` is held below `green` so the two greens stay apart. Dark keeps each hue as known, lifting only the lines a dark card swallowed (`teal`, `brown`, `wine`, `olive`). Don't re-tune a hue in a product; tune the token here.
+- **Not a second categorical palette.** A series with no place in a product's mapping takes the commodity ramp or `chart-misc`; don't pull a line hue onto unrelated data because it is a distinct colour.
+- **A threshold the operator acts on may take a line hue.** A statistical overlay (period average, min/max) stays neutral/`muted`; a *threshold* that is steered between is read by colour and takes its mapped hue.
+- **Reds tag data here, not status.** `chart-line-red` (hue 29) and the `chart-window-*` reds sit in `destructive`'s band, alongside `chart-gas` and `chart-emissions`. They mean a line and a peak window, never an error — and `destructive` is never a line on a plot.
+- **Window bands are fills, not lines.** `chart-window-{high,normal,low}` grade the peak-window bands by rank (ranks 1–2, rank 3, rank 4 and past). They are read against the lines drawn over them, so they carry no contrast bar of their own; light grades toward white, dark toward the card, so the softest band never becomes the brightest thing on a dark plot.
 
 ### Brand blue is mode-independent
 
@@ -375,7 +375,7 @@ Never a **zero gap** — touching bars read as one solid block. **Round only the
 **Do**
 - Use semantic tokens for every color; test in light **and** dark.
 - Pick status/commodity colors strictly by meaning.
-- On a demand plot, take each line's colour by its `chart-demand-*` / `chart-peak-*` / `chart-threshold-*` / `chart-window-*` role, and draw through the role even where it aliases another.
+- On a demand plot, draw every line through the product's one series-to-hue mapping onto `chart-line-*` (peak lines through `chart-peak-1..7`, bands through `chart-window-*`); never a literal.
 - Default badges to `outline`; reserve primary `default` for one key highlight.
 - Use the rem type, spacing, and radius scales.
 - Keep overlays dismissible — a top-right close (X) on every dialog/sheet, except the `alert-dialog`.
@@ -425,4 +425,4 @@ Never a **zero gap** — touching bars read as one solid block. **Round only the
 - Don't fully-round, pill-shape, or bottom-round bars, and don't vary the bar radius or thickness between charts — round only the top corners with one uniform radius.
 - Don't color a statistical reference line (period average / min / max) with a status or commodity hue — keep it neutral/muted.
 - Don't put a commodity red (`chart-gas`, `chart-emissions`) and `destructive` in the same visual role — a red series next to a red error state reads as one signal.
-- Don't hardcode a demand plot's hues in a product, re-tune a role locally, or pull a `chart-peak-*` / `chart-threshold-*` hue onto unrelated data — the palette is role tokens, tuned once here, and it is not a second categorical palette.
+- Don't hardcode a plot's hues in a product, re-tune a `chart-line-*` hue locally, or pull a line or peak hue onto unrelated data — the palette is tuned once here, and it is not a second categorical palette.
