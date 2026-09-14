@@ -13,7 +13,7 @@ const skeletonVariants = cva("relative rounded-md bg-muted", {
       pulse:
         "after:pointer-events-none after:absolute after:inset-0 after:rounded-[inherit] after:bg-foreground/12 after:opacity-0 after:animate-skeleton-pulse motion-reduce:after:animate-none",
       shimmer:
-        "overflow-hidden before:pointer-events-none before:absolute before:inset-0 before:-translate-x-full before:bg-linear-to-r before:from-transparent before:via-foreground/12 before:to-transparent before:animate-skeleton-shimmer motion-reduce:before:animate-none",
+        "overflow-hidden before:pointer-events-none before:absolute before:inset-0 before:bg-linear-to-r before:from-transparent before:via-foreground/12 before:to-transparent before:animate-skeleton-shimmer motion-reduce:before:hidden",
       none: "",
     },
   },
