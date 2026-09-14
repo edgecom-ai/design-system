@@ -73,6 +73,20 @@ export const changelog: ChangelogRelease[] = [
     "summary": null,
     "entries": [
       {
+        "sha": "11d3fce",
+        "date": "2026-09-14",
+        "type": "feat",
+        "group": "added",
+        "scopes": [
+          "theme"
+        ],
+        "summary": "Add the demand-chart palette — the legacy demand-plot hues as role tokens, tuned to 3:1 on card in both themes",
+        "items": [
+          "theme"
+        ],
+        "breaking": false
+      },
+      {
         "sha": "77ed362",
         "date": "2026-09-14",
         "type": "fix",

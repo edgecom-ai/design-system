@@ -171,7 +171,7 @@ import { ButtonIconsDemo } from "@/components/demo/button-icons-demo";
 import { ButtonIconButtonsDemo } from "@/components/demo/button-icon-buttons-demo";
 import { ButtonRowActionDemo } from "@/components/demo/button-row-action-demo";
 import { ButtonLoadingDemo } from "@/components/demo/button-loading-demo";
-import { ChartDemandPaletteDemo } from "@/components/demo/chart-demand-palette-demo";
+import { ChartLinePaletteDemo } from "@/components/demo/chart-line-palette-demo";
 import { ChartRampDemo } from "@/components/demo/chart-ramp-demo";
 import { ContextMenuDemo } from "@/components/demo/context-menu-demo";
 import ContextMenuBasicDemo from "@/components/shadcn-studio/context-menu/context-menu-01";
@@ -309,21 +309,21 @@ const emphasisText = [
   { name: "destructive-emphasis", fg: "var(--destructive-emphasis)" },
 ];
 
-// Demand-chart line hues, one row per unique hue (aliased roles share it).
+// Line-palette hues, with the peak rank that aliases each one.
 // Plot lines are 1.5–2 px, so the bar is 3:1 (the "large" WCAG threshold).
 const chartLines = [
-  { name: "chart-demand-live", also: "" },
-  { name: "chart-demand-hourly", also: "demand-projected" },
-  { name: "chart-demand-forecast", also: "" },
-  { name: "chart-demand-short-forecast", also: "demand-interval-1 · threshold-projected" },
-  { name: "chart-demand-facility", also: "peak-3" },
-  { name: "chart-peak-1", also: "demand-interval-5 · threshold-action" },
-  { name: "chart-peak-2", also: "" },
-  { name: "chart-peak-4", also: "" },
-  { name: "chart-peak-5", also: "" },
-  { name: "chart-peak-6", also: "" },
-  { name: "chart-peak-7", also: "" },
-  { name: "chart-threshold-peak-to-date", also: "demand-interval-15" },
+  { name: "chart-line-teal", also: "" },
+  { name: "chart-line-green", also: "" },
+  { name: "chart-line-brown", also: "" },
+  { name: "chart-line-orange", also: "" },
+  { name: "chart-line-red", also: "peak-3" },
+  { name: "chart-line-magenta", also: "peak-1" },
+  { name: "chart-line-sky", also: "peak-2" },
+  { name: "chart-line-yellow", also: "peak-4" },
+  { name: "chart-line-lime", also: "peak-5" },
+  { name: "chart-line-wine", also: "peak-6" },
+  { name: "chart-line-olive", also: "peak-7" },
+  { name: "chart-line-steel", also: "" },
 ];
 
 // Elevation stack (recessed → raised).
@@ -665,19 +665,19 @@ function ColorsPage() {
       </section>
 
       <section id="colors-chart-lines" className="flex scroll-mt-24 flex-col gap-3">
-        <h3 className="text-title">Demand-chart lines on card</h3>
+        <h3 className="text-title">Line palette on card</h3>
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
           The{" "}
           <Link
             className="font-medium text-primary underline underline-offset-4 dark:text-primary-emphasis"
             href="/foundations/charts/"
           >
-            demand-chart palette
+            line palette
           </Link>{" "}
           is drawn as 1.5–2 px plot lines against <Code>card</Code>, so its bar is{" "}
           <span className="font-medium text-foreground">3:1</span>, and every hue must
-          clear it in both themes. One row per hue; the roles that alias it are listed
-          beside the name.
+          clear it in both themes. One row per hue; the peak rank that aliases it is
+          listed beside the name.
         </p>
         <div className="grid gap-2 sm:grid-cols-2">
           {chartLines.map((l) => (
@@ -1138,7 +1138,7 @@ export const sections: Section[] = [
       { id: "colors-solid", name: "Solid fills" },
       { id: "colors-subtle", name: "Status & brand surfaces" },
       { id: "colors-emphasis", name: "Emphasis colors as text" },
-      { id: "colors-chart-lines", name: "Demand-chart lines on card" },
+      { id: "colors-chart-lines", name: "Line palette on card" },
       { id: "colors-elevation", name: "Elevation surfaces" },
     ],
     node: <ColorsPage />,
@@ -1148,7 +1148,7 @@ export const sections: Section[] = [
     label: "Chart ramp",
     group: "Foundations",
     description:
-      "Categorical hues and sequential tint ramps for charting each commodity, plus the demand-chart palette of line hues by role.",
+      "Categorical hues and sequential tint ramps for charting each commodity, plus the line palette of plot-line hues.",
     install: "@edgecom/theme",
     variants: [
       {
@@ -1160,12 +1160,12 @@ export const sections: Section[] = [
         source: dm("chart-ramp-demo"),
       },
       {
-        id: "chart-demand-palette",
-        name: "Demand-chart palette",
+        id: "chart-line-palette",
+        name: "Line palette",
         description:
-          "The hues operators read a demand plot by — series, peak ranks, thresholds, and peak-window bands — each a role token tuned to 3:1 on card in both themes. Roles that share a hue alias it, so every hue is defined once.",
-        preview: <ChartDemandPaletteDemo />,
-        source: dm("chart-demand-palette-demo"),
+          "Twelve plot-line hues named by colour, each tuned to 3:1 on card in both themes, with the peak-rank aliases and peak-window bands drawn over them. A product maps its series onto the hues in one place; the token itself carries no meaning.",
+        preview: <ChartLinePaletteDemo />,
+        source: dm("chart-line-palette-demo"),
       },
     ],
   },

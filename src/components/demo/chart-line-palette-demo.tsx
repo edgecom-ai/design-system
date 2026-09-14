@@ -19,53 +19,47 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart"
 
-// Every token is a role; a role that shares its hue with another aliases it,
-// so the palette is defined once per hue. `alias` names the token a role
-// resolves to.
-type Role = { token: string; label: string; alias?: string }
+// The palette is named by colour on purpose: which hue a series takes is a
+// product's own convention, so the token carries no meaning of its own.
+// `alias` names the hue a peak rank resolves to.
+type Swatch = { token: string; label: string; alias?: string }
 
-const families: { name: string; note: string; roles: Role[] }[] = [
+const families: { name: string; note: string; swatches: Swatch[] }[] = [
   {
-    name: "Demand series",
-    note: "The lines a demand plot draws: readings, the forecasts of them, and the site's own draw.",
-    roles: [
-      { token: "demand-live", label: "Live reading" },
-      { token: "demand-hourly", label: "Hourly reading" },
-      { token: "demand-projected", label: "Market projection", alias: "demand-hourly" },
-      { token: "demand-forecast", label: "Platform forecast" },
-      { token: "demand-short-forecast", label: "Short forecast" },
-      { token: "demand-facility", label: "Facility draw" },
-      { token: "demand-interval-1", label: "1-min interval", alias: "demand-short-forecast" },
-      { token: "demand-interval-5", label: "5-min interval", alias: "peak-1" },
-      { token: "demand-interval-15", label: "15-min interval", alias: "threshold-peak-to-date" },
+    name: "Line palette",
+    note: "Twelve plot-line hues, each tuned to 3:1 on card in both themes. A product maps its series onto them in one place and takes each line by hue.",
+    swatches: [
+      { token: "line-teal", label: "Teal" },
+      { token: "line-green", label: "Green" },
+      { token: "line-brown", label: "Brown" },
+      { token: "line-orange", label: "Orange" },
+      { token: "line-red", label: "Red" },
+      { token: "line-magenta", label: "Magenta" },
+      { token: "line-sky", label: "Sky" },
+      { token: "line-yellow", label: "Yellow" },
+      { token: "line-lime", label: "Lime" },
+      { token: "line-wine", label: "Wine" },
+      { token: "line-olive", label: "Olive" },
+      { token: "line-steel", label: "Steel" },
     ],
   },
   {
     name: "Peak ranks",
     note: "One hue per rank, in the order operators know them. Rank is the identity, so the order never rotates.",
-    roles: [
-      { token: "peak-1", label: "Peak 1" },
-      { token: "peak-2", label: "Peak 2" },
-      { token: "peak-3", label: "Peak 3", alias: "demand-facility" },
-      { token: "peak-4", label: "Peak 4" },
-      { token: "peak-5", label: "Peak 5" },
-      { token: "peak-6", label: "Peak 6" },
-      { token: "peak-7", label: "Peak 7" },
-    ],
-  },
-  {
-    name: "Thresholds",
-    note: "Horizontal lines the operator steers between. Not the neutral statistical overlays; these are read by colour.",
-    roles: [
-      { token: "threshold-peak-to-date", label: "Peak to date" },
-      { token: "threshold-action", label: "Action required", alias: "peak-1" },
-      { token: "threshold-projected", label: "Projected peak", alias: "demand-short-forecast" },
+    swatches: [
+      { token: "peak-1", label: "Peak 1", alias: "line-magenta" },
+      { token: "peak-2", label: "Peak 2", alias: "line-sky" },
+      { token: "peak-3", label: "Peak 3", alias: "line-red" },
+      { token: "peak-4", label: "Peak 4", alias: "line-yellow" },
+      { token: "peak-5", label: "Peak 5", alias: "line-lime" },
+      { token: "peak-6", label: "Peak 6", alias: "line-wine" },
+      { token: "peak-7", label: "Peak 7", alias: "line-olive" },
     ],
   },
   {
     name: "Peak windows",
     note: "Filled bands behind the lines, graded by rank. One red mixed toward the surface, so the softest band stays soft on a dark card.",
-    roles: [
+    swatches: [
       { token: "window-high", label: "Ranks 1–2" },
       { token: "window-normal", label: "Rank 3" },
       { token: "window-low", label: "Rank 4+" },
@@ -73,9 +67,9 @@ const families: { name: string; note: string; roles: Role[] }[] = [
   },
 ]
 
-// A day of regional demand in MW: the hourly reading, the platform's forecast
-// of it, and one site's own draw on a second axis, under the day's ranked
-// peak lines and the window the top hours fall in.
+// A day of regional demand in MW: two readings of it, a dashed estimate, and
+// one site's own draw on a second axis, under ranked peak lines and the
+// window the top hours fall in.
 const hours = Array.from({ length: 24 }, (_, h) => `${String(h).padStart(2, "0")}:00`)
 const hourlyMw = [
   14200, 13900, 13700, 13600, 13800, 14300, 15400, 16800, 17900, 18600, 19100, 19500,
@@ -83,15 +77,15 @@ const hourlyMw = [
 ]
 const demandData = hours.map((hour, i) => ({
   hour,
-  hourly: hourlyMw[i],
-  forecast: i < 14 ? null : Math.round(hourlyMw[i] * (1 + (i - 14) * 0.004)),
-  facility: +(2.4 + Math.sin((i - 6) / 4) * 1.1 + (i > 12 && i < 18 ? 0.6 : 0)).toFixed(2),
+  regional: hourlyMw[i],
+  estimate: i < 14 ? null : Math.round(hourlyMw[i] * (1 + (i - 14) * 0.004)),
+  site: +(2.4 + Math.sin((i - 6) / 4) * 1.1 + (i > 12 && i < 18 ? 0.6 : 0)).toFixed(2),
 }))
 
 const demandConfig = {
-  hourly: { label: "Hourly reading", color: "var(--chart-demand-hourly)" },
-  forecast: { label: "Platform forecast", color: "var(--chart-demand-forecast)" },
-  facility: { label: "Facility draw", color: "var(--chart-demand-facility)" },
+  regional: { label: "Regional demand", color: "var(--chart-line-green)" },
+  estimate: { label: "Estimate", color: "var(--chart-line-brown)" },
+  site: { label: "Site draw", color: "var(--chart-line-red)" },
 } satisfies ChartConfig
 
 const peakLines = [
@@ -100,7 +94,7 @@ const peakLines = [
   { rank: 4, value: 20250 },
 ]
 
-export function ChartDemandPaletteDemo() {
+export function ChartLinePaletteDemo() {
   return (
     <div className="flex flex-col gap-8">
       {families.map((family) => (
@@ -111,13 +105,13 @@ export function ChartDemandPaletteDemo() {
               {family.note}
             </span>
           </div>
-          <div className="grid grid-cols-[repeat(auto-fill,minmax(10.5rem,1fr))] gap-3">
-            {family.roles.map((role) => (
-              <div key={role.token} className="flex min-w-0 flex-col gap-1.5">
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(9.5rem,1fr))] gap-3">
+            {family.swatches.map((swatch) => (
+              <div key={swatch.token} className="flex min-w-0 flex-col gap-1.5">
                 {family.name === "Peak windows" ? (
                   <div
                     className="h-12 rounded-md border border-border/40"
-                    style={{ background: `var(--chart-${role.token})` }}
+                    style={{ background: `var(--chart-${swatch.token})` }}
                     aria-hidden
                   />
                 ) : (
@@ -127,17 +121,17 @@ export function ChartDemandPaletteDemo() {
                   >
                     <div
                       className="h-0.5 w-full rounded-full"
-                      style={{ background: `var(--chart-${role.token})` }}
+                      style={{ background: `var(--chart-${swatch.token})` }}
                     />
                   </div>
                 )}
-                <span className="text-xs font-medium">{role.label}</span>
+                <span className="text-xs font-medium">{swatch.label}</span>
                 <span className="font-mono text-[11px] break-all text-muted-foreground">
-                  chart-{role.token}
+                  chart-{swatch.token}
                 </span>
-                {role.alias && (
+                {swatch.alias && (
                   <span className="text-[11px] break-all text-muted-foreground/70">
-                    = chart-{role.alias}
+                    = chart-{swatch.alias}
                   </span>
                 )}
               </div>
@@ -148,7 +142,7 @@ export function ChartDemandPaletteDemo() {
 
       <div className="flex flex-col gap-3 border-t pt-6">
         <span className="text-xs font-medium text-muted-foreground">
-          In a demand plot — series, peak lines, and a peak window together
+          In a plot — line hues, peak lines, a steel reference line, and a window band together
         </span>
         <ChartContainer config={demandConfig} className="h-[280px] w-full">
           <LineChart accessibilityLayer data={demandData} margin={{ left: 4, right: 8, top: 12 }}>
@@ -189,12 +183,12 @@ export function ChartDemandPaletteDemo() {
             <ReferenceLine
               yAxisId="mw"
               y={20600}
-              stroke="var(--chart-threshold-peak-to-date)"
+              stroke="var(--chart-line-steel)"
               strokeWidth={2}
               label={{
-                value: "Peak to date",
+                value: "Reference",
                 position: "insideTopLeft",
-                fill: "var(--chart-threshold-peak-to-date)",
+                fill: "var(--chart-line-steel)",
                 fontSize: 11,
               }}
             />
@@ -202,17 +196,17 @@ export function ChartDemandPaletteDemo() {
             <ChartLegend content={<ChartLegendContent />} />
             <Line
               yAxisId="mw"
-              dataKey="hourly"
+              dataKey="regional"
               type="monotone"
-              stroke="var(--color-hourly)"
+              stroke="var(--color-regional)"
               strokeWidth={1.5}
               dot={false}
             />
             <Line
               yAxisId="mw"
-              dataKey="forecast"
+              dataKey="estimate"
               type="monotone"
-              stroke="var(--color-forecast)"
+              stroke="var(--color-estimate)"
               strokeWidth={1.75}
               strokeDasharray="6 4"
               dot={false}
@@ -220,9 +214,9 @@ export function ChartDemandPaletteDemo() {
             />
             <Line
               yAxisId="site"
-              dataKey="facility"
+              dataKey="site"
               type="monotone"
-              stroke="var(--color-facility)"
+              stroke="var(--color-site)"
               strokeWidth={1.5}
               dot={false}
             />

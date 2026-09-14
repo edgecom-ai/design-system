@@ -9,6 +9,7 @@ Every change to the Edgecom design system, derived from git history. Also publis
 
 ### Added
 
+- **theme:** Add the demand-chart palette — the legacy demand-plot hues as role tokens, tuned to 3:1 on card in both themes ([`11d3fce`](https://github.com/edgecom-ai/design-system/commit/11d3fce))
 - **skeleton:** Make the loading pulse legible and add shimmer and static animation variants ([`1f61723`](https://github.com/edgecom-ai/design-system/commit/1f61723))
 
 ### Fixed
