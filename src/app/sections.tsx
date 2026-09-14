@@ -124,6 +124,7 @@ import CollapsibleTreeDemo from "@/components/shadcn-studio/collapsible/collapsi
 import CollapsibleCardDemo from "@/components/shadcn-studio/collapsible/collapsible-07";
 import { SpinnerDemo } from "@/components/demo/spinner-demo";
 import { SkeletonAvatarDemo } from "@/components/demo/skeleton-avatar-demo";
+import { SkeletonAnimationDemo } from "@/components/demo/skeleton-animation-demo";
 import { SwitchBasicDemo } from "@/components/demo/switch-basic-demo";
 import { ToggleFormattingDemo } from "@/components/demo/toggle-formatting-demo";
 import { SliderBasicDemo } from "@/components/demo/slider-basic-demo";
@@ -2083,6 +2084,14 @@ export const sections: Section[] = [
         description: "A circular avatar placeholder beside text lines.",
         preview: <SkeletonAvatarDemo />,
         source: dm("skeleton-avatar-demo"),
+      },
+      {
+        id: "skeleton-animation",
+        name: "Animation",
+        description:
+          "The default pulse beside the shimmer variant and a static block. Pick one per screen so every placeholder on it moves the same way.",
+        preview: <SkeletonAnimationDemo />,
+        source: dm("skeleton-animation-demo"),
       },
       {
         id: "skeleton-text",
