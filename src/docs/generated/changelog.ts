@@ -66,6 +66,68 @@ export const commitUrl = (sha: string) => `https://github.com/edgecom-ai/design-
 
 export const changelog: ChangelogRelease[] = [
   {
+    "id": "release-2026-09-14",
+    "version": null,
+    "date": "2026-09-14",
+    "title": "September 14, 2026",
+    "summary": null,
+    "entries": [
+      {
+        "sha": "77ed362",
+        "date": "2026-09-14",
+        "type": "fix",
+        "group": "fixed",
+        "scopes": [
+          "skeleton"
+        ],
+        "summary": "Let the shimmer band sweep the full block and loop seamlessly",
+        "items": [
+          "skeleton"
+        ],
+        "breaking": false
+      },
+      {
+        "sha": "1f61723",
+        "date": "2026-09-14",
+        "type": "feat",
+        "group": "added",
+        "scopes": [
+          "skeleton"
+        ],
+        "summary": "Make the loading pulse legible and add shimmer and static animation variants",
+        "items": [
+          "skeleton",
+          "theme"
+        ],
+        "breaking": false
+      }
+    ]
+  },
+  {
+    "id": "release-2026-09-10",
+    "version": null,
+    "date": "2026-09-10",
+    "title": "September 10, 2026",
+    "summary": null,
+    "entries": [
+      {
+        "sha": "48e6719",
+        "date": "2026-09-10",
+        "type": "feat",
+        "group": "added",
+        "scopes": [
+          "tabs"
+        ],
+        "summary": "Add a new variant",
+        "items": [
+          "tabs",
+          "theme"
+        ],
+        "breaking": false
+      }
+    ]
+  },
+  {
     "id": "release-2026-08-31",
     "version": null,
     "date": "2026-08-31",

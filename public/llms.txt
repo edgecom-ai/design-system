@@ -24,7 +24,7 @@ Browse every component in light/dark with copyable code at [design.edgecom.ai](h
 ## Foundations
 
 - [Semantic colors](https://design.edgecom.ai/foundations/colors/): Semantic color tokens that adapt automatically between light and dark themes.
-- [Chart ramp](https://design.edgecom.ai/foundations/charts/): Categorical hues and sequential tint ramps for charting each commodity.
+- [Chart ramp](https://design.edgecom.ai/foundations/charts/): Categorical hues and sequential tint ramps for charting each commodity, plus the demand-chart palette of line hues by role.
 - [Typography](https://design.edgecom.ai/foundations/typography/): The type scale, tabular figures, and heading styles used across the platform.
 - [Logo](https://design.edgecom.ai/foundations/logo/): The Edgecom wordmark and glyph, with clear-space and color guidance.
 - [Icons](https://design.edgecom.ai/foundations/icons/): Lucide icons — sizing conventions and usage.
