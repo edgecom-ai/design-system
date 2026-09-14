@@ -52,6 +52,7 @@ Dark mode is the `.dark` class on the `<html>` root; **portaled content (dropdow
 The full guardrails — status-color meaning, badges, dialog-vs-sheet, toasts, destructive double-confirm, validation, tables, tooltips, active-state highlighting, loading/empty/error, accessibility — are in **[design.md](https://design.edgecom.ai/design.md)**. Follow them; they are not optional. A few load-bearing ones, so they're not missed:
 
 - **Status/commodity colors strictly by meaning** — never decorative.
+- **`--chart-legacy-*` is migration-only.** Those tokens exist so a product porting plots operators already read by colour can drop its literals; they have no Tailwind utility and no place in a new feature. New charts use the commodity ramp (`chart-*`, `chart-misc`, `chart-1..5`).
 - **Keep overlays dismissible** (dialog/sheet close X); gate **destructive actions** behind an `alert-dialog`.
 - **A destructive row action is the `ghost-destructive` button variant** — quiet at rest, tinted on hover, correct in both themes. Don't compose one from `ghost` plus destructive utilities.
 - **Confirm actions with the matching semantic `toast`** variant; one `<Toaster>` per app; every toast has a title.

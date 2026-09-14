@@ -50,29 +50,29 @@ colors:
   chart-temperature: oklch(0.68 0.12 178)
   chart-emissions: oklch(0.58 0.16 10)
   chart-misc: oklch(0.55 0.18 300)
-  # Line palette (plot-line hues; light values, dark re-tunes in the body) + peak-rank aliases + window bands
-  chart-line-teal: oklch(0.483 0.082 201.5)
-  chart-line-green: oklch(0.649 0.157 142.6)
-  chart-line-brown: oklch(0.564 0.126 60.4)
-  chart-line-orange: oklch(0.672 0.143 70.7)
-  chart-line-red: oklch(0.612 0.227 29.2)
-  chart-line-magenta: oklch(0.626 0.268 322.6)
-  chart-line-sky: oklch(0.659 0.135 236.6)
-  chart-line-yellow: oklch(0.662 0.139 104.2)
-  chart-line-lime: oklch(0.56 0.16 133.9)
-  chart-line-wine: oklch(0.452 0.158 4.9)
-  chart-line-olive: oklch(0.452 0.098 110.5)
-  chart-line-steel: oklch(0.588 0.099 245.7)
-  chart-peak-1: oklch(0.626 0.268 322.6)
-  chart-peak-2: oklch(0.659 0.135 236.6)
-  chart-peak-3: oklch(0.612 0.227 29.2)
-  chart-peak-4: oklch(0.662 0.139 104.2)
-  chart-peak-5: oklch(0.56 0.16 133.9)
-  chart-peak-6: oklch(0.452 0.158 4.9)
-  chart-peak-7: oklch(0.452 0.098 110.5)
-  chart-window-high: oklch(0.612 0.176 23.9)
-  chart-window-normal: oklch(0.704 0.128 20.8)
-  chart-window-low: oklch(0.861 0.057 18.3)
+  # LEGACY line palette — migration of existing plots only, never a new feature (light values; dark re-tunes in the body)
+  chart-legacy-line-teal: oklch(0.483 0.082 201.5)
+  chart-legacy-line-green: oklch(0.649 0.157 142.6)
+  chart-legacy-line-brown: oklch(0.564 0.126 60.4)
+  chart-legacy-line-orange: oklch(0.672 0.143 70.7)
+  chart-legacy-line-red: oklch(0.612 0.227 29.2)
+  chart-legacy-line-magenta: oklch(0.626 0.268 322.6)
+  chart-legacy-line-sky: oklch(0.659 0.135 236.6)
+  chart-legacy-line-yellow: oklch(0.662 0.139 104.2)
+  chart-legacy-line-lime: oklch(0.56 0.16 133.9)
+  chart-legacy-line-wine: oklch(0.452 0.158 4.9)
+  chart-legacy-line-olive: oklch(0.452 0.098 110.5)
+  chart-legacy-line-steel: oklch(0.588 0.099 245.7)
+  chart-legacy-peak-1: oklch(0.626 0.268 322.6)
+  chart-legacy-peak-2: oklch(0.659 0.135 236.6)
+  chart-legacy-peak-3: oklch(0.612 0.227 29.2)
+  chart-legacy-peak-4: oklch(0.662 0.139 104.2)
+  chart-legacy-peak-5: oklch(0.56 0.16 133.9)
+  chart-legacy-peak-6: oklch(0.452 0.158 4.9)
+  chart-legacy-peak-7: oklch(0.452 0.098 110.5)
+  chart-legacy-window-high: oklch(0.612 0.176 23.9)
+  chart-legacy-window-normal: oklch(0.704 0.128 20.8)
+  chart-legacy-window-low: oklch(0.861 0.057 18.3)
 typography:
   font-family: SF Pro / system-ui sans (var --font-sans)
   font-family-mono: SF Mono / ui-monospace (var --font-mono)
@@ -157,7 +157,7 @@ Colors are semantic tokens. Reach for the token by **role**, not by how it looks
 - **Interaction:** `ghost-hover` (quiet controls with no resting fill — `button`/`badge` `ghost`), `outline-surface` + `outline-hover` (`button` `outline`), `input-surface` + `input-hover` (the field triggers — `select`, `native-select`, which rest transparent so a tinted row shows through). Each is one theme-aware token rather than a light value plus a `dark:` override, so an app can re-tint a quiet control with a single `bg-*` / `hover:bg-*` and have it win in **both** themes.
 - **Relative surfaces:** `track` + `track-active` — the sunken segmented strip and the tab raised on it, in the `tabs` `adaptive` variant. Unlike every other surface token these are an **alpha over whatever is behind them**, not a fixed value: a strip that must read as "one step below my parent" has no absolute lightness, so an opaque one collapses to 1.00:1 the moment it lands on a surface of its own value. Light darkens, dark lightens (dark `background` is already near-black and has nowhere to go). They are the second colour set for that strip, not a replacement — the `default` variant's absolute `muted` track stays the right choice on a plain surface.
 - **Charts / commodities:** `chart-1..5` alias the `500` step of the five named commodity ramps `chart-{electricity,water,gas,temperature,emissions}-{100..900}` (one hue per commodity); `chart-misc-{100..900}` is a sixth ramp (violet) for miscellaneous/uncategorized data, outside the `chart-1..5` rotation. All commodity ramps are mode-independent — `100` is the lightest step in both themes.
-- **Line palette:** `chart-line-{teal,green,brown,orange,red,magenta,sky,yellow,lime,wine,olive,steel}` — twelve plot-line hues tuned as 1.5–2 px lines to 3:1 on `card` in both themes; `chart-peak-1..7` alias them in rank order; `chart-window-{high,normal,low}` are the peak-window band fills (see *Line palette*).
+- **Legacy line palette (migration only):** `chart-legacy-line-{teal,green,brown,orange,red,magenta,sky,yellow,lime,wine,olive,steel}`, `chart-legacy-peak-1..7`, `chart-legacy-window-{high,normal,low}` — the hues a product's *existing* plots are already read by, owned here so that product can delete its literals. Never for a new feature; no Tailwind utility exposes them (see *Legacy line palette*).
 - **Sidebar:** `sidebar`, `sidebar-foreground`, `sidebar-primary`, `sidebar-accent`, `sidebar-border`, `sidebar-ring` (+ foregrounds).
 
 ### Which shade to use
@@ -182,17 +182,16 @@ Three families sit in the warm-red band and must not be substituted for one anot
 * Where gas and emissions appear in the same chart, separate them in the categorical order so they are not adjacent segments, and rely on the legend rather than hue alone to tell them apart.
 * Emissions as text or a thin icon uses `chart-emissions-700`; the `500` step is for fills.
 
-### Line palette — plot-line hues named by colour
+### Legacy line palette — migration only
 
-A demand plot is read by colour: operators have identified each line by its hue across years of screenshots and reports, and the commodity ramp cannot stand in because those series tag no commodity. The design system owns that palette so no product hardcodes it — and names it **by colour on purpose**. Which hue a given series takes is a product's own convention, so a token here carries no meaning of its own; the one exception is the peak ranks, whose order *is* the identity.
+A handful of existing demand plots are read by colour: operators have identified each line by its hue across years of screenshots and reports, and those series tag no commodity, so the commodity ramp could not replace them. The design system owns that palette **only so the product porting those plots can delete its hex literals**. It is not a palette for new work.
 
-- **A product maps its series onto the hues in one place** (one constants file, one lookup by hue) and takes each line through that mapping — never a literal, and never a hue chosen ad hoc at a call site. Keep the mapping stable: a line changing hue is the thing operators notice first.
-- **`chart-peak-1..7` are the ranked peak lines**, aliasing `magenta, sky, red, yellow, lime, wine, olive` in that order. Rank is the identity, so the order never rotates, and a peak line always draws through its rank token, not the hue it resolves to.
-- **The bar is 3:1 on `card`, in both themes.** These are plot lines, not text. The light values are the legacy hues; the ones that fell under 3:1 on white were lowered in **lightness only** (hue kept, chroma clipped only where the gamut forced it) — `orange`, `sky`, `yellow`, `lime` — and `lime` is held below `green` so the two greens stay apart. Dark keeps each hue as known, lifting only the lines a dark card swallowed (`teal`, `brown`, `wine`, `olive`). Don't re-tune a hue in a product; tune the token here.
-- **Not a second categorical palette.** A series with no place in a product's mapping takes the commodity ramp or `chart-misc`; don't pull a line hue onto unrelated data because it is a distinct colour.
-- **A threshold the operator acts on may take a line hue.** A statistical overlay (period average, min/max) stays neutral/`muted`; a *threshold* that is steered between is read by colour and takes its mapped hue.
-- **Reds tag data here, not status.** `chart-line-red` (hue 29) and the `chart-window-*` reds sit in `destructive`'s band, alongside `chart-gas` and `chart-emissions`. They mean a line and a peak window, never an error — and `destructive` is never a line on a plot.
-- **Window bands are fills, not lines.** `chart-window-{high,normal,low}` grade the peak-window bands by rank (ranks 1–2, rank 3, rank 4 and past). They are read against the lines drawn over them, so they carry no contrast bar of their own; light grades toward white, dark toward the card, so the softest band never becomes the brightest thing on a dark plot.
+- **A new feature never draws from it.** New charts take the commodity ramp (`chart-*` by meaning, `chart-misc` for uncategorized data, the `chart-1..5` rotation for categorical series); every other colour is a semantic token. If a new chart seems to need one of these hues, that is a sign it should be using the ramp — the `legacy` in every name is there to make the exception visible at the call site.
+- **The guardrails are mechanical.** There is deliberately no `--color-*` mapping for these tokens, so no `stroke-chart-legacy-*` / `bg-chart-legacy-*` utility exists to reach for from a class; they are read as CSS variables only, by the code that ports a plot. `registry:check` fails the build if any shipped primitive references a `--chart-legacy-*` token. **No hue is ever added to this set**, and no new role is built on it — a ported plot that grows a new series gives that series a ramp colour.
+- **Named by colour on purpose.** Which hue a given series takes is the porting product's own convention, so a token here carries no meaning of its own; that product keeps its series-to-hue mapping in one place and takes each line by hue — never a literal, and never a hue chosen ad hoc at a call site. The one exception is `chart-legacy-peak-1..7`, the ranked peak lines (`magenta, sky, red, yellow, lime, wine, olive` in that order): rank *is* the identity, so the order never rotates and a peak line draws through its rank token.
+- **The bar is 3:1 on `card`, in both themes.** These are 1.5–2 px plot lines, not text. Light values are the legacy hues; the ones that fell under 3:1 on white were lowered in **lightness only** (hue kept, chroma clipped only where the gamut forced it) — `orange`, `sky`, `yellow`, `lime` — and `lime` is held below `green` so the two greens stay apart. Dark keeps each hue as known, lifting only the lines a dark card swallowed (`teal`, `brown`, `wine`, `olive`). Don't re-tune a hue in a product; tune the token here.
+- **Reds tag data here, not status.** `chart-legacy-line-red` (hue 29) and the `chart-legacy-window-*` reds sit in `destructive`'s band, alongside `chart-gas` and `chart-emissions`. They mean a line and a peak window, never an error — and `destructive` is never a line on a plot.
+- **Window bands are fills, not lines.** `chart-legacy-window-{high,normal,low}` grade the peak-window bands by rank (ranks 1–2, rank 3, rank 4 and past). They are read against the lines drawn over them, so they carry no contrast bar of their own; light grades toward white, dark toward the card, so the softest band never becomes the brightest thing on a dark plot.
 
 ### Brand blue is mode-independent
 
@@ -375,7 +374,7 @@ Never a **zero gap** — touching bars read as one solid block. **Round only the
 **Do**
 - Use semantic tokens for every color; test in light **and** dark.
 - Pick status/commodity colors strictly by meaning.
-- On a demand plot, draw every line through the product's one series-to-hue mapping onto `chart-line-*` (peak lines through `chart-peak-1..7`, bands through `chart-window-*`); never a literal.
+- Colour a new chart from the commodity ramp (`chart-*` by meaning, `chart-misc`, `chart-1..5`) and semantic tokens only; touch `chart-legacy-*` solely when porting an existing plot, through the product's one series-to-hue mapping, never a literal.
 - Default badges to `outline`; reserve primary `default` for one key highlight.
 - Use the rem type, spacing, and radius scales.
 - Keep overlays dismissible — a top-right close (X) on every dialog/sheet, except the `alert-dialog`.
@@ -425,4 +424,4 @@ Never a **zero gap** — touching bars read as one solid block. **Round only the
 - Don't fully-round, pill-shape, or bottom-round bars, and don't vary the bar radius or thickness between charts — round only the top corners with one uniform radius.
 - Don't color a statistical reference line (period average / min / max) with a status or commodity hue — keep it neutral/muted.
 - Don't put a commodity red (`chart-gas`, `chart-emissions`) and `destructive` in the same visual role — a red series next to a red error state reads as one signal.
-- Don't hardcode a plot's hues in a product, re-tune a `chart-line-*` hue locally, or pull a line or peak hue onto unrelated data — the palette is tuned once here, and it is not a second categorical palette.
+- Don't use a `chart-legacy-*` hue in a new feature, add a hue or role to that set, re-tune one locally, or hardcode a ported plot's hues — the legacy palette exists only to migrate existing plots and is not a second categorical palette.

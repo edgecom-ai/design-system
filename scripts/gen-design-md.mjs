@@ -41,12 +41,13 @@ const COLOR_GROUPS = [
   { comment: null, keys: ["border", "input", "ring"] },
 ];
 const COMMODITIES = ["electricity", "water", "gas", "temperature", "emissions", "misc"];
-// Line palette (neutral colour names), peak-rank aliases, and window bands.
-const LINE_ROLES = [
-  "line-teal", "line-green", "line-brown", "line-orange", "line-red", "line-magenta",
-  "line-sky", "line-yellow", "line-lime", "line-wine", "line-olive", "line-steel",
-  "peak-1", "peak-2", "peak-3", "peak-4", "peak-5", "peak-6", "peak-7",
-  "window-high", "window-normal", "window-low",
+// Legacy line palette (migration only): neutral colour names, peak-rank
+// aliases, and window bands. No `--color-*` mapping, so read straight off :root.
+const LEGACY_TOKENS = [
+  "legacy-line-teal", "legacy-line-green", "legacy-line-brown", "legacy-line-orange", "legacy-line-red", "legacy-line-magenta",
+  "legacy-line-sky", "legacy-line-yellow", "legacy-line-lime", "legacy-line-wine", "legacy-line-olive", "legacy-line-steel",
+  "legacy-peak-1", "legacy-peak-2", "legacy-peak-3", "legacy-peak-4", "legacy-peak-5", "legacy-peak-6", "legacy-peak-7",
+  "legacy-window-high", "legacy-window-normal", "legacy-window-low",
 ];
 const TYPE_SCALE = ["caption", "body-sm", "body", "body-lg", "title", "heading", "display"];
 const RADII = ["sm", "md", "lg", "xl", "2xl", "3xl", "4xl"];
@@ -73,8 +74,8 @@ for (const group of COLOR_GROUPS) {
 }
 lines.push("  # Commodity categorical ramp (chart series) — mode-independent");
 for (const c of COMMODITIES) lines.push(`  chart-${c}: ${val(`chart-${c}-500`)}`);
-lines.push("  # Line palette (plot-line hues; light values, dark re-tunes in the body) + peak-rank aliases + window bands");
-for (const r of LINE_ROLES) lines.push(`  chart-${r}: ${val(`chart-${r}`)}`);
+lines.push("  # LEGACY line palette — migration of existing plots only, never a new feature (light values; dark re-tunes in the body)");
+for (const r of LEGACY_TOKENS) lines.push(`  chart-${r}: ${val(`chart-${r}`)}`);
 
 lines.push("typography:");
 lines.push("  font-family: SF Pro / system-ui sans (var --font-sans)");
@@ -116,7 +117,7 @@ const out = md.replace(re, block);
 writeFileSync(designPath, out);
 copyFileSync(designPath, publicPath);
 
-const colorCount = COLOR_GROUPS.reduce((n, g) => n + g.keys.length, 0) + COMMODITIES.length + LINE_ROLES.length;
+const colorCount = COLOR_GROUPS.reduce((n, g) => n + g.keys.length, 0) + COMMODITIES.length + LEGACY_TOKENS.length;
 console.log(
   `gen-design-md — ${colorCount} colors + ${TYPE_SCALE.length} type steps + ${RADII.length + 1} radii → design.md (+ public/design.md)`
 );

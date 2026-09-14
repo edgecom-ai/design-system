@@ -54,28 +54,6 @@
   --color-chart-misc-500: var(--chart-misc-500);
   --color-chart-misc-700: var(--chart-misc-700);
   --color-chart-misc-900: var(--chart-misc-900);
-  --color-chart-line-teal: var(--chart-line-teal);
-  --color-chart-line-green: var(--chart-line-green);
-  --color-chart-line-brown: var(--chart-line-brown);
-  --color-chart-line-orange: var(--chart-line-orange);
-  --color-chart-line-red: var(--chart-line-red);
-  --color-chart-line-magenta: var(--chart-line-magenta);
-  --color-chart-line-sky: var(--chart-line-sky);
-  --color-chart-line-yellow: var(--chart-line-yellow);
-  --color-chart-line-lime: var(--chart-line-lime);
-  --color-chart-line-wine: var(--chart-line-wine);
-  --color-chart-line-olive: var(--chart-line-olive);
-  --color-chart-line-steel: var(--chart-line-steel);
-  --color-chart-peak-1: var(--chart-peak-1);
-  --color-chart-peak-2: var(--chart-peak-2);
-  --color-chart-peak-3: var(--chart-peak-3);
-  --color-chart-peak-4: var(--chart-peak-4);
-  --color-chart-peak-5: var(--chart-peak-5);
-  --color-chart-peak-6: var(--chart-peak-6);
-  --color-chart-peak-7: var(--chart-peak-7);
-  --color-chart-window-high: var(--chart-window-high);
-  --color-chart-window-normal: var(--chart-window-normal);
-  --color-chart-window-low: var(--chart-window-low);
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -325,46 +303,52 @@
   --chart-3: var(--chart-gas-500);
   --chart-4: var(--chart-temperature-500);
   --chart-5: var(--chart-emissions-500);
-  /* Line palette — the plot-line hues operators read their plots by,
-     carried from the legacy portal and owned here so no product hardcodes
-     them. Named by colour on purpose: which hue a given series takes is a
-     product's own convention, so the token carries no meaning of its own —
-     the product keeps that mapping in one place and takes each line by hue.
-     They are 1.5–2 px lines read against `card`, so each clears 3:1 on
-     white here and on the dark card below. Values are the legacy hexes in
-     OKLCH; where a legacy light value fell under 3:1 on white (noted per
-     line) the lightness alone was lowered — hue kept, chroma clipped only
-     where the gamut forced it — and the dark value keeps the hue as known.
-     Not a second categorical palette: a series with no place in a product's
-     mapping takes the commodity ramp or `chart-misc`. The red here sits in
-     `destructive`'s band; it tags data, never an error. */
-  --chart-line-teal: oklch(0.483 0.082 201.5);
-  --chart-line-green: oklch(0.649 0.157 142.6); /* 3.06:1 on white, the bar exactly. Merges a green 1 OKLCH point off and a lighter one (1.9:1) */
-  --chart-line-brown: oklch(0.564 0.126 60.4);
-  --chart-line-orange: oklch(0.672 0.143 70.7); /* legacy 0.793 fell to 1.97:1 on white. Merges an amber (0.715, 2.6:1) that converged with it once tuned */
-  --chart-line-red: oklch(0.612 0.227 29.2);
-  --chart-line-magenta: oklch(0.626 0.268 322.6);
-  --chart-line-sky: oklch(0.659 0.135 236.6); /* legacy 0.688 fell to 2.7:1 on white */
-  --chart-line-yellow: oklch(0.662 0.139 104.2); /* legacy 0.871 fell to 1.5:1 on white */
-  --chart-line-lime: oklch(0.56 0.16 133.9); /* legacy 0.898 fell to 1.3:1 on white; held below `line-green` so the two greens stay apart */
-  --chart-line-wine: oklch(0.452 0.158 4.9);
-  --chart-line-olive: oklch(0.452 0.098 110.5);
-  --chart-line-steel: oklch(0.588 0.099 245.7); /* merges a sky blue (0.789, 1.9:1) that shares its hue */
-  /* Peak rank lines — one hue per rank, in the order operators know them.
+  /* LEGACY line palette — migration only. The plot-line hues operators read
+     their existing plots by, carried from the legacy portal and owned here so
+     the product porting those plots can delete its literals. That is the
+     palette's only job: a NEW feature never reaches for it — new charts take
+     the commodity ramp / `chart-misc` above, and every other colour is a
+     semantic token. Hence the `legacy` in every name, and no `--color-*`
+     mapping in `@theme`: there is deliberately no `stroke-chart-legacy-*`
+     utility to reach for from a class, and `registry:check` fails any shipped
+     primitive that references one. No hue is added to this set.
+     Named by colour on purpose: which hue a given series takes is the
+     porting product's own convention, so the token carries no meaning of
+     its own — the product keeps that mapping in one place and takes each
+     line by hue. They are 1.5–2 px lines read against `card`, so each
+     clears 3:1 on white here and on the dark card below. Values are the
+     legacy hexes in OKLCH; where a legacy light value fell under 3:1 on
+     white (noted per line) the lightness alone was lowered — hue kept,
+     chroma clipped only where the gamut forced it — and the dark value
+     keeps the hue as known. The red here sits in `destructive`'s band; it
+     tags data, never an error. */
+  --chart-legacy-line-teal: oklch(0.483 0.082 201.5);
+  --chart-legacy-line-green: oklch(0.649 0.157 142.6); /* 3.06:1 on white, the bar exactly. Merges a green 1 OKLCH point off and a lighter one (1.9:1) */
+  --chart-legacy-line-brown: oklch(0.564 0.126 60.4);
+  --chart-legacy-line-orange: oklch(0.672 0.143 70.7); /* legacy 0.793 fell to 1.97:1 on white. Merges an amber (0.715, 2.6:1) that converged with it once tuned */
+  --chart-legacy-line-red: oklch(0.612 0.227 29.2);
+  --chart-legacy-line-magenta: oklch(0.626 0.268 322.6);
+  --chart-legacy-line-sky: oklch(0.659 0.135 236.6); /* legacy 0.688 fell to 2.7:1 on white */
+  --chart-legacy-line-yellow: oklch(0.662 0.139 104.2); /* legacy 0.871 fell to 1.5:1 on white */
+  --chart-legacy-line-lime: oklch(0.56 0.16 133.9); /* legacy 0.898 fell to 1.3:1 on white; held below `legacy-line-green` so the two greens stay apart */
+  --chart-legacy-line-wine: oklch(0.452 0.158 4.9);
+  --chart-legacy-line-olive: oklch(0.452 0.098 110.5);
+  --chart-legacy-line-steel: oklch(0.588 0.099 245.7); /* merges a sky blue (0.789, 1.9:1) that shares its hue */
+  /* Legacy peak rank lines — one hue per rank, in the order operators know them.
      Rank is the identity, so the order never rotates */
-  --chart-peak-1: var(--chart-line-magenta);
-  --chart-peak-2: var(--chart-line-sky);
-  --chart-peak-3: var(--chart-line-red);
-  --chart-peak-4: var(--chart-line-yellow);
-  --chart-peak-5: var(--chart-line-lime);
-  --chart-peak-6: var(--chart-line-wine);
-  --chart-peak-7: var(--chart-line-olive);
-  /* Peak window bands — filled regions behind the lines, no stroke. One red
+  --chart-legacy-peak-1: var(--chart-legacy-line-magenta);
+  --chart-legacy-peak-2: var(--chart-legacy-line-sky);
+  --chart-legacy-peak-3: var(--chart-legacy-line-red);
+  --chart-legacy-peak-4: var(--chart-legacy-line-yellow);
+  --chart-legacy-peak-5: var(--chart-legacy-line-lime);
+  --chart-legacy-peak-6: var(--chart-legacy-line-wine);
+  --chart-legacy-peak-7: var(--chart-legacy-line-olive);
+  /* Legacy peak window bands — filled regions behind the lines, no stroke. One red
      graded toward the surface: light toward white, dark toward the card, so
      the softest band never becomes the brightest thing on a dark plot */
-  --chart-window-high: oklch(0.612 0.176 23.9); /* ranks 1–2 */
-  --chart-window-normal: oklch(0.704 0.128 20.8); /* rank 3 */
-  --chart-window-low: oklch(0.861 0.057 18.3); /* rank 4 and past */
+  --chart-legacy-window-high: oklch(0.612 0.176 23.9); /* ranks 1–2 */
+  --chart-legacy-window-normal: oklch(0.704 0.128 20.8); /* rank 3 */
+  --chart-legacy-window-low: oklch(0.861 0.057 18.3); /* rank 4 and past */
   --radius: 0.625rem;
   --sidebar: oklch(0.985 0.002 254);
   --sidebar-foreground: oklch(0.16 0.01 254);
@@ -441,21 +425,21 @@
      a matching host. The active tab's `border-input` edge still reads. */
   --track: oklch(1 0 0 / 8%);
   --track-active: oklch(1 0 0 / 10%);
-  /* Commodity ramps are mode-independent (defined once in :root). The line
-     palette is not: legacy drew one set for both modes, and these are the
+  /* Commodity ramps are mode-independent (defined once in :root). The legacy
+     line palette is not: it drew one set for both modes, and these are the
      lines a dark card swallowed (2.2–3.8:1) lifted in lightness only, plus
      the lines whose legacy value already clears the dark card and keeps the
      hue as known there. The peak aliases follow. */
-  --chart-line-teal: oklch(0.669 0.082 201.6);
-  --chart-line-brown: oklch(0.628 0.126 60.3);
-  --chart-line-orange: oklch(0.793 0.171 70.7);
-  --chart-line-sky: oklch(0.688 0.135 236.6);
-  --chart-line-yellow: oklch(0.871 0.177 104.2);
-  --chart-line-lime: oklch(0.898 0.256 133.9);
-  --chart-line-wine: oklch(0.645 0.157 4.8);
-  --chart-line-olive: oklch(0.619 0.098 110.3);
-  --chart-window-normal: oklch(0.502 0.133 22.6);
-  --chart-window-low: oklch(0.329 0.061 16.4);
+  --chart-legacy-line-teal: oklch(0.669 0.082 201.6);
+  --chart-legacy-line-brown: oklch(0.628 0.126 60.3);
+  --chart-legacy-line-orange: oklch(0.793 0.171 70.7);
+  --chart-legacy-line-sky: oklch(0.688 0.135 236.6);
+  --chart-legacy-line-yellow: oklch(0.871 0.177 104.2);
+  --chart-legacy-line-lime: oklch(0.898 0.256 133.9);
+  --chart-legacy-line-wine: oklch(0.645 0.157 4.8);
+  --chart-legacy-line-olive: oklch(0.619 0.098 110.3);
+  --chart-legacy-window-normal: oklch(0.502 0.133 22.6);
+  --chart-legacy-window-low: oklch(0.329 0.061 16.4);
   --sidebar: oklch(0.205 0.008 254);
   --sidebar-foreground: oklch(0.985 0 0);
   --sidebar-primary: oklch(0.514 0.161 254.3);

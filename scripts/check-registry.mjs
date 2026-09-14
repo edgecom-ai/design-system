@@ -6,6 +6,10 @@
 // 2. Semantic type tokens — a shipped source that pairs a type token with a
 //    `leading-*`, a `text-<token>/<modifier>`, or a weight the token already
 //    owns.
+// 3. Legacy palette — a shipped source that references a `--chart-legacy-*`
+//    token. That palette exists only so a product porting its existing plots
+//    can drop hex literals; a primitive using it would carry it into every new
+//    feature (design.md → Legacy line palette).
 // `shadcn add <item>` installs exactly what the item declares, so an undeclared
 // import ships a package that can't resolve in the consumer's tree (#35) — and a
 // declared-but-missing sibling is a dependency the CLI follows to nothing.
@@ -202,7 +206,23 @@ for (const item of items) {
   }
 }
 
-if (problems.length || typeProblems.length) {
+// A registry item installs verbatim, so a primitive drawing from the legacy
+// palette would put those hues in front of every consumer as if they were the
+// system's. The `theme` item carries the tokens themselves in cssVars, not in
+// a file, so its files (lib/utils) are scanned like any other.
+const LEGACY_TOKEN = /--chart-legacy-[\w-]+/g;
+const legacyProblems = [];
+for (const item of items) {
+  for (const f of item.files ?? []) {
+    const content = f.content ?? "";
+    for (const m of content.matchAll(LEGACY_TOKEN)) {
+      const line = content.slice(0, m.index).split("\n").length;
+      legacyProblems.push(`  ${f.path}:${line} (${item.name}): references ${m[0]}`);
+    }
+  }
+}
+
+if (problems.length || typeProblems.length || legacyProblems.length) {
   if (problems.length) {
     console.error(
       `check-registry — ${problems.length} item(s) don't match their manifest:\n` +
@@ -218,10 +238,19 @@ if (problems.length || typeProblems.length) {
         "Drop the override; if a tighter line box is genuinely wanted, add a token for it in globals.css."
     );
   }
+  if (legacyProblems.length) {
+    console.error(
+      `check-registry — ${legacyProblems.length} legacy-palette reference(s):\n` +
+        legacyProblems.join("\n") +
+        "\n\nThe chart-legacy-* palette is for migrating existing plots only (design.md → Legacy line palette).\n" +
+        "A primitive takes the commodity ramp or a semantic token."
+    );
+  }
   process.exit(1);
 }
 
 console.log(
   `check-registry — ${items.length} built items declare every import at a pinned version ` +
-    `with its types, every registry dependency resolves, and no source overrides a type token's line box`
+    `with its types, every registry dependency resolves, no source overrides a type token's line box, ` +
+    `and none references the legacy palette`
 );
