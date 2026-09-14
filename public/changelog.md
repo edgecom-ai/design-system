@@ -16,6 +16,10 @@ Every change to the Edgecom design system, derived from git history. Also publis
 
 - **skeleton:** Let the shimmer band sweep the full block and loop seamlessly ([`77ed362`](https://github.com/edgecom-ai/design-system/commit/77ed362))
 
+### Changed
+
+- **theme:** Name the line palette by colour, not by what a series means ([`88d4a46`](https://github.com/edgecom-ai/design-system/commit/88d4a46))
+
 ## September 10, 2026
 
 ### Added

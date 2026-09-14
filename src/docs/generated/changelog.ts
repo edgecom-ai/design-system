@@ -73,6 +73,20 @@ export const changelog: ChangelogRelease[] = [
     "summary": null,
     "entries": [
       {
+        "sha": "88d4a46",
+        "date": "2026-09-14",
+        "type": "refactor",
+        "group": "changed",
+        "scopes": [
+          "theme"
+        ],
+        "summary": "Name the line palette by colour, not by what a series means",
+        "items": [
+          "theme"
+        ],
+        "breaking": false
+      },
+      {
         "sha": "11d3fce",
         "date": "2026-09-14",
         "type": "feat",
