@@ -934,6 +934,9 @@
       "type": "registry:ui",
       "title": "Skeleton",
       "description": "The Edgecom Skeleton component.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
       ],

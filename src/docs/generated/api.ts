@@ -247,7 +247,14 @@ export const generatedApi: Record<string, GeneratedApi> = {
     "parts": [
       "Skeleton"
     ],
-    "props": []
+    "props": [
+      {
+        "part": "Skeleton",
+        "name": "animation",
+        "type": "\"pulse\" | \"shimmer\" | \"none\"",
+        "default": "\"pulse\""
+      }
+    ]
   },
   "switch": {
     "base": {

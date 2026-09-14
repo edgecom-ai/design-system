@@ -62,6 +62,26 @@ const themeVars = blockVars(/@theme[^{]*\{([\s\S]*?)\n\}/);
 const lightVars = blockVars(/^:root\s*\{([\s\S]*?)\n\}/m);
 const darkVars = blockVars(/^\.dark\s*\{([\s\S]*?)\n\}/m);
 
+// Top-level `@keyframes` blocks ship on the theme item's `css` field (the
+// registry-item field for arbitrary rules), so a `--animate-*` theme var that
+// names one resolves for consumers too. Shape per shadcn:
+//   { "@keyframes name": { "0%, 100%": { opacity: "0" }, "50%": { opacity: "1" } } }
+function keyframeRules() {
+  const rules = {};
+  for (const kf of css.matchAll(/^@keyframes\s+([\w-]+)\s*\{([\s\S]*?)\n\}/gm)) {
+    const steps = {};
+    for (const step of kf[2].matchAll(/([^{}]+?)\s*\{([^}]*)\}/g)) {
+      const selector = step[1].trim().replace(/\s*,\s*/g, ", ").replace(/\s+/g, " ");
+      const decls = {};
+      for (const d of step[2].matchAll(/([\w-]+):\s*([^;]+);/g)) decls[d[1]] = d[2].trim();
+      steps[selector] = decls;
+    }
+    rules[`@keyframes ${kf[1]}`] = steps;
+  }
+  return rules;
+}
+const themeCss = keyframeRules();
+
 // --- import analysis --------------------------------------------------------
 // The scanner is shared with scripts/check-registry.mjs so the derivation and
 // the audit can never disagree about what a file imports (#35).
@@ -114,6 +134,7 @@ writeChunk(libDir, [
     dependencies: ["clsx", "tailwind-merge"].map(withVersion),
     files: [{ path: "utils.ts", type: "registry:lib" }],
     cssVars: { theme: themeVars, light: lightVars, dark: darkVars },
+    ...(Object.keys(themeCss).length ? { css: themeCss } : {}),
   },
 ]);
 include.push("src/lib/registry.json");
@@ -212,5 +233,5 @@ console.log(
   `gen-registry — ${include.length} chunk files · ${1 + uiFiles.length + hookItems.length} items ` +
     `(1 theme + ${uiFiles.length} components + ${hookItems.length} hooks), ` +
     `${Object.keys(lightVars).length} light / ${Object.keys(darkVars).length} dark / ` +
-    `${Object.keys(themeVars).length} theme vars`
+    `${Object.keys(themeVars).length} theme vars, ${Object.keys(themeCss).length} keyframes`
 );

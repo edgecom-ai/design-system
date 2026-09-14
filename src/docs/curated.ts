@@ -321,9 +321,14 @@ export const curatedApi: Record<string, CuratedApi> = {
     },
   },
   skeleton: {
-    summary: "A pulsing muted placeholder block for loading states.",
+    summary:
+      "A muted placeholder block for loading states; pulses by default, or shimmers with a sweeping highlight.",
     parts: {
-      Skeleton: "Pulsing muted placeholder for loading states.",
+      Skeleton: "Muted placeholder block for loading states.",
+    },
+    propDescriptions: {
+      "Skeleton.animation":
+        "Loading motion: pulse (default), shimmer (a highlight sweeps across), or none (static). All stop under prefers-reduced-motion.",
     },
   },
   slider: {

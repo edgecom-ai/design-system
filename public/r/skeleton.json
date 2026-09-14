@@ -3,13 +3,16 @@
   "name": "skeleton",
   "title": "Skeleton",
   "description": "The Edgecom Skeleton component.",
+  "dependencies": [
+    "class-variance-authority@^0.7.1"
+  ],
   "registryDependencies": [
     "edgecom-ai/design-system/theme"
   ],
   "files": [
     {
       "path": "src/components/ui/skeleton.tsx",
-      "content": "import { cn } from \"@/lib/utils\"\n\nfunction Skeleton({ className, ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      data-slot=\"skeleton\"\n      className={cn(\"animate-pulse rounded-md bg-muted\", className)}\n      {...props}\n    />\n  )\n}\n\nexport { Skeleton }\n",
+      "content": "import { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n// The motion lives on a `foreground`-tinted pseudo-element, not on the block's\n// own opacity: `muted` is within a hair of its host in both themes, so fading\n// it toward the host is invisible, while a foreground tint always moves the\n// lightness *away* from the host (darker in light, lighter in dark). The\n// pseudo-element inherits the radius so `rounded-full` and friends still work.\nconst skeletonVariants = cva(\"relative rounded-md bg-muted\", {\n  variants: {\n    animation: {\n      pulse:\n        \"after:pointer-events-none after:absolute after:inset-0 after:rounded-[inherit] after:bg-foreground/12 after:opacity-0 after:animate-skeleton-pulse motion-reduce:after:animate-none\",\n      shimmer:\n        \"overflow-hidden before:pointer-events-none before:absolute before:inset-0 before:-translate-x-full before:bg-linear-to-r before:from-transparent before:via-foreground/12 before:to-transparent before:animate-skeleton-shimmer motion-reduce:before:animate-none\",\n      none: \"\",\n    },\n  },\n  defaultVariants: {\n    animation: \"pulse\",\n  },\n})\n\nfunction Skeleton({\n  className,\n  animation,\n  ...props\n}: React.ComponentProps<\"div\"> & VariantProps<typeof skeletonVariants>) {\n  return (\n    <div\n      data-slot=\"skeleton\"\n      data-animation={animation ?? \"pulse\"}\n      className={cn(skeletonVariants({ animation }), className)}\n      {...props}\n    />\n  )\n}\n\nexport { Skeleton, skeletonVariants }\n",
       "type": "registry:ui"
     }
   ],

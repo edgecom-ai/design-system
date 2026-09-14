@@ -138,11 +138,39 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  /* Skeleton loading motion — keyframes are defined below, outside @theme, so
+     the registry can ship them to consumers as a `css` rule set. */
+  --animate-skeleton-pulse: skeleton-pulse 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-skeleton-shimmer: skeleton-shimmer 1.8s ease-in-out infinite;
 }
 
 /* Tabular figures — align numeric columns in tables, KPIs, meter readouts. */
 @utility tabular {
   font-variant-numeric: tabular-nums;
+}
+
+/* Skeleton motion. Both animate a `foreground`-tinted overlay rather than the
+   block's own opacity: `muted` sits within a hair of its host in both themes
+   (0.968 on white, 0.27 on 0.205), so fading it toward the host is invisible,
+   while a foreground tint always moves lightness *away* from the host —
+   darker in light, lighter in dark. */
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes skeleton-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  60%,
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 :root {
