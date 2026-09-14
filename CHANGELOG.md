@@ -5,6 +5,22 @@
 Every change to the Edgecom design system, derived from git history. Also published at
 [design.edgecom.ai/changelog](https://design.edgecom.ai/getting-started/changelog).
 
+## September 14, 2026
+
+### Added
+
+- **skeleton:** Make the loading pulse legible and add shimmer and static animation variants ([`1f61723`](https://github.com/edgecom-ai/design-system/commit/1f61723))
+
+### Fixed
+
+- **skeleton:** Let the shimmer band sweep the full block and loop seamlessly ([`77ed362`](https://github.com/edgecom-ai/design-system/commit/77ed362))
+
+## September 10, 2026
+
+### Added
+
+- **tabs:** Add a new variant ([`48e6719`](https://github.com/edgecom-ai/design-system/commit/48e6719))
+
 ## August 31, 2026
 
 ### Added
