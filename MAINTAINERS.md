@@ -39,6 +39,7 @@ The consumer guide is deliberately **not** in this layer. It lives at [`public/a
 | `pnpm build` | Static export to `out/`. `prebuild` runs `docs:gen` **and** `registry:build` first. |
 | `pnpm lint` | ESLint (Next core-web-vitals + TypeScript). |
 | `pnpm typecheck` | TypeScript strict, after materialising the generated changelog. |
+| `pnpm verify:docs` | Load a sample of built routes in real Chrome, light + dark, and fail on a blank page, a console error, a failed chunk, or a stuck Suspense fallback. Needs a prior `pnpm build`. |
 | `pnpm registry:build` | Regenerate registry from source, `shadcn build`, then `registry:check`. |
 | `pnpm registry:check` | Audit built items for imports their manifest doesn't declare, dependencies with no version range, registry dependencies no item provides, type tokens paired with a `leading-*`/weight override, and any reference to a `--chart-legacy-*` token (that palette is for migrating existing plots, never a primitive). |
 | `pnpm docs:gen` | Regenerate all docs-source / api / routes / changelog artifacts. |
@@ -178,7 +179,8 @@ The site is a **static export** (`output: "export"` in [`next.config.ts`](next.c
 
 There is **no test framework** in this repo. The quality gates are:
 - `pnpm lint` (ESLint) and TypeScript **strict** — use **`pnpm typecheck`**, not a bare `npx tsc --noEmit`. `src/docs/generated/changelog.ts` is a git-ignored build output that `changelog.tsx` imports, so a fresh checkout must generate it first; `pnpm typecheck` does that, and `pnpm build` gets it from `prebuild`.
-- For anything visible, use the browser preview and check **both light and dark**.
+- **`pnpm verify:docs`** — the closest thing to a test suite here. `pnpm build` only proves the export prerenders; the page shells are empty and every section renders client-side, so a build can succeed while the site renders nothing. This loads ten representative routes in system Chrome, in **both themes**, and fails on a blank page, a console error, a failed chunk, or a Suspense fallback that never resolved. Run it after anything that changes how the docs site loads.
+- For anything else visible, use the browser preview and check **both light and dark**.
 - A full `pnpm build` also validates the static-export prerender end-to-end.
 
 ## Do-nots (maintainer)
