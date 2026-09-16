@@ -107,6 +107,8 @@ Run `pnpm design:sync` after a component, token, or `design.md` change, then upl
 
 Cards are static HTML using the components' **actual utility classes**, so a card cannot drift from its primitive: change the `cva`, re-sync, the card changes.
 
+**Sync from a clean tree on `main`, after the change has merged.** `_system.json` stamps `HEAD`, so a bundle built from uncommitted work claims a version whose content it does not match — and the version stamp is the whole reason the file exists. The generator refuses to build on a dirty tree; `DESIGN_SYNC_ALLOW_DIRTY=1` overrides it for a throwaway preview you do not upload.
+
 **The upload plan is scoped to those paths**, so a sync structurally cannot touch `brand/` — hand-authored marketing material that is deliberately not in this public repo. Keep it that way.
 
 The old `Edgecom Energy Design System` project is **legacy**: a Figma reconstruction that teaches hex colours, px type, and no dark mode. Its skill is being renamed `edgecom-design-legacy`. Don't sync to it, and don't point anyone at it.

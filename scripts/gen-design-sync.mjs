@@ -245,6 +245,27 @@ function build() {
   mkdirSync(resolve(outDir, "foundations"), { recursive: true })
   mkdirSync(resolve(outDir, "components"), { recursive: true })
 
+  // The whole point of _system.json is that a design can name the exact system
+  // it was built against. That is only true if the tree is clean — a bundle cut
+  // from uncommitted work stamps a commit whose content it does not match.
+  const dirty = git("status", "--porcelain", "--untracked-files=no")
+  if (dirty) {
+    const files = dirty.split("\n").length
+    if (process.env.DESIGN_SYNC_ALLOW_DIRTY) {
+      console.warn(
+        `gen-design-sync — WARNING: ${files} uncommitted file(s); _system.json will name a commit ` +
+          `whose content this bundle does not match.`,
+      )
+    } else {
+      console.error(
+        `gen-design-sync — refusing to build: ${files} uncommitted file(s).\n` +
+          `  _system.json stamps HEAD, so a bundle cut from a dirty tree claims a version it is not.\n` +
+          `  Commit first, or set DESIGN_SYNC_ALLOW_DIRTY=1 for a throwaway preview build.`,
+      )
+      process.exit(1)
+    }
+  }
+
   const compiled = findCompiledCss()
   if (!compiled) {
     console.error("gen-design-sync — no compiled stylesheet found in out/. Run `pnpm build` first.")
