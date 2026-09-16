@@ -22,7 +22,7 @@ Path-scoped rules in `.claude/rules/` load themselves when you open a matching f
 These hold everywhere and have no file to trigger them:
 
 - **pnpm 11.10.0**, never npm. `pnpm install` after cloning.
-- **Never hand-edit a generated file.** Edit the source and regenerate. The generated list is the table in [MAINTAINERS.md](MAINTAINERS.md) → *Generated files*; `CHANGELOG.md`, `public/changelog.md`, `public/design.md`, `registry.json`, and `src/docs/generated/*` are all outputs.
+- **Never hand-edit a generated file.** Edit the source and regenerate. The generated list is the table in [MAINTAINERS.md](MAINTAINERS.md) → *Generated files*; `public/design.md`, `registry.json`, and `src/docs/generated/*` are all outputs. The changelog artifacts are outputs **and git-ignored** — never commit them.
 - **Run `pnpm registry:build`** after changing a component, a hook, or a token, so the generated registry reflects it.
 - **Never hardcode a hex, a px type size, or a magic radius.** Every colour, size, and radius is a semantic token. Tokens live in `src/app/globals.css` — edit both `:root` **and** `.dark`.
 - **lucide-react is the only icon library.**

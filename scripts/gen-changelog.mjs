@@ -16,6 +16,12 @@
 //   CHANGELOG.md                    — repo-root changelog
 //   public/changelog.md             — served at design.edgecom.ai/changelog.md
 //
+// All three are git-ignored build outputs, not committed files: they embed
+// commit SHAs and the repo rebase-merges, so a committed copy would reference
+// commits that no longer exist. predev/prebuild regenerate them. The shallow-
+// clone guard below therefore has nothing to fall back on in a fresh clone —
+// the Pages workflow must keep `fetch-depth: 0`.
+//
 // Releases are cut at git tags when they exist (each `tag: v*` ref starts a
 // release, commits after the newest tag are "Unreleased"); until the repo is
 // tagged, commits group by date instead, so the page is useful from day one.
