@@ -1,0 +1,87 @@
+# Pull-request gates.
+#
+# Until now the only workflow was deploy-pages.yml, which runs *after* a change
+# reaches main — so a broken build, a stale generated file, or a registry item
+# whose manifest doesn't match its imports was only discovered once it was
+# already published. These are the same gates a maintainer runs locally, so a
+# green PR means the same thing as a clean working tree.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      # fetch-depth: 0 is load-bearing, not hygiene — gen-changelog.mjs refuses
+      # to truncate on a shallow tree and the changelog artifacts are no longer
+      # committed, so a shallow checkout would build an empty changelog.
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      # Runs docs:gen + registry:build via prebuild, so this also produces the
+      # artifacts the parity check below compares against.
+      - name: Build
+        run: pnpm build
+
+      # The registry audit: imports a manifest doesn't declare, dependencies with
+      # no version range, registry dependencies no item provides, type tokens
+      # paired with a leading-*/weight override, and any --chart-legacy-* token
+      # reaching a shipped primitive.
+      - name: Registry audit
+        run: pnpm registry:check
+
+      # Generated files are committed, so regenerating them must produce no diff.
+      # A diff means someone hand-edited an output or forgot to regenerate after
+      # changing its source — both of which used to reach main unnoticed.
+      - name: Generated files are up to date
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "::error::Generated files are out of date. Run 'pnpm build' and commit the result."
+            git status --short
+            git diff -- . ':!*.lock' | head -200
+            exit 1
+          fi
+          echo "No diff — generated files match their sources."
+
+      - name: Install Chromium for the browser gate
+        run: pnpm exec playwright install chromium --with-deps
+
+      # `pnpm build` only proves the export prerenders; the page shells are empty
+      # and every section renders client-side, so the site can build fine and
+      # render nothing. This loads real routes in a real browser, both themes.
+      - name: Verify the built site renders
+        run: pnpm verify:docs
+
+      - name: Upload build output on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: out
+          path: out/
+          retention-days: 5
