@@ -107,7 +107,7 @@ Edit the **sources**, then run `pnpm registry:build` (or `pnpm docs:gen`). `preb
 | `public/r/*.json` | `shadcn build` | the registry chunks |
 | `src/docs/generated/{api,api-highlight,routes}.ts` | `docs:api` / `docs:routes` | `sections.tsx`, `ui/*`, `docs/api.ts` |
 | `public/docs-source/*` (git-**ignored**) | `docs:source` | `components/demo/*`, `components/shadcn-studio/*` |
-| `src/docs/generated/changelog.ts`, `CHANGELOG.md`, `public/changelog.md` | `docs:changelog` | git history + `src/docs/changelog-notes.json` |
+| `src/docs/generated/changelog.ts`, `CHANGELOG.md`, `public/changelog.md` — **git-ignored** | `docs:changelog` | git history + `src/docs/changelog-notes.json` |
 
 Note: `src/docs/api.ts`, `src/docs/curated.ts`, and `src/docs/changelog-notes.json` are **hand-written** sources — distinct from the generated `src/docs/generated/*`.
 
@@ -131,7 +131,8 @@ Releases are cut at **git tags** (`git tag v1.2.0` — the tagged commit is the 
 Two things to keep intact:
 
 - The Pages workflow checks out with **`fetch-depth: 0`**. A shallow checkout sees one commit; the generator detects that (and a non-git tree) and keeps the committed changelog rather than truncating it, but the deploy would then go stale.
-- `CHANGELOG.md` and `public/changelog.md` are **generated mirrors** — served at [design.edgecom.ai/changelog.md](https://design.edgecom.ai/changelog.md) and linked from `llms.txt` so consuming agents can diff against what they remember. Edit `changelog-notes.json`, never the markdown.
+- `CHANGELOG.md`, `public/changelog.md` and `src/docs/generated/changelog.ts` are **git-ignored build outputs**, not committed files. They embed commit SHAs and this repo rebase-merges, so any committed copy starts linking to commits that no longer exist the moment its own PR lands. They are rebuilt by `predev` / `prebuild`, so a local `pnpm dev` or `pnpm build` materialises them; a fresh clone has no changelog until you run one. `design.edgecom.ai/changelog.md` is still served and still linked from `llms.txt` — it is built at deploy time. Edit `changelog-notes.json`, never the markdown.
+- **`fetch-depth: 0` in the Pages workflow is now load-bearing.** The generator refuses to truncate on a shallow or non-git tree and falls back to the committed changelog — but nothing is committed any more, so on a shallow checkout it writes an *empty* changelog instead. Keep the full-history fetch.
 
 ## shadcn-studio components (`src/components/shadcn-studio/**`)
 
@@ -157,7 +158,7 @@ There is **no test framework** in this repo. The quality gates are:
 ## Do-nots (maintainer)
 
 - Don't hand-edit generated files (see the table above) — edit the source and regenerate.
-- Don't hand-edit `CHANGELOG.md` / `public/changelog.md`, and don't drop `fetch-depth: 0` from the Pages workflow — both break the self-maintaining changelog.
+- Don't commit `CHANGELOG.md` / `public/changelog.md` / `src/docs/generated/changelog.ts` (they are git-ignored outputs), don't hand-edit them, and don't drop `fetch-depth: 0` from the Pages workflow — each one breaks the self-maintaining changelog.
 - Don't `--overwrite` our custom `src/components/ui` primitives when pulling shadcn-studio components, and don't reformat vendored studio files.
 - Don't add icon libraries other than lucide-react.
 - Don't edit a token in only one of `:root` / `.dark` — set both (or confirm the light value is meant to inherit).
