@@ -5,70 +5,41 @@
 Every change to the Edgecom design system, derived from git history. Also published at
 [design.edgecom.ai/changelog](https://design.edgecom.ai/getting-started/changelog).
 
-## September 14, 2026
+## v1.0.0 — 2026-09-14
+
+### Breaking
+
+- **theme:** Mark the line palette legacy — migration only, no Tailwind utilities, audited out of primitives ([`9d92098`](https://github.com/edgecom-ai/design-system/commit/9d92098))
 
 ### Added
 
-- **theme:** Add the demand-chart palette — the legacy demand-plot hues as role tokens, tuned to 3:1 on card in both themes ([`11d3fce`](https://github.com/edgecom-ai/design-system/commit/11d3fce))
+- **theme:** Add the demand-chart palette — the legacy demand-plot hues as role tokens, tuned to 3:1 on card in both themes ([`79c494b`](https://github.com/edgecom-ai/design-system/commit/79c494b))
 - **skeleton:** Make the loading pulse legible and add shimmer and static animation variants ([`1f61723`](https://github.com/edgecom-ai/design-system/commit/1f61723))
+- **tabs:** Add a new variant ([`48e6719`](https://github.com/edgecom-ai/design-system/commit/48e6719))
+- **dropdown-menu:** Shrink-wrap to widest item; add menu-width + chart-export guidelines ([`2787b19`](https://github.com/edgecom-ai/design-system/commit/2787b19))
+- **theme:** Move emissions from violet to crimson red, add chart-misc from the former violet ([`31a32e7`](https://github.com/edgecom-ai/design-system/commit/31a32e7))
+- **date-picker:** Rolling-window variant with hover preview ([`26b11b0`](https://github.com/edgecom-ai/design-system/commit/26b11b0))
+- **date-picker:** Compact icon-trigger variant ([`e61fe64`](https://github.com/edgecom-ai/design-system/commit/e61fe64))
+- **phone-input:** Smart caret on by default, plus an optional extension field ([`60b1076`](https://github.com/edgecom-ai/design-system/commit/60b1076))
+- **multi-select-listbox:** Static trigger label by default ([`4b57c0f`](https://github.com/edgecom-ai/design-system/commit/4b57c0f))
+- **docs:** Self-maintaining changelog page generated from git history ([`edf2c8f`](https://github.com/edgecom-ai/design-system/commit/edf2c8f))
+- **multi-select-listbox:** Count-summary checkbox listbox multi-select ([`7d40f6f`](https://github.com/edgecom-ai/design-system/commit/7d40f6f))
+- **theme:** Add the body-sm compact step to the type scale ([`b70b38c`](https://github.com/edgecom-ai/design-system/commit/b70b38c))
+- **date-picker:** Month-to-month range picker ([`706e5e0`](https://github.com/edgecom-ai/design-system/commit/706e5e0))
+- **tabs, pagination, sidebar:** Ship the parts consumers were forking ([`a143170`](https://github.com/edgecom-ai/design-system/commit/a143170))
+- **sidebar:** Off-rail submenu flyout when collapsed ([`8091fcb`](https://github.com/edgecom-ai/design-system/commit/8091fcb))
+- **ui:** Table compact density mode ([`e6abbe3`](https://github.com/edgecom-ai/design-system/commit/e6abbe3))
+- **ui:** Rich-color toast variants (success/warning/error) ([`942b565`](https://github.com/edgecom-ai/design-system/commit/942b565))
+- **demo:** Add multiselect variant to Select ([`6b0f89a`](https://github.com/edgecom-ai/design-system/commit/6b0f89a))
+- **demo:** Update application shell ([`d23d08b`](https://github.com/edgecom-ai/design-system/commit/d23d08b))
+- Add github pages settings ([`6f88308`](https://github.com/edgecom-ai/design-system/commit/6f88308))
+- Refactor to public, split registry json ([`ddc5b50`](https://github.com/edgecom-ai/design-system/commit/ddc5b50))
+- Use pnpm, add env example ([`8c1fe79`](https://github.com/edgecom-ai/design-system/commit/8c1fe79))
 
 ### Fixed
 
 - **skeleton:** Let the shimmer band sweep the full block and loop seamlessly ([`77ed362`](https://github.com/edgecom-ai/design-system/commit/77ed362))
-
-### Changed
-
-- **theme:** Name the line palette by colour, not by what a series means ([`88d4a46`](https://github.com/edgecom-ai/design-system/commit/88d4a46))
-
-## September 10, 2026
-
-### Added
-
-- **tabs:** Add a new variant ([`48e6719`](https://github.com/edgecom-ai/design-system/commit/48e6719))
-
-## August 31, 2026
-
-### Added
-
-- **dropdown-menu:** Shrink-wrap to widest item; add menu-width + chart-export guidelines ([`2787b19`](https://github.com/edgecom-ai/design-system/commit/2787b19))
-
-### Fixed
-
 - **tabs:** Color the active-tab underline brand blue instead of near-black ([`31b1c0d`](https://github.com/edgecom-ai/design-system/commit/31b1c0d))
-
-### Documentation
-
-- **dropdown-menu:** Document that menus portal to the app root and never clip ([`22a0968`](https://github.com/edgecom-ai/design-system/commit/22a0968))
-- **charts:** Default header date-picker/export to icon buttons; center legends ([`d14ab98`](https://github.com/edgecom-ai/design-system/commit/d14ab98))
-- **demos:** Complete the demo-copy sanitization and unify the region model ([`895b668`](https://github.com/edgecom-ai/design-system/commit/895b668))
-
-### Internal
-
-- **docs:** Regenerate the changelog artifacts ([`3dac69e`](https://github.com/edgecom-ai/design-system/commit/3dac69e))
-- **docs:** Regenerate the changelog artifacts ([`8665079`](https://github.com/edgecom-ai/design-system/commit/8665079))
-- **docs:** Regenerate the changelog artifacts ([`7520189`](https://github.com/edgecom-ai/design-system/commit/7520189))
-
-## August 28, 2026
-
-### Documentation
-
-- **demos:** Use fictional utilities, sites, and contacts in demo copy ([`c22a08b`](https://github.com/edgecom-ai/design-system/commit/c22a08b))
-
-## August 31, 2026
-
-### Documentation
-
-- **colors:** Add usage guidance + reasoning to the Semantic colors page ([`74042d1`](https://github.com/edgecom-ai/design-system/commit/74042d1))
-
-## August 28, 2026
-
-### Added
-
-- **theme:** Move emissions from violet to crimson red, add chart-misc from the former violet ([`31a32e7`](https://github.com/edgecom-ai/design-system/commit/31a32e7))
-- **date-picker:** Rolling-window variant with hover preview ([`26b11b0`](https://github.com/edgecom-ai/design-system/commit/26b11b0))
-
-### Fixed
-
 - **tabs:** Let an overflowing tab strip scroll itself ([`a6c763a`](https://github.com/edgecom-ai/design-system/commit/a6c763a))
 - **docs:** Model the empty state in the destructive row-action demo ([`334b04e`](https://github.com/edgecom-ai/design-system/commit/334b04e))
 - **native-select:** Let a consumer's classes reach the select ([`5f8c202`](https://github.com/edgecom-ai/design-system/commit/5f8c202))
@@ -80,28 +51,6 @@ Every change to the Edgecom design system, derived from git history. Also publis
 - **registry:** Ship every dependency at the version it was built against ([`bb6756b`](https://github.com/edgecom-ai/design-system/commit/bb6756b))
 - **sortable:** Declare the react-dom it imports for its drag overlay ([`2a11c72`](https://github.com/edgecom-ai/design-system/commit/2a11c72))
 - **resizable:** Migrate to the react-resizable-panels v4 API ([`65c0e17`](https://github.com/edgecom-ai/design-system/commit/65c0e17))
-
-### Internal
-
-- **docs:** Regenerate the changelog artifacts ([`387f291`](https://github.com/edgecom-ai/design-system/commit/387f291))
-
-## August 27, 2026
-
-The semantic type scale becomes real: tokens carry their own size, line-height, and weight, cn() stops dropping them, and every primitive in the registry now uses them.
-
-### Added
-
-- **date-picker:** Compact icon-trigger variant ([`e61fe64`](https://github.com/edgecom-ai/design-system/commit/e61fe64))
-- **phone-input:** Smart caret on by default, plus an optional extension field ([`60b1076`](https://github.com/edgecom-ai/design-system/commit/60b1076))
-- **multi-select-listbox:** Static trigger label by default ([`4b57c0f`](https://github.com/edgecom-ai/design-system/commit/4b57c0f))
-- **docs:** Self-maintaining changelog page generated from git history ([`edf2c8f`](https://github.com/edgecom-ai/design-system/commit/edf2c8f))
-- **multi-select-listbox:** Count-summary checkbox listbox multi-select ([`7d40f6f`](https://github.com/edgecom-ai/design-system/commit/7d40f6f))
-- **theme:** Add the body-sm compact step to the type scale ([`b70b38c`](https://github.com/edgecom-ai/design-system/commit/b70b38c))
-- **date-picker:** Month-to-month range picker ([`706e5e0`](https://github.com/edgecom-ai/design-system/commit/706e5e0))
-- **tabs, pagination, sidebar:** Ship the parts consumers were forking ([`a143170`](https://github.com/edgecom-ai/design-system/commit/a143170))
-
-### Fixed
-
 - **scroll-area:** Drop the unused React import that breaks noUnusedLocals builds ([`bca9735`](https://github.com/edgecom-ai/design-system/commit/bca9735))
 - **registry:** Derive every item's dependencies from all of its imports ([`920ffe1`](https://github.com/edgecom-ai/design-system/commit/920ffe1))
 - **multi-select-listbox:** Visible selection, search field, placeholder ([`2529056`](https://github.com/edgecom-ai/design-system/commit/2529056))
@@ -111,172 +60,59 @@ The semantic type scale becomes real: tokens carry their own size, line-height, 
 - **popover, tooltip:** Put the z-index on the Positioner, publish the layer order ([`0dc2035`](https://github.com/edgecom-ai/design-system/commit/0dc2035))
 - **sheet, sidebar, table:** Stop defaults winning on specificity ([`742910f`](https://github.com/edgecom-ai/design-system/commit/742910f))
 - **a11y:** Key disabled styling off data-disabled, add checkbox indeterminate mark ([`27e59b7`](https://github.com/edgecom-ai/design-system/commit/27e59b7))
-
-### Changed
-
-- **ui:** Adopt the semantic type tokens across the registry ([`1cb3248`](https://github.com/edgecom-ai/design-system/commit/1cb3248))
-
-### Documentation
-
-- **design:** Bar default slot ratio ~65% -> ~75% ([`61c38e6`](https://github.com/edgecom-ai/design-system/commit/61c38e6))
-- **design:** Bar-chart top-corner radius + uniform styling ([`f1a35d4`](https://github.com/edgecom-ai/design-system/commit/f1a35d4))
-- **design:** Chart, select, dialog, bar-density, consistency & tooltip guardrails ([`5d8a86e`](https://github.com/edgecom-ai/design-system/commit/5d8a86e))
-
-## August 21, 2026
-
-### Added
-
-- **sidebar:** Off-rail submenu flyout when collapsed ([`8091fcb`](https://github.com/edgecom-ai/design-system/commit/8091fcb))
-
-## August 17, 2026
-
-### Documentation
-
-- Split AGENTS.md into audience-specific guides + llms.txt ([`d0a893b`](https://github.com/edgecom-ai/design-system/commit/d0a893b))
-
-### Internal
-
-- **docs:** Generate design.md tokens + llms.txt catalog from source ([`dee9c49`](https://github.com/edgecom-ai/design-system/commit/dee9c49))
-
-## August 13, 2026
-
-### Documentation
-
-- **blocks:** Swap statistic cards — usage meters & KPI-period tiles ([`a3902db`](https://github.com/edgecom-ai/design-system/commit/a3902db))
-
-## August 10, 2026
-
-### Documentation
-
-- **agents:** Dialogs & sheets keep their close (X) ([`90e58bd`](https://github.com/edgecom-ai/design-system/commit/90e58bd))
-
-## August 7, 2026
-
-### Documentation
-
-- **agents:** Destructive actions require double confirmation ([`222dddb`](https://github.com/edgecom-ai/design-system/commit/222dddb))
-
-## August 4, 2026
-
-### Documentation
-
-- **agents:** Tooltip width fits content ([`429e68a`](https://github.com/edgecom-ai/design-system/commit/429e68a))
-- **agents:** Secondary actions use icon buttons ([`202083d`](https://github.com/edgecom-ai/design-system/commit/202083d))
-
-## July 31, 2026
-
-### Fixed
-
 - **theme:** Overlay elevation, scrim token, dark destructive-subtle ([`0c6f9a5`](https://github.com/edgecom-ai/design-system/commit/0c6f9a5))
-
-### Documentation
-
-- **agents:** Dark-mode overlay, toast & status-contrast guardrails ([`c0fb091`](https://github.com/edgecom-ai/design-system/commit/c0fb091))
-
-## July 30, 2026
-
-### Added
-
-- **ui:** Table compact density mode ([`e6abbe3`](https://github.com/edgecom-ai/design-system/commit/e6abbe3))
-
-### Fixed
-
 - **theme:** Lighten dark-mode active/hover highlight to a light blue ([`c01ad25`](https://github.com/edgecom-ai/design-system/commit/c01ad25))
-
-### Documentation
-
-- **agents:** Active-state highlight guardrails ([`1004c7b`](https://github.com/edgecom-ai/design-system/commit/1004c7b))
-- **agents:** Table edge-alignment guardrail ([`f6822da`](https://github.com/edgecom-ai/design-system/commit/f6822da))
-
-## July 24, 2026
-
-### Fixed
-
 - **ui:** Restore cursor:pointer on buttons (Tailwind v4) ([`3d8874c`](https://github.com/edgecom-ai/design-system/commit/3d8874c))
 - **ui:** Drop single-select checkmark; add gap between menu items ([`b1c6e2f`](https://github.com/edgecom-ai/design-system/commit/b1c6e2f))
-
-### Changed
-
-- Serve the docs from the design.edgecom.ai root — the /design-system base path is gone ([`3b2633a`](https://github.com/edgecom-ai/design-system/commit/3b2633a))
-
-### Documentation
-
-- **agents:** More UI guardrails (cursor, table overflow, sheet width, sizing) ([`0543c43`](https://github.com/edgecom-ai/design-system/commit/0543c43))
-- Sidebar submenu variant; select defaults to single value ([`7191f51`](https://github.com/edgecom-ai/design-system/commit/7191f51))
-
-## July 20, 2026
-
-### Added
-
-- **ui:** Rich-color toast variants (success/warning/error) ([`942b565`](https://github.com/edgecom-ai/design-system/commit/942b565))
-
-### Documentation
-
-- **agents:** More UI guardrails (deps, semantic toasts, status colors, primary-blue, table density) ([`f1e4be7`](https://github.com/edgecom-ai/design-system/commit/f1e4be7))
-
-## July 17, 2026
-
-### Fixed
-
 - **ui:** Add gap between sidebar menu items ([`ca3deea`](https://github.com/edgecom-ai/design-system/commit/ca3deea))
-
-### Changed
-
-- **deploy:** Serve docs from GitHub Pages /design-system ([`0e0a437`](https://github.com/edgecom-ai/design-system/commit/0e0a437))
-
-### Documentation
-
-- **agents:** Expand UI guardrails and revert docs URL ([`cadd712`](https://github.com/edgecom-ai/design-system/commit/cadd712))
-
-## July 15, 2026
-
-### Fixed
-
 - **ui:** Match Base UI orientation with data-[orientation=…] ([`e563134`](https://github.com/edgecom-ai/design-system/commit/e563134))
 - **demo:** Make app-shell full-screen toggle demo-only ([`beebf71`](https://github.com/edgecom-ai/design-system/commit/beebf71))
 - **demo:** Use styled Select for single & placeholder variants ([`10c30c5`](https://github.com/edgecom-ai/design-system/commit/10c30c5))
-
-### Documentation
-
-- Add pages for sidebar, command, timeline, table, pagination, category-bar ([`2d0a443`](https://github.com/edgecom-ai/design-system/commit/2d0a443))
-- Add interaction & feedback UI guardrails to AGENTS.md ([`94ed41e`](https://github.com/edgecom-ai/design-system/commit/94ed41e))
-
-## July 14, 2026
-
-### Added
-
-- **demo:** Add multiselect variant to Select ([`6b0f89a`](https://github.com/edgecom-ai/design-system/commit/6b0f89a))
-- **demo:** Update application shell ([`d23d08b`](https://github.com/edgecom-ai/design-system/commit/d23d08b))
-
-### Fixed
-
 - **deploy:** Serve docs at design.edgecom.ai root ([`4ac7abb`](https://github.com/edgecom-ai/design-system/commit/4ac7abb))
+- **docs:** Persist sidebar across navigation; independent scroll panes ([`8e3d6d1`](https://github.com/edgecom-ai/design-system/commit/8e3d6d1))
 
 ### Changed
 
+- **theme:** Name the line palette by colour, not by what a series means ([`8b59b71`](https://github.com/edgecom-ai/design-system/commit/8b59b71))
+- **ui:** Adopt the semantic type tokens across the registry ([`1cb3248`](https://github.com/edgecom-ai/design-system/commit/1cb3248))
+- Serve the docs from the design.edgecom.ai root — the /design-system base path is gone ([`3b2633a`](https://github.com/edgecom-ai/design-system/commit/3b2633a))
+- **deploy:** Serve docs from GitHub Pages /design-system ([`0e0a437`](https://github.com/edgecom-ai/design-system/commit/0e0a437))
 - Replace the Create Next App boilerplate in the README ([`bc54269`](https://github.com/edgecom-ai/design-system/commit/bc54269))
 
 ### Documentation
 
+- **dropdown-menu:** Document that menus portal to the app root and never clip ([`22a0968`](https://github.com/edgecom-ai/design-system/commit/22a0968))
+- **charts:** Default header date-picker/export to icon buttons; center legends ([`d14ab98`](https://github.com/edgecom-ai/design-system/commit/d14ab98))
+- **demos:** Complete the demo-copy sanitization and unify the region model ([`895b668`](https://github.com/edgecom-ai/design-system/commit/895b668))
+- **demos:** Use fictional utilities, sites, and contacts in demo copy ([`c22a08b`](https://github.com/edgecom-ai/design-system/commit/c22a08b))
+- **colors:** Add usage guidance + reasoning to the Semantic colors page ([`74042d1`](https://github.com/edgecom-ai/design-system/commit/74042d1))
+- **design:** Bar default slot ratio ~65% -> ~75% ([`61c38e6`](https://github.com/edgecom-ai/design-system/commit/61c38e6))
+- **design:** Bar-chart top-corner radius + uniform styling ([`f1a35d4`](https://github.com/edgecom-ai/design-system/commit/f1a35d4))
+- **design:** Chart, select, dialog, bar-density, consistency & tooltip guardrails ([`5d8a86e`](https://github.com/edgecom-ai/design-system/commit/5d8a86e))
+- Split AGENTS.md into audience-specific guides + llms.txt ([`d0a893b`](https://github.com/edgecom-ai/design-system/commit/d0a893b))
+- **blocks:** Swap statistic cards — usage meters & KPI-period tiles ([`a3902db`](https://github.com/edgecom-ai/design-system/commit/a3902db))
+- **agents:** Dialogs & sheets keep their close (X) ([`90e58bd`](https://github.com/edgecom-ai/design-system/commit/90e58bd))
+- **agents:** Destructive actions require double confirmation ([`222dddb`](https://github.com/edgecom-ai/design-system/commit/222dddb))
+- **agents:** Tooltip width fits content ([`429e68a`](https://github.com/edgecom-ai/design-system/commit/429e68a))
+- **agents:** Secondary actions use icon buttons ([`202083d`](https://github.com/edgecom-ai/design-system/commit/202083d))
+- **agents:** Dark-mode overlay, toast & status-contrast guardrails ([`c0fb091`](https://github.com/edgecom-ai/design-system/commit/c0fb091))
+- **agents:** Active-state highlight guardrails ([`1004c7b`](https://github.com/edgecom-ai/design-system/commit/1004c7b))
+- **agents:** Table edge-alignment guardrail ([`f6822da`](https://github.com/edgecom-ai/design-system/commit/f6822da))
+- **agents:** More UI guardrails (cursor, table overflow, sheet width, sizing) ([`0543c43`](https://github.com/edgecom-ai/design-system/commit/0543c43))
+- Sidebar submenu variant; select defaults to single value ([`7191f51`](https://github.com/edgecom-ai/design-system/commit/7191f51))
+- **agents:** More UI guardrails (deps, semantic toasts, status colors, primary-blue, table density) ([`f1e4be7`](https://github.com/edgecom-ai/design-system/commit/f1e4be7))
+- **agents:** Expand UI guardrails and revert docs URL ([`cadd712`](https://github.com/edgecom-ai/design-system/commit/cadd712))
+- Add pages for sidebar, command, timeline, table, pagination, category-bar ([`2d0a443`](https://github.com/edgecom-ai/design-system/commit/2d0a443))
+- Add interaction & feedback UI guardrails to AGENTS.md ([`94ed41e`](https://github.com/edgecom-ai/design-system/commit/94ed41e))
 - Add UI guardrails to AGENTS.md ([`54b011d`](https://github.com/edgecom-ai/design-system/commit/54b011d))
-
-## July 13, 2026
-
-### Added
-
-- Add github pages settings ([`6f88308`](https://github.com/edgecom-ai/design-system/commit/6f88308))
-- Refactor to public, split registry json ([`ddc5b50`](https://github.com/edgecom-ai/design-system/commit/ddc5b50))
-- Use pnpm, add env example ([`8c1fe79`](https://github.com/edgecom-ai/design-system/commit/8c1fe79))
-
-### Fixed
-
-- **docs:** Persist sidebar across navigation; independent scroll panes ([`8e3d6d1`](https://github.com/edgecom-ai/design-system/commit/8e3d6d1))
-
-### Documentation
-
 - Expand AGENTS.md into a contributor guide ([`b63388b`](https://github.com/edgecom-ai/design-system/commit/b63388b))
 - Product trademark styling + site content fixes ([`7b0665e`](https://github.com/edgecom-ai/design-system/commit/7b0665e))
 
 ### Internal
 
+- **docs:** Regenerate the changelog artifacts ([`3dac69e`](https://github.com/edgecom-ai/design-system/commit/3dac69e))
+- **docs:** Regenerate the changelog artifacts ([`8665079`](https://github.com/edgecom-ai/design-system/commit/8665079))
+- **docs:** Regenerate the changelog artifacts ([`7520189`](https://github.com/edgecom-ai/design-system/commit/7520189))
+- **docs:** Regenerate the changelog artifacts ([`387f291`](https://github.com/edgecom-ai/design-system/commit/387f291))
+- **docs:** Generate design.md tokens + llms.txt catalog from source ([`dee9c49`](https://github.com/edgecom-ai/design-system/commit/dee9c49))
 - Stop tracking and ignore .env.example ([`e599f43`](https://github.com/edgecom-ai/design-system/commit/e599f43))
