@@ -104,6 +104,41 @@ function parseSections() {
 }
 const sections = parseSections()
 
+// --- generated API (parts / props) -------------------------------------------
+// gen-api.mjs writes a plain JSON object literal, so slice it out and parse it
+// rather than importing TypeScript.
+function loadApi() {
+  try {
+    const src = read("src/docs/generated/api.ts")
+    const start = src.indexOf("{", src.indexOf("generatedApi"))
+    return JSON.parse(src.slice(start, src.lastIndexOf("}") + 1))
+  } catch {
+    return {}
+  }
+}
+const api = loadApi()
+
+// --- curated prose -----------------------------------------------------------
+// curated.ts is hand-written TS (unquoted keys, wrapped strings). Only the
+// one-line `summary` per component is pulled out; anything trickier stays in
+// the repo where it is already rendered on the docs site.
+function loadCuratedSummaries() {
+  const out = {}
+  try {
+    const src = read("src/docs/curated.ts")
+    for (const m of src.matchAll(/^  ([\w-]+):\s*\{/gm)) {
+      const key = m[1]
+      const slice = src.slice(m.index, m.index + 1200)
+      const sum = slice.match(/summary:\s*\n?\s*"((?:[^"\\]|\\.)*)"/)
+      if (sum) out[key] = sum[1].replace(/\\"/g, '"')
+    }
+  } catch {
+    /* optional */
+  }
+  return out
+}
+const curated = loadCuratedSummaries()
+
 // --- cva extraction ----------------------------------------------------------
 // Pulls the base class string and each variant group's class strings straight
 // out of the primitive, so a card renders what the component actually renders.
@@ -440,7 +475,57 @@ function writeFoundations() {
 const SAMPLE = {
   button: (cls) => `<button class="${cls}">Save changes</button>`,
   badge: (cls) => `<span class="${cls}">Electricity</span>`,
-  alert: (cls) => `<div class="${cls}" style="max-width:340px"><div>Meter offline since 14:02</div></div>`,
+  alert: (cls) => `<div class="${cls}" style="max-width:360px"><div>Meter offline since 14:02</div></div>`,
+  banner: (cls) => `<div class="${cls}" style="max-width:420px">Interval data import finished</div>`,
+  empty: (cls) => `<div class="${cls}" style="max-width:300px">No meters on this site yet</div>`,
+  skeleton: (cls) => `<div class="${cls}" style="width:200px;height:16px"></div>`,
+  toggle: (cls) => `<button class="${cls}">Step</button>`,
+  item: (cls) => `<div class="${cls}" style="max-width:360px">Bishops Gate substation</div>`,
+}
+
+// The rules the Phase 0 audit found being broken, attached to the component they
+// govern so a designer meets them at the point of use rather than in a long doc.
+const RULES = {
+  dialog: [
+    "Short create actions (1–4 fields). Longer or dense edit forms go to a right `sheet` at 420px.",
+    "**Always keeps its top-right close (X).** Never `showCloseButton={false}` — only `alert-dialog` omits it.",
+  ],
+  sheet: ["Default width 420px, full-width on mobile. Keeps its top-right close (X)."],
+  "alert-dialog": [
+    "The only overlay without a close (X) — a destructive or confirming flow must force an explicit choice.",
+    "Every destructive action passes through one. Name what is affected and that it cannot be undone.",
+  ],
+  select: [
+    "**No checkmark on the selected option** in a single-select — the trigger value plus the option highlight already say it. A check belongs only in multi-select.",
+    "The list matches the trigger width so options line up under the shown value.",
+  ],
+  "dropdown-menu": [
+    "**Shrink-wraps to its widest item.** Never stretch it to the trigger width or pad items to a fixed width.",
+    "Portaled to the app root, so no `overflow` ancestor can clip it. It flips and shifts to stay in the viewport.",
+  ],
+  tabs: [
+    "**Pick the variant by the surface underneath.** Plain `background`/`card` → `default`. A tinted surface or any overlay → `adaptive` or `line`; the `muted` track has no lightness step left there and the strip vanishes.",
+    "Never hand-tint a `TabsList` with a `bg-*` override to fix that — switch the variant.",
+  ],
+  button: [
+    "A quiet destructive row action is `ghost-destructive`. Never hand-compose one from `ghost` plus destructive utilities — `ghost` re-asserts `hover:text-foreground`, so the label goes neutral exactly as the tint turns red.",
+    "Secondary/utility actions (export, refresh, filter) are icon buttons with an `aria-label` and a tooltip.",
+  ],
+  badge: [
+    "Neutral labels → `outline`; it is the default when unsure. Primary `default` is for a single key highlight only.",
+    "Commodity variants tag that commodity and nothing else.",
+  ],
+  table: [
+    "The first and last cell in a row align to the card's content padding (1.5rem), not the 0.75rem cell padding.",
+    "No icons in cells unless asked. Rely on the primitive's built-in row hover.",
+  ],
+  tooltip: [
+    "Shrink-wraps to its content — never a `max-w` or fixed width that forces wrapping.",
+    "Portaled and viewport-aware; never pin a side that lets it run off-screen.",
+  ],
+  field: ["Validation is inline and specific, via `FieldError` + `aria-invalid`. A description and an error that swap in one position take the same type token, or the layout shifts."],
+  empty: ["Pair with a retry action on async failure — never a blank screen or an endless spinner."],
+  skeleton: ["Use for loading, with `spinner` and `empty` for the other two states. Never a raw loading gap."],
 }
 
 function writeComponents() {
@@ -456,10 +541,11 @@ function writeComponents() {
     const cva = extractCva(src)
 
     // spec — always
+    const a = api[s.id] || {}
     const spec = [
       `# ${s.label}`,
       "",
-      s.description,
+      curated[s.id] || s.description,
       "",
       `**Registry item:** \`edgecom-ai/design-system/${s.id}\``,
       `**Install:** \`pnpm dlx shadcn@latest add edgecom-ai/design-system/${s.id}\``,
@@ -476,10 +562,26 @@ function writeComponents() {
       }
       spec.push("")
     }
+    if (a.parts && a.parts.length) {
+      spec.push("## Parts", "", a.parts.map((x) => `- \`${x}\``).join("\n"), "")
+    }
+    if (a.props && a.props.length) {
+      spec.push("## Props", "", "| Part | Prop | Type | Default |", "|---|---|---|---|")
+      for (const pr of a.props) {
+        spec.push(`| \`${pr.part}\` | \`${pr.name}\` | \`${pr.type}\` | ${pr.default ? `\`${pr.default}\`` : "—"} |`)
+      }
+      spec.push("")
+    }
+    if (a.base) {
+      spec.push(`Built on [${a.base.name}](${a.base.url}).`, "")
+    }
+    const hasVariants = cva && Object.keys(cva.groups).length
+    spec.push("## Rules", "")
+    if (RULES[s.id]) spec.push(...RULES[s.id].map((r) => `- ${r}`), "")
     spec.push(
-      "## Rules",
-      "",
-      "Follow https://design.edgecom.ai/design.md. Use the variants above — never override the primitive's own classes, and never hand-roll a parallel version.",
+      hasVariants
+        ? "Follow https://design.edgecom.ai/design.md. Use the variants above — never override the primitive's own classes, and never hand-roll a parallel version."
+        : "Follow https://design.edgecom.ai/design.md. Compose the parts above — never override the primitive's own classes, and never hand-roll a parallel version.",
       "",
     )
     writeFileSync(resolve(outDir, `components/${s.id}.md`), spec.join("\n"))
@@ -487,8 +589,15 @@ function writeComponents() {
 
     // card — only where we can render something truthful
     const sample = SAMPLE[s.id]
-    if (!cva || !sample || !cva.groups.variant) continue
-    const variants = Object.entries(cva.groups.variant)
+    if (!cva || !sample) continue
+    // Most components name the group `variant`; some name it for what it varies
+    // (skeleton: `animation`). Fall back to the first non-size group.
+    const groupName = cva.groups.variant
+      ? "variant"
+      : Object.keys(cva.groups).find((g) => g !== "size" && Object.keys(cva.groups[g]).length)
+    if (!groupName) continue
+    const variants = Object.entries(cva.groups[groupName])
+    if (!variants.length) continue
     const rows = variants
       .map(
         ([nameV, cls]) =>
@@ -497,7 +606,7 @@ function writeComponents() {
       .join("\n")
     let sizeRow = ""
     if (cva.groups.size) {
-      const defV = cva.groups.variant[cva.defaults.variant] || ""
+      const defV = cva.groups[groupName][cva.defaults[groupName]] || ""
       sizeRow =
         `<div class="ds-line ds-sep" style="margin-top:6px"><span class="ds-label">sizes</span><div class="ds-row">` +
         Object.entries(cva.groups.size)
@@ -510,7 +619,7 @@ function writeComponents() {
       card({
         group: "Components",
         name: s.label,
-        subtitle: `${variants.length} variants${cva.groups.size ? ` · ${Object.keys(cva.groups.size).length} sizes` : ""}`,
+        subtitle: `${variants.length} ${groupName}${variants.length === 1 ? "" : "s"}${cva.groups.size ? ` · ${Object.keys(cva.groups.size).length} sizes` : ""}`,
         width: 780,
         height: Math.min(140 + variants.length * 44, 900),
         body: `<div class="ds-col">${rows}${sizeRow}</div>`,
