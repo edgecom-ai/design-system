@@ -48,7 +48,10 @@ for (const t of tokens) byFamily[t.family] = (byFamily[t.family] || 0) + 1
 const doc = {
   $schema: "../../../schemas/tokens.schema.json",
   version: git("describe", "--tags", "--abbrev=0") || "untagged",
-  commit: git("rev-parse", "HEAD"),
+  // Deliberately no commit SHA. This artifact is derived from globals.css, so
+  // its identity is the content digest — which changes when the tokens change.
+  // A commit SHA changes on every commit, which would make a committed copy
+  // impossible to keep parity-clean; the changelog already taught us that.
   digest: createHash("sha256").update(css).digest("hex").slice(0, 16),
   source: "src/app/globals.css",
   generator: "scripts/gen-tokens.mjs",
