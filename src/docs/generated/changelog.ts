@@ -66,14 +66,28 @@ export const commitUrl = (sha: string) => `https://github.com/edgecom-ai/design-
 
 export const changelog: ChangelogRelease[] = [
   {
-    "id": "release-2026-09-14",
-    "version": null,
+    "id": "release-v1.0.0",
+    "version": "v1.0.0",
     "date": "2026-09-14",
-    "title": "September 14, 2026",
+    "title": "v1.0.0",
     "summary": null,
     "entries": [
       {
-        "sha": "88d4a46",
+        "sha": "9d92098",
+        "date": "2026-09-14",
+        "type": "feat",
+        "group": "breaking",
+        "scopes": [
+          "theme"
+        ],
+        "summary": "Mark the line palette legacy — migration only, no Tailwind utilities, audited out of primitives",
+        "items": [
+          "theme"
+        ],
+        "breaking": true
+      },
+      {
+        "sha": "8b59b71",
         "date": "2026-09-14",
         "type": "refactor",
         "group": "changed",
@@ -87,7 +101,7 @@ export const changelog: ChangelogRelease[] = [
         "breaking": false
       },
       {
-        "sha": "11d3fce",
+        "sha": "79c494b",
         "date": "2026-09-14",
         "type": "feat",
         "group": "added",
@@ -128,16 +142,7 @@ export const changelog: ChangelogRelease[] = [
           "theme"
         ],
         "breaking": false
-      }
-    ]
-  },
-  {
-    "id": "release-2026-09-10",
-    "version": null,
-    "date": "2026-09-10",
-    "title": "September 10, 2026",
-    "summary": null,
-    "entries": [
+      },
       {
         "sha": "48e6719",
         "date": "2026-09-10",
@@ -152,16 +157,7 @@ export const changelog: ChangelogRelease[] = [
           "theme"
         ],
         "breaking": false
-      }
-    ]
-  },
-  {
-    "id": "release-2026-08-31",
-    "version": null,
-    "date": "2026-08-31",
-    "title": "August 31, 2026",
-    "summary": null,
-    "entries": [
+      },
       {
         "sha": "22a0968",
         "date": "2026-08-31",
@@ -261,16 +257,7 @@ export const changelog: ChangelogRelease[] = [
         "summary": "Regenerate the changelog artifacts",
         "items": [],
         "breaking": false
-      }
-    ]
-  },
-  {
-    "id": "release-2026-08-28",
-    "version": null,
-    "date": "2026-08-28",
-    "title": "August 28, 2026",
-    "summary": null,
-    "entries": [
+      },
       {
         "sha": "c22a08b",
         "date": "2026-08-28",
@@ -282,16 +269,7 @@ export const changelog: ChangelogRelease[] = [
         "summary": "Use fictional utilities, sites, and contacts in demo copy",
         "items": [],
         "breaking": false
-      }
-    ]
-  },
-  {
-    "id": "release-2026-08-31",
-    "version": null,
-    "date": "2026-08-31",
-    "title": "August 31, 2026",
-    "summary": null,
-    "entries": [
+      },
       {
         "sha": "74042d1",
         "date": "2026-08-31",
@@ -303,16 +281,7 @@ export const changelog: ChangelogRelease[] = [
         "summary": "Add usage guidance + reasoning to the Semantic colors page",
         "items": [],
         "breaking": false
-      }
-    ]
-  },
-  {
-    "id": "release-2026-08-28",
-    "version": null,
-    "date": "2026-08-28",
-    "title": "August 28, 2026",
-    "summary": null,
-    "entries": [
+      },
       {
         "sha": "31a32e7",
         "date": "2026-08-28",
@@ -510,16 +479,7 @@ export const changelog: ChangelogRelease[] = [
           "date-picker"
         ],
         "breaking": false
-      }
-    ]
-  },
-  {
-    "id": "release-2026-08-27",
-    "version": null,
-    "date": "2026-08-27",
-    "title": "August 27, 2026",
-    "summary": "The semantic type scale becomes real: tokens carry their own size, line-height, and weight, cn() stops dropping them, and every primitive in the registry now uses them.",
-    "entries": [
+      },
       {
         "sha": "e61fe64",
         "date": "2026-08-27",
@@ -868,16 +828,7 @@ export const changelog: ChangelogRelease[] = [
           "switch"
         ],
         "breaking": false
-      }
-    ]
-  },
-  {
-    "id": "release-2026-08-21",
-    "version": null,
-    "date": "2026-08-21",
-    "title": "August 21, 2026",
-    "summary": null,
-    "entries": [
+      },
       {
         "sha": "8091fcb",
         "date": "2026-08-21",
@@ -891,16 +842,7 @@ export const changelog: ChangelogRelease[] = [
           "sidebar"
         ],
         "breaking": false
-      }
-    ]
-  },
-  {
-    "id": "release-2026-08-17",
-    "version": null,
-    "date": "2026-08-17",
-    "title": "August 17, 2026",
-    "summary": null,
-    "entries": [
+      },
       {
         "sha": "dee9c49",
         "date": "2026-08-17",
@@ -922,16 +864,7 @@ export const changelog: ChangelogRelease[] = [
         "summary": "Split AGENTS.md into audience-specific guides + llms.txt",
         "items": [],
         "breaking": false
-      }
-    ]
-  },
-  {
-    "id": "release-2026-08-13",
-    "version": null,
-    "date": "2026-08-13",
-    "title": "August 13, 2026",
-    "summary": null,
-    "entries": [
+      },
       {
         "sha": "a3902db",
         "date": "2026-08-13",
@@ -943,16 +876,7 @@ export const changelog: ChangelogRelease[] = [
         "summary": "Swap statistic cards — usage meters & KPI-period tiles",
         "items": [],
         "breaking": false
-      }
-    ]
-  },
-  {
-    "id": "release-2026-08-10",
-    "version": null,
-    "date": "2026-08-10",
-    "title": "August 10, 2026",
-    "summary": null,
-    "entries": [
+      },
       {
         "sha": "90e58bd",
         "date": "2026-08-10",
@@ -964,16 +888,7 @@ export const changelog: ChangelogRelease[] = [
         "summary": "Dialogs & sheets keep their close (X)",
         "items": [],
         "breaking": false
-      }
-    ]
-  },
-  {
-    "id": "release-2026-08-07",
-    "version": null,
-    "date": "2026-08-07",
-    "title": "August 7, 2026",
-    "summary": null,
-    "entries": [
+      },
       {
         "sha": "222dddb",
         "date": "2026-08-07",
@@ -985,16 +900,7 @@ export const changelog: ChangelogRelease[] = [
         "summary": "Destructive actions require double confirmation",
         "items": [],
         "breaking": false
-      }
-    ]
-  },
-  {
-    "id": "release-2026-08-04",
-    "version": null,
-    "date": "2026-08-04",
-    "title": "August 4, 2026",
-    "summary": null,
-    "entries": [
+      },
       {
         "sha": "429e68a",
         "date": "2026-08-04",
@@ -1018,16 +924,7 @@ export const changelog: ChangelogRelease[] = [
         "summary": "Secondary actions use icon buttons",
         "items": [],
         "breaking": false
-      }
-    ]
-  },
-  {
-    "id": "release-2026-07-31",
-    "version": null,
-    "date": "2026-07-31",
-    "title": "July 31, 2026",
-    "summary": null,
-    "entries": [
+      },
       {
         "sha": "c0fb091",
         "date": "2026-07-31",
@@ -1057,16 +954,7 @@ export const changelog: ChangelogRelease[] = [
           "theme"
         ],
         "breaking": false
-      }
-    ]
-  },
-  {
-    "id": "release-2026-07-30",
-    "version": null,
-    "date": "2026-07-30",
-    "title": "July 30, 2026",
-    "summary": null,
-    "entries": [
+      },
       {
         "sha": "1004c7b",
         "date": "2026-07-30",
@@ -1118,16 +1006,7 @@ export const changelog: ChangelogRelease[] = [
           "table"
         ],
         "breaking": false
-      }
-    ]
-  },
-  {
-    "id": "release-2026-07-24",
-    "version": null,
-    "date": "2026-07-24",
-    "title": "July 24, 2026",
-    "summary": null,
-    "entries": [
+      },
       {
         "sha": "3b2633a",
         "date": "2026-07-24",
@@ -1190,16 +1069,7 @@ export const changelog: ChangelogRelease[] = [
           "select"
         ],
         "breaking": false
-      }
-    ]
-  },
-  {
-    "id": "release-2026-07-20",
-    "version": null,
-    "date": "2026-07-20",
-    "title": "July 20, 2026",
-    "summary": null,
-    "entries": [
+      },
       {
         "sha": "f1e4be7",
         "date": "2026-07-20",
@@ -1225,16 +1095,7 @@ export const changelog: ChangelogRelease[] = [
           "sonner"
         ],
         "breaking": false
-      }
-    ]
-  },
-  {
-    "id": "release-2026-07-17",
-    "version": null,
-    "date": "2026-07-17",
-    "title": "July 17, 2026",
-    "summary": null,
-    "entries": [
+      },
       {
         "sha": "cadd712",
         "date": "2026-07-17",
@@ -1272,16 +1133,7 @@ export const changelog: ChangelogRelease[] = [
           "sidebar"
         ],
         "breaking": false
-      }
-    ]
-  },
-  {
-    "id": "release-2026-07-15",
-    "version": null,
-    "date": "2026-07-15",
-    "title": "July 15, 2026",
-    "summary": null,
-    "entries": [
+      },
       {
         "sha": "2d0a443",
         "date": "2026-07-15",
@@ -1343,16 +1195,7 @@ export const changelog: ChangelogRelease[] = [
         "summary": "Use styled Select for single & placeholder variants",
         "items": [],
         "breaking": false
-      }
-    ]
-  },
-  {
-    "id": "release-2026-07-14",
-    "version": null,
-    "date": "2026-07-14",
-    "title": "July 14, 2026",
-    "summary": null,
-    "entries": [
+      },
       {
         "sha": "bc54269",
         "date": "2026-07-14",
@@ -1408,16 +1251,7 @@ export const changelog: ChangelogRelease[] = [
         "summary": "Add UI guardrails to AGENTS.md",
         "items": [],
         "breaking": false
-      }
-    ]
-  },
-  {
-    "id": "release-2026-07-13",
-    "version": null,
-    "date": "2026-07-13",
-    "title": "July 13, 2026",
-    "summary": null,
-    "entries": [
+      },
       {
         "sha": "b63388b",
         "date": "2026-07-13",
