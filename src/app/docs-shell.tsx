@@ -8,6 +8,7 @@ import { Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/ui/logo";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { ComponentPreview, InstallCommand } from "@/components/docs/component-preview";
 import { Toc } from "@/components/docs/toc";
 import { ApiReference } from "@/components/docs/api-reference";
@@ -48,6 +49,22 @@ import {
  * navigation uses real routes, so browser back/forward, refresh, and shareable
  * links all work and there's no content flash on deep links.
  */
+/** Shown while a section's lazily-imported demos are fetched. */
+function SectionFallback() {
+  return (
+    <div className="mx-auto w-full max-w-6xl p-8">
+      <div className="flex flex-col gap-10">
+        {[0, 1, 2].map((i) => (
+          <div key={i} className="flex flex-col gap-3">
+            <Skeleton className="h-5 w-40" />
+            <Skeleton className="h-48 w-full rounded-xl" />
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export function DocsShell({ group, slug }: { group: string; slug: string }) {
   const router = useRouter();
   const [theme, setTheme] = React.useState<"light" | "dark">("light");
@@ -175,6 +192,11 @@ export function DocsShell({ group, slug }: { group: string; slug: string }) {
         </header>
 
         <div ref={contentRef} className="min-h-0 flex-1 overflow-y-auto bg-background text-foreground">
+          {/* Section content is lazily imported (see sections.tsx), so every demo
+              chunk loads on demand rather than shipping with the shell. Keyed on
+              the section id so switching sections shows the fallback rather than
+              holding the previous section's content while the next one loads. */}
+          <React.Suspense key={active.id} fallback={<SectionFallback />}>
           {active.variants ? (
             <div className="mx-auto flex w-full max-w-6xl gap-8 p-8">
               <div className="flex min-w-0 flex-1 flex-col gap-10">
@@ -210,6 +232,7 @@ export function DocsShell({ group, slug }: { group: string; slug: string }) {
           ) : (
             <div className="mx-auto w-full max-w-6xl p-8">{active.node}</div>
           )}
+          </React.Suspense>
         </div>
       </SidebarInset>
 
