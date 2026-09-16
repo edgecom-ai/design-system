@@ -15,8 +15,8 @@
 //   pnpm verify:docs              # builds nothing; expects out/ to exist
 //   node scripts/verify-docs.mjs --base http://localhost:3000   # against dev
 //
-// Uses system Chrome (channel: "chrome") rather than a downloaded browser, so
-// it needs no `playwright install`.
+// Prefers system Chrome (channel: "chrome") so it needs no `playwright install`,
+// and falls back to Playwright's bundled chromium where there is none (CI).
 
 import { createServer } from "node:http"
 import { readFile, stat } from "node:fs/promises"
@@ -114,7 +114,15 @@ async function run(browser, base, dark) {
 
 const { server, base } = baseArg ? { server: null, base: baseArg } : await serveOut()
 const { chromium } = await import("playwright")
-const browser = await chromium.launch({ channel: "chrome", headless: true })
+// Prefer the installed Chrome so a contributor needs no `playwright install`.
+// CI has no system Chrome, so fall back to Playwright's own chromium there.
+let browser
+try {
+  browser = await chromium.launch({ channel: "chrome", headless: true })
+} catch {
+  console.log("  (no system Chrome — falling back to bundled chromium)")
+  browser = await chromium.launch({ headless: true })
+}
 
 let failures = 0
 for (const dark of [false, true]) {

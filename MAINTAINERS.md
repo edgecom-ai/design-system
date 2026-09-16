@@ -177,6 +177,8 @@ The site is a **static export** (`output: "export"` in [`next.config.ts`](next.c
 
 ## Verifying changes
 
+**CI runs on every pull request** ([`ci.yml`](.github/workflows/ci.yml)) — lint, typecheck, build, the registry audit, a generated-files parity check, and the browser gate. Before this, the only workflow ran *after* a change reached `main`, so a broken build or a stale generated file was discovered once it was already published. A green PR now means the same thing as a clean working tree.
+
 There is **no test framework** in this repo. The quality gates are:
 - `pnpm lint` (ESLint) and TypeScript **strict** — use **`pnpm typecheck`**, not a bare `npx tsc --noEmit`. `src/docs/generated/changelog.ts` is a git-ignored build output that `changelog.tsx` imports, so a fresh checkout must generate it first; `pnpm typecheck` does that, and `pnpm build` gets it from `prebuild`.
 - **`pnpm verify:docs`** — the closest thing to a test suite here. `pnpm build` only proves the export prerenders; the page shells are empty and every section renders client-side, so a build can succeed while the site renders nothing. This loads ten representative routes in system Chrome, in **both themes**, and fails on a blank page, a console error, a failed chunk, or a Suspense fallback that never resolved. Run it after anything that changes how the docs site loads.
