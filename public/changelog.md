@@ -5,6 +5,20 @@
 Every change to the Edgecom design system, derived from git history. Also published at
 [design.edgecom.ai/changelog](https://design.edgecom.ai/getting-started/changelog).
 
+## Unreleased
+
+### Changed
+
+- **docs:** Load agent instructions on demand instead of at launch ([`33bfcc1`](https://github.com/edgecom-ai/design-system/commit/33bfcc1))
+
+### Documentation
+
+- Move the consumer guide to design.edgecom.ai/agents.md ([`222cf14`](https://github.com/edgecom-ai/design-system/commit/222cf14))
+
+### Internal
+
+- **release:** Cut v1.0.0 and group the changelog by release ([`9cfa925`](https://github.com/edgecom-ai/design-system/commit/9cfa925))
+
 ## v1.0.0 — 2026-09-14
 
 ### Breaking
