@@ -7,13 +7,12 @@
 //   src/app/sections.tsx         which components exist, their group + blurb
 //   src/components/ui/*.tsx      cva base + variant class strings
 //   src/docs/generated/api.ts    parts and props extracted by gen-api.mjs
-//   out/_next/static/chunks/*.css  compiled Tailwind (tokens + utilities)
 //
 // It writes into .design-sync/bundle/:
 //   _system.json          version, commit, digest — so a design can name what it was built against
 //   SKILL.md              the invocable entry point (name: edgecom-design)
 //   README.md             compiled from design.md
-//   _base.css             compiled Tailwind + card layout helpers
+//   _base.css             the Edgecom tokens + only the utilities the cards use (lib/base-css.mjs)
 //   foundations/*.html    colour / type / radius / elevation cards
 //   components/*.html     one variant-matrix card per component
 //   components/*.md       one spec per component
@@ -21,17 +20,20 @@
 // The bundle is uploaded by DesignSync under a plan scoped to these paths, so a
 // sync can never touch hand-authored `brand/**` material in the project.
 //
-// Previews are static HTML using the component's REAL utility classes plus the
-// compiled stylesheet — no React, no browser, no dev server. A card therefore
-// cannot drift from the primitive: if the cva changes, the card changes.
+// Previews are static HTML using the component's REAL utility classes, and
+// _base.css is compiled from globals.css against exactly those classes — no
+// React, no browser, no dev server, no prior `pnpm build`. A card therefore
+// cannot drift from the primitive: if the cva changes, the card changes, and
+// the stylesheet follows.
 
-import { readFileSync, writeFileSync, mkdirSync, rmSync, readdirSync, existsSync, copyFileSync } from "node:fs"
-import { resolve, dirname, join } from "node:path"
+import { readFileSync, writeFileSync, mkdirSync, rmSync, readdirSync, existsSync } from "node:fs"
+import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 import { execFileSync } from "node:child_process"
 import { createHash } from "node:crypto"
 
 import { readBlocks } from "./lib/tokens.mjs"
+import { buildBaseCss, probeUtilities, scanClasses } from "./lib/base-css.mjs"
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const outDir = resolve(root, ".design-sync/bundle")
@@ -51,7 +53,19 @@ const css = read("src/app/globals.css")
 const designMd = read("design.md")
 const sectionsSrc = read("src/app/sections.tsx")
 
-const { light, dark } = readBlocks(css)
+const { light, theme } = readBlocks(css)
+
+// Edgecom's `@theme inline` tokens that are tokens in their own right — the
+// type scale, the radius scale, motion — as opposed to the `--color-x: var(--x)`
+// aliases that only exist to give Tailwind utilities. `inline` means Tailwind
+// never emits any of them as a CSS variable, so the cards (and a designer
+// reading _base.css) would not see them unless they are declared explicitly.
+const themeTokens = Object.fromEntries(
+  Object.entries(theme).filter(([, v]) => {
+    const alias = v.match(/^var\(--([\w-]+)\)$/)
+    return !(alias && (alias[1] in light || alias[1] in theme))
+  }),
+)
 
 const tokenValue = (name) => {
   let v = light[name]
@@ -202,22 +216,6 @@ function parseVariantEntries(body) {
   return out
 }
 
-// --- compiled Tailwind -------------------------------------------------------
-function findCompiledCss() {
-  const dir = resolve(root, "out/_next/static/chunks")
-  if (!existsSync(dir)) return null
-  const files = readdirSync(dir).filter((f) => f.endsWith(".css"))
-  let best = null
-  for (const f of files) {
-    const p = join(dir, f)
-    const body = readFileSync(p, "utf8")
-    if (body.includes("--primary:") && body.includes(".bg-primary")) {
-      if (!best || body.length > best.body.length) best = { path: p, body }
-    }
-  }
-  return best
-}
-
 // --- card helpers ------------------------------------------------------------
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;")
 
@@ -233,7 +231,7 @@ ${body}
 export { extractCva, parseSections }
 
 // --- build -------------------------------------------------------------------
-function build() {
+async function build() {
   rmSync(outDir, { recursive: true, force: true })
   mkdirSync(resolve(outDir, "foundations"), { recursive: true })
   mkdirSync(resolve(outDir, "components"), { recursive: true })
@@ -258,30 +256,6 @@ function build() {
       process.exit(1)
     }
   }
-
-  const compiled = findCompiledCss()
-  if (!compiled) {
-    console.error("gen-design-sync — no compiled stylesheet found in out/. Run `pnpm build` first.")
-    process.exit(1)
-  }
-
-  // _base.css = compiled Tailwind + the small layout helpers the cards use.
-  const helpers = `
-/* --- design-sync card helpers (not part of the design system) --- */
-html{background:var(--background)}
-body.ds-card{margin:0;padding:20px;background:var(--background);color:var(--foreground);
-  font-family:var(--font-sans),system-ui,sans-serif}
-.ds-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
-.ds-col{display:flex;flex-direction:column;gap:14px}
-.ds-label{font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted-foreground);
-  font-weight:500;min-width:104px}
-.ds-line{display:flex;align-items:center;gap:12px}
-.ds-sep{border-top:1px solid var(--border);padding-top:12px}
-.ds-swatch{width:100%;height:44px;border-radius:var(--radius-md);border:1px solid var(--border)}
-.ds-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:12px}
-.ds-name{font-size:11px;color:var(--muted-foreground);margin-top:5px;font-family:var(--font-mono),monospace}
-`
-  writeFileSync(resolve(outDir, "_base.css"), compiled.body + helpers)
 
   // ---- _system.json ---------------------------------------------------------
   const sha = git("rev-parse", "HEAD")
@@ -338,7 +312,7 @@ https://design.edgecom.ai/design.md. It is required, not advisory.
 | \`foundations/\` | Colour, type scale, radius, elevation — rendered from the real tokens. |
 | \`components/*.html\` | Preview cards, rendered with each primitive's actual classes. |
 | \`components/*.md\` | Per-component spec: variants, sizes, defaults, install address. |
-| \`_base.css\` | The compiled stylesheet. Link it in any artifact you author. |
+| \`_base.css\` | The stylesheet the cards render with: every Edgecom token (\`:root\` light, \`.dark\` overrides) and only the utilities the cards use. Read it for token names and values. |
 | \`brand/\` | Hand-authored brand and marketing material. Not generated, not part of the product system. |
 
 ## Non-negotiables
@@ -357,8 +331,13 @@ https://design.edgecom.ai/design.md. It is required, not advisory.
 
 \`\`\`html
 <link rel="stylesheet" href="_base.css">
-<!-- then use the real utility classes: bg-primary, text-body-sm, rounded-xl -->
+<!-- colour, radius and spacing by token: background:var(--primary); border-radius:var(--radius-md) -->
+<!-- type by step: class="text-body-sm" … class="text-display" -->
 \`\`\`
+
+\`_base.css\` is not a full Tailwind build — it holds the tokens and the type-scale classes, plus
+whatever the cards happen to use. Style everything else with \`var(--token)\`, never with a
+Tailwind class name you have not seen in the file, and never with a literal value.
 `,
   )
 
@@ -376,9 +355,58 @@ https://design.edgecom.ai/design.md. It is required, not advisory.
   // ---- components -----------------------------------------------------------
   const built = writeComponents()
 
+  // ---- _base.css ------------------------------------------------------------
+  // Compiled last, from the cards just written: the Edgecom :root/.dark tokens,
+  // then only the utilities those cards use, with every Tailwind internal
+  // resolved away so Claude Design's token manifest reads Edgecom's system and
+  // nothing else. See lib/base-css.mjs for why that matters.
+  const helpers = `
+/* --- design-sync card helpers (not part of the design system) --- */
+html{background:var(--background)}
+body.ds-card{margin:0;padding:20px;background:var(--background);color:var(--foreground);
+  font-family:var(--font-sans),system-ui,sans-serif}
+.ds-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.ds-col{display:flex;flex-direction:column;gap:14px}
+.ds-label{font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted-foreground);
+  font-weight:500;min-width:104px}
+.ds-line{display:flex;align-items:center;gap:12px}
+.ds-sep{border-top:1px solid var(--border);padding-top:12px}
+.ds-swatch{width:100%;height:44px;border-radius:var(--radius-md);border:1px solid var(--border)}
+.ds-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:12px}
+.ds-name{font-size:11px;color:var(--muted-foreground);margin-top:5px;font-family:var(--font-mono),monospace}
+`
+  const htmlDocs = []
+  for (const dir of ["foundations", "components"]) {
+    for (const f of readdirSync(resolve(outDir, dir))) {
+      if (f.endsWith(".html")) htmlDocs.push(readFileSync(resolve(outDir, dir, f), "utf8"))
+    }
+  }
+  // A radius step design.md documents but @theme inline does not author (`lg`)
+  // renders Tailwind's default. The card must show what `rounded-lg` really
+  // renders, so the value is read back from the compiler, not from the docs.
+  const missing = RADII.filter((r) => !themeTokens[`radius-${r}`])
+  const probed = await probeUtilities(
+    css,
+    resolve(root, "src/app"),
+    Object.fromEntries(missing.map((r) => [`radius-${r}`, [`rounded-${r}`, "border-radius"]])),
+  )
+  for (const [name, value] of Object.entries(probed)) themeTokens[name] = value
+
+  const { css: baseCss, report } = await buildBaseCss({
+    globalsCss: css,
+    base: resolve(root, "src/app"),
+    elements: scanClasses(htmlDocs).elements,
+    themeTokens,
+    helpers,
+  })
+  writeFileSync(resolve(outDir, "_base.css"), baseCss)
+  for (const d of report.dropped) console.warn(`gen-design-sync — WARNING: unresolvable, dropped: ${d}`)
+
   console.log(
     `gen-design-sync — ${built.cards} component cards, ${built.specs} specs, 4 foundations, ` +
-      `${(compiled.body.length / 1024).toFixed(0)} KB base css → .design-sync/bundle/`,
+      `_base.css ${(baseCss.length / 1024).toFixed(0)} KB (${report.edgecomTokens} tokens, ` +
+      `${report.utilities} utilities from ${report.candidates} class names` +
+      `${report.composed.length ? `, ${report.composed.length} composed` : ""}) → .design-sync/bundle/`,
   )
   return { system, ...built }
 }
@@ -424,8 +452,8 @@ function writeFoundations() {
 
   // typography
   const rows = TYPE_STEPS.map((t) => {
-    const size = light[`text-${t}`] || ""
-    const lh = light[`text-${t}--line-height`] || ""
+    const size = theme[`text-${t}`] || ""
+    const lh = theme[`text-${t}--line-height`] || ""
     return `<div class="ds-line ds-sep"><span class="ds-label">${t}</span>
       <span class="text-${t}">Peak demand 412 kW</span>
       <span class="ds-name" style="margin-left:auto">${esc(size)} / ${esc(lh)}</span></div>`
@@ -644,4 +672,4 @@ function writeComponents() {
   return { cards, specs }
 }
 
-build()
+await build()
