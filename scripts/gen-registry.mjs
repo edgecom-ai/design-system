@@ -30,6 +30,7 @@ import { fileURLToPath } from "node:url";
 
 import { specifiersOf, classify } from "./lib/imports.mjs";
 import { withVersion, typesFor } from "./lib/deps.mjs";
+import { readBlocks } from "./lib/tokens.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const uiDir = resolve(root, "src/components/ui");
@@ -47,20 +48,8 @@ const ref = (name) => `${GITHUB_REPO}/${name}`;
 // --- parse globals.css into cssVars -----------------------------------------
 const css = readFileSync(resolve(root, "src/app/globals.css"), "utf8");
 
-function blockVars(re) {
-  const m = css.match(re);
-  if (!m) return {};
-  const vars = {};
-  for (const d of m[1].matchAll(/--([\w-]+):\s*([^;]+);/g)) {
-    // Values may wrap across lines (e.g. font stacks); ship them on one line.
-    vars[d[1]] = d[2].trim().replace(/\s+/g, " ");
-  }
-  return vars;
-}
 
-const themeVars = blockVars(/@theme[^{]*\{([\s\S]*?)\n\}/);
-const lightVars = blockVars(/^:root\s*\{([\s\S]*?)\n\}/m);
-const darkVars = blockVars(/^\.dark\s*\{([\s\S]*?)\n\}/m);
+const { theme: themeVars, light: lightVars, dark: darkVars } = readBlocks(css);
 
 // Top-level `@keyframes` blocks ship on the theme item's `css` field (the
 // registry-item field for arbitrary rules), so a `--animate-*` theme var that

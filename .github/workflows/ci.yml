@@ -60,6 +60,12 @@ jobs:
       - name: Registry audit
         run: pnpm registry:check
 
+      # The artifacts match their sources (parity, below); this proves they also
+      # match their declared shape, so a token model that says something the
+      # schema forbids — a legacy token exposed to Tailwind, say — fails here.
+      - name: Schemas
+        run: pnpm check:schemas
+
       # Generated files are committed, so regenerating them must produce no diff.
       # A diff means someone hand-edited an output or forgot to regenerate after
       # changing its source — both of which used to reach main unnoticed.

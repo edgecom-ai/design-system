@@ -15,21 +15,15 @@ import { readFileSync, writeFileSync, copyFileSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { readBlocks } from "./lib/tokens.mjs";
+
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const css = readFileSync(resolve(root, "src/app/globals.css"), "utf8");
 const designPath = resolve(root, "design.md");
 const publicPath = resolve(root, "public/design.md");
 
 // --- parse globals.css (same approach as gen-registry.mjs) ------------------
-function blockVars(re) {
-  const m = css.match(re);
-  if (!m) return {};
-  const vars = {};
-  for (const d of m[1].matchAll(/--([\w-]+):\s*([^;]+);/g)) vars[d[1]] = d[2].trim();
-  return vars;
-}
-const themeVars = blockVars(/@theme[^{]*\{([\s\S]*?)\n\}/);
-const lightVars = blockVars(/^:root\s*\{([\s\S]*?)\n\}/m);
+const { theme: themeVars, light: lightVars } = readBlocks(css);
 
 // Semantic colors surfaced in the front-matter (role order), each pulling its
 // light/canonical value from :root. Comments group them for readability.
