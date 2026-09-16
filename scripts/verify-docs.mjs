@@ -20,7 +20,7 @@
 
 import { createServer } from "node:http"
 import { readFile, stat } from "node:fs/promises"
-import { resolve, dirname, extname, join } from "node:path"
+import { resolve, dirname, extname, sep } from "node:path"
 import { fileURLToPath } from "node:url"
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..")
@@ -58,9 +58,19 @@ async function serveOut() {
     process.exit(1)
   }
   const server = createServer(async (req, res) => {
-    let p = decodeURIComponent(req.url.split("?")[0])
+    let p
+    try {
+      p = decodeURIComponent(req.url.split("?")[0])
+    } catch {
+      return void res.writeHead(400).end("bad request")
+    }
     if (p.endsWith("/")) p += "index.html"
-    const file = join(outDir, p)
+    // Resolve, then confirm the result is still inside out/. `join` happily
+    // walks out of the root on a `..` segment, and the path comes off the wire.
+    const file = resolve(outDir, "." + (p.startsWith("/") ? p : "/" + p))
+    if (file !== outDir && !file.startsWith(outDir + sep)) {
+      return void res.writeHead(403).end("forbidden")
+    }
     try {
       const body = await readFile(file)
       res.writeHead(200, { "content-type": MIME[extname(file)] || "application/octet-stream" })
