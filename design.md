@@ -129,7 +129,7 @@ components:
 
 # Edgecom Design System — Design Language & Usage
 
-> **How to use this file:** read it before generating or designing Edgecom UI, then follow it. It defines the visual language (colors, type, spacing, elevation, shape) and the **usage rules** for building correct, accessible, on-brand screens. It is tool-agnostic — for design tools (Claude Design, Figma) and as the shared "what/why" behind the code guardrails.
+> **How to use this file:** read it before generating or designing Edgecom UI, then follow it. It defines the visual language (colors, type, spacing, elevation, shape) and the **usage rules** for building correct, accessible, on-brand screens. It is tool-agnostic — for whatever tool generates Edgecom UI, and as the shared "what/why" behind the code guardrails.
 >
 > **Related docs:** [agents.md](https://design.edgecom.ai/agents.md) — implementing with the component registry in a consuming app. [REGISTRY.md](https://github.com/edgecom-ai/design-system/blob/main/REGISTRY.md) — install mechanics. [MAINTAINERS.md](https://github.com/edgecom-ai/design-system/blob/main/MAINTAINERS.md) — developing the design-system repo itself. Live reference: [design.edgecom.ai](https://design.edgecom.ai).
 
