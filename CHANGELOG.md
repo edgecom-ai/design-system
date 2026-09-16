@@ -9,15 +9,16 @@ Every change to the Edgecom design system, derived from git history. Also publis
 
 ### Changed
 
-- **docs:** Load agent instructions on demand instead of at launch ([`33bfcc1`](https://github.com/edgecom-ai/design-system/commit/33bfcc1))
+- **docs:** Load agent instructions on demand instead of at launch ([`8b459e8`](https://github.com/edgecom-ai/design-system/commit/8b459e8))
 
 ### Documentation
 
-- Move the consumer guide to design.edgecom.ai/agents.md ([`222cf14`](https://github.com/edgecom-ai/design-system/commit/222cf14))
+- Drop the Figma mention from design.md ([`35a2026`](https://github.com/edgecom-ai/design-system/commit/35a2026))
+- Move the consumer guide to design.edgecom.ai/agents.md ([`5569cc8`](https://github.com/edgecom-ai/design-system/commit/5569cc8))
 
 ### Internal
 
-- **release:** Cut v1.0.0 and group the changelog by release ([`9cfa925`](https://github.com/edgecom-ai/design-system/commit/9cfa925))
+- **release:** Cut v1.0.0 and group the changelog by release ([`47606ef`](https://github.com/edgecom-ai/design-system/commit/47606ef))
 
 ## v1.0.0 — 2026-09-14
 
