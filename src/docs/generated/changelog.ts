@@ -73,7 +73,17 @@ export const changelog: ChangelogRelease[] = [
     "summary": null,
     "entries": [
       {
-        "sha": "9cfa925",
+        "sha": "35a2026",
+        "date": "2026-09-16",
+        "type": "docs",
+        "group": "docs",
+        "scopes": [],
+        "summary": "Drop the Figma mention from design.md",
+        "items": [],
+        "breaking": false
+      },
+      {
+        "sha": "47606ef",
         "date": "2026-09-16",
         "type": "chore",
         "group": "internal",
@@ -85,7 +95,7 @@ export const changelog: ChangelogRelease[] = [
         "breaking": false
       },
       {
-        "sha": "33bfcc1",
+        "sha": "8b459e8",
         "date": "2026-09-16",
         "type": "refactor",
         "group": "changed",
@@ -97,7 +107,7 @@ export const changelog: ChangelogRelease[] = [
         "breaking": false
       },
       {
-        "sha": "222cf14",
+        "sha": "5569cc8",
         "date": "2026-09-16",
         "type": "docs",
         "group": "docs",
