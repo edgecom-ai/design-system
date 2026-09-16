@@ -33,7 +33,7 @@ There is no test framework. The gates are:
 
 ```bash
 pnpm lint
-npx tsc --noEmit
+pnpm typecheck
 pnpm registry:build      # includes registry:check
 ```
 

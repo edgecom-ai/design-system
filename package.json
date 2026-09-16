@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "typecheck": "pnpm run docs:changelog && tsc --noEmit",
     "docs:source": "node scripts/gen-docs-source.mjs",
     "docs:api": "node scripts/gen-api.mjs",
     "docs:routes": "node scripts/gen-routes.mjs",
