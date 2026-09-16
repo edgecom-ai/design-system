@@ -52,3 +52,8 @@ next-env.d.ts
 /CHANGELOG.md
 /public/changelog.md
 /src/docs/generated/changelog.ts
+
+# design-sync bundle (run `pnpm design:sync`)
+# Generated output uploaded to the Claude Design project; embeds the compiled
+# stylesheet, so it is rebuilt rather than committed.
+/.design-sync/bundle/

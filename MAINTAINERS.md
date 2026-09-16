@@ -41,6 +41,7 @@ The consumer guide is deliberately **not** in this layer. It lives at [`public/a
 | `pnpm registry:build` | Regenerate registry from source, `shadcn build`, then `registry:check`. |
 | `pnpm registry:check` | Audit built items for imports their manifest doesn't declare, dependencies with no version range, registry dependencies no item provides, type tokens paired with a `leading-*`/weight override, and any reference to a `--chart-legacy-*` token (that palette is for migrating existing plots, never a primitive). |
 | `pnpm docs:gen` | Regenerate all docs-source / api / routes / changelog artifacts. |
+| `pnpm design:sync` | Rebuild the Claude Design bundle from tokens, `design.md`, and the primitives. Needs a prior `pnpm build` (it ships the compiled stylesheet). |
 | `pnpm docs:changelog` | Regenerate the changelog from git history (part of `docs:gen`). |
 
 You rarely run the generators by hand — `predev`/`prebuild` do it. Run `pnpm registry:build` yourself after changing a component or token so the generated registry reflects it.
@@ -86,6 +87,28 @@ All tokens live in [`src/app/globals.css`](src/app/globals.css): `@theme inline`
 - Some rules in `globals.css` are **app-level CSS the `theme` registry item does _not_ ship** — the `cursor: pointer` base-layer rule, `color-scheme`, and the `@utility tabular` helper. Keep them here; consuming apps must add their own (see [agents.md](https://design.edgecom.ai/agents.md)).
 - After any token change, run `pnpm registry:build` so the `theme` item regenerates.
 - The live **Foundations → Semantic colors** page is the interactive reference + contrast meter — verify new/tuned colors there in **both** light and dark.
+
+## The Claude Design project
+
+Designers work in **Edgecom Energy Design System V2** (`6a99bc4b-d46f-47de-a63f-81b94b1dd319`), and everything in it except `brand/` is **generated from this repo** by [`scripts/gen-design-sync.mjs`](scripts/gen-design-sync.mjs).
+
+Run `pnpm design:sync` after a component, token, or `design.md` change, then upload the bundle with the `DesignSync` tool. It emits:
+
+| Path | From |
+|---|---|
+| `_system.json` | git tag + commit + a digest of `globals.css` and `design.md` — this is how a design can name the version it was built against |
+| `SKILL.md` | the `edgecom-design` entry point |
+| `README.md` | `design.md`, verbatim |
+| `foundations/*.html` | `globals.css` |
+| `components/*.html` | each primitive's real `cva` base + variant classes |
+| `components/*.md` | variants, sizes, defaults, install address |
+| `_base.css` | the compiled stylesheet from `out/` — so run `pnpm build` first |
+
+Cards are static HTML using the components' **actual utility classes**, so a card cannot drift from its primitive: change the `cva`, re-sync, the card changes.
+
+**The upload plan is scoped to those paths**, so a sync structurally cannot touch `brand/` — hand-authored marketing material that is deliberately not in this public repo. Keep it that way.
+
+The old `Edgecom Energy Design System` project is **legacy**: a Figma reconstruction that teaches hex colours, px type, and no dark mode. Its skill is being renamed `edgecom-design-legacy`. Don't sync to it, and don't point anyone at it.
 
 ## Adding or changing a component
 
