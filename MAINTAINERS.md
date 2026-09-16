@@ -44,7 +44,7 @@ The consumer guide is deliberately **not** in this layer. It lives at [`public/a
 | `pnpm registry:check` | Audit built items for imports their manifest doesn't declare, dependencies with no version range, registry dependencies no item provides, type tokens paired with a `leading-*`/weight override, and any reference to a `--chart-legacy-*` token (that palette is for migrating existing plots, never a primitive). |
 | `pnpm docs:gen` | Regenerate all docs-source / tokens / api / routes / changelog artifacts. |
 | `pnpm check:schemas` | Validate the generated artifacts against `schemas/*.schema.json`. |
-| `pnpm design:sync` | Rebuild the Claude Design bundle from tokens, `design.md`, and the primitives. Needs a prior `pnpm build` (it ships the compiled stylesheet). |
+| `pnpm design:sync` | Rebuild the Claude Design bundle from tokens, `design.md`, and the primitives. Compiles its own stylesheet from `globals.css`; needs a clean tree, not a prior build. |
 | `pnpm docs:changelog` | Regenerate the changelog from git history (part of `docs:gen`). |
 
 You rarely run the generators by hand — `predev`/`prebuild` do it. Run `pnpm registry:build` yourself after changing a component or token so the generated registry reflects it.
@@ -113,7 +113,7 @@ Run `pnpm design:sync` after a component, token, or `design.md` change, then upl
 | `foundations/*.html` | `globals.css` |
 | `components/*.html` | each primitive's real `cva` base + variant classes |
 | `components/*.md` | variants, sizes, defaults, install address |
-| `_base.css` | the compiled stylesheet from `out/` — so run `pnpm build` first |
+| `_base.css` | the Edgecom `:root`/`.dark` tokens plus only the utilities the cards use, compiled by `scripts/lib/base-css.mjs` with every Tailwind internal resolved away — Claude Design builds its token manifest from this file, so nothing but Edgecom's tokens may declare a custom property in it |
 
 Cards are static HTML using the components' **actual utility classes**, so a card cannot drift from its primitive: change the `cva`, re-sync, the card changes.
 
