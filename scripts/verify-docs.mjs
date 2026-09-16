@@ -19,8 +19,8 @@
 // and falls back to Playwright's bundled chromium where there is none (CI).
 
 import { createServer } from "node:http"
-import { readFile, stat } from "node:fs/promises"
-import { resolve, dirname, extname, sep } from "node:path"
+import { readFile, readdir, stat } from "node:fs/promises"
+import { resolve, dirname, extname, join } from "node:path"
 import { fileURLToPath } from "node:url"
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..")
@@ -57,6 +57,21 @@ async function serveOut() {
     console.error("verify-docs — out/ not found. Run `pnpm build` first.")
     process.exit(1)
   }
+
+  // Index out/ once, then serve strictly from that map. The request path is only
+  // ever a *key lookup*, never part of a filesystem path, so a traversal has
+  // nothing to traverse — the class is gone rather than guarded against.
+  const files = new Map()
+  async function index(dir, prefix) {
+    for (const entry of await readdir(dir, { withFileTypes: true })) {
+      const abs = join(dir, entry.name)
+      const url = `${prefix}/${entry.name}`
+      if (entry.isDirectory()) await index(abs, url)
+      else files.set(url, abs)
+    }
+  }
+  await index(outDir, "")
+
   const server = createServer(async (req, res) => {
     let p
     try {
@@ -65,22 +80,13 @@ async function serveOut() {
       return void res.writeHead(400).end("bad request")
     }
     if (p.endsWith("/")) p += "index.html"
-    // Resolve, then confirm the result is still inside out/. `join` happily
-    // walks out of the root on a `..` segment, and the path comes off the wire.
-    const file = resolve(outDir, "." + (p.startsWith("/") ? p : "/" + p))
-    if (file !== outDir && !file.startsWith(outDir + sep)) {
-      return void res.writeHead(403).end("forbidden")
-    }
-    try {
-      const body = await readFile(file)
-      res.writeHead(200, { "content-type": MIME[extname(file)] || "application/octet-stream" })
-      res.end(body)
-    } catch {
-      res.writeHead(404).end("not found")
-    }
+    const file = files.get(p)
+    if (!file) return void res.writeHead(404).end("not found")
+    res.writeHead(200, { "content-type": MIME[extname(file)] || "application/octet-stream" })
+    res.end(await readFile(file))
   })
   await new Promise((r) => server.listen(0, r))
-  return { server, base: `http://localhost:${server.address().port}` }
+  return { server, base: `http://localhost:${server.address().port}`, count: files.size }
 }
 
 async function run(browser, base, dark) {
