@@ -31,6 +31,8 @@ import { fileURLToPath } from "node:url"
 import { execFileSync } from "node:child_process"
 import { createHash } from "node:crypto"
 
+import { readBlocks } from "./lib/tokens.mjs"
+
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const outDir = resolve(root, ".design-sync/bundle")
 const read = (p) => readFileSync(resolve(root, p), "utf8")
@@ -49,16 +51,7 @@ const css = read("src/app/globals.css")
 const designMd = read("design.md")
 const sectionsSrc = read("src/app/sections.tsx")
 
-// Same parser gen-registry.mjs / gen-design-md.mjs use.
-function blockVars(re) {
-  const m = css.match(re)
-  if (!m) return {}
-  const vars = {}
-  for (const d of m[1].matchAll(/--([\w-]+):\s*([^;]+);/g)) vars[d[1]] = d[2].trim()
-  return vars
-}
-const light = blockVars(/^:root\s*\{([\s\S]*?)\n\}/m)
-const dark = blockVars(/^\.dark\s*\{([\s\S]*?)\n\}/m)
+const { light, dark } = readBlocks(css)
 
 const tokenValue = (name) => {
   let v = light[name]

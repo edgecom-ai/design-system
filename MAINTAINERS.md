@@ -42,7 +42,8 @@ The consumer guide is deliberately **not** in this layer. It lives at [`public/a
 | `pnpm verify:docs` | Load a sample of built routes in real Chrome, light + dark, and fail on a blank page, a console error, a failed chunk, or a stuck Suspense fallback. Needs a prior `pnpm build`. |
 | `pnpm registry:build` | Regenerate registry from source, `shadcn build`, then `registry:check`. |
 | `pnpm registry:check` | Audit built items for imports their manifest doesn't declare, dependencies with no version range, registry dependencies no item provides, type tokens paired with a `leading-*`/weight override, and any reference to a `--chart-legacy-*` token (that palette is for migrating existing plots, never a primitive). |
-| `pnpm docs:gen` | Regenerate all docs-source / api / routes / changelog artifacts. |
+| `pnpm docs:gen` | Regenerate all docs-source / tokens / api / routes / changelog artifacts. |
+| `pnpm check:schemas` | Validate the generated artifacts against `schemas/*.schema.json`. |
 | `pnpm design:sync` | Rebuild the Claude Design bundle from tokens, `design.md`, and the primitives. Needs a prior `pnpm build` (it ships the compiled stylesheet). |
 | `pnpm docs:changelog` | Regenerate the changelog from git history (part of `docs:gen`). |
 
@@ -79,6 +80,14 @@ Match the existing files — canonical examples are [`button.tsx`](src/component
 - **Named export**, PascalCase ending in `Demo`, matching the filename (e.g. `export function SheetDemo()`).
 - `"use client"` **only** when the demo is interactive.
 - Use Edgecom domain copy (sites, meters, commodities, kW) — not lorem ipsum.
+
+## One parser for the tokens
+
+`globals.css` is the authority, and [`scripts/lib/tokens.mjs`](scripts/lib/tokens.mjs) is the only thing that parses it. Three generators had each grown their own copy of `blockVars` and they had already diverged — only `gen-registry` collapsed values that wrap across lines, which font stacks do. Nothing emitted a parsed font value yet, so the bug was latent; it is now impossible.
+
+`pnpm docs:tokens` compiles that reading into [`src/docs/generated/tokens.json`](src/docs/generated/tokens.json): every token with its family, type, light and dark values, alias target, whether a Tailwind utility can reach it, and whether it is mode-independent. `schemas/tokens.schema.json` validates it in CI, and the schema encodes guardrails rather than just shapes — a `legacy` token with `tailwindUtility: true` fails, because that palette has no `--color-*` mapping by design.
+
+Two things it will reject outright: a token defined in `.dark` but not `:root` (edit both, or confirm the light value inherits), and a token claiming to be mode-dependent while having no dark value.
 
 ## Editing tokens (`src/app/globals.css`)
 
@@ -133,6 +142,7 @@ Edit the **sources**, then run `pnpm registry:build` (or `pnpm docs:gen`). `preb
 | `registry.json` + `src/**/registry.json` chunks | `registry:gen` | `src/components/ui/*.tsx`, `src/hooks/*`, `globals.css` |
 | `public/r/*.json` | `shadcn build` | the registry chunks |
 | `src/docs/generated/{api,api-highlight,routes}.ts` | `docs:api` / `docs:routes` | `sections.tsx`, `ui/*`, `docs/api.ts` |
+| `src/docs/generated/tokens.json` | `docs:tokens` | `globals.css`, via `scripts/lib/tokens.mjs` |
 | `public/docs-source/*` (git-**ignored**) | `docs:source` | `components/demo/*`, `components/shadcn-studio/*` |
 | `src/docs/generated/changelog.ts`, `CHANGELOG.md`, `public/changelog.md` — **git-ignored** | `docs:changelog` | git history + `src/docs/changelog-notes.json` |
 
