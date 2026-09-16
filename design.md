@@ -131,7 +131,7 @@ components:
 
 > **How to use this file:** read it before generating or designing Edgecom UI, then follow it. It defines the visual language (colors, type, spacing, elevation, shape) and the **usage rules** for building correct, accessible, on-brand screens. It is tool-agnostic — for design tools (Claude Design, Figma) and as the shared "what/why" behind the code guardrails.
 >
-> **Related docs:** [AGENTS.md](https://github.com/edgecom-ai/design-system/blob/main/AGENTS.md) — implementing with the component registry in a consuming app. [REGISTRY.md](https://github.com/edgecom-ai/design-system/blob/main/REGISTRY.md) — install mechanics. [MAINTAINERS.md](https://github.com/edgecom-ai/design-system/blob/main/MAINTAINERS.md) — developing the design-system repo itself. Live reference: [design.edgecom.ai](https://design.edgecom.ai).
+> **Related docs:** [agents.md](https://design.edgecom.ai/agents.md) — implementing with the component registry in a consuming app. [REGISTRY.md](https://github.com/edgecom-ai/design-system/blob/main/REGISTRY.md) — install mechanics. [MAINTAINERS.md](https://github.com/edgecom-ai/design-system/blob/main/MAINTAINERS.md) — developing the design-system repo itself. Live reference: [design.edgecom.ai](https://design.edgecom.ai).
 
 ## Overview
 
@@ -141,7 +141,7 @@ Core principles:
 
 - **Semantic tokens, never raw values.** Every color, size, and radius is a named token with light + dark values. Never hardcode a hex or a magic px. This is what makes the whole system adapt to dark mode and stay consistent.
 - **Status means something.** Color is not decorative — `success`/`warning`/`info`/`destructive` and the commodity hues each carry meaning. Use them strictly by meaning.
-- **Reuse over reinvention.** Compose the existing components; don't hand-roll parallel versions. (Implementation: see [AGENTS.md](https://github.com/edgecom-ai/design-system/blob/main/AGENTS.md).)
+- **Reuse over reinvention.** Compose the existing components; don't hand-roll parallel versions. (Implementation: see [agents.md](https://design.edgecom.ai/agents.md).)
 - **Accessible by default.** WCAG AA minimum, AAA where the palette allows — in both themes.
 
 ## Colors

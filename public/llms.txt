@@ -5,7 +5,7 @@
 ## Guides
 
 - [design.md](https://design.edgecom.ai/design.md): The design language and usage rules — colors/tokens, typography, layout, elevation, shape, per-component conventions, and accessibility. Read this before designing or generating any Edgecom UI.
-- [AGENTS.md](https://github.com/edgecom-ai/design-system/blob/main/AGENTS.md): Building an app **with** the design system — installing components from the registry, composing primitives, token sync, responsiveness. The "how to implement".
+- [agents.md](https://design.edgecom.ai/agents.md): Building an app **with** the design system — installing components from the registry, composing primitives, token sync, responsiveness. The "how to implement".
 - [REGISTRY.md](https://github.com/edgecom-ai/design-system/blob/main/REGISTRY.md): Registry install mechanics in depth — the install address, the `theme` item, and how dependencies are inferred.
 - [MAINTAINERS.md](https://github.com/edgecom-ai/design-system/blob/main/MAINTAINERS.md): Developing the design-system repo itself — authoring primitives, tuning tokens, the Next.js docs site, and the registry build.
 - [changelog.md](https://design.edgecom.ai/changelog.md): What changed and when — every release, generated from the commit history, with the registry items each change touched. Check it before assuming an API or token still looks the way you remember.
