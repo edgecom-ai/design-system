@@ -18,6 +18,7 @@
     "registry:gen": "node scripts/gen-registry.mjs",
     "registry:check": "node scripts/check-registry.mjs",
     "registry:build": "pnpm run registry:gen && shadcn build && pnpm run registry:check",
+    "design:sync": "node scripts/gen-design-sync.mjs",
     "predev": "pnpm run docs:gen",
     "prebuild": "pnpm run docs:gen && pnpm run registry:build"
   },
