@@ -13,6 +13,10 @@ on:
     branches: [main]
   workflow_dispatch:
 
+# Read-only: nothing here writes to the repo, publishes, or comments.
+permissions:
+  contents: read
+
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
