@@ -6,11 +6,26 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 # Edgecom Design System — maintainer guide
 
-**This file is for people (and agents) developing _this repo_** — authoring primitives, tuning tokens, and running the docs site / registry build. If instead you're **consuming** the design system in another app, read [AGENTS.md](AGENTS.md). For the **design language, tokens, and usage guardrails**, read [design.md](design.md) (published at [design.edgecom.ai/design.md](https://design.edgecom.ai/design.md)). For how the registry is consumed, hosted, and updated in depth, see [REGISTRY.md](REGISTRY.md).
+**This file is for people (and agents) developing _this repo_** — authoring primitives, tuning tokens, and running the docs site / registry build. If instead you're **consuming** the design system in another app, read [agents.md](https://design.edgecom.ai/agents.md) (source: [public/agents.md](public/agents.md)). For the **design language, tokens, and usage guardrails**, read [design.md](design.md) (published at [design.edgecom.ai/design.md](https://design.edgecom.ai/design.md)). For how the registry is consumed, hosted, and updated in depth, see [REGISTRY.md](REGISTRY.md).
 
 This repo is two things at once: a **Next.js 16 docs site** and the **source of truth for the public `edgecom-ai/design-system` shadcn registry**.
 
 > When you author or change any UI here (a primitive, a demo, a doc page), you are also *building with the design system* — follow [design.md](design.md) as well as this file.
+
+## How agents load this repo
+
+Instructions are layered so that only the routing layer is always in context and the detail loads when it is relevant. When you add a rule, put it in the layer that matches its trigger:
+
+| Layer | File | Loads |
+|---|---|---|
+| Routing + invariants | [`AGENTS.md`](AGENTS.md), imported by [`CLAUDE.md`](CLAUDE.md) | Every session. **Keep it under ~60 lines.** Only invariants with no file to trigger them belong here. |
+| Path-scoped rules | `.claude/rules/*.md` | On demand, when a file matching the rule's `paths:` frontmatter is read. File-specific conventions go here. |
+| Skills | `.claude/skills/*/SKILL.md` | On demand, when invoked or when the model judges them relevant. Multi-step procedures go here. |
+| Full references | this file, [design.md](design.md), [REGISTRY.md](REGISTRY.md) | When a routing entry or rule points at them. |
+
+Every rule file **must** carry a `paths:` field — a rule without one loads at launch and costs context in every session. Adding a paragraph to `AGENTS.md` is almost never the right move; adding it to a rule usually is.
+
+The consumer guide is deliberately **not** in this layer. It lives at [`public/agents.md`](public/agents.md), served at [design.edgecom.ai/agents.md](https://design.edgecom.ai/agents.md), so an agent working in this repo reads producer instructions and a consuming app is pointed at a stable URL. It is hand-written, not generated — the only hand-written markdown in `public/`.
 
 ## Getting set up
 
@@ -68,7 +83,7 @@ All tokens live in [`src/app/globals.css`](src/app/globals.css): `@theme inline`
 
 - **Adding or adjusting a color means editing `globals.css` (both `:root` **and** `.dark`), not the call site.** `:root` is the complete light token set; `.dark` overrides only the tokens that differ (the rest inherit). If a new token needs a distinct dark value, add it to `.dark` too — don't assume the light value carries.
 - Expose a new token to Tailwind by adding its `--color-*: var(--…)` mapping in the `@theme inline` block.
-- Some rules in `globals.css` are **app-level CSS the `theme` registry item does _not_ ship** — the `cursor: pointer` base-layer rule, `color-scheme`, and the `@utility tabular` helper. Keep them here; consuming apps must add their own (see [AGENTS.md](AGENTS.md)).
+- Some rules in `globals.css` are **app-level CSS the `theme` registry item does _not_ ship** — the `cursor: pointer` base-layer rule, `color-scheme`, and the `@utility tabular` helper. Keep them here; consuming apps must add their own (see [agents.md](https://design.edgecom.ai/agents.md)).
 - After any token change, run `pnpm registry:build` so the `theme` item regenerates.
 - The live **Foundations → Semantic colors** page is the interactive reference + contrast meter — verify new/tuned colors there in **both** light and dark.
 
