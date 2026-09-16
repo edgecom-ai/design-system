@@ -66,6 +66,49 @@ export const commitUrl = (sha: string) => `https://github.com/edgecom-ai/design-
 
 export const changelog: ChangelogRelease[] = [
   {
+    "id": "release-unreleased",
+    "version": null,
+    "date": "2026-09-16",
+    "title": "Unreleased",
+    "summary": null,
+    "entries": [
+      {
+        "sha": "9cfa925",
+        "date": "2026-09-16",
+        "type": "chore",
+        "group": "internal",
+        "scopes": [
+          "release"
+        ],
+        "summary": "Cut v1.0.0 and group the changelog by release",
+        "items": [],
+        "breaking": false
+      },
+      {
+        "sha": "33bfcc1",
+        "date": "2026-09-16",
+        "type": "refactor",
+        "group": "changed",
+        "scopes": [
+          "docs"
+        ],
+        "summary": "Load agent instructions on demand instead of at launch",
+        "items": [],
+        "breaking": false
+      },
+      {
+        "sha": "222cf14",
+        "date": "2026-09-16",
+        "type": "docs",
+        "group": "docs",
+        "scopes": [],
+        "summary": "Move the consumer guide to design.edgecom.ai/agents.md",
+        "items": [],
+        "breaking": false
+      }
+    ]
+  },
+  {
     "id": "release-v1.0.0",
     "version": "v1.0.0",
     "date": "2026-09-14",
