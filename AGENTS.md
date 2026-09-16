@@ -29,7 +29,7 @@ These hold everywhere and have no file to trigger them:
 - **Base UI (`@base-ui/react`), not Radix.** Pass a trigger with the `render` prop; there is no `asChild`.
 - **Conventional-commit subjects** — `type(scope): summary`. The changelog page is generated from them and publishes the summary verbatim, so write it for a docs reader, not for the diff. `!` or a `BREAKING CHANGE:` body line promotes to Breaking; a `Changelog: skip` trailer drops the commit.
 - **Never print the values in `.env.local`.**
-- **Verify before claiming done:** `pnpm lint` and `npx tsc --noEmit`. There is no test framework. For anything visible, check the browser preview in **both light and dark**.
+- **Verify before claiming done:** `pnpm lint` and `pnpm typecheck` (not bare `tsc --noEmit` — `src/docs/generated/changelog.ts` is a git-ignored build output, so a fresh checkout has to generate it first). There is no test framework. For anything visible, check the browser preview in **both light and dark**.
 
 ## Scripts
 

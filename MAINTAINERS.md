@@ -38,6 +38,7 @@ The consumer guide is deliberately **not** in this layer. It lives at [`public/a
 | `pnpm dev` | Docs site at `:3000`. `predev` runs `docs:gen` first. |
 | `pnpm build` | Static export to `out/`. `prebuild` runs `docs:gen` **and** `registry:build` first. |
 | `pnpm lint` | ESLint (Next core-web-vitals + TypeScript). |
+| `pnpm typecheck` | TypeScript strict, after materialising the generated changelog. |
 | `pnpm registry:build` | Regenerate registry from source, `shadcn build`, then `registry:check`. |
 | `pnpm registry:check` | Audit built items for imports their manifest doesn't declare, dependencies with no version range, registry dependencies no item provides, type tokens paired with a `leading-*`/weight override, and any reference to a `--chart-legacy-*` token (that palette is for migrating existing plots, never a primitive). |
 | `pnpm docs:gen` | Regenerate all docs-source / api / routes / changelog artifacts. |
@@ -174,7 +175,7 @@ The site is a **static export** (`output: "export"` in [`next.config.ts`](next.c
 ## Verifying changes
 
 There is **no test framework** in this repo. The quality gates are:
-- `pnpm lint` (ESLint) and TypeScript **strict** (`npx tsc --noEmit`, or via `pnpm build`).
+- `pnpm lint` (ESLint) and TypeScript **strict** — use **`pnpm typecheck`**, not a bare `npx tsc --noEmit`. `src/docs/generated/changelog.ts` is a git-ignored build output that `changelog.tsx` imports, so a fresh checkout must generate it first; `pnpm typecheck` does that, and `pnpm build` gets it from `prebuild`.
 - For anything visible, use the browser preview and check **both light and dark**.
 - A full `pnpm build` also validates the static-export prerender end-to-end.
 
