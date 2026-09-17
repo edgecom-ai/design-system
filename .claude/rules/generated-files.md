@@ -4,6 +4,8 @@ paths:
   - "src/**/registry.json"
   - "public/r/**/*.json"
   - "src/docs/generated/**/*.ts"
+  - "src/docs/generated/**/*.json"
+  - "src/docs/contracts.json"
   - "CHANGELOG.md"
   - "public/changelog.md"
   - "public/design.md"
@@ -20,10 +22,14 @@ Edit the **source** and regenerate. `prebuild`/`predev` regenerate everything au
 | `registry.json`, `src/**/registry.json` | `pnpm registry:gen` | `src/components/ui/*.tsx`, `src/hooks/*`, `globals.css` |
 | `public/r/*.json` | `shadcn build` | the registry chunks |
 | `src/docs/generated/{api,api-highlight,routes}.ts` | `pnpm docs:api` / `docs:routes` | `sections.tsx`, `ui/*`, `src/docs/api.ts` |
+| `src/docs/generated/tokens.json` | `pnpm docs:tokens` | `src/app/globals.css` |
+| `src/docs/generated/contracts.json` | `pnpm docs:contracts` | `ui/*.tsx`, `sections.tsx`, `curated.ts`, `src/docs/contracts.json` |
 | `CHANGELOG.md`, `public/changelog.md`, `src/docs/generated/changelog.ts` — **git-ignored** | `pnpm docs:changelog` | git history + `src/docs/changelog-notes.json` |
 | `public/design.md` | `pnpm docs:design-md` | `design.md` (mirrored verbatim) |
 
-Hand-written sources that look generated but are not: `src/docs/api.ts`, `src/docs/curated.ts`, `src/docs/changelog-notes.json`.
+Hand-written sources that look generated but are not: `src/docs/api.ts`, `src/docs/curated.ts`, `src/docs/changelog-notes.json`, and **`src/docs/contracts.json`**.
+
+That last one is a name collision worth slowing down for. `src/docs/contracts.json` is the authored overlay — purpose, selection criteria, compositions, anti-patterns — and it is the file you edit. `src/docs/generated/contracts.json` is the compiled artifact, and half of each contract there (variants, tokens, states, parts, props) is read out of the primitive on every run: correcting one of those fields by hand changes nothing, because the next `docs:gen` reads the primitive again. Fix the primitive instead.
 
 ## Two partial files
 

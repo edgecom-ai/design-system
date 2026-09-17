@@ -34,6 +34,8 @@ import { createHash } from "node:crypto"
 
 import { readBlocks } from "./lib/tokens.mjs"
 import { buildBaseCss, probeUtilities, scanClasses } from "./lib/base-css.mjs"
+import { extractCva } from "./lib/cva.mjs"
+import { parseSections } from "./lib/sections.mjs"
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const outDir = resolve(root, ".design-sync/bundle")
@@ -79,37 +81,7 @@ const tokenValue = (name) => {
 
 // --- sections (id -> label, group, description) ------------------------------
 // Mirrors gen-llms.mjs: top-level fields are indented exactly four spaces.
-function parseSections() {
-  const lines = sectionsSrc.split("\n")
-  const start = lines.findIndex((l) => l.includes("const sections: Section[]"))
-  const out = []
-  let cur = null
-  let awaiting = false
-  for (const l of lines.slice(start)) {
-    const id = l.match(/^\s{4}id:\s*"([^"]+)"/)
-    if (id) {
-      cur = { id: id[1], label: id[1], group: null, description: "" }
-      out.push(cur)
-      awaiting = false
-      continue
-    }
-    if (!cur) continue
-    const lab = l.match(/^\s{4}label:\s*"([^"]+)"/)
-    if (lab) { cur.label = lab[1]; continue }
-    const grp = l.match(/^\s{4}group:\s*"([^"]+)"/)
-    if (grp) { cur.group = grp[1]; continue }
-    const dIn = l.match(/^\s{4}description:\s*"((?:[^"\\]|\\.)*)"/)
-    if (dIn) { cur.description = dIn[1]; continue }
-    if (/^\s{4}description:\s*$/.test(l)) { awaiting = true; continue }
-    if (awaiting) {
-      const piece = l.match(/^\s*"((?:[^"\\]|\\.)*)"/)
-      if (piece) { cur.description += piece[1]; if (!l.trimEnd().endsWith("+")) awaiting = false; continue }
-      awaiting = false
-    }
-  }
-  return out.filter((s) => s.group)
-}
-const sections = parseSections()
+const sections = parseSections(sectionsSrc)
 
 // --- generated API (parts / props) -------------------------------------------
 // gen-api.mjs writes a plain JSON object literal, so slice it out and parse it
@@ -146,76 +118,6 @@ function loadCuratedSummaries() {
 }
 const curated = loadCuratedSummaries()
 
-// --- cva extraction ----------------------------------------------------------
-// Pulls the base class string and each variant group's class strings straight
-// out of the primitive, so a card renders what the component actually renders.
-function braceBody(src, openIdx) {
-  let depth = 0
-  for (let i = openIdx; i < src.length; i++) {
-    if (src[i] === "{") depth++
-    else if (src[i] === "}") { depth--; if (depth === 0) return src.slice(openIdx + 1, i) }
-  }
-  return null
-}
-
-function extractCva(src) {
-  const at = src.indexOf("cva(")
-  if (at === -1) return null
-
-  // base string: first quoted literal after cva(
-  const afterOpen = src.slice(at + 4)
-  const baseM = afterOpen.match(/^\s*("(?:[^"\\]|\\.)*"|`(?:[^`\\]|\\.)*`)/s)
-  const base = baseM ? baseM[1].slice(1, -1).replace(/\s+/g, " ").trim() : ""
-
-  const vIdx = src.indexOf("variants:", at)
-  if (vIdx === -1) return { base, groups: {}, defaults: {} }
-  const vBody = braceBody(src, src.indexOf("{", vIdx))
-  if (!vBody) return { base, groups: {}, defaults: {} }
-
-  const groups = {}
-  // top-level keys of the variants object
-  let depth = 0
-  const lines = vBody.split("\n")
-  let curGroup = null
-  let groupBody = []
-  for (const line of lines) {
-    if (depth === 0) {
-      const g = line.match(/^\s*"?([\w-]+)"?:\s*\{/)
-      if (g) { curGroup = g[1]; groupBody = []; depth = 1; continue }
-    } else {
-      const opens = (line.match(/\{/g) || []).length
-      const closes = (line.match(/\}/g) || []).length
-      if (depth + opens - closes <= 0) {
-        // close of this group
-        groups[curGroup] = parseVariantEntries(groupBody.join("\n"))
-        curGroup = null
-        depth = 0
-        continue
-      }
-      depth += opens - closes
-      groupBody.push(line)
-    }
-  }
-
-  const defaults = {}
-  const dIdx = src.indexOf("defaultVariants:", at)
-  if (dIdx !== -1) {
-    const dBody = braceBody(src, src.indexOf("{", dIdx))
-    if (dBody) for (const m of dBody.matchAll(/"?([\w-]+)"?:\s*"([^"]+)"/g)) defaults[m[1]] = m[2]
-  }
-  return { base, groups, defaults }
-}
-
-// `name: "classes"` / `"name": "classes"` / `name:\n  "classes"` — comments dropped.
-function parseVariantEntries(body) {
-  const clean = body.replace(/\/\/[^\n]*/g, "").replace(/\/\*[\s\S]*?\*\//g, "")
-  const out = {}
-  for (const m of clean.matchAll(/"?([\w-]+)"?:\s*("(?:[^"\\]|\\.)*"|`(?:[^`\\]|\\.)*`)/gs)) {
-    out[m[1]] = m[2].slice(1, -1).replace(/\s+/g, " ").trim()
-  }
-  return out
-}
-
 // --- card helpers ------------------------------------------------------------
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;")
 
@@ -228,7 +130,6 @@ ${body}
 `
 }
 
-export { extractCva, parseSections }
 
 // --- build -------------------------------------------------------------------
 async function build() {
@@ -527,48 +428,15 @@ const SAMPLE = {
 
 // The rules the Phase 0 audit found being broken, attached to the component they
 // govern so a designer meets them at the point of use rather than in a long doc.
-const RULES = {
-  dialog: [
-    "Short create actions (1–4 fields). Longer or dense edit forms go to a right `sheet` at 420px.",
-    "**Always keeps its top-right close (X).** Never `showCloseButton={false}` — only `alert-dialog` omits it.",
-  ],
-  sheet: ["Default width 420px, full-width on mobile. Keeps its top-right close (X)."],
-  "alert-dialog": [
-    "The only overlay without a close (X) — a destructive or confirming flow must force an explicit choice.",
-    "Every destructive action passes through one. Name what is affected and that it cannot be undone.",
-  ],
-  select: [
-    "**No checkmark on the selected option** in a single-select — the trigger value plus the option highlight already say it. A check belongs only in multi-select.",
-    "The list matches the trigger width so options line up under the shown value.",
-  ],
-  "dropdown-menu": [
-    "**Shrink-wraps to its widest item.** Never stretch it to the trigger width or pad items to a fixed width.",
-    "Portaled to the app root, so no `overflow` ancestor can clip it. It flips and shifts to stay in the viewport.",
-  ],
-  tabs: [
-    "**Pick the variant by the surface underneath.** Plain `background`/`card` → `default`. A tinted surface or any overlay → `adaptive` or `line`; the `muted` track has no lightness step left there and the strip vanishes.",
-    "Never hand-tint a `TabsList` with a `bg-*` override to fix that — switch the variant.",
-  ],
-  button: [
-    "A quiet destructive row action is `ghost-destructive`. Never hand-compose one from `ghost` plus destructive utilities — `ghost` re-asserts `hover:text-foreground`, so the label goes neutral exactly as the tint turns red.",
-    "Secondary/utility actions (export, refresh, filter) are icon buttons with an `aria-label` and a tooltip.",
-  ],
-  badge: [
-    "Neutral labels → `outline`; it is the default when unsure. Primary `default` is for a single key highlight only.",
-    "Commodity variants tag that commodity and nothing else.",
-  ],
-  table: [
-    "The first and last cell in a row align to the card's content padding (1.5rem), not the 0.75rem cell padding.",
-    "No icons in cells unless asked. Rely on the primitive's built-in row hover.",
-  ],
-  tooltip: [
-    "Shrink-wraps to its content — never a `max-w` or fixed width that forces wrapping.",
-    "Portaled and viewport-aware; never pin a side that lets it run off-screen.",
-  ],
-  field: ["Validation is inline and specific, via `FieldError` + `aria-invalid`. A description and an error that swap in one position take the same type token, or the layout shifts."],
-  empty: ["Pair with a retry action on async failure — never a blank screen or an endless spinner."],
-  skeleton: ["Use for loading, with `spinner` and `empty` for the other two states. Never a raw loading gap."],
-}
+// Per-component usage rules come from the contracts (src/docs/generated/
+// contracts.json), which is where authored component guidance lives now. They
+// were a map in this file, which meant the rule a designer reads in the Claude
+// Design spec and the contract an implementing agent reads could disagree with
+// nothing to catch it.
+const contractRules = (() => {
+  const doc = JSON.parse(read("src/docs/generated/contracts.json"))
+  return Object.fromEntries(doc.contracts.filter((c) => c.rules.length).map((c) => [c.id, c.rules]))
+})()
 
 function writeComponents() {
   const uiDir = resolve(root, "src/components/ui")
@@ -619,7 +487,7 @@ function writeComponents() {
     }
     const hasVariants = cva && Object.keys(cva.groups).length
     spec.push("## Rules", "")
-    if (RULES[s.id]) spec.push(...RULES[s.id].map((r) => `- ${r}`), "")
+    if (contractRules[s.id]) spec.push(...contractRules[s.id].map((r) => `- ${r}`), "")
     spec.push(
       hasVariants
         ? "Follow https://design.edgecom.ai/design.md. Use the variants above — never override the primitive's own classes, and never hand-roll a parallel version."

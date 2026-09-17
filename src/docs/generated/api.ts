@@ -14,7 +14,20 @@ export const generatedApi: Record<string, GeneratedApi> = {
     "parts": [
       "Button"
     ],
-    "props": []
+    "props": [
+      {
+        "part": "Button",
+        "name": "variant",
+        "type": "\"default\" | \"outline\" | \"secondary\" | \"ghost\" | \"ghost-destructive\" | \"destructive\" | \"success\" | \"warning\" | \"info\" | \"destructive-subtle\" | \"success-subtle\" | \"warning-subtle\" | \"info-subtle\" | \"link\"",
+        "default": "\"default\""
+      },
+      {
+        "part": "Button",
+        "name": "size",
+        "type": "\"default\" | \"xs\" | \"sm\" | \"lg\" | \"icon\" | \"icon-xs\" | \"icon-sm\" | \"icon-lg\"",
+        "default": "\"default\""
+      }
+    ]
   },
   "input": {
     "base": {
@@ -604,7 +617,8 @@ export const generatedApi: Record<string, GeneratedApi> = {
       {
         "part": "Timeline",
         "name": "positions",
-        "type": "\"left\" | \"right\" | \"center\""
+        "type": "\"left\" | \"right\" | \"center\"",
+        "default": "\"left\""
       }
     ]
   },
@@ -671,7 +685,14 @@ export const generatedApi: Record<string, GeneratedApi> = {
       "TabsIndicator",
       "TabsContent"
     ],
-    "props": []
+    "props": [
+      {
+        "part": "Tabs",
+        "name": "variant",
+        "type": "\"default\" | \"adaptive\" | \"line\"",
+        "default": "\"default\""
+      }
+    ]
   },
   "popover": {
     "base": {
