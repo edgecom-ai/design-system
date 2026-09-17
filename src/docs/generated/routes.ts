@@ -66,6 +66,10 @@ export const staticParams: { group: string; slug: string }[] = [
   },
   {
     "group": "components",
+    "slug": "alert-dialog"
+  },
+  {
+    "group": "components",
     "slug": "dropdown-menu"
   },
   {
@@ -231,6 +235,10 @@ export const staticParams: { group: string; slug: string }[] = [
   {
     "group": "components",
     "slug": "tooltip"
+  },
+  {
+    "group": "components",
+    "slug": "hover-card"
   },
   {
     "group": "components",

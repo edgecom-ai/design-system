@@ -20,12 +20,6 @@ const TooltipContentDemo = React.lazy(() => import("@/components/shadcn-studio/t
 
 const TooltipBadgeDemo = React.lazy(() => import("@/components/shadcn-studio/tooltip/tooltip-10"));
 
-const HoverCardStatsDemo = React.lazy(() => import("@/components/shadcn-studio/tooltip/tooltip-12"));
-
-const HoverCardProjectDemo = React.lazy(() => import("@/components/shadcn-studio/tooltip/tooltip-13"));
-
-const HoverCardTasksDemo = React.lazy(() => import("@/components/shadcn-studio/tooltip/tooltip-15"));
-
 const content = {
   variants: [
       {
@@ -85,27 +79,6 @@ const content = {
           </TooltipProvider>
         ),
         source: ss("tooltip/tooltip-04"),
-      },
-      {
-        id: "hover-card-stats",
-        name: "Hover card — stats",
-        description: "A rich hover card surfacing key metrics at a glance.",
-        preview: <HoverCardStatsDemo />,
-        source: ss("tooltip/tooltip-12"),
-      },
-      {
-        id: "hover-card-project",
-        name: "Hover card — project",
-        description: "Preview project details without leaving the page.",
-        preview: <HoverCardProjectDemo />,
-        source: ss("tooltip/tooltip-13"),
-      },
-      {
-        id: "hover-card-tasks",
-        name: "Hover card — tasks",
-        description: "Show a summary task list on hover.",
-        preview: <HoverCardTasksDemo />,
-        source: ss("tooltip/tooltip-15"),
       },
     ],
 };

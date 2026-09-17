@@ -8,20 +8,51 @@
     "Every claim here has to be true of the primitive or stated in design.md — this text is",
     "published to consumers through the Claude Design specs."
   ],
-  "$pending": {
-    "note": [
-      "alert-dialog has a primitive in src/components/ui and is named seven times in design.md as",
-      "the mandatory gate for every destructive action, but it has no section in sections.tsx and no",
-      "registry item — so it has no docs page, cannot be installed, and can carry no contract.",
-      "Its guidance is parked here rather than deleted. Move it up to a real key once the component",
-      "is documented and published. hover-card is in the same position (six mentions, not shipped)."
+  "alert-dialog": {
+    "purpose": "The confirmation gate for an irreversible action. It is the only overlay that omits the close, because a destructive flow has to end in an explicit choice rather than a dismissal.",
+    "useWhen": [
+      "An action deletes, removes, disconnects, resets or purges something.",
+      "An action is irreversible in any other way, or costs real money.",
+      "A bulk action applies to more rows than the user can see at once."
     ],
-    "alert-dialog": {
-      "rules": [
-        "The only overlay without a close (X) — a destructive or confirming flow must force an explicit choice.",
-        "Every destructive action passes through one. Name what is affected and that it cannot be undone."
-      ]
-    }
+    "dontUseWhen": [
+      "The action is reversible and routine — commit it and confirm with a `toast`.",
+      "The overlay is a short create or edit form — that is `dialog`, which keeps its close."
+    ],
+    "requires": [
+      "An `AlertDialogTitle` naming what is about to happen, and a description stating what is affected and that it cannot be undone.",
+      "Exactly two choices in the footer: `AlertDialogCancel` and `AlertDialogAction`.",
+      "`variant=\"destructive\"` on the action when the outcome is destructive.",
+      "A `toast` afterwards reporting what happened.",
+      "For a high-impact or bulk action, a stronger barrier — type the resource name to enable the confirm."
+    ],
+    "forbids": [
+      "Wiring a destructive action straight to its trigger, with no confirmation in between.",
+      "Adding a close (X). This is the one overlay that deliberately has none; adding one gives back the escape route the component exists to remove.",
+      "A vague title. \"Are you sure?\" does not name what is affected."
+    ],
+    "rules": [
+      "The only overlay without a close (X) — a destructive or confirming flow must force an explicit choice.",
+      "Every destructive action passes through one. Name what is affected and that it cannot be undone."
+    ],
+    "behavior": {
+      "destructive": "This component is the destructive path. The trigger opens it; the action runs only from `AlertDialogAction`, and its result is surfaced with a `toast`.",
+      "loading": "While the action is in flight the confirm is disabled rather than the dialog being closed early, so a second confirm cannot land."
+    },
+    "a11yRequirements": [
+      "The title is the accessible name; it is announced, so it has to carry the meaning on its own.",
+      "Focus moves into the popup on open and returns to the trigger on close.",
+      "Cancel is reachable first by keyboard — the footer reverses on small screens so the dismissing choice is not the default target."
+    ],
+    "examples": [
+      "`<AlertDialog><AlertDialogTrigger render={<Button variant=\"outline\">Disconnect gateway</Button>} /><AlertDialogContent><AlertDialogHeader><AlertDialogTitle>Disconnect this gateway?</AlertDialogTitle><AlertDialogDescription>…</AlertDialogDescription></AlertDialogHeader><AlertDialogFooter><AlertDialogCancel>Keep connected</AlertDialogCancel><AlertDialogAction variant=\"destructive\">Disconnect</AlertDialogAction></AlertDialogFooter></AlertDialogContent></AlertDialog>`",
+      "Type-to-confirm: hold the action `disabled` until a `field` + `input` matches the resource name exactly."
+    ],
+    "antiPatterns": [
+      "A row delete that fires on click, with only a toast afterwards offering an undo.",
+      "A confirmation whose copy says \"This action cannot be undone\" without saying what the action is.",
+      "Reusing `dialog` for a delete, so the user can dismiss their way out of a decision the product needs recorded."
+    ]
   },
 
   "button": {
@@ -66,6 +97,43 @@
       "Reaching for `destructive` on a row delete, which paints a red chip on every row.",
       "A labelled text button for every toolbar action, competing with the screen's one primary action.",
       "Primary `default` on several buttons in one view."
+    ]
+  },
+
+  "hover-card": {
+    "purpose": "The richer half of the density rule: detail that would otherwise need more columns, revealed on hover or focus while the primary value stays visible in place.",
+    "useWhen": [
+      "A dense table, metric tile or chart has secondary detail that does not deserve its own column.",
+      "An identifier in running text — a meter, a site, a tariff — is worth previewing without a navigation."
+    ],
+    "dontUseWhen": [
+      "The detail is one short line — that is a `tooltip`, which shrink-wraps and stays transient.",
+      "The content is interactive or needs a click to open — that is a `popover`.",
+      "The information is essential to the task. Anything a user must read cannot live behind a hover."
+    ],
+    "requires": [
+      "A focusable trigger, so the card is reachable without a pointer.",
+      "Portalling left on, so a card inside a table or a `scroll-area` is never clipped."
+    ],
+    "forbids": [
+      "Putting an action inside the card that exists nowhere else — hover is not a reliable way to reach a control.",
+      "Pinning a side that lets the card run off-screen; the positioner flips and shifts by default."
+    ],
+    "rules": [
+      "Richer than a `tooltip` and lighter than a `popover`: it opens on hover, so nothing inside it may be the only path to an action.",
+      "Portaled and viewport-aware — never render it inline inside a clipping or scrolling container."
+    ],
+    "a11yRequirements": [
+      "The trigger is keyboard-focusable and opens the card on focus, not only on hover.",
+      "The card's content is supplementary; the row or sentence still reads correctly without it."
+    ],
+    "examples": [
+      "`<HoverCard><HoverCardTrigger render={<Button variant=\"link\" size=\"sm\">Distribution Center</Button>} /><HoverCardContent align=\"start\">…</HoverCardContent></HoverCard>`"
+    ],
+    "antiPatterns": [
+      "A hover card on a plain `span`, unreachable by keyboard.",
+      "Moving a value users scan for into a hover card to tidy a table.",
+      "A hover card holding the only Edit button for a row."
     ]
   },
 
