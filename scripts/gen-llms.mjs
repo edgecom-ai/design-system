@@ -14,8 +14,22 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { freshness, forced } from "./lib/stale.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+
+// Skip the work when nothing this generator reads has moved (see lib/stale.mjs).
+// `--force` / DOCS_GEN_FORCE=1 rebuilds regardless.
+const stamp = freshness({
+  name: "llms",
+  inputs: ["src/app/sections.tsx", "scripts/gen-llms.mjs"],
+  outputs: ["public/llms.txt"],
+});
+if (stamp.fresh && !forced()) {
+  console.log("gen-llms — up to date — skipped");
+  process.exit(0);
+}
+
 const src = readFileSync(resolve(root, "src/app/sections.tsx"), "utf8");
 const llmsPath = resolve(root, "public/llms.txt");
 
@@ -105,3 +119,5 @@ if (!re.test(txt)) {
 }
 writeFileSync(llmsPath, txt.replace(re, block));
 console.log(`gen-llms — ${count} sections across ${groups.filter((g) => sections.some((s) => s.group === g)).length} groups → public/llms.txt`);
+
+stamp.save();

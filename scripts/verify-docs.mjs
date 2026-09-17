@@ -20,6 +20,7 @@
 
 import { createServer } from "node:http"
 import { readFile, readdir, stat } from "node:fs/promises"
+import { readFileSync as readFileSyncSync } from "node:fs"
 import { resolve, dirname, extname, join } from "node:path"
 import { fileURLToPath } from "node:url"
 
@@ -31,7 +32,7 @@ const baseArg = argv.includes("--base") ? argv[argv.indexOf("--base") + 1] : nul
 
 // Routes chosen to cover each group and the shapes that differ: a prose page, a
 // foundations page, variant pages, and a block.
-const ROUTES = [
+const SAMPLE = [
   "/getting-started/introduction/",
   "/foundations/colors/",
   "/foundations/typography/",
@@ -43,6 +44,19 @@ const ROUTES = [
   "/components/skeleton/",
   "/blocks/chart-blocks/",
 ]
+
+// `--all` checks every generated route instead of the sample. The sample is the
+// CI default because it is ~8x faster and catches shape regressions; use --all
+// after anything that touches section content wholesale, where a single section
+// can break on its own without the sample ever loading it.
+function allRoutes() {
+  const ts = readFileSyncSync(resolve(root, "src/docs/generated/routes.ts"), "utf8")
+  const m = /=\s*\[/.exec(ts)
+  const json = ts.slice(m.index + m[0].indexOf("["), ts.lastIndexOf("]") + 1)
+  return JSON.parse(json).map((r) => `/${r.group}/${r.slug}/`)
+}
+
+const ROUTES = argv.includes("--all") ? allRoutes() : SAMPLE
 
 const MIME = {
   ".html": "text/html", ".js": "text/javascript", ".css": "text/css",

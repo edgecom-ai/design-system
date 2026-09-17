@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { Link } from '@/components/docs/link'
 
 import { Trash2Icon } from 'lucide-react'
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogClose } from '@/components/ui/dialog'

@@ -1,14 +1,8 @@
-<!-- BEGIN:nextjs-agent-rules -->
-# This is NOT the Next.js you know
-
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
-<!-- END:nextjs-agent-rules -->
-
 # Edgecom Design System — maintainer guide
 
 **This file is for people (and agents) developing _this repo_** — authoring primitives, tuning tokens, and running the docs site / registry build. If instead you're **consuming** the design system in another app, read [agents.md](https://design.edgecom.ai/agents.md) (source: [public/agents.md](public/agents.md)). For the **design language, tokens, and usage guardrails**, read [design.md](design.md) (published at [design.edgecom.ai/design.md](https://design.edgecom.ai/design.md)). For how the registry is consumed, hosted, and updated in depth, see [REGISTRY.md](REGISTRY.md).
 
-This repo is two things at once: a **Next.js 16 docs site** and the **source of truth for the public `edgecom-ai/design-system` shadcn registry**.
+This repo is two things at once: a **Vite + TanStack Router docs site** and the **source of truth for the public `edgecom-ai/design-system` shadcn registry**.
 
 > When you author or change any UI here (a primitive, a demo, a doc page), you are also *building with the design system* — follow [design.md](design.md) as well as this file.
 
@@ -51,7 +45,7 @@ You rarely run the generators by hand — `predev`/`prebuild` do it. Run `pnpm r
 
 ## Stack & house style
 
-- **Next.js 16** — breaking changes vs. training data; read `node_modules/next/dist/docs/` before writing Next code (see the block up top).
+- **Vite + TanStack Router**, a client-rendered SPA built to static files. The route tree is code-based, in `src/router.tsx`; `pnpm build` runs `vite build` and then `scripts/prerender.mjs`, which writes one HTML shell per route so GitHub Pages — which has no server-side fallback — resolves every URL in `llms.txt`. Nothing the registry ships imports from either; keep it that way.
 - **Base UI, not Radix.** The package is **`@base-ui/react`**, imported per subpath (e.g. `@base-ui/react/dialog`, `@base-ui/react/button`). Pass a trigger via the **`render` prop** — there is no `asChild`:
   ```tsx
   // ✅ Base UI
@@ -127,7 +121,7 @@ The old `Edgecom Energy Design System` project is **legacy**: a Figma reconstruc
 
 1. Primitive → `src/components/ui/<name>.tsx` (follow the house style above).
 2. Demo → `src/components/demo/<name>-demo.tsx`.
-3. Register the section in [`src/app/sections.tsx`](src/app/sections.tsx).
+3. Register the section: **metadata** in [`src/app/sections.tsx`](src/app/sections.tsx), **content** in `src/app/sections/<id>.tsx`. The metadata is eager (the sidebar, the search dialog and every generator read all 70 entries); the content is one lazy chunk per section, so a route only downloads its own. Helpers used by two or more sections live in `src/app/sections/shared.tsx`.
 4. Curated API copy → [`src/docs/curated.ts`](src/docs/curated.ts) (shape: `summary` / `parts` / `propDescriptions` / `omitProps`; note this file uses **semicolons + double quotes**).
 5. `pnpm registry:build`.
 

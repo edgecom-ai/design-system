@@ -13,9 +13,16 @@
 # testing
 /coverage
 
-# next.js
-/.next/
+# docs site build output (Vite)
 /out/
+/.vite/
+# Left over from the Next.js era. Kept so a tree that still has one from before
+# the Vite migration can't have it swept into a commit by `git add -A`.
+/.next/
+
+# Freshness stamps for the docs generators (scripts/lib/stale.mjs). A cache and
+# nothing else: deleting it only costs time, it never changes an output.
+/.cache/
 
 # production
 /build
@@ -40,7 +47,6 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
-next-env.d.ts
 
 # generated docs source (run `npm run docs:source`)
 /public/docs-source/
@@ -57,3 +63,23 @@ next-env.d.ts
 # Generated output uploaded to the Claude Design project; embeds the compiled
 # stylesheet, so it is rebuilt rather than committed.
 /.design-sync/bundle/
+
+# design-sync (official converter) machine state — see .design-sync/README.md
+/.ds-sync/
+/ds-bundle/
+/.design-sync/.cache/
+/.design-sync/learnings/
+/.design-sync/node_modules
+# Internal to a maintainer's machine, and this repo is public: config.json holds
+# a Claude Design project id, NOTES.md holds project ids, internal timelines and
+# programme notes. The committable parts are README.md, conventions.md and
+# previews/.
+/.design-sync/config.json
+/.design-sync/NOTES.md
+
+# design-system package entry for the Claude Design converter (`pnpm design:entry`)
+/dist/
+
+# Internal programme notes — project IDs, timelines, metrics. This repo is
+# public; these exist only on a maintainer's machine. See docs/HANDOFF.md.
+/docs/

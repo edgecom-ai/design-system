@@ -82,9 +82,9 @@ jobs:
       - name: Install Chromium for the browser gate
         run: pnpm exec playwright install chromium --with-deps
 
-      # `pnpm build` only proves the export prerenders; the page shells are empty
-      # and every section renders client-side, so the site can build fine and
-      # render nothing. This loads real routes in a real browser, both themes.
+      # `pnpm build` only proves the shells got written; they are empty and every
+      # section renders client-side, so the site can build fine and render
+      # nothing. This loads real routes in a real browser, both themes.
       - name: Verify the built site renders
         run: pnpm verify:docs
 

@@ -133,7 +133,7 @@ function loadCuratedSummaries() {
   const out = {}
   try {
     const src = read("src/docs/curated.ts")
-    for (const m of src.matchAll(/^  ([\w-]+):\s*\{/gm)) {
+    for (const m of src.matchAll(/^ {2}([\w-]+):\s*\{/gm)) {
       const key = m[1]
       const slice = src.slice(m.index, m.index + 1200)
       const sum = slice.match(/summary:\s*\n?\s*"((?:[^"\\]|\\.)*)"/)

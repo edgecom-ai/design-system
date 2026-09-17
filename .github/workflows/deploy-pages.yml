@@ -35,9 +35,10 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      # `pnpm build` runs prebuild (docs:gen + registry:build) then the static
-      # export. The site is served at the root of the custom domain
-      # (design.edgecom.ai), so no PAGES_BASE_PATH is set.
+      # `pnpm build` runs prebuild (docs:gen + registry:build), then `vite build`
+      # and the prerender step that writes one HTML shell per route. The site is
+      # served at the root of the custom domain (design.edgecom.ai), so no
+      # PAGES_BASE_PATH is set.
       - run: pnpm build
 
       - uses: actions/configure-pages@v5

@@ -12,6 +12,7 @@
 //   -> /docs-source/components/shadcn-studio/dialog/dialog-02.tsx.json
 
 import { readFile, readdir, writeFile, mkdir, rm } from "node:fs/promises";
+import { createHash } from "node:crypto";
 import { dirname, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 import { codeToHtml } from "shiki";
@@ -20,6 +21,14 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
 const SRC = join(ROOT, "src");
 const OUT = join(ROOT, "public", "docs-source");
+// Content hashes of the inputs that produced the current outputs. Highlighting
+// 273 files with Shiki is the slowest step in `docs:gen` (~2.8 s of ~6 s), and
+// `predev` runs the whole chain on every `pnpm dev` — so re-highlighting files
+// that have not changed is most of the dev-loop latency this buys back.
+// Git-ignored with the rest of public/docs-source/.
+const MANIFEST = join(OUT, ".hashes.json");
+
+const sha = (text) => createHash("sha256").update(text).digest("hex").slice(0, 16);
 
 // Directories whose .tsx files back a documented variant.
 const SCAN_DIRS = [
@@ -47,27 +56,73 @@ async function walk(dir) {
 }
 
 async function main() {
-  await rm(OUT, { recursive: true, force: true });
-  let count = 0;
+  // Previous run's input hashes. Any failure to read them (first run, corrupt
+  // file, changed shape) just means a full rebuild — never a stale output.
+  let previous = {};
+  try {
+    const raw = JSON.parse(await readFile(MANIFEST, "utf8"));
+    if (raw && raw.v === 1 && raw.files) previous = raw.files;
+  } catch {
+    /* no usable manifest — rebuild everything */
+  }
+
+  const current = {};
+  let written = 0;
+  let reused = 0;
 
   for (const dir of SCAN_DIRS) {
     const files = await walk(dir);
     for (const file of files) {
       const code = await readFile(file, "utf8");
       const key = relative(SRC, file).split("\\").join("/"); // posix key
+      const outFile = join(OUT, `${key}.json`);
+      const hash = sha(code);
+      current[key] = hash;
+
+      // Unchanged input AND the output still on disk — the output is a pure
+      // function of the input, so there is nothing to redo. Both conditions
+      // matter: a manifest alone would happily "skip" a file someone deleted.
+      if (previous[key] === hash && (await exists(outFile))) {
+        reused++;
+        continue;
+      }
+
       const html = await codeToHtml(code, {
         lang: "tsx",
         themes: { light: "github-light", dark: "github-dark" },
         defaultColor: false, // emit CSS variables so the .dark toggle can recolor
       });
-      const outFile = join(OUT, `${key}.json`);
       await mkdir(dirname(outFile), { recursive: true });
       await writeFile(outFile, JSON.stringify({ code, html }), "utf8");
-      count++;
+      written++;
     }
   }
 
-  console.log(`docs:source — wrote ${count} demo sources to public/docs-source/`);
+  // Outputs whose source is gone. Removed by key rather than by wiping OUT, so
+  // an incremental run stays incremental — and a deleted demo still stops being
+  // served, which a hash check alone would miss.
+  let removed = 0;
+  for (const key of Object.keys(previous)) {
+    if (key in current) continue;
+    await rm(join(OUT, `${key}.json`), { force: true });
+    removed++;
+  }
+
+  await mkdir(OUT, { recursive: true });
+  await writeFile(MANIFEST, JSON.stringify({ v: 1, files: current }), "utf8");
+
+  const parts = [`${written} written`, `${reused} unchanged`];
+  if (removed) parts.push(`${removed} removed`);
+  console.log(`docs:source — ${parts.join(", ")} in public/docs-source/`);
+}
+
+async function exists(p) {
+  try {
+    await readFile(p);
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 main().catch((err) => {

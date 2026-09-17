@@ -1,0 +1,17 @@
+{
+  // Declaration-only build of the primitives for the Claude Design converter
+  // (`pnpm design:entry`). The app tsconfig has noEmit; this one emits .d.ts
+  // for exactly the files the design-system entry re-exports.
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "dist/types",
+    "rootDir": "src",
+    "incremental": false,
+    "plugins": []
+  },
+  "include": ["src/components/ui/**/*.tsx", "src/lib/**/*.ts", "src/hooks/**/*.ts"],
+  "exclude": ["node_modules"]
+}

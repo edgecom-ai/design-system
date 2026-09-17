@@ -38,7 +38,7 @@ const ShareCollaborateDialog = ({ defaultOpen = false, trigger, className }: Pro
 
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
-    } catch (e) {
+    } catch {
       // fallback for older browsers
       const textarea = document.createElement('textarea')
 

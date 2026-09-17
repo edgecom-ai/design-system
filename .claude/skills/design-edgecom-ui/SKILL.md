@@ -17,7 +17,7 @@ You are in the producer repo. Whatever you add here ships to every consuming app
 
 1. **Primitive** → `src/components/ui/<name>.tsx`. House style is in `.claude/rules/ui-primitives.md` (it loads when you open the file): function declarations not `forwardRef`, double quotes and no semicolons, `cva` + `VariantProps`, `cn()`, a `data-slot` on every element, one `export { … }` block at the end, Base UI `render` prop not `asChild`.
 2. **Demo** → `src/components/demo/<name>-demo.tsx`. Named export, PascalCase ending in `Demo`, matching the filename. `"use client"` only if interactive. Edgecom domain copy with fictional proper nouns — this repo is public and demo copy ships verbatim.
-3. **Register the section** in `src/app/sections.tsx`.
+3. **Register the section**: metadata in `src/app/sections.tsx`, content in `src/app/sections/<id>.tsx` (lazily imported; shared helpers in `src/app/sections/shared.tsx`).
 4. **Curated API copy** → `src/docs/curated.ts` (`summary` / `parts` / `propDescriptions` / `omitProps`). Note this file uses semicolons + double quotes, unlike the primitives.
 5. **`pnpm registry:build`.**
 

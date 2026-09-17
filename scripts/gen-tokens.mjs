@@ -15,8 +15,22 @@ import { execFileSync } from "node:child_process"
 import { createHash } from "node:crypto"
 
 import { buildTokens } from "./lib/tokens.mjs"
+import { freshness, forced } from "./lib/stale.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..")
+
+// Skip the work when nothing this generator reads has moved (see lib/stale.mjs).
+// `--force` / DOCS_GEN_FORCE=1 rebuilds regardless.
+const stamp = freshness({
+  name: "tokens",
+  inputs: ["src/app/globals.css", "scripts/gen-tokens.mjs", "scripts/lib/tokens.mjs"],
+  outputs: ["src/docs/generated/tokens.json"],
+});
+if (stamp.fresh && !forced()) {
+  console.log("gen-tokens — up to date — skipped");
+  process.exit(0);
+}
+
 const cssPath = resolve(root, "src/app/globals.css")
 const outPath = resolve(root, "src/docs/generated/tokens.json")
 
@@ -75,3 +89,5 @@ console.log(
     `(${doc.counts.withDarkOverride} with a dark override, ${doc.counts.aliases} aliases, ` +
     `${doc.counts.tailwindExposed} exposed to Tailwind) → src/docs/generated/tokens.json`,
 )
+
+stamp.save();

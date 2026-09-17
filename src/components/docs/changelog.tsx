@@ -1,6 +1,6 @@
 "use client"
 
-import Link from "next/link"
+import { Link } from "@/components/docs/link"
 
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
@@ -113,7 +113,7 @@ export function Changelog({
           item it touched. The same list is published as{" "}
           <a
             className="font-medium text-primary underline underline-offset-4 dark:text-primary-emphasis"
-            href={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/changelog.md`}
+            href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/changelog.md`}
             target="_blank"
             rel="noreferrer"
           >

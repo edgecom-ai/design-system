@@ -13,8 +13,22 @@
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { freshness, forced } from "./lib/stale.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+
+// Skip the work when nothing this generator reads has moved (see lib/stale.mjs).
+// `--force` / DOCS_GEN_FORCE=1 rebuilds regardless.
+const stamp = freshness({
+  name: "routes",
+  inputs: ["src/app/sections.tsx", "scripts/gen-routes.mjs"],
+  outputs: ["src/docs/generated/routes.ts"],
+});
+if (stamp.fresh && !forced()) {
+  console.log("gen-routes — up to date — skipped");
+  process.exit(0);
+}
+
 const src = readFileSync(resolve(root, "src/app/sections.tsx"), "utf8");
 const lines = src.split("\n");
 const start = lines.findIndex((l) => l.includes("const sections: Section[]"));
@@ -49,3 +63,5 @@ writeFileSync(
     ";\n"
 );
 console.log(`gen-routes — ${params.length} routes`);
+
+stamp.save();

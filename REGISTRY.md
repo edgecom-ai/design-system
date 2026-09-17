@@ -54,7 +54,7 @@ What happens on install:
 
 - **Tailwind v4** with `@import "tailwindcss";` in your CSS entry.
 - A `@/*` path alias (`tsconfig.json` / `jsconfig.json`) matching your `components.json` aliases.
-- React 19 / Next 16 (or compatible). Components are Base UI + Tailwind v4.
+- React 19. Components are Base UI + Tailwind v4 and import nothing framework-specific, so any React stack works — Next, Vite, TanStack Start, Remix.
 
 ---
 

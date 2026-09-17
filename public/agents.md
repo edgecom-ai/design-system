@@ -16,7 +16,7 @@ Published at **[design.edgecom.ai/agents.md](https://design.edgecom.ai/agents.md
   pnpm dlx shadcn@latest add edgecom-ai/design-system/button
   ```
   Pin to a ref with `#ref`; preview before writing with `--dry-run` (see [REGISTRY.md](https://github.com/edgecom-ai/design-system/blob/main/REGISTRY.md)).
-- **Prereqs in the consuming app:** a shadcn-initialized project, **Tailwind v4** (`@import "tailwindcss";`), a `@/*` path alias matching your `components.json`, **React 19 / Next 16**, and **Base UI** (`@base-ui/react`).
+- **Prereqs in the consuming app:** a shadcn-initialized project, **Tailwind v4** (`@import "tailwindcss";`), a `@/*` path alias matching your `components.json`, **React 19**, and **Base UI** (`@base-ui/react`). No particular framework: the primitives import nothing framework-specific.
 - **Discover before you build.** Browse every component (light/dark, with code) at **[design.edgecom.ai](https://design.edgecom.ai)** — the catalog is the source of truth for what exists. Don't copy/paste or reimplement a primitive.
 - **Compose, don't reinvent.** Build higher-level patterns (blocks, page sections) from the installed primitives — blocks are **not** registry items. Don't copy a primitive to tweak it or reach into its internals; extend through its exposed `cva` variants and `size` props.
 - **No third-party components or dependencies unless asked or required.** Don't pull in an outside UI-component library or add an npm dependency unless (a) the user explicitly requests it, or (b) it's already required by a registry component (deps + `registryDependencies` are inferred from imports — see [REGISTRY.md](https://github.com/edgecom-ai/design-system/blob/main/REGISTRY.md) §3). Reach for the registry primitives and Base UI first.

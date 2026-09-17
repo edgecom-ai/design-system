@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { Link } from "@/components/docs/link";
+import { useRouter } from "@tanstack/react-router";
 import { Search } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -41,7 +41,11 @@ import {
   groupedSections,
   findSection,
   sectionPath,
+  sectionContent,
+  type Section,
+  type SectionContent,
 } from "./sections";
+import type { ComponentApi } from "@/docs/api";
 
 /**
  * The docs chrome (sidebar nav + header + content + ⌘K), driven by the current
@@ -63,6 +67,80 @@ function SectionFallback() {
       </div>
     </div>
   )
+}
+
+/**
+ * One cached promise per section. `use()` re-reads the promise on every render,
+ * so handing it a fresh one each time would suspend forever — the cache is what
+ * makes the module load exactly once and the result stick.
+ */
+const contentPromises = new Map<string, Promise<{ default: SectionContent }>>();
+
+function loadContent(id: string) {
+  let p = contentPromises.get(id);
+  if (!p) {
+    const load = sectionContent[id];
+    if (!load) throw new Error(`no content module registered for section "${id}"`);
+    p = load();
+    contentPromises.set(id, p);
+  }
+  return p;
+}
+
+/**
+ * The section body. Split out of `DocsShell` so it can suspend on its own:
+ * the shell, sidebar and header stay painted while a section's chunk arrives.
+ */
+function SectionBody({
+  section,
+  api,
+}: {
+  section: Section;
+  api: ComponentApi | null;
+}) {
+  const content = React.use(loadContent(section.id)).default;
+
+  if (content.variants) {
+    return (
+      <div className="mx-auto flex w-full max-w-6xl gap-8 p-8">
+        <div className="flex min-w-0 flex-1 flex-col gap-10">
+          {content.variants.map((v) => (
+            <ComponentPreview
+              key={v.id}
+              id={v.id}
+              name={v.name}
+              description={v.description}
+              preview={v.preview}
+              source={v.source}
+            />
+          ))}
+          {api && <ApiReference api={api} />}
+        </div>
+        <aside className="sticky top-24 hidden h-fit w-52 shrink-0 xl:block">
+          <Toc
+            items={[
+              ...content.variants.map((v) => ({ id: v.id, name: v.name })),
+              ...(api ? [{ id: "api-reference", name: "API reference" }] : []),
+            ]}
+            install={section.install}
+          />
+        </aside>
+      </div>
+    );
+  }
+
+  if (section.toc) {
+    return (
+      <div className="mx-auto flex w-full max-w-6xl gap-8 p-8">
+        <div className="min-w-0 flex-1">{content.node}</div>
+        <aside className="sticky top-24 hidden h-fit w-52 shrink-0 xl:block">
+          <Toc items={section.toc} install={section.install} />
+        </aside>
+      </div>
+    );
+  }
+
+  return <div className="mx-auto w-full max-w-6xl p-8">{content.node}</div>;
 }
 
 export function DocsShell({ group, slug }: { group: string; slug: string }) {
@@ -184,7 +262,7 @@ export function DocsShell({ group, slug }: { group: string; slug: string }) {
               </div>
             </div>
           </div>
-          {active.install && !active.variants && !active.toc && (
+          {active.install && !active.hasVariants && !active.toc && (
             <div className="max-w-md">
               <InstallCommand command={active.install} />
             </div>
@@ -197,41 +275,7 @@ export function DocsShell({ group, slug }: { group: string; slug: string }) {
               the section id so switching sections shows the fallback rather than
               holding the previous section's content while the next one loads. */}
           <React.Suspense key={active.id} fallback={<SectionFallback />}>
-          {active.variants ? (
-            <div className="mx-auto flex w-full max-w-6xl gap-8 p-8">
-              <div className="flex min-w-0 flex-1 flex-col gap-10">
-                {active.variants.map((v) => (
-                  <ComponentPreview
-                    key={v.id}
-                    id={v.id}
-                    name={v.name}
-                    description={v.description}
-                    preview={v.preview}
-                    source={v.source}
-                  />
-                ))}
-                {api && <ApiReference api={api} />}
-              </div>
-              <aside className="sticky top-24 hidden h-fit w-52 shrink-0 xl:block">
-                <Toc
-                  items={[
-                    ...active.variants.map((v) => ({ id: v.id, name: v.name })),
-                    ...(api ? [{ id: "api-reference", name: "API reference" }] : []),
-                  ]}
-                  install={active.install}
-                />
-              </aside>
-            </div>
-          ) : active.toc ? (
-            <div className="mx-auto flex w-full max-w-6xl gap-8 p-8">
-              <div className="min-w-0 flex-1">{active.node}</div>
-              <aside className="sticky top-24 hidden h-fit w-52 shrink-0 xl:block">
-                <Toc items={active.toc} install={active.install} />
-              </aside>
-            </div>
-          ) : (
-            <div className="mx-auto w-full max-w-6xl p-8">{active.node}</div>
-          )}
+            <SectionBody section={active} api={api} />
           </React.Suspense>
         </div>
       </SidebarInset>
@@ -248,7 +292,7 @@ export function DocsShell({ group, slug }: { group: string; slug: string }) {
                   value={`${group} ${s.label}`}
                   onSelect={() => {
                     setSearchOpen(false);
-                    router.push(sectionPath(s));
+                    router.navigate({ to: sectionPath(s) as never });
                   }}
                 >
                   {s.label}

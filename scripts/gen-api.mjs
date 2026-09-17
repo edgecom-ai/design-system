@@ -14,10 +14,32 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
 import { codeToHtml } from "shiki";
+import { readdirSync } from "node:fs";
+import { freshness, forced } from "./lib/stale.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, "..");
 const uiDir = resolve(root, "src/components/ui");
+
+// Skip the work when nothing this generator reads has moved (see lib/stale.mjs).
+// Every primitive is an input: the props table is derived from their sources.
+const stamp = freshness({
+  name: "api",
+  inputs: [
+    "src/app/sections.tsx",
+    "src/docs/api.ts",
+    "scripts/gen-api.mjs",
+    ...readdirSync(uiDir)
+      .filter((f) => f.endsWith(".tsx"))
+      .map((f) => `src/components/ui/${f}`),
+  ],
+  outputs: ["src/docs/generated/api.ts", "src/docs/generated/api-highlight.ts"],
+});
+if (stamp.fresh && !forced()) {
+  console.log("gen-api — up to date — skipped");
+  process.exit(0);
+}
+
 
 // Sections whose primitive lives under a different filename than the section id.
 const aliasFile = { list: "item", toast: "sonner" };
@@ -269,3 +291,5 @@ export const apiHighlight: Record<string, string> = ${JSON.stringify(
 console.log(
   `gen-api — ${Object.keys(generated).length} components, ${strings.size} highlighted strings`
 );
+
+stamp.save();

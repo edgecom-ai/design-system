@@ -16,8 +16,22 @@ import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { readBlocks } from "./lib/tokens.mjs";
+import { freshness, forced } from "./lib/stale.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+
+// Skip the work when nothing this generator reads has moved (see lib/stale.mjs).
+// `--force` / DOCS_GEN_FORCE=1 rebuilds regardless.
+const stamp = freshness({
+  name: "design-md",
+  inputs: ["src/app/globals.css", "scripts/gen-design-md.mjs"],
+  outputs: ["design.md", "public/design.md"],
+});
+if (stamp.fresh && !forced()) {
+  console.log("gen-design-md — up to date — skipped");
+  process.exit(0);
+}
+
 const css = readFileSync(resolve(root, "src/app/globals.css"), "utf8");
 const designPath = resolve(root, "design.md");
 const publicPath = resolve(root, "public/design.md");
@@ -115,3 +129,5 @@ const colorCount = COLOR_GROUPS.reduce((n, g) => n + g.keys.length, 0) + COMMODI
 console.log(
   `gen-design-md — ${colorCount} colors + ${TYPE_SCALE.length} type steps + ${RADII.length + 1} radii → design.md (+ public/design.md)`
 );
+
+stamp.save();

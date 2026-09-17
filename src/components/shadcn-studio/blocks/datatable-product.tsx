@@ -86,7 +86,6 @@ const columns: ColumnDef<Item>[] = [
     cell: ({ row }) => (
       <div className='flex items-center gap-2'>
         <div className='bg-primary/5 flex size-10 items-center justify-center rounded-sm'>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={row.original.productImage} alt={row.getValue('product')} className='w-7.5' />
         </div>
         <div className='flex flex-col'>

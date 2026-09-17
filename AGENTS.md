@@ -13,7 +13,7 @@ This file is the routing layer. The detail loads on demand — don't work from m
 | Any UI at all — primitive, demo, doc page | **[design.md](design.md)** — the design language and usage guardrails. Not optional. |
 | Repo mechanics — scripts, generators, registry, docs site | **[MAINTAINERS.md](MAINTAINERS.md)** |
 | Registry install/hosting mechanics | **[REGISTRY.md](REGISTRY.md)** |
-| Anything touching Next.js | `node_modules/next/dist/docs/` — **this is Next.js 16; it has breaking changes vs. your training data.** Never write Next code from memory. |
+| Anything touching the docs site's routing or build | `src/router.tsx` and `scripts/prerender.mjs` — Vite + TanStack Router, code-based routes, one prerendered HTML shell per route. |
 
 Path-scoped rules in `.claude/rules/` load themselves when you open a matching file (primitives, demos, tokens, generated artifacts, the docs shell). Longer procedures live in `.claude/skills/`.
 

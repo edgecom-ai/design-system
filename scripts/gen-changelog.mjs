@@ -35,12 +35,39 @@ import { execFileSync } from "node:child_process";
 import { readFileSync, writeFileSync, existsSync, mkdirSync, copyFileSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { freshness, forced } from "./lib/stale.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const outFile = resolve(root, "src/docs/generated/changelog.ts");
 const notesFile = resolve(root, "src/docs/changelog-notes.json");
 const mdFile = resolve(root, "CHANGELOG.md");
 const publicMdFile = resolve(root, "public/changelog.md");
+
+// Skip the work when the history this generator reads has not moved (see
+// lib/stale.mjs). The inputs are not files but git state, so the commit at HEAD
+// and the tag list stand in for them. Any git failure means no stamp key, which
+// means "regenerate" — the shallow-clone guard below still has the last word.
+let gitKey = "";
+try {
+  gitKey =
+    execFileSync("git", ["rev-parse", "HEAD"], { cwd: root, encoding: "utf8" }) +
+    execFileSync("git", ["tag", "--list"], { cwd: root, encoding: "utf8" });
+} catch {
+  /* not a git tree, or git unavailable — fall through and regenerate */
+}
+const stamp = gitKey
+  ? freshness({
+      name: "changelog",
+      inputs: ["scripts/gen-changelog.mjs"],
+      outputs: ["src/docs/generated/changelog.ts", "public/changelog.md"],
+      extra: gitKey,
+    })
+  : { fresh: false, save() {} };
+if (stamp.fresh && !forced()) {
+  console.log("gen-changelog — up to date — skipped");
+  process.exit(0);
+}
+
 
 const REPO_URL = "https://github.com/edgecom-ai/design-system";
 const MAX_COMMITS = 500;
@@ -295,3 +322,5 @@ copyFileSync(mdFile, publicMdFile);
 console.log(
   `gen-changelog — ${commits.length} commits in ${releases.length} ${tagged ? "tagged releases" : "dated groups"}`
 );
+
+stamp.save();
