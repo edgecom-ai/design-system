@@ -190,6 +190,27 @@ export const curatedApi: Record<string, CuratedApi> = {
       DatePicker: "Button + popover Calendar for selecting a single date.",
     },
   },
+  "alert-dialog": {
+    summary:
+      "The confirmation an irreversible action passes through: a Trigger opens a portalled, centered Content whose footer forces an explicit Cancel or Action choice.",
+    parts: {
+      AlertDialog: "Root managing the confirmation's open state.",
+      AlertDialogTrigger: "Element that opens the confirmation on click.",
+      AlertDialogPortal: "Renders the confirmation outside the DOM tree.",
+      AlertDialogOverlay: "Fixed scrim behind the popup, blurred where supported.",
+      AlertDialogContent: "Portalled, centered popup at default or sm width.",
+      AlertDialogHeader: "Centered stack of media, title, and description; left-aligned from sm up at default size.",
+      AlertDialogMedia: "Rounded muted tile for a leading status icon.",
+      AlertDialogTitle: "Heading naming what is about to happen.",
+      AlertDialogDescription: "Supporting text stating what is affected and that it can't be undone.",
+      AlertDialogFooter: "Tinted footer row holding the two choices.",
+      AlertDialogAction: "The confirming button — destructive variant for a destructive action.",
+      AlertDialogCancel: "The dismissing button; outline variant by default.",
+    },
+    propDescriptions: {
+      "AlertDialogContent.size": "Popup width — default, or sm for a two-column footer.",
+    },
+  },
   dialog: {
     summary:
       "A modal dialog: a Trigger opens a portalled overlay + centered Content, with styled header/footer, title, description, and close.",
@@ -258,6 +279,21 @@ export const curatedApi: Record<string, CuratedApi> = {
     // The cva variant lives on EmptyMedia, not Empty — the extractor attributes
     // it to the primary part, so drop that and re-add it correctly (see api.ts).
     omitProps: ["Empty.variant"],
+  },
+  "hover-card": {
+    summary:
+      "Richer detail revealed on hover or focus: a Trigger anchors a portalled, positioned Content that escapes any clipping container.",
+    parts: {
+      HoverCard: "Root managing the open state and hover delay.",
+      HoverCardTrigger: "Element the card is anchored to.",
+      HoverCardContent: "Portalled popup, positioned and collision-aware, 16rem wide by default.",
+    },
+    propDescriptions: {
+      "HoverCardContent.side": "Which side of the trigger the card opens on.",
+      "HoverCardContent.align": "Alignment of the card relative to the trigger.",
+      "HoverCardContent.sideOffset": "Gap in pixels between the trigger and the card.",
+      "HoverCardContent.alignOffset": "Shift along the alignment axis, in pixels.",
+    },
   },
   input: {
     summary: "A single-line text field with focus, disabled, and invalid states.",

@@ -127,6 +127,27 @@ export const generatedApi: Record<string, GeneratedApi> = {
     ],
     "props": []
   },
+  "alert-dialog": {
+    "base": {
+      "name": "Base UI AlertDialog",
+      "url": "https://base-ui.com/react/components/alert-dialog"
+    },
+    "parts": [
+      "AlertDialog",
+      "AlertDialogAction",
+      "AlertDialogCancel",
+      "AlertDialogContent",
+      "AlertDialogDescription",
+      "AlertDialogFooter",
+      "AlertDialogHeader",
+      "AlertDialogMedia",
+      "AlertDialogOverlay",
+      "AlertDialogPortal",
+      "AlertDialogTitle",
+      "AlertDialogTrigger"
+    ],
+    "props": []
+  },
   "dropdown-menu": {
     "base": {
       "name": "Base UI Menu",
@@ -731,6 +752,18 @@ export const generatedApi: Record<string, GeneratedApi> = {
       "TooltipTrigger",
       "TooltipContent",
       "TooltipProvider"
+    ],
+    "props": []
+  },
+  "hover-card": {
+    "base": {
+      "name": "Base UI PreviewCard",
+      "url": "https://base-ui.com/react/components/preview-card"
+    },
+    "parts": [
+      "HoverCard",
+      "HoverCardTrigger",
+      "HoverCardContent"
     ],
     "props": []
   },

@@ -38,6 +38,7 @@ Browse every component in light/dark with copyable code at [design.edgecom.ai](h
 - [Badge & status tags](https://design.edgecom.ai/components/badge/): Compact labels for statuses, counts, and commodity tags.
 - [Alert](https://design.edgecom.ai/components/alert/): Inline messages that communicate status, warnings, and errors.
 - [Dialog](https://design.edgecom.ai/components/dialog/): Modal dialogs for confirmations, forms, and focused tasks.
+- [Alert dialog](https://design.edgecom.ai/components/alert-dialog/): The confirmation every destructive action passes through — the one overlay without a close.
 - [Dropdown menu](https://design.edgecom.ai/components/dropdown-menu/): Menus of actions and options triggered from a button.
 - [Context menu](https://design.edgecom.ai/components/context-menu/): A menu of actions revealed by right-clicking (or long-pressing) a target region.
 - [Navigation menu](https://design.edgecom.ai/components/navigation-menu/): Horizontal top-level navigation with dropdown panels for links, features, and calls to action.
@@ -79,7 +80,8 @@ Browse every component in light/dark with copyable code at [design.edgecom.ai](h
 - [Tabs](https://design.edgecom.ai/components/tabs/): Switch between related views within the same context.
 - [Popover](https://design.edgecom.ai/components/popover/): Floating panels anchored to a trigger for forms and details.
 - [Radio group](https://design.edgecom.ai/components/radio-group/): Choose exactly one option from a set.
-- [Tooltip](https://design.edgecom.ai/components/tooltip/): Contextual hints and rich previews shown on hover.
+- [Tooltip](https://design.edgecom.ai/components/tooltip/): Short contextual hints shown on hover or focus.
+- [Hover card](https://design.edgecom.ai/components/hover-card/): Richer detail on hover, for dense UI where the primary value has to stay visible.
 - [Toast](https://design.edgecom.ai/components/toast/): Brief, dismissible notifications for feedback and events.
 
 ## Blocks

@@ -83,12 +83,13 @@ const problems = []
 for (const [id, entry] of Object.entries(overlay)) {
   if (id.startsWith("$")) continue
   if (!sectionIds.has(id)) {
-    // Distinguish a typo from the real gap: a primitive that ships in
-    // src/components/ui but was never given a section has no docs page and no
-    // registry item, so no contract can honestly name an install command for it.
+    // Distinguish a typo from the real gap. A primitive with no section still
+    // ships — gen-registry reads the whole directory, so it has a registry item
+    // and installs fine — but it has no docs page, no catalogue entry, and
+    // nothing for a contract's `docs` URL to point at.
     problems.push(
       existsSync(resolve(uiDir, `${ALIAS_FILE[id] ?? id}.tsx`))
-        ? `"${id}" has a primitive but no section in src/app/sections.tsx — it has no docs page and no registry item, so it can carry no contract. Park its guidance under $pending until it is documented.`
+        ? `"${id}" has a primitive and a registry item but no section in src/app/sections.tsx, so it has no docs page for a contract to point at. Give it a section, or park the guidance under a $-prefixed key.`
         : `unknown component id "${id}"`,
     )
   } else if (!existsSync(resolve(uiDir, `${ALIAS_FILE[id] ?? id}.tsx`))) {

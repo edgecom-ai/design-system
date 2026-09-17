@@ -32,6 +32,7 @@ export const sectionContent: Record<string, () => Promise<{ default: SectionCont
   "badge": () => import("./sections/badge"),
   "alert": () => import("./sections/alert"),
   "dialog": () => import("./sections/dialog"),
+  "alert-dialog": () => import("./sections/alert-dialog"),
   "dropdown-menu": () => import("./sections/dropdown-menu"),
   "context-menu": () => import("./sections/context-menu"),
   "navigation-menu": () => import("./sections/navigation-menu"),
@@ -74,6 +75,7 @@ export const sectionContent: Record<string, () => Promise<{ default: SectionCont
   "popover": () => import("./sections/popover"),
   "radio-group": () => import("./sections/radio-group"),
   "tooltip": () => import("./sections/tooltip"),
+  "hover-card": () => import("./sections/hover-card"),
   "toast": () => import("./sections/toast"),
   "authorization": () => import("./sections/authorization"),
   "detail-dialog": () => import("./sections/detail-dialog"),
@@ -279,6 +281,15 @@ export const sections: Section[] = [
     description:
       "Modal dialogs for confirmations, forms, and focused tasks.",
     install: "@edgecom/dialog",
+    hasVariants: true,
+  },
+  {
+    id: "alert-dialog",
+    label: "Alert dialog",
+    group: "Components",
+    description:
+      "The confirmation every destructive action passes through — the one overlay without a close.",
+    install: "@edgecom/alert-dialog",
     hasVariants: true,
   },
   {
@@ -619,8 +630,17 @@ export const sections: Section[] = [
     id: "tooltip",
     label: "Tooltip",
     group: "Components",
-    description: "Contextual hints and rich previews shown on hover.",
-    install: "@edgecom/tooltip @edgecom/hover-card",
+    description: "Short contextual hints shown on hover or focus.",
+    install: "@edgecom/tooltip",
+    hasVariants: true,
+  },
+  {
+    id: "hover-card",
+    label: "Hover card",
+    group: "Components",
+    description:
+      "Richer detail on hover, for dense UI where the primary value has to stay visible.",
+    install: "@edgecom/hover-card",
     hasVariants: true,
   },
   {
