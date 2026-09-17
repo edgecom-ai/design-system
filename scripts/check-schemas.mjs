@@ -13,7 +13,10 @@ import Ajv from "ajv/dist/2020.js"
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const read = (p) => JSON.parse(readFileSync(resolve(root, p), "utf8"))
 
-const PAIRS = [["schemas/tokens.schema.json", "src/docs/generated/tokens.json"]]
+const PAIRS = [
+  ["schemas/tokens.schema.json", "src/docs/generated/tokens.json"],
+  ["schemas/contracts.schema.json", "src/docs/generated/contracts.json"],
+]
 
 const ajv = new Ajv({ allErrors: true, strict: false })
 let failed = 0
@@ -27,7 +30,7 @@ for (const [schemaPath, dataPath] of PAIRS) {
   const validate = ajv.compile(read(schemaPath))
   const data = read(dataPath)
   if (validate(data)) {
-    const n = Array.isArray(data.tokens) ? data.tokens.length : "?"
+    const n = (Array.isArray(data.tokens) && data.tokens.length) || (Array.isArray(data.contracts) && data.contracts.length) || "?"
     console.log(`check-schemas — ${dataPath} valid against ${schemaPath} (${n} entries)`)
   } else {
     failed++

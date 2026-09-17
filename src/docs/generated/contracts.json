@@ -1,0 +1,5576 @@
+{
+  "$schema": "../../../schemas/contracts.schema.json",
+  "version": "v1.0.0",
+  "digest": "84013cfee09d2eb6",
+  "sources": [
+    "src/components/ui/*.tsx",
+    "src/app/sections.tsx",
+    "src/docs/curated.ts",
+    "src/docs/contracts.json"
+  ],
+  "generator": "scripts/gen-contracts.mjs",
+  "counts": {
+    "total": 49,
+    "authored": 10,
+    "withVariants": 14,
+    "withBaseUi": 23,
+    "tokenReferences": 415
+  },
+  "contracts": [
+    {
+      "id": "accordion",
+      "label": "Accordion",
+      "registryItem": "edgecom-ai/design-system/accordion",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/accordion",
+      "docs": "https://design.edgecom.ai/components/accordion/",
+      "source": "src/components/ui/accordion.tsx",
+      "summary": "A collapsible disclosure list; each AccordionItem pairs an AccordionTrigger with an AccordionContent panel.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": {
+        "name": "Base UI Accordion",
+        "url": "https://base-ui.com/react/components/accordion"
+      },
+      "parts": [
+        {
+          "name": "Accordion",
+          "description": "Root vertical container wrapping all accordion items."
+        },
+        {
+          "name": "AccordionItem",
+          "description": "Single expandable section with a bottom-border divider."
+        },
+        {
+          "name": "AccordionTrigger",
+          "description": "Header button that toggles its panel; shows a chevron."
+        },
+        {
+          "name": "AccordionContent",
+          "description": "Animated collapsible panel holding the item's content."
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [
+        "aria-disabled",
+        "data-[slot=accordion-trigger-icon]",
+        "data-closed",
+        "data-ending-style",
+        "data-open",
+        "data-starting-style",
+        "focus-visible",
+        "group-aria-expanded/accordion-trigger",
+        "hover"
+      ],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "border",
+          "family": "neutral"
+        },
+        {
+          "id": "foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "muted-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "radius-lg",
+          "family": "radius"
+        },
+        {
+          "id": "ring",
+          "family": "neutral"
+        },
+        {
+          "id": "text-body-sm",
+          "family": "typography"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [],
+      "behavior": {},
+      "a11y": {
+        "attributes": [],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "alert",
+      "label": "Alert",
+      "registryItem": "edgecom-ai/design-system/alert",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/alert",
+      "docs": "https://design.edgecom.ai/components/alert/",
+      "source": "src/components/ui/alert.tsx",
+      "summary": "A callout box laying out an optional icon, AlertTitle, AlertDescription, and a top-right AlertAction.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": null,
+      "parts": [
+        {
+          "name": "Alert",
+          "description": "Root callout container with role=alert and variant styling."
+        },
+        {
+          "name": "AlertTitle",
+          "description": "Bold single-line heading text for the alert."
+        },
+        {
+          "name": "AlertDescription",
+          "description": "Secondary descriptive body text below the title."
+        },
+        {
+          "name": "AlertAction",
+          "description": "Top-right slot for a dismiss or action button."
+        }
+      ],
+      "props": [
+        {
+          "part": "Alert",
+          "name": "variant",
+          "type": "\"default\" | \"destructive\" | \"success\" | \"warning\" | \"info\"",
+          "default": "\"default\"",
+          "description": "Tone: default, destructive, success, warning, or info."
+        }
+      ],
+      "variants": [
+        {
+          "name": "variant",
+          "options": [
+            "default",
+            "destructive",
+            "success",
+            "warning",
+            "info"
+          ],
+          "default": "default"
+        }
+      ],
+      "states": [
+        "hover"
+      ],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "border",
+          "family": "neutral"
+        },
+        {
+          "id": "card",
+          "family": "surface"
+        },
+        {
+          "id": "card-foreground",
+          "family": "surface"
+        },
+        {
+          "id": "destructive",
+          "family": "status"
+        },
+        {
+          "id": "destructive-emphasis",
+          "family": "status"
+        },
+        {
+          "id": "foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "info",
+          "family": "status"
+        },
+        {
+          "id": "info-emphasis",
+          "family": "status"
+        },
+        {
+          "id": "radius-lg",
+          "family": "radius"
+        },
+        {
+          "id": "success",
+          "family": "status"
+        },
+        {
+          "id": "success-emphasis",
+          "family": "status"
+        },
+        {
+          "id": "text-body",
+          "family": "typography"
+        },
+        {
+          "id": "text-body-sm",
+          "family": "typography"
+        },
+        {
+          "id": "warning",
+          "family": "status"
+        },
+        {
+          "id": "warning-emphasis",
+          "family": "status"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [],
+      "behavior": {},
+      "a11y": {
+        "attributes": [
+          "role=alert"
+        ],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "avatar",
+      "label": "Avatar",
+      "registryItem": "edgecom-ai/design-system/avatar",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/avatar",
+      "docs": "https://design.edgecom.ai/components/avatar/",
+      "source": "src/components/ui/avatar.tsx",
+      "summary": "A user or contact image with a text fallback. Compose Avatar with AvatarImage + AvatarFallback; stack them in an AvatarGroup with an overflow count.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": {
+        "name": "Base UI Avatar",
+        "url": "https://base-ui.com/react/components/avatar"
+      },
+      "parts": [
+        {
+          "name": "Avatar",
+          "description": "Rounded image container; accepts a size prop (default/sm/lg)."
+        },
+        {
+          "name": "AvatarImage",
+          "description": "The photo; covers the avatar once it loads."
+        },
+        {
+          "name": "AvatarFallback",
+          "description": "Shown when no image loads — usually initials."
+        },
+        {
+          "name": "AvatarGroup",
+          "description": "Overlaps child avatars with ring separators."
+        },
+        {
+          "name": "AvatarGroupCount",
+          "description": "Trailing chip showing an overflow count (e.g. +3)."
+        },
+        {
+          "name": "AvatarBadge",
+          "description": "A small status dot pinned to the avatar corner."
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [
+        "data-[size=lg]",
+        "data-[size=sm]",
+        "data-[slot=avatar]",
+        "group-data-[size=default]/avatar",
+        "group-data-[size=lg]/avatar",
+        "group-data-[size=sm]/avatar"
+      ],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "background",
+          "family": "surface"
+        },
+        {
+          "id": "border",
+          "family": "neutral"
+        },
+        {
+          "id": "muted",
+          "family": "neutral"
+        },
+        {
+          "id": "muted-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "primary",
+          "family": "brand"
+        },
+        {
+          "id": "primary-foreground",
+          "family": "brand"
+        },
+        {
+          "id": "text-body-sm",
+          "family": "typography"
+        },
+        {
+          "id": "text-caption",
+          "family": "typography"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [],
+      "behavior": {},
+      "a11y": {
+        "attributes": [],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "badge",
+      "label": "Badge & status tags",
+      "registryItem": "edgecom-ai/design-system/badge",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/badge",
+      "docs": "https://design.edgecom.ai/components/badge/",
+      "source": "src/components/ui/badge.tsx",
+      "summary": "A compact pill label (renders a span by default) for statuses, counts, and tags.",
+      "purpose": "A compact label for a status, a count, or a category. The variant carries the meaning, so the meaning survives a theme change.",
+      "useWhen": [
+        "A row or card needs a status, a count, or a category label.",
+        "A commodity is being tagged — with that commodity's variant and nothing else."
+      ],
+      "dontUseWhen": [
+        "The label is interactive. A badge is not a button, a filter chip, or a toggle.",
+        "The state belongs to a whole surface — that is the surface's own variant, e.g. an `alert`."
+      ],
+      "base": null,
+      "parts": [
+        {
+          "name": "Badge",
+          "description": "Compact rounded pill for status, counts, or labels."
+        }
+      ],
+      "props": [
+        {
+          "part": "Badge",
+          "name": "variant",
+          "type": "\"default\" | \"secondary\" | \"destructive\" | \"success\" | \"warning\" | \"info\" | \"electricity\" | \"water\" | \"gas\" | \"temperature\" | \"emissions\" | \"outline\" | \"ghost\" | \"link\"",
+          "default": "\"default\"",
+          "description": "Color/style: default, semantic, per-commodity, outline, ghost, link."
+        }
+      ],
+      "variants": [
+        {
+          "name": "variant",
+          "options": [
+            "default",
+            "secondary",
+            "destructive",
+            "success",
+            "warning",
+            "info",
+            "electricity",
+            "water",
+            "gas",
+            "temperature",
+            "emissions",
+            "outline",
+            "ghost",
+            "link"
+          ],
+          "default": "default"
+        }
+      ],
+      "states": [
+        "aria-invalid",
+        "focus-visible",
+        "hover"
+      ],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "border",
+          "family": "neutral"
+        },
+        {
+          "id": "chart-electricity-300",
+          "family": "chart"
+        },
+        {
+          "id": "chart-electricity-500",
+          "family": "chart"
+        },
+        {
+          "id": "chart-electricity-700",
+          "family": "chart"
+        },
+        {
+          "id": "chart-emissions-300",
+          "family": "chart"
+        },
+        {
+          "id": "chart-emissions-500",
+          "family": "chart"
+        },
+        {
+          "id": "chart-emissions-700",
+          "family": "chart"
+        },
+        {
+          "id": "chart-gas-300",
+          "family": "chart"
+        },
+        {
+          "id": "chart-gas-500",
+          "family": "chart"
+        },
+        {
+          "id": "chart-gas-700",
+          "family": "chart"
+        },
+        {
+          "id": "chart-temperature-300",
+          "family": "chart"
+        },
+        {
+          "id": "chart-temperature-500",
+          "family": "chart"
+        },
+        {
+          "id": "chart-temperature-700",
+          "family": "chart"
+        },
+        {
+          "id": "chart-water-300",
+          "family": "chart"
+        },
+        {
+          "id": "chart-water-500",
+          "family": "chart"
+        },
+        {
+          "id": "chart-water-700",
+          "family": "chart"
+        },
+        {
+          "id": "destructive",
+          "family": "status"
+        },
+        {
+          "id": "destructive-emphasis",
+          "family": "status"
+        },
+        {
+          "id": "foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "ghost-hover",
+          "family": "interaction"
+        },
+        {
+          "id": "info",
+          "family": "status"
+        },
+        {
+          "id": "info-emphasis",
+          "family": "status"
+        },
+        {
+          "id": "muted",
+          "family": "neutral"
+        },
+        {
+          "id": "muted-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "primary",
+          "family": "brand"
+        },
+        {
+          "id": "primary-emphasis",
+          "family": "brand"
+        },
+        {
+          "id": "primary-foreground",
+          "family": "brand"
+        },
+        {
+          "id": "radius-4xl",
+          "family": "radius"
+        },
+        {
+          "id": "ring",
+          "family": "neutral"
+        },
+        {
+          "id": "secondary",
+          "family": "neutral"
+        },
+        {
+          "id": "secondary-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "success",
+          "family": "status"
+        },
+        {
+          "id": "success-emphasis",
+          "family": "status"
+        },
+        {
+          "id": "text-caption",
+          "family": "typography"
+        },
+        {
+          "id": "warning",
+          "family": "status"
+        },
+        {
+          "id": "warning-emphasis",
+          "family": "status"
+        }
+      ],
+      "requires": [
+        "A variant chosen by meaning: `outline` for neutral labels, a status variant only for genuine status."
+      ],
+      "forbids": [
+        "Primary `default` for routine labels — it marks a single key highlight in a view.",
+        "A commodity variant on anything that is not that commodity.",
+        "Colour as the only signal; the text carries the meaning too."
+      ],
+      "rules": [
+        "Neutral labels → `outline`; it is the default when unsure. Primary `default` is for a single key highlight only.",
+        "Commodity variants tag that commodity and nothing else."
+      ],
+      "behavior": {},
+      "a11y": {
+        "attributes": [],
+        "requirements": [
+          "The badge's text states the status; the colour reinforces it."
+        ]
+      },
+      "examples": [
+        "`<Badge variant=\"outline\">Draft</Badge>` — the right default when unsure.",
+        "`<Badge variant=\"electricity\">Electricity</Badge>` — commodity tagging."
+      ],
+      "antiPatterns": [
+        "A row of primary badges, none of which is the key highlight.",
+        "A `success` badge used decoratively where nothing succeeded."
+      ],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": true
+    },
+    {
+      "id": "banner",
+      "label": "Banner",
+      "registryItem": "edgecom-ai/design-system/banner",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/banner",
+      "docs": "https://design.edgecom.ai/components/banner/",
+      "source": "src/components/ui/banner.tsx",
+      "summary": "A full-width page-level strip; BannerContent centers and lays out the contents.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": null,
+      "parts": [
+        {
+          "name": "Banner",
+          "description": "Full-width strip container with default or primary background."
+        },
+        {
+          "name": "BannerContent",
+          "description": "Centered max-width row spacing content with justify-between."
+        }
+      ],
+      "props": [
+        {
+          "part": "Banner",
+          "name": "variant",
+          "type": "\"default\" | \"primary\"",
+          "default": "\"default\"",
+          "description": "Background: default (muted) or primary."
+        }
+      ],
+      "variants": [
+        {
+          "name": "variant",
+          "options": [
+            "default",
+            "primary"
+          ],
+          "default": "default"
+        }
+      ],
+      "states": [],
+      "responsive": [
+        "2xl",
+        "md"
+      ],
+      "tokens": [
+        {
+          "id": "foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "muted",
+          "family": "neutral"
+        },
+        {
+          "id": "primary",
+          "family": "brand"
+        },
+        {
+          "id": "primary-foreground",
+          "family": "brand"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [],
+      "behavior": {},
+      "a11y": {
+        "attributes": [],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "breadcrumb",
+      "label": "Breadcrumb",
+      "registryItem": "edgecom-ai/design-system/breadcrumb",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/breadcrumb",
+      "docs": "https://design.edgecom.ai/components/breadcrumb/",
+      "source": "src/components/ui/breadcrumb.tsx",
+      "summary": "A navigation trail: a Breadcrumb nav wrapping a BreadcrumbList of items, links, the current page, and separators.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": null,
+      "parts": [
+        {
+          "name": "Breadcrumb",
+          "description": "Root nav landmark labelled 'breadcrumb'."
+        },
+        {
+          "name": "BreadcrumbList",
+          "description": "Ordered flex list holding the breadcrumb items."
+        },
+        {
+          "name": "BreadcrumbItem",
+          "description": "List item wrapping one crumb's content."
+        },
+        {
+          "name": "BreadcrumbLink",
+          "description": "Interactive link crumb (renders an anchor by default)."
+        },
+        {
+          "name": "BreadcrumbPage",
+          "description": "Current-page crumb — non-interactive, with aria-current."
+        },
+        {
+          "name": "BreadcrumbSeparator",
+          "description": "Presentational divider; default chevron-right icon."
+        },
+        {
+          "name": "BreadcrumbEllipsis",
+          "description": "Collapsed-crumbs indicator showing a horizontal-dots icon."
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [
+        "hover"
+      ],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "muted-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "text-body-sm",
+          "family": "typography"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [],
+      "behavior": {},
+      "a11y": {
+        "attributes": [
+          "aria-current",
+          "aria-disabled",
+          "aria-hidden",
+          "aria-label",
+          "role=link",
+          "role=presentation",
+          "sr-only"
+        ],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "button",
+      "label": "Button",
+      "registryItem": "edgecom-ai/design-system/button",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/button",
+      "docs": "https://design.edgecom.ai/components/button/",
+      "source": "src/components/ui/button.tsx",
+      "summary": "A clickable button with class-variance-authority variants and sizes, including icon-only sizes.",
+      "purpose": "The one control for committing an action. Every clickable affordance is this primitive or composes it — a styled div or anchor loses the hover, focus ring, disabled and aria-invalid handling the variants already carry.",
+      "useWhen": [
+        "The user commits something: submit, save, open an overlay, trigger an export.",
+        "A secondary or utility action sits in a table toolbar or page header — as an icon button (`size=\"icon-sm\"`/`\"icon-lg\"`, usually `outline` or `ghost`) with an `aria-label` and a tooltip.",
+        "A destructive action has to stay quiet in a table row — `variant=\"ghost-destructive\"`, neutral at rest and red only on hover."
+      ],
+      "dontUseWhen": [
+        "The control only navigates. An anchor is the right element; `variant=\"link\"` styles a button to read as text, it does not make it a link.",
+        "The user is choosing among options rather than acting — that is `select`, `tabs`, or `toggle`."
+      ],
+      "base": {
+        "name": "Base UI Button",
+        "url": "https://base-ui.com/react/components/button"
+      },
+      "parts": [
+        {
+          "name": "Button",
+          "description": "Clickable button with a configurable visual variant and size."
+        }
+      ],
+      "props": [
+        {
+          "part": "Button",
+          "name": "variant",
+          "type": "\"default\" | \"outline\" | \"secondary\" | \"ghost\" | \"ghost-destructive\" | \"destructive\" | \"success\" | \"warning\" | \"info\" | \"destructive-subtle\" | \"success-subtle\" | \"warning-subtle\" | \"info-subtle\" | \"link\"",
+          "default": "\"default\"",
+          "description": "Style: neutral, semantic solid/subtle, or link."
+        },
+        {
+          "part": "Button",
+          "name": "size",
+          "type": "\"default\" | \"xs\" | \"sm\" | \"lg\" | \"icon\" | \"icon-xs\" | \"icon-sm\" | \"icon-lg\"",
+          "default": "\"default\"",
+          "description": "Dimensions: default, xs, sm, lg, and icon variants."
+        }
+      ],
+      "variants": [
+        {
+          "name": "variant",
+          "options": [
+            "default",
+            "outline",
+            "secondary",
+            "ghost",
+            "ghost-destructive",
+            "destructive",
+            "success",
+            "warning",
+            "info",
+            "destructive-subtle",
+            "success-subtle",
+            "warning-subtle",
+            "info-subtle",
+            "link"
+          ],
+          "default": "default"
+        },
+        {
+          "name": "size",
+          "options": [
+            "default",
+            "xs",
+            "sm",
+            "lg",
+            "icon",
+            "icon-xs",
+            "icon-sm",
+            "icon-lg"
+          ],
+          "default": "default"
+        }
+      ],
+      "states": [
+        "active",
+        "aria-expanded",
+        "aria-invalid",
+        "data-disabled",
+        "disabled",
+        "focus-visible",
+        "hover"
+      ],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "border",
+          "family": "neutral"
+        },
+        {
+          "id": "destructive",
+          "family": "status"
+        },
+        {
+          "id": "destructive-emphasis",
+          "family": "status"
+        },
+        {
+          "id": "destructive-subtle",
+          "family": "status"
+        },
+        {
+          "id": "destructive-subtle-foreground",
+          "family": "status"
+        },
+        {
+          "id": "foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "ghost-hover",
+          "family": "interaction"
+        },
+        {
+          "id": "info",
+          "family": "status"
+        },
+        {
+          "id": "info-foreground",
+          "family": "status"
+        },
+        {
+          "id": "info-subtle",
+          "family": "status"
+        },
+        {
+          "id": "info-subtle-foreground",
+          "family": "status"
+        },
+        {
+          "id": "input",
+          "family": "neutral"
+        },
+        {
+          "id": "muted",
+          "family": "neutral"
+        },
+        {
+          "id": "outline-hover",
+          "family": "interaction"
+        },
+        {
+          "id": "outline-surface",
+          "family": "interaction"
+        },
+        {
+          "id": "primary",
+          "family": "brand"
+        },
+        {
+          "id": "primary-emphasis",
+          "family": "brand"
+        },
+        {
+          "id": "primary-foreground",
+          "family": "brand"
+        },
+        {
+          "id": "radius-lg",
+          "family": "radius"
+        },
+        {
+          "id": "ring",
+          "family": "neutral"
+        },
+        {
+          "id": "secondary",
+          "family": "neutral"
+        },
+        {
+          "id": "secondary-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "success",
+          "family": "status"
+        },
+        {
+          "id": "success-foreground",
+          "family": "status"
+        },
+        {
+          "id": "success-subtle",
+          "family": "status"
+        },
+        {
+          "id": "success-subtle-foreground",
+          "family": "status"
+        },
+        {
+          "id": "text-body-sm",
+          "family": "typography"
+        },
+        {
+          "id": "text-caption",
+          "family": "typography"
+        },
+        {
+          "id": "warning",
+          "family": "status"
+        },
+        {
+          "id": "warning-foreground",
+          "family": "status"
+        },
+        {
+          "id": "warning-subtle",
+          "family": "status"
+        },
+        {
+          "id": "warning-subtle-foreground",
+          "family": "status"
+        }
+      ],
+      "requires": [
+        "An `aria-label` on every icon-only button, and a `tooltip` alongside it in page or table chrome.",
+        "A destructive action is gated behind an `alert-dialog` before it runs, and its outcome is surfaced with a `toast`.",
+        "Exactly one labelled primary action per view; the rest are secondary or icon buttons."
+      ],
+      "forbids": [
+        "Hand-composing a quiet destructive button from `ghost` plus destructive utilities. `ghost` re-asserts `hover:text-foreground`, so the label goes neutral at the moment the tint turns red — use `ghost-destructive`.",
+        "Overriding the primitive's own classes to invent a look. Every appearance it can have is in `variants`.",
+        "A flat, stateless clickable element with no hover and no focus ring."
+      ],
+      "rules": [
+        "A quiet destructive row action is `ghost-destructive`. Never hand-compose one from `ghost` plus destructive utilities — `ghost` re-asserts `hover:text-foreground`, so the label goes neutral exactly as the tint turns red.",
+        "Secondary/utility actions (export, refresh, filter) are icon buttons with an `aria-label` and a tooltip."
+      ],
+      "behavior": {
+        "loading": "Disable the button while its action is in flight. `disabled` and `data-disabled` both drop it to 50% opacity and remove pointer events, so a second submit cannot land.",
+        "destructive": "A `destructive` button never runs its action directly — it confirms through an `alert-dialog` naming what is affected and that it cannot be undone."
+      },
+      "a11y": {
+        "attributes": [],
+        "requirements": [
+          "An icon-only button carries an `aria-label`; the glyph is not an accessible name.",
+          "The focus ring is the `ring` token and stays visible — never `outline: none` with no replacement."
+        ]
+      },
+      "examples": [
+        "`<Button>Save changes</Button>` — the single primary action on a screen.",
+        "`<Button variant=\"outline\" size=\"icon-sm\" aria-label=\"Export\"><Download /></Button>` — a toolbar utility action.",
+        "`<Button variant=\"ghost-destructive\" size=\"icon-sm\" aria-label=\"Delete site\"><Trash2 /></Button>` — a quiet row action."
+      ],
+      "antiPatterns": [
+        "Reaching for `destructive` on a row delete, which paints a red chip on every row.",
+        "A labelled text button for every toolbar action, competing with the screen's one primary action.",
+        "Primary `default` on several buttons in one view."
+      ],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": true
+    },
+    {
+      "id": "button-group",
+      "label": "Button group",
+      "registryItem": "edgecom-ai/design-system/button-group",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/button-group",
+      "docs": "https://design.edgecom.ai/components/button-group/",
+      "source": "src/components/ui/button-group.tsx",
+      "summary": "A container that visually joins adjacent buttons, with optional separators and text segments.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": null,
+      "parts": [
+        {
+          "name": "ButtonGroup",
+          "description": "Container merging child buttons' borders and radii."
+        },
+        {
+          "name": "ButtonGroupSeparator",
+          "description": "Divider line between grouped buttons."
+        },
+        {
+          "name": "ButtonGroupText",
+          "description": "Non-interactive labelled segment styled like a muted button."
+        }
+      ],
+      "props": [
+        {
+          "part": "ButtonGroup",
+          "name": "orientation",
+          "type": "\"horizontal\" | \"vertical\"",
+          "default": "\"horizontal\"",
+          "description": "Layout direction: horizontal or vertical."
+        }
+      ],
+      "variants": [
+        {
+          "name": "orientation",
+          "options": [
+            "horizontal",
+            "vertical"
+          ],
+          "default": "horizontal"
+        }
+      ],
+      "states": [
+        "data-[orientation=horizontal]",
+        "data-[orientation=vertical]",
+        "data-slot",
+        "focus-visible"
+      ],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "border",
+          "family": "neutral"
+        },
+        {
+          "id": "input",
+          "family": "neutral"
+        },
+        {
+          "id": "muted",
+          "family": "neutral"
+        },
+        {
+          "id": "radius-lg",
+          "family": "radius"
+        },
+        {
+          "id": "text-body-sm",
+          "family": "typography"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [],
+      "behavior": {},
+      "a11y": {
+        "attributes": [
+          "aria-hidden",
+          "role=group"
+        ],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "calendar",
+      "label": "Calendar",
+      "registryItem": "edgecom-ai/design-system/calendar",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/calendar",
+      "docs": "https://design.edgecom.ai/components/calendar/",
+      "source": "src/components/ui/calendar.tsx",
+      "summary": "A styled react-day-picker month grid with a custom day-button renderer.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": null,
+      "parts": [
+        {
+          "name": "Calendar",
+          "description": "Styled DayPicker root rendering the month grid, nav, and dropdowns."
+        },
+        {
+          "name": "CalendarDayButton",
+          "description": "Ghost button for one day cell, with selection/range styling."
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [
+        "aria-disabled",
+        "aria-selected",
+        "data-[range-end=true]",
+        "data-[range-middle=true]",
+        "data-[range-start=true]",
+        "data-[selected-single=true]",
+        "data-[selected=true]",
+        "group-data-[focused=true]/day",
+        "hover"
+      ],
+      "responsive": [
+        "md"
+      ],
+      "tokens": [
+        {
+          "id": "background",
+          "family": "surface"
+        },
+        {
+          "id": "foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "muted",
+          "family": "neutral"
+        },
+        {
+          "id": "muted-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "popover",
+          "family": "surface"
+        },
+        {
+          "id": "primary",
+          "family": "brand"
+        },
+        {
+          "id": "primary-foreground",
+          "family": "brand"
+        },
+        {
+          "id": "ring",
+          "family": "neutral"
+        },
+        {
+          "id": "text-body-sm",
+          "family": "typography"
+        },
+        {
+          "id": "text-caption",
+          "family": "typography"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [],
+      "behavior": {},
+      "a11y": {
+        "attributes": [],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "card",
+      "label": "Card",
+      "registryItem": "edgecom-ai/design-system/card",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/card",
+      "docs": "https://design.edgecom.ai/components/card/",
+      "source": "src/components/ui/card.tsx",
+      "summary": "A styled container with composable header, content, and footer sections (all div-based).",
+      "purpose": "The standard content surface: the `card` token at radius `xl`, with header, content and footer slots sharing one 1.5rem content line.",
+      "useWhen": [
+        "A coherent block — a metric tile, a chart, a table — is grouped on the page background.",
+        "A surface needs to sit one step above `background` in the elevation order."
+      ],
+      "dontUseWhen": [
+        "The content is itself an overlay. `popover` and `elevated` sit above `card`, and a card inside an overlay flattens the stack.",
+        "The block is a page-level message — that is `banner` or `alert`."
+      ],
+      "base": null,
+      "parts": [
+        {
+          "name": "Card",
+          "description": "Root container with ring, rounded corners, and consistent spacing."
+        },
+        {
+          "name": "CardHeader",
+          "description": "Grid header area for title, description, and optional action."
+        },
+        {
+          "name": "CardFooter",
+          "description": "Bottom bar with a top border and muted background."
+        },
+        {
+          "name": "CardTitle",
+          "description": "Heading-font title text for the card."
+        },
+        {
+          "name": "CardAction",
+          "description": "Slot positioned top-right of the header for actions."
+        },
+        {
+          "name": "CardDescription",
+          "description": "Muted secondary text below the title."
+        },
+        {
+          "name": "CardContent",
+          "description": "Padded region for the card's main body."
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [
+        "data-[size=sm]",
+        "group-data-[size=sm]/card"
+      ],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "card",
+          "family": "surface"
+        },
+        {
+          "id": "card-foreground",
+          "family": "surface"
+        },
+        {
+          "id": "font-heading",
+          "family": "typography"
+        },
+        {
+          "id": "foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "muted",
+          "family": "neutral"
+        },
+        {
+          "id": "muted-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "radius-xl",
+          "family": "radius"
+        },
+        {
+          "id": "text-body",
+          "family": "typography"
+        },
+        {
+          "id": "text-body-lg",
+          "family": "typography"
+        },
+        {
+          "id": "text-body-sm",
+          "family": "typography"
+        }
+      ],
+      "requires": [
+        "Content aligned to the card's 1.5rem content line. A table inside it aligns its first and last cells to that line, not to the 0.75rem cell padding."
+      ],
+      "forbids": [
+        "A coloured strip along an edge to signal status — use the relevant component's own `-subtle` variant.",
+        "A hand-set radius. Cards are `xl` from the radius scale."
+      ],
+      "rules": [],
+      "behavior": {
+        "loading": "The card keeps its frame and fills its content slots with `skeleton` blocks — never a raw loading gap or a bare spinner in place of the layout.",
+        "empty": "No content is an `empty` state inside the content slot, carrying a retry action when the emptiness is a failed request."
+      },
+      "a11y": {
+        "attributes": [],
+        "requirements": [
+          "`CardTitle` renders a `div`, not a heading. Where the card is a section in the page outline, supply the heading element and level yourself."
+        ]
+      },
+      "examples": [
+        "`<Card><CardHeader><CardTitle>Consumption</CardTitle><CardAction><Button variant=\"ghost\" size=\"icon-sm\" aria-label=\"Export\"><Download /></Button></CardAction></CardHeader><CardContent>…</CardContent></Card>`"
+      ],
+      "antiPatterns": [
+        "A `border-l-4` status stripe down the card edge.",
+        "A card nested inside a dialog to re-create a surface the overlay already provides."
+      ],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": true
+    },
+    {
+      "id": "category-bar",
+      "label": "Category bar",
+      "registryItem": "edgecom-ai/design-system/category-bar",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/category-bar",
+      "docs": "https://design.edgecom.ai/components/category-bar/",
+      "source": "src/components/ui/category-bar.tsx",
+      "summary": "A single horizontal bar split into proportional colored segments, with an optional marker and numeric labels.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": null,
+      "parts": [
+        {
+          "name": "CategoryBar",
+          "description": null
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "background",
+          "family": "surface"
+        },
+        {
+          "id": "muted",
+          "family": "neutral"
+        },
+        {
+          "id": "muted-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "text-body-sm",
+          "family": "typography"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [],
+      "behavior": {},
+      "a11y": {
+        "attributes": [
+          "aria-hidden",
+          "aria-label",
+          "aria-valuenow"
+        ],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "checkbox",
+      "label": "Checkbox",
+      "registryItem": "edgecom-ai/design-system/checkbox",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/checkbox",
+      "docs": "https://design.edgecom.ai/components/checkbox/",
+      "source": "src/components/ui/checkbox.tsx",
+      "summary": "A checkbox styled as a small box, with a tick when selected and a dash when indeterminate.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": {
+        "name": "Base UI Checkbox",
+        "url": "https://base-ui.com/react/components/checkbox"
+      },
+      "parts": [
+        {
+          "name": "Checkbox",
+          "description": "Checkbox root. Selected shows a tick; pass indeterminate (or use a CheckboxGroup parent) for the dash. inline-flex, so a centred cell centres it without a wrapper."
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [
+        "aria-checked",
+        "aria-invalid",
+        "data-checked",
+        "data-disabled",
+        "data-indeterminate",
+        "disabled",
+        "focus-visible",
+        "group-data-indeterminate/checkbox-indicator"
+      ],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "border",
+          "family": "neutral"
+        },
+        {
+          "id": "destructive",
+          "family": "status"
+        },
+        {
+          "id": "input",
+          "family": "neutral"
+        },
+        {
+          "id": "primary",
+          "family": "brand"
+        },
+        {
+          "id": "primary-foreground",
+          "family": "brand"
+        },
+        {
+          "id": "ring",
+          "family": "neutral"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [],
+      "behavior": {},
+      "a11y": {
+        "attributes": [],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "collapsible",
+      "label": "Collapsible",
+      "registryItem": "edgecom-ai/design-system/collapsible",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/collapsible",
+      "docs": "https://design.edgecom.ai/components/collapsible/",
+      "source": "src/components/ui/collapsible.tsx",
+      "summary": "An open/closed disclosure: a Trigger toggles a Content panel.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": {
+        "name": "Base UI Collapsible",
+        "url": "https://base-ui.com/react/components/collapsible"
+      },
+      "parts": [
+        {
+          "name": "Collapsible",
+          "description": "Root managing the open/closed state."
+        },
+        {
+          "name": "CollapsibleTrigger",
+          "description": "Button that toggles the collapsible open and closed."
+        },
+        {
+          "name": "CollapsibleContent",
+          "description": "Panel holding the revealed content."
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [],
+      "responsive": [],
+      "tokens": [],
+      "requires": [],
+      "forbids": [],
+      "rules": [],
+      "behavior": {},
+      "a11y": {
+        "attributes": [],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "combobox",
+      "label": "Combobox",
+      "registryItem": "edgecom-ai/design-system/combobox",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/combobox",
+      "docs": "https://design.edgecom.ai/components/combobox/",
+      "source": "src/components/ui/combobox.tsx",
+      "summary": "A searchable, optionally multi-select picker: an input group plus a portalled popup list, with optional selected-value chips.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": null,
+      "parts": [
+        {
+          "name": "Combobox",
+          "description": "Root managing the value, query, and filtering."
+        },
+        {
+          "name": "ComboboxInput",
+          "description": "The combobox input, with optional trigger and clear buttons."
+        },
+        {
+          "name": "ComboboxContent",
+          "description": "Portalled, positioned popup panel for the listbox."
+        },
+        {
+          "name": "ComboboxList",
+          "description": "Scrollable list container holding the items."
+        },
+        {
+          "name": "ComboboxItem",
+          "description": "A selectable option; shows a check when selected."
+        },
+        {
+          "name": "ComboboxGroup",
+          "description": "Wraps related items. Required around a ComboboxLabel."
+        },
+        {
+          "name": "ComboboxLabel",
+          "description": "Muted heading for a group of items."
+        },
+        {
+          "name": "ComboboxCollection",
+          "description": "Helper that maps data to combobox items."
+        },
+        {
+          "name": "ComboboxEmpty",
+          "description": "Message shown when no items match the query."
+        },
+        {
+          "name": "ComboboxSeparator",
+          "description": "Thin divider between sections."
+        },
+        {
+          "name": "ComboboxChips",
+          "description": "Bordered container laying out selected-value chips + input."
+        },
+        {
+          "name": "ComboboxChip",
+          "description": "A single selected-value chip with an optional remove button."
+        },
+        {
+          "name": "ComboboxChipsInput",
+          "description": "Bare inline input used inside the chips container."
+        },
+        {
+          "name": "ComboboxTrigger",
+          "description": "Button that toggles the popup; appends a chevron."
+        },
+        {
+          "name": "ComboboxValue",
+          "description": "Displays the current selected value."
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [
+        "data-[chips=true]",
+        "data-[side=bottom]",
+        "data-[side=inline-end]",
+        "data-[side=inline-start]",
+        "data-[side=left]",
+        "data-[side=right]",
+        "data-[side=top]",
+        "data-[slot=input-group]",
+        "data-closed",
+        "data-disabled",
+        "data-empty",
+        "data-highlighted",
+        "data-open",
+        "data-pressed",
+        "focus-within",
+        "group-data-empty/combobox-content",
+        "hover"
+      ],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "accent",
+          "family": "neutral"
+        },
+        {
+          "id": "accent-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "border",
+          "family": "neutral"
+        },
+        {
+          "id": "destructive",
+          "family": "status"
+        },
+        {
+          "id": "foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "input",
+          "family": "neutral"
+        },
+        {
+          "id": "muted",
+          "family": "neutral"
+        },
+        {
+          "id": "muted-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "popover",
+          "family": "surface"
+        },
+        {
+          "id": "popover-foreground",
+          "family": "surface"
+        },
+        {
+          "id": "radius-lg",
+          "family": "radius"
+        },
+        {
+          "id": "radius-md",
+          "family": "radius"
+        },
+        {
+          "id": "radius-sm",
+          "family": "radius"
+        },
+        {
+          "id": "ring",
+          "family": "neutral"
+        },
+        {
+          "id": "text-body-sm",
+          "family": "typography"
+        },
+        {
+          "id": "text-caption",
+          "family": "typography"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [],
+      "behavior": {},
+      "a11y": {
+        "attributes": [],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "command",
+      "label": "Command",
+      "registryItem": "edgecom-ai/design-system/command",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/command",
+      "docs": "https://design.edgecom.ai/components/command/",
+      "source": "src/components/ui/command.tsx",
+      "summary": "A searchable command palette; type to filter grouped, keyboard-navigable items. Wrap in CommandDialog for a ⌘K overlay.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": null,
+      "parts": [
+        {
+          "name": "Command",
+          "description": "Root container owning the filter state and keyboard navigation."
+        },
+        {
+          "name": "CommandDialog",
+          "description": "Dialog wrapper that renders the menu as a ⌘K overlay."
+        },
+        {
+          "name": "CommandInput",
+          "description": "Search field that filters the list as you type."
+        },
+        {
+          "name": "CommandList",
+          "description": "Scrollable results region."
+        },
+        {
+          "name": "CommandEmpty",
+          "description": "Fallback shown when nothing matches."
+        },
+        {
+          "name": "CommandGroup",
+          "description": "A labelled group of related items (via heading)."
+        },
+        {
+          "name": "CommandItem",
+          "description": "A selectable action or navigation target."
+        },
+        {
+          "name": "CommandShortcut",
+          "description": "Right-aligned keyboard-shortcut hint on an item."
+        },
+        {
+          "name": "CommandSeparator",
+          "description": "A divider between groups."
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [
+        "data-[disabled=true]",
+        "data-[slot=input-group-addon]",
+        "data-selected",
+        "disabled",
+        "group-data-[checked=true]/command-item",
+        "group-data-selected/command-item"
+      ],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "border",
+          "family": "neutral"
+        },
+        {
+          "id": "foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "input",
+          "family": "neutral"
+        },
+        {
+          "id": "muted",
+          "family": "neutral"
+        },
+        {
+          "id": "muted-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "popover",
+          "family": "surface"
+        },
+        {
+          "id": "popover-foreground",
+          "family": "surface"
+        },
+        {
+          "id": "radius-sm",
+          "family": "radius"
+        },
+        {
+          "id": "text-body-sm",
+          "family": "typography"
+        },
+        {
+          "id": "text-caption",
+          "family": "typography"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [],
+      "behavior": {},
+      "a11y": {
+        "attributes": [
+          "sr-only"
+        ],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "context-menu",
+      "label": "Context menu",
+      "registryItem": "edgecom-ai/design-system/context-menu",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/context-menu",
+      "docs": "https://design.edgecom.ai/components/context-menu/",
+      "source": "src/components/ui/context-menu.tsx",
+      "summary": "A right-click menu: a Trigger region opens a portalled popup of items, checkboxes, radios, labels, and nested submenus.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": {
+        "name": "Base UI ContextMenu",
+        "url": "https://base-ui.com/react/components/context-menu"
+      },
+      "parts": [
+        {
+          "name": "ContextMenu",
+          "description": "Root managing the menu's open state."
+        },
+        {
+          "name": "ContextMenuTrigger",
+          "description": "The region that opens the menu on right-click."
+        },
+        {
+          "name": "ContextMenuContent",
+          "description": "Portalled, positioned popup container for items."
+        },
+        {
+          "name": "ContextMenuItem",
+          "description": "A clickable menu row (supports inset and destructive)."
+        },
+        {
+          "name": "ContextMenuCheckboxItem",
+          "description": "A menu item with a check indicator for a boolean."
+        },
+        {
+          "name": "ContextMenuRadioItem",
+          "description": "A menu item with a dot indicator; use inside a RadioGroup."
+        },
+        {
+          "name": "ContextMenuLabel",
+          "description": "Muted, non-interactive heading. Must be inside a Group."
+        },
+        {
+          "name": "ContextMenuSeparator",
+          "description": "Thin divider between menu sections."
+        },
+        {
+          "name": "ContextMenuShortcut",
+          "description": "Right-aligned muted text showing a keyboard shortcut."
+        },
+        {
+          "name": "ContextMenuGroup",
+          "description": "Wraps related items. Required around a Label."
+        },
+        {
+          "name": "ContextMenuPortal",
+          "description": "Portal that renders the menu content."
+        },
+        {
+          "name": "ContextMenuSub",
+          "description": "Root for a nested submenu."
+        },
+        {
+          "name": "ContextMenuSubContent",
+          "description": "Portalled popup for a submenu."
+        },
+        {
+          "name": "ContextMenuSubTrigger",
+          "description": "A menu item that opens a submenu; shows a chevron."
+        },
+        {
+          "name": "ContextMenuRadioGroup",
+          "description": "Coordinates selection among radio items."
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [
+        "data-[side=bottom]",
+        "data-[side=inline-end]",
+        "data-[side=inline-start]",
+        "data-[side=left]",
+        "data-[side=right]",
+        "data-[side=top]",
+        "data-[variant=destructive]",
+        "data-closed",
+        "data-disabled",
+        "data-inset",
+        "data-open",
+        "data-popup-open",
+        "focus"
+      ],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "accent",
+          "family": "neutral"
+        },
+        {
+          "id": "accent-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "border",
+          "family": "neutral"
+        },
+        {
+          "id": "destructive",
+          "family": "status"
+        },
+        {
+          "id": "destructive-emphasis",
+          "family": "status"
+        },
+        {
+          "id": "foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "muted-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "popover",
+          "family": "surface"
+        },
+        {
+          "id": "popover-foreground",
+          "family": "surface"
+        },
+        {
+          "id": "radius-lg",
+          "family": "radius"
+        },
+        {
+          "id": "radius-md",
+          "family": "radius"
+        },
+        {
+          "id": "text-body-sm",
+          "family": "typography"
+        },
+        {
+          "id": "text-caption",
+          "family": "typography"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [],
+      "behavior": {},
+      "a11y": {
+        "attributes": [],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "date-picker",
+      "label": "Date picker",
+      "registryItem": "edgecom-ai/design-system/date-picker",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/date-picker",
+      "docs": "https://design.edgecom.ai/components/date-picker/",
+      "source": "src/components/ui/date-picker.tsx",
+      "summary": "A single-date control pairing a popover-triggering button with a Calendar.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": null,
+      "parts": [
+        {
+          "name": "DatePicker",
+          "description": "Button + popover Calendar for selecting a single date."
+        },
+        {
+          "name": "MonthRangePicker",
+          "description": null
+        },
+        {
+          "name": "WindowRangePicker",
+          "description": null
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [
+        "data-[empty=true]",
+        "data-[window-endpoint=true]",
+        "data-[window-middle=true]",
+        "data-[window-preview=true]",
+        "group-data-[focused=true]/day",
+        "hover"
+      ],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "accent",
+          "family": "neutral"
+        },
+        {
+          "id": "accent-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "muted",
+          "family": "neutral"
+        },
+        {
+          "id": "muted-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "primary",
+          "family": "brand"
+        },
+        {
+          "id": "primary-foreground",
+          "family": "brand"
+        },
+        {
+          "id": "radius-md",
+          "family": "radius"
+        },
+        {
+          "id": "ring",
+          "family": "neutral"
+        },
+        {
+          "id": "text-caption",
+          "family": "typography"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [],
+      "behavior": {},
+      "a11y": {
+        "attributes": [
+          "aria-label"
+        ],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "dialog",
+      "label": "Dialog",
+      "registryItem": "edgecom-ai/design-system/dialog",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/dialog",
+      "docs": "https://design.edgecom.ai/components/dialog/",
+      "source": "src/components/ui/dialog.tsx",
+      "summary": "A modal dialog: a Trigger opens a portalled overlay + centered Content, with styled header/footer, title, description, and close.",
+      "purpose": "The centered modal for one short, focused action. It keeps a top-right close so a modal is always dismissible.",
+      "useWhen": [
+        "A short create action of roughly one to four fields.",
+        "A focused, non-destructive confirmation."
+      ],
+      "dontUseWhen": [
+        "The form is long or dense — that is a right-side `sheet`.",
+        "The action is destructive or irreversible — that is an `alert-dialog`, which omits the close on purpose."
+      ],
+      "base": {
+        "name": "Base UI Dialog",
+        "url": "https://base-ui.com/react/components/dialog"
+      },
+      "parts": [
+        {
+          "name": "Dialog",
+          "description": "Root managing the dialog's open state."
+        },
+        {
+          "name": "DialogClose",
+          "description": "Button that closes the dialog."
+        },
+        {
+          "name": "DialogContent",
+          "description": "Portalled, centered popup with an optional close button."
+        },
+        {
+          "name": "DialogDescription",
+          "description": "Muted supporting text under the title."
+        },
+        {
+          "name": "DialogFooter",
+          "description": "Styled footer row for actions."
+        },
+        {
+          "name": "DialogHeader",
+          "description": "Styled div stacking the title and description."
+        },
+        {
+          "name": "DialogOverlay",
+          "description": "Fixed dimmed backdrop behind the dialog."
+        },
+        {
+          "name": "DialogPortal",
+          "description": "Renders the dialog outside the DOM tree."
+        },
+        {
+          "name": "DialogTitle",
+          "description": "Styled heading text for the dialog."
+        },
+        {
+          "name": "DialogTrigger",
+          "description": "Element that opens the dialog on click."
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [
+        "data-closed",
+        "data-open",
+        "hover"
+      ],
+      "responsive": [
+        "sm"
+      ],
+      "tokens": [
+        {
+          "id": "font-heading",
+          "family": "typography"
+        },
+        {
+          "id": "foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "muted",
+          "family": "neutral"
+        },
+        {
+          "id": "muted-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "popover",
+          "family": "surface"
+        },
+        {
+          "id": "popover-foreground",
+          "family": "surface"
+        },
+        {
+          "id": "radius-xl",
+          "family": "radius"
+        },
+        {
+          "id": "scrim",
+          "family": "surface"
+        },
+        {
+          "id": "text-body",
+          "family": "typography"
+        },
+        {
+          "id": "text-body-lg",
+          "family": "typography"
+        },
+        {
+          "id": "text-body-sm",
+          "family": "typography"
+        }
+      ],
+      "requires": [
+        "A `DialogTitle`; it is the modal's accessible name, visually hidden if the design shows none.",
+        "The default top-right close (X)."
+      ],
+      "forbids": [
+        "`showCloseButton={false}` — only `alert-dialog` omits the close.",
+        "Moving the close elsewhere, or hand-rolling a modal without one.",
+        "An inline scrim colour; the scrim is the `scrim` token."
+      ],
+      "rules": [
+        "Short create actions (1–4 fields). Longer or dense edit forms go to a right `sheet` at 420px.",
+        "**Always keeps its top-right close (X).** Never `showCloseButton={false}` — only `alert-dialog` omits it."
+      ],
+      "behavior": {
+        "destructive": "A destructive confirmation is not this component — it is `alert-dialog`."
+      },
+      "a11y": {
+        "attributes": [
+          "sr-only"
+        ],
+        "requirements": [
+          "Focus moves into the dialog on open and returns to the trigger on close. Base UI does this; don't defeat it.",
+          "A surface opened from inside a dialog — a `select`, a `popover` — is a later portal sibling and paints above it without a new z-index."
+        ]
+      },
+      "examples": [
+        "`<Dialog><DialogTrigger render={<Button>Add site</Button>} /><DialogContent><DialogHeader><DialogTitle>Add site</DialogTitle></DialogHeader>…</DialogContent></Dialog>`"
+      ],
+      "antiPatterns": [
+        "A twelve-field form in a dialog that should have been a sheet.",
+        "A non-destructive modal with the close removed."
+      ],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": true
+    },
+    {
+      "id": "drawer",
+      "label": "Drawer",
+      "registryItem": "edgecom-ai/design-system/drawer",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/drawer",
+      "docs": "https://design.edgecom.ai/components/drawer/",
+      "source": "src/components/ui/drawer.tsx",
+      "summary": "A swipeable panel that slides in from an edge: a Trigger opens a portalled overlay + Content, with header/footer, title, and description.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": {
+        "name": "Base UI Drawer",
+        "url": "https://base-ui.com/react/components/drawer"
+      },
+      "parts": [
+        {
+          "name": "Drawer",
+          "description": "Root setting modality, snap points, and swipe direction."
+        },
+        {
+          "name": "DrawerPortal",
+          "description": "Renders the drawer outside the DOM tree."
+        },
+        {
+          "name": "DrawerOverlay",
+          "description": "Swipe-aware dimmed backdrop behind the drawer."
+        },
+        {
+          "name": "DrawerSwipeHandle",
+          "description": "Aria-hidden grip for dragging the drawer."
+        },
+        {
+          "name": "DrawerTrigger",
+          "description": "Element that opens the drawer on click."
+        },
+        {
+          "name": "DrawerClose",
+          "description": "Button that closes the drawer."
+        },
+        {
+          "name": "DrawerContent",
+          "description": "Portalled panel that slides in from an edge."
+        },
+        {
+          "name": "DrawerHeader",
+          "description": "Styled div stacking the title and description."
+        },
+        {
+          "name": "DrawerFooter",
+          "description": "Styled footer pinned to the bottom."
+        },
+        {
+          "name": "DrawerTitle",
+          "description": "Styled heading text for the drawer."
+        },
+        {
+          "name": "DrawerDescription",
+          "description": "Muted supporting text under the title."
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [
+        "active",
+        "data-[modal=true]",
+        "data-[swipe-axis=x]",
+        "data-[swipe-axis=y]",
+        "data-[swipe-direction=down]",
+        "data-[swipe-direction=left]",
+        "data-[swipe-direction=right]",
+        "data-[swipe-direction=up]",
+        "data-ending-style",
+        "data-nested-drawer-open",
+        "data-nested-drawer-swiping",
+        "data-snap-points",
+        "data-starting-style",
+        "data-swiping",
+        "group-data-[swipe-axis=x]/drawer-popup",
+        "group-data-[swipe-axis=y]/drawer-popup",
+        "group-data-[swipe-direction=down]/drawer-popup",
+        "group-data-[swipe-direction=left]/drawer-popup",
+        "group-data-[swipe-direction=right]/drawer-popup",
+        "group-data-[swipe-direction=up]/drawer-popup",
+        "group-data-nested-drawer-open/drawer-popup",
+        "group-data-nested-drawer-swiping/drawer-popup",
+        "group-data-swiping/drawer-popup"
+      ],
+      "responsive": [
+        "md",
+        "sm"
+      ],
+      "tokens": [
+        {
+          "id": "font-heading",
+          "family": "typography"
+        },
+        {
+          "id": "foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "muted",
+          "family": "neutral"
+        },
+        {
+          "id": "muted-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "popover",
+          "family": "surface"
+        },
+        {
+          "id": "popover-foreground",
+          "family": "surface"
+        },
+        {
+          "id": "scrim",
+          "family": "surface"
+        },
+        {
+          "id": "text-body",
+          "family": "typography"
+        },
+        {
+          "id": "text-body-lg",
+          "family": "typography"
+        },
+        {
+          "id": "text-body-sm",
+          "family": "typography"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [],
+      "behavior": {},
+      "a11y": {
+        "attributes": [
+          "aria-hidden"
+        ],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "dropdown-menu",
+      "label": "Dropdown menu",
+      "registryItem": "edgecom-ai/design-system/dropdown-menu",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/dropdown-menu",
+      "docs": "https://design.edgecom.ai/components/dropdown-menu/",
+      "source": "src/components/ui/dropdown-menu.tsx",
+      "summary": "A menu opened from a button: a portalled popup of groups, labels, items, checkbox/radio items, separators, shortcuts, and submenus.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": {
+        "name": "Base UI Menu",
+        "url": "https://base-ui.com/react/components/menu"
+      },
+      "parts": [
+        {
+          "name": "DropdownMenu",
+          "description": "Root managing the menu's open state."
+        },
+        {
+          "name": "DropdownMenuPortal",
+          "description": "Renders the menu outside the DOM tree."
+        },
+        {
+          "name": "DropdownMenuTrigger",
+          "description": "Button that opens the menu."
+        },
+        {
+          "name": "DropdownMenuContent",
+          "description": "Portalled, positioned popup container for items."
+        },
+        {
+          "name": "DropdownMenuGroup",
+          "description": "Wraps related items. Required around a Label."
+        },
+        {
+          "name": "DropdownMenuLabel",
+          "description": "Muted heading for a group. Must be inside a Group."
+        },
+        {
+          "name": "DropdownMenuItem",
+          "description": "A selectable menu row."
+        },
+        {
+          "name": "DropdownMenuCheckboxItem",
+          "description": "A menu item with a check indicator."
+        },
+        {
+          "name": "DropdownMenuRadioGroup",
+          "description": "Coordinates selection among radio items."
+        },
+        {
+          "name": "DropdownMenuRadioItem",
+          "description": "A radio menu row with a check indicator."
+        },
+        {
+          "name": "DropdownMenuSeparator",
+          "description": "Thin divider between menu sections."
+        },
+        {
+          "name": "DropdownMenuShortcut",
+          "description": "Right-aligned text showing a keyboard shortcut."
+        },
+        {
+          "name": "DropdownMenuSub",
+          "description": "Root for a nested submenu."
+        },
+        {
+          "name": "DropdownMenuSubTrigger",
+          "description": "A menu item that opens a submenu; shows a chevron."
+        },
+        {
+          "name": "DropdownMenuSubContent",
+          "description": "Portalled popup for a submenu."
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [
+        "data-[side=bottom]",
+        "data-[side=inline-end]",
+        "data-[side=inline-start]",
+        "data-[side=left]",
+        "data-[side=right]",
+        "data-[side=top]",
+        "data-[variant=destructive]",
+        "data-closed",
+        "data-disabled",
+        "data-inset",
+        "data-open",
+        "data-popup-open",
+        "focus"
+      ],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "accent",
+          "family": "neutral"
+        },
+        {
+          "id": "accent-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "border",
+          "family": "neutral"
+        },
+        {
+          "id": "destructive",
+          "family": "status"
+        },
+        {
+          "id": "destructive-emphasis",
+          "family": "status"
+        },
+        {
+          "id": "foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "muted-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "popover",
+          "family": "surface"
+        },
+        {
+          "id": "popover-foreground",
+          "family": "surface"
+        },
+        {
+          "id": "radius-lg",
+          "family": "radius"
+        },
+        {
+          "id": "radius-md",
+          "family": "radius"
+        },
+        {
+          "id": "text-body-sm",
+          "family": "typography"
+        },
+        {
+          "id": "text-caption",
+          "family": "typography"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [
+        "**Shrink-wraps to its widest item.** Never stretch it to the trigger width or pad items to a fixed width.",
+        "Portaled to the app root, so no `overflow` ancestor can clip it. It flips and shifts to stay in the viewport."
+      ],
+      "behavior": {},
+      "a11y": {
+        "attributes": [],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "empty",
+      "label": "Empty state",
+      "registryItem": "edgecom-ai/design-system/empty",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/empty",
+      "docs": "https://design.edgecom.ai/components/empty/",
+      "source": "src/components/ui/empty.tsx",
+      "summary": "An empty-state placeholder: a dashed-border container with a header (media, title, description) and a content area for actions.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": null,
+      "parts": [
+        {
+          "name": "Empty",
+          "description": "Centered dashed-border container for the empty state."
+        },
+        {
+          "name": "EmptyHeader",
+          "description": "Centered column grouping media, title, and description."
+        },
+        {
+          "name": "EmptyMedia",
+          "description": "Icon or media holder with a variant style."
+        },
+        {
+          "name": "EmptyTitle",
+          "description": "The empty-state heading text."
+        },
+        {
+          "name": "EmptyDescription",
+          "description": "Muted paragraph describing the empty state."
+        },
+        {
+          "name": "EmptyContent",
+          "description": "Column area for actions or supplementary content."
+        }
+      ],
+      "props": [
+        {
+          "part": "Empty",
+          "name": "variant",
+          "type": "\"default\" | \"icon\"",
+          "default": "\"icon\"",
+          "description": null
+        }
+      ],
+      "variants": [
+        {
+          "name": "variant",
+          "options": [
+            "default",
+            "icon"
+          ],
+          "default": "icon"
+        }
+      ],
+      "states": [],
+      "responsive": [
+        "md"
+      ],
+      "tokens": [
+        {
+          "id": "border",
+          "family": "neutral"
+        },
+        {
+          "id": "foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "muted",
+          "family": "neutral"
+        },
+        {
+          "id": "muted-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "primary",
+          "family": "brand"
+        },
+        {
+          "id": "radius-lg",
+          "family": "radius"
+        },
+        {
+          "id": "text-body",
+          "family": "typography"
+        },
+        {
+          "id": "text-body-sm",
+          "family": "typography"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [
+        "Pair with a retry action on async failure — never a blank screen or an endless spinner."
+      ],
+      "behavior": {},
+      "a11y": {
+        "attributes": [],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "field",
+      "label": "Field",
+      "registryItem": "edgecom-ai/design-system/field",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/field",
+      "docs": "https://design.edgecom.ai/components/field/",
+      "source": "src/components/ui/field.tsx",
+      "summary": "Form-field scaffolding: a Field wraps a control with a label, description, and error; group fields with FieldGroup or a FieldSet.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": null,
+      "parts": [
+        {
+          "name": "Field",
+          "description": "One field row; orientation sets vertical (default) or horizontal."
+        },
+        {
+          "name": "FieldLabel",
+          "description": "The field's label (wraps the Label primitive)."
+        },
+        {
+          "name": "FieldDescription",
+          "description": "Muted helper text for a field."
+        },
+        {
+          "name": "FieldError",
+          "description": "Error message; pass children or an errors array."
+        },
+        {
+          "name": "FieldGroup",
+          "description": "Stacks multiple fields with consistent spacing."
+        },
+        {
+          "name": "FieldLegend",
+          "description": "The fieldset's heading (legend or label variant)."
+        },
+        {
+          "name": "FieldSeparator",
+          "description": "A divider between fields, with optional centered text."
+        },
+        {
+          "name": "FieldSet",
+          "description": "A fieldset grouping related fields."
+        },
+        {
+          "name": "FieldContent",
+          "description": "Column holding a control plus its title/description."
+        },
+        {
+          "name": "FieldTitle",
+          "description": "A bold inline title for a field."
+        }
+      ],
+      "props": [
+        {
+          "part": "Field",
+          "name": "orientation",
+          "type": "\"vertical\" | \"horizontal\" | \"responsive\"",
+          "default": "\"vertical\"",
+          "description": null
+        }
+      ],
+      "variants": [
+        {
+          "name": "orientation",
+          "options": [
+            "vertical",
+            "horizontal",
+            "responsive"
+          ],
+          "default": "vertical"
+        }
+      ],
+      "states": [
+        "data-[invalid=true]",
+        "data-[slot=checkbox-group]",
+        "data-[slot=field-group]",
+        "data-[slot=field-label]",
+        "data-[slot=field]",
+        "data-[variant=label]",
+        "data-[variant=legend]",
+        "group-data-[disabled=true]/field",
+        "group-data-[orientation=horizontal]/field",
+        "group-data-[variant=outline]/field-group",
+        "last"
+      ],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "background",
+          "family": "surface"
+        },
+        {
+          "id": "border",
+          "family": "neutral"
+        },
+        {
+          "id": "destructive-emphasis",
+          "family": "status"
+        },
+        {
+          "id": "muted-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "primary",
+          "family": "brand"
+        },
+        {
+          "id": "primary-emphasis",
+          "family": "brand"
+        },
+        {
+          "id": "radius-lg",
+          "family": "radius"
+        },
+        {
+          "id": "text-body",
+          "family": "typography"
+        },
+        {
+          "id": "text-body-lg",
+          "family": "typography"
+        },
+        {
+          "id": "text-body-sm",
+          "family": "typography"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [
+        "Validation is inline and specific, via `FieldError` + `aria-invalid`. A description and an error that swap in one position take the same type token, or the layout shifts."
+      ],
+      "behavior": {},
+      "a11y": {
+        "attributes": [
+          "role=alert",
+          "role=group",
+          "sr-only"
+        ],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "input",
+      "label": "Input",
+      "registryItem": "edgecom-ai/design-system/input",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/input",
+      "docs": "https://design.edgecom.ai/components/input/",
+      "source": "src/components/ui/input.tsx",
+      "summary": "A single-line text field with focus, disabled, and invalid states.",
+      "purpose": "The single-line text field. It renders the destructive border and ring from `aria-invalid`, so the invalid state is a data attribute rather than a class override.",
+      "useWhen": [
+        "A single line of free text or a number is entered.",
+        "It sits inside a `field`, which supplies the label, description and error slots."
+      ],
+      "dontUseWhen": [
+        "The value belongs to a known set — that is `select`, `combobox`, or `radio-group`.",
+        "The control needs an affix, icon, or button inside it — that is `input-group`."
+      ],
+      "base": {
+        "name": "Base UI Input",
+        "url": "https://base-ui.com/react/components/input"
+      },
+      "parts": [
+        {
+          "name": "Input",
+          "description": "Styled text input element."
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [
+        "aria-invalid",
+        "disabled",
+        "focus-visible"
+      ],
+      "responsive": [
+        "md"
+      ],
+      "tokens": [
+        {
+          "id": "border",
+          "family": "neutral"
+        },
+        {
+          "id": "destructive",
+          "family": "status"
+        },
+        {
+          "id": "foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "input",
+          "family": "neutral"
+        },
+        {
+          "id": "muted-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "radius-lg",
+          "family": "radius"
+        },
+        {
+          "id": "ring",
+          "family": "neutral"
+        },
+        {
+          "id": "text-body-lg",
+          "family": "typography"
+        },
+        {
+          "id": "text-body-sm",
+          "family": "typography"
+        }
+      ],
+      "requires": [
+        "A programmatic label: `field`'s `FieldLabel`, or an `aria-label` where no visible label exists.",
+        "`aria-invalid` on the control when validation fails, paired with a `FieldError` that names what is wrong."
+      ],
+      "forbids": [
+        "Re-styling the invalid state with border or ring utilities — the primitive renders it from `aria-invalid`.",
+        "A fixed px width. The field fills its container and the layout decides the measure."
+      ],
+      "rules": [],
+      "behavior": {
+        "error": "Invalid means `aria-invalid` on the control plus an inline `FieldError` naming the problem — never a generic toast, and never a silently blocked submit button."
+      },
+      "a11y": {
+        "attributes": [],
+        "requirements": [
+          "Every field is labelled.",
+          "Colour is never the only error signal; the message carries the meaning."
+        ]
+      },
+      "examples": [
+        "`<Field><FieldLabel>Site name</FieldLabel><Input aria-invalid={!valid} /><FieldError>Site name is required</FieldError></Field>`"
+      ],
+      "antiPatterns": [
+        "A required field that blocks submission with no inline message.",
+        "Hand-drawn focus styling that replaces the `ring` token."
+      ],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": true
+    },
+    {
+      "id": "input-group",
+      "label": "Input group",
+      "registryItem": "edgecom-ai/design-system/input-group",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/input-group",
+      "docs": "https://design.edgecom.ai/components/input-group/",
+      "source": "src/components/ui/input-group.tsx",
+      "summary": "An input with attached add-ons. Wrap an InputGroupInput (or Textarea) with InputGroupAddon slots holding icons, text, or buttons.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": null,
+      "parts": [
+        {
+          "name": "InputGroup",
+          "description": "Bordered container that visually merges the control and add-ons."
+        },
+        {
+          "name": "InputGroupAddon",
+          "description": "An add-on slot; align sets inline/block start or end."
+        },
+        {
+          "name": "InputGroupButton",
+          "description": "A compact button inside an add-on."
+        },
+        {
+          "name": "InputGroupText",
+          "description": "Muted text inside an add-on (e.g. a unit like kWh)."
+        },
+        {
+          "name": "InputGroupInput",
+          "description": "The text input control inside the group."
+        },
+        {
+          "name": "InputGroupTextarea",
+          "description": "A multi-line control variant inside the group."
+        }
+      ],
+      "props": [
+        {
+          "part": "InputGroup",
+          "name": "align",
+          "type": "\"inline-start\" | \"inline-end\" | \"block-start\" | \"block-end\"",
+          "default": "\"inline-start\"",
+          "description": null
+        }
+      ],
+      "variants": [
+        {
+          "name": "align",
+          "options": [
+            "inline-start",
+            "inline-end",
+            "block-start",
+            "block-end"
+          ],
+          "default": "inline-start"
+        }
+      ],
+      "states": [
+        "aria-invalid",
+        "disabled",
+        "focus-visible",
+        "focus-within",
+        "group-data-[disabled=true]/input-group"
+      ],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "border",
+          "family": "neutral"
+        },
+        {
+          "id": "destructive",
+          "family": "status"
+        },
+        {
+          "id": "input",
+          "family": "neutral"
+        },
+        {
+          "id": "muted-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "radius-lg",
+          "family": "radius"
+        },
+        {
+          "id": "ring",
+          "family": "neutral"
+        },
+        {
+          "id": "text-body-sm",
+          "family": "typography"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [],
+      "behavior": {},
+      "a11y": {
+        "attributes": [
+          "aria-invalid",
+          "role=group"
+        ],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "list",
+      "label": "List",
+      "registryItem": "edgecom-ai/design-system/list",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/list",
+      "docs": "https://design.edgecom.ai/components/list/",
+      "source": "src/components/ui/item.tsx",
+      "summary": "Structured rows built from the Item primitive — media, content (title + description), and trailing actions, grouped by ItemGroup.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": null,
+      "parts": [
+        {
+          "name": "Item",
+          "description": "A single row laying out media, content, and actions."
+        },
+        {
+          "name": "ItemMedia",
+          "description": "Leading icon, avatar, or image slot."
+        },
+        {
+          "name": "ItemContent",
+          "description": "Main column holding the title and description."
+        },
+        {
+          "name": "ItemActions",
+          "description": "Trailing slot for buttons or a menu."
+        },
+        {
+          "name": "ItemGroup",
+          "description": "Wraps a set of items as one list."
+        },
+        {
+          "name": "ItemSeparator",
+          "description": "A divider between rows."
+        },
+        {
+          "name": "ItemTitle",
+          "description": "The row's primary line."
+        },
+        {
+          "name": "ItemDescription",
+          "description": "Muted secondary line under the title."
+        },
+        {
+          "name": "ItemHeader",
+          "description": "Optional header row above the content."
+        },
+        {
+          "name": "ItemFooter",
+          "description": "Optional footer row below the content."
+        }
+      ],
+      "props": [
+        {
+          "part": "Item",
+          "name": "variant",
+          "type": "\"default\" | \"outline\" | \"muted\"",
+          "default": "\"default\"",
+          "description": "Row surface style."
+        },
+        {
+          "part": "Item",
+          "name": "size",
+          "type": "\"default\" | \"sm\" | \"xs\"",
+          "default": "\"default\"",
+          "description": "Row density (padding)."
+        }
+      ],
+      "variants": [
+        {
+          "name": "variant",
+          "options": [
+            "default",
+            "outline",
+            "muted"
+          ],
+          "default": "default"
+        },
+        {
+          "name": "size",
+          "options": [
+            "default",
+            "sm",
+            "xs"
+          ],
+          "default": "default"
+        }
+      ],
+      "states": [
+        "focus-visible",
+        "group-data-[size=sm]/item",
+        "group-data-[size=xs]/item",
+        "hover"
+      ],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "border",
+          "family": "neutral"
+        },
+        {
+          "id": "muted",
+          "family": "neutral"
+        },
+        {
+          "id": "muted-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "primary",
+          "family": "brand"
+        },
+        {
+          "id": "primary-emphasis",
+          "family": "brand"
+        },
+        {
+          "id": "radius-lg",
+          "family": "radius"
+        },
+        {
+          "id": "radius-sm",
+          "family": "radius"
+        },
+        {
+          "id": "ring",
+          "family": "neutral"
+        },
+        {
+          "id": "text-body",
+          "family": "typography"
+        },
+        {
+          "id": "text-body-sm",
+          "family": "typography"
+        },
+        {
+          "id": "text-caption",
+          "family": "typography"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [],
+      "behavior": {},
+      "a11y": {
+        "attributes": [
+          "role=list"
+        ],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "navigation-menu",
+      "label": "Navigation menu",
+      "registryItem": "edgecom-ai/design-system/navigation-menu",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/navigation-menu",
+      "docs": "https://design.edgecom.ai/components/navigation-menu/",
+      "source": "src/components/ui/navigation-menu.tsx",
+      "summary": "A horizontal nav bar: a List of items whose Triggers open Content panels, with an indicator arrow and a portalled viewport.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": {
+        "name": "Base UI NavigationMenu",
+        "url": "https://base-ui.com/react/components/navigation-menu"
+      },
+      "parts": [
+        {
+          "name": "NavigationMenu",
+          "description": "Root wrapper that also mounts the positioner."
+        },
+        {
+          "name": "NavigationMenuContent",
+          "description": "Panel shown for an open item."
+        },
+        {
+          "name": "NavigationMenuIndicator",
+          "description": "Animated arrow marking the active trigger."
+        },
+        {
+          "name": "NavigationMenuItem",
+          "description": "One menu entry container."
+        },
+        {
+          "name": "NavigationMenuLink",
+          "description": "A styled navigable link row."
+        },
+        {
+          "name": "NavigationMenuList",
+          "description": "Horizontal row of menu items."
+        },
+        {
+          "name": "NavigationMenuTrigger",
+          "description": "Toggles a content panel; shows a rotating chevron."
+        },
+        {
+          "name": "NavigationMenuPositioner",
+          "description": "Portalled positioner holding the popup and viewport."
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [
+        "data-[ending-style]",
+        "data-[motion=from-end]",
+        "data-[motion=from-start]",
+        "data-[motion=to-end]",
+        "data-[motion=to-start]",
+        "data-[motion^=from-]",
+        "data-[motion^=to-]",
+        "data-[side=bottom]",
+        "data-[slot=navigation-menu-link]",
+        "data-[state=hidden]",
+        "data-[state=visible]",
+        "data-activation-direction=left",
+        "data-activation-direction=right",
+        "data-active",
+        "data-closed",
+        "data-ending-style",
+        "data-instant",
+        "data-open",
+        "data-popup-open",
+        "data-starting-style",
+        "disabled",
+        "focus",
+        "focus-visible",
+        "group-data-[viewport=false]/navigation-menu",
+        "group-data-open/navigation-menu-trigger",
+        "group-data-popup-open/navigation-menu-trigger",
+        "hover"
+      ],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "border",
+          "family": "neutral"
+        },
+        {
+          "id": "foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "muted",
+          "family": "neutral"
+        },
+        {
+          "id": "popover",
+          "family": "surface"
+        },
+        {
+          "id": "popover-foreground",
+          "family": "surface"
+        },
+        {
+          "id": "radius-lg",
+          "family": "radius"
+        },
+        {
+          "id": "radius-md",
+          "family": "radius"
+        },
+        {
+          "id": "ring",
+          "family": "neutral"
+        },
+        {
+          "id": "text-body-sm",
+          "family": "typography"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [],
+      "behavior": {},
+      "a11y": {
+        "attributes": [
+          "aria-hidden"
+        ],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "pagination",
+      "label": "Pagination",
+      "registryItem": "edgecom-ai/design-system/pagination",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/pagination",
+      "docs": "https://design.edgecom.ai/components/pagination/",
+      "source": "src/components/ui/pagination.tsx",
+      "summary": "Page navigation for long lists and tables — previous/next controls, numbered links, and an ellipsis.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": null,
+      "parts": [
+        {
+          "name": "Pagination",
+          "description": "Root nav landmark labelled for assistive tech."
+        },
+        {
+          "name": "PaginationContent",
+          "description": "The row that lays out the page items."
+        },
+        {
+          "name": "PaginationEllipsis",
+          "description": "Indicates skipped page ranges."
+        },
+        {
+          "name": "PaginationItem",
+          "description": "A single slot wrapping a link or control."
+        },
+        {
+          "name": "PaginationLink",
+          "description": "A page-number link; mark the current page with isActive."
+        },
+        {
+          "name": "PaginationNext",
+          "description": "Link to the next page."
+        },
+        {
+          "name": "PaginationPrevious",
+          "description": "Link to the previous page."
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [],
+      "responsive": [
+        "sm"
+      ],
+      "tokens": [],
+      "requires": [],
+      "forbids": [],
+      "rules": [],
+      "behavior": {},
+      "a11y": {
+        "attributes": [
+          "aria-current",
+          "aria-label",
+          "role=navigation",
+          "sr-only"
+        ],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "popover",
+      "label": "Popover",
+      "registryItem": "edgecom-ai/design-system/popover",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/popover",
+      "docs": "https://design.edgecom.ai/components/popover/",
+      "source": "src/components/ui/popover.tsx",
+      "summary": "A floating panel anchored to a trigger: PopoverContent can hold a header (title + description) and a close button.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": {
+        "name": "Base UI Popover",
+        "url": "https://base-ui.com/react/components/popover"
+      },
+      "parts": [
+        {
+          "name": "Popover",
+          "description": "Root managing the popover's open state."
+        },
+        {
+          "name": "PopoverTrigger",
+          "description": "Element that toggles the popover on click."
+        },
+        {
+          "name": "PopoverContent",
+          "description": "Portalled, positioned popup panel."
+        },
+        {
+          "name": "PopoverClose",
+          "description": "Button that closes the popover."
+        },
+        {
+          "name": "PopoverHeader",
+          "description": "Div stacking the title and description."
+        },
+        {
+          "name": "PopoverTitle",
+          "description": "Accessible heading for the popover."
+        },
+        {
+          "name": "PopoverDescription",
+          "description": "Muted supporting text."
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [
+        "data-[ending-style]",
+        "data-[starting-style]"
+      ],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "border",
+          "family": "neutral"
+        },
+        {
+          "id": "muted-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "popover",
+          "family": "surface"
+        },
+        {
+          "id": "popover-foreground",
+          "family": "surface"
+        },
+        {
+          "id": "radius-lg",
+          "family": "radius"
+        },
+        {
+          "id": "text-body",
+          "family": "typography"
+        },
+        {
+          "id": "text-body-sm",
+          "family": "typography"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [],
+      "behavior": {},
+      "a11y": {
+        "attributes": [],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "progress",
+      "label": "Progress",
+      "registryItem": "edgecom-ai/design-system/progress",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/progress",
+      "docs": "https://design.edgecom.ai/components/progress/",
+      "source": "src/components/ui/progress.tsx",
+      "summary": "A progress bar: the root auto-renders a Track containing an Indicator, with optional Label and Value.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": {
+        "name": "Base UI Progress",
+        "url": "https://base-ui.com/react/components/progress"
+      },
+      "parts": [
+        {
+          "name": "Progress",
+          "description": "Root holding the value; auto-renders the track and indicator."
+        },
+        {
+          "name": "ProgressTrack",
+          "description": "The rounded bar background containing the indicator."
+        },
+        {
+          "name": "ProgressIndicator",
+          "description": "The filled bar, sized to the current value."
+        },
+        {
+          "name": "ProgressLabel",
+          "description": "Text label naming the progress bar."
+        },
+        {
+          "name": "ProgressValue",
+          "description": "Right-aligned text showing the formatted value."
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "muted",
+          "family": "neutral"
+        },
+        {
+          "id": "muted-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "primary",
+          "family": "brand"
+        },
+        {
+          "id": "text-body-sm",
+          "family": "typography"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [],
+      "behavior": {},
+      "a11y": {
+        "attributes": [],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "radio-group",
+      "label": "Radio group",
+      "registryItem": "edgecom-ai/design-system/radio-group",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/radio-group",
+      "docs": "https://design.edgecom.ai/components/radio-group/",
+      "source": "src/components/ui/radio-group.tsx",
+      "summary": "A set of mutually-exclusive options: a RadioGroup coordinates its RadioGroupItems.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": {
+        "name": "Base UI Radio",
+        "url": "https://base-ui.com/react/components/radio"
+      },
+      "parts": [
+        {
+          "name": "RadioGroup",
+          "description": "Root coordinating selection across its items."
+        },
+        {
+          "name": "RadioGroupItem",
+          "description": "A single circular radio with a checked-dot indicator."
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [
+        "aria-checked",
+        "aria-invalid",
+        "data-checked",
+        "data-disabled",
+        "disabled",
+        "focus-visible"
+      ],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "border",
+          "family": "neutral"
+        },
+        {
+          "id": "destructive",
+          "family": "status"
+        },
+        {
+          "id": "input",
+          "family": "neutral"
+        },
+        {
+          "id": "primary",
+          "family": "brand"
+        },
+        {
+          "id": "primary-foreground",
+          "family": "brand"
+        },
+        {
+          "id": "ring",
+          "family": "neutral"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [],
+      "behavior": {},
+      "a11y": {
+        "attributes": [],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "resizable",
+      "label": "Resizable",
+      "registryItem": "edgecom-ai/design-system/resizable",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/resizable",
+      "docs": "https://design.edgecom.ai/components/resizable/",
+      "source": "src/components/ui/resizable.tsx",
+      "summary": "Draggable split layouts: a PanelGroup arranges Panels separated by Handles.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": null,
+      "parts": [
+        {
+          "name": "ResizablePanelGroup",
+          "description": "Container arranging panels horizontally or vertically."
+        },
+        {
+          "name": "ResizablePanel",
+          "description": "An individual resizable region within the group."
+        },
+        {
+          "name": "ResizableHandle",
+          "description": "Draggable divider between panels; optional grip icon."
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [
+        "aria-[orientation=horizontal]",
+        "focus-visible"
+      ],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "border",
+          "family": "neutral"
+        },
+        {
+          "id": "ring",
+          "family": "neutral"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [],
+      "behavior": {},
+      "a11y": {
+        "attributes": [
+          "aria-orientation"
+        ],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "scroll-area",
+      "label": "Scroll area",
+      "registryItem": "edgecom-ai/design-system/scroll-area",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/scroll-area",
+      "docs": "https://design.edgecom.ai/components/scroll-area/",
+      "source": "src/components/ui/scroll-area.tsx",
+      "summary": "A scrollable region with a custom overlay scrollbar. Set orientation to vertical, horizontal, or both.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": {
+        "name": "Base UI ScrollArea",
+        "url": "https://base-ui.com/react/components/scroll-area"
+      },
+      "parts": [
+        {
+          "name": "ScrollArea",
+          "description": "Root + viewport; auto-renders scrollbars per orientation."
+        },
+        {
+          "name": "ScrollBar",
+          "description": "The draggable scrollbar track and thumb."
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [
+        "data-[orientation=horizontal]",
+        "data-[orientation=vertical]",
+        "focus-visible"
+      ],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "border",
+          "family": "neutral"
+        },
+        {
+          "id": "ring",
+          "family": "neutral"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [],
+      "behavior": {},
+      "a11y": {
+        "attributes": [],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "select",
+      "label": "Select",
+      "registryItem": "edgecom-ai/design-system/select",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/select",
+      "docs": "https://design.edgecom.ai/components/select/",
+      "source": "src/components/ui/select.tsx",
+      "summary": "Choose one value from a list. A Root holds the value and wraps a Trigger plus a portalled, positioned Content of Items.",
+      "purpose": "Choose one value from a known set. The popup is portaled to the app root and matches the trigger width, so options line up under the value they replace.",
+      "useWhen": [
+        "One value is chosen from a set too long for a `tabs` strip, or from one that grows.",
+        "A recurring job needs a control — a series selector, a date range — and then the same `select` appears wherever that job does."
+      ],
+      "dontUseWhen": [
+        "The set is small and fixed and the choice switches panels — that is `tabs`.",
+        "The user needs to type or search — that is `combobox`.",
+        "The list holds actions rather than values — that is a `dropdown-menu`, which shrink-wraps instead of matching the trigger."
+      ],
+      "base": {
+        "name": "Base UI Select",
+        "url": "https://base-ui.com/react/components/select"
+      },
+      "parts": [
+        {
+          "name": "Select",
+          "description": "Root. Owns the value state and wraps the trigger and content."
+        },
+        {
+          "name": "SelectContent",
+          "description": "The popup listbox — portalled, positioned below the trigger."
+        },
+        {
+          "name": "SelectGroup",
+          "description": "Wraps related items. Required around a SelectLabel."
+        },
+        {
+          "name": "SelectItem",
+          "description": "A selectable option; shows a check when selected."
+        },
+        {
+          "name": "SelectLabel",
+          "description": "A non-interactive heading for a group. Must be inside SelectGroup."
+        },
+        {
+          "name": "SelectScrollDownButton",
+          "description": "Scroll-down affordance shown when the list overflows."
+        },
+        {
+          "name": "SelectScrollUpButton",
+          "description": "Scroll-up affordance shown when the list overflows."
+        },
+        {
+          "name": "SelectSeparator",
+          "description": "A thin divider between groups or items."
+        },
+        {
+          "name": "SelectTrigger",
+          "description": "The button that opens the listbox and shows the current value."
+        },
+        {
+          "name": "SelectValue",
+          "description": "Renders the selected item's label, or the placeholder when empty."
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [
+        "aria-invalid",
+        "data-[align-trigger=true]",
+        "data-[side=bottom]",
+        "data-[side=inline-end]",
+        "data-[side=inline-start]",
+        "data-[side=left]",
+        "data-[side=right]",
+        "data-[side=top]",
+        "data-[size=default]",
+        "data-[size=sm]",
+        "data-[slot=select-value]",
+        "data-closed",
+        "data-disabled",
+        "data-open",
+        "data-placeholder",
+        "disabled",
+        "focus",
+        "focus-visible",
+        "hover",
+        "last"
+      ],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "accent",
+          "family": "neutral"
+        },
+        {
+          "id": "accent-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "border",
+          "family": "neutral"
+        },
+        {
+          "id": "destructive",
+          "family": "status"
+        },
+        {
+          "id": "foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "input",
+          "family": "neutral"
+        },
+        {
+          "id": "input-hover",
+          "family": "interaction"
+        },
+        {
+          "id": "input-surface",
+          "family": "interaction"
+        },
+        {
+          "id": "muted-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "popover",
+          "family": "surface"
+        },
+        {
+          "id": "popover-foreground",
+          "family": "surface"
+        },
+        {
+          "id": "radius-lg",
+          "family": "radius"
+        },
+        {
+          "id": "radius-md",
+          "family": "radius"
+        },
+        {
+          "id": "ring",
+          "family": "neutral"
+        },
+        {
+          "id": "text-body-sm",
+          "family": "typography"
+        },
+        {
+          "id": "text-caption",
+          "family": "typography"
+        }
+      ],
+      "requires": [
+        "A `SelectValue` in the trigger, so the current value is readable without opening the list.",
+        "Portalling left on, so no `overflow` ancestor can clip the popup."
+      ],
+      "forbids": [
+        "A checkmark on the selected option in a single-select. The trigger value and the option highlight already say it; a check belongs only to multi-select.",
+        "Pinning a side that lets the popup run off-screen — the positioner flips and shifts by default.",
+        "Stretching or shrinking the list away from the trigger width."
+      ],
+      "rules": [
+        "**No checkmark on the selected option** in a single-select — the trigger value plus the option highlight already say it. A check belongs only in multi-select.",
+        "The list matches the trigger width so options line up under the shown value."
+      ],
+      "behavior": {
+        "error": "`aria-invalid` on the trigger renders the destructive border and ring, exactly as on `input`."
+      },
+      "a11y": {
+        "attributes": [],
+        "requirements": [
+          "The trigger is labelled — by a `field` label or an `aria-label`."
+        ]
+      },
+      "examples": [
+        "`<Select><SelectTrigger><SelectValue placeholder=\"All sites\" /></SelectTrigger><SelectContent><SelectItem value=\"a\">Site A</SelectItem></SelectContent></Select>`"
+      ],
+      "antiPatterns": [
+        "Adding a tick to the chosen item because a design tool drew one.",
+        "A `select` for a job that a segmented control handles on another screen."
+      ],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": true
+    },
+    {
+      "id": "separator",
+      "label": "Separator",
+      "registryItem": "edgecom-ai/design-system/separator",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/separator",
+      "docs": "https://design.edgecom.ai/components/separator/",
+      "source": "src/components/ui/separator.tsx",
+      "summary": "A thin divider line. Set orientation to horizontal (default) or vertical.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": {
+        "name": "Base UI Separator",
+        "url": "https://base-ui.com/react/components/separator"
+      },
+      "parts": [
+        {
+          "name": "Separator",
+          "description": "Border-colored divider; orientation sets horizontal or vertical."
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [
+        "data-[orientation=horizontal]",
+        "data-[orientation=vertical]"
+      ],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "border",
+          "family": "neutral"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [],
+      "behavior": {},
+      "a11y": {
+        "attributes": [],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "sheet",
+      "label": "Sheet",
+      "registryItem": "edgecom-ai/design-system/sheet",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/sheet",
+      "docs": "https://design.edgecom.ai/components/sheet/",
+      "source": "src/components/ui/sheet.tsx",
+      "summary": "A dialog panel that slides in from an edge. A Trigger opens a portalled Content with header/footer, title, description, and close.",
+      "purpose": "The edge-anchored panel for longer edit flows. 420px on the inline edges by default, full width on mobile.",
+      "useWhen": [
+        "An edit or update form runs to many fields.",
+        "A detail panel should keep the page context visible behind it."
+      ],
+      "dontUseWhen": [
+        "The form is one to four fields — that is a `dialog`.",
+        "The flow is a destructive confirmation — that is an `alert-dialog`."
+      ],
+      "base": {
+        "name": "Base UI Dialog",
+        "url": "https://base-ui.com/react/components/dialog"
+      },
+      "parts": [
+        {
+          "name": "Sheet",
+          "description": "Root managing the sheet's open state."
+        },
+        {
+          "name": "SheetTrigger",
+          "description": "Opens the sheet; pass a Button via the render prop."
+        },
+        {
+          "name": "SheetClose",
+          "description": "Closes the sheet; wrap a Button via the render prop."
+        },
+        {
+          "name": "SheetContent",
+          "description": "The sliding panel; takes a side prop (default right). 420px wide for left/right, uncapped for top/bottom — resize with a plain sm:max-w-* class, or set the --sheet-width custom property."
+        },
+        {
+          "name": "SheetHeader",
+          "description": "Top section for the title and description."
+        },
+        {
+          "name": "SheetFooter",
+          "description": "Bottom section for action buttons."
+        },
+        {
+          "name": "SheetTitle",
+          "description": "Accessible heading for the panel."
+        },
+        {
+          "name": "SheetDescription",
+          "description": "Muted supporting text under the title."
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [
+        "data-[side=bottom]",
+        "data-[side=left]",
+        "data-[side=right]",
+        "data-[side=top]",
+        "data-ending-style",
+        "data-starting-style"
+      ],
+      "responsive": [
+        "sm"
+      ],
+      "tokens": [
+        {
+          "id": "font-heading",
+          "family": "typography"
+        },
+        {
+          "id": "foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "muted-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "popover",
+          "family": "surface"
+        },
+        {
+          "id": "popover-foreground",
+          "family": "surface"
+        },
+        {
+          "id": "scrim",
+          "family": "surface"
+        },
+        {
+          "id": "text-body",
+          "family": "typography"
+        },
+        {
+          "id": "text-body-lg",
+          "family": "typography"
+        },
+        {
+          "id": "text-body-sm",
+          "family": "typography"
+        }
+      ],
+      "requires": [
+        "A `SheetTitle`.",
+        "The default top-right close (X)."
+      ],
+      "forbids": [
+        "Widening past the default unless the content genuinely needs it — and then through the `--sheet-width` custom property the primitive reads, not a `w-*` override.",
+        "Removing the close."
+      ],
+      "rules": [
+        "Default width 420px, full-width on mobile. Keeps its top-right close (X)."
+      ],
+      "behavior": {},
+      "a11y": {
+        "attributes": [
+          "sr-only"
+        ],
+        "requirements": [
+          "Focus moves into the panel on open and returns to the trigger on close."
+        ]
+      },
+      "examples": [
+        "`<Sheet><SheetTrigger render={<Button variant=\"outline\">Edit site</Button>} /><SheetContent side=\"right\"><SheetHeader><SheetTitle>Edit site</SheetTitle></SheetHeader>…</SheetContent></Sheet>`"
+      ],
+      "antiPatterns": [
+        "A sheet used as a permanent side panel — it is an overlay, mounted at the app root.",
+        "A `w-[600px]` on `SheetContent` instead of setting `--sheet-width`."
+      ],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": true
+    },
+    {
+      "id": "sidebar",
+      "label": "Sidebar",
+      "registryItem": "edgecom-ai/design-system/sidebar",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/sidebar",
+      "docs": "https://design.edgecom.ai/components/sidebar/",
+      "source": "src/components/ui/sidebar.tsx",
+      "summary": "A composable application sidebar. SidebarProvider supplies collapse state; Sidebar holds a header, a scrollable body of grouped menus, and a footer, alongside a SidebarInset for the main area.",
+      "purpose": "The application navigation frame: a provider holding collapse state, a rail, and menus whose active item uses the component's own neutral highlight.",
+      "useWhen": [
+        "Top-level navigation of the app shell.",
+        "Grouped, collapsible navigation that has to survive a route change."
+      ],
+      "dontUseWhen": [
+        "The switch is between panels within one page — that is `tabs`.",
+        "The list is a set of actions on one element — that is a `dropdown-menu`."
+      ],
+      "base": null,
+      "parts": [
+        {
+          "name": "Sidebar",
+          "description": "The sidebar container; collapsible offcanvas, icon, or none."
+        },
+        {
+          "name": "SidebarContent",
+          "description": "Scrollable body holding the navigation groups."
+        },
+        {
+          "name": "SidebarFooter",
+          "description": "Bottom region, e.g. settings or the account menu."
+        },
+        {
+          "name": "SidebarGroup",
+          "description": "A titled section of menu items."
+        },
+        {
+          "name": "SidebarGroupAction",
+          "description": null
+        },
+        {
+          "name": "SidebarGroupContent",
+          "description": null
+        },
+        {
+          "name": "SidebarGroupLabel",
+          "description": "Heading for a group."
+        },
+        {
+          "name": "SidebarHeader",
+          "description": "Top region, typically the logo or workspace switcher."
+        },
+        {
+          "name": "SidebarInput",
+          "description": null
+        },
+        {
+          "name": "SidebarInset",
+          "description": "The main content area beside the sidebar."
+        },
+        {
+          "name": "SidebarMenu",
+          "description": "The list of menu items within a group."
+        },
+        {
+          "name": "SidebarMenuAction",
+          "description": null
+        },
+        {
+          "name": "SidebarMenuBadge",
+          "description": null
+        },
+        {
+          "name": "SidebarMenuButton",
+          "description": "The interactive nav button; set isActive for the current page."
+        },
+        {
+          "name": "SidebarMenuItem",
+          "description": "A single menu row."
+        },
+        {
+          "name": "SidebarMenuSkeleton",
+          "description": null
+        },
+        {
+          "name": "SidebarMenuSub",
+          "description": null
+        },
+        {
+          "name": "SidebarMenuSubButton",
+          "description": null
+        },
+        {
+          "name": "SidebarMenuSubItem",
+          "description": null
+        },
+        {
+          "name": "SidebarMenuSubmenu",
+          "description": "A parent with subpages: an inline collapsible submenu when expanded, and an off-rail hover/focus flyout when the rail is collapsed to icons. Pass the parent button as `trigger` and the SidebarMenuSubItem rows as children. If the trigger renders something other than a <button> — a SidebarMenuButton with render={<Link />}, say — pass nativeButton={false} so Base UI does not warn on the collapsed-rail flyout."
+        },
+        {
+          "name": "SidebarProvider",
+          "description": "Context provider owning open/collapsed state; wrap the whole layout."
+        },
+        {
+          "name": "SidebarRail",
+          "description": null
+        },
+        {
+          "name": "SidebarSeparator",
+          "description": null
+        },
+        {
+          "name": "SidebarTrigger",
+          "description": "Button that toggles the sidebar open/collapsed."
+        }
+      ],
+      "props": [
+        {
+          "part": "Sidebar",
+          "name": "variant",
+          "type": "\"default\" | \"outline\"",
+          "default": "\"default\"",
+          "description": null
+        },
+        {
+          "part": "Sidebar",
+          "name": "size",
+          "type": "\"default\" | \"sm\" | \"lg\"",
+          "default": "\"default\"",
+          "description": null
+        }
+      ],
+      "variants": [
+        {
+          "name": "variant",
+          "options": [
+            "default",
+            "outline"
+          ],
+          "default": "default"
+        },
+        {
+          "name": "size",
+          "options": [
+            "default",
+            "sm",
+            "lg"
+          ],
+          "default": "default"
+        }
+      ],
+      "states": [
+        "active",
+        "aria-disabled",
+        "aria-expanded",
+        "data-[orientation=horizontal]",
+        "data-[side=left]",
+        "data-[side=right]",
+        "data-[size=md]",
+        "data-[size=sm]",
+        "data-active",
+        "data-open",
+        "disabled",
+        "focus-visible",
+        "group-data-[collapsible=icon]",
+        "group-data-[collapsible=offcanvas]",
+        "group-data-[side=left]",
+        "group-data-[side=right]",
+        "group-data-[variant=floating]",
+        "hover",
+        "peer-data-[size=default]/menu-button",
+        "peer-data-[size=lg]/menu-button",
+        "peer-data-[size=sm]/menu-button",
+        "peer-data-[state=collapsed]",
+        "peer-data-[variant=inset]",
+        "peer-data-active/menu-button"
+      ],
+      "responsive": [
+        "md",
+        "sm"
+      ],
+      "tokens": [
+        {
+          "id": "background",
+          "family": "surface"
+        },
+        {
+          "id": "input",
+          "family": "neutral"
+        },
+        {
+          "id": "muted-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "radius-lg",
+          "family": "radius"
+        },
+        {
+          "id": "radius-md",
+          "family": "radius"
+        },
+        {
+          "id": "radius-xl",
+          "family": "radius"
+        },
+        {
+          "id": "sidebar",
+          "family": "other"
+        },
+        {
+          "id": "sidebar-accent",
+          "family": "sidebar"
+        },
+        {
+          "id": "sidebar-accent-foreground",
+          "family": "sidebar"
+        },
+        {
+          "id": "sidebar-border",
+          "family": "sidebar"
+        },
+        {
+          "id": "sidebar-foreground",
+          "family": "sidebar"
+        },
+        {
+          "id": "sidebar-ring",
+          "family": "sidebar"
+        },
+        {
+          "id": "text-body-sm",
+          "family": "typography"
+        },
+        {
+          "id": "text-caption",
+          "family": "typography"
+        }
+      ],
+      "requires": [
+        "A `SidebarProvider` above any `Sidebar`; the collapse state lives there.",
+        "`SidebarMenuButton isActive` for the current item, so the active styling is the component's own.",
+        "A gap between menu items so an active item and a hovered neighbour never merge into one block."
+      ],
+      "forbids": [
+        "Recolouring the active item with brand blue. The highlight is the neutral `sidebar-accent` surface, and the text and icon stay `foreground`.",
+        "Hand-rolling the highlight instead of composing `SidebarGroupLabel`, `SidebarMenuButton isActive`, and `SidebarMenuSub`."
+      ],
+      "rules": [],
+      "behavior": {
+        "loading": "`SidebarMenuSkeleton` holds the menu's shape while its items load."
+      },
+      "a11y": {
+        "attributes": [
+          "aria-label",
+          "sr-only",
+          "tabIndex"
+        ],
+        "requirements": [
+          "`SidebarTrigger` carries an `aria-label`.",
+          "Items collapsed to icons keep an accessible name."
+        ]
+      },
+      "examples": [
+        "`<SidebarProvider><Sidebar><SidebarContent><SidebarGroup><SidebarGroupLabel>Sites</SidebarGroupLabel><SidebarMenu><SidebarMenuItem><SidebarMenuButton isActive>Overview</SidebarMenuButton></SidebarMenuItem></SidebarMenu></SidebarGroup></SidebarContent></Sidebar><SidebarInset>…</SidebarInset></SidebarProvider>`"
+      ],
+      "antiPatterns": [
+        "A brand-blue active nav item.",
+        "Two parallel navigation patterns in one app shell."
+      ],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": true
+    },
+    {
+      "id": "skeleton",
+      "label": "Skeleton",
+      "registryItem": "edgecom-ai/design-system/skeleton",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/skeleton",
+      "docs": "https://design.edgecom.ai/components/skeleton/",
+      "source": "src/components/ui/skeleton.tsx",
+      "summary": "A muted placeholder block for loading states; pulses by default, or shimmers with a sweeping highlight.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": null,
+      "parts": [
+        {
+          "name": "Skeleton",
+          "description": "Muted placeholder block for loading states."
+        }
+      ],
+      "props": [
+        {
+          "part": "Skeleton",
+          "name": "animation",
+          "type": "\"pulse\" | \"shimmer\" | \"none\"",
+          "default": "\"pulse\"",
+          "description": "Loading motion: pulse (default), shimmer (a highlight sweeps across), or none (static). All stop under prefers-reduced-motion."
+        }
+      ],
+      "variants": [
+        {
+          "name": "animation",
+          "options": [
+            "pulse",
+            "shimmer",
+            "none"
+          ],
+          "default": "pulse"
+        }
+      ],
+      "states": [],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "animate-skeleton-pulse",
+          "family": "motion"
+        },
+        {
+          "id": "animate-skeleton-shimmer",
+          "family": "motion"
+        },
+        {
+          "id": "foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "muted",
+          "family": "neutral"
+        },
+        {
+          "id": "radius-md",
+          "family": "radius"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [
+        "Use for loading, with `spinner` and `empty` for the other two states. Never a raw loading gap."
+      ],
+      "behavior": {},
+      "a11y": {
+        "attributes": [],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "slider",
+      "label": "Slider",
+      "registryItem": "edgecom-ai/design-system/slider",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/slider",
+      "docs": "https://design.edgecom.ai/components/slider/",
+      "source": "src/components/ui/slider.tsx",
+      "summary": "A track-and-thumb control for a value or range; renders one thumb per value.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": {
+        "name": "Base UI Slider",
+        "url": "https://base-ui.com/react/components/slider"
+      },
+      "parts": [
+        {
+          "name": "Slider",
+          "description": "All-in-one slider: track, filled range, and thumbs from value/defaultValue."
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [
+        "data-disabled",
+        "disabled",
+        "focus-visible"
+      ],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "background",
+          "family": "surface"
+        },
+        {
+          "id": "border",
+          "family": "neutral"
+        },
+        {
+          "id": "muted",
+          "family": "neutral"
+        },
+        {
+          "id": "primary",
+          "family": "brand"
+        },
+        {
+          "id": "ring",
+          "family": "neutral"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [],
+      "behavior": {},
+      "a11y": {
+        "attributes": [],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "sortable",
+      "label": "Sortable",
+      "registryItem": "edgecom-ai/design-system/sortable",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/sortable",
+      "docs": "https://design.edgecom.ai/components/sortable/",
+      "source": "src/components/ui/sortable.tsx",
+      "summary": "Drag-and-drop reordering: Sortable provides context, SortableItem wraps each entry, and SortableOverlay renders the dragged preview.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": null,
+      "parts": [
+        {
+          "name": "Sortable",
+          "description": "Root managing drag context, sensors, and reordering."
+        },
+        {
+          "name": "SortableItem",
+          "description": "A draggable list entry, keyed by its value."
+        },
+        {
+          "name": "SortableItemHandle",
+          "description": "A grip element that binds the drag listeners."
+        },
+        {
+          "name": "SortableOverlay",
+          "description": "Portalled floating preview of the dragged item."
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [],
+      "responsive": [],
+      "tokens": [],
+      "requires": [],
+      "forbids": [],
+      "rules": [],
+      "behavior": {},
+      "a11y": {
+        "attributes": [],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "spinner",
+      "label": "Spinner",
+      "registryItem": "edgecom-ai/design-system/spinner",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/spinner",
+      "docs": "https://design.edgecom.ai/components/spinner/",
+      "source": "src/components/ui/spinner.tsx",
+      "summary": "A spinning loading indicator with role=status.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": null,
+      "parts": [
+        {
+          "name": "Spinner",
+          "description": "Animated spinning loader icon with an accessible label."
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [],
+      "responsive": [],
+      "tokens": [],
+      "requires": [],
+      "forbids": [],
+      "rules": [],
+      "behavior": {},
+      "a11y": {
+        "attributes": [
+          "aria-label",
+          "role=status"
+        ],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "stepper",
+      "label": "Stepper",
+      "registryItem": "edgecom-ai/design-system/stepper",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/stepper",
+      "docs": "https://design.edgecom.ai/components/stepper/",
+      "source": "src/components/ui/stepper.tsx",
+      "summary": "A multi-step progress flow: a nav of items (trigger, indicator, separator, title, description) with switchable content panels.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": null,
+      "parts": [
+        {
+          "name": "Stepper",
+          "description": "Root holding the steps, orientation, and navigation state."
+        },
+        {
+          "name": "StepperItem",
+          "description": "Wraps one step, deriving its active/completed state."
+        },
+        {
+          "name": "StepperTrigger",
+          "description": "Clickable tab that navigates to its step."
+        },
+        {
+          "name": "StepperIndicator",
+          "description": "Circular badge showing the step number, icon, or state."
+        },
+        {
+          "name": "StepperSeparator",
+          "description": "Connector line between steps; fills when completed."
+        },
+        {
+          "name": "StepperTitle",
+          "description": "Heading label for a step."
+        },
+        {
+          "name": "StepperDescription",
+          "description": "Muted secondary text for a step."
+        },
+        {
+          "name": "StepperPanel",
+          "description": "Container region for the active step's content."
+        },
+        {
+          "name": "StepperContent",
+          "description": "Content shown only when its value is the current step."
+        },
+        {
+          "name": "StepperNav",
+          "description": "Flex nav laying out the stepper items."
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [
+        "data-[orientation=horizontal]",
+        "data-[orientation=vertical]",
+        "data-[state=active]",
+        "data-[state=completed]",
+        "disabled",
+        "group-data-[orientation=horizontal]/stepper-nav",
+        "group-data-[orientation=vertical]/stepper-nav",
+        "group-data-[state=active]/step",
+        "group-data-[state=completed]/step"
+      ],
+      "responsive": [
+        "md"
+      ],
+      "tokens": [
+        {
+          "id": "background",
+          "family": "surface"
+        },
+        {
+          "id": "border",
+          "family": "neutral"
+        },
+        {
+          "id": "foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "muted",
+          "family": "neutral"
+        },
+        {
+          "id": "muted-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "primary",
+          "family": "brand"
+        },
+        {
+          "id": "primary-foreground",
+          "family": "brand"
+        },
+        {
+          "id": "radius-md",
+          "family": "radius"
+        },
+        {
+          "id": "radius-sm",
+          "family": "radius"
+        },
+        {
+          "id": "text-body-sm",
+          "family": "typography"
+        },
+        {
+          "id": "text-caption",
+          "family": "typography"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [],
+      "behavior": {},
+      "a11y": {
+        "attributes": [
+          "aria-controls",
+          "aria-labelledby",
+          "aria-orientation",
+          "aria-selected",
+          "tabIndex"
+        ],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "switch",
+      "label": "Switch",
+      "registryItem": "edgecom-ai/design-system/switch",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/switch",
+      "docs": "https://design.edgecom.ai/components/switch/",
+      "source": "src/components/ui/switch.tsx",
+      "summary": "An on/off toggle with a sliding thumb.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": {
+        "name": "Base UI Switch",
+        "url": "https://base-ui.com/react/components/switch"
+      },
+      "parts": [
+        {
+          "name": "Switch",
+          "description": "Toggleable on/off switch; supports default and sm sizes."
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [
+        "data-[checked]",
+        "data-[unchecked]",
+        "data-disabled",
+        "disabled",
+        "focus-visible"
+      ],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "border",
+          "family": "neutral"
+        },
+        {
+          "id": "input",
+          "family": "neutral"
+        },
+        {
+          "id": "primary",
+          "family": "brand"
+        },
+        {
+          "id": "primary-foreground",
+          "family": "brand"
+        },
+        {
+          "id": "ring",
+          "family": "neutral"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [],
+      "behavior": {},
+      "a11y": {
+        "attributes": [],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "table",
+      "label": "Table",
+      "registryItem": "edgecom-ai/design-system/table",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/table",
+      "docs": "https://design.edgecom.ai/components/table/",
+      "source": "src/components/ui/table.tsx",
+      "summary": "A styled HTML table wrapped for horizontal overflow — header, body, optional footer, rows, cells, and a caption.",
+      "purpose": "The data grid for text-first rows. It ships the row hover and the alignment that make every table in the product match.",
+      "useWhen": [
+        "Data reads as rows and columns.",
+        "Density is high and secondary detail can move into a `tooltip` or `hover-card` rather than another column."
+      ],
+      "dontUseWhen": [
+        "The rows are actions or navigation — that is a menu or the `sidebar`.",
+        "There is no data to show — that is `empty`, in the table's place."
+      ],
+      "base": null,
+      "parts": [
+        {
+          "name": "Table",
+          "description": "Root table, wrapped in an overflow-x container."
+        },
+        {
+          "name": "TableHeader",
+          "description": "The thead grouping header rows."
+        },
+        {
+          "name": "TableBody",
+          "description": "The tbody grouping data rows."
+        },
+        {
+          "name": "TableFooter",
+          "description": "Optional tfoot for totals or summaries."
+        },
+        {
+          "name": "TableHead",
+          "description": "A header cell (th)."
+        },
+        {
+          "name": "TableRow",
+          "description": "A single row with hover and selected states."
+        },
+        {
+          "name": "TableCell",
+          "description": "A data cell (td)."
+        },
+        {
+          "name": "TableCaption",
+          "description": "A caption describing the table."
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [
+        "data-[state=selected]",
+        "group-data-[density=compact]/table",
+        "hover",
+        "last"
+      ],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "muted",
+          "family": "neutral"
+        },
+        {
+          "id": "muted-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "text-body-sm",
+          "family": "typography"
+        }
+      ],
+      "requires": [
+        "Wide tables scroll inside their own container rather than forcing horizontal page scroll; the primitive wraps for this.",
+        "The first and last cell in a row align to the card's 1.5rem content padding."
+      ],
+      "forbids": [
+        "Icons in cells unless explicitly asked — cells are text-first.",
+        "A hand-rolled row hover. The primitive's light `primary` tint is what every table uses."
+      ],
+      "rules": [
+        "The first and last cell in a row align to the card's content padding (1.5rem), not the 0.75rem cell padding.",
+        "No icons in cells unless asked. Rely on the primitive's built-in row hover."
+      ],
+      "behavior": {
+        "loading": "Rows render as `skeleton` blocks in place, keeping the column layout, rather than collapsing the table.",
+        "empty": "No rows is an `empty` state with a retry action when a request failed."
+      },
+      "a11y": {
+        "attributes": [],
+        "requirements": [
+          "A `TableCaption` or an `aria-label` names the table.",
+          "Header cells are `TableHead`, not body cells styled to look like headers."
+        ]
+      },
+      "examples": [
+        "`<Table><TableHeader><TableRow><TableHead>Site</TableHead></TableRow></TableHeader><TableBody><TableRow><TableCell>North yard</TableCell></TableRow></TableBody></Table>`"
+      ],
+      "antiPatterns": [
+        "A metric and its delta crammed into one cell instead of moving the detail into a tooltip.",
+        "A first column sitting flush against the card border."
+      ],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": true
+    },
+    {
+      "id": "tabs",
+      "label": "Tabs",
+      "registryItem": "edgecom-ai/design-system/tabs",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/tabs",
+      "docs": "https://design.edgecom.ai/components/tabs/",
+      "source": "src/components/ui/tabs.tsx",
+      "summary": "A tabbed interface: a List of Triggers reveals matching Content panels.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": {
+        "name": "Base UI Tabs",
+        "url": "https://base-ui.com/react/components/tabs"
+      },
+      "parts": [
+        {
+          "name": "Tabs",
+          "description": "Root managing the orientation and active tab value."
+        },
+        {
+          "name": "TabsList",
+          "description": "Container arranging the tab triggers. It is also the scroll port: a strip wider than its container scrolls inside the list — horizontally when horizontal, vertically when vertical — instead of widening the page, fades whichever edge still hides a tab, and scrolls a newly activated tab into view. Don't wrap it in your own overflow container; that would put the scroll offset on the wrong side of the active bar."
+        },
+        {
+          "name": "TabsTrigger",
+          "description": "Clickable tab that activates its panel."
+        },
+        {
+          "name": "TabsIndicator",
+          "description": "Optional single bar that slides to the active tab. Render it as the last child of TabsList; the line variant's per-trigger bars switch off automatically when it is present."
+        },
+        {
+          "name": "TabsContent",
+          "description": "Panel content shown for the active tab."
+        }
+      ],
+      "props": [
+        {
+          "part": "Tabs",
+          "name": "variant",
+          "type": "\"default\" | \"adaptive\" | \"line\"",
+          "default": "\"default\"",
+          "description": "TabsList style. `default` is the filled segmented strip — a `muted` track with the active tab raised on it — and reads as a group by lightness alone, so it wants a plain host (`background`, `card`). `adaptive` is that same strip in a second colour set: its `track`/`track-active` surfaces are an alpha over whatever is behind them, plus a hairline, so the strip keeps its step on a surface the `muted` track would collide with — a `muted`/`secondary` panel, a `bg-muted/50` card footer, a selected row, or (in dark) inside any overlay, where `popover` and `elevated` sit within a hair of `muted`. `line` replaces the strip with an underline bar and needs no lightness step at all."
+        }
+      ],
+      "variants": [
+        {
+          "name": "variant",
+          "options": [
+            "default",
+            "adaptive",
+            "line"
+          ],
+          "default": "default"
+        }
+      ],
+      "states": [
+        "aria-disabled",
+        "data-[orientation=horizontal]",
+        "data-[variant=line]",
+        "data-active",
+        "data-fade-end",
+        "data-fade-start",
+        "disabled",
+        "focus-visible",
+        "group-data-[orientation=horizontal]/tabs",
+        "group-data-[orientation=vertical]/tabs",
+        "group-data-[variant=adaptive]/tabs-list",
+        "group-data-[variant=default]/tabs-list",
+        "group-data-[variant=line]/tabs-list",
+        "hover"
+      ],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "background",
+          "family": "surface"
+        },
+        {
+          "id": "border",
+          "family": "neutral"
+        },
+        {
+          "id": "foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "input",
+          "family": "neutral"
+        },
+        {
+          "id": "muted",
+          "family": "neutral"
+        },
+        {
+          "id": "muted-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "primary",
+          "family": "brand"
+        },
+        {
+          "id": "primary-emphasis",
+          "family": "brand"
+        },
+        {
+          "id": "radius-lg",
+          "family": "radius"
+        },
+        {
+          "id": "radius-md",
+          "family": "radius"
+        },
+        {
+          "id": "ring",
+          "family": "neutral"
+        },
+        {
+          "id": "text-body-sm",
+          "family": "typography"
+        },
+        {
+          "id": "track",
+          "family": "relative-surface"
+        },
+        {
+          "id": "track-active",
+          "family": "relative-surface"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [
+        "**Pick the variant by the surface underneath.** Plain `background`/`card` → `default`. A tinted surface or any overlay → `adaptive` or `line`; the `muted` track has no lightness step left there and the strip vanishes.",
+        "Never hand-tint a `TabsList` with a `bg-*` override to fix that — switch the variant."
+      ],
+      "behavior": {},
+      "a11y": {
+        "attributes": [],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "tags-input",
+      "label": "Tags",
+      "registryItem": "edgecom-ai/design-system/tags-input",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/tags-input",
+      "docs": "https://design.edgecom.ai/components/tags-input/",
+      "source": "src/components/ui/tags-input.tsx",
+      "summary": "A field for entering and removing multiple tag chips, with paste-splitting and validation.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": null,
+      "parts": [
+        {
+          "name": "TagsInput",
+          "description": "Multi-tag input with removable chips, delimiters, and validation."
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [
+        "aria-invalid",
+        "data-disabled",
+        "disabled",
+        "focus-within",
+        "hover"
+      ],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "border",
+          "family": "neutral"
+        },
+        {
+          "id": "destructive",
+          "family": "status"
+        },
+        {
+          "id": "foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "input",
+          "family": "neutral"
+        },
+        {
+          "id": "muted",
+          "family": "neutral"
+        },
+        {
+          "id": "muted-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "radius-lg",
+          "family": "radius"
+        },
+        {
+          "id": "radius-sm",
+          "family": "radius"
+        },
+        {
+          "id": "ring",
+          "family": "neutral"
+        },
+        {
+          "id": "text-body-sm",
+          "family": "typography"
+        },
+        {
+          "id": "text-caption",
+          "family": "typography"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [],
+      "behavior": {},
+      "a11y": {
+        "attributes": [
+          "aria-invalid",
+          "aria-label"
+        ],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "timeline",
+      "label": "Timeline",
+      "registryItem": "edgecom-ai/design-system/timeline",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/timeline",
+      "docs": "https://design.edgecom.ai/components/timeline/",
+      "source": "src/components/ui/timeline.tsx",
+      "summary": "A vertical sequence of events. Each TimelineItem pairs a status TimelineDot with a TimelineHeading and TimelineContent, connected by a TimelineLine.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": null,
+      "parts": [
+        {
+          "name": "Timeline",
+          "description": "Root list; positions dots left, right, or center."
+        },
+        {
+          "name": "TimelineDot",
+          "description": "The status marker: default, current, done, error, or custom."
+        },
+        {
+          "name": "TimelineItem",
+          "description": "One event row; status tints the text done or default."
+        },
+        {
+          "name": "TimelineContent",
+          "description": "The event body / description."
+        },
+        {
+          "name": "TimelineHeading",
+          "description": "The event title."
+        },
+        {
+          "name": "TimelineLine",
+          "description": "The connector drawn between consecutive dots."
+        },
+        {
+          "name": "TimelineTag",
+          "description": "An optional side label aligned to the dot."
+        }
+      ],
+      "props": [
+        {
+          "part": "Timeline",
+          "name": "positions",
+          "type": "\"left\" | \"right\" | \"center\"",
+          "default": "\"left\"",
+          "description": null
+        }
+      ],
+      "variants": [
+        {
+          "name": "positions",
+          "options": [
+            "left",
+            "right",
+            "center"
+          ],
+          "default": "left"
+        }
+      ],
+      "states": [],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "background",
+          "family": "surface"
+        },
+        {
+          "id": "border",
+          "family": "neutral"
+        },
+        {
+          "id": "card-foreground",
+          "family": "surface"
+        },
+        {
+          "id": "destructive",
+          "family": "status"
+        },
+        {
+          "id": "muted",
+          "family": "neutral"
+        },
+        {
+          "id": "muted-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "primary",
+          "family": "brand"
+        },
+        {
+          "id": "text-body-lg",
+          "family": "typography"
+        },
+        {
+          "id": "text-body-sm",
+          "family": "typography"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [],
+      "behavior": {},
+      "a11y": {
+        "attributes": [
+          "aria-level",
+          "aria-orientation"
+        ],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "toast",
+      "label": "Toast",
+      "registryItem": "edgecom-ai/design-system/toast",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/toast",
+      "docs": "https://design.edgecom.ai/components/toast/",
+      "source": "src/components/ui/sonner.tsx",
+      "summary": "App-wide notifications: mount one Toaster near the app root, then call the imperative toast() function to show messages.",
+      "purpose": "App-wide feedback for a completed interaction. One `Toaster` is mounted near the app root; everything else is the imperative `toast()` call from `sonner`.",
+      "useWhen": [
+        "An interaction has no other visible result — a saved form, a toggled switch.",
+        "The outcome of a destructive action needs reporting after its confirmation."
+      ],
+      "dontUseWhen": [
+        "The message belongs to one field — that is inline validation through `field`.",
+        "The message is a persistent page-level condition — that is `banner` or `alert`."
+      ],
+      "base": null,
+      "parts": [
+        {
+          "name": "Toaster",
+          "description": "The notifier region — mount once; renders queued toasts."
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [],
+      "responsive": [],
+      "tokens": [],
+      "requires": [
+        "A title on every toast; the description row collapses when empty.",
+        "A variant matching the outcome: `toast.success` for confirmation, `toast.warning` for a negative-but-expected result, `toast.error` for a genuine failure."
+      ],
+      "forbids": [
+        "More than one `<Toaster>` in an application.",
+        "A neutral `toast()` for a success or an error."
+      ],
+      "rules": [],
+      "behavior": {
+        "error": "A failed action surfaces a toast and keeps the user's input intact — the form is not cleared."
+      },
+      "a11y": {
+        "attributes": [],
+        "requirements": [
+          "The toast text carries the meaning; the variant's colour only reinforces it."
+        ]
+      },
+      "examples": [
+        "`import { toast } from \"sonner\"` — the `Toaster` is the only export of the registry item; the call comes from sonner itself.",
+        "`toast.success(\"Site saved\")`",
+        "`toast.error(\"Could not save site\", { description: \"The gateway did not respond.\" })`"
+      ],
+      "antiPatterns": [
+        "A save that completes silently.",
+        "A failure reported by colour alone, with no title."
+      ],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": true
+    },
+    {
+      "id": "toggle",
+      "label": "Toggle",
+      "registryItem": "edgecom-ai/design-system/toggle",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/toggle",
+      "docs": "https://design.edgecom.ai/components/toggle/",
+      "source": "src/components/ui/toggle.tsx",
+      "summary": "A two-state button that holds a pressed/on state.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": {
+        "name": "Base UI Toggle",
+        "url": "https://base-ui.com/react/components/toggle"
+      },
+      "parts": [
+        {
+          "name": "Toggle",
+          "description": "Pressable button toggling a pressed/on state."
+        }
+      ],
+      "props": [
+        {
+          "part": "Toggle",
+          "name": "variant",
+          "type": "\"default\" | \"outline\"",
+          "default": "\"default\"",
+          "description": "Style: default (transparent) or outline (bordered)."
+        },
+        {
+          "part": "Toggle",
+          "name": "size",
+          "type": "\"default\" | \"sm\" | \"lg\"",
+          "default": "\"default\"",
+          "description": "Size: default, sm, or lg."
+        }
+      ],
+      "variants": [
+        {
+          "name": "variant",
+          "options": [
+            "default",
+            "outline"
+          ],
+          "default": "default"
+        },
+        {
+          "name": "size",
+          "options": [
+            "default",
+            "sm",
+            "lg"
+          ],
+          "default": "default"
+        }
+      ],
+      "states": [
+        "data-[pressed]",
+        "disabled",
+        "focus-visible",
+        "hover"
+      ],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "accent",
+          "family": "neutral"
+        },
+        {
+          "id": "accent-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "border",
+          "family": "neutral"
+        },
+        {
+          "id": "foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "input",
+          "family": "neutral"
+        },
+        {
+          "id": "muted",
+          "family": "neutral"
+        },
+        {
+          "id": "muted-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "radius-lg",
+          "family": "radius"
+        },
+        {
+          "id": "ring",
+          "family": "neutral"
+        },
+        {
+          "id": "text-body-sm",
+          "family": "typography"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [],
+      "behavior": {},
+      "a11y": {
+        "attributes": [],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "tooltip",
+      "label": "Tooltip",
+      "registryItem": "edgecom-ai/design-system/tooltip",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/tooltip",
+      "docs": "https://design.edgecom.ai/components/tooltip/",
+      "source": "src/components/ui/tooltip.tsx",
+      "summary": "A hover hint: a Provider shares timing, a Trigger reveals a portalled Content on hover/focus.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": {
+        "name": "Base UI Tooltip",
+        "url": "https://base-ui.com/react/components/tooltip"
+      },
+      "parts": [
+        {
+          "name": "Tooltip",
+          "description": "Root managing a single tooltip's open state."
+        },
+        {
+          "name": "TooltipTrigger",
+          "description": "Element that shows the tooltip on hover or focus."
+        },
+        {
+          "name": "TooltipContent",
+          "description": "Portalled, positioned popup with an arrow."
+        },
+        {
+          "name": "TooltipProvider",
+          "description": "Shares the hover delay across tooltips (defaults to 200ms)."
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [
+        "data-[ending-style]",
+        "data-[starting-style]"
+      ],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "background",
+          "family": "surface"
+        },
+        {
+          "id": "foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "radius-md",
+          "family": "radius"
+        },
+        {
+          "id": "text-caption",
+          "family": "typography"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [
+        "Shrink-wraps to its content — never a `max-w` or fixed width that forces wrapping.",
+        "Portaled and viewport-aware; never pin a side that lets it run off-screen."
+      ],
+      "behavior": {},
+      "a11y": {
+        "attributes": [],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    }
+  ]
+}

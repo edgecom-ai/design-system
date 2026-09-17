@@ -137,10 +137,22 @@ Edit the **sources**, then run `pnpm registry:build` (or `pnpm docs:gen`). `preb
 | `public/r/*.json` | `shadcn build` | the registry chunks |
 | `src/docs/generated/{api,api-highlight,routes}.ts` | `docs:api` / `docs:routes` | `sections.tsx`, `ui/*`, `docs/api.ts` |
 | `src/docs/generated/tokens.json` | `docs:tokens` | `globals.css`, via `scripts/lib/tokens.mjs` |
+| `src/docs/generated/contracts.json` | `docs:contracts` | `ui/*.tsx`, `sections.tsx`, `curated.ts`, `docs/contracts.json`, via `scripts/lib/contracts.mjs` |
 | `public/docs-source/*` (git-**ignored**) | `docs:source` | `components/demo/*`, `components/shadcn-studio/*` |
 | `src/docs/generated/changelog.ts`, `CHANGELOG.md`, `public/changelog.md` — **git-ignored** | `docs:changelog` | git history + `src/docs/changelog-notes.json` |
 
-Note: `src/docs/api.ts`, `src/docs/curated.ts`, and `src/docs/changelog-notes.json` are **hand-written** sources — distinct from the generated `src/docs/generated/*`.
+Note: `src/docs/api.ts`, `src/docs/curated.ts`, `src/docs/contracts.json`, and `src/docs/changelog-notes.json` are **hand-written** sources — distinct from the generated `src/docs/generated/*`. The name collision is worth watching: `src/docs/contracts.json` is the authored overlay you edit, `src/docs/generated/contracts.json` is the compiled artifact you don't.
+
+## Component contracts
+
+`src/docs/generated/contracts.json` is one contract per registry primitive: what it is for, what it may compose with, which tokens it reaches, which states it implements. It is what an agent reads instead of all of `design.md`, and `pnpm design:sync` publishes its `rules` into each Claude Design spec.
+
+The split matters when you edit one:
+
+- **Derived, every run** — variants, tokens, states, responsive breakpoints, parts, props, the Base UI origin. Read straight from `src/components/ui/*.tsx`, so a contract cannot claim a variant or a state the primitive doesn't implement. Never try to correct these here; fix the primitive.
+- **Authored** — purpose, `useWhen`/`dontUseWhen`, `requires`/`forbids`, `rules`, behaviour in the loading/empty/error/destructive paths, accessibility requirements, examples, anti-patterns. These live in `src/docs/contracts.json`, keyed by section id.
+
+`gen-contracts` fails on an unknown key or an id with no section, so a typo can't silently drop the guidance someone wrote. Ten components are authored so far — button, input, select, badge, card, dialog, sheet, table, sidebar, toast; the rest carry the derived half only. Everything written there is published to consumers through the design specs, so each claim has to be true of the primitive or stated in `design.md`.
 
 ## The changelog maintains itself
 

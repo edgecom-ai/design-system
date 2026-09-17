@@ -16,6 +16,8 @@ import { dirname, resolve } from "node:path";
 import { codeToHtml } from "shiki";
 import { readdirSync } from "node:fs";
 import { freshness, forced } from "./lib/stale.mjs";
+import { componentIds as componentIdsOf } from "./lib/sections.mjs";
+import { extractCva } from "./lib/cva.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, "..");
@@ -29,6 +31,8 @@ const stamp = freshness({
     "src/app/sections.tsx",
     "src/docs/api.ts",
     "scripts/gen-api.mjs",
+    "scripts/lib/sections.mjs",
+    "scripts/lib/cva.mjs",
     ...readdirSync(uiDir)
       .filter((f) => f.endsWith(".tsx"))
       .map((f) => `src/components/ui/${f}`),
@@ -48,121 +52,12 @@ const baseDenylist = new Set(["merge-props", "use-render"]);
 
 // --- discover which section ids map to a primitive ------------------------
 const sectionsSrc = readFileSync(resolve(root, "src/app/sections.tsx"), "utf8");
-const lines = sectionsSrc.split("\n");
-const startIdx = lines.findIndex((l) => l.includes("const sections: Section[]"));
-let cur = null;
-const componentIds = [];
-for (const l of lines.slice(startIdx)) {
-  const idm = l.match(/^\s{4}id:\s*"([^"]+)"/);
-  if (idm) {
-    cur = { id: idm[1], group: null };
-    continue;
-  }
-  if (cur) {
-    const gm = l.match(/^\s{4}group:\s*"([^"]+)"/);
-    if (gm && !cur.group) {
-      cur.group = gm[1];
-      if (cur.group === "Components") componentIds.push(cur.id);
-    }
-  }
-}
+const componentIds = componentIdsOf(sectionsSrc);
 
 // --- helpers ---------------------------------------------------------------
 const titleCase = (slug) =>
   slug.replace(/(^|-)([a-z])/g, (_, __, c) => c.toUpperCase());
 const pascal = (id) => titleCase(id);
-
-const QUOTES = new Set(['"', "'", "`"]);
-
-/** Return the object-literal text starting at the `{` after `key:`, string-aware. */
-function objectAfter(src, key, from = 0) {
-  const at = src.indexOf(key, from);
-  if (at === -1) return null;
-  const open = src.indexOf("{", at);
-  if (open === -1) return null;
-  let depth = 0;
-  let str = null;
-  for (let i = open; i < src.length; i++) {
-    const ch = src[i];
-    if (str) {
-      if (ch === "\\") i++;
-      else if (ch === str) str = null;
-      continue;
-    }
-    if (QUOTES.has(ch)) str = ch;
-    else if (ch === "{") depth++;
-    else if (ch === "}") {
-      depth--;
-      if (depth === 0) return { body: src.slice(open + 1, i), end: i };
-    }
-  }
-  return null;
-}
-
-/**
- * Top-level keys of an object-literal body. String-aware, and only reads a key
- * when one is expected (start of body / after a depth-0 comma) so `hover:` etc.
- * inside class-string values are never mistaken for keys.
- */
-function topLevelKeys(body) {
-  const keys = [];
-  let depth = 0;
-  let str = null;
-  let expectKey = true;
-  let i = 0;
-  while (i < body.length) {
-    const ch = body[i];
-    if (str) {
-      if (ch === "\\") i++;
-      else if (ch === str) str = null;
-      i++;
-      continue;
-    }
-    // skip comments (so `//` doesn't get mistaken for a value)
-    if (ch === "/" && body[i + 1] === "/") {
-      const nl = body.indexOf("\n", i);
-      i = nl === -1 ? body.length : nl;
-      continue;
-    }
-    if (ch === "/" && body[i + 1] === "*") {
-      const close = body.indexOf("*/", i + 2);
-      i = close === -1 ? body.length : close + 2;
-      continue;
-    }
-    if (QUOTES.has(ch)) {
-      str = ch;
-      i++;
-      continue;
-    }
-    if (ch === "{" || ch === "[" || ch === "(") {
-      depth++;
-      i++;
-      continue;
-    }
-    if (ch === "}" || ch === "]" || ch === ")") {
-      depth--;
-      i++;
-      continue;
-    }
-    if (depth === 0 && ch === ",") {
-      expectKey = true;
-      i++;
-      continue;
-    }
-    if (depth === 0 && expectKey) {
-      const m = body.slice(i).match(/^\s*(?:"([^"]+)"|'([^']+)'|([A-Za-z0-9_]+))\s*:/);
-      if (m) {
-        keys.push(m[1] ?? m[2] ?? m[3]);
-        expectKey = false;
-        i += m[0].length;
-        continue;
-      }
-      if (/\S/.test(ch)) expectKey = false; // value started without a key match
-    }
-    i++;
-  }
-  return keys;
-}
 
 function extract(id) {
   const file = resolve(uiDir, `${aliasFile[id] ?? id}.tsx`);
@@ -192,32 +87,22 @@ function extract(id) {
     partList[0] ??
     pascal(id);
 
-  // props: cva variant groups
+  // props: cva variant groups, via the one cva reader (lib/cva.mjs). The
+  // local reader this replaced tracked quotes but not comments, so a single
+  // apostrophe in a comment inside the variants object — "can't" in button's —
+  // swallowed the rest of the block and the component documented no props.
   const props = [];
-  const cvaAt = src.indexOf("cva(");
-  if (cvaAt !== -1) {
-    const variants = objectAfter(src, "variants:", cvaAt);
-    const defs = objectAfter(src, "defaultVariants:", cvaAt);
-    const defaults = {};
-    if (defs) {
-      for (const dm of defs.body.matchAll(
-        /([A-Za-z0-9_]+)\s*:\s*"([^"]*)"/g
-      ))
-        defaults[dm[1]] = dm[2];
-    }
-    if (variants) {
-      for (const group of topLevelKeys(variants.body)) {
-        const groupObj = objectAfter(variants.body, `${group}:`);
-        if (!groupObj) continue;
-        const options = topLevelKeys(groupObj.body);
-        if (!options.length) continue;
-        props.push({
-          part: mainPart,
-          name: group,
-          type: options.map((o) => `"${o}"`).join(" | "),
-          default: defaults[group] ? `"${defaults[group]}"` : undefined,
-        });
-      }
+  const cva = extractCva(src);
+  if (cva) {
+    for (const [group, entries] of Object.entries(cva.groups)) {
+      const options = Object.keys(entries);
+      if (!options.length) continue;
+      props.push({
+        part: mainPart,
+        name: group,
+        type: options.map((o) => `"${o}"`).join(" | "),
+        default: cva.defaults[group] ? `"${cva.defaults[group]}"` : undefined,
+      });
     }
   }
 
