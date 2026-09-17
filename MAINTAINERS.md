@@ -95,7 +95,9 @@ All tokens live in [`src/app/globals.css`](src/app/globals.css): `@theme inline`
 
 ## The Claude Design project
 
-Designers work in **Edgecom Energy Design System V2** (`6a99bc4b-d46f-47de-a63f-81b94b1dd319`), and everything in it except `brand/` is **generated from this repo** by [`scripts/gen-design-sync.mjs`](scripts/gen-design-sync.mjs).
+Designers work in the **Edgecom Energy Design System** project on Claude Design, and everything in it except `brand/` is **generated from this repo** by [`scripts/gen-design-sync.mjs`](scripts/gen-design-sync.mjs).
+
+The project id is **not in this repo**. It lives in `.design-sync/config.json`, which is git-ignored for that reason — this repository is public, and a project id is an address into the organisation's Claude Design workspace, not something a reader of the registry needs. Get it from a maintainer, or read it back with the `DesignSync` tool's `list_projects`, which only ever returns projects you can already write to.
 
 Run `pnpm design:sync` after a component, token, or `design.md` change, then upload the bundle with the `DesignSync` tool. It emits:
 
