@@ -80,6 +80,6 @@ yarn-error.log*
 # design-system package entry for the Claude Design converter (`pnpm design:entry`)
 /dist/
 
-# Internal programme notes — project IDs, timelines, metrics. This repo is
-# public; these exist only on a maintainer's machine. See docs/HANDOFF.md.
+# Internal programme notes — project ids, timelines, metrics. This repo is
+# public; these exist only on a maintainer's machine.
 /docs/
