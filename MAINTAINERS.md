@@ -1,5 +1,7 @@
 # Edgecom Design System — maintainer guide
 
+> **New here?** Read [ONBOARDING.md](ONBOARDING.md) first — what this repo is, the one idea behind its shape, and the traps. This file is the reference you work from afterwards.
+
 **This file is for people (and agents) developing _this repo_** — authoring primitives, tuning tokens, and running the docs site / registry build. If instead you're **consuming** the design system in another app, read [agents.md](https://design.edgecom.ai/agents.md) (source: [public/agents.md](public/agents.md)). For the **design language, tokens, and usage guardrails**, read [design.md](design.md) (published at [design.edgecom.ai/design.md](https://design.edgecom.ai/design.md)). For how the registry is consumed, hosted, and updated in depth, see [REGISTRY.md](REGISTRY.md).
 
 This repo is two things at once: a **Vite + TanStack Router docs site** and the **source of truth for the public `edgecom-ai/design-system` shadcn registry**.
@@ -31,7 +33,7 @@ The consumer guide is deliberately **not** in this layer. It lives at [`public/a
 |---|---|
 | `pnpm dev` | Docs site at `:3000`. `predev` runs `docs:gen` first. |
 | `pnpm build` | Static export to `out/`. `prebuild` runs `docs:gen` **and** `registry:build` first. |
-| `pnpm lint` | ESLint (Next core-web-vitals + TypeScript). |
+| `pnpm lint` | ESLint — TypeScript, React, hooks, jsx-a11y and import rules. (The Next config was replaced by the upstream plugins it wrapped when Next left the tree.) |
 | `pnpm typecheck` | TypeScript strict, after materialising the generated changelog. |
 | `pnpm verify:docs` | Load a sample of built routes in real Chrome, light + dark, and fail on a blank page, a console error, a failed chunk, or a stuck Suspense fallback. Needs a prior `pnpm build`. |
 | `pnpm registry:build` | Regenerate registry from source, `shadcn build`, then `registry:check`. |

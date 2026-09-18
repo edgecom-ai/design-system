@@ -8,5 +8,6 @@ Docs by audience:
 - **Building an app with the design system** (installing from the registry, composing) → **[agents.md](https://design.edgecom.ai/agents.md)** (source: [public/agents.md](public/agents.md)).
 - **Working in this repo** (the instruction layer agents load) → **[AGENTS.md](AGENTS.md)** / **[CLAUDE.md](CLAUDE.md)**.
 - **Registry install mechanics** — installs are `pnpm dlx shadcn@latest add edgecom-ai/design-system/<name>` → **[REGISTRY.md](REGISTRY.md)**.
+- **New maintainer, start here** (what this repo is, the mental model, the traps) → **[ONBOARDING.md](ONBOARDING.md)**.
 - **Developing this repo** (authoring primitives, tokens, the docs site) → **[MAINTAINERS.md](MAINTAINERS.md)**.
 - **Discovery index for agents** → [llms.txt](https://design.edgecom.ai/llms.txt).
