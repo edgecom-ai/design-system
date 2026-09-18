@@ -322,21 +322,41 @@ body.ds-card{margin:0;padding:20px;background:var(--background);color:var(--fore
   // Emitted rather than remembered so the upload plan is derived from the build.
   const overlay = {
     note: "Paths to upload into a project the Claude Design converter already populates. The rest of this bundle is for a standalone project only.",
-    writes: ["SKILL.md", "_system.json", "_base.css", "foundations/**"],
+    writes: ["SKILL.md", "_system.json", "_base.css", "foundations/**", "_ds_needs_recompile"],
+    uploadLast: "_ds_needs_recompile",
     standaloneOnly: ["README.md", "components/**"],
     reason: {
       "components/**": "the converter owns components/; our specs reach it through its docsDir instead",
       "README.md": "the converter builds its own from conventions.md — don't clobber it",
+      "_ds_needs_recompile": "without it the upload never reaches the card index or the token manifest — see below",
     },
   }
   writeFileSync(resolve(outDir, "_overlay.json"), JSON.stringify(overlay, null, 2) + "\n")
+
+  // ---- _ds_needs_recompile --------------------------------------------------
+  // The platform compiles its own card index and token manifest during a
+  // self-check, and an upload does not run it. What runs it is someone opening
+  // the project *while this marker is present*; the app deletes the marker when
+  // the check completes.
+  //
+  // That is the difference between the two projects this bundle has been sent
+  // to. The converter writes this marker, so its manifest recompiled the first
+  // time anyone opened it — 328 cards, all 118 Edgecom tokens, one theme. This
+  // generator never wrote one, so the project it built has never recompiled and
+  // still publishes the token list from a stylesheet replaced two PRs ago:
+  // ~250 Tailwind internals and 89 utility classes misread as themes.
+  //
+  // An upload without this marker is therefore invisible. Upload it LAST, after
+  // every other file, so the check never runs against a half-written bundle.
+  writeFileSync(resolve(outDir, "_ds_needs_recompile"), JSON.stringify({ by: "edgecom-design-sync" }) + "\n")
 
   console.log(
     `gen-design-sync — ${built.cards} component cards, ${built.specs} specs, 4 foundations, ` +
       `_base.css ${(baseCss.length / 1024).toFixed(0)} KB (${report.edgecomTokens} tokens, ` +
       `${report.utilities} utilities from ${report.candidates} class names` +
       `${report.composed.length ? `, ${report.composed.length} composed` : ""}) → .design-sync/bundle/\n` +
-      `  overlay upload: ${overlay.writes.join(" ")}`,
+      `  overlay upload: ${overlay.writes.join(" ")}\n` +
+      `  ${overlay.uploadLast} goes last — without it the platform never recompiles`,
   )
   return { system, overlay, ...built }
 }
