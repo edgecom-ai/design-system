@@ -13,6 +13,22 @@
 // and Prettier holds it.
 
 /**
+ * Section ids whose primitive lives under a different filename.
+ *
+ * `multi-select` is the awkward one: the page covers two registry items, and the
+ * file named after the section (`multi-select.tsx`) is the tag-style selector,
+ * which ships a default export and so has no named parts to document. The
+ * listbox the page leads with — the one design.md's checkmark rule is about —
+ * lives in `multi-select-listbox.tsx` and has a proper API, so that is what the
+ * section's API reference and contract describe.
+ */
+export const ALIAS_FILE = {
+  list: "item",
+  toast: "sonner",
+  "multi-select": "multi-select-listbox",
+}
+
+/**
  * Every section entry, in file order: `{ id, label, group, description }`.
  * Entries with no group (the catalogue's non-doc rows) are dropped.
  */

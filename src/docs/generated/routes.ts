@@ -46,6 +46,14 @@ export const staticParams: { group: string; slug: string }[] = [
   },
   {
     "group": "components",
+    "slug": "input-otp"
+  },
+  {
+    "group": "components",
+    "slug": "phone-input"
+  },
+  {
+    "group": "components",
     "slug": "list"
   },
   {
@@ -134,6 +142,10 @@ export const staticParams: { group: string; slug: string }[] = [
   },
   {
     "group": "components",
+    "slug": "circular-progress"
+  },
+  {
+    "group": "components",
     "slug": "avatar"
   },
   {
@@ -159,6 +171,14 @@ export const staticParams: { group: string; slug: string }[] = [
   {
     "group": "components",
     "slug": "select"
+  },
+  {
+    "group": "components",
+    "slug": "multi-select"
+  },
+  {
+    "group": "components",
+    "slug": "native-select"
   },
   {
     "group": "components",

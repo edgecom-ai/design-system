@@ -4,7 +4,7 @@
 // sections.tsx and .claude/rules/docs-site.md.
 
 import * as React from "react"
-import { dm, ss } from "./shared";
+import { ss } from "./shared";
 
 const InputDemo = React.lazy(() => import("@/components/shadcn-studio/input/input-01"));
 
@@ -38,12 +38,6 @@ const InputSearchLoaderDemo = React.lazy(() => import("@/components/shadcn-studi
 
 const InputWithPlusMinusButtonsDemo = React.lazy(() => import("@/components/shadcn-studio/input/input-40"));
 
-const InputOTPNumberDemo = React.lazy(() => import("@/components/shadcn-studio/input-otp/input-otp-01"));
-
-const PhoneInputWithLabel = React.lazy(() => import("@/components/shadcn-studio/phone-input/phone-input-02"));
-
-const PhoneInputExtensionDemo = React.lazy(() => import("@/components/demo/phone-input-extension-demo").then((m) => ({ default: m.PhoneInputExtensionDemo })));
-
 const content = {
   variants: [
       { id: "input-default", name: "Default", description: "A bare text field with placeholder text.", preview: <InputDemo />, source: ss("input/input-01") },
@@ -62,9 +56,6 @@ const content = {
       { id: "input-clearable", name: "Clearable", description: "A clear button appears once text is entered.", preview: <InputClearDemo />, source: ss("input/input-36") },
       { id: "input-search-loader", name: "Search with loader", description: "A search field showing a loading spinner.", preview: <InputSearchLoaderDemo />, source: ss("input/input-39") },
       { id: "input-stepper", name: "Stepper (plus / minus)", description: "A numeric input with increment and decrement buttons.", preview: <InputWithPlusMinusButtonsDemo />, source: ss("input/input-40") },
-      { id: "input-otp", name: "OTP", description: "A segmented one-time-passcode entry field.", preview: <InputOTPNumberDemo />, source: ss("input-otp/input-otp-01") },
-      { id: "input-phone", name: "Phone number", description: "A phone field with a country-code selector.", preview: <PhoneInputWithLabel />, source: ss("phone-input/phone-input-02") },
-      { id: "input-phone-extension", name: "Phone number with extension", description: "A phone field with a separate desk-extension value.", preview: <PhoneInputExtensionDemo />, source: dm("phone-input-extension-demo") },
     ],
 };
 
