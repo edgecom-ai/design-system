@@ -136,12 +136,12 @@ Scope the `DesignSync` `finalize_plan` to `writes` when the destination is an ov
 
 The platform does not read the bundle when you upload it. It compiles its own card index and token manifest during a **self-check**, and what runs that check is **someone opening the project while a `_ds_needs_recompile` marker is present**. The app deletes the marker when the check completes.
 
-This is not a detail you can skip. The two projects this bundle has been sent to are a controlled experiment in what happens if you do:
+This is not a detail you can skip. The two projects this bundle was sent to were an accidental controlled experiment in what happens if you do:
 
 | | Marker written? | Opened | Result |
 |---|---|---|---|
 | Converter-built | yes, by the converter | 2026-09-18 | recompiled — 328 cards, all 118 Edgecom tokens, one theme |
-| Generator-built | no — this script never wrote one | 2026-09-16 | **nothing.** Its manifest still describes a stylesheet replaced two PRs earlier: ~250 Tailwind internals and 89 utility classes misread as themes |
+| Generator-built | no — this script never wrote one | 2026-09-16 | **nothing.** Its manifest still described a stylesheet replaced two PRs earlier: ~250 Tailwind internals and 89 utility classes misread as themes. It was deleted on 2026-09-18 rather than repaired. |
 
 So the build now emits `_ds_needs_recompile`, and `_overlay.json` lists it in `writes` with `uploadLast` naming it. **Upload it last**, after every other file, so the self-check can never run against a half-written bundle. Then open the project once — that is what makes the sync take effect.
 
@@ -149,7 +149,7 @@ So the build now emits `_ds_needs_recompile`, and `_overlay.json` lists it in `w
 
 **The upload plan is scoped to those paths**, so a sync structurally cannot touch `brand/` — hand-authored marketing material that is deliberately not in this public repo. Keep it that way.
 
-The old `Edgecom Energy Design System` project is **legacy**: a Figma reconstruction that teaches hex colours, px type, and no dark mode. Its skill is being renamed `edgecom-design-legacy`. Don't sync to it, and don't point anyone at it.
+**There is one project to sync to.** The old `Edgecom Energy Design System` is **legacy**: a Figma reconstruction that teaches hex colours, px type, px radii and no dark mode, with nine of the ten token names it documents absent from `globals.css`. Its skill is being renamed `edgecom-design-legacy`. Don't sync to it, and don't point anyone at it — a designer who opens it gets confidently wrong answers.
 
 ## Adding or changing a component
 
