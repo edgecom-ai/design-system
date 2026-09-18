@@ -21,6 +21,7 @@
     "registry:gen": "node scripts/gen-registry.mjs",
     "registry:check": "node scripts/check-registry.mjs",
     "check:schemas": "node scripts/check-schemas.mjs",
+    "check:sections": "node scripts/check-sections.mjs",
     "registry:build": "pnpm run registry:gen && shadcn build && pnpm run registry:check",
     "design:sync": "node scripts/gen-design-sync.mjs",
     "predev": "pnpm run docs:gen",

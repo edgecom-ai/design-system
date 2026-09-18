@@ -39,6 +39,21 @@ export const generatedApi: Record<string, GeneratedApi> = {
     ],
     "props": []
   },
+  "input-otp": {
+    "parts": [
+      "InputOTP",
+      "InputOTPGroup",
+      "InputOTPSlot",
+      "InputOTPSeparator"
+    ],
+    "props": []
+  },
+  "phone-input": {
+    "parts": [
+      "PhoneInput"
+    ],
+    "props": []
+  },
   "list": {
     "parts": [
       "Item",
@@ -371,6 +386,12 @@ export const generatedApi: Record<string, GeneratedApi> = {
     ],
     "props": []
   },
+  "circular-progress": {
+    "parts": [
+      "CircularProgress"
+    ],
+    "props": []
+  },
   "avatar": {
     "base": {
       "name": "Base UI Avatar",
@@ -480,6 +501,24 @@ export const generatedApi: Record<string, GeneratedApi> = {
       "SelectSeparator",
       "SelectTrigger",
       "SelectValue"
+    ],
+    "props": []
+  },
+  "multi-select": {
+    "base": {
+      "name": "Base UI Select",
+      "url": "https://base-ui.com/react/components/select"
+    },
+    "parts": [
+      "MultiSelect"
+    ],
+    "props": []
+  },
+  "native-select": {
+    "parts": [
+      "NativeSelect",
+      "NativeSelectOptGroup",
+      "NativeSelectOption"
     ],
     "props": []
   },

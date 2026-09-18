@@ -66,6 +66,12 @@ jobs:
       - name: Schemas
         run: pnpm check:schemas
 
+      # A page may compose anything the docs document — a dialog demo uses a
+      # button — but a demo reaching for a primitive no page installs leaves the
+      # reader with code that will not compile and nowhere to find the piece.
+      - name: Sections
+        run: pnpm check:sections
+
       # Generated files are committed, so regenerating them must produce no diff.
       # A diff means someone hand-edited an output or forgot to regenerate after
       # changing its source — both of which used to reach main unnoticed.

@@ -16,7 +16,7 @@ import { dirname, resolve } from "node:path";
 import { codeToHtml } from "shiki";
 import { readdirSync } from "node:fs";
 import { freshness, forced } from "./lib/stale.mjs";
-import { componentIds as componentIdsOf } from "./lib/sections.mjs";
+import { componentIds as componentIdsOf, ALIAS_FILE } from "./lib/sections.mjs";
 import { extractCva } from "./lib/cva.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -45,8 +45,6 @@ if (stamp.fresh && !forced()) {
 }
 
 
-// Sections whose primitive lives under a different filename than the section id.
-const aliasFile = { list: "item", toast: "sonner" };
 // @base-ui imports that are utilities, not documentable Base UI components.
 const baseDenylist = new Set(["merge-props", "use-render"]);
 
@@ -60,7 +58,7 @@ const titleCase = (slug) =>
 const pascal = (id) => titleCase(id);
 
 function extract(id) {
-  const file = resolve(uiDir, `${aliasFile[id] ?? id}.tsx`);
+  const file = resolve(uiDir, `${ALIAS_FILE[id] ?? id}.tsx`);
   if (!existsSync(file)) return null;
   const src = readFileSync(file, "utf8");
 
