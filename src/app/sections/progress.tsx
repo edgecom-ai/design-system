@@ -8,8 +8,6 @@ import { dm, ss } from "./shared";
 
 const ProgressLinearDemo = React.lazy(() => import("@/components/demo/progress-linear-demo").then((m) => ({ default: m.ProgressLinearDemo })));
 
-const CircularProgressDemo = React.lazy(() => import("@/components/shadcn-studio/progress/progress-23"));
-
 const ProgressShapeDemo = React.lazy(() => import("@/components/shadcn-studio/progress/progress-04"));
 
 const ProgressChecklistDemo = React.lazy(() => import("@/components/shadcn-studio/progress/progress-14"));
@@ -44,13 +42,6 @@ const content = {
           </div>
         ),
         source: ss("progress/progress-14"),
-      },
-      {
-        id: "progress-circular",
-        name: "Circular (interactive)",
-        description: "A circular progress ring with adjustable value.",
-        preview: <CircularProgressDemo />,
-        source: ss("progress/progress-23"),
       },
     ],
 };

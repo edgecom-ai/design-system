@@ -27,6 +27,8 @@ export const sectionContent: Record<string, () => Promise<{ default: SectionCont
   "icons": () => import("./sections/icons"),
   "button": () => import("./sections/button"),
   "input": () => import("./sections/input"),
+  "input-otp": () => import("./sections/input-otp"),
+  "phone-input": () => import("./sections/phone-input"),
   "list": () => import("./sections/list"),
   "card": () => import("./sections/card"),
   "badge": () => import("./sections/badge"),
@@ -49,6 +51,7 @@ export const sectionContent: Record<string, () => Promise<{ default: SectionCont
   "sortable": () => import("./sections/sortable"),
   "stepper": () => import("./sections/stepper"),
   "progress": () => import("./sections/progress"),
+  "circular-progress": () => import("./sections/circular-progress"),
   "avatar": () => import("./sections/avatar"),
   "field": () => import("./sections/field"),
   "input-group": () => import("./sections/input-group"),
@@ -56,6 +59,8 @@ export const sectionContent: Record<string, () => Promise<{ default: SectionCont
   "separator": () => import("./sections/separator"),
   "sheet": () => import("./sections/sheet"),
   "select": () => import("./sections/select"),
+  "multi-select": () => import("./sections/multi-select"),
+  "native-select": () => import("./sections/native-select"),
   "banner": () => import("./sections/banner"),
   "accordion": () => import("./sections/accordion"),
   "collapsible": () => import("./sections/collapsible"),
@@ -178,7 +183,7 @@ export const sections: Section[] = [
     group: "Foundations",
     description:
       "Categorical hues and sequential tint ramps for charting each commodity, plus the legacy line palette kept for migrating existing plots.",
-    install: "@edgecom/theme",
+    install: "@edgecom/theme @edgecom/chart",
     hasVariants: true,
   },
   {
@@ -237,6 +242,23 @@ export const sections: Section[] = [
     description:
       "Single-line text fields with labels, icons, add-ons, and validation states.",
     install: "@edgecom/input",
+    hasVariants: true,
+  },
+  {
+    id: "input-otp",
+    label: "Input OTP",
+    group: "Components",
+    description:
+      "A segmented one-time-passcode field, so the length of the code is visible before it is typed.",
+    install: "@edgecom/input-otp",
+    hasVariants: true,
+  },
+  {
+    id: "phone-input",
+    label: "Phone input",
+    group: "Components",
+    description: "A phone number field with a country-code selector and an optional extension.",
+    install: "@edgecom/phone-input",
     hasVariants: true,
   },
   {
@@ -426,6 +448,14 @@ export const sections: Section[] = [
     hasVariants: true,
   },
   {
+    id: "circular-progress",
+    label: "Circular progress",
+    group: "Components",
+    description: "A determinate ring, for a single figure that has a ceiling.",
+    install: "@edgecom/circular-progress",
+    hasVariants: true,
+  },
+  {
     id: "avatar",
     label: "Avatar",
     group: "Components",
@@ -479,6 +509,24 @@ export const sections: Section[] = [
     group: "Components",
     description: "Choose one or more options from a dropdown list.",
     install: "@edgecom/select",
+    hasVariants: true,
+  },
+  {
+    id: "multi-select",
+    label: "Multi-select",
+    group: "Components",
+    description:
+      "Choosing several values at once — the one place a checkmark belongs, as a searchable listbox or as removable tags.",
+    install: "@edgecom/multi-select-listbox @edgecom/multi-select",
+    hasVariants: true,
+  },
+  {
+    id: "native-select",
+    label: "Native select",
+    group: "Components",
+    description:
+      "The platform select, styled to match — for dense forms and small screens where the OS picker is the better control.",
+    install: "@edgecom/native-select",
     hasVariants: true,
   },
   {
@@ -607,7 +655,7 @@ export const sections: Section[] = [
     label: "Tabs",
     group: "Components",
     description: "Switch between related views within the same context.",
-    install: "@edgecom/tabs",
+    install: "@edgecom/tabs @edgecom/motion-tabs",
     hasVariants: true,
   },
   {
@@ -672,7 +720,7 @@ export const sections: Section[] = [
     label: "Charts",
     group: "Blocks",
     description: "Prebuilt chart blocks themed with the commodity color ramps.",
-    install: "@edgecom/charts",
+    install: "@edgecom/chart",
     toc: [
       { id: "chart-consumption", name: "Consumption metrics" },
       { id: "chart-spend", name: "Energy spend" },
@@ -692,7 +740,7 @@ export const sections: Section[] = [
     label: "Form",
     group: "Blocks",
     description: "Composed form layouts, from single-step to multi-step wizards.",
-    install: "@edgecom/form",
+    install: "@edgecom/form @edgecom/tanstack-form",
     hasVariants: true,
   },
   {

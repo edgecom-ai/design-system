@@ -19,9 +19,9 @@
 
 import { familyOf } from "./tokens.mjs"
 import { extractCva } from "./cva.mjs"
+import { ALIAS_FILE } from "./sections.mjs"
 
-// Section ids whose primitive lives under a different filename.
-export const ALIAS_FILE = { list: "item", toast: "sonner" }
+export { ALIAS_FILE }
 
 // Utility prefixes that can carry a token name. `bg-primary` reaches --primary;
 // `text-sm` reaches --text-sm. Both shapes are tried, full name first.

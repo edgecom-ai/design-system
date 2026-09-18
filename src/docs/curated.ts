@@ -295,6 +295,49 @@ export const curatedApi: Record<string, CuratedApi> = {
       "HoverCardContent.alignOffset": "Shift along the alignment axis, in pixels.",
     },
   },
+  "input-otp": {
+    summary:
+      "A one-time passcode split into slots, so the length of the code is visible before it is typed.",
+    parts: {
+      InputOTP: "Root holding the value, length, and paste handling.",
+      InputOTPGroup: "Run of slots kept together as one block.",
+      InputOTPSlot: "One character cell, showing the caret when it is active.",
+      InputOTPSeparator: "Visual break between two groups.",
+    },
+  },
+  "phone-input": {
+    summary:
+      "A phone number field whose country selector keeps the dial code and the number in a single value.",
+    parts: {
+      PhoneInput: "The composed field — country selector plus number entry.",
+    },
+  },
+  "native-select": {
+    summary:
+      "The platform select element, styled to match the design system — for dense forms and small screens where the OS picker is the better control.",
+    parts: {
+      NativeSelect: "Wrapper positioning the chevron around a styled select.",
+      NativeSelectOptGroup: "Labelled group of options.",
+      NativeSelectOption: "One option, painted on the OS canvas colours.",
+    },
+    propDescriptions: {
+      "NativeSelect.size": "Control height — sm (h-7) or default (h-8).",
+    },
+  },
+  "multi-select": {
+    summary:
+      "Choosing several values at once: a trigger plus a searchable checkbox listbox with Select all and Clear. The one place a checkmark belongs. The tag-style selector on this page ships as a separate registry item.",
+    parts: {
+      MultiSelect: "The composed control — trigger, search, checkbox list, and the Select all / Clear row.",
+    },
+  },
+  "circular-progress": {
+    summary:
+      "A determinate ring, for a single figure that has a ceiling — a meter's share of its site total, or a job's completion.",
+    parts: {
+      CircularProgress: "The ring, its track, and the optional value in the centre.",
+    },
+  },
   input: {
     summary: "A single-line text field with focus, disabled, and invalid states.",
     parts: {
