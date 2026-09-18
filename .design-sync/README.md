@@ -10,6 +10,7 @@ the shadcn registry — `pnpm build` and `pnpm registry:build` never read it.
 | `conventions.md` | Prepended to the generated project README — how to build with this system, for whoever reads it there. |
 | `config.json` | Converter configuration. **Not committed:** it names a specific Claude Design project, and this repo is public. |
 | `.cache/`, `bundle/` | Generated. Rebuilt by `pnpm design:build`; never hand-edited. |
+| `bundle/_overlay.json` | Generated. Which bundle paths to upload into a project this converter has already populated, and which are for a standalone project only. See MAINTAINERS.md → *Two shapes of destination*. |
 
 ## Writing a preview
 

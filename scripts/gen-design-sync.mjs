@@ -303,13 +303,42 @@ body.ds-card{margin:0;padding:20px;background:var(--background);color:var(--fore
   writeFileSync(resolve(outDir, "_base.css"), baseCss)
   for (const d of report.dropped) console.warn(`gen-design-sync — WARNING: unresolvable, dropped: ${d}`)
 
+  // ---- _overlay.json --------------------------------------------------------
+  // Two shapes of destination project exist, and the bundle serves both.
+  //
+  // A *standalone* project is one this generator owns end to end — everything
+  // below is uploaded, and the cards here are all the cards there are.
+  //
+  // An *overlay* target is a project the official Claude Design converter has
+  // already populated: it brings its own `components/**` (one directory per
+  // component, with real `.d.ts` and a rendered card), `guidelines/**`,
+  // `_preview/**`, `_vendor/**`, `styles.css` and its own `README.md`. Uploading
+  // ours into `components/` would collide with that tree for nothing — the specs
+  // already reach it by another route, since the converter's config points its
+  // `docsDir` at `.design-sync/bundle/components`. What the converter has no
+  // equivalent of is the authored layer: the skill entry point, the provenance
+  // stamp, and the foundations cards with the stylesheet they link.
+  //
+  // Emitted rather than remembered so the upload plan is derived from the build.
+  const overlay = {
+    note: "Paths to upload into a project the Claude Design converter already populates. The rest of this bundle is for a standalone project only.",
+    writes: ["SKILL.md", "_system.json", "_base.css", "foundations/**"],
+    standaloneOnly: ["README.md", "components/**"],
+    reason: {
+      "components/**": "the converter owns components/; our specs reach it through its docsDir instead",
+      "README.md": "the converter builds its own from conventions.md — don't clobber it",
+    },
+  }
+  writeFileSync(resolve(outDir, "_overlay.json"), JSON.stringify(overlay, null, 2) + "\n")
+
   console.log(
     `gen-design-sync — ${built.cards} component cards, ${built.specs} specs, 4 foundations, ` +
       `_base.css ${(baseCss.length / 1024).toFixed(0)} KB (${report.edgecomTokens} tokens, ` +
       `${report.utilities} utilities from ${report.candidates} class names` +
-      `${report.composed.length ? `, ${report.composed.length} composed` : ""}) → .design-sync/bundle/`,
+      `${report.composed.length ? `, ${report.composed.length} composed` : ""}) → .design-sync/bundle/\n` +
+      `  overlay upload: ${overlay.writes.join(" ")}`,
   )
-  return { system, ...built }
+  return { system, overlay, ...built }
 }
 
 // --- foundations -------------------------------------------------------------
