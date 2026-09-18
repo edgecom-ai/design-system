@@ -186,7 +186,7 @@ The split matters when you edit one:
 - **Derived, every run** — variants, tokens, states, responsive breakpoints, parts, props, the Base UI origin. Read straight from `src/components/ui/*.tsx`, so a contract cannot claim a variant or a state the primitive doesn't implement. Never try to correct these here; fix the primitive.
 - **Authored** — purpose, `useWhen`/`dontUseWhen`, `requires`/`forbids`, `rules`, behaviour in the loading/empty/error/destructive paths, accessibility requirements, examples, anti-patterns. These live in `src/docs/contracts.json`, keyed by section id.
 
-`gen-contracts` fails on an unknown key or an id with no section, so a typo can't silently drop the guidance someone wrote. Ten components are authored so far — button, input, select, badge, card, dialog, sheet, table, sidebar, toast; the rest carry the derived half only. Everything written there is published to consumers through the design specs, so each claim has to be true of the primitive or stated in `design.md`.
+`gen-contracts` fails on an unknown key or an id with no section, so a typo can't silently drop the guidance someone wrote. Twelve components are authored so far — button, input, select, badge, card, dialog, sheet, table, sidebar, toast, alert-dialog and hover-card; the rest carry the derived half only. `contracts.json`'s own `counts` block is the number of record, not this sentence. Everything written there is published to consumers through the design specs, so each claim has to be true of the primitive or stated in `design.md`.
 
 ## The changelog maintains itself
 
