@@ -13,7 +13,7 @@
 | Type scale (only these) | `text-caption` `text-body-sm` `text-body` `text-body-lg` `text-title` `text-heading` `text-display` — each carries its own line-height and weight; never pair with `leading-*`; never `text-sm`/`text-xs` |
 | Radius | `rounded-sm` (badges) `rounded-md` (buttons, inputs) `rounded-lg` `rounded-xl` (cards) `rounded-full` |
 | Layout | `flex` `grid` `grid-cols-2` `gap-2` `gap-3` `gap-4` `p-4` `p-6` `px-3` `py-2` `w-full` `min-w-0` `truncate` `tabular-nums` |
-| Commodities (tags only) | `bg-chart-electricity-500/10` + `text-chart-electricity-700`, likewise `water` `gas` `temperature` `emissions` |
+| Commodities (tags only) | `<Badge variant="electricity">` — likewise `water` `gas` `temperature` `emissions`. Never hand-compose a commodity tag from chart classes. Chart series labels may use `text-chart-<commodity>-700`. |
 
 Rules that the audit found broken most often: a quiet delete in a table row is `<Button variant="ghost-destructive">`, never `ghost` plus red classes. Every destructive action goes through `AlertDialog`. `Select` shows no checkmark on the chosen option. `DropdownMenu` shrink-wraps to its widest item. `Dialog` is for 1–4 fields; longer forms go to `Sheet`. Neutral labels are `<Badge variant="outline">`.
 
