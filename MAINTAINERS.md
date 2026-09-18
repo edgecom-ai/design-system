@@ -215,15 +215,18 @@ Two things to keep intact:
 
 These are **docs demos, not registry items** — vendor-imported from shadcn-studio, so they use default exports, arrow functions, and a single-quote style that differs from the house style. Leave that style as-is (don't reformat), and **don't `--overwrite`** our custom `src/components/ui` primitives when pulling upstream studio components. They're consumed only by the doc pages.
 
-## Docs-site architecture (static export)
+## Docs-site architecture (Vite + TanStack Router, prerendered)
 
-The site is a **static export** (`output: "export"` in [`next.config.ts`](next.config.ts)), built and published on push to `main` (see [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml)) and served at the **root of the custom domain [design.edgecom.ai](https://design.edgecom.ai)** (no base path in the CI deploy). Files placed in `public/` get clean URLs at that root — e.g. `public/design.md` → `https://design.edgecom.ai/design.md`, `public/llms.txt` → `https://design.edgecom.ai/llms.txt`.
+The site is a **client-rendered SPA built to static files** with Vite and TanStack Router, published on push to `main` (see [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml)) and served at the **root of the custom domain [design.edgecom.ai](https://design.edgecom.ai)**. Files placed in `public/` get clean URLs at that root — e.g. `public/design.md` → `https://design.edgecom.ai/design.md`, `public/llms.txt` → `https://design.edgecom.ai/llms.txt`.
 
-- The chrome (sidebar + header + content) renders **once** from [`src/app/(docs)/layout.tsx`](src/app/(docs)/layout.tsx) — a route-group layout — so the sidebar persists across navigations instead of remounting.
-- [`src/app/(docs)/[group]/[slug]/page.tsx`](src/app/(docs)/[group]/[slug]/page.tsx) returns `null` but **must keep `generateStaticParams()`** (from `src/docs/generated/routes.ts`) — static export requires it to prerender one HTML file per section.
-- **Don't move `DocsShell` back into the page** (it remounts → the sidebar scroll jumps to top on every click) and **don't drop `generateStaticParams`** (the static build fails).
-- `basePath` / `NEXT_PUBLIC_BASE_PATH` (from the optional `PAGES_BASE_PATH`) prefix asset and runtime-fetch URLs when serving under a sub-path; it's unset for local `pnpm dev` and the CI deploy, which both serve from `/`.
+- The chrome (sidebar + header + content) renders **once** from the pathless `docs` layout route in [`src/router.tsx`](src/router.tsx), so the sidebar persists across navigations instead of remounting. The layout route deliberately renders no `<Outlet />` — `DocsShell` renders the whole page itself, and the child route exists only to make the URL resolve.
+- [`scripts/prerender.mjs`](scripts/prerender.mjs) writes **one HTML shell per route** from `src/docs/generated/routes.ts`. GitHub Pages has no server-side fallback, so a route with no file is a 404 however well the SPA would have handled it. Dropping the prerender step silently breaks every deep link.
+- **Don't move `DocsShell` down onto the `$group/$slug` route** — it remounts, and the sidebar scroll jumps to top on every click.
+- `import.meta.env.BASE_URL` (from the optional `PAGES_BASE_PATH`, via `base` in [`vite.config.ts`](vite.config.ts)) prefixes asset and runtime-fetch URLs when serving under a sub-path. It is unset for local `pnpm dev` and for the CI deploy, which both serve from `/`. It always ends in a slash.
+- Links go through [`src/components/docs/link.tsx`](src/components/docs/link.tsx) rather than the router's `Link` directly: the site's links are data-derived, and the vendored shadcn-studio demos carry `href="#"` and should stay diffable against upstream.
+- The route tree is **code-based**, so there is no generated route tree to keep in sync.
 - The `design.edgecom.ai` domain is configured in GitHub Pages settings — there is **no `CNAME` file** in the repo. A `public/` regeneration must not add or clobber one.
+- Nothing the registry ships depends on the docs framework: `src/components/ui/*`, `src/hooks/*` and `src/lib/*` import nothing from Vite or the router. Keep it that way.
 
 ## Verifying changes
 
@@ -242,9 +245,8 @@ There is **no test framework** in this repo. The quality gates are:
 - Don't `--overwrite` our custom `src/components/ui` primitives when pulling shadcn-studio components, and don't reformat vendored studio files.
 - Don't add icon libraries other than lucide-react.
 - Don't edit a token in only one of `:root` / `.dark` — set both (or confirm the light value is meant to inherit).
-- Don't move `DocsShell` into the page or drop `generateStaticParams()` — you break sidebar persistence / the static build.
+- Don't move `DocsShell` onto the child route, and don't drop the prerender step — you break sidebar persistence / every deep link.
 - Never print the values in `.env.local`.
-- Keep the `nextjs-agent-rules` block at the top of this file intact.
 
 ---
 
