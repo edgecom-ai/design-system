@@ -132,6 +132,19 @@ standaloneOnly: README.md  components/**
 
 Scope the `DesignSync` `finalize_plan` to `writes` when the destination is an overlay target. The plan boundary is what structurally prevents a sync from touching hand-authored `brand/` material or the converter's component tree.
 
+### An upload is invisible until the project is opened
+
+The platform does not read the bundle when you upload it. It compiles its own card index and token manifest during a **self-check**, and what runs that check is **someone opening the project while a `_ds_needs_recompile` marker is present**. The app deletes the marker when the check completes.
+
+This is not a detail you can skip. The two projects this bundle has been sent to are a controlled experiment in what happens if you do:
+
+| | Marker written? | Opened | Result |
+|---|---|---|---|
+| Converter-built | yes, by the converter | 2026-09-18 | recompiled — 328 cards, all 118 Edgecom tokens, one theme |
+| Generator-built | no — this script never wrote one | 2026-09-16 | **nothing.** Its manifest still describes a stylesheet replaced two PRs earlier: ~250 Tailwind internals and 89 utility classes misread as themes |
+
+So the build now emits `_ds_needs_recompile`, and `_overlay.json` lists it in `writes` with `uploadLast` naming it. **Upload it last**, after every other file, so the self-check can never run against a half-written bundle. Then open the project once — that is what makes the sync take effect.
+
 **Sync from a clean tree on `main`, after the change has merged.** `_system.json` stamps `HEAD`, so a bundle built from uncommitted work claims a version whose content it does not match — and the version stamp is the whole reason the file exists. The generator refuses to build on a dirty tree; `DESIGN_SYNC_ALLOW_DIRTY=1` overrides it for a throwaway preview you do not upload.
 
 **The upload plan is scoped to those paths**, so a sync structurally cannot touch `brand/` — hand-authored marketing material that is deliberately not in this public repo. Keep it that way.
