@@ -1,0 +1,56 @@
+{
+  "version": "v1.0.0",
+  "digest": "2694528e294510cc",
+  "contract": {
+    "id": "tanstack-form",
+    "label": "Tanstack form",
+    "registryItem": "edgecom-ai/design-system/tanstack-form",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/tanstack-form",
+    "docs": null,
+    "source": "src/components/ui/tanstack-form.tsx",
+    "summary": null,
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": null,
+    "parts": [
+      {
+        "name": "TextareaField",
+        "description": null
+      },
+      {
+        "name": "SelectField",
+        "description": null
+      },
+      {
+        "name": "CheckboxField",
+        "description": null
+      },
+      {
+        "name": "SubmitButton",
+        "description": null
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [],
+    "responsive": [],
+    "tokens": [],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [
+        "aria-invalid"
+      ],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

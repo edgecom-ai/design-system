@@ -25,7 +25,7 @@ import { fileURLToPath } from "node:url"
 
 import { readBlocks } from "./lib/tokens.mjs"
 import { parseSections } from "./lib/sections.mjs"
-import { buildContracts, OVERLAY_KEYS, ALIAS_FILE } from "./lib/contracts.mjs"
+import { buildContracts, undocumentedPrimitives, OVERLAY_KEYS, ALIAS_FILE } from "./lib/contracts.mjs"
 import { freshness, forced } from "./lib/stale.mjs"
 import { PUBLISHED, urlOf, contractUrl, schemaUrl } from "./lib/publish.mjs"
 import { systemIdentity, systemSources } from "./lib/system.mjs"
@@ -69,11 +69,21 @@ const inputs = [
 
 // --- inputs ------------------------------------------------------------------
 const sections = parseSections(read("src/app/sections.tsx"))
+const primitives = readdirSync(uiDir)
+  .filter((f) => f.endsWith(".tsx"))
+  .map((f) => f.slice(0, -".tsx".length))
+// Every id a contract will be written for: the sections' plus the primitives
+// no section covers, which get a derived contract so a design citing them
+// resolves (lib/contracts undocumentedPrimitives).
+const contractIds = [
+  ...sections.filter((s) => s.group === "Components").map((s) => s.id),
+  ...undocumentedPrimitives(sections, primitives),
+]
 
 const stamp = freshness({
   name: "contracts",
   inputs: [...inputs, "scripts/lib/publish.mjs", "schemas/contracts.schema.json"],
-  outputs: [OUT, ...publishedFiles(sections.filter((s) => s.group === "Components").map((s) => s.id))],
+  outputs: [OUT, ...publishedFiles(contractIds)],
 })
 if (stamp.fresh && !forced()) {
   console.log("gen-contracts — up to date — skipped")
@@ -140,6 +150,7 @@ const contracts = buildContracts({
   curated,
   overlay,
   tokenNames: [...Object.keys(light), ...Object.keys(theme)],
+  primitives,
 })
 
 // Identity is the digest of the whole system — not HEAD, and not of this
@@ -163,6 +174,7 @@ const doc = {
     authored: authored.length,
     withVariants: contracts.filter((c) => c.variants.length).length,
     withBaseUi: contracts.filter((c) => c.base).length,
+    undocumented: contracts.filter((c) => c.docs === null).length,
     tokenReferences: contracts.reduce((n, c) => n + c.tokens.length, 0),
   },
   contracts: contracts.sort((a, b) => a.id.localeCompare(b.id)),

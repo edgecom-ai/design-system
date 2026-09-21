@@ -1,0 +1,46 @@
+{
+  "version": "v1.0.0",
+  "digest": "2694528e294510cc",
+  "contract": {
+    "id": "logo",
+    "label": "Logo",
+    "registryItem": "edgecom-ai/design-system/logo",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/logo",
+    "docs": null,
+    "source": "src/components/ui/logo.tsx",
+    "summary": null,
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": null,
+    "parts": [
+      {
+        "name": "Logo",
+        "description": null
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [],
+    "responsive": [],
+    "tokens": [],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [
+        "aria-hidden",
+        "aria-label",
+        "role=img"
+      ],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "version": "v1.0.0",
+  "digest": "2694528e294510cc",
+  "contract": {
+    "id": "motion-tabs",
+    "label": "Motion tabs",
+    "registryItem": "edgecom-ai/design-system/motion-tabs",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/motion-tabs",
+    "docs": null,
+    "source": "src/components/ui/motion-tabs.tsx",
+    "summary": null,
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": null,
+    "parts": [
+      {
+        "name": "Tabs",
+        "description": null
+      },
+      {
+        "name": "TabsList",
+        "description": null
+      },
+      {
+        "name": "TabsTrigger",
+        "description": null
+      },
+      {
+        "name": "TabsContents",
+        "description": null
+      },
+      {
+        "name": "TabsContent",
+        "description": null
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [
+      "data-[state=active]",
+      "disabled",
+      "focus-visible"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "background",
+        "family": "surface"
+      },
+      {
+        "id": "foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "muted",
+        "family": "neutral"
+      },
+      {
+        "id": "muted-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "radius-lg",
+        "family": "radius"
+      },
+      {
+        "id": "radius-sm",
+        "family": "radius"
+      },
+      {
+        "id": "ring",
+        "family": "neutral"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

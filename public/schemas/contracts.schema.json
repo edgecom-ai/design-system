@@ -62,7 +62,11 @@
         "label": { "type": "string", "minLength": 1 },
         "registryItem": { "type": "string", "pattern": "^edgecom-ai/design-system/[a-z0-9-]+$" },
         "install": { "type": "string", "pattern": "^pnpm dlx shadcn@latest add " },
-        "docs": { "type": "string", "pattern": "^https://design\\.edgecom\\.ai/components/[a-z0-9-]+/$" },
+        "docs": {
+          "type": ["string", "null"],
+          "pattern": "^https://design\\.edgecom\\.ai/components/[a-z0-9-]+/$",
+          "description": "The component's docs page. null for a primitive that ships with no section of its own — installable and contracted, but with no page to send a reader to."
+        },
         "source": { "type": "string", "pattern": "^src/components/ui/[a-z0-9-]+\\.tsx$" },
         "summary": { "type": ["string", "null"], "description": "One line, from curated.ts or the section blurb." },
         "purpose": { "type": ["string", "null"], "description": "Authored: what the component is for, in the Edgecom product context." },

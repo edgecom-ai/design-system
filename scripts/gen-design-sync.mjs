@@ -266,20 +266,28 @@ produce, write one: \`<Name>.manifest.json\` next to \`<Name>.dc.html\`. Start f
 \`_manifest.example.json\` — it is complete and already names this system's version and digest.
 
 - \`designSystemVersion\` and \`designSystemDigest\` are copied from \`_system.json\`. Never type them.
+  Where \`_system.json\` is not beside you, copy the pair from ${system.manifestExample},
+  which is stamped with the current one.
 - One entry in \`components\` per design-system element on the screen: a kebab-case \`instanceId\`
-  that you also put on the element as \`data-instance="…"\`; the registry \`component\` id exactly
-  as its spec is named (\`alert-dialog\`, not \`AlertDialog\`); the \`variants\` it sets, by axis
-  (\`{ "variant": "outline", "size": "sm" }\`); the \`parts\` it composes. A variant that is not in
-  the spec does not exist — pick from the spec, never invent one.
+  that you also put on the element as \`data-instance="…"\` — on every declared instance, including
+  elements your logic creates (pass \`"data-instance"\` as a prop); the registry \`component\` id
+  exactly as its spec is named (\`alert-dialog\`, not \`AlertDialog\`); the \`variants\` it sets, by
+  axis (\`{ "variant": "outline", "size": "sm" }\`); the \`parts\` it composes. Variants are only the
+  axes the spec lists — a prop such as \`collapsible\`, \`compact\` or a trigger's \`size\` is not a
+  variant and is not recorded, and a component with no axes gets no \`variants\` at all.
 - \`tokens\` lists every token the design reaches for directly, by id (\`primary\`, not \`--primary\`).
+  Scale steps — \`radius-md\`, \`text-body\`, \`rounded-full\` — are utilities, not tokens; never list them.
 - \`viewports\` needs \`mobile\` and \`desktop\`; \`themes\` needs \`light\` and \`dark\`; \`states\` needs
   \`loading\`, \`empty\`, \`error\` and \`success\`. A design missing any of them is not finished.
 - \`interactions\` says what each control does, naming other instances by id.
-  \`approvedExceptions\` is the only place a deviation from the rules may live, with who approved it.
+  \`approvedExceptions\` is the only place a deviation from the rules may live: \`rule\`, \`reason\`,
+  \`approvedBy\` — someone who has approved it; "pending" is a deviation to report, not an
+  exception — and optionally \`instanceId\` and \`approvedOn\`. No other fields.
 
 The manifest is the first thing a coding agent reads: it verifies the version, fetches each
-component's contract, and checks every variant and token against the system. Schema:
-${system.manifestSchema} · validator: ${system.manifestValidator}
+component's contract, checks every variant and token against the system, and joins every
+\`instanceId\` to its \`data-instance\` in the markup. Every line the validator prints is a defect.
+Schema: ${system.manifestSchema} · validator: ${system.manifestValidator}
 
 ## Starting an artifact
 

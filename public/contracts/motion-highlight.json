@@ -1,0 +1,51 @@
+{
+  "version": "v1.0.0",
+  "digest": "2694528e294510cc",
+  "contract": {
+    "id": "motion-highlight",
+    "label": "Motion highlight",
+    "registryItem": "edgecom-ai/design-system/motion-highlight",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/motion-highlight",
+    "docs": null,
+    "source": "src/components/ui/motion-highlight.tsx",
+    "summary": null,
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": null,
+    "parts": [
+      {
+        "name": "MotionHighlight",
+        "description": null
+      },
+      {
+        "name": "MotionHighlightItem",
+        "description": null
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "muted",
+        "family": "neutral"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

@@ -26,7 +26,7 @@
 // Inside this repository the system is read from src/docs/generated/; anywhere
 // else (or with --remote) it is fetched from design.edgecom.ai. Usage:
 //
-//   node scripts/check-design-manifest.mjs <manifest.json | URL> [--remote] [--strict]
+//   node scripts/check-design-manifest.mjs <manifest.json | URL> [--remote] [--strict] [--design <file>]
 //       [--index <contracts.json | index.json | URL>] [--tokens <tokens.json | URL>]
 //
 // Exit 0 when the manifest is valid; 1 on any error. Coverage gaps are
@@ -66,6 +66,13 @@ const INSTANCE_KEYS = ["instanceId", "component", "label", "screen", "variants",
 const INTERACTION_KEYS = ["instanceId", "event", "result"]
 const EXCEPTION_KEYS = ["instanceId", "rule", "reason", "approvedBy", "approvedOn"]
 
+// Steps of the radius and type scales. They are utilities (`rounded-md`,
+// `text-body`), not tokens, and the first real manifest listed three of them.
+const SCALE_STEP = /^(radius-(sm|md|lg|xl|2xl|3xl|4xl|full)|text-(caption|body-sm|body|body-lg|title|heading|display))$/
+// An approval that has not happened. An exception nobody approved is a
+// deviation to report, and the first real manifest carried two of them.
+const NOT_APPROVED = /^\s*$|pending|tbd|to be|todo|awaiting|none|n\/a|unknown|nobody|\?/i
+
 // --- arguments ----------------------------------------------------------------
 const argv = process.argv.slice(2)
 const opts = { remote: false, strict: false, index: null, tokens: null, file: null }
@@ -73,6 +80,7 @@ for (let i = 0; i < argv.length; i++) {
   const a = argv[i]
   if (a === "--remote") opts.remote = true
   else if (a === "--strict") opts.strict = true
+  else if (a === "--design") opts.design = argv[++i]
   else if (a === "--index") opts.index = argv[++i]
   else if (a === "--tokens") opts.tokens = argv[++i]
   else if (a === "--help" || a === "-h") opts.help = true
@@ -85,7 +93,8 @@ if (opts.help || !opts.file) {
     "usage: check-design-manifest <manifest.json | URL> [--remote] [--strict] [--index <path|URL>] [--tokens <path|URL>]\n" +
       "  Validates a design handoff manifest against its schema and against the design system it names.\n" +
       "  --remote  read the system from design.edgecom.ai even inside the design-system repo\n" +
-      "  --strict  coverage gaps (viewports, themes, states) are errors, not warnings",
+      "  --strict  coverage gaps (viewports, themes, states) are errors, not warnings\n" +
+      "  --design  the design file to join data-instance against (default: the manifest's `design`, beside it)",
   )
   process.exit(opts.help ? 0 : 2)
 }
@@ -293,6 +302,8 @@ if ("approvedExceptions" in manifest) {
       checkString(x, "rule", p, { required: true })
       checkString(x, "reason", p, { required: true })
       checkString(x, "approvedBy", p, { required: true })
+      if (isStr(x.approvedBy) && NOT_APPROVED.test(x.approvedBy))
+        err(`${p}/approvedBy`, `"${x.approvedBy}" is not an approval — an exception nobody has approved is a deviation to report; remove it, or name who approved it`)
       checkString(x, "approvedOn", p, { pattern: DATE, hint: "must be YYYY-MM-DD" })
     })
 }
@@ -339,7 +350,8 @@ for (const [i, c] of (Array.isArray(manifest.components) ? manifest.components :
         const axes = [...contract.variants.keys()]
         err(
           `${p}/variants/${axis}`,
-          axes.length ? `"${c.component}" has no "${axis}" axis — it has ${axes.join(", ")}` : `"${c.component}" has no variant axes; drop "variants"`,
+          (axes.length ? `"${c.component}" has no "${axis}" axis — it has ${axes.join(", ")}` : `"${c.component}" has no variant axes; drop "variants"`) +
+            ` — a prop is not a variant and is not recorded here`,
         )
       } else if (!contract.variants.get(axis).includes(value)) {
         err(`${p}/variants/${axis}`, `"${value}" is not an option of ${c.component}.${axis} — options: ${contract.variants.get(axis).join(", ")}`)
@@ -356,6 +368,10 @@ for (const [i, c] of (Array.isArray(manifest.components) ? manifest.components :
 for (const [i, t] of (Array.isArray(manifest.tokens) ? manifest.tokens : []).entries()) {
   if (!isStr(t) || system.tokens.has(t)) continue
   const stripped = t.replace(/^--/, "")
+  if (SCALE_STEP.test(stripped)) {
+    err(`/tokens/${i}`, `"${t}" is a scale step, not a token — the design may use it, but tokens lists tokens.json ids only; drop it`)
+    continue
+  }
   const hint = system.tokens.has(stripped) ? ` — did you mean "${stripped}"?` : " — not in tokens.json; never invent a token"
   err(`/tokens/${i}`, `unknown token "${t}"${hint}`)
 }
@@ -367,6 +383,31 @@ const refCheck = (list, key) => {
 }
 refCheck(manifest.interactions, "interactions")
 refCheck(manifest.approvedExceptions, "approvedExceptions")
+
+// The join. The manifest and the markup meet on `data-instance`; an instance on
+// one side only is either undocumented (markup) or fictional (manifest). The
+// first real manifest declared 23 instances and put the attribute on 15. Only
+// a local design file can be read; a manifest fetched by URL is not joined.
+const designRef = opts.design ?? (!isUrl(opts.file) && isStr(manifest.design) ? resolve(dirname(resolve(process.cwd(), opts.file)), manifest.design) : null)
+let joined = null
+if (designRef && existsSync(designRef)) {
+  const html = readFileSync(designRef, "utf8")
+  const inMarkup = new Set()
+  for (const re of [/data-instance\s*=\s*["']([^"']+)["']/g, /["']data-instance["']\s*:\s*["']([^"']+)["']/g])
+    for (const m of html.matchAll(re)) inMarkup.add(m[1])
+  const design = isStr(manifest.design) ? manifest.design : designRef
+  for (const [i, c] of (Array.isArray(manifest.components) ? manifest.components : []).entries()) {
+    if (isObj(c) && isStr(c.instanceId) && !inMarkup.has(c.instanceId))
+      err(`/components/${i}/instanceId`, `no element in ${design} carries data-instance="${c.instanceId}" — put it on the element, including ones the logic creates`)
+  }
+  for (const id of [...inMarkup].sort()) {
+    if (!instances.has(id)) err("/components", `${design} carries data-instance="${id}", which is not a declared instance`)
+  }
+  joined = inMarkup.size
+}
+// No design file is not a defect of the manifest — the published example has
+// none — so it is noted in the summary rather than warned about.
+const joinNote = joined === null ? "; data-instance join not checked (no design file beside the manifest — pass --design <file>)" : `; ${joined} data-instance element(s) join the markup`
 
 // Coverage: what an implementation needs and a happy-path-only design omits.
 const coverage = opts.strict ? err : warn
@@ -388,6 +429,7 @@ if (!errors.length) {
     `  ✓ ${n} instance(s) resolve to ${resolved.size} contract(s); ` +
       `${Array.isArray(manifest.tokens) ? manifest.tokens.length : 0} token(s) exist; ` +
       `${Array.isArray(manifest.interactions) ? manifest.interactions.length : 0} interaction(s) cite declared instances` +
+      joinNote +
       (warnings.length ? ` — ${warnings.length} coverage warning(s)` : ""),
   )
 }
