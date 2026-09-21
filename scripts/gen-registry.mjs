@@ -102,8 +102,11 @@ try {
 // and where the contract is. An agent that installed without reading either
 // gets both addresses at the moment it is about to use the component.
 function installNote(contract) {
+  // A primitive with no section has a contract but no page; say so rather
+  // than print a URL that 404s.
+  const docs = contract.docs ?? "no page yet — read the contract";
   return (
-    `Docs: ${contract.docs} · Contract: ${contractUrl(contract.id)} · ` +
+    `Docs: ${docs} · Contract: ${contractUrl(contract.id)} · ` +
     `Guardrails: ${PUBLIC_BASE}/design.md`
   );
 }

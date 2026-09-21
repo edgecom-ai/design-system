@@ -1,0 +1,50 @@
+{
+  "version": "v1.0.0",
+  "digest": "2694528e294510cc",
+  "contract": {
+    "id": "label",
+    "label": "Label",
+    "registryItem": "edgecom-ai/design-system/label",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/label",
+    "docs": null,
+    "source": "src/components/ui/label.tsx",
+    "summary": null,
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": null,
+    "parts": [
+      {
+        "name": "Label",
+        "description": null
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [
+      "group-data-[disabled=true]",
+      "peer-disabled"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

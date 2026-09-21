@@ -1,0 +1,95 @@
+{
+  "version": "v1.0.0",
+  "digest": "2694528e294510cc",
+  "contract": {
+    "id": "chart",
+    "label": "Chart",
+    "registryItem": "edgecom-ai/design-system/chart",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/chart",
+    "docs": null,
+    "source": "src/components/ui/chart.tsx",
+    "summary": null,
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": null,
+    "parts": [
+      {
+        "name": "ChartContainer",
+        "description": null
+      },
+      {
+        "name": "ChartTooltip",
+        "description": null
+      },
+      {
+        "name": "ChartTooltipContent",
+        "description": null
+      },
+      {
+        "name": "ChartLegend",
+        "description": null
+      },
+      {
+        "name": "ChartLegendContent",
+        "description": null
+      },
+      {
+        "name": "ChartStyle",
+        "description": null
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "background",
+        "family": "surface"
+      },
+      {
+        "id": "border",
+        "family": "neutral"
+      },
+      {
+        "id": "font-mono",
+        "family": "typography"
+      },
+      {
+        "id": "foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "muted",
+        "family": "neutral"
+      },
+      {
+        "id": "muted-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "radius-lg",
+        "family": "radius"
+      },
+      {
+        "id": "text-caption",
+        "family": "typography"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

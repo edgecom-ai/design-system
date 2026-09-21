@@ -5,11 +5,12 @@
   "docs": "https://design.edgecom.ai/design.md",
   "guide": "https://design.edgecom.ai/agents.md",
   "counts": {
-    "total": 56,
+    "total": 64,
     "authored": 12,
-    "withVariants": 14,
+    "withVariants": 15,
     "withBaseUi": 26,
-    "tokenReferences": 470
+    "undocumented": 8,
+    "tokenReferences": 500
   },
   "components": [
     {
@@ -377,6 +378,29 @@
       "registryItem": "edgecom-ai/design-system/category-bar",
       "docs": "https://design.edgecom.ai/components/category-bar/",
       "contract": "https://design.edgecom.ai/contracts/category-bar.json"
+    },
+    {
+      "id": "chart",
+      "label": "Chart",
+      "summary": null,
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "ChartContainer",
+        "ChartTooltip",
+        "ChartTooltipContent",
+        "ChartLegend",
+        "ChartLegendContent",
+        "ChartStyle"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/chart",
+      "registryItem": "edgecom-ai/design-system/chart",
+      "docs": null,
+      "contract": "https://design.edgecom.ai/contracts/chart.json"
     },
     {
       "id": "checkbox",
@@ -813,6 +837,24 @@
       "contract": "https://design.edgecom.ai/contracts/input-otp.json"
     },
     {
+      "id": "label",
+      "label": "Label",
+      "summary": null,
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "Label"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/label",
+      "registryItem": "edgecom-ai/design-system/label",
+      "docs": null,
+      "contract": "https://design.edgecom.ai/contracts/label.json"
+    },
+    {
       "id": "list",
       "label": "List",
       "summary": "Structured rows built from the Item primitive — media, content (title + description), and trailing actions, grouped by ItemGroup.",
@@ -857,6 +899,65 @@
       "registryItem": "edgecom-ai/design-system/list",
       "docs": "https://design.edgecom.ai/components/list/",
       "contract": "https://design.edgecom.ai/contracts/list.json"
+    },
+    {
+      "id": "logo",
+      "label": "Logo",
+      "summary": null,
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "Logo"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/logo",
+      "registryItem": "edgecom-ai/design-system/logo",
+      "docs": null,
+      "contract": "https://design.edgecom.ai/contracts/logo.json"
+    },
+    {
+      "id": "motion-highlight",
+      "label": "Motion highlight",
+      "summary": null,
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "MotionHighlight",
+        "MotionHighlightItem"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/motion-highlight",
+      "registryItem": "edgecom-ai/design-system/motion-highlight",
+      "docs": null,
+      "contract": "https://design.edgecom.ai/contracts/motion-highlight.json"
+    },
+    {
+      "id": "motion-tabs",
+      "label": "Motion tabs",
+      "summary": null,
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "Tabs",
+        "TabsList",
+        "TabsTrigger",
+        "TabsContents",
+        "TabsContent"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/motion-tabs",
+      "registryItem": "edgecom-ai/design-system/motion-tabs",
+      "docs": null,
+      "contract": "https://design.edgecom.ai/contracts/motion-tabs.json"
     },
     {
       "id": "multi-select",
@@ -1427,6 +1528,45 @@
       "contract": "https://design.edgecom.ai/contracts/tags-input.json"
     },
     {
+      "id": "tanstack-form",
+      "label": "Tanstack form",
+      "summary": null,
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "TextareaField",
+        "SelectField",
+        "CheckboxField",
+        "SubmitButton"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/tanstack-form",
+      "registryItem": "edgecom-ai/design-system/tanstack-form",
+      "docs": null,
+      "contract": "https://design.edgecom.ai/contracts/tanstack-form.json"
+    },
+    {
+      "id": "textarea",
+      "label": "Textarea",
+      "summary": null,
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "Textarea"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/textarea",
+      "registryItem": "edgecom-ai/design-system/textarea",
+      "docs": null,
+      "contract": "https://design.edgecom.ai/contracts/textarea.json"
+    },
+    {
       "id": "timeline",
       "label": "Timeline",
       "summary": "A vertical sequence of events. Each TimelineItem pairs a status TimelineDot with a TimelineHeading and TimelineContent, connected by a TimelineLine.",
@@ -1519,6 +1659,43 @@
       "registryItem": "edgecom-ai/design-system/toggle",
       "docs": "https://design.edgecom.ai/components/toggle/",
       "contract": "https://design.edgecom.ai/contracts/toggle.json"
+    },
+    {
+      "id": "toggle-group",
+      "label": "Toggle group",
+      "summary": null,
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [
+        {
+          "name": "variant",
+          "options": [
+            "default",
+            "outline"
+          ],
+          "default": "default"
+        },
+        {
+          "name": "size",
+          "options": [
+            "default",
+            "sm",
+            "lg"
+          ],
+          "default": "default"
+        }
+      ],
+      "parts": [
+        "ToggleGroup",
+        "ToggleGroupItem"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/toggle-group",
+      "registryItem": "edgecom-ai/design-system/toggle-group",
+      "docs": null,
+      "contract": "https://design.edgecom.ai/contracts/toggle-group.json"
     },
     {
       "id": "tooltip",

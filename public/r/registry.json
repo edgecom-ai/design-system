@@ -601,6 +601,7 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: no page yet — read the contract · Contract: https://design.edgecom.ai/contracts/chart.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
@@ -959,6 +960,7 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: no page yet — read the contract · Contract: https://design.edgecom.ai/contracts/label.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
@@ -974,6 +976,7 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: no page yet — read the contract · Contract: https://design.edgecom.ai/contracts/logo.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
@@ -992,6 +995,7 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: no page yet — read the contract · Contract: https://design.edgecom.ai/contracts/motion-highlight.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
@@ -1011,6 +1015,7 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: no page yet — read the contract · Contract: https://design.edgecom.ai/contracts/motion-tabs.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
@@ -1542,6 +1547,7 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: no page yet — read the contract · Contract: https://design.edgecom.ai/contracts/tanstack-form.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
@@ -1557,6 +1563,7 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: no page yet — read the contract · Contract: https://design.edgecom.ai/contracts/textarea.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
@@ -1617,6 +1624,7 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: no page yet — read the contract · Contract: https://design.edgecom.ai/contracts/toggle-group.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {

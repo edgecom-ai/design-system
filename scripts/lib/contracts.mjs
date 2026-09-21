@@ -225,29 +225,68 @@ const EMPTY_OVERLAY = {
 
 export const OVERLAY_KEYS = Object.keys(EMPTY_OVERLAY)
 
+/** PascalCase names in the source's `export { … }` blocks — the component's parts. */
+export function exportedParts(src) {
+  const parts = new Set()
+  for (const m of src.matchAll(/export\s*\{([^}]*)\}/g)) {
+    for (const raw of m[1].split(",")) {
+      const name = raw.replace(/\s+as\s+\w+/, "").trim()
+      if (/^[A-Z][A-Za-z0-9]*$/.test(name)) parts.add(name)
+    }
+  }
+  return [...parts]
+}
+
 /**
- * One contract per section in the Components group that has a primitive file.
+ * Primitives that ship but have no section of their own.
+ *
+ * gen-registry scans the directory, so every file in src/components/ui installs
+ * and the design bundle carries every one of them — the first real design
+ * manifest cited `toggle-group` and `chart` and the validator called both
+ * unknown, because contracts were built from the docs sections alone. A
+ * section's primitive (or its ALIAS_FILE target) is covered by that section's
+ * contract; everything else here gets a derived contract with no docs page.
+ */
+export function undocumentedPrimitives(sections, primitiveIds) {
+  const covered = new Set()
+  for (const s of sections) {
+    if (s.group !== "Components") continue
+    covered.add(s.id)
+    covered.add(ALIAS_FILE[s.id] ?? s.id)
+  }
+  return primitiveIds.filter((id) => !covered.has(id)).sort()
+}
+
+const sentenceCase = (id) => id.charAt(0).toUpperCase() + id.slice(1).replace(/-/g, " ")
+
+/**
+ * One contract per section in the Components group that has a primitive file,
+ * plus one per primitive no section covers (`undocumentedPrimitives`), so that
+ * everything a design can cite resolves.
  *
  * `sources` supplies the already-parsed inputs so this stays a pure function —
  * the generator does the reading, this does the merging, and a test can call it
- * with fixtures.
+ * with fixtures. `primitives` is the list of ids in src/components/ui.
  */
-export function buildContracts({ sections, readPrimitive, api, curated, overlay, tokenNames }) {
+export function buildContracts({ sections, readPrimitive, api, curated, overlay, tokenNames, primitives = [] }) {
   const known = new Set(tokenNames)
   const contracts = []
 
-  for (const s of sections) {
-    if (s.group !== "Components") continue
-    const file = `src/components/ui/${ALIAS_FILE[s.id] ?? s.id}.tsx`
-    const src = readPrimitive(file)
-    if (src == null) continue
+  // A primitive may take its axes from a sibling's cva — toggle-group types its
+  // props as `VariantProps<typeof toggleVariants>` and imports that from
+  // toggle.tsx, so its own source declares no cva. Follow the import when the
+  // source says the borrowed variants are its props, else `size="sm"` on a
+  // ToggleGroup validates as a prop that does not exist.
+  const borrowedCva = (src) => {
+    const m = src.match(/import\s*\{[^}]*\b(\w+Variants)\b[^}]*\}\s*from\s*"@\/components\/ui\/([a-z0-9-]+)"/)
+    if (!m || !new RegExp(`VariantProps<typeof ${m[1]}>`).test(src)) return null
+    const sibling = readPrimitive(`src/components/ui/${m[2]}.tsx`)
+    return sibling ? extractCva(sibling) : null
+  }
 
-    const cva = extractCva(src)
+  const assemble = ({ id, label, docs, file, src, a, c, o }) => {
+    const cva = extractCva(src) ?? borrowedCva(src)
     const derived = deriveFromSource(src, known)
-    const a = api[s.id] ?? {}
-    const c = curated[s.id] ?? {}
-    const o = { ...EMPTY_OVERLAY, ...(overlay[s.id] ?? {}) }
-
     const parts = (a.parts ?? []).map((name) => ({
       name,
       description: c.parts?.[name] ?? null,
@@ -259,15 +298,14 @@ export function buildContracts({ sections, readPrimitive, api, curated, overlay,
       default: p.default ?? null,
       description: c.propDescriptions?.[`${p.part}.${p.name}`] ?? null,
     }))
-
-    contracts.push({
-      id: s.id,
-      label: s.label,
-      registryItem: `edgecom-ai/design-system/${s.id}`,
-      install: `pnpm dlx shadcn@latest add edgecom-ai/design-system/${s.id}`,
-      docs: `https://design.edgecom.ai/components/${s.id}/`,
+    return {
+      id,
+      label,
+      registryItem: `edgecom-ai/design-system/${id}`,
+      install: `pnpm dlx shadcn@latest add edgecom-ai/design-system/${id}`,
+      docs,
       source: file,
-      summary: c.summary ?? s.description ?? null,
+      summary: c.summary ?? null,
       purpose: o.purpose,
       useWhen: o.useWhen,
       dontUseWhen: o.dontUseWhen,
@@ -288,8 +326,51 @@ export function buildContracts({ sections, readPrimitive, api, curated, overlay,
       status: o.status,
       replaces: o.replaces,
       deprecated: o.deprecated,
-      authored: Boolean(overlay[s.id]?.purpose),
-    })
+      authored: Boolean(o.purpose),
+    }
+  }
+
+  for (const s of sections) {
+    if (s.group !== "Components") continue
+    const file = `src/components/ui/${ALIAS_FILE[s.id] ?? s.id}.tsx`
+    const src = readPrimitive(file)
+    if (src == null) continue
+    const c = curated[s.id] ?? {}
+    contracts.push(
+      assemble({
+        id: s.id,
+        label: s.label,
+        docs: `https://design.edgecom.ai/components/${s.id}/`,
+        file,
+        src,
+        a: api[s.id] ?? {},
+        c: { ...c, summary: c.summary ?? s.description ?? null },
+        o: { ...EMPTY_OVERLAY, ...(overlay[s.id] ?? {}) },
+      }),
+    )
+  }
+
+  // No section means no page, no api.ts entry and no overlay: the parts come
+  // straight from the export block, the summary from curated.ts if anyone wrote
+  // one, and `docs` is null — honestly, so a reader knows there is nothing to
+  // follow. The contract still names the parts, variants and tokens, which is
+  // what an implementing agent resolving a manifest needs.
+  for (const id of undocumentedPrimitives(sections, primitives)) {
+    const file = `src/components/ui/${id}.tsx`
+    const src = readPrimitive(file)
+    if (src == null) continue
+    contracts.push(
+      assemble({
+        id,
+        label: sentenceCase(id),
+        docs: null,
+        file,
+        src,
+        a: { parts: exportedParts(src) },
+        c: curated[id] ?? {},
+        o: EMPTY_OVERLAY,
+      }),
+    )
   }
 
   return contracts

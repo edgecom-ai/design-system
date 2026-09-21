@@ -251,5 +251,13 @@
       "result": "removes the row; outcome-toast success"
     }
   ],
-  "approvedExceptions": []
+  "approvedExceptions": [
+    {
+      "instanceId": "members-table",
+      "rule": "design.md — No icons in table cells unless asked",
+      "reason": "The role column shows the provider's icon beside the role name so roles can be told apart without reading; asked for in the product brief.",
+      "approvedBy": "product design lead",
+      "approvedOn": "2026-09-21"
+    }
+  ]
 }

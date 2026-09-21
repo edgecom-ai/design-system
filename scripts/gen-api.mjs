@@ -18,6 +18,7 @@ import { readdirSync } from "node:fs";
 import { freshness, forced } from "./lib/stale.mjs";
 import { componentIds as componentIdsOf, ALIAS_FILE } from "./lib/sections.mjs";
 import { extractCva } from "./lib/cva.mjs";
+import { exportedParts } from "./lib/contracts.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, "..");
@@ -71,15 +72,9 @@ function extract(id) {
       }
     : undefined;
 
-  // parts: PascalCase names from the export block(s)
-  const parts = new Set();
-  for (const m of src.matchAll(/export\s*\{([^}]*)\}/g)) {
-    for (const raw of m[1].split(",")) {
-      const name = raw.replace(/\s+as\s+\w+/, "").trim();
-      if (/^[A-Z][A-Za-z0-9]*$/.test(name)) parts.add(name);
-    }
-  }
-  const partList = [...parts];
+  // parts: PascalCase names from the export block(s) — the same reader the
+  // contracts use for a primitive with no section, so the two cannot disagree.
+  const partList = exportedParts(src);
   const mainPart =
     partList.find((p) => p.toLowerCase() === id.replace(/-/g, "")) ??
     partList[0] ??

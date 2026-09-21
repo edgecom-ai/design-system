@@ -238,6 +238,7 @@
       "type": "registry:ui",
       "title": "Chart",
       "description": "The Edgecom Chart component.",
+      "docs": "Docs: no page yet — read the contract · Contract: https://design.edgecom.ai/contracts/chart.json · Guardrails: https://design.edgecom.ai/design.md",
       "dependencies": [
         "recharts@^3.8.0"
       ],
@@ -599,6 +600,7 @@
       "type": "registry:ui",
       "title": "Label",
       "description": "The Edgecom Label component.",
+      "docs": "Docs: no page yet — read the contract · Contract: https://design.edgecom.ai/contracts/label.json · Guardrails: https://design.edgecom.ai/design.md",
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
       ],
@@ -614,6 +616,7 @@
       "type": "registry:ui",
       "title": "Logo",
       "description": "The Edgecom Logo component.",
+      "docs": "Docs: no page yet — read the contract · Contract: https://design.edgecom.ai/contracts/logo.json · Guardrails: https://design.edgecom.ai/design.md",
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
       ],
@@ -629,6 +632,7 @@
       "type": "registry:ui",
       "title": "Motion Highlight",
       "description": "The Edgecom Motion Highlight component.",
+      "docs": "Docs: no page yet — read the contract · Contract: https://design.edgecom.ai/contracts/motion-highlight.json · Guardrails: https://design.edgecom.ai/design.md",
       "dependencies": [
         "motion@^12.42.2"
       ],
@@ -647,6 +651,7 @@
       "type": "registry:ui",
       "title": "Motion Tabs",
       "description": "The Edgecom Motion Tabs component.",
+      "docs": "Docs: no page yet — read the contract · Contract: https://design.edgecom.ai/contracts/motion-tabs.json · Guardrails: https://design.edgecom.ai/design.md",
       "dependencies": [
         "motion@^12.42.2"
       ],
@@ -1173,6 +1178,7 @@
       "type": "registry:ui",
       "title": "Tanstack Form",
       "description": "The Edgecom Tanstack Form component.",
+      "docs": "Docs: no page yet — read the contract · Contract: https://design.edgecom.ai/contracts/tanstack-form.json · Guardrails: https://design.edgecom.ai/design.md",
       "dependencies": [
         "@tanstack/react-form@^1.33.1"
       ],
@@ -1197,6 +1203,7 @@
       "type": "registry:ui",
       "title": "Textarea",
       "description": "The Edgecom Textarea component.",
+      "docs": "Docs: no page yet — read the contract · Contract: https://design.edgecom.ai/contracts/textarea.json · Guardrails: https://design.edgecom.ai/design.md",
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
       ],
@@ -1252,6 +1259,7 @@
       "type": "registry:ui",
       "title": "Toggle Group",
       "description": "The Edgecom Toggle Group component.",
+      "docs": "Docs: no page yet — read the contract · Contract: https://design.edgecom.ai/contracts/toggle-group.json · Guardrails: https://design.edgecom.ai/design.md",
       "dependencies": [
         "@base-ui/react@^1.6.0",
         "class-variance-authority@^0.7.1"
