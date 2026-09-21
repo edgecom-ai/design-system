@@ -22,14 +22,13 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, unlinkSync, copyFileSync } from "node:fs"
 import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
-import { execFileSync } from "node:child_process"
-import { createHash } from "node:crypto"
 
 import { readBlocks } from "./lib/tokens.mjs"
 import { parseSections } from "./lib/sections.mjs"
 import { buildContracts, OVERLAY_KEYS, ALIAS_FILE } from "./lib/contracts.mjs"
 import { freshness, forced } from "./lib/stale.mjs"
 import { PUBLISHED, urlOf, contractUrl, schemaUrl } from "./lib/publish.mjs"
+import { systemIdentity, systemSources } from "./lib/system.mjs"
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const read = (p) => readFileSync(resolve(root, p), "utf8")
@@ -60,6 +59,9 @@ const inputs = [
   "scripts/lib/cva.mjs",
   "scripts/lib/sections.mjs",
   "scripts/lib/tokens.mjs",
+  "scripts/lib/system.mjs",
+  // The digest is the whole system's, so any system source regenerates this.
+  ...systemSources(),
   ...readdirSync(uiDir)
     .filter((f) => f.endsWith(".tsx"))
     .map((f) => `src/components/ui/${f}`),
@@ -140,26 +142,20 @@ const contracts = buildContracts({
   tokenNames: [...Object.keys(light), ...Object.keys(theme)],
 })
 
-const git = (...a) => {
-  try {
-    return execFileSync("git", a, { cwd: root, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).trim()
-  } catch {
-    return null
-  }
-}
-
-// Identity is the digest of everything that went in — not HEAD. A commit SHA
-// would change on every commit and make a committed copy impossible to keep
-// parity-clean; tokens.json and the changelog both taught that.
-const digest = createHash("sha256")
-for (const p of inputs.filter((p) => existsSync(resolve(root, p)))) digest.update(read(p))
+// Identity is the digest of the whole system — not HEAD, and not of this
+// artifact's inputs alone. A commit SHA would change on every commit and make a
+// committed copy impossible to keep parity-clean; a per-artifact digest was an
+// honest hash that nothing else could ever equal, so the version check a
+// consumer runs against a design project's _system.json could not pass. One
+// value, computed in scripts/lib/system.mjs, stamped everywhere.
+const system = systemIdentity()
 
 const authored = contracts.filter((c) => c.authored)
 
 const doc = {
   $schema: "../../../schemas/contracts.schema.json",
-  version: git("describe", "--tags", "--abbrev=0") || "untagged",
-  digest: digest.digest("hex").slice(0, 16),
+  version: system.version,
+  digest: system.digest,
   sources: ["src/components/ui/*.tsx", "src/app/sections.tsx", "src/docs/curated.ts", OVERLAY],
   generator: "scripts/gen-contracts.mjs",
   counts: {

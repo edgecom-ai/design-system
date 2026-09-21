@@ -66,6 +66,13 @@ jobs:
       - name: Schemas
         run: pnpm check:schemas
 
+      # A design manifest names the system a design was built against and the
+      # registry component behind each element. This runs the published,
+      # dependency-free validator over the published example, so the schema,
+      # the example and the validator a consumer downloads cannot disagree.
+      - name: Design manifest
+        run: pnpm check:design-manifest
+
       # A page may compose anything the docs document — a dialog demo uses a
       # button — but a demo reaching for a primitive no page installs leaves the
       # reader with code that will not compile and nowhere to find the piece.

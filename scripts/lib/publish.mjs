@@ -20,6 +20,11 @@ export const PUBLISHED = {
   tokens: "public/tokens.json",
   skillsDir: "public/skills",
   schemasDir: "public/schemas",
+  // The design handoff manifest (plan §5.4): a complete example stamped with the
+  // current identity, and the validator a consumer runs over a real one.
+  designManifestExample: "public/design-manifest.example.json",
+  toolsDir: "public/tools",
+  checkDesignManifest: "public/tools/check-design-manifest.mjs",
 }
 
 /**

@@ -1,0 +1,167 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://design.edgecom.ai/schemas/design-manifest.schema.json",
+  "title": "Edgecom design handoff manifest",
+  "description": "The file a Claude Design output ships beside itself — `<Name>.manifest.json` next to `<Name>.dc.html` — naming the design-system version and digest the design was built against and the registry component behind every designed element. It is authored by the design step, not extracted afterwards: a rendered design carries neither. A coding agent reads it to verify the version, resolve each instance to its published contract at https://design.edgecom.ai/contracts/<component>.json, and check that the variants, tokens and states the design relies on exist. Validate with https://design.edgecom.ai/tools/check-design-manifest.mjs.",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "design",
+    "designSystemVersion",
+    "designSystemDigest",
+    "components",
+    "viewports",
+    "themes",
+    "states"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": {
+      "const": "1",
+      "description": "The manifest format. Bump only when a field changes meaning."
+    },
+    "design": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Path of the design this manifest describes, relative to the design project root — `Settings.dc.html`, `screens/permissions.dc.html`. One manifest per design file."
+    },
+    "title": { "type": "string", "description": "What the design is, for a human reading the manifest." },
+    "designSystemVersion": {
+      "type": "string",
+      "pattern": "^(v[0-9]+\\.[0-9]+\\.[0-9]+|untagged)$",
+      "description": "Copied from the design project's `_system.json` → `designSystemVersion`. Must equal `version` in https://design.edgecom.ai/contracts/index.json for the design to be current."
+    },
+    "designSystemDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{16}$",
+      "description": "Copied from `_system.json` → `designSystemDigest`. The content identity of the whole system — tokens, design language, primitives, authored overlays — and the same value every published artifact carries as `digest`. A different digest means a different system."
+    },
+    "designSystemCommit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{7,40}$",
+      "description": "Copied from `_system.json` → `designSystemCommit`. Informational: the digest, not the commit, is the identity."
+    },
+    "generatedAt": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}(T[0-9]{2}:[0-9]{2}(:[0-9]{2}(\\.[0-9]+)?)?(Z|[+-][0-9]{2}:[0-9]{2})?)?$",
+      "description": "When the manifest was written, ISO 8601."
+    },
+    "screens": {
+      "type": "array",
+      "description": "The screens a multi-screen design switches between — the values of its `activeSection` prop, or one entry per view. Instances cite one by `screen`.",
+      "items": {
+        "type": "object",
+        "required": ["id"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "$ref": "#/$defs/kebab" },
+          "title": { "type": "string" },
+          "description": { "type": "string" }
+        }
+      }
+    },
+    "components": {
+      "type": "array",
+      "description": "One entry per designed element that is a design-system component. The instance-level form of the screen map: what is on the screen, which registry component it is, and which of that component's variants it uses.",
+      "items": { "$ref": "#/$defs/instance" }
+    },
+    "tokens": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/kebab" },
+      "description": "Every semantic token the design reaches for directly — by `var(--x)` or a utility naming it — outside what the components already carry. Ids as in https://design.edgecom.ai/tokens.json (`primary`, not `--primary`)."
+    },
+    "viewports": {
+      "type": "array",
+      "uniqueItems": true,
+      "minItems": 1,
+      "items": { "enum": ["mobile", "tablet", "desktop"] },
+      "description": "The viewports the design was drawn for. `mobile` and `desktop` are both required for a design to be complete."
+    },
+    "themes": {
+      "type": "array",
+      "uniqueItems": true,
+      "minItems": 1,
+      "items": { "enum": ["light", "dark"] },
+      "description": "The themes the design was checked in. Both are required; every token has both values."
+    },
+    "states": {
+      "type": "array",
+      "uniqueItems": true,
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/state" },
+      "description": "The states the design shows for the screen as a whole. `loading`, `empty`, `error` and `success` are required for a design to be complete — a screen that only shows the happy path is not implementable."
+    },
+    "interactions": {
+      "type": "array",
+      "description": "What happens when: which instance, on which event, produces which result. What an implementing agent otherwise has to infer.",
+      "items": {
+        "type": "object",
+        "required": ["instanceId", "result"],
+        "additionalProperties": false,
+        "properties": {
+          "instanceId": { "$ref": "#/$defs/kebab" },
+          "event": { "type": "string", "description": "`click`, `submit`, `change`, `open`, `hover`, …" },
+          "result": { "type": "string", "description": "In words, naming other instances by id where it helps: `opens confirm-remove`." }
+        }
+      }
+    },
+    "approvedExceptions": {
+      "type": "array",
+      "description": "Deviations from a contract or from design.md that were approved, and by whom. The only way a deviation is allowed (precedence rule 5); anything not listed here is a defect to report, not a choice to keep.",
+      "items": {
+        "type": "object",
+        "required": ["rule", "reason", "approvedBy"],
+        "additionalProperties": false,
+        "properties": {
+          "instanceId": { "$ref": "#/$defs/kebab" },
+          "rule": { "type": "string", "description": "The rule being deviated from, as a contract field or a design.md sentence." },
+          "reason": { "type": "string" },
+          "approvedBy": { "type": "string" },
+          "approvedOn": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "kebab": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+    "state": { "enum": ["default", "loading", "empty", "error", "success", "disabled"] },
+    "instance": {
+      "type": "object",
+      "required": ["instanceId", "component"],
+      "additionalProperties": false,
+      "properties": {
+        "instanceId": {
+          "$ref": "#/$defs/kebab",
+          "description": "Unique within the manifest. Put the same value on the element as `data-instance=\"…\"` so the manifest and the markup can be joined."
+        },
+        "component": {
+          "$ref": "#/$defs/kebab",
+          "description": "The registry component's id, as listed in https://design.edgecom.ai/contracts/index.json — `alert-dialog`, not `AlertDialog`."
+        },
+        "label": { "type": "string", "description": "What this instance is on the screen: `Save permissions`, `Members table`." },
+        "screen": { "$ref": "#/$defs/kebab", "description": "The `screens[].id` this instance belongs to." },
+        "variants": {
+          "type": "object",
+          "description": "One entry per variant axis the instance sets, keyed by the axis name the contract lists — `variant`, `size`, `orientation`, … — with the chosen option as value. Omitted axes take the contract's default.",
+          "propertyNames": { "pattern": "^[a-z][a-zA-Z0-9-]*$" },
+          "additionalProperties": { "type": "string", "minLength": 1 }
+        },
+        "parts": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^[A-Z][A-Za-z0-9]*$" },
+          "description": "The parts of a compound component this instance composes, by the names the contract lists — `DialogHeader`, `DialogFooter`."
+        },
+        "states": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/state" },
+          "description": "States drawn for this instance specifically, where they differ from the screen-level `states`."
+        },
+        "note": { "type": "string" }
+      }
+    }
+  }
+}

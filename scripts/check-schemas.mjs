@@ -21,6 +21,13 @@ const PAIRS = [
   ["schemas/contracts.schema.json", "src/docs/generated/contracts.json"],
   ["public/schemas/tokens.schema.json", "public/tokens.json"],
   ["public/schemas/contracts.schema.json", "public/contracts.json"],
+  // The design manifest has no repo-side instance — designs live in Claude
+  // Design projects — so the published example stands in. It is generated with
+  // the current identity, and `pnpm check:design-manifest` runs the
+  // dependency-free validator over the same file; this proves the real schema
+  // and that validator agree on what a manifest is.
+  ["schemas/design-manifest.schema.json", "public/design-manifest.example.json"],
+  ["public/schemas/design-manifest.schema.json", "public/design-manifest.example.json"],
 ]
 
 let failed = 0
@@ -37,7 +44,7 @@ for (const [schemaPath, dataPath] of PAIRS) {
   const validate = ajv.compile(read(schemaPath))
   const data = read(dataPath)
   if (validate(data)) {
-    const n = (Array.isArray(data.tokens) && data.tokens.length) || (Array.isArray(data.contracts) && data.contracts.length) || "?"
+    const n = (Array.isArray(data.contracts) && data.contracts.length) || (Array.isArray(data.components) && data.components.length) || (Array.isArray(data.tokens) && data.tokens.length) || "?"
     console.log(`check-schemas — ${dataPath} valid against ${schemaPath} (${n} entries)`)
   } else {
     failed++

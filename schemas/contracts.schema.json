@@ -16,7 +16,7 @@
     "digest": {
       "type": "string",
       "pattern": "^[0-9a-f]{16}$",
-      "description": "Content hash of every input. This is the artifact's identity — it changes when a contract changes, not when any commit happens, so a committed copy stays parity-clean."
+      "description": "The identity of the whole design system — sha256 over the tokens, the design language, the primitives and the authored overlays, 16 hex chars — computed once in scripts/lib/system.mjs and stamped into every published artifact and into the design bundle's _system.json, so a design or an app built against a different digest is working from a different system. It changes when the system changes, not when a commit happens, so a committed copy stays parity-clean."
     },
     "sources": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
     "generator": { "type": "string" },

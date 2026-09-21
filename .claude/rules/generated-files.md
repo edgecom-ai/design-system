@@ -14,6 +14,8 @@ paths:
   - "public/contracts.json"
   - "public/contracts/**/*.json"
   - "public/tokens.json"
+  - "public/design-manifest.example.json"
+  - "public/tools/**"
   - "public/schemas/**/*.json"
   - "public/skills/**/*.md"
   - "design.md"
@@ -32,11 +34,12 @@ Edit the **source** and regenerate. `prebuild`/`predev` regenerate everything au
 | `src/docs/generated/contracts.json` | `pnpm docs:contracts` | `ui/*.tsx`, `sections.tsx`, `curated.ts`, `src/docs/contracts.json` |
 | `public/contracts.json`, `public/contracts/*.json`, `public/schemas/contracts.schema.json` | `pnpm docs:contracts` | the contracts above, published for consuming agents |
 | `public/tokens.json`, `public/schemas/tokens.schema.json` | `pnpm docs:tokens` | `tokens.json` above, published |
+| `public/design-manifest.example.json`, `public/schemas/design-manifest.schema.json`, `public/tools/check-design-manifest.mjs` | `pnpm docs:design-manifest` | `src/docs/design-manifest.example.json` (its `@@version`/`@@digest` placeholders filled), `schemas/design-manifest.schema.json`, `scripts/check-design-manifest.mjs` |
 | `public/skills/*/SKILL.md` | `pnpm docs:agents` | `.claude/skills/<name>/SKILL.md` — edit the skill, not the mirror |
 | `CHANGELOG.md`, `public/changelog.md`, `src/docs/generated/changelog.ts` — **git-ignored** | `pnpm docs:changelog` | git history + `src/docs/changelog-notes.json` |
 | `public/design.md` | `pnpm docs:design-md` | `design.md` (mirrored verbatim) |
 
-Hand-written sources that look generated but are not: `src/docs/api.ts`, `src/docs/curated.ts`, `src/docs/changelog-notes.json`, and **`src/docs/contracts.json`**.
+Hand-written sources that look generated but are not: `src/docs/api.ts`, `src/docs/curated.ts`, `src/docs/changelog-notes.json`, `src/docs/design-manifest.example.json`, and **`src/docs/contracts.json`**.
 
 That last one is a name collision worth slowing down for. `src/docs/contracts.json` is the authored overlay — purpose, selection criteria, compositions, anti-patterns — and it is the file you edit. `src/docs/generated/contracts.json` is the compiled artifact, and half of each contract there (variants, tokens, states, parts, props) is read out of the primitive on every run: correcting one of those fields by hand changes nothing, because the next `docs:gen` reads the primitive again. Fix the primitive instead.
 

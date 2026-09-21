@@ -78,7 +78,9 @@ const lines = [
   `| [contracts/\`<id>\`.json](${contractUrl("button")}) | One component's full contract — the tokens it reaches, the states it styles, its props, required and forbidden compositions, behaviour in the loading/empty/error/destructive paths, accessibility requirements, anti-patterns. Fetch this for each component you are about to use. |`,
   `| [contracts.json](${urlOf(PUBLISHED.contracts)}) | Every contract in one document, for an audit or a bulk check. |`,
   `| [tokens.json](${urlOf(PUBLISHED.tokens)}) | The token model — every semantic token with its family, light and dark values, aliases, and whether Tailwind can reach it. Compare your installed \`theme\` against it to detect staleness. |`,
-  `| [schemas/](${urlOf(PUBLISHED.schemasDir)}/contracts.schema.json) | The JSON Schemas both files validate against. |`,
+  `| [design-manifest.example.json](${urlOf(PUBLISHED.designManifestExample)}) | The design handoff manifest — the \`<Name>.manifest.json\` a Claude Design output ships beside \`<Name>.dc.html\`, naming the system version and digest it was built against and the registry component, variants and parts behind every element. This is a complete example stamped with the current identity; the schema is [design-manifest.schema.json](${urlOf(PUBLISHED.schemasDir)}/design-manifest.schema.json). |`,
+  `| [tools/check-design-manifest.mjs](${urlOf(PUBLISHED.checkDesignManifest)}) | Dependency-free validator for a manifest: \`node check-design-manifest.mjs <Name>.manifest.json\` checks its shape, that its version and digest are current, and that every component, variant, part and token it names exists. |`,
+  `| [schemas/](${urlOf(PUBLISHED.schemasDir)}/contracts.schema.json) | The JSON Schemas the files above validate against. |`,
   ...CONSUMER_SKILLS.map((name) => {
     const fm = read(skillSource(name)).match(/^description:\s*(.+)$/m)?.[1] ?? ""
     return `| [skills/${name}/SKILL.md](${skillUrl(name)}) | Claude Code skill. ${fm} |`

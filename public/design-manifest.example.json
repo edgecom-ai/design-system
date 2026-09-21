@@ -1,0 +1,255 @@
+{
+  "$schema": "https://design.edgecom.ai/schemas/design-manifest.schema.json",
+  "schemaVersion": "1",
+  "design": "Settings.dc.html",
+  "title": "Client portal — Settings, Permissions screen",
+  "designSystemVersion": "v1.0.0",
+  "designSystemDigest": "2694528e294510cc",
+  "screens": [
+    {
+      "id": "permissions",
+      "title": "Permissions",
+      "description": "Who on the account can see and change what. One row per member."
+    }
+  ],
+  "components": [
+    {
+      "instanceId": "settings-tabs",
+      "component": "tabs",
+      "label": "Settings section switcher",
+      "screen": "permissions",
+      "variants": {
+        "variant": "line"
+      },
+      "parts": [
+        "Tabs",
+        "TabsList",
+        "TabsTrigger",
+        "TabsContent"
+      ]
+    },
+    {
+      "instanceId": "invite-member",
+      "component": "button",
+      "label": "Invite member — the one labeled primary action on the screen",
+      "screen": "permissions",
+      "variants": {
+        "variant": "default",
+        "size": "sm"
+      }
+    },
+    {
+      "instanceId": "members-table",
+      "component": "table",
+      "label": "Members and their roles",
+      "screen": "permissions",
+      "parts": [
+        "Table",
+        "TableHeader",
+        "TableHead",
+        "TableBody",
+        "TableRow",
+        "TableCell"
+      ],
+      "states": [
+        "default",
+        "loading",
+        "empty",
+        "error"
+      ]
+    },
+    {
+      "instanceId": "members-loading",
+      "component": "skeleton",
+      "label": "Row placeholders while the table loads",
+      "screen": "permissions",
+      "variants": {
+        "animation": "pulse"
+      }
+    },
+    {
+      "instanceId": "members-empty",
+      "component": "empty",
+      "label": "No members yet, with the invite action repeated",
+      "screen": "permissions",
+      "variants": {
+        "variant": "icon"
+      },
+      "parts": [
+        "Empty",
+        "EmptyHeader",
+        "EmptyMedia",
+        "EmptyTitle",
+        "EmptyDescription",
+        "EmptyContent"
+      ]
+    },
+    {
+      "instanceId": "member-role",
+      "component": "select",
+      "label": "Role, one per member row",
+      "screen": "permissions",
+      "parts": [
+        "Select",
+        "SelectTrigger",
+        "SelectValue",
+        "SelectContent",
+        "SelectItem"
+      ]
+    },
+    {
+      "instanceId": "member-status",
+      "component": "badge",
+      "label": "Invitation status — Active, Invited, Suspended",
+      "screen": "permissions",
+      "variants": {
+        "variant": "outline"
+      }
+    },
+    {
+      "instanceId": "member-can-export",
+      "component": "checkbox",
+      "label": "Per-row export permission",
+      "screen": "permissions"
+    },
+    {
+      "instanceId": "remove-member",
+      "component": "button",
+      "label": "Quiet per-row remove, icon only, with aria-label and tooltip",
+      "screen": "permissions",
+      "variants": {
+        "variant": "ghost-destructive",
+        "size": "icon-sm"
+      }
+    },
+    {
+      "instanceId": "remove-member-tooltip",
+      "component": "tooltip",
+      "label": "Names the remove action",
+      "screen": "permissions",
+      "parts": [
+        "Tooltip",
+        "TooltipTrigger",
+        "TooltipContent"
+      ]
+    },
+    {
+      "instanceId": "members-pagination",
+      "component": "pagination",
+      "label": "25 members per page",
+      "screen": "permissions",
+      "parts": [
+        "Pagination",
+        "PaginationContent",
+        "PaginationItem",
+        "PaginationPrevious",
+        "PaginationLink",
+        "PaginationNext"
+      ]
+    },
+    {
+      "instanceId": "invite-dialog",
+      "component": "dialog",
+      "label": "Invite a member — email and role, two fields",
+      "screen": "permissions",
+      "parts": [
+        "Dialog",
+        "DialogContent",
+        "DialogHeader",
+        "DialogTitle",
+        "DialogDescription",
+        "DialogFooter"
+      ]
+    },
+    {
+      "instanceId": "invite-email",
+      "component": "input",
+      "label": "Email address in the invite dialog",
+      "screen": "permissions",
+      "states": [
+        "default",
+        "error"
+      ]
+    },
+    {
+      "instanceId": "confirm-remove",
+      "component": "alert-dialog",
+      "label": "Confirms removing a member, naming them, with a destructive confirm",
+      "screen": "permissions",
+      "parts": [
+        "AlertDialog",
+        "AlertDialogContent",
+        "AlertDialogHeader",
+        "AlertDialogTitle",
+        "AlertDialogDescription",
+        "AlertDialogFooter",
+        "AlertDialogCancel",
+        "AlertDialogAction"
+      ]
+    },
+    {
+      "instanceId": "outcome-toast",
+      "component": "toast",
+      "label": "Confirms every invite, role change and removal",
+      "screen": "permissions",
+      "parts": [
+        "Toaster"
+      ]
+    }
+  ],
+  "tokens": [
+    "background",
+    "card",
+    "border",
+    "muted-foreground",
+    "destructive-emphasis"
+  ],
+  "viewports": [
+    "mobile",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark"
+  ],
+  "states": [
+    "default",
+    "loading",
+    "empty",
+    "error",
+    "success"
+  ],
+  "interactions": [
+    {
+      "instanceId": "invite-member",
+      "event": "click",
+      "result": "opens invite-dialog"
+    },
+    {
+      "instanceId": "invite-dialog",
+      "event": "submit",
+      "result": "adds a row to members-table with member-status Invited; outcome-toast success"
+    },
+    {
+      "instanceId": "invite-email",
+      "event": "submit",
+      "result": "invalid address: inline error text under the field, aria-invalid on the input, the dialog stays open"
+    },
+    {
+      "instanceId": "member-role",
+      "event": "change",
+      "result": "saves immediately; outcome-toast success, or error with the previous role restored"
+    },
+    {
+      "instanceId": "remove-member",
+      "event": "click",
+      "result": "opens confirm-remove naming the member; nothing is removed until confirmed"
+    },
+    {
+      "instanceId": "confirm-remove",
+      "event": "confirm",
+      "result": "removes the row; outcome-toast success"
+    }
+  ],
+  "approvedExceptions": []
+}
