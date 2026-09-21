@@ -10,6 +10,14 @@
 - [MAINTAINERS.md](https://github.com/edgecom-ai/design-system/blob/main/MAINTAINERS.md): Developing the design-system repo itself — authoring primitives, tuning tokens, the docs site, and the registry build.
 - [changelog.md](https://design.edgecom.ai/changelog.md): What changed and when — every release, generated from the commit history, with the registry items each change touched. Check it before assuming an API or token still looks the way you remember.
 
+Machine-readable, for resolving a designed element to a component rather than inferring one from the catalog (all stamped with the same version and digest):
+
+- [contracts/index.json](https://design.edgecom.ai/contracts/index.json): Every component's id, summary, purpose, when to use it and when not, variants with options and defaults, parts, install command, and the address of its full contract. Start here.
+- [contracts/<id>.json](https://design.edgecom.ai/contracts/button.json): One component's full contract — tokens reached, states styled, props, required and forbidden compositions, behaviour in the loading/empty/error/destructive paths, accessibility requirements, anti-patterns.
+- [contracts.json](https://design.edgecom.ai/contracts.json): Every contract in one document.
+- [tokens.json](https://design.edgecom.ai/tokens.json): The token model — every semantic token with family, light and dark values, aliases, and Tailwind reachability. Compare an installed theme against it.
+- [skills/implement-edgecom-design/SKILL.md](https://design.edgecom.ai/skills/implement-edgecom-design/SKILL.md) and [skills/audit-edgecom-ui/SKILL.md](https://design.edgecom.ai/skills/audit-edgecom-ui/SKILL.md): Claude Code skills for implementing from a design and auditing UI against the system. Install them under `.claude/skills/` in the consuming app.
+
 Browse every component in light/dark with copyable code at [design.edgecom.ai](https://design.edgecom.ai) — the source of truth for what exists. The full catalog:
 
 <!-- @@GENERATED:catalog — grouped from src/app/sections.tsx by scripts/gen-llms.mjs (run `pnpm docs:gen`); do not hand-edit until the closing marker -->

@@ -1,0 +1,72 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "switch",
+    "label": "Switch",
+    "registryItem": "edgecom-ai/design-system/switch",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/switch",
+    "docs": "https://design.edgecom.ai/components/switch/",
+    "source": "src/components/ui/switch.tsx",
+    "summary": "An on/off toggle with a sliding thumb.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": {
+      "name": "Base UI Switch",
+      "url": "https://base-ui.com/react/components/switch"
+    },
+    "parts": [
+      {
+        "name": "Switch",
+        "description": "Toggleable on/off switch; supports default and sm sizes."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [
+      "data-[checked]",
+      "data-[unchecked]",
+      "data-disabled",
+      "disabled",
+      "focus-visible"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "border",
+        "family": "neutral"
+      },
+      {
+        "id": "input",
+        "family": "neutral"
+      },
+      {
+        "id": "primary",
+        "family": "brand"
+      },
+      {
+        "id": "primary-foreground",
+        "family": "brand"
+      },
+      {
+        "id": "ring",
+        "family": "neutral"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

@@ -1,0 +1,193 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "select",
+    "label": "Select",
+    "registryItem": "edgecom-ai/design-system/select",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/select",
+    "docs": "https://design.edgecom.ai/components/select/",
+    "source": "src/components/ui/select.tsx",
+    "summary": "Choose one value from a list. A Root holds the value and wraps a Trigger plus a portalled, positioned Content of Items.",
+    "purpose": "Choose one value from a known set. The popup is portaled to the app root and matches the trigger width, so options line up under the value they replace.",
+    "useWhen": [
+      "One value is chosen from a set too long for a `tabs` strip, or from one that grows.",
+      "A recurring job needs a control — a series selector, a date range — and then the same `select` appears wherever that job does."
+    ],
+    "dontUseWhen": [
+      "The set is small and fixed and the choice switches panels — that is `tabs`.",
+      "The user needs to type or search — that is `combobox`.",
+      "The list holds actions rather than values — that is a `dropdown-menu`, which shrink-wraps instead of matching the trigger."
+    ],
+    "base": {
+      "name": "Base UI Select",
+      "url": "https://base-ui.com/react/components/select"
+    },
+    "parts": [
+      {
+        "name": "Select",
+        "description": "Root. Owns the value state and wraps the trigger and content."
+      },
+      {
+        "name": "SelectContent",
+        "description": "The popup listbox — portalled, positioned below the trigger."
+      },
+      {
+        "name": "SelectGroup",
+        "description": "Wraps related items. Required around a SelectLabel."
+      },
+      {
+        "name": "SelectItem",
+        "description": "A selectable option; shows a check when selected."
+      },
+      {
+        "name": "SelectLabel",
+        "description": "A non-interactive heading for a group. Must be inside SelectGroup."
+      },
+      {
+        "name": "SelectScrollDownButton",
+        "description": "Scroll-down affordance shown when the list overflows."
+      },
+      {
+        "name": "SelectScrollUpButton",
+        "description": "Scroll-up affordance shown when the list overflows."
+      },
+      {
+        "name": "SelectSeparator",
+        "description": "A thin divider between groups or items."
+      },
+      {
+        "name": "SelectTrigger",
+        "description": "The button that opens the listbox and shows the current value."
+      },
+      {
+        "name": "SelectValue",
+        "description": "Renders the selected item's label, or the placeholder when empty."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [
+      "aria-invalid",
+      "data-[align-trigger=true]",
+      "data-[side=bottom]",
+      "data-[side=inline-end]",
+      "data-[side=inline-start]",
+      "data-[side=left]",
+      "data-[side=right]",
+      "data-[side=top]",
+      "data-[size=default]",
+      "data-[size=sm]",
+      "data-[slot=select-value]",
+      "data-closed",
+      "data-disabled",
+      "data-open",
+      "data-placeholder",
+      "disabled",
+      "focus",
+      "focus-visible",
+      "hover",
+      "last"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "accent",
+        "family": "neutral"
+      },
+      {
+        "id": "accent-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "border",
+        "family": "neutral"
+      },
+      {
+        "id": "destructive",
+        "family": "status"
+      },
+      {
+        "id": "foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "input",
+        "family": "neutral"
+      },
+      {
+        "id": "input-hover",
+        "family": "interaction"
+      },
+      {
+        "id": "input-surface",
+        "family": "interaction"
+      },
+      {
+        "id": "muted-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "popover",
+        "family": "surface"
+      },
+      {
+        "id": "popover-foreground",
+        "family": "surface"
+      },
+      {
+        "id": "radius-lg",
+        "family": "radius"
+      },
+      {
+        "id": "radius-md",
+        "family": "radius"
+      },
+      {
+        "id": "ring",
+        "family": "neutral"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      },
+      {
+        "id": "text-caption",
+        "family": "typography"
+      }
+    ],
+    "requires": [
+      "A `SelectValue` in the trigger, so the current value is readable without opening the list.",
+      "Portalling left on, so no `overflow` ancestor can clip the popup."
+    ],
+    "forbids": [
+      "A checkmark on the selected option in a single-select. The trigger value and the option highlight already say it; a check belongs only to multi-select.",
+      "Pinning a side that lets the popup run off-screen — the positioner flips and shifts by default.",
+      "Stretching or shrinking the list away from the trigger width."
+    ],
+    "rules": [
+      "**No checkmark on the selected option** in a single-select — the trigger value plus the option highlight already say it. A check belongs only in multi-select.",
+      "The list matches the trigger width so options line up under the shown value."
+    ],
+    "behavior": {
+      "error": "`aria-invalid` on the trigger renders the destructive border and ring, exactly as on `input`."
+    },
+    "a11y": {
+      "attributes": [],
+      "requirements": [
+        "The trigger is labelled — by a `field` label or an `aria-label`."
+      ]
+    },
+    "examples": [
+      "`<Select><SelectTrigger><SelectValue placeholder=\"All sites\" /></SelectTrigger><SelectContent><SelectItem value=\"a\">Site A</SelectItem></SelectContent></Select>`"
+    ],
+    "antiPatterns": [
+      "Adding a tick to the chosen item because a design tool drew one.",
+      "A `select` for a job that a segmented control handles on another screen."
+    ],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": true
+  }
+}

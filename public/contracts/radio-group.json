@@ -1,0 +1,81 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "radio-group",
+    "label": "Radio group",
+    "registryItem": "edgecom-ai/design-system/radio-group",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/radio-group",
+    "docs": "https://design.edgecom.ai/components/radio-group/",
+    "source": "src/components/ui/radio-group.tsx",
+    "summary": "A set of mutually-exclusive options: a RadioGroup coordinates its RadioGroupItems.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": {
+      "name": "Base UI Radio",
+      "url": "https://base-ui.com/react/components/radio"
+    },
+    "parts": [
+      {
+        "name": "RadioGroup",
+        "description": "Root coordinating selection across its items."
+      },
+      {
+        "name": "RadioGroupItem",
+        "description": "A single circular radio with a checked-dot indicator."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [
+      "aria-checked",
+      "aria-invalid",
+      "data-checked",
+      "data-disabled",
+      "disabled",
+      "focus-visible"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "border",
+        "family": "neutral"
+      },
+      {
+        "id": "destructive",
+        "family": "status"
+      },
+      {
+        "id": "input",
+        "family": "neutral"
+      },
+      {
+        "id": "primary",
+        "family": "brand"
+      },
+      {
+        "id": "primary-foreground",
+        "family": "brand"
+      },
+      {
+        "id": "ring",
+        "family": "neutral"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

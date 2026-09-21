@@ -1,0 +1,181 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "combobox",
+    "label": "Combobox",
+    "registryItem": "edgecom-ai/design-system/combobox",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/combobox",
+    "docs": "https://design.edgecom.ai/components/combobox/",
+    "source": "src/components/ui/combobox.tsx",
+    "summary": "A searchable, optionally multi-select picker: an input group plus a portalled popup list, with optional selected-value chips.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": null,
+    "parts": [
+      {
+        "name": "Combobox",
+        "description": "Root managing the value, query, and filtering."
+      },
+      {
+        "name": "ComboboxInput",
+        "description": "The combobox input, with optional trigger and clear buttons."
+      },
+      {
+        "name": "ComboboxContent",
+        "description": "Portalled, positioned popup panel for the listbox."
+      },
+      {
+        "name": "ComboboxList",
+        "description": "Scrollable list container holding the items."
+      },
+      {
+        "name": "ComboboxItem",
+        "description": "A selectable option; shows a check when selected."
+      },
+      {
+        "name": "ComboboxGroup",
+        "description": "Wraps related items. Required around a ComboboxLabel."
+      },
+      {
+        "name": "ComboboxLabel",
+        "description": "Muted heading for a group of items."
+      },
+      {
+        "name": "ComboboxCollection",
+        "description": "Helper that maps data to combobox items."
+      },
+      {
+        "name": "ComboboxEmpty",
+        "description": "Message shown when no items match the query."
+      },
+      {
+        "name": "ComboboxSeparator",
+        "description": "Thin divider between sections."
+      },
+      {
+        "name": "ComboboxChips",
+        "description": "Bordered container laying out selected-value chips + input."
+      },
+      {
+        "name": "ComboboxChip",
+        "description": "A single selected-value chip with an optional remove button."
+      },
+      {
+        "name": "ComboboxChipsInput",
+        "description": "Bare inline input used inside the chips container."
+      },
+      {
+        "name": "ComboboxTrigger",
+        "description": "Button that toggles the popup; appends a chevron."
+      },
+      {
+        "name": "ComboboxValue",
+        "description": "Displays the current selected value."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [
+      "data-[chips=true]",
+      "data-[side=bottom]",
+      "data-[side=inline-end]",
+      "data-[side=inline-start]",
+      "data-[side=left]",
+      "data-[side=right]",
+      "data-[side=top]",
+      "data-[slot=input-group]",
+      "data-closed",
+      "data-disabled",
+      "data-empty",
+      "data-highlighted",
+      "data-open",
+      "data-pressed",
+      "focus-within",
+      "group-data-empty/combobox-content",
+      "hover"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "accent",
+        "family": "neutral"
+      },
+      {
+        "id": "accent-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "border",
+        "family": "neutral"
+      },
+      {
+        "id": "destructive",
+        "family": "status"
+      },
+      {
+        "id": "foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "input",
+        "family": "neutral"
+      },
+      {
+        "id": "muted",
+        "family": "neutral"
+      },
+      {
+        "id": "muted-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "popover",
+        "family": "surface"
+      },
+      {
+        "id": "popover-foreground",
+        "family": "surface"
+      },
+      {
+        "id": "radius-lg",
+        "family": "radius"
+      },
+      {
+        "id": "radius-md",
+        "family": "radius"
+      },
+      {
+        "id": "radius-sm",
+        "family": "radius"
+      },
+      {
+        "id": "ring",
+        "family": "neutral"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      },
+      {
+        "id": "text-caption",
+        "family": "typography"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

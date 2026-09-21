@@ -1,0 +1,108 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "hover-card",
+    "label": "Hover card",
+    "registryItem": "edgecom-ai/design-system/hover-card",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/hover-card",
+    "docs": "https://design.edgecom.ai/components/hover-card/",
+    "source": "src/components/ui/hover-card.tsx",
+    "summary": "Richer detail revealed on hover or focus: a Trigger anchors a portalled, positioned Content that escapes any clipping container.",
+    "purpose": "The richer half of the density rule: detail that would otherwise need more columns, revealed on hover or focus while the primary value stays visible in place.",
+    "useWhen": [
+      "A dense table, metric tile or chart has secondary detail that does not deserve its own column.",
+      "An identifier in running text — a meter, a site, a tariff — is worth previewing without a navigation."
+    ],
+    "dontUseWhen": [
+      "The detail is one short line — that is a `tooltip`, which shrink-wraps and stays transient.",
+      "The content is interactive or needs a click to open — that is a `popover`.",
+      "The information is essential to the task. Anything a user must read cannot live behind a hover."
+    ],
+    "base": {
+      "name": "Base UI PreviewCard",
+      "url": "https://base-ui.com/react/components/preview-card"
+    },
+    "parts": [
+      {
+        "name": "HoverCard",
+        "description": "Root managing the open state and hover delay."
+      },
+      {
+        "name": "HoverCardTrigger",
+        "description": "Element the card is anchored to."
+      },
+      {
+        "name": "HoverCardContent",
+        "description": "Portalled popup, positioned and collision-aware, 16rem wide by default."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [
+      "data-[side=bottom]",
+      "data-[side=inline-end]",
+      "data-[side=inline-start]",
+      "data-[side=left]",
+      "data-[side=right]",
+      "data-[side=top]",
+      "data-closed",
+      "data-open"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "popover",
+        "family": "surface"
+      },
+      {
+        "id": "popover-foreground",
+        "family": "surface"
+      },
+      {
+        "id": "radius-lg",
+        "family": "radius"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      }
+    ],
+    "requires": [
+      "A focusable trigger, so the card is reachable without a pointer.",
+      "Portalling left on, so a card inside a table or a `scroll-area` is never clipped."
+    ],
+    "forbids": [
+      "Putting an action inside the card that exists nowhere else — hover is not a reliable way to reach a control.",
+      "Pinning a side that lets the card run off-screen; the positioner flips and shifts by default."
+    ],
+    "rules": [
+      "Richer than a `tooltip` and lighter than a `popover`: it opens on hover, so nothing inside it may be the only path to an action.",
+      "Portaled and viewport-aware — never render it inline inside a clipping or scrolling container."
+    ],
+    "behavior": {},
+    "a11y": {
+      "attributes": [],
+      "requirements": [
+        "The trigger is keyboard-focusable and opens the card on focus, not only on hover.",
+        "The card's content is supplementary; the row or sentence still reads correctly without it."
+      ]
+    },
+    "examples": [
+      "`<HoverCard><HoverCardTrigger render={<Button variant=\"link\" size=\"sm\">Distribution Center</Button>} /><HoverCardContent align=\"start\">…</HoverCardContent></HoverCard>`"
+    ],
+    "antiPatterns": [
+      "A hover card on a plain `span`, unreachable by keyboard.",
+      "Moving a value users scan for into a hover card to tidy a table.",
+      "A hover card holding the only Edit button for a row."
+    ],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": true
+  }
+}

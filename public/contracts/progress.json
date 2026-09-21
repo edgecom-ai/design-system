@@ -1,0 +1,78 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "progress",
+    "label": "Progress",
+    "registryItem": "edgecom-ai/design-system/progress",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/progress",
+    "docs": "https://design.edgecom.ai/components/progress/",
+    "source": "src/components/ui/progress.tsx",
+    "summary": "A progress bar: the root auto-renders a Track containing an Indicator, with optional Label and Value.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": {
+      "name": "Base UI Progress",
+      "url": "https://base-ui.com/react/components/progress"
+    },
+    "parts": [
+      {
+        "name": "Progress",
+        "description": "Root holding the value; auto-renders the track and indicator."
+      },
+      {
+        "name": "ProgressTrack",
+        "description": "The rounded bar background containing the indicator."
+      },
+      {
+        "name": "ProgressIndicator",
+        "description": "The filled bar, sized to the current value."
+      },
+      {
+        "name": "ProgressLabel",
+        "description": "Text label naming the progress bar."
+      },
+      {
+        "name": "ProgressValue",
+        "description": "Right-aligned text showing the formatted value."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "muted",
+        "family": "neutral"
+      },
+      {
+        "id": "muted-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "primary",
+        "family": "brand"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

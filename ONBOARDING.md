@@ -51,9 +51,10 @@ twice eventually disagrees with itself.
 | The authority | What is compiled from it |
 |---|---|
 | `src/app/globals.css` | `src/docs/generated/tokens.json`, the registry `theme` item, the token block in `design.md`, the design bundle's stylesheet |
-| `src/components/ui/*.tsx` | registry items, API reference, component contracts, design-system specs and cards |
+| `src/components/ui/*.tsx` | registry items and their descriptions, API reference, component contracts (published at `design.edgecom.ai/contracts/`), design-system specs and cards |
 | `src/app/sections.tsx` | the sidebar, the search dialog, the route list, the prerendered pages, `llms.txt` |
 | `design.md` | the published design language, and the rules inside the design bundle |
+| `.claude/skills/<consumer skill>/SKILL.md` | the copies served at `design.edgecom.ai/skills/`, and their row in `agents.md` |
 | git history | the changelog |
 
 Two consequences worth internalising now:

@@ -1,0 +1,139 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "alert",
+    "label": "Alert",
+    "registryItem": "edgecom-ai/design-system/alert",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/alert",
+    "docs": "https://design.edgecom.ai/components/alert/",
+    "source": "src/components/ui/alert.tsx",
+    "summary": "A callout box laying out an optional icon, AlertTitle, AlertDescription, and a top-right AlertAction.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": null,
+    "parts": [
+      {
+        "name": "Alert",
+        "description": "Root callout container with role=alert and variant styling."
+      },
+      {
+        "name": "AlertTitle",
+        "description": "Bold single-line heading text for the alert."
+      },
+      {
+        "name": "AlertDescription",
+        "description": "Secondary descriptive body text below the title."
+      },
+      {
+        "name": "AlertAction",
+        "description": "Top-right slot for a dismiss or action button."
+      }
+    ],
+    "props": [
+      {
+        "part": "Alert",
+        "name": "variant",
+        "type": "\"default\" | \"destructive\" | \"success\" | \"warning\" | \"info\"",
+        "default": "\"default\"",
+        "description": "Tone: default, destructive, success, warning, or info."
+      }
+    ],
+    "variants": [
+      {
+        "name": "variant",
+        "options": [
+          "default",
+          "destructive",
+          "success",
+          "warning",
+          "info"
+        ],
+        "default": "default"
+      }
+    ],
+    "states": [
+      "hover"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "border",
+        "family": "neutral"
+      },
+      {
+        "id": "card",
+        "family": "surface"
+      },
+      {
+        "id": "card-foreground",
+        "family": "surface"
+      },
+      {
+        "id": "destructive",
+        "family": "status"
+      },
+      {
+        "id": "destructive-emphasis",
+        "family": "status"
+      },
+      {
+        "id": "foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "info",
+        "family": "status"
+      },
+      {
+        "id": "info-emphasis",
+        "family": "status"
+      },
+      {
+        "id": "radius-lg",
+        "family": "radius"
+      },
+      {
+        "id": "success",
+        "family": "status"
+      },
+      {
+        "id": "success-emphasis",
+        "family": "status"
+      },
+      {
+        "id": "text-body",
+        "family": "typography"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      },
+      {
+        "id": "warning",
+        "family": "status"
+      },
+      {
+        "id": "warning-emphasis",
+        "family": "status"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [
+        "role=alert"
+      ],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

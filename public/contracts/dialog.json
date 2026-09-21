@@ -1,0 +1,160 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "dialog",
+    "label": "Dialog",
+    "registryItem": "edgecom-ai/design-system/dialog",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/dialog",
+    "docs": "https://design.edgecom.ai/components/dialog/",
+    "source": "src/components/ui/dialog.tsx",
+    "summary": "A modal dialog: a Trigger opens a portalled overlay + centered Content, with styled header/footer, title, description, and close.",
+    "purpose": "The centered modal for one short, focused action. It keeps a top-right close so a modal is always dismissible.",
+    "useWhen": [
+      "A short create action of roughly one to four fields.",
+      "A focused, non-destructive confirmation."
+    ],
+    "dontUseWhen": [
+      "The form is long or dense — that is a right-side `sheet`.",
+      "The action is destructive or irreversible — that is an `alert-dialog`, which omits the close on purpose."
+    ],
+    "base": {
+      "name": "Base UI Dialog",
+      "url": "https://base-ui.com/react/components/dialog"
+    },
+    "parts": [
+      {
+        "name": "Dialog",
+        "description": "Root managing the dialog's open state."
+      },
+      {
+        "name": "DialogClose",
+        "description": "Button that closes the dialog."
+      },
+      {
+        "name": "DialogContent",
+        "description": "Portalled, centered popup with an optional close button."
+      },
+      {
+        "name": "DialogDescription",
+        "description": "Muted supporting text under the title."
+      },
+      {
+        "name": "DialogFooter",
+        "description": "Styled footer row for actions."
+      },
+      {
+        "name": "DialogHeader",
+        "description": "Styled div stacking the title and description."
+      },
+      {
+        "name": "DialogOverlay",
+        "description": "Fixed dimmed backdrop behind the dialog."
+      },
+      {
+        "name": "DialogPortal",
+        "description": "Renders the dialog outside the DOM tree."
+      },
+      {
+        "name": "DialogTitle",
+        "description": "Styled heading text for the dialog."
+      },
+      {
+        "name": "DialogTrigger",
+        "description": "Element that opens the dialog on click."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [
+      "data-closed",
+      "data-open",
+      "hover"
+    ],
+    "responsive": [
+      "sm"
+    ],
+    "tokens": [
+      {
+        "id": "font-heading",
+        "family": "typography"
+      },
+      {
+        "id": "foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "muted",
+        "family": "neutral"
+      },
+      {
+        "id": "muted-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "popover",
+        "family": "surface"
+      },
+      {
+        "id": "popover-foreground",
+        "family": "surface"
+      },
+      {
+        "id": "radius-xl",
+        "family": "radius"
+      },
+      {
+        "id": "scrim",
+        "family": "surface"
+      },
+      {
+        "id": "text-body",
+        "family": "typography"
+      },
+      {
+        "id": "text-body-lg",
+        "family": "typography"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      }
+    ],
+    "requires": [
+      "A `DialogTitle`; it is the modal's accessible name, visually hidden if the design shows none.",
+      "The default top-right close (X)."
+    ],
+    "forbids": [
+      "`showCloseButton={false}` — only `alert-dialog` omits the close.",
+      "Moving the close elsewhere, or hand-rolling a modal without one.",
+      "An inline scrim colour; the scrim is the `scrim` token."
+    ],
+    "rules": [
+      "Short create actions (1–4 fields). Longer or dense edit forms go to a right `sheet` at 420px.",
+      "**Always keeps its top-right close (X).** Never `showCloseButton={false}` — only `alert-dialog` omits it."
+    ],
+    "behavior": {
+      "destructive": "A destructive confirmation is not this component — it is `alert-dialog`."
+    },
+    "a11y": {
+      "attributes": [
+        "sr-only"
+      ],
+      "requirements": [
+        "Focus moves into the dialog on open and returns to the trigger on close. Base UI does this; don't defeat it.",
+        "A surface opened from inside a dialog — a `select`, a `popover` — is a later portal sibling and paints above it without a new z-index."
+      ]
+    },
+    "examples": [
+      "`<Dialog><DialogTrigger render={<Button>Add site</Button>} /><DialogContent><DialogHeader><DialogTitle>Add site</DialogTitle></DialogHeader>…</DialogContent></Dialog>`"
+    ],
+    "antiPatterns": [
+      "A twelve-field form in a dialog that should have been a sheet.",
+      "A non-destructive modal with the close removed."
+    ],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": true
+  }
+}

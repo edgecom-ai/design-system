@@ -1,0 +1,92 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "accordion",
+    "label": "Accordion",
+    "registryItem": "edgecom-ai/design-system/accordion",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/accordion",
+    "docs": "https://design.edgecom.ai/components/accordion/",
+    "source": "src/components/ui/accordion.tsx",
+    "summary": "A collapsible disclosure list; each AccordionItem pairs an AccordionTrigger with an AccordionContent panel.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": {
+      "name": "Base UI Accordion",
+      "url": "https://base-ui.com/react/components/accordion"
+    },
+    "parts": [
+      {
+        "name": "Accordion",
+        "description": "Root vertical container wrapping all accordion items."
+      },
+      {
+        "name": "AccordionItem",
+        "description": "Single expandable section with a bottom-border divider."
+      },
+      {
+        "name": "AccordionTrigger",
+        "description": "Header button that toggles its panel; shows a chevron."
+      },
+      {
+        "name": "AccordionContent",
+        "description": "Animated collapsible panel holding the item's content."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [
+      "aria-disabled",
+      "data-[slot=accordion-trigger-icon]",
+      "data-closed",
+      "data-ending-style",
+      "data-open",
+      "data-starting-style",
+      "focus-visible",
+      "group-aria-expanded/accordion-trigger",
+      "hover"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "border",
+        "family": "neutral"
+      },
+      {
+        "id": "foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "muted-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "radius-lg",
+        "family": "radius"
+      },
+      {
+        "id": "ring",
+        "family": "neutral"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

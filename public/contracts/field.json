@@ -1,0 +1,155 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "field",
+    "label": "Field",
+    "registryItem": "edgecom-ai/design-system/field",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/field",
+    "docs": "https://design.edgecom.ai/components/field/",
+    "source": "src/components/ui/field.tsx",
+    "summary": "Form-field scaffolding: a Field wraps a control with a label, description, and error; group fields with FieldGroup or a FieldSet.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": null,
+    "parts": [
+      {
+        "name": "Field",
+        "description": "One field row; orientation sets vertical (default) or horizontal."
+      },
+      {
+        "name": "FieldLabel",
+        "description": "The field's label (wraps the Label primitive)."
+      },
+      {
+        "name": "FieldDescription",
+        "description": "Muted helper text for a field."
+      },
+      {
+        "name": "FieldError",
+        "description": "Error message; pass children or an errors array."
+      },
+      {
+        "name": "FieldGroup",
+        "description": "Stacks multiple fields with consistent spacing."
+      },
+      {
+        "name": "FieldLegend",
+        "description": "The fieldset's heading (legend or label variant)."
+      },
+      {
+        "name": "FieldSeparator",
+        "description": "A divider between fields, with optional centered text."
+      },
+      {
+        "name": "FieldSet",
+        "description": "A fieldset grouping related fields."
+      },
+      {
+        "name": "FieldContent",
+        "description": "Column holding a control plus its title/description."
+      },
+      {
+        "name": "FieldTitle",
+        "description": "A bold inline title for a field."
+      }
+    ],
+    "props": [
+      {
+        "part": "Field",
+        "name": "orientation",
+        "type": "\"vertical\" | \"horizontal\" | \"responsive\"",
+        "default": "\"vertical\"",
+        "description": null
+      }
+    ],
+    "variants": [
+      {
+        "name": "orientation",
+        "options": [
+          "vertical",
+          "horizontal",
+          "responsive"
+        ],
+        "default": "vertical"
+      }
+    ],
+    "states": [
+      "data-[invalid=true]",
+      "data-[slot=checkbox-group]",
+      "data-[slot=field-group]",
+      "data-[slot=field-label]",
+      "data-[slot=field]",
+      "data-[variant=label]",
+      "data-[variant=legend]",
+      "group-data-[disabled=true]/field",
+      "group-data-[orientation=horizontal]/field",
+      "group-data-[variant=outline]/field-group",
+      "last"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "background",
+        "family": "surface"
+      },
+      {
+        "id": "border",
+        "family": "neutral"
+      },
+      {
+        "id": "destructive-emphasis",
+        "family": "status"
+      },
+      {
+        "id": "muted-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "primary",
+        "family": "brand"
+      },
+      {
+        "id": "primary-emphasis",
+        "family": "brand"
+      },
+      {
+        "id": "radius-lg",
+        "family": "radius"
+      },
+      {
+        "id": "text-body",
+        "family": "typography"
+      },
+      {
+        "id": "text-body-lg",
+        "family": "typography"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [
+      "Validation is inline and specific, via `FieldError` + `aria-invalid`. A description and an error that swap in one position take the same type token, or the layout shifts."
+    ],
+    "behavior": {},
+    "a11y": {
+      "attributes": [
+        "role=alert",
+        "role=group",
+        "sr-only"
+      ],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

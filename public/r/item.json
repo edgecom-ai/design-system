@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "item",
   "title": "Item",
-  "description": "The Edgecom Item component.",
+  "description": "Structured rows built from the Item primitive — media, content (title + description), and trailing actions, grouped by ItemGroup.",
   "dependencies": [
     "@base-ui/react@^1.6.0",
     "class-variance-authority@^0.7.1"
@@ -18,5 +18,6 @@
       "type": "registry:ui"
     }
   ],
+  "docs": "Docs: https://design.edgecom.ai/components/list/ · Contract: https://design.edgecom.ai/contracts/list.json · Guardrails: https://design.edgecom.ai/design.md",
   "type": "registry:ui"
 }

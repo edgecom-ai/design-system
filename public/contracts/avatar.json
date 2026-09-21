@@ -1,0 +1,105 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "avatar",
+    "label": "Avatar",
+    "registryItem": "edgecom-ai/design-system/avatar",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/avatar",
+    "docs": "https://design.edgecom.ai/components/avatar/",
+    "source": "src/components/ui/avatar.tsx",
+    "summary": "A user or contact image with a text fallback. Compose Avatar with AvatarImage + AvatarFallback; stack them in an AvatarGroup with an overflow count.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": {
+      "name": "Base UI Avatar",
+      "url": "https://base-ui.com/react/components/avatar"
+    },
+    "parts": [
+      {
+        "name": "Avatar",
+        "description": "Rounded image container; accepts a size prop (default/sm/lg)."
+      },
+      {
+        "name": "AvatarImage",
+        "description": "The photo; covers the avatar once it loads."
+      },
+      {
+        "name": "AvatarFallback",
+        "description": "Shown when no image loads — usually initials."
+      },
+      {
+        "name": "AvatarGroup",
+        "description": "Overlaps child avatars with ring separators."
+      },
+      {
+        "name": "AvatarGroupCount",
+        "description": "Trailing chip showing an overflow count (e.g. +3)."
+      },
+      {
+        "name": "AvatarBadge",
+        "description": "A small status dot pinned to the avatar corner."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [
+      "data-[size=lg]",
+      "data-[size=sm]",
+      "data-[slot=avatar]",
+      "group-data-[size=default]/avatar",
+      "group-data-[size=lg]/avatar",
+      "group-data-[size=sm]/avatar"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "background",
+        "family": "surface"
+      },
+      {
+        "id": "border",
+        "family": "neutral"
+      },
+      {
+        "id": "muted",
+        "family": "neutral"
+      },
+      {
+        "id": "muted-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "primary",
+        "family": "brand"
+      },
+      {
+        "id": "primary-foreground",
+        "family": "brand"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      },
+      {
+        "id": "text-caption",
+        "family": "typography"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

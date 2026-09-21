@@ -21,7 +21,9 @@ Instructions are layered so that only the routing layer is always in context and
 
 Every rule file **must** carry a `paths:` field — a rule without one loads at launch and costs context in every session. Adding a paragraph to `AGENTS.md` is almost never the right move; adding it to a rule usually is.
 
-The consumer guide is deliberately **not** in this layer. It lives at [`public/agents.md`](public/agents.md), served at [design.edgecom.ai/agents.md](https://design.edgecom.ai/agents.md), so an agent working in this repo reads producer instructions and a consuming app is pointed at a stable URL. It is hand-written, not generated — the only hand-written markdown in `public/`.
+The consumer guide is deliberately **not** in this layer. It lives at [`public/agents.md`](public/agents.md), served at [design.edgecom.ai/agents.md](https://design.edgecom.ai/agents.md), so an agent working in this repo reads producer instructions and a consuming app is pointed at a stable URL. It is hand-written apart from one block: `gen-agents-md` rewrites the `@@GENERATED:contracts` section — the addresses of the published contracts, tokens and skills, their version and digest, and which contracts are authored — the same shape as `llms.txt`'s catalog.
+
+Two of the three skills are **consumer** skills — `implement-edgecom-design` and `audit-edgecom-ui` run in a consuming app, not here — so `gen-agents-md` mirrors them to `public/skills/<name>/SKILL.md`, and `agents.md` tells a consumer how to install them. The list is `CONSUMER_SKILLS` in [`scripts/lib/publish.mjs`](scripts/lib/publish.mjs). `design-edgecom-ui` is the procedure for changing the system and stays here.
 
 ## Getting set up
 
@@ -38,7 +40,7 @@ The consumer guide is deliberately **not** in this layer. It lives at [`public/a
 | `pnpm verify:docs` | Load a sample of built routes in real Chrome, light + dark, and fail on a blank page, a console error, a failed chunk, or a stuck Suspense fallback. Needs a prior `pnpm build`. |
 | `pnpm registry:build` | Regenerate registry from source, `shadcn build`, then `registry:check`. |
 | `pnpm registry:check` | Audit built items for imports their manifest doesn't declare, dependencies with no version range, registry dependencies no item provides, type tokens paired with a `leading-*`/weight override, and any reference to a `--chart-legacy-*` token (that palette is for migrating existing plots, never a primitive). |
-| `pnpm docs:gen` | Regenerate all docs-source / tokens / api / routes / changelog artifacts. |
+| `pnpm docs:gen` | Regenerate all docs-source / tokens / api / contracts / routes / changelog artifacts, including the copies published under `public/`. |
 | `pnpm check:schemas` | Validate the generated artifacts against `schemas/*.schema.json`. |
 | `pnpm design:sync` | Rebuild the Claude Design bundle from tokens, `design.md`, and the primitives. Compiles its own stylesheet from `globals.css`; needs a clean tree, not a prior build. |
 | `pnpm docs:changelog` | Regenerate the changelog from git history (part of `docs:gen`). |
@@ -172,6 +174,9 @@ Edit the **sources**, then run `pnpm registry:build` (or `pnpm docs:gen`). `preb
 | `src/docs/generated/{api,api-highlight,routes}.ts` | `docs:api` / `docs:routes` | `sections.tsx`, `ui/*`, `docs/api.ts` |
 | `src/docs/generated/tokens.json` | `docs:tokens` | `globals.css`, via `scripts/lib/tokens.mjs` |
 | `src/docs/generated/contracts.json` | `docs:contracts` | `ui/*.tsx`, `sections.tsx`, `curated.ts`, `docs/contracts.json`, via `scripts/lib/contracts.mjs` |
+| `public/contracts.json`, `public/contracts/*.json`, `public/schemas/contracts.schema.json` | `docs:contracts` | the contracts above, published — one file per contract plus `index.json`, the search surface |
+| `public/tokens.json`, `public/schemas/tokens.schema.json` | `docs:tokens` | `tokens.json` above, published |
+| the `@@GENERATED:contracts` block in `public/agents.md`; `public/skills/*/SKILL.md` | `docs:agents` | `contracts.json`, `.claude/skills/<consumer skill>/SKILL.md`, `scripts/lib/publish.mjs` |
 | `public/docs-source/*` (git-**ignored**) | `docs:source` | `components/demo/*`, `components/shadcn-studio/*` |
 | `src/docs/generated/changelog.ts`, `CHANGELOG.md`, `public/changelog.md` — **git-ignored** | `docs:changelog` | git history + `src/docs/changelog-notes.json` |
 
@@ -186,7 +191,13 @@ The split matters when you edit one:
 - **Derived, every run** — variants, tokens, states, responsive breakpoints, parts, props, the Base UI origin. Read straight from `src/components/ui/*.tsx`, so a contract cannot claim a variant or a state the primitive doesn't implement. Never try to correct these here; fix the primitive.
 - **Authored** — purpose, `useWhen`/`dontUseWhen`, `requires`/`forbids`, `rules`, behaviour in the loading/empty/error/destructive paths, accessibility requirements, examples, anti-patterns. These live in `src/docs/contracts.json`, keyed by section id.
 
-`gen-contracts` fails on an unknown key or an id with no section, so a typo can't silently drop the guidance someone wrote. Twelve components are authored so far — button, input, select, badge, card, dialog, sheet, table, sidebar, toast, alert-dialog and hover-card; the rest carry the derived half only. `contracts.json`'s own `counts` block is the number of record, not this sentence. Everything written there is published to consumers through the design specs, so each claim has to be true of the primitive or stated in `design.md`.
+`gen-contracts` fails on an unknown key or an id with no section, so a typo can't silently drop the guidance someone wrote. Twelve components are authored so far — button, input, select, badge, card, dialog, sheet, table, sidebar, toast, alert-dialog and hover-card; the rest carry the derived half only. `contracts.json`'s own `counts` block is the number of record, not this sentence. Everything written there is published to consumers — through the design specs, and directly — so each claim has to be true of the primitive or stated in `design.md`.
+
+The contracts have three consumers now, and each reads them rather than restating them:
+
+- **The registry.** `gen-registry` takes each component item's `description` from its contract's `summary`, and its `docs` — the note `shadcn add` prints after installing — from the contract's page and contract addresses. A primitive with no docs section has no contract and keeps a templated description; `registry:gen` fails if `contracts.json` is missing, so run `docs:gen` first (`prebuild` does).
+- **The design bundle.** `design:sync` publishes each contract's `rules` into its Claude Design spec.
+- **Consuming agents**, over HTTP. `gen-contracts` publishes the document to `public/contracts.json`, one file per contract to `public/contracts/<id>.json` — pruned when a contract goes away — and a compact `public/contracts/index.json` carrying what selection is made on: summary, purpose, `useWhen`/`dontUseWhen`, variants, parts, install command, and each full contract's URL. The served copies point `$schema` at `public/schemas/`, where the schemas are published too, so the `$id` each schema declares is a real address. `check:schemas` validates the served pair as well as the repo pair. All published addresses are spelled out once, in [`scripts/lib/publish.mjs`](scripts/lib/publish.mjs).
 
 ## The changelog maintains itself
 

@@ -1,0 +1,124 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "toggle",
+    "label": "Toggle",
+    "registryItem": "edgecom-ai/design-system/toggle",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/toggle",
+    "docs": "https://design.edgecom.ai/components/toggle/",
+    "source": "src/components/ui/toggle.tsx",
+    "summary": "A two-state button that holds a pressed/on state.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": {
+      "name": "Base UI Toggle",
+      "url": "https://base-ui.com/react/components/toggle"
+    },
+    "parts": [
+      {
+        "name": "Toggle",
+        "description": "Pressable button toggling a pressed/on state."
+      }
+    ],
+    "props": [
+      {
+        "part": "Toggle",
+        "name": "variant",
+        "type": "\"default\" | \"outline\"",
+        "default": "\"default\"",
+        "description": "Style: default (transparent) or outline (bordered)."
+      },
+      {
+        "part": "Toggle",
+        "name": "size",
+        "type": "\"default\" | \"sm\" | \"lg\"",
+        "default": "\"default\"",
+        "description": "Size: default, sm, or lg."
+      }
+    ],
+    "variants": [
+      {
+        "name": "variant",
+        "options": [
+          "default",
+          "outline"
+        ],
+        "default": "default"
+      },
+      {
+        "name": "size",
+        "options": [
+          "default",
+          "sm",
+          "lg"
+        ],
+        "default": "default"
+      }
+    ],
+    "states": [
+      "data-[pressed]",
+      "disabled",
+      "focus-visible",
+      "hover"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "accent",
+        "family": "neutral"
+      },
+      {
+        "id": "accent-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "border",
+        "family": "neutral"
+      },
+      {
+        "id": "foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "input",
+        "family": "neutral"
+      },
+      {
+        "id": "muted",
+        "family": "neutral"
+      },
+      {
+        "id": "muted-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "radius-lg",
+        "family": "radius"
+      },
+      {
+        "id": "ring",
+        "family": "neutral"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

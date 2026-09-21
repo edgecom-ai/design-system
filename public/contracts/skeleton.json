@@ -1,0 +1,83 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "skeleton",
+    "label": "Skeleton",
+    "registryItem": "edgecom-ai/design-system/skeleton",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/skeleton",
+    "docs": "https://design.edgecom.ai/components/skeleton/",
+    "source": "src/components/ui/skeleton.tsx",
+    "summary": "A muted placeholder block for loading states; pulses by default, or shimmers with a sweeping highlight.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": null,
+    "parts": [
+      {
+        "name": "Skeleton",
+        "description": "Muted placeholder block for loading states."
+      }
+    ],
+    "props": [
+      {
+        "part": "Skeleton",
+        "name": "animation",
+        "type": "\"pulse\" | \"shimmer\" | \"none\"",
+        "default": "\"pulse\"",
+        "description": "Loading motion: pulse (default), shimmer (a highlight sweeps across), or none (static). All stop under prefers-reduced-motion."
+      }
+    ],
+    "variants": [
+      {
+        "name": "animation",
+        "options": [
+          "pulse",
+          "shimmer",
+          "none"
+        ],
+        "default": "pulse"
+      }
+    ],
+    "states": [],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "animate-skeleton-pulse",
+        "family": "motion"
+      },
+      {
+        "id": "animate-skeleton-shimmer",
+        "family": "motion"
+      },
+      {
+        "id": "foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "muted",
+        "family": "neutral"
+      },
+      {
+        "id": "radius-md",
+        "family": "radius"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [
+      "Use for loading, with `spinner` and `empty` for the other two states. Never a raw loading gap."
+    ],
+    "behavior": {},
+    "a11y": {
+      "attributes": [],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

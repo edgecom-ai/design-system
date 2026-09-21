@@ -1,0 +1,96 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "button-group",
+    "label": "Button group",
+    "registryItem": "edgecom-ai/design-system/button-group",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/button-group",
+    "docs": "https://design.edgecom.ai/components/button-group/",
+    "source": "src/components/ui/button-group.tsx",
+    "summary": "A container that visually joins adjacent buttons, with optional separators and text segments.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": null,
+    "parts": [
+      {
+        "name": "ButtonGroup",
+        "description": "Container merging child buttons' borders and radii."
+      },
+      {
+        "name": "ButtonGroupSeparator",
+        "description": "Divider line between grouped buttons."
+      },
+      {
+        "name": "ButtonGroupText",
+        "description": "Non-interactive labelled segment styled like a muted button."
+      }
+    ],
+    "props": [
+      {
+        "part": "ButtonGroup",
+        "name": "orientation",
+        "type": "\"horizontal\" | \"vertical\"",
+        "default": "\"horizontal\"",
+        "description": "Layout direction: horizontal or vertical."
+      }
+    ],
+    "variants": [
+      {
+        "name": "orientation",
+        "options": [
+          "horizontal",
+          "vertical"
+        ],
+        "default": "horizontal"
+      }
+    ],
+    "states": [
+      "data-[orientation=horizontal]",
+      "data-[orientation=vertical]",
+      "data-slot",
+      "focus-visible"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "border",
+        "family": "neutral"
+      },
+      {
+        "id": "input",
+        "family": "neutral"
+      },
+      {
+        "id": "muted",
+        "family": "neutral"
+      },
+      {
+        "id": "radius-lg",
+        "family": "radius"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [
+        "aria-hidden",
+        "role=group"
+      ],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

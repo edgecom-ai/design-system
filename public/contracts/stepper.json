@@ -1,0 +1,141 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "stepper",
+    "label": "Stepper",
+    "registryItem": "edgecom-ai/design-system/stepper",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/stepper",
+    "docs": "https://design.edgecom.ai/components/stepper/",
+    "source": "src/components/ui/stepper.tsx",
+    "summary": "A multi-step progress flow: a nav of items (trigger, indicator, separator, title, description) with switchable content panels.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": null,
+    "parts": [
+      {
+        "name": "Stepper",
+        "description": "Root holding the steps, orientation, and navigation state."
+      },
+      {
+        "name": "StepperItem",
+        "description": "Wraps one step, deriving its active/completed state."
+      },
+      {
+        "name": "StepperTrigger",
+        "description": "Clickable tab that navigates to its step."
+      },
+      {
+        "name": "StepperIndicator",
+        "description": "Circular badge showing the step number, icon, or state."
+      },
+      {
+        "name": "StepperSeparator",
+        "description": "Connector line between steps; fills when completed."
+      },
+      {
+        "name": "StepperTitle",
+        "description": "Heading label for a step."
+      },
+      {
+        "name": "StepperDescription",
+        "description": "Muted secondary text for a step."
+      },
+      {
+        "name": "StepperPanel",
+        "description": "Container region for the active step's content."
+      },
+      {
+        "name": "StepperContent",
+        "description": "Content shown only when its value is the current step."
+      },
+      {
+        "name": "StepperNav",
+        "description": "Flex nav laying out the stepper items."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [
+      "data-[orientation=horizontal]",
+      "data-[orientation=vertical]",
+      "data-[state=active]",
+      "data-[state=completed]",
+      "disabled",
+      "group-data-[orientation=horizontal]/stepper-nav",
+      "group-data-[orientation=vertical]/stepper-nav",
+      "group-data-[state=active]/step",
+      "group-data-[state=completed]/step"
+    ],
+    "responsive": [
+      "md"
+    ],
+    "tokens": [
+      {
+        "id": "background",
+        "family": "surface"
+      },
+      {
+        "id": "border",
+        "family": "neutral"
+      },
+      {
+        "id": "foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "muted",
+        "family": "neutral"
+      },
+      {
+        "id": "muted-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "primary",
+        "family": "brand"
+      },
+      {
+        "id": "primary-foreground",
+        "family": "brand"
+      },
+      {
+        "id": "radius-md",
+        "family": "radius"
+      },
+      {
+        "id": "radius-sm",
+        "family": "radius"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      },
+      {
+        "id": "text-caption",
+        "family": "typography"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [
+        "aria-controls",
+        "aria-labelledby",
+        "aria-orientation",
+        "aria-selected",
+        "tabIndex"
+      ],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

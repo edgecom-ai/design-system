@@ -1,0 +1,264 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "button",
+    "label": "Button",
+    "registryItem": "edgecom-ai/design-system/button",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/button",
+    "docs": "https://design.edgecom.ai/components/button/",
+    "source": "src/components/ui/button.tsx",
+    "summary": "A clickable button with class-variance-authority variants and sizes, including icon-only sizes.",
+    "purpose": "The one control for committing an action. Every clickable affordance is this primitive or composes it — a styled div or anchor loses the hover, focus ring, disabled and aria-invalid handling the variants already carry.",
+    "useWhen": [
+      "The user commits something: submit, save, open an overlay, trigger an export.",
+      "A secondary or utility action sits in a table toolbar or page header — as an icon button (`size=\"icon-sm\"`/`\"icon-lg\"`, usually `outline` or `ghost`) with an `aria-label` and a tooltip.",
+      "A destructive action has to stay quiet in a table row — `variant=\"ghost-destructive\"`, neutral at rest and red only on hover."
+    ],
+    "dontUseWhen": [
+      "The control only navigates. An anchor is the right element; `variant=\"link\"` styles a button to read as text, it does not make it a link.",
+      "The user is choosing among options rather than acting — that is `select`, `tabs`, or `toggle`."
+    ],
+    "base": {
+      "name": "Base UI Button",
+      "url": "https://base-ui.com/react/components/button"
+    },
+    "parts": [
+      {
+        "name": "Button",
+        "description": "Clickable button with a configurable visual variant and size."
+      }
+    ],
+    "props": [
+      {
+        "part": "Button",
+        "name": "variant",
+        "type": "\"default\" | \"outline\" | \"secondary\" | \"ghost\" | \"ghost-destructive\" | \"destructive\" | \"success\" | \"warning\" | \"info\" | \"destructive-subtle\" | \"success-subtle\" | \"warning-subtle\" | \"info-subtle\" | \"link\"",
+        "default": "\"default\"",
+        "description": "Style: neutral, semantic solid/subtle, or link."
+      },
+      {
+        "part": "Button",
+        "name": "size",
+        "type": "\"default\" | \"xs\" | \"sm\" | \"lg\" | \"icon\" | \"icon-xs\" | \"icon-sm\" | \"icon-lg\"",
+        "default": "\"default\"",
+        "description": "Dimensions: default, xs, sm, lg, and icon variants."
+      }
+    ],
+    "variants": [
+      {
+        "name": "variant",
+        "options": [
+          "default",
+          "outline",
+          "secondary",
+          "ghost",
+          "ghost-destructive",
+          "destructive",
+          "success",
+          "warning",
+          "info",
+          "destructive-subtle",
+          "success-subtle",
+          "warning-subtle",
+          "info-subtle",
+          "link"
+        ],
+        "default": "default"
+      },
+      {
+        "name": "size",
+        "options": [
+          "default",
+          "xs",
+          "sm",
+          "lg",
+          "icon",
+          "icon-xs",
+          "icon-sm",
+          "icon-lg"
+        ],
+        "default": "default"
+      }
+    ],
+    "states": [
+      "active",
+      "aria-expanded",
+      "aria-invalid",
+      "data-disabled",
+      "disabled",
+      "focus-visible",
+      "hover"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "border",
+        "family": "neutral"
+      },
+      {
+        "id": "destructive",
+        "family": "status"
+      },
+      {
+        "id": "destructive-emphasis",
+        "family": "status"
+      },
+      {
+        "id": "destructive-subtle",
+        "family": "status"
+      },
+      {
+        "id": "destructive-subtle-foreground",
+        "family": "status"
+      },
+      {
+        "id": "foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "ghost-hover",
+        "family": "interaction"
+      },
+      {
+        "id": "info",
+        "family": "status"
+      },
+      {
+        "id": "info-foreground",
+        "family": "status"
+      },
+      {
+        "id": "info-subtle",
+        "family": "status"
+      },
+      {
+        "id": "info-subtle-foreground",
+        "family": "status"
+      },
+      {
+        "id": "input",
+        "family": "neutral"
+      },
+      {
+        "id": "muted",
+        "family": "neutral"
+      },
+      {
+        "id": "outline-hover",
+        "family": "interaction"
+      },
+      {
+        "id": "outline-surface",
+        "family": "interaction"
+      },
+      {
+        "id": "primary",
+        "family": "brand"
+      },
+      {
+        "id": "primary-emphasis",
+        "family": "brand"
+      },
+      {
+        "id": "primary-foreground",
+        "family": "brand"
+      },
+      {
+        "id": "radius-lg",
+        "family": "radius"
+      },
+      {
+        "id": "ring",
+        "family": "neutral"
+      },
+      {
+        "id": "secondary",
+        "family": "neutral"
+      },
+      {
+        "id": "secondary-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "success",
+        "family": "status"
+      },
+      {
+        "id": "success-foreground",
+        "family": "status"
+      },
+      {
+        "id": "success-subtle",
+        "family": "status"
+      },
+      {
+        "id": "success-subtle-foreground",
+        "family": "status"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      },
+      {
+        "id": "text-caption",
+        "family": "typography"
+      },
+      {
+        "id": "warning",
+        "family": "status"
+      },
+      {
+        "id": "warning-foreground",
+        "family": "status"
+      },
+      {
+        "id": "warning-subtle",
+        "family": "status"
+      },
+      {
+        "id": "warning-subtle-foreground",
+        "family": "status"
+      }
+    ],
+    "requires": [
+      "An `aria-label` on every icon-only button, and a `tooltip` alongside it in page or table chrome.",
+      "A destructive action is gated behind an `alert-dialog` before it runs, and its outcome is surfaced with a `toast`.",
+      "Exactly one labelled primary action per view; the rest are secondary or icon buttons."
+    ],
+    "forbids": [
+      "Hand-composing a quiet destructive button from `ghost` plus destructive utilities. `ghost` re-asserts `hover:text-foreground`, so the label goes neutral at the moment the tint turns red — use `ghost-destructive`.",
+      "Overriding the primitive's own classes to invent a look. Every appearance it can have is in `variants`.",
+      "A flat, stateless clickable element with no hover and no focus ring."
+    ],
+    "rules": [
+      "A quiet destructive row action is `ghost-destructive`. Never hand-compose one from `ghost` plus destructive utilities — `ghost` re-asserts `hover:text-foreground`, so the label goes neutral exactly as the tint turns red.",
+      "Secondary/utility actions (export, refresh, filter) are icon buttons with an `aria-label` and a tooltip."
+    ],
+    "behavior": {
+      "loading": "Disable the button while its action is in flight. `disabled` and `data-disabled` both drop it to 50% opacity and remove pointer events, so a second submit cannot land.",
+      "destructive": "A `destructive` button never runs its action directly — it confirms through an `alert-dialog` naming what is affected and that it cannot be undone."
+    },
+    "a11y": {
+      "attributes": [],
+      "requirements": [
+        "An icon-only button carries an `aria-label`; the glyph is not an accessible name.",
+        "The focus ring is the `ring` token and stays visible — never `outline: none` with no replacement."
+      ]
+    },
+    "examples": [
+      "`<Button>Save changes</Button>` — the single primary action on a screen.",
+      "`<Button variant=\"outline\" size=\"icon-sm\" aria-label=\"Export\"><Download /></Button>` — a toolbar utility action.",
+      "`<Button variant=\"ghost-destructive\" size=\"icon-sm\" aria-label=\"Delete site\"><Trash2 /></Button>` — a quiet row action."
+    ],
+    "antiPatterns": [
+      "Reaching for `destructive` on a row delete, which paints a red chip on every row.",
+      "A labelled text button for every toolbar action, competing with the screen's one primary action.",
+      "Primary `default` on several buttons in one view."
+    ],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": true
+  }
+}

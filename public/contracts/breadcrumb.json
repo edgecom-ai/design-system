@@ -1,0 +1,89 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "breadcrumb",
+    "label": "Breadcrumb",
+    "registryItem": "edgecom-ai/design-system/breadcrumb",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/breadcrumb",
+    "docs": "https://design.edgecom.ai/components/breadcrumb/",
+    "source": "src/components/ui/breadcrumb.tsx",
+    "summary": "A navigation trail: a Breadcrumb nav wrapping a BreadcrumbList of items, links, the current page, and separators.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": null,
+    "parts": [
+      {
+        "name": "Breadcrumb",
+        "description": "Root nav landmark labelled 'breadcrumb'."
+      },
+      {
+        "name": "BreadcrumbList",
+        "description": "Ordered flex list holding the breadcrumb items."
+      },
+      {
+        "name": "BreadcrumbItem",
+        "description": "List item wrapping one crumb's content."
+      },
+      {
+        "name": "BreadcrumbLink",
+        "description": "Interactive link crumb (renders an anchor by default)."
+      },
+      {
+        "name": "BreadcrumbPage",
+        "description": "Current-page crumb — non-interactive, with aria-current."
+      },
+      {
+        "name": "BreadcrumbSeparator",
+        "description": "Presentational divider; default chevron-right icon."
+      },
+      {
+        "name": "BreadcrumbEllipsis",
+        "description": "Collapsed-crumbs indicator showing a horizontal-dots icon."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [
+      "hover"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "muted-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [
+        "aria-current",
+        "aria-disabled",
+        "aria-hidden",
+        "aria-label",
+        "role=link",
+        "role=presentation",
+        "sr-only"
+      ],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

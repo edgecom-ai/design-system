@@ -1,0 +1,65 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "toast",
+    "label": "Toast",
+    "registryItem": "edgecom-ai/design-system/toast",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/toast",
+    "docs": "https://design.edgecom.ai/components/toast/",
+    "source": "src/components/ui/sonner.tsx",
+    "summary": "App-wide notifications: mount one Toaster near the app root, then call the imperative toast() function to show messages.",
+    "purpose": "App-wide feedback for a completed interaction. One `Toaster` is mounted near the app root; everything else is the imperative `toast()` call from `sonner`.",
+    "useWhen": [
+      "An interaction has no other visible result — a saved form, a toggled switch.",
+      "The outcome of a destructive action needs reporting after its confirmation."
+    ],
+    "dontUseWhen": [
+      "The message belongs to one field — that is inline validation through `field`.",
+      "The message is a persistent page-level condition — that is `banner` or `alert`."
+    ],
+    "base": null,
+    "parts": [
+      {
+        "name": "Toaster",
+        "description": "The notifier region — mount once; renders queued toasts."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [],
+    "responsive": [],
+    "tokens": [],
+    "requires": [
+      "A title on every toast; the description row collapses when empty.",
+      "A variant matching the outcome: `toast.success` for confirmation, `toast.warning` for a negative-but-expected result, `toast.error` for a genuine failure."
+    ],
+    "forbids": [
+      "More than one `<Toaster>` in an application.",
+      "A neutral `toast()` for a success or an error."
+    ],
+    "rules": [],
+    "behavior": {
+      "error": "A failed action surfaces a toast and keeps the user's input intact — the form is not cleared."
+    },
+    "a11y": {
+      "attributes": [],
+      "requirements": [
+        "The toast text carries the meaning; the variant's colour only reinforces it."
+      ]
+    },
+    "examples": [
+      "`import { toast } from \"sonner\"` — the `Toaster` is the only export of the registry item; the call comes from sonner itself.",
+      "`toast.success(\"Site saved\")`",
+      "`toast.error(\"Could not save site\", { description: \"The gateway did not respond.\" })`"
+    ],
+    "antiPatterns": [
+      "A save that completes silently.",
+      "A failure reported by colour alone, with no title."
+    ],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": true
+  }
+}

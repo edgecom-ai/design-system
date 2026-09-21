@@ -1,0 +1,179 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "alert-dialog",
+    "label": "Alert dialog",
+    "registryItem": "edgecom-ai/design-system/alert-dialog",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/alert-dialog",
+    "docs": "https://design.edgecom.ai/components/alert-dialog/",
+    "source": "src/components/ui/alert-dialog.tsx",
+    "summary": "The confirmation an irreversible action passes through: a Trigger opens a portalled, centered Content whose footer forces an explicit Cancel or Action choice.",
+    "purpose": "The confirmation gate for an irreversible action. It is the only overlay that omits the close, because a destructive flow has to end in an explicit choice rather than a dismissal.",
+    "useWhen": [
+      "An action deletes, removes, disconnects, resets or purges something.",
+      "An action is irreversible in any other way, or costs real money.",
+      "A bulk action applies to more rows than the user can see at once."
+    ],
+    "dontUseWhen": [
+      "The action is reversible and routine — commit it and confirm with a `toast`.",
+      "The overlay is a short create or edit form — that is `dialog`, which keeps its close."
+    ],
+    "base": {
+      "name": "Base UI AlertDialog",
+      "url": "https://base-ui.com/react/components/alert-dialog"
+    },
+    "parts": [
+      {
+        "name": "AlertDialog",
+        "description": "Root managing the confirmation's open state."
+      },
+      {
+        "name": "AlertDialogAction",
+        "description": "The confirming button — destructive variant for a destructive action."
+      },
+      {
+        "name": "AlertDialogCancel",
+        "description": "The dismissing button; outline variant by default."
+      },
+      {
+        "name": "AlertDialogContent",
+        "description": "Portalled, centered popup at default or sm width."
+      },
+      {
+        "name": "AlertDialogDescription",
+        "description": "Supporting text stating what is affected and that it can't be undone."
+      },
+      {
+        "name": "AlertDialogFooter",
+        "description": "Tinted footer row holding the two choices."
+      },
+      {
+        "name": "AlertDialogHeader",
+        "description": "Centered stack of media, title, and description; left-aligned from sm up at default size."
+      },
+      {
+        "name": "AlertDialogMedia",
+        "description": "Rounded muted tile for a leading status icon."
+      },
+      {
+        "name": "AlertDialogOverlay",
+        "description": "Fixed scrim behind the popup, blurred where supported."
+      },
+      {
+        "name": "AlertDialogPortal",
+        "description": "Renders the confirmation outside the DOM tree."
+      },
+      {
+        "name": "AlertDialogTitle",
+        "description": "Heading naming what is about to happen."
+      },
+      {
+        "name": "AlertDialogTrigger",
+        "description": "Element that opens the confirmation on click."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [
+      "data-[size=default]",
+      "data-[size=sm]",
+      "data-closed",
+      "data-open",
+      "group-data-[size=default]/alert-dialog-content",
+      "group-data-[size=sm]/alert-dialog-content",
+      "hover"
+    ],
+    "responsive": [
+      "md",
+      "sm"
+    ],
+    "tokens": [
+      {
+        "id": "font-heading",
+        "family": "typography"
+      },
+      {
+        "id": "foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "muted",
+        "family": "neutral"
+      },
+      {
+        "id": "muted-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "popover",
+        "family": "surface"
+      },
+      {
+        "id": "popover-foreground",
+        "family": "surface"
+      },
+      {
+        "id": "radius-md",
+        "family": "radius"
+      },
+      {
+        "id": "radius-xl",
+        "family": "radius"
+      },
+      {
+        "id": "scrim",
+        "family": "surface"
+      },
+      {
+        "id": "text-body",
+        "family": "typography"
+      },
+      {
+        "id": "text-body-lg",
+        "family": "typography"
+      }
+    ],
+    "requires": [
+      "An `AlertDialogTitle` naming what is about to happen, and a description stating what is affected and that it cannot be undone.",
+      "Exactly two choices in the footer: `AlertDialogCancel` and `AlertDialogAction`.",
+      "`variant=\"destructive\"` on the action when the outcome is destructive.",
+      "A `toast` afterwards reporting what happened.",
+      "For a high-impact or bulk action, a stronger barrier — type the resource name to enable the confirm."
+    ],
+    "forbids": [
+      "Wiring a destructive action straight to its trigger, with no confirmation in between.",
+      "Adding a close (X). This is the one overlay that deliberately has none; adding one gives back the escape route the component exists to remove.",
+      "A vague title. \"Are you sure?\" does not name what is affected."
+    ],
+    "rules": [
+      "The only overlay without a close (X) — a destructive or confirming flow must force an explicit choice.",
+      "Every destructive action passes through one. Name what is affected and that it cannot be undone."
+    ],
+    "behavior": {
+      "destructive": "This component is the destructive path. The trigger opens it; the action runs only from `AlertDialogAction`, and its result is surfaced with a `toast`.",
+      "loading": "While the action is in flight the confirm is disabled rather than the dialog being closed early, so a second confirm cannot land."
+    },
+    "a11y": {
+      "attributes": [],
+      "requirements": [
+        "The title is the accessible name; it is announced, so it has to carry the meaning on its own.",
+        "Focus moves into the popup on open and returns to the trigger on close.",
+        "Cancel is reachable first by keyboard — the footer reverses on small screens so the dismissing choice is not the default target."
+      ]
+    },
+    "examples": [
+      "`<AlertDialog><AlertDialogTrigger render={<Button variant=\"outline\">Disconnect gateway</Button>} /><AlertDialogContent><AlertDialogHeader><AlertDialogTitle>Disconnect this gateway?</AlertDialogTitle><AlertDialogDescription>…</AlertDialogDescription></AlertDialogHeader><AlertDialogFooter><AlertDialogCancel>Keep connected</AlertDialogCancel><AlertDialogAction variant=\"destructive\">Disconnect</AlertDialogAction></AlertDialogFooter></AlertDialogContent></AlertDialog>`",
+      "Type-to-confirm: hold the action `disabled` until a `field` + `input` matches the resource name exactly."
+    ],
+    "antiPatterns": [
+      "A row delete that fires on click, with only a toast afterwards offering an undo.",
+      "A confirmation whose copy says \"This action cannot be undone\" without saying what the action is.",
+      "Reusing `dialog` for a delete, so the user can dismiss their way out of a decision the product needs recorded."
+    ],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": true
+  }
+}

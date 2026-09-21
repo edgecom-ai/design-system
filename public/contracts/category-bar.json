@@ -1,0 +1,63 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "category-bar",
+    "label": "Category bar",
+    "registryItem": "edgecom-ai/design-system/category-bar",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/category-bar",
+    "docs": "https://design.edgecom.ai/components/category-bar/",
+    "source": "src/components/ui/category-bar.tsx",
+    "summary": "A single horizontal bar split into proportional colored segments, with an optional marker and numeric labels.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": null,
+    "parts": [
+      {
+        "name": "CategoryBar",
+        "description": null
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "background",
+        "family": "surface"
+      },
+      {
+        "id": "muted",
+        "family": "neutral"
+      },
+      {
+        "id": "muted-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [
+        "aria-hidden",
+        "aria-label",
+        "aria-valuenow"
+      ],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

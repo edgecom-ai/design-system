@@ -1,0 +1,64 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "resizable",
+    "label": "Resizable",
+    "registryItem": "edgecom-ai/design-system/resizable",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/resizable",
+    "docs": "https://design.edgecom.ai/components/resizable/",
+    "source": "src/components/ui/resizable.tsx",
+    "summary": "Draggable split layouts: a PanelGroup arranges Panels separated by Handles.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": null,
+    "parts": [
+      {
+        "name": "ResizablePanelGroup",
+        "description": "Container arranging panels horizontally or vertically."
+      },
+      {
+        "name": "ResizablePanel",
+        "description": "An individual resizable region within the group."
+      },
+      {
+        "name": "ResizableHandle",
+        "description": "Draggable divider between panels; optional grip icon."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [
+      "aria-[orientation=horizontal]",
+      "focus-visible"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "border",
+        "family": "neutral"
+      },
+      {
+        "id": "ring",
+        "family": "neutral"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [
+        "aria-orientation"
+      ],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

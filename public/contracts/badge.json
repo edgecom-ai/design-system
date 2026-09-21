@@ -1,0 +1,243 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "badge",
+    "label": "Badge & status tags",
+    "registryItem": "edgecom-ai/design-system/badge",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/badge",
+    "docs": "https://design.edgecom.ai/components/badge/",
+    "source": "src/components/ui/badge.tsx",
+    "summary": "A compact pill label (renders a span by default) for statuses, counts, and tags.",
+    "purpose": "A compact label for a status, a count, or a category. The variant carries the meaning, so the meaning survives a theme change.",
+    "useWhen": [
+      "A row or card needs a status, a count, or a category label.",
+      "A commodity is being tagged — with that commodity's variant and nothing else."
+    ],
+    "dontUseWhen": [
+      "The label is interactive. A badge is not a button, a filter chip, or a toggle.",
+      "The state belongs to a whole surface — that is the surface's own variant, e.g. an `alert`."
+    ],
+    "base": null,
+    "parts": [
+      {
+        "name": "Badge",
+        "description": "Compact rounded pill for status, counts, or labels."
+      }
+    ],
+    "props": [
+      {
+        "part": "Badge",
+        "name": "variant",
+        "type": "\"default\" | \"secondary\" | \"destructive\" | \"success\" | \"warning\" | \"info\" | \"electricity\" | \"water\" | \"gas\" | \"temperature\" | \"emissions\" | \"outline\" | \"ghost\" | \"link\"",
+        "default": "\"default\"",
+        "description": "Color/style: default, semantic, per-commodity, outline, ghost, link."
+      }
+    ],
+    "variants": [
+      {
+        "name": "variant",
+        "options": [
+          "default",
+          "secondary",
+          "destructive",
+          "success",
+          "warning",
+          "info",
+          "electricity",
+          "water",
+          "gas",
+          "temperature",
+          "emissions",
+          "outline",
+          "ghost",
+          "link"
+        ],
+        "default": "default"
+      }
+    ],
+    "states": [
+      "aria-invalid",
+      "focus-visible",
+      "hover"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "border",
+        "family": "neutral"
+      },
+      {
+        "id": "chart-electricity-300",
+        "family": "chart"
+      },
+      {
+        "id": "chart-electricity-500",
+        "family": "chart"
+      },
+      {
+        "id": "chart-electricity-700",
+        "family": "chart"
+      },
+      {
+        "id": "chart-emissions-300",
+        "family": "chart"
+      },
+      {
+        "id": "chart-emissions-500",
+        "family": "chart"
+      },
+      {
+        "id": "chart-emissions-700",
+        "family": "chart"
+      },
+      {
+        "id": "chart-gas-300",
+        "family": "chart"
+      },
+      {
+        "id": "chart-gas-500",
+        "family": "chart"
+      },
+      {
+        "id": "chart-gas-700",
+        "family": "chart"
+      },
+      {
+        "id": "chart-temperature-300",
+        "family": "chart"
+      },
+      {
+        "id": "chart-temperature-500",
+        "family": "chart"
+      },
+      {
+        "id": "chart-temperature-700",
+        "family": "chart"
+      },
+      {
+        "id": "chart-water-300",
+        "family": "chart"
+      },
+      {
+        "id": "chart-water-500",
+        "family": "chart"
+      },
+      {
+        "id": "chart-water-700",
+        "family": "chart"
+      },
+      {
+        "id": "destructive",
+        "family": "status"
+      },
+      {
+        "id": "destructive-emphasis",
+        "family": "status"
+      },
+      {
+        "id": "foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "ghost-hover",
+        "family": "interaction"
+      },
+      {
+        "id": "info",
+        "family": "status"
+      },
+      {
+        "id": "info-emphasis",
+        "family": "status"
+      },
+      {
+        "id": "muted",
+        "family": "neutral"
+      },
+      {
+        "id": "muted-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "primary",
+        "family": "brand"
+      },
+      {
+        "id": "primary-emphasis",
+        "family": "brand"
+      },
+      {
+        "id": "primary-foreground",
+        "family": "brand"
+      },
+      {
+        "id": "radius-4xl",
+        "family": "radius"
+      },
+      {
+        "id": "ring",
+        "family": "neutral"
+      },
+      {
+        "id": "secondary",
+        "family": "neutral"
+      },
+      {
+        "id": "secondary-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "success",
+        "family": "status"
+      },
+      {
+        "id": "success-emphasis",
+        "family": "status"
+      },
+      {
+        "id": "text-caption",
+        "family": "typography"
+      },
+      {
+        "id": "warning",
+        "family": "status"
+      },
+      {
+        "id": "warning-emphasis",
+        "family": "status"
+      }
+    ],
+    "requires": [
+      "A variant chosen by meaning: `outline` for neutral labels, a status variant only for genuine status."
+    ],
+    "forbids": [
+      "Primary `default` for routine labels — it marks a single key highlight in a view.",
+      "A commodity variant on anything that is not that commodity.",
+      "Colour as the only signal; the text carries the meaning too."
+    ],
+    "rules": [
+      "Neutral labels → `outline`; it is the default when unsure. Primary `default` is for a single key highlight only.",
+      "Commodity variants tag that commodity and nothing else."
+    ],
+    "behavior": {},
+    "a11y": {
+      "attributes": [],
+      "requirements": [
+        "The badge's text states the status; the colour reinforces it."
+      ]
+    },
+    "examples": [
+      "`<Badge variant=\"outline\">Draft</Badge>` — the right default when unsure.",
+      "`<Badge variant=\"electricity\">Electricity</Badge>` — commodity tagging."
+    ],
+    "antiPatterns": [
+      "A row of primary badges, none of which is the key highlight.",
+      "A `success` badge used decoratively where nothing succeeded."
+    ],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": true
+  }
+}

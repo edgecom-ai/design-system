@@ -1,0 +1,80 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "tooltip",
+    "label": "Tooltip",
+    "registryItem": "edgecom-ai/design-system/tooltip",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/tooltip",
+    "docs": "https://design.edgecom.ai/components/tooltip/",
+    "source": "src/components/ui/tooltip.tsx",
+    "summary": "A hover hint: a Provider shares timing, a Trigger reveals a portalled Content on hover/focus.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": {
+      "name": "Base UI Tooltip",
+      "url": "https://base-ui.com/react/components/tooltip"
+    },
+    "parts": [
+      {
+        "name": "Tooltip",
+        "description": "Root managing a single tooltip's open state."
+      },
+      {
+        "name": "TooltipTrigger",
+        "description": "Element that shows the tooltip on hover or focus."
+      },
+      {
+        "name": "TooltipContent",
+        "description": "Portalled, positioned popup with an arrow."
+      },
+      {
+        "name": "TooltipProvider",
+        "description": "Shares the hover delay across tooltips (defaults to 200ms)."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [
+      "data-[ending-style]",
+      "data-[starting-style]"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "background",
+        "family": "surface"
+      },
+      {
+        "id": "foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "radius-md",
+        "family": "radius"
+      },
+      {
+        "id": "text-caption",
+        "family": "typography"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [
+      "Shrink-wraps to its content — never a `max-w` or fixed width that forces wrapping.",
+      "Portaled and viewport-aware; never pin a side that lets it run off-screen."
+    ],
+    "behavior": {},
+    "a11y": {
+      "attributes": [],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

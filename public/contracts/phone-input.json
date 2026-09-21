@@ -1,0 +1,75 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "phone-input",
+    "label": "Phone input",
+    "registryItem": "edgecom-ai/design-system/phone-input",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/phone-input",
+    "docs": "https://design.edgecom.ai/components/phone-input/",
+    "source": "src/components/ui/phone-input.tsx",
+    "summary": "A phone number field whose country selector keeps the dial code and the number in a single value.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": null,
+    "parts": [
+      {
+        "name": "PhoneInput",
+        "description": "The composed field — country selector plus number entry."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [
+      "aria-pressed",
+      "data-[slot=input-group]",
+      "data-[slot=scroll-area-scrollbar]",
+      "disabled",
+      "focus",
+      "focus-visible",
+      "hover"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "border",
+        "family": "neutral"
+      },
+      {
+        "id": "destructive",
+        "family": "status"
+      },
+      {
+        "id": "foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "input",
+        "family": "neutral"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [
+        "aria-invalid",
+        "aria-label",
+        "sr-only"
+      ],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

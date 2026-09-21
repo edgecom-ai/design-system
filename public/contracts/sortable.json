@@ -1,0 +1,54 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "sortable",
+    "label": "Sortable",
+    "registryItem": "edgecom-ai/design-system/sortable",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/sortable",
+    "docs": "https://design.edgecom.ai/components/sortable/",
+    "source": "src/components/ui/sortable.tsx",
+    "summary": "Drag-and-drop reordering: Sortable provides context, SortableItem wraps each entry, and SortableOverlay renders the dragged preview.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": null,
+    "parts": [
+      {
+        "name": "Sortable",
+        "description": "Root managing drag context, sensors, and reordering."
+      },
+      {
+        "name": "SortableItem",
+        "description": "A draggable list entry, keyed by its value."
+      },
+      {
+        "name": "SortableItemHandle",
+        "description": "A grip element that binds the drag listeners."
+      },
+      {
+        "name": "SortableOverlay",
+        "description": "Portalled floating preview of the dragged item."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [],
+    "responsive": [],
+    "tokens": [],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

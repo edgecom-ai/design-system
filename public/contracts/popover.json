@@ -1,0 +1,101 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "popover",
+    "label": "Popover",
+    "registryItem": "edgecom-ai/design-system/popover",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/popover",
+    "docs": "https://design.edgecom.ai/components/popover/",
+    "source": "src/components/ui/popover.tsx",
+    "summary": "A floating panel anchored to a trigger: PopoverContent can hold a header (title + description) and a close button.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": {
+      "name": "Base UI Popover",
+      "url": "https://base-ui.com/react/components/popover"
+    },
+    "parts": [
+      {
+        "name": "Popover",
+        "description": "Root managing the popover's open state."
+      },
+      {
+        "name": "PopoverTrigger",
+        "description": "Element that toggles the popover on click."
+      },
+      {
+        "name": "PopoverContent",
+        "description": "Portalled, positioned popup panel."
+      },
+      {
+        "name": "PopoverClose",
+        "description": "Button that closes the popover."
+      },
+      {
+        "name": "PopoverHeader",
+        "description": "Div stacking the title and description."
+      },
+      {
+        "name": "PopoverTitle",
+        "description": "Accessible heading for the popover."
+      },
+      {
+        "name": "PopoverDescription",
+        "description": "Muted supporting text."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [
+      "data-[ending-style]",
+      "data-[starting-style]"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "border",
+        "family": "neutral"
+      },
+      {
+        "id": "muted-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "popover",
+        "family": "surface"
+      },
+      {
+        "id": "popover-foreground",
+        "family": "surface"
+      },
+      {
+        "id": "radius-lg",
+        "family": "radius"
+      },
+      {
+        "id": "text-body",
+        "family": "typography"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}
