@@ -17,6 +17,8 @@
 
 Rules that the audit found broken most often: a quiet delete in a table row is `<Button variant="ghost-destructive">`, never `ghost` plus red classes. Every destructive action goes through `AlertDialog`. `Select` shows no checkmark on the chosen option. `DropdownMenu` shrink-wraps to its widest item. `Dialog` is for 1–4 fields; longer forms go to `Sheet`. Neutral labels are `<Badge variant="outline">`.
 
+**Every design ships a manifest.** Beside each `<Name>.dc.html` write `<Name>.manifest.json`, starting from `_manifest.example.json` in this project: the `designSystemVersion` and `designSystemDigest` copied from `_system.json`, one `components` entry per design-system element (a kebab-case `instanceId` also placed on the element as `data-instance`, the registry `component` id such as `alert-dialog`, its `variants` by axis, its `parts`), the `tokens` reached for directly, and the `viewports`, `themes` and `states` covered — `mobile` + `desktop`, `light` + `dark`, `loading` + `empty` + `error` + `success` are all required. `SKILL.md` has the full rule; the implementing agent reads the manifest before the design.
+
 **Where the truth lives.** `styles.css` → `_ds_bundle.css`: the first block is every token (`:root` light, `.dark` overrides) in OKLCH. `guidelines/design.md`: the full design language and usage rules — read it before a screen. `components/general/<Name>/<Name>.prompt.md`: variants, sizes, parts and rules per component; `<Name>.d.ts`: the props you may pass.
 
 ```jsx

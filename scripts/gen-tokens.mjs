@@ -11,12 +11,11 @@
 import { readFileSync, writeFileSync, mkdirSync, copyFileSync } from "node:fs"
 import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
-import { execFileSync } from "node:child_process"
-import { createHash } from "node:crypto"
 
 import { buildTokens } from "./lib/tokens.mjs"
 import { freshness, forced } from "./lib/stale.mjs";
 import { PUBLISHED, schemaUrl } from "./lib/publish.mjs"
+import { systemIdentity, systemSources } from "./lib/system.mjs"
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 
@@ -29,7 +28,10 @@ const stamp = freshness({
     "scripts/gen-tokens.mjs",
     "scripts/lib/tokens.mjs",
     "scripts/lib/publish.mjs",
+    "scripts/lib/system.mjs",
     "schemas/tokens.schema.json",
+    // The digest is the whole system's, so any system source regenerates this.
+    ...systemSources(),
   ],
   outputs: ["src/docs/generated/tokens.json", PUBLISHED.tokens, `${PUBLISHED.schemasDir}/tokens.schema.json`],
 });
@@ -44,13 +46,7 @@ const outPath = resolve(root, "src/docs/generated/tokens.json")
 const css = readFileSync(cssPath, "utf8")
 const { tokens, darkOnly } = buildTokens(css)
 
-const git = (...a) => {
-  try {
-    return execFileSync("git", a, { cwd: root, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).trim()
-  } catch {
-    return null
-  }
-}
+const system = systemIdentity()
 
 // A token defined only in .dark almost always means someone edited one block and
 // not the other — the single most common token mistake, per design.md.
@@ -68,12 +64,14 @@ for (const t of tokens) byFamily[t.family] = (byFamily[t.family] || 0) + 1
 
 const doc = {
   $schema: "../../../schemas/tokens.schema.json",
-  version: git("describe", "--tags", "--abbrev=0") || "untagged",
-  // Deliberately no commit SHA. This artifact is derived from globals.css, so
-  // its identity is the content digest — which changes when the tokens change.
-  // A commit SHA changes on every commit, which would make a committed copy
-  // impossible to keep parity-clean; the changelog already taught us that.
-  digest: createHash("sha256").update(css).digest("hex").slice(0, 16),
+  // The identity of the whole system — the same pair contracts.json, the
+  // contracts index and the design bundle's _system.json carry — so a design
+  // or an app can be checked against any one of them (scripts/lib/system.mjs).
+  // Deliberately no commit SHA: a content digest changes when the system
+  // changes, a SHA changes on every commit, and a committed copy has to stay
+  // parity-clean; the changelog already taught us that.
+  version: system.version,
+  digest: system.digest,
   source: "src/app/globals.css",
   generator: "scripts/gen-tokens.mjs",
   counts: {

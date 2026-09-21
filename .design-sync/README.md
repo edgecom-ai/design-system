@@ -11,6 +11,7 @@ the shadcn registry — `pnpm build` and `pnpm registry:build` never read it.
 | `config.json` | Converter configuration. **Not committed:** it names a specific Claude Design project, and this repo is public. |
 | `.cache/`, `bundle/` | Generated. Rebuilt by `pnpm design:build`; never hand-edited. |
 | `bundle/_overlay.json` | Generated. Which bundle paths to upload into a project this converter has already populated, and which are for a standalone project only. See MAINTAINERS.md → *Two shapes of destination*. |
+| `bundle/_manifest.example.json` | Generated. The design handoff manifest a design ships beside itself, copied from the published example so it names the same version and digest as `_system.json`. Part of the overlay. |
 | `bundle/_ds_needs_recompile` | Generated. Upload it **last**. The platform only recompiles its card index and token manifest when someone opens the project with this marker present; without it an upload changes nothing a designer can see. |
 
 ## Writing a preview

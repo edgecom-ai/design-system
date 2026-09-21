@@ -10,6 +10,8 @@
 //
 // It writes into .design-sync/bundle/:
 //   _system.json          version, commit, digest — so a design can name what it was built against
+//   _manifest.example.json  the design handoff manifest a design ships beside itself (plan §5.4),
+//                         copied from the published example so it carries the same identity
 //   SKILL.md              the invocable entry point (name: edgecom-design)
 //   README.md             compiled from design.md
 //   _base.css             the Edgecom tokens + only the utilities the cards use (lib/base-css.mjs)
@@ -26,16 +28,17 @@
 // cannot drift from the primitive: if the cva changes, the card changes, and
 // the stylesheet follows.
 
-import { readFileSync, writeFileSync, mkdirSync, rmSync, readdirSync, existsSync } from "node:fs"
+import { readFileSync, writeFileSync, mkdirSync, rmSync, readdirSync, existsSync, copyFileSync } from "node:fs"
 import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 import { execFileSync } from "node:child_process"
-import { createHash } from "node:crypto"
 
 import { readBlocks } from "./lib/tokens.mjs"
 import { buildBaseCss, probeUtilities, scanClasses } from "./lib/base-css.mjs"
 import { extractCva } from "./lib/cva.mjs"
 import { parseSections } from "./lib/sections.mjs"
+import { systemIdentity } from "./lib/system.mjs"
+import { PUBLISHED, urlOf, schemaUrl } from "./lib/publish.mjs"
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const outDir = resolve(root, ".design-sync/bundle")
@@ -160,21 +163,48 @@ async function build() {
 
   // ---- _system.json ---------------------------------------------------------
   const sha = git("rev-parse", "HEAD")
-  const tag = git("describe", "--tags", "--abbrev=0")
-  const digest = createHash("sha256").update(css).update(designMd).digest("hex").slice(0, 16)
+  // The same version and digest every published artifact carries
+  // (scripts/lib/system.mjs) — this stamp used to hash globals.css + design.md
+  // on its own, so nothing served could ever equal it and the version check a
+  // consumer runs against contracts/index.json could not pass.
+  const identity = systemIdentity()
   const system = {
     schemaVersion: "1",
     name: "Edgecom Energy Design System",
-    designSystemVersion: tag || "untagged",
+    designSystemVersion: identity.version,
     designSystemCommit: sha,
-    designSystemDigest: digest,
+    designSystemDigest: identity.digest,
     generatedAt: new Date().toISOString(),
     generator: "scripts/gen-design-sync.mjs",
     authority: "https://github.com/edgecom-ai/design-system",
     rules: "https://design.edgecom.ai/design.md",
-    note: "Generated. Do not hand-edit anything outside brand/.",
+    contracts: urlOf(PUBLISHED.contractsIndex),
+    manifestSchema: schemaUrl("design-manifest.schema.json"),
+    manifestExample: urlOf(PUBLISHED.designManifestExample),
+    manifestValidator: urlOf(PUBLISHED.checkDesignManifest),
+    note: "Generated. Do not hand-edit anything outside brand/. Every design ships a <Name>.manifest.json beside it — start from _manifest.example.json.",
   }
   writeFileSync(resolve(outDir, "_system.json"), JSON.stringify(system, null, 2) + "\n")
+
+  // ---- _manifest.example.json -----------------------------------------------
+  // The published example, verbatim, so the design agent has a complete manifest
+  // to copy without leaving the project. It is a docs:gen output and carries the
+  // identity of the system it was generated from; if that is not the identity
+  // this bundle stamps, the two were built from different trees.
+  const examplePath = resolve(root, PUBLISHED.designManifestExample)
+  if (!existsSync(examplePath)) {
+    console.error(`gen-design-sync — ${PUBLISHED.designManifestExample} is missing. Run \`pnpm docs:gen\` first.`)
+    process.exit(1)
+  }
+  const exampleDigest = JSON.parse(readFileSync(examplePath, "utf8")).designSystemDigest
+  if (exampleDigest !== identity.digest) {
+    console.error(
+      `gen-design-sync — ${PUBLISHED.designManifestExample} names digest ${exampleDigest}, the tree is ${identity.digest}. ` +
+        `Run \`pnpm docs:gen\` so the example and _system.json agree.`,
+    )
+    process.exit(1)
+  }
+  copyFileSync(examplePath, resolve(outDir, "_manifest.example.json"))
 
   // ---- SKILL.md + README.md -------------------------------------------------
   // The rules delivery. README is design.md's body verbatim — one authority,
@@ -196,8 +226,8 @@ user-invocable: true
 # Edgecom Energy — product design system
 
 **Generated from \`edgecom-ai/design-system\` at \`${system.designSystemVersion}\` (\`${(sha || "").slice(0, 7)}\`). Do not hand-edit.**
-Version, commit and digest are in \`_system.json\` — cite them in anything you produce so it can
-be checked against the system later.
+Version, commit and digest are in \`_system.json\`. Every design you produce ships a manifest
+beside it that cites them — see *Every design ships a manifest* below.
 
 ## Read this first
 
@@ -210,6 +240,7 @@ https://design.edgecom.ai/design.md. It is required, not advisory.
 |---|---|
 | \`README.md\` | The design language and usage rules. |
 | \`_system.json\` | Version, commit, digest. |
+| \`_manifest.example.json\` | A complete design manifest, already naming this system's version and digest. Copy it beside every design. |
 | \`foundations/\` | Colour, type scale, radius, elevation — rendered from the real tokens. |
 | \`components/*.html\` | Preview cards, rendered with each primitive's actual classes. |
 | \`components/*.md\` | Per-component spec: variants, sizes, defaults, install address. |
@@ -227,6 +258,28 @@ https://design.edgecom.ai/design.md. It is required, not advisory.
 - **Colour by meaning.** \`destructive\` means error or destructive action and is never a chart
   series. Commodity hues tag their commodity only.
 - **Reuse the primitives.** If nothing fits, stop and ask — do not hand-roll a parallel version.
+
+## Every design ships a manifest
+
+A rendered design carries no version and no component identity, so beside every design file you
+produce, write one: \`<Name>.manifest.json\` next to \`<Name>.dc.html\`. Start from
+\`_manifest.example.json\` — it is complete and already names this system's version and digest.
+
+- \`designSystemVersion\` and \`designSystemDigest\` are copied from \`_system.json\`. Never type them.
+- One entry in \`components\` per design-system element on the screen: a kebab-case \`instanceId\`
+  that you also put on the element as \`data-instance="…"\`; the registry \`component\` id exactly
+  as its spec is named (\`alert-dialog\`, not \`AlertDialog\`); the \`variants\` it sets, by axis
+  (\`{ "variant": "outline", "size": "sm" }\`); the \`parts\` it composes. A variant that is not in
+  the spec does not exist — pick from the spec, never invent one.
+- \`tokens\` lists every token the design reaches for directly, by id (\`primary\`, not \`--primary\`).
+- \`viewports\` needs \`mobile\` and \`desktop\`; \`themes\` needs \`light\` and \`dark\`; \`states\` needs
+  \`loading\`, \`empty\`, \`error\` and \`success\`. A design missing any of them is not finished.
+- \`interactions\` says what each control does, naming other instances by id.
+  \`approvedExceptions\` is the only place a deviation from the rules may live, with who approved it.
+
+The manifest is the first thing a coding agent reads: it verifies the version, fetches each
+component's contract, and checks every variant and token against the system. Schema:
+${system.manifestSchema} · validator: ${system.manifestValidator}
 
 ## Starting an artifact
 
@@ -322,11 +375,12 @@ body.ds-card{margin:0;padding:20px;background:var(--background);color:var(--fore
   // Emitted rather than remembered so the upload plan is derived from the build.
   const overlay = {
     note: "Paths to upload into a project the Claude Design converter already populates. The rest of this bundle is for a standalone project only.",
-    writes: ["SKILL.md", "_system.json", "_base.css", "foundations/**", "_ds_needs_recompile"],
+    writes: ["SKILL.md", "_system.json", "_manifest.example.json", "_base.css", "foundations/**", "_ds_needs_recompile"],
     uploadLast: "_ds_needs_recompile",
     standaloneOnly: ["README.md", "components/**"],
     reason: {
       "components/**": "the converter owns components/; our specs reach it through its docsDir instead",
+      "_manifest.example.json": "the design handoff manifest a design ships beside itself, stamped with the same identity as _system.json",
       "README.md": "the converter builds its own from conventions.md — don't clobber it",
       "_ds_needs_recompile": "without it the upload never reaches the card index or the token manifest — see below",
     },

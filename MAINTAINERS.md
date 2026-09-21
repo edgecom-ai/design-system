@@ -123,12 +123,12 @@ A destination project is one of two things, and the build says which paths suit 
 
 A **standalone** project is one this generator owns end to end: the whole bundle goes up, and the seven component cards here are all the cards there are.
 
-An **overlay** target is a project the official Claude Design converter has already populated. It brings its own `components/**` — one directory per component, with real `.d.ts` and a rendered card — plus `guidelines/**`, `_preview/**`, `_vendor/**`, `styles.css` and its own `README.md`. Uploading ours into `components/` would collide with that tree for nothing: the specs already reach it by another route, because the converter's config points its `docsDir` at `.design-sync/bundle/components`. What the converter has no equivalent of is the **authored layer** — the skill entry point, the provenance stamp, and the foundations cards with the stylesheet they link.
+An **overlay** target is a project the official Claude Design converter has already populated. It brings its own `components/**` — one directory per component, with real `.d.ts` and a rendered card — plus `guidelines/**`, `_preview/**`, `_vendor/**`, `styles.css` and its own `README.md`. Uploading ours into `components/` would collide with that tree for nothing: the specs already reach it by another route, because the converter's config points its `docsDir` at `.design-sync/bundle/components`. What the converter has no equivalent of is the **authored layer** — the skill entry point, the provenance stamp, the manifest example a design agent copies, and the foundations cards with the stylesheet they link.
 
 `_overlay.json` is written by the build and names exactly those paths, so the upload plan is derived from the bundle rather than remembered:
 
 ```
-writes:         SKILL.md  _system.json  _base.css  foundations/**
+writes:         SKILL.md  _system.json  _manifest.example.json  _base.css  foundations/**  _ds_needs_recompile
 standaloneOnly: README.md  components/**
 ```
 
@@ -176,11 +176,12 @@ Edit the **sources**, then run `pnpm registry:build` (or `pnpm docs:gen`). `preb
 | `src/docs/generated/contracts.json` | `docs:contracts` | `ui/*.tsx`, `sections.tsx`, `curated.ts`, `docs/contracts.json`, via `scripts/lib/contracts.mjs` |
 | `public/contracts.json`, `public/contracts/*.json`, `public/schemas/contracts.schema.json` | `docs:contracts` | the contracts above, published — one file per contract plus `index.json`, the search surface |
 | `public/tokens.json`, `public/schemas/tokens.schema.json` | `docs:tokens` | `tokens.json` above, published |
+| `public/design-manifest.example.json`, `public/schemas/design-manifest.schema.json`, `public/tools/check-design-manifest.mjs` | `docs:design-manifest` | `src/docs/design-manifest.example.json` (placeholders filled with the system identity), `schemas/design-manifest.schema.json`, `scripts/check-design-manifest.mjs` |
 | the `@@GENERATED:contracts` block in `public/agents.md`; `public/skills/*/SKILL.md` | `docs:agents` | `contracts.json`, `.claude/skills/<consumer skill>/SKILL.md`, `scripts/lib/publish.mjs` |
 | `public/docs-source/*` (git-**ignored**) | `docs:source` | `components/demo/*`, `components/shadcn-studio/*` |
 | `src/docs/generated/changelog.ts`, `CHANGELOG.md`, `public/changelog.md` — **git-ignored** | `docs:changelog` | git history + `src/docs/changelog-notes.json` |
 
-Note: `src/docs/api.ts`, `src/docs/curated.ts`, `src/docs/contracts.json`, and `src/docs/changelog-notes.json` are **hand-written** sources — distinct from the generated `src/docs/generated/*`. The name collision is worth watching: `src/docs/contracts.json` is the authored overlay you edit, `src/docs/generated/contracts.json` is the compiled artifact you don't.
+Note: `src/docs/api.ts`, `src/docs/curated.ts`, `src/docs/contracts.json`, `src/docs/design-manifest.example.json`, and `src/docs/changelog-notes.json` are **hand-written** sources — distinct from the generated `src/docs/generated/*`. The name collision is worth watching: `src/docs/contracts.json` is the authored overlay you edit, `src/docs/generated/contracts.json` is the compiled artifact you don't.
 
 ## Component contracts
 
@@ -193,11 +194,32 @@ The split matters when you edit one:
 
 `gen-contracts` fails on an unknown key or an id with no section, so a typo can't silently drop the guidance someone wrote. Twelve components are authored so far — button, input, select, badge, card, dialog, sheet, table, sidebar, toast, alert-dialog and hover-card; the rest carry the derived half only. `contracts.json`'s own `counts` block is the number of record, not this sentence. Everything written there is published to consumers — through the design specs, and directly — so each claim has to be true of the primitive or stated in `design.md`.
 
-The contracts have three consumers now, and each reads them rather than restating them:
+The contracts have four consumers now, and each reads them rather than restating them:
 
 - **The registry.** `gen-registry` takes each component item's `description` from its contract's `summary`, and its `docs` — the note `shadcn add` prints after installing — from the contract's page and contract addresses. A primitive with no docs section has no contract and keeps a templated description; `registry:gen` fails if `contracts.json` is missing, so run `docs:gen` first (`prebuild` does).
 - **The design bundle.** `design:sync` publishes each contract's `rules` into its Claude Design spec.
 - **Consuming agents**, over HTTP. `gen-contracts` publishes the document to `public/contracts.json`, one file per contract to `public/contracts/<id>.json` — pruned when a contract goes away — and a compact `public/contracts/index.json` carrying what selection is made on: summary, purpose, `useWhen`/`dontUseWhen`, variants, parts, install command, and each full contract's URL. The served copies point `$schema` at `public/schemas/`, where the schemas are published too, so the `$id` each schema declares is a real address. `check:schemas` validates the served pair as well as the repo pair. All published addresses are spelled out once, in [`scripts/lib/publish.mjs`](scripts/lib/publish.mjs).
+- **Design manifests.** `check-design-manifest` resolves every instance a manifest declares to a contract and checks its variants and parts against it — see the next section.
+
+## One identity for the whole system
+
+Every published artifact — `tokens.json`, `contracts.json`, `contracts/index.json`, each `contracts/<id>.json`, the `@@GENERATED:contracts` block in `agents.md` — and the design bundle's `_system.json` carry the same `version` and `digest`, computed once in [`scripts/lib/system.mjs`](scripts/lib/system.mjs). The digest is sha256 over the sources that *are* the design system: `globals.css`, `design.md`, every `src/components/ui/*.tsx`, `sections.tsx`, and the authored `api.ts`, `curated.ts` and `contracts.json` overlays. It changes when any of them changes and never on a commit, so the committed copies stay parity-clean.
+
+It used to be three digests — tokens over `globals.css`, contracts over the contract inputs, `_system.json` over `globals.css` + `design.md`. Each was an honest content hash and no two could ever be equal, so the version check the consumer skill described could not pass. A design's manifest cites this identity; the check only means something if there is one value to cite. Any generator that stamps an identity imports it from `system.mjs`, and lists `...systemSources()` among its freshness inputs so a primitive change regenerates it.
+
+## Design manifests
+
+A design produced in Claude Design carries no version and no component identity, so the design step **authors** one beside it: `<Name>.manifest.json` next to `<Name>.dc.html` (plan §5.4). It is the instance-level form of the old hand-written screen map — one entry per designed element naming its registry `component`, `variants` by axis and `parts`, plus the system identity, the tokens reached for, the viewports, themes and states covered, the interactions, and any approved exceptions.
+
+Three files define it, all published by `docs:design-manifest`:
+
+- [`schemas/design-manifest.schema.json`](schemas/design-manifest.schema.json) — the shape. Strict: unknown fields fail.
+- [`src/docs/design-manifest.example.json`](src/docs/design-manifest.example.json) — a complete example, hand-written with `@@version` / `@@digest` placeholders that the generator fills with the current identity. It is published at `design.edgecom.ai/design-manifest.example.json` and copied into the design bundle as `_manifest.example.json`, so a design agent has the shape beside `_system.json`. The generator refuses a literal identity in the source, and `design:sync` refuses to bundle an example whose digest is not the tree's — run `docs:gen` first.
+- [`scripts/check-design-manifest.mjs`](scripts/check-design-manifest.mjs) — the validator, deliberately **dependency-free** so a consumer can `curl` it from `design.edgecom.ai/tools/` and run it with Node alone. It checks the shape by hand, then the meaning against the system: identity current, every `component` a contract, every variant axis and option on that contract, every part listed by it, every token in the model, every cited instance declared, and coverage of mobile/desktop, light/dark, loading/empty/error/success (warnings; errors under `--strict`). Inside the repo it reads `src/docs/generated/`; anywhere else, or with `--remote`, it fetches from the site.
+
+CI runs `check:schemas`, which validates the published example against the real schema with Ajv, and `check:design-manifest`, which runs the hand-rolled validator over the same file — so the schema and the validator cannot drift apart without a red build. When you add a field, change all three and the SKILL.md section the bundle generator writes.
+
+Where the instruction to write one reaches the design agent: the bundle's `SKILL.md` (*Every design ships a manifest*), the conventions header the converter prepends to the project README, and the rulebook in each design project's `CLAUDE.md`.
 
 ## The changelog maintains itself
 
