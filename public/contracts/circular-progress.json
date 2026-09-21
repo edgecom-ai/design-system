@@ -1,0 +1,55 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "circular-progress",
+    "label": "Circular progress",
+    "registryItem": "edgecom-ai/design-system/circular-progress",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/circular-progress",
+    "docs": "https://design.edgecom.ai/components/circular-progress/",
+    "source": "src/components/ui/circular-progress.tsx",
+    "summary": "A determinate ring, for a single figure that has a ceiling — a meter's share of its site total, or a job's completion.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": null,
+    "parts": [
+      {
+        "name": "CircularProgress",
+        "description": "The ring, its track, and the optional value in the centre."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "primary",
+        "family": "brand"
+      },
+      {
+        "id": "text-body-lg",
+        "family": "typography"
+      },
+      {
+        "id": "text-title",
+        "family": "typography"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

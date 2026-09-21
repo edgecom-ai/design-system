@@ -22,6 +22,11 @@
 //     Every component depends on the theme. Package dependencies carry the
 //     version range this repo builds against, plus any @types companion the
 //     package needs (see scripts/lib/deps.mjs).
+//   - description <- the component's contract (src/docs/generated/contracts.json),
+//     so `shadcn search`/`view` show the same one-line summary the docs page and
+//     the design spec show, and `docs` — the note the CLI prints after an install
+//     — names the page and the contract. A primitive with no contract (no docs
+//     section of its own) keeps a templated description.
 // Then `pnpm exec shadcn build` flattens the include tree into public/r/*.json.
 
 import { readFileSync, writeFileSync, readdirSync } from "node:fs";
@@ -31,6 +36,7 @@ import { fileURLToPath } from "node:url";
 import { specifiersOf, classify } from "./lib/imports.mjs";
 import { withVersion, typesFor } from "./lib/deps.mjs";
 import { readBlocks } from "./lib/tokens.mjs";
+import { PUBLIC_BASE, contractUrl } from "./lib/publish.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const uiDir = resolve(root, "src/components/ui");
@@ -70,6 +76,37 @@ function keyframeRules() {
   return rules;
 }
 const themeCss = keyframeRules();
+
+// --- contracts ---------------------------------------------------------------
+// The registry description used to be a templated string that could say
+// anything. The contract beside it is derived from the primitive and the
+// curated docs prose, so it is the one line that is actually true of the
+// component. docs:gen writes contracts.json before registry:gen runs (prebuild
+// orders them), and CI's parity gate catches a stale copy.
+const contractsPath = resolve(root, "src/docs/generated/contracts.json");
+let contractsById = new Map();
+try {
+  const { contracts } = JSON.parse(readFileSync(contractsPath, "utf8"));
+  contractsById = new Map(
+    contracts.map((c) => [c.source.replace(/^src\/components\/ui\//, "").replace(/\.tsx$/, ""), c])
+  );
+} catch (err) {
+  console.error(
+    `gen-registry — cannot read src/docs/generated/contracts.json (${err.code ?? err.message}). ` +
+      "Run `pnpm docs:gen` first; registry descriptions are derived from the contracts."
+  );
+  process.exit(1);
+}
+
+// The note `shadcn add` prints once the files are written: where the page is,
+// and where the contract is. An agent that installed without reading either
+// gets both addresses at the moment it is about to use the component.
+function installNote(contract) {
+  return (
+    `Docs: ${contract.docs} · Contract: ${contractUrl(contract.id)} · ` +
+    `Guardrails: ${PUBLIC_BASE}/design.md`
+  );
+}
 
 // --- import analysis --------------------------------------------------------
 // The scanner is shared with scripts/check-registry.mjs so the derivation and
@@ -150,11 +187,17 @@ for (const name of uiFiles) {
     ...hooks.map(ref),
   ];
 
+  // A file the contracts know by another section id (item.tsx is the List
+  // page's primitive; sonner.tsx is Toast's) still resolves — the map is keyed
+  // by source file, not by section id.
+  const contract = contractsById.get(name);
+
   componentItems.push({
     name,
     type: "registry:ui",
     title: titleCase(name),
-    description: `The Edgecom ${titleCase(name)} component.`,
+    description: contract?.summary ?? `The Edgecom ${titleCase(name)} component.`,
+    ...(contract ? { docs: installNote(contract) } : {}),
     ...(pkgs.length ? { dependencies: pkgs.map(withVersion) } : {}),
     ...(typeCompanions(pkgs).length
       ? { devDependencies: typeCompanions(pkgs) }
@@ -218,9 +261,11 @@ const registry = {
 };
 
 writeFileSync(resolve(root, "registry.json"), JSON.stringify(registry, null, 2) + "\n");
+const described = componentItems.filter((i) => i.docs).length;
 console.log(
   `gen-registry — ${include.length} chunk files · ${1 + uiFiles.length + hookItems.length} items ` +
     `(1 theme + ${uiFiles.length} components + ${hookItems.length} hooks), ` +
+    `${described}/${uiFiles.length} component descriptions from contracts, ` +
     `${Object.keys(lightVars).length} light / ${Object.keys(darkVars).length} dark / ` +
     `${Object.keys(themeVars).length} theme vars, ${Object.keys(themeCss).length} keyframes`
 );

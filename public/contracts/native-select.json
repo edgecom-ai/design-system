@@ -1,0 +1,103 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "native-select",
+    "label": "Native select",
+    "registryItem": "edgecom-ai/design-system/native-select",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/native-select",
+    "docs": "https://design.edgecom.ai/components/native-select/",
+    "source": "src/components/ui/native-select.tsx",
+    "summary": "The platform select element, styled to match the design system — for dense forms and small screens where the OS picker is the better control.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": null,
+    "parts": [
+      {
+        "name": "NativeSelect",
+        "description": "Wrapper positioning the chevron around a styled select."
+      },
+      {
+        "name": "NativeSelectOptGroup",
+        "description": "Labelled group of options."
+      },
+      {
+        "name": "NativeSelectOption",
+        "description": "One option, painted on the OS canvas colours."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [
+      "aria-invalid",
+      "data-[size=sm]",
+      "disabled",
+      "focus-visible",
+      "hover"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "border",
+        "family": "neutral"
+      },
+      {
+        "id": "destructive",
+        "family": "status"
+      },
+      {
+        "id": "input",
+        "family": "neutral"
+      },
+      {
+        "id": "input-hover",
+        "family": "interaction"
+      },
+      {
+        "id": "input-surface",
+        "family": "interaction"
+      },
+      {
+        "id": "muted-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "primary",
+        "family": "brand"
+      },
+      {
+        "id": "primary-foreground",
+        "family": "brand"
+      },
+      {
+        "id": "radius-lg",
+        "family": "radius"
+      },
+      {
+        "id": "ring",
+        "family": "neutral"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [
+        "aria-hidden"
+      ],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

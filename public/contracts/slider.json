@@ -1,0 +1,70 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "slider",
+    "label": "Slider",
+    "registryItem": "edgecom-ai/design-system/slider",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/slider",
+    "docs": "https://design.edgecom.ai/components/slider/",
+    "source": "src/components/ui/slider.tsx",
+    "summary": "A track-and-thumb control for a value or range; renders one thumb per value.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": {
+      "name": "Base UI Slider",
+      "url": "https://base-ui.com/react/components/slider"
+    },
+    "parts": [
+      {
+        "name": "Slider",
+        "description": "All-in-one slider: track, filled range, and thumbs from value/defaultValue."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [
+      "data-disabled",
+      "disabled",
+      "focus-visible"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "background",
+        "family": "surface"
+      },
+      {
+        "id": "border",
+        "family": "neutral"
+      },
+      {
+        "id": "muted",
+        "family": "neutral"
+      },
+      {
+        "id": "primary",
+        "family": "brand"
+      },
+      {
+        "id": "ring",
+        "family": "neutral"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

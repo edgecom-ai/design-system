@@ -1,0 +1,168 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "context-menu",
+    "label": "Context menu",
+    "registryItem": "edgecom-ai/design-system/context-menu",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/context-menu",
+    "docs": "https://design.edgecom.ai/components/context-menu/",
+    "source": "src/components/ui/context-menu.tsx",
+    "summary": "A right-click menu: a Trigger region opens a portalled popup of items, checkboxes, radios, labels, and nested submenus.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": {
+      "name": "Base UI ContextMenu",
+      "url": "https://base-ui.com/react/components/context-menu"
+    },
+    "parts": [
+      {
+        "name": "ContextMenu",
+        "description": "Root managing the menu's open state."
+      },
+      {
+        "name": "ContextMenuTrigger",
+        "description": "The region that opens the menu on right-click."
+      },
+      {
+        "name": "ContextMenuContent",
+        "description": "Portalled, positioned popup container for items."
+      },
+      {
+        "name": "ContextMenuItem",
+        "description": "A clickable menu row (supports inset and destructive)."
+      },
+      {
+        "name": "ContextMenuCheckboxItem",
+        "description": "A menu item with a check indicator for a boolean."
+      },
+      {
+        "name": "ContextMenuRadioItem",
+        "description": "A menu item with a dot indicator; use inside a RadioGroup."
+      },
+      {
+        "name": "ContextMenuLabel",
+        "description": "Muted, non-interactive heading. Must be inside a Group."
+      },
+      {
+        "name": "ContextMenuSeparator",
+        "description": "Thin divider between menu sections."
+      },
+      {
+        "name": "ContextMenuShortcut",
+        "description": "Right-aligned muted text showing a keyboard shortcut."
+      },
+      {
+        "name": "ContextMenuGroup",
+        "description": "Wraps related items. Required around a Label."
+      },
+      {
+        "name": "ContextMenuPortal",
+        "description": "Portal that renders the menu content."
+      },
+      {
+        "name": "ContextMenuSub",
+        "description": "Root for a nested submenu."
+      },
+      {
+        "name": "ContextMenuSubContent",
+        "description": "Portalled popup for a submenu."
+      },
+      {
+        "name": "ContextMenuSubTrigger",
+        "description": "A menu item that opens a submenu; shows a chevron."
+      },
+      {
+        "name": "ContextMenuRadioGroup",
+        "description": "Coordinates selection among radio items."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [
+      "data-[side=bottom]",
+      "data-[side=inline-end]",
+      "data-[side=inline-start]",
+      "data-[side=left]",
+      "data-[side=right]",
+      "data-[side=top]",
+      "data-[variant=destructive]",
+      "data-closed",
+      "data-disabled",
+      "data-inset",
+      "data-open",
+      "data-popup-open",
+      "focus"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "accent",
+        "family": "neutral"
+      },
+      {
+        "id": "accent-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "border",
+        "family": "neutral"
+      },
+      {
+        "id": "destructive",
+        "family": "status"
+      },
+      {
+        "id": "destructive-emphasis",
+        "family": "status"
+      },
+      {
+        "id": "foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "muted-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "popover",
+        "family": "surface"
+      },
+      {
+        "id": "popover-foreground",
+        "family": "surface"
+      },
+      {
+        "id": "radius-lg",
+        "family": "radius"
+      },
+      {
+        "id": "radius-md",
+        "family": "radius"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      },
+      {
+        "id": "text-caption",
+        "family": "typography"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

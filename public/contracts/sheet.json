@@ -1,0 +1,142 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "sheet",
+    "label": "Sheet",
+    "registryItem": "edgecom-ai/design-system/sheet",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/sheet",
+    "docs": "https://design.edgecom.ai/components/sheet/",
+    "source": "src/components/ui/sheet.tsx",
+    "summary": "A dialog panel that slides in from an edge. A Trigger opens a portalled Content with header/footer, title, description, and close.",
+    "purpose": "The edge-anchored panel for longer edit flows. 420px on the inline edges by default, full width on mobile.",
+    "useWhen": [
+      "An edit or update form runs to many fields.",
+      "A detail panel should keep the page context visible behind it."
+    ],
+    "dontUseWhen": [
+      "The form is one to four fields — that is a `dialog`.",
+      "The flow is a destructive confirmation — that is an `alert-dialog`."
+    ],
+    "base": {
+      "name": "Base UI Dialog",
+      "url": "https://base-ui.com/react/components/dialog"
+    },
+    "parts": [
+      {
+        "name": "Sheet",
+        "description": "Root managing the sheet's open state."
+      },
+      {
+        "name": "SheetTrigger",
+        "description": "Opens the sheet; pass a Button via the render prop."
+      },
+      {
+        "name": "SheetClose",
+        "description": "Closes the sheet; wrap a Button via the render prop."
+      },
+      {
+        "name": "SheetContent",
+        "description": "The sliding panel; takes a side prop (default right). 420px wide for left/right, uncapped for top/bottom — resize with a plain sm:max-w-* class, or set the --sheet-width custom property."
+      },
+      {
+        "name": "SheetHeader",
+        "description": "Top section for the title and description."
+      },
+      {
+        "name": "SheetFooter",
+        "description": "Bottom section for action buttons."
+      },
+      {
+        "name": "SheetTitle",
+        "description": "Accessible heading for the panel."
+      },
+      {
+        "name": "SheetDescription",
+        "description": "Muted supporting text under the title."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [
+      "data-[side=bottom]",
+      "data-[side=left]",
+      "data-[side=right]",
+      "data-[side=top]",
+      "data-ending-style",
+      "data-starting-style"
+    ],
+    "responsive": [
+      "sm"
+    ],
+    "tokens": [
+      {
+        "id": "font-heading",
+        "family": "typography"
+      },
+      {
+        "id": "foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "muted-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "popover",
+        "family": "surface"
+      },
+      {
+        "id": "popover-foreground",
+        "family": "surface"
+      },
+      {
+        "id": "scrim",
+        "family": "surface"
+      },
+      {
+        "id": "text-body",
+        "family": "typography"
+      },
+      {
+        "id": "text-body-lg",
+        "family": "typography"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      }
+    ],
+    "requires": [
+      "A `SheetTitle`.",
+      "The default top-right close (X)."
+    ],
+    "forbids": [
+      "Widening past the default unless the content genuinely needs it — and then through the `--sheet-width` custom property the primitive reads, not a `w-*` override.",
+      "Removing the close."
+    ],
+    "rules": [
+      "Default width 420px, full-width on mobile. Keeps its top-right close (X)."
+    ],
+    "behavior": {},
+    "a11y": {
+      "attributes": [
+        "sr-only"
+      ],
+      "requirements": [
+        "Focus moves into the panel on open and returns to the trigger on close."
+      ]
+    },
+    "examples": [
+      "`<Sheet><SheetTrigger render={<Button variant=\"outline\">Edit site</Button>} /><SheetContent side=\"right\"><SheetHeader><SheetTitle>Edit site</SheetTitle></SheetHeader>…</SheetContent></Sheet>`"
+    ],
+    "antiPatterns": [
+      "A sheet used as a permanent side panel — it is an overlay, mounted at the app root.",
+      "A `w-[600px]` on `SheetContent` instead of setting `--sheet-width`."
+    ],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": true
+  }
+}

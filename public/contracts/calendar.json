@@ -1,0 +1,99 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "calendar",
+    "label": "Calendar",
+    "registryItem": "edgecom-ai/design-system/calendar",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/calendar",
+    "docs": "https://design.edgecom.ai/components/calendar/",
+    "source": "src/components/ui/calendar.tsx",
+    "summary": "A styled react-day-picker month grid with a custom day-button renderer.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": null,
+    "parts": [
+      {
+        "name": "Calendar",
+        "description": "Styled DayPicker root rendering the month grid, nav, and dropdowns."
+      },
+      {
+        "name": "CalendarDayButton",
+        "description": "Ghost button for one day cell, with selection/range styling."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [
+      "aria-disabled",
+      "aria-selected",
+      "data-[range-end=true]",
+      "data-[range-middle=true]",
+      "data-[range-start=true]",
+      "data-[selected-single=true]",
+      "data-[selected=true]",
+      "group-data-[focused=true]/day",
+      "hover"
+    ],
+    "responsive": [
+      "md"
+    ],
+    "tokens": [
+      {
+        "id": "background",
+        "family": "surface"
+      },
+      {
+        "id": "foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "muted",
+        "family": "neutral"
+      },
+      {
+        "id": "muted-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "popover",
+        "family": "surface"
+      },
+      {
+        "id": "primary",
+        "family": "brand"
+      },
+      {
+        "id": "primary-foreground",
+        "family": "brand"
+      },
+      {
+        "id": "ring",
+        "family": "neutral"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      },
+      {
+        "id": "text-caption",
+        "family": "typography"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

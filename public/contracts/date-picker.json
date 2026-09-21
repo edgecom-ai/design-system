@@ -1,0 +1,100 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "date-picker",
+    "label": "Date picker",
+    "registryItem": "edgecom-ai/design-system/date-picker",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/date-picker",
+    "docs": "https://design.edgecom.ai/components/date-picker/",
+    "source": "src/components/ui/date-picker.tsx",
+    "summary": "A single-date control pairing a popover-triggering button with a Calendar.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": null,
+    "parts": [
+      {
+        "name": "DatePicker",
+        "description": "Button + popover Calendar for selecting a single date."
+      },
+      {
+        "name": "MonthRangePicker",
+        "description": null
+      },
+      {
+        "name": "WindowRangePicker",
+        "description": null
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [
+      "data-[empty=true]",
+      "data-[window-endpoint=true]",
+      "data-[window-middle=true]",
+      "data-[window-preview=true]",
+      "group-data-[focused=true]/day",
+      "hover"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "accent",
+        "family": "neutral"
+      },
+      {
+        "id": "accent-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "muted",
+        "family": "neutral"
+      },
+      {
+        "id": "muted-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "primary",
+        "family": "brand"
+      },
+      {
+        "id": "primary-foreground",
+        "family": "brand"
+      },
+      {
+        "id": "radius-md",
+        "family": "radius"
+      },
+      {
+        "id": "ring",
+        "family": "neutral"
+      },
+      {
+        "id": "text-caption",
+        "family": "typography"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [
+        "aria-label"
+      ],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

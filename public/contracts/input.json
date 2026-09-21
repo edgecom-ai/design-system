@@ -1,0 +1,110 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "input",
+    "label": "Input",
+    "registryItem": "edgecom-ai/design-system/input",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/input",
+    "docs": "https://design.edgecom.ai/components/input/",
+    "source": "src/components/ui/input.tsx",
+    "summary": "A single-line text field with focus, disabled, and invalid states.",
+    "purpose": "The single-line text field. It renders the destructive border and ring from `aria-invalid`, so the invalid state is a data attribute rather than a class override.",
+    "useWhen": [
+      "A single line of free text or a number is entered.",
+      "It sits inside a `field`, which supplies the label, description and error slots."
+    ],
+    "dontUseWhen": [
+      "The value belongs to a known set — that is `select`, `combobox`, or `radio-group`.",
+      "The control needs an affix, icon, or button inside it — that is `input-group`."
+    ],
+    "base": {
+      "name": "Base UI Input",
+      "url": "https://base-ui.com/react/components/input"
+    },
+    "parts": [
+      {
+        "name": "Input",
+        "description": "Styled text input element."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [
+      "aria-invalid",
+      "disabled",
+      "focus-visible"
+    ],
+    "responsive": [
+      "md"
+    ],
+    "tokens": [
+      {
+        "id": "border",
+        "family": "neutral"
+      },
+      {
+        "id": "destructive",
+        "family": "status"
+      },
+      {
+        "id": "foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "input",
+        "family": "neutral"
+      },
+      {
+        "id": "muted-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "radius-lg",
+        "family": "radius"
+      },
+      {
+        "id": "ring",
+        "family": "neutral"
+      },
+      {
+        "id": "text-body-lg",
+        "family": "typography"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      }
+    ],
+    "requires": [
+      "A programmatic label: `field`'s `FieldLabel`, or an `aria-label` where no visible label exists.",
+      "`aria-invalid` on the control when validation fails, paired with a `FieldError` that names what is wrong."
+    ],
+    "forbids": [
+      "Re-styling the invalid state with border or ring utilities — the primitive renders it from `aria-invalid`.",
+      "A fixed px width. The field fills its container and the layout decides the measure."
+    ],
+    "rules": [],
+    "behavior": {
+      "error": "Invalid means `aria-invalid` on the control plus an inline `FieldError` naming the problem — never a generic toast, and never a silently blocked submit button."
+    },
+    "a11y": {
+      "attributes": [],
+      "requirements": [
+        "Every field is labelled.",
+        "Colour is never the only error signal; the message carries the meaning."
+      ]
+    },
+    "examples": [
+      "`<Field><FieldLabel>Site name</FieldLabel><Input aria-invalid={!valid} /><FieldError>Site name is required</FieldError></Field>`"
+    ],
+    "antiPatterns": [
+      "A required field that blocks submission with no inline message.",
+      "Hand-drawn focus styling that replaces the `ring` token."
+    ],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": true
+  }
+}

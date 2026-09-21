@@ -1,0 +1,140 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "navigation-menu",
+    "label": "Navigation menu",
+    "registryItem": "edgecom-ai/design-system/navigation-menu",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/navigation-menu",
+    "docs": "https://design.edgecom.ai/components/navigation-menu/",
+    "source": "src/components/ui/navigation-menu.tsx",
+    "summary": "A horizontal nav bar: a List of items whose Triggers open Content panels, with an indicator arrow and a portalled viewport.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": {
+      "name": "Base UI NavigationMenu",
+      "url": "https://base-ui.com/react/components/navigation-menu"
+    },
+    "parts": [
+      {
+        "name": "NavigationMenu",
+        "description": "Root wrapper that also mounts the positioner."
+      },
+      {
+        "name": "NavigationMenuContent",
+        "description": "Panel shown for an open item."
+      },
+      {
+        "name": "NavigationMenuIndicator",
+        "description": "Animated arrow marking the active trigger."
+      },
+      {
+        "name": "NavigationMenuItem",
+        "description": "One menu entry container."
+      },
+      {
+        "name": "NavigationMenuLink",
+        "description": "A styled navigable link row."
+      },
+      {
+        "name": "NavigationMenuList",
+        "description": "Horizontal row of menu items."
+      },
+      {
+        "name": "NavigationMenuTrigger",
+        "description": "Toggles a content panel; shows a rotating chevron."
+      },
+      {
+        "name": "NavigationMenuPositioner",
+        "description": "Portalled positioner holding the popup and viewport."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [
+      "data-[ending-style]",
+      "data-[motion=from-end]",
+      "data-[motion=from-start]",
+      "data-[motion=to-end]",
+      "data-[motion=to-start]",
+      "data-[motion^=from-]",
+      "data-[motion^=to-]",
+      "data-[side=bottom]",
+      "data-[slot=navigation-menu-link]",
+      "data-[state=hidden]",
+      "data-[state=visible]",
+      "data-activation-direction=left",
+      "data-activation-direction=right",
+      "data-active",
+      "data-closed",
+      "data-ending-style",
+      "data-instant",
+      "data-open",
+      "data-popup-open",
+      "data-starting-style",
+      "disabled",
+      "focus",
+      "focus-visible",
+      "group-data-[viewport=false]/navigation-menu",
+      "group-data-open/navigation-menu-trigger",
+      "group-data-popup-open/navigation-menu-trigger",
+      "hover"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "border",
+        "family": "neutral"
+      },
+      {
+        "id": "foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "muted",
+        "family": "neutral"
+      },
+      {
+        "id": "popover",
+        "family": "surface"
+      },
+      {
+        "id": "popover-foreground",
+        "family": "surface"
+      },
+      {
+        "id": "radius-lg",
+        "family": "radius"
+      },
+      {
+        "id": "radius-md",
+        "family": "radius"
+      },
+      {
+        "id": "ring",
+        "family": "neutral"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [
+        "aria-hidden"
+      ],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

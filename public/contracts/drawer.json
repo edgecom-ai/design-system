@@ -1,0 +1,155 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "drawer",
+    "label": "Drawer",
+    "registryItem": "edgecom-ai/design-system/drawer",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/drawer",
+    "docs": "https://design.edgecom.ai/components/drawer/",
+    "source": "src/components/ui/drawer.tsx",
+    "summary": "A swipeable panel that slides in from an edge: a Trigger opens a portalled overlay + Content, with header/footer, title, and description.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": {
+      "name": "Base UI Drawer",
+      "url": "https://base-ui.com/react/components/drawer"
+    },
+    "parts": [
+      {
+        "name": "Drawer",
+        "description": "Root setting modality, snap points, and swipe direction."
+      },
+      {
+        "name": "DrawerPortal",
+        "description": "Renders the drawer outside the DOM tree."
+      },
+      {
+        "name": "DrawerOverlay",
+        "description": "Swipe-aware dimmed backdrop behind the drawer."
+      },
+      {
+        "name": "DrawerSwipeHandle",
+        "description": "Aria-hidden grip for dragging the drawer."
+      },
+      {
+        "name": "DrawerTrigger",
+        "description": "Element that opens the drawer on click."
+      },
+      {
+        "name": "DrawerClose",
+        "description": "Button that closes the drawer."
+      },
+      {
+        "name": "DrawerContent",
+        "description": "Portalled panel that slides in from an edge."
+      },
+      {
+        "name": "DrawerHeader",
+        "description": "Styled div stacking the title and description."
+      },
+      {
+        "name": "DrawerFooter",
+        "description": "Styled footer pinned to the bottom."
+      },
+      {
+        "name": "DrawerTitle",
+        "description": "Styled heading text for the drawer."
+      },
+      {
+        "name": "DrawerDescription",
+        "description": "Muted supporting text under the title."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [
+      "active",
+      "data-[modal=true]",
+      "data-[swipe-axis=x]",
+      "data-[swipe-axis=y]",
+      "data-[swipe-direction=down]",
+      "data-[swipe-direction=left]",
+      "data-[swipe-direction=right]",
+      "data-[swipe-direction=up]",
+      "data-ending-style",
+      "data-nested-drawer-open",
+      "data-nested-drawer-swiping",
+      "data-snap-points",
+      "data-starting-style",
+      "data-swiping",
+      "group-data-[swipe-axis=x]/drawer-popup",
+      "group-data-[swipe-axis=y]/drawer-popup",
+      "group-data-[swipe-direction=down]/drawer-popup",
+      "group-data-[swipe-direction=left]/drawer-popup",
+      "group-data-[swipe-direction=right]/drawer-popup",
+      "group-data-[swipe-direction=up]/drawer-popup",
+      "group-data-nested-drawer-open/drawer-popup",
+      "group-data-nested-drawer-swiping/drawer-popup",
+      "group-data-swiping/drawer-popup"
+    ],
+    "responsive": [
+      "md",
+      "sm"
+    ],
+    "tokens": [
+      {
+        "id": "font-heading",
+        "family": "typography"
+      },
+      {
+        "id": "foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "muted",
+        "family": "neutral"
+      },
+      {
+        "id": "muted-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "popover",
+        "family": "surface"
+      },
+      {
+        "id": "popover-foreground",
+        "family": "surface"
+      },
+      {
+        "id": "scrim",
+        "family": "surface"
+      },
+      {
+        "id": "text-body",
+        "family": "typography"
+      },
+      {
+        "id": "text-body-lg",
+        "family": "typography"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [
+        "aria-hidden"
+      ],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "checkbox",
+    "label": "Checkbox",
+    "registryItem": "edgecom-ai/design-system/checkbox",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/checkbox",
+    "docs": "https://design.edgecom.ai/components/checkbox/",
+    "source": "src/components/ui/checkbox.tsx",
+    "summary": "A checkbox styled as a small box, with a tick when selected and a dash when indeterminate.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": {
+      "name": "Base UI Checkbox",
+      "url": "https://base-ui.com/react/components/checkbox"
+    },
+    "parts": [
+      {
+        "name": "Checkbox",
+        "description": "Checkbox root. Selected shows a tick; pass indeterminate (or use a CheckboxGroup parent) for the dash. inline-flex, so a centred cell centres it without a wrapper."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [
+      "aria-checked",
+      "aria-invalid",
+      "data-checked",
+      "data-disabled",
+      "data-indeterminate",
+      "disabled",
+      "focus-visible",
+      "group-data-indeterminate/checkbox-indicator"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "border",
+        "family": "neutral"
+      },
+      {
+        "id": "destructive",
+        "family": "status"
+      },
+      {
+        "id": "input",
+        "family": "neutral"
+      },
+      {
+        "id": "primary",
+        "family": "brand"
+      },
+      {
+        "id": "primary-foreground",
+        "family": "brand"
+      },
+      {
+        "id": "ring",
+        "family": "neutral"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

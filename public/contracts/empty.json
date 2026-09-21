@@ -1,0 +1,116 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "empty",
+    "label": "Empty state",
+    "registryItem": "edgecom-ai/design-system/empty",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/empty",
+    "docs": "https://design.edgecom.ai/components/empty/",
+    "source": "src/components/ui/empty.tsx",
+    "summary": "An empty-state placeholder: a dashed-border container with a header (media, title, description) and a content area for actions.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": null,
+    "parts": [
+      {
+        "name": "Empty",
+        "description": "Centered dashed-border container for the empty state."
+      },
+      {
+        "name": "EmptyHeader",
+        "description": "Centered column grouping media, title, and description."
+      },
+      {
+        "name": "EmptyMedia",
+        "description": "Icon or media holder with a variant style."
+      },
+      {
+        "name": "EmptyTitle",
+        "description": "The empty-state heading text."
+      },
+      {
+        "name": "EmptyDescription",
+        "description": "Muted paragraph describing the empty state."
+      },
+      {
+        "name": "EmptyContent",
+        "description": "Column area for actions or supplementary content."
+      }
+    ],
+    "props": [
+      {
+        "part": "Empty",
+        "name": "variant",
+        "type": "\"default\" | \"icon\"",
+        "default": "\"icon\"",
+        "description": null
+      }
+    ],
+    "variants": [
+      {
+        "name": "variant",
+        "options": [
+          "default",
+          "icon"
+        ],
+        "default": "icon"
+      }
+    ],
+    "states": [],
+    "responsive": [
+      "md"
+    ],
+    "tokens": [
+      {
+        "id": "border",
+        "family": "neutral"
+      },
+      {
+        "id": "foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "muted",
+        "family": "neutral"
+      },
+      {
+        "id": "muted-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "primary",
+        "family": "brand"
+      },
+      {
+        "id": "radius-lg",
+        "family": "radius"
+      },
+      {
+        "id": "text-body",
+        "family": "typography"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [
+      "Pair with a retry action on async failure — never a blank screen or an endless spinner."
+    ],
+    "behavior": {},
+    "a11y": {
+      "attributes": [],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

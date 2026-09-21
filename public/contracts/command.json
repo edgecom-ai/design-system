@@ -1,0 +1,124 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "command",
+    "label": "Command",
+    "registryItem": "edgecom-ai/design-system/command",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/command",
+    "docs": "https://design.edgecom.ai/components/command/",
+    "source": "src/components/ui/command.tsx",
+    "summary": "A searchable command palette; type to filter grouped, keyboard-navigable items. Wrap in CommandDialog for a ⌘K overlay.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": null,
+    "parts": [
+      {
+        "name": "Command",
+        "description": "Root container owning the filter state and keyboard navigation."
+      },
+      {
+        "name": "CommandDialog",
+        "description": "Dialog wrapper that renders the menu as a ⌘K overlay."
+      },
+      {
+        "name": "CommandInput",
+        "description": "Search field that filters the list as you type."
+      },
+      {
+        "name": "CommandList",
+        "description": "Scrollable results region."
+      },
+      {
+        "name": "CommandEmpty",
+        "description": "Fallback shown when nothing matches."
+      },
+      {
+        "name": "CommandGroup",
+        "description": "A labelled group of related items (via heading)."
+      },
+      {
+        "name": "CommandItem",
+        "description": "A selectable action or navigation target."
+      },
+      {
+        "name": "CommandShortcut",
+        "description": "Right-aligned keyboard-shortcut hint on an item."
+      },
+      {
+        "name": "CommandSeparator",
+        "description": "A divider between groups."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [
+      "data-[disabled=true]",
+      "data-[slot=input-group-addon]",
+      "data-selected",
+      "disabled",
+      "group-data-[checked=true]/command-item",
+      "group-data-selected/command-item"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "border",
+        "family": "neutral"
+      },
+      {
+        "id": "foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "input",
+        "family": "neutral"
+      },
+      {
+        "id": "muted",
+        "family": "neutral"
+      },
+      {
+        "id": "muted-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "popover",
+        "family": "surface"
+      },
+      {
+        "id": "popover-foreground",
+        "family": "surface"
+      },
+      {
+        "id": "radius-sm",
+        "family": "radius"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      },
+      {
+        "id": "text-caption",
+        "family": "typography"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [
+        "sr-only"
+      ],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

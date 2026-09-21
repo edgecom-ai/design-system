@@ -1,0 +1,53 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "separator",
+    "label": "Separator",
+    "registryItem": "edgecom-ai/design-system/separator",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/separator",
+    "docs": "https://design.edgecom.ai/components/separator/",
+    "source": "src/components/ui/separator.tsx",
+    "summary": "A thin divider line. Set orientation to horizontal (default) or vertical.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": {
+      "name": "Base UI Separator",
+      "url": "https://base-ui.com/react/components/separator"
+    },
+    "parts": [
+      {
+        "name": "Separator",
+        "description": "Border-colored divider; orientation sets horizontal or vertical."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [
+      "data-[orientation=horizontal]",
+      "data-[orientation=vertical]"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "border",
+        "family": "neutral"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

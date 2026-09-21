@@ -153,5 +153,5 @@ Because `registry:build` is baked into `prebuild`, the registry **cannot silentl
 ## 5. Notes
 
 - **Two app-level CSS bits are not shipped** via theme tokens: the `color-scheme` pinning (native-select dark fix) and the `@utility tabular` helper. Everything token-driven works; ship a small extra CSS file in the `theme` item if these are needed downstream.
-- **Per-item `title`/`description`** in the chunks are generic ("The Edgecom X component") — cosmetic only.
+- **Per-item `description`** is the component's one-line summary from its contract (`src/docs/generated/contracts.json`), so `shadcn search`/`view` show what the docs page shows; and `docs` — the note the CLI prints after an install — names the docs page, the contract address and `design.md`. Only a primitive with no docs section of its own falls back to the generic "The Edgecom X component".
 - `registry:build` was validated end-to-end with `shadcn build`: the `include` tree resolves, every item's colocated source file is found and embedded, and `registryDependencies` carry full GitHub addresses. Install against a clean consumer app should be spot-checked after the first public push (e.g. `sidebar`, which exercises 6 cross-deps + the `use-mobile` hook + `theme`).

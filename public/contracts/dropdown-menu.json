@@ -1,0 +1,171 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "dropdown-menu",
+    "label": "Dropdown menu",
+    "registryItem": "edgecom-ai/design-system/dropdown-menu",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/dropdown-menu",
+    "docs": "https://design.edgecom.ai/components/dropdown-menu/",
+    "source": "src/components/ui/dropdown-menu.tsx",
+    "summary": "A menu opened from a button: a portalled popup of groups, labels, items, checkbox/radio items, separators, shortcuts, and submenus.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": {
+      "name": "Base UI Menu",
+      "url": "https://base-ui.com/react/components/menu"
+    },
+    "parts": [
+      {
+        "name": "DropdownMenu",
+        "description": "Root managing the menu's open state."
+      },
+      {
+        "name": "DropdownMenuPortal",
+        "description": "Renders the menu outside the DOM tree."
+      },
+      {
+        "name": "DropdownMenuTrigger",
+        "description": "Button that opens the menu."
+      },
+      {
+        "name": "DropdownMenuContent",
+        "description": "Portalled, positioned popup container for items."
+      },
+      {
+        "name": "DropdownMenuGroup",
+        "description": "Wraps related items. Required around a Label."
+      },
+      {
+        "name": "DropdownMenuLabel",
+        "description": "Muted heading for a group. Must be inside a Group."
+      },
+      {
+        "name": "DropdownMenuItem",
+        "description": "A selectable menu row."
+      },
+      {
+        "name": "DropdownMenuCheckboxItem",
+        "description": "A menu item with a check indicator."
+      },
+      {
+        "name": "DropdownMenuRadioGroup",
+        "description": "Coordinates selection among radio items."
+      },
+      {
+        "name": "DropdownMenuRadioItem",
+        "description": "A radio menu row with a check indicator."
+      },
+      {
+        "name": "DropdownMenuSeparator",
+        "description": "Thin divider between menu sections."
+      },
+      {
+        "name": "DropdownMenuShortcut",
+        "description": "Right-aligned text showing a keyboard shortcut."
+      },
+      {
+        "name": "DropdownMenuSub",
+        "description": "Root for a nested submenu."
+      },
+      {
+        "name": "DropdownMenuSubTrigger",
+        "description": "A menu item that opens a submenu; shows a chevron."
+      },
+      {
+        "name": "DropdownMenuSubContent",
+        "description": "Portalled popup for a submenu."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [
+      "data-[side=bottom]",
+      "data-[side=inline-end]",
+      "data-[side=inline-start]",
+      "data-[side=left]",
+      "data-[side=right]",
+      "data-[side=top]",
+      "data-[variant=destructive]",
+      "data-closed",
+      "data-disabled",
+      "data-inset",
+      "data-open",
+      "data-popup-open",
+      "focus"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "accent",
+        "family": "neutral"
+      },
+      {
+        "id": "accent-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "border",
+        "family": "neutral"
+      },
+      {
+        "id": "destructive",
+        "family": "status"
+      },
+      {
+        "id": "destructive-emphasis",
+        "family": "status"
+      },
+      {
+        "id": "foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "muted-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "popover",
+        "family": "surface"
+      },
+      {
+        "id": "popover-foreground",
+        "family": "surface"
+      },
+      {
+        "id": "radius-lg",
+        "family": "radius"
+      },
+      {
+        "id": "radius-md",
+        "family": "radius"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      },
+      {
+        "id": "text-caption",
+        "family": "typography"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [
+      "**Shrink-wraps to its widest item.** Never stretch it to the trigger width or pad items to a fixed width.",
+      "Portaled to the app root, so no `overflow` ancestor can clip it. It flips and shifts to stay in the viewport."
+    ],
+    "behavior": {},
+    "a11y": {
+      "attributes": [],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

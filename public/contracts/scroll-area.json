@@ -1,0 +1,62 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "scroll-area",
+    "label": "Scroll area",
+    "registryItem": "edgecom-ai/design-system/scroll-area",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/scroll-area",
+    "docs": "https://design.edgecom.ai/components/scroll-area/",
+    "source": "src/components/ui/scroll-area.tsx",
+    "summary": "A scrollable region with a custom overlay scrollbar. Set orientation to vertical, horizontal, or both.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": {
+      "name": "Base UI ScrollArea",
+      "url": "https://base-ui.com/react/components/scroll-area"
+    },
+    "parts": [
+      {
+        "name": "ScrollArea",
+        "description": "Root + viewport; auto-renders scrollbars per orientation."
+      },
+      {
+        "name": "ScrollBar",
+        "description": "The draggable scrollbar track and thumb."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [
+      "data-[orientation=horizontal]",
+      "data-[orientation=vertical]",
+      "focus-visible"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "border",
+        "family": "neutral"
+      },
+      {
+        "id": "ring",
+        "family": "neutral"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

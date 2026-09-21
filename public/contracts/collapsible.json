@@ -1,0 +1,53 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "collapsible",
+    "label": "Collapsible",
+    "registryItem": "edgecom-ai/design-system/collapsible",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/collapsible",
+    "docs": "https://design.edgecom.ai/components/collapsible/",
+    "source": "src/components/ui/collapsible.tsx",
+    "summary": "An open/closed disclosure: a Trigger toggles a Content panel.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": {
+      "name": "Base UI Collapsible",
+      "url": "https://base-ui.com/react/components/collapsible"
+    },
+    "parts": [
+      {
+        "name": "Collapsible",
+        "description": "Root managing the open/closed state."
+      },
+      {
+        "name": "CollapsibleTrigger",
+        "description": "Button that toggles the collapsible open and closed."
+      },
+      {
+        "name": "CollapsibleContent",
+        "description": "Panel holding the revealed content."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [],
+    "responsive": [],
+    "tokens": [],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

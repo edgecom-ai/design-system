@@ -1,0 +1,124 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "timeline",
+    "label": "Timeline",
+    "registryItem": "edgecom-ai/design-system/timeline",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/timeline",
+    "docs": "https://design.edgecom.ai/components/timeline/",
+    "source": "src/components/ui/timeline.tsx",
+    "summary": "A vertical sequence of events. Each TimelineItem pairs a status TimelineDot with a TimelineHeading and TimelineContent, connected by a TimelineLine.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": null,
+    "parts": [
+      {
+        "name": "Timeline",
+        "description": "Root list; positions dots left, right, or center."
+      },
+      {
+        "name": "TimelineDot",
+        "description": "The status marker: default, current, done, error, or custom."
+      },
+      {
+        "name": "TimelineItem",
+        "description": "One event row; status tints the text done or default."
+      },
+      {
+        "name": "TimelineContent",
+        "description": "The event body / description."
+      },
+      {
+        "name": "TimelineHeading",
+        "description": "The event title."
+      },
+      {
+        "name": "TimelineLine",
+        "description": "The connector drawn between consecutive dots."
+      },
+      {
+        "name": "TimelineTag",
+        "description": "An optional side label aligned to the dot."
+      }
+    ],
+    "props": [
+      {
+        "part": "Timeline",
+        "name": "positions",
+        "type": "\"left\" | \"right\" | \"center\"",
+        "default": "\"left\"",
+        "description": null
+      }
+    ],
+    "variants": [
+      {
+        "name": "positions",
+        "options": [
+          "left",
+          "right",
+          "center"
+        ],
+        "default": "left"
+      }
+    ],
+    "states": [],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "background",
+        "family": "surface"
+      },
+      {
+        "id": "border",
+        "family": "neutral"
+      },
+      {
+        "id": "card-foreground",
+        "family": "surface"
+      },
+      {
+        "id": "destructive",
+        "family": "status"
+      },
+      {
+        "id": "muted",
+        "family": "neutral"
+      },
+      {
+        "id": "muted-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "primary",
+        "family": "brand"
+      },
+      {
+        "id": "text-body-lg",
+        "family": "typography"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [
+        "aria-level",
+        "aria-orientation"
+      ],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

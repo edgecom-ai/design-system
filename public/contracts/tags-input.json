@@ -1,0 +1,96 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "tags-input",
+    "label": "Tags",
+    "registryItem": "edgecom-ai/design-system/tags-input",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/tags-input",
+    "docs": "https://design.edgecom.ai/components/tags-input/",
+    "source": "src/components/ui/tags-input.tsx",
+    "summary": "A field for entering and removing multiple tag chips, with paste-splitting and validation.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": null,
+    "parts": [
+      {
+        "name": "TagsInput",
+        "description": "Multi-tag input with removable chips, delimiters, and validation."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [
+      "aria-invalid",
+      "data-disabled",
+      "disabled",
+      "focus-within",
+      "hover"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "border",
+        "family": "neutral"
+      },
+      {
+        "id": "destructive",
+        "family": "status"
+      },
+      {
+        "id": "foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "input",
+        "family": "neutral"
+      },
+      {
+        "id": "muted",
+        "family": "neutral"
+      },
+      {
+        "id": "muted-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "radius-lg",
+        "family": "radius"
+      },
+      {
+        "id": "radius-sm",
+        "family": "radius"
+      },
+      {
+        "id": "ring",
+        "family": "neutral"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      },
+      {
+        "id": "text-caption",
+        "family": "typography"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [
+        "aria-invalid",
+        "aria-label"
+      ],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

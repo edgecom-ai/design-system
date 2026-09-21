@@ -1,0 +1,154 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "tabs",
+    "label": "Tabs",
+    "registryItem": "edgecom-ai/design-system/tabs",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/tabs",
+    "docs": "https://design.edgecom.ai/components/tabs/",
+    "source": "src/components/ui/tabs.tsx",
+    "summary": "A tabbed interface: a List of Triggers reveals matching Content panels.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": {
+      "name": "Base UI Tabs",
+      "url": "https://base-ui.com/react/components/tabs"
+    },
+    "parts": [
+      {
+        "name": "Tabs",
+        "description": "Root managing the orientation and active tab value."
+      },
+      {
+        "name": "TabsList",
+        "description": "Container arranging the tab triggers. It is also the scroll port: a strip wider than its container scrolls inside the list — horizontally when horizontal, vertically when vertical — instead of widening the page, fades whichever edge still hides a tab, and scrolls a newly activated tab into view. Don't wrap it in your own overflow container; that would put the scroll offset on the wrong side of the active bar."
+      },
+      {
+        "name": "TabsTrigger",
+        "description": "Clickable tab that activates its panel."
+      },
+      {
+        "name": "TabsIndicator",
+        "description": "Optional single bar that slides to the active tab. Render it as the last child of TabsList; the line variant's per-trigger bars switch off automatically when it is present."
+      },
+      {
+        "name": "TabsContent",
+        "description": "Panel content shown for the active tab."
+      }
+    ],
+    "props": [
+      {
+        "part": "Tabs",
+        "name": "variant",
+        "type": "\"default\" | \"adaptive\" | \"line\"",
+        "default": "\"default\"",
+        "description": "TabsList style. `default` is the filled segmented strip — a `muted` track with the active tab raised on it — and reads as a group by lightness alone, so it wants a plain host (`background`, `card`). `adaptive` is that same strip in a second colour set: its `track`/`track-active` surfaces are an alpha over whatever is behind them, plus a hairline, so the strip keeps its step on a surface the `muted` track would collide with — a `muted`/`secondary` panel, a `bg-muted/50` card footer, a selected row, or (in dark) inside any overlay, where `popover` and `elevated` sit within a hair of `muted`. `line` replaces the strip with an underline bar and needs no lightness step at all."
+      }
+    ],
+    "variants": [
+      {
+        "name": "variant",
+        "options": [
+          "default",
+          "adaptive",
+          "line"
+        ],
+        "default": "default"
+      }
+    ],
+    "states": [
+      "aria-disabled",
+      "data-[orientation=horizontal]",
+      "data-[variant=line]",
+      "data-active",
+      "data-fade-end",
+      "data-fade-start",
+      "disabled",
+      "focus-visible",
+      "group-data-[orientation=horizontal]/tabs",
+      "group-data-[orientation=vertical]/tabs",
+      "group-data-[variant=adaptive]/tabs-list",
+      "group-data-[variant=default]/tabs-list",
+      "group-data-[variant=line]/tabs-list",
+      "hover"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "background",
+        "family": "surface"
+      },
+      {
+        "id": "border",
+        "family": "neutral"
+      },
+      {
+        "id": "foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "input",
+        "family": "neutral"
+      },
+      {
+        "id": "muted",
+        "family": "neutral"
+      },
+      {
+        "id": "muted-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "primary",
+        "family": "brand"
+      },
+      {
+        "id": "primary-emphasis",
+        "family": "brand"
+      },
+      {
+        "id": "radius-lg",
+        "family": "radius"
+      },
+      {
+        "id": "radius-md",
+        "family": "radius"
+      },
+      {
+        "id": "ring",
+        "family": "neutral"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      },
+      {
+        "id": "track",
+        "family": "relative-surface"
+      },
+      {
+        "id": "track-active",
+        "family": "relative-surface"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [
+      "**Pick the variant by the surface underneath.** Plain `background`/`card` → `default`. A tinted surface or any overlay → `adaptive` or `line`; the `muted` track has no lightness step left there and the strip vanishes.",
+      "Never hand-tint a `TabsList` with a `bg-*` override to fix that — switch the variant."
+    ],
+    "behavior": {},
+    "a11y": {
+      "attributes": [],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

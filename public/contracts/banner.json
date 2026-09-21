@@ -1,0 +1,83 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "banner",
+    "label": "Banner",
+    "registryItem": "edgecom-ai/design-system/banner",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/banner",
+    "docs": "https://design.edgecom.ai/components/banner/",
+    "source": "src/components/ui/banner.tsx",
+    "summary": "A full-width page-level strip; BannerContent centers and lays out the contents.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": null,
+    "parts": [
+      {
+        "name": "Banner",
+        "description": "Full-width strip container with default or primary background."
+      },
+      {
+        "name": "BannerContent",
+        "description": "Centered max-width row spacing content with justify-between."
+      }
+    ],
+    "props": [
+      {
+        "part": "Banner",
+        "name": "variant",
+        "type": "\"default\" | \"primary\"",
+        "default": "\"default\"",
+        "description": "Background: default (muted) or primary."
+      }
+    ],
+    "variants": [
+      {
+        "name": "variant",
+        "options": [
+          "default",
+          "primary"
+        ],
+        "default": "default"
+      }
+    ],
+    "states": [],
+    "responsive": [
+      "2xl",
+      "md"
+    ],
+    "tokens": [
+      {
+        "id": "foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "muted",
+        "family": "neutral"
+      },
+      {
+        "id": "primary",
+        "family": "brand"
+      },
+      {
+        "id": "primary-foreground",
+        "family": "brand"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

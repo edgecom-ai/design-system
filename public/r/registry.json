@@ -356,7 +356,7 @@
     {
       "name": "accordion",
       "title": "Accordion",
-      "description": "The Edgecom Accordion component.",
+      "description": "A collapsible disclosure list; each AccordionItem pairs an AccordionTrigger with an AccordionContent panel.",
       "dependencies": [
         "@base-ui/react@^1.6.0",
         "lucide-react@^1.23.0"
@@ -370,12 +370,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/accordion/ · Contract: https://design.edgecom.ai/contracts/accordion.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "alert",
       "title": "Alert",
-      "description": "The Edgecom Alert component.",
+      "description": "A callout box laying out an optional icon, AlertTitle, AlertDescription, and a top-right AlertAction.",
       "dependencies": [
         "class-variance-authority@^0.7.1"
       ],
@@ -388,12 +389,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/alert/ · Contract: https://design.edgecom.ai/contracts/alert.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "alert-dialog",
       "title": "Alert Dialog",
-      "description": "The Edgecom Alert Dialog component.",
+      "description": "The confirmation an irreversible action passes through: a Trigger opens a portalled, centered Content whose footer forces an explicit Cancel or Action choice.",
       "dependencies": [
         "@base-ui/react@^1.6.0"
       ],
@@ -407,12 +409,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/alert-dialog/ · Contract: https://design.edgecom.ai/contracts/alert-dialog.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "avatar",
       "title": "Avatar",
-      "description": "The Edgecom Avatar component.",
+      "description": "A user or contact image with a text fallback. Compose Avatar with AvatarImage + AvatarFallback; stack them in an AvatarGroup with an overflow count.",
       "dependencies": [
         "@base-ui/react@^1.6.0"
       ],
@@ -425,12 +428,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/avatar/ · Contract: https://design.edgecom.ai/contracts/avatar.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "badge",
       "title": "Badge",
-      "description": "The Edgecom Badge component.",
+      "description": "A compact pill label (renders a span by default) for statuses, counts, and tags.",
       "dependencies": [
         "@base-ui/react@^1.6.0",
         "class-variance-authority@^0.7.1"
@@ -444,12 +448,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/badge/ · Contract: https://design.edgecom.ai/contracts/badge.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "banner",
       "title": "Banner",
-      "description": "The Edgecom Banner component.",
+      "description": "A full-width page-level strip; BannerContent centers and lays out the contents.",
       "dependencies": [
         "class-variance-authority@^0.7.1"
       ],
@@ -462,12 +467,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/banner/ · Contract: https://design.edgecom.ai/contracts/banner.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "breadcrumb",
       "title": "Breadcrumb",
-      "description": "The Edgecom Breadcrumb component.",
+      "description": "A navigation trail: a Breadcrumb nav wrapping a BreadcrumbList of items, links, the current page, and separators.",
       "dependencies": [
         "@base-ui/react@^1.6.0",
         "lucide-react@^1.23.0"
@@ -481,12 +487,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/breadcrumb/ · Contract: https://design.edgecom.ai/contracts/breadcrumb.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "button",
       "title": "Button",
-      "description": "The Edgecom Button component.",
+      "description": "A clickable button with class-variance-authority variants and sizes, including icon-only sizes.",
       "dependencies": [
         "@base-ui/react@^1.6.0",
         "class-variance-authority@^0.7.1"
@@ -500,12 +507,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/button/ · Contract: https://design.edgecom.ai/contracts/button.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "button-group",
       "title": "Button Group",
-      "description": "The Edgecom Button Group component.",
+      "description": "A container that visually joins adjacent buttons, with optional separators and text segments.",
       "dependencies": [
         "@base-ui/react@^1.6.0",
         "class-variance-authority@^0.7.1"
@@ -520,12 +528,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/button-group/ · Contract: https://design.edgecom.ai/contracts/button-group.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "calendar",
       "title": "Calendar",
-      "description": "The Edgecom Calendar component.",
+      "description": "A styled react-day-picker month grid with a custom day-button renderer.",
       "dependencies": [
         "lucide-react@^1.23.0",
         "react-day-picker@^10.0.1"
@@ -540,12 +549,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/calendar/ · Contract: https://design.edgecom.ai/contracts/calendar.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "card",
       "title": "Card",
-      "description": "The Edgecom Card component.",
+      "description": "A styled container with composable header, content, and footer sections (all div-based).",
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
       ],
@@ -555,12 +565,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/card/ · Contract: https://design.edgecom.ai/contracts/card.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "category-bar",
       "title": "Category Bar",
-      "description": "The Edgecom Category Bar component.",
+      "description": "A single horizontal bar split into proportional colored segments, with an optional marker and numeric labels.",
       "registryDependencies": [
         "edgecom-ai/design-system/theme",
         "edgecom-ai/design-system/tooltip"
@@ -571,6 +582,7 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/category-bar/ · Contract: https://design.edgecom.ai/contracts/category-bar.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
@@ -594,7 +606,7 @@
     {
       "name": "checkbox",
       "title": "Checkbox",
-      "description": "The Edgecom Checkbox component.",
+      "description": "A checkbox styled as a small box, with a tick when selected and a dash when indeterminate.",
       "dependencies": [
         "@base-ui/react@^1.6.0",
         "lucide-react@^1.23.0"
@@ -608,12 +620,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/checkbox/ · Contract: https://design.edgecom.ai/contracts/checkbox.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "circular-progress",
       "title": "Circular Progress",
-      "description": "The Edgecom Circular Progress component.",
+      "description": "A determinate ring, for a single figure that has a ceiling — a meter's share of its site total, or a job's completion.",
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
       ],
@@ -623,12 +636,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/circular-progress/ · Contract: https://design.edgecom.ai/contracts/circular-progress.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "collapsible",
       "title": "Collapsible",
-      "description": "The Edgecom Collapsible component.",
+      "description": "An open/closed disclosure: a Trigger toggles a Content panel.",
       "dependencies": [
         "@base-ui/react@^1.6.0"
       ],
@@ -641,12 +655,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/collapsible/ · Contract: https://design.edgecom.ai/contracts/collapsible.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "combobox",
       "title": "Combobox",
-      "description": "The Edgecom Combobox component.",
+      "description": "A searchable, optionally multi-select picker: an input group plus a portalled popup list, with optional selected-value chips.",
       "dependencies": [
         "@base-ui/react@^1.6.0",
         "lucide-react@^1.23.0"
@@ -662,12 +677,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/combobox/ · Contract: https://design.edgecom.ai/contracts/combobox.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "command",
       "title": "Command",
-      "description": "The Edgecom Command component.",
+      "description": "A searchable command palette; type to filter grouped, keyboard-navigable items. Wrap in CommandDialog for a ⌘K overlay.",
       "dependencies": [
         "cmdk@^1.1.1",
         "lucide-react@^1.23.0"
@@ -683,12 +699,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/command/ · Contract: https://design.edgecom.ai/contracts/command.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "context-menu",
       "title": "Context Menu",
-      "description": "The Edgecom Context Menu component.",
+      "description": "A right-click menu: a Trigger region opens a portalled popup of items, checkboxes, radios, labels, and nested submenus.",
       "dependencies": [
         "@base-ui/react@^1.6.0",
         "lucide-react@^1.23.0"
@@ -702,12 +719,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/context-menu/ · Contract: https://design.edgecom.ai/contracts/context-menu.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "date-picker",
       "title": "Date Picker",
-      "description": "The Edgecom Date Picker component.",
+      "description": "A single-date control pairing a popover-triggering button with a Calendar.",
       "dependencies": [
         "lucide-react@^1.23.0",
         "react-day-picker@^10.0.1"
@@ -724,12 +742,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/date-picker/ · Contract: https://design.edgecom.ai/contracts/date-picker.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "dialog",
       "title": "Dialog",
-      "description": "The Edgecom Dialog component.",
+      "description": "A modal dialog: a Trigger opens a portalled overlay + centered Content, with styled header/footer, title, description, and close.",
       "dependencies": [
         "@base-ui/react@^1.6.0",
         "lucide-react@^1.23.0"
@@ -744,12 +763,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/dialog/ · Contract: https://design.edgecom.ai/contracts/dialog.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "drawer",
       "title": "Drawer",
-      "description": "The Edgecom Drawer component.",
+      "description": "A swipeable panel that slides in from an edge: a Trigger opens a portalled overlay + Content, with header/footer, title, and description.",
       "dependencies": [
         "@base-ui/react@^1.6.0"
       ],
@@ -762,12 +782,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/drawer/ · Contract: https://design.edgecom.ai/contracts/drawer.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "dropdown-menu",
       "title": "Dropdown Menu",
-      "description": "The Edgecom Dropdown Menu component.",
+      "description": "A menu opened from a button: a portalled popup of groups, labels, items, checkbox/radio items, separators, shortcuts, and submenus.",
       "dependencies": [
         "@base-ui/react@^1.6.0",
         "lucide-react@^1.23.0"
@@ -781,12 +802,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/dropdown-menu/ · Contract: https://design.edgecom.ai/contracts/dropdown-menu.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "empty",
       "title": "Empty",
-      "description": "The Edgecom Empty component.",
+      "description": "An empty-state placeholder: a dashed-border container with a header (media, title, description) and a content area for actions.",
       "dependencies": [
         "class-variance-authority@^0.7.1"
       ],
@@ -799,12 +821,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/empty/ · Contract: https://design.edgecom.ai/contracts/empty.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "field",
       "title": "Field",
-      "description": "The Edgecom Field component.",
+      "description": "Form-field scaffolding: a Field wraps a control with a label, description, and error; group fields with FieldGroup or a FieldSet.",
       "dependencies": [
         "class-variance-authority@^0.7.1"
       ],
@@ -819,12 +842,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/field/ · Contract: https://design.edgecom.ai/contracts/field.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "hover-card",
       "title": "Hover Card",
-      "description": "The Edgecom Hover Card component.",
+      "description": "Richer detail revealed on hover or focus: a Trigger anchors a portalled, positioned Content that escapes any clipping container.",
       "dependencies": [
         "@base-ui/react@^1.6.0"
       ],
@@ -837,12 +861,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/hover-card/ · Contract: https://design.edgecom.ai/contracts/hover-card.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "input",
       "title": "Input",
-      "description": "The Edgecom Input component.",
+      "description": "A single-line text field with focus, disabled, and invalid states.",
       "dependencies": [
         "@base-ui/react@^1.6.0"
       ],
@@ -855,12 +880,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/input/ · Contract: https://design.edgecom.ai/contracts/input.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "input-group",
       "title": "Input Group",
-      "description": "The Edgecom Input Group component.",
+      "description": "An input with attached add-ons. Wrap an InputGroupInput (or Textarea) with InputGroupAddon slots holding icons, text, or buttons.",
       "dependencies": [
         "class-variance-authority@^0.7.1"
       ],
@@ -876,12 +902,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/input-group/ · Contract: https://design.edgecom.ai/contracts/input-group.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "input-otp",
       "title": "Input Otp",
-      "description": "The Edgecom Input Otp component.",
+      "description": "A one-time passcode split into slots, so the length of the code is visible before it is typed.",
       "dependencies": [
         "input-otp@^1.4.2",
         "lucide-react@^1.23.0"
@@ -895,12 +922,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/input-otp/ · Contract: https://design.edgecom.ai/contracts/input-otp.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "item",
       "title": "Item",
-      "description": "The Edgecom Item component.",
+      "description": "Structured rows built from the Item primitive — media, content (title + description), and trailing actions, grouped by ItemGroup.",
       "dependencies": [
         "@base-ui/react@^1.6.0",
         "class-variance-authority@^0.7.1"
@@ -915,6 +943,7 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/list/ · Contract: https://design.edgecom.ai/contracts/list.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
@@ -1007,7 +1036,7 @@
     {
       "name": "multi-select-listbox",
       "title": "Multi Select Listbox",
-      "description": "The Edgecom Multi Select Listbox component.",
+      "description": "Choosing several values at once: a trigger plus a searchable checkbox listbox with Select all and Clear. The one place a checkmark belongs. The tag-style selector on this page ships as a separate registry item.",
       "dependencies": [
         "@base-ui/react@^1.6.0",
         "lucide-react@^1.23.0"
@@ -1022,12 +1051,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/multi-select/ · Contract: https://design.edgecom.ai/contracts/multi-select.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "native-select",
       "title": "Native Select",
-      "description": "The Edgecom Native Select component.",
+      "description": "The platform select element, styled to match the design system — for dense forms and small screens where the OS picker is the better control.",
       "dependencies": [
         "lucide-react@^1.23.0"
       ],
@@ -1040,12 +1070,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/native-select/ · Contract: https://design.edgecom.ai/contracts/native-select.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "navigation-menu",
       "title": "Navigation Menu",
-      "description": "The Edgecom Navigation Menu component.",
+      "description": "A horizontal nav bar: a List of items whose Triggers open Content panels, with an indicator arrow and a portalled viewport.",
       "dependencies": [
         "@base-ui/react@^1.6.0",
         "class-variance-authority@^0.7.1",
@@ -1060,12 +1091,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/navigation-menu/ · Contract: https://design.edgecom.ai/contracts/navigation-menu.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "pagination",
       "title": "Pagination",
-      "description": "The Edgecom Pagination component.",
+      "description": "Page navigation for long lists and tables — previous/next controls, numbered links, and an ellipsis.",
       "dependencies": [
         "lucide-react@^1.23.0"
       ],
@@ -1079,12 +1111,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/pagination/ · Contract: https://design.edgecom.ai/contracts/pagination.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "phone-input",
       "title": "Phone Input",
-      "description": "The Edgecom Phone Input component.",
+      "description": "A phone number field whose country selector keeps the dial code and the number in a single value.",
       "dependencies": [
         "lucide-react@^1.23.0",
         "react-phone-number-input@^3.4.17"
@@ -1102,12 +1135,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/phone-input/ · Contract: https://design.edgecom.ai/contracts/phone-input.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "popover",
       "title": "Popover",
-      "description": "The Edgecom Popover component.",
+      "description": "A floating panel anchored to a trigger: PopoverContent can hold a header (title + description) and a close button.",
       "dependencies": [
         "@base-ui/react@^1.6.0"
       ],
@@ -1120,12 +1154,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/popover/ · Contract: https://design.edgecom.ai/contracts/popover.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "progress",
       "title": "Progress",
-      "description": "The Edgecom Progress component.",
+      "description": "A progress bar: the root auto-renders a Track containing an Indicator, with optional Label and Value.",
       "dependencies": [
         "@base-ui/react@^1.6.0"
       ],
@@ -1138,12 +1173,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/progress/ · Contract: https://design.edgecom.ai/contracts/progress.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "radio-group",
       "title": "Radio Group",
-      "description": "The Edgecom Radio Group component.",
+      "description": "A set of mutually-exclusive options: a RadioGroup coordinates its RadioGroupItems.",
       "dependencies": [
         "@base-ui/react@^1.6.0"
       ],
@@ -1156,12 +1192,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/radio-group/ · Contract: https://design.edgecom.ai/contracts/radio-group.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "resizable",
       "title": "Resizable",
-      "description": "The Edgecom Resizable component.",
+      "description": "Draggable split layouts: a PanelGroup arranges Panels separated by Handles.",
       "dependencies": [
         "lucide-react@^1.23.0",
         "react-resizable-panels@^4.12.3"
@@ -1175,12 +1212,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/resizable/ · Contract: https://design.edgecom.ai/contracts/resizable.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "scroll-area",
       "title": "Scroll Area",
-      "description": "The Edgecom Scroll Area component.",
+      "description": "A scrollable region with a custom overlay scrollbar. Set orientation to vertical, horizontal, or both.",
       "dependencies": [
         "@base-ui/react@^1.6.0"
       ],
@@ -1193,12 +1231,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/scroll-area/ · Contract: https://design.edgecom.ai/contracts/scroll-area.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "select",
       "title": "Select",
-      "description": "The Edgecom Select component.",
+      "description": "Choose one value from a list. A Root holds the value and wraps a Trigger plus a portalled, positioned Content of Items.",
       "dependencies": [
         "@base-ui/react@^1.6.0",
         "lucide-react@^1.23.0"
@@ -1212,12 +1251,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/select/ · Contract: https://design.edgecom.ai/contracts/select.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "separator",
       "title": "Separator",
-      "description": "The Edgecom Separator component.",
+      "description": "A thin divider line. Set orientation to horizontal (default) or vertical.",
       "dependencies": [
         "@base-ui/react@^1.6.0"
       ],
@@ -1230,12 +1270,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/separator/ · Contract: https://design.edgecom.ai/contracts/separator.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "sheet",
       "title": "Sheet",
-      "description": "The Edgecom Sheet component.",
+      "description": "A dialog panel that slides in from an edge. A Trigger opens a portalled Content with header/footer, title, description, and close.",
       "dependencies": [
         "@base-ui/react@^1.6.0",
         "lucide-react@^1.23.0"
@@ -1250,12 +1291,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/sheet/ · Contract: https://design.edgecom.ai/contracts/sheet.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "sidebar",
       "title": "Sidebar",
-      "description": "The Edgecom Sidebar component.",
+      "description": "A composable application sidebar. SidebarProvider supplies collapse state; Sidebar holds a header, a scrollable body of grouped menus, and a footer, alongside a SidebarInset for the main area.",
       "dependencies": [
         "@base-ui/react@^1.6.0",
         "class-variance-authority@^0.7.1",
@@ -1279,12 +1321,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/sidebar/ · Contract: https://design.edgecom.ai/contracts/sidebar.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "skeleton",
       "title": "Skeleton",
-      "description": "The Edgecom Skeleton component.",
+      "description": "A muted placeholder block for loading states; pulses by default, or shimmers with a sweeping highlight.",
       "dependencies": [
         "class-variance-authority@^0.7.1"
       ],
@@ -1297,12 +1340,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/skeleton/ · Contract: https://design.edgecom.ai/contracts/skeleton.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "slider",
       "title": "Slider",
-      "description": "The Edgecom Slider component.",
+      "description": "A track-and-thumb control for a value or range; renders one thumb per value.",
       "dependencies": [
         "@base-ui/react@^1.6.0"
       ],
@@ -1315,12 +1359,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/slider/ · Contract: https://design.edgecom.ai/contracts/slider.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "sonner",
       "title": "Sonner",
-      "description": "The Edgecom Sonner component.",
+      "description": "App-wide notifications: mount one Toaster near the app root, then call the imperative toast() function to show messages.",
       "dependencies": [
         "sonner@^2.0.7"
       ],
@@ -1333,12 +1378,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/toast/ · Contract: https://design.edgecom.ai/contracts/toast.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "sortable",
       "title": "Sortable",
-      "description": "The Edgecom Sortable component.",
+      "description": "Drag-and-drop reordering: Sortable provides context, SortableItem wraps each entry, and SortableOverlay renders the dragged preview.",
       "dependencies": [
         "@base-ui/react@^1.6.0",
         "@dnd-kit/core@^6.3.1",
@@ -1358,12 +1404,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/sortable/ · Contract: https://design.edgecom.ai/contracts/sortable.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "spinner",
       "title": "Spinner",
-      "description": "The Edgecom Spinner component.",
+      "description": "A spinning loading indicator with role=status.",
       "dependencies": [
         "lucide-react@^1.23.0"
       ],
@@ -1376,12 +1423,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/spinner/ · Contract: https://design.edgecom.ai/contracts/spinner.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "stepper",
       "title": "Stepper",
-      "description": "The Edgecom Stepper component.",
+      "description": "A multi-step progress flow: a nav of items (trigger, indicator, separator, title, description) with switchable content panels.",
       "dependencies": [
         "@stepperize/react@^7.0.0"
       ],
@@ -1394,12 +1442,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/stepper/ · Contract: https://design.edgecom.ai/contracts/stepper.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "switch",
       "title": "Switch",
-      "description": "The Edgecom Switch component.",
+      "description": "An on/off toggle with a sliding thumb.",
       "dependencies": [
         "@base-ui/react@^1.6.0"
       ],
@@ -1412,12 +1461,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/switch/ · Contract: https://design.edgecom.ai/contracts/switch.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "table",
       "title": "Table",
-      "description": "The Edgecom Table component.",
+      "description": "A styled HTML table wrapped for horizontal overflow — header, body, optional footer, rows, cells, and a caption.",
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
       ],
@@ -1427,12 +1477,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/table/ · Contract: https://design.edgecom.ai/contracts/table.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "tabs",
       "title": "Tabs",
-      "description": "The Edgecom Tabs component.",
+      "description": "A tabbed interface: a List of Triggers reveals matching Content panels.",
       "dependencies": [
         "@base-ui/react@^1.6.0",
         "class-variance-authority@^0.7.1"
@@ -1446,12 +1497,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/tabs/ · Contract: https://design.edgecom.ai/contracts/tabs.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "tags-input",
       "title": "Tags Input",
-      "description": "The Edgecom Tags Input component.",
+      "description": "A field for entering and removing multiple tag chips, with paste-splitting and validation.",
       "dependencies": [
         "lucide-react@^1.23.0"
       ],
@@ -1465,6 +1517,7 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/tags-input/ · Contract: https://design.edgecom.ai/contracts/tags-input.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
@@ -1509,7 +1562,7 @@
     {
       "name": "timeline",
       "title": "Timeline",
-      "description": "The Edgecom Timeline component.",
+      "description": "A vertical sequence of events. Each TimelineItem pairs a status TimelineDot with a TimelineHeading and TimelineContent, connected by a TimelineLine.",
       "dependencies": [
         "class-variance-authority@^0.7.1",
         "lucide-react@^1.23.0"
@@ -1523,12 +1576,13 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/timeline/ · Contract: https://design.edgecom.ai/contracts/timeline.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
       "name": "toggle",
       "title": "Toggle",
-      "description": "The Edgecom Toggle component.",
+      "description": "A two-state button that holds a pressed/on state.",
       "dependencies": [
         "@base-ui/react@^1.6.0",
         "class-variance-authority@^0.7.1"
@@ -1542,6 +1596,7 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/toggle/ · Contract: https://design.edgecom.ai/contracts/toggle.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
@@ -1567,7 +1622,7 @@
     {
       "name": "tooltip",
       "title": "Tooltip",
-      "description": "The Edgecom Tooltip component.",
+      "description": "A hover hint: a Provider shares timing, a Trigger reveals a portalled Content on hover/focus.",
       "dependencies": [
         "@base-ui/react@^1.6.0"
       ],
@@ -1580,6 +1635,7 @@
           "type": "registry:ui"
         }
       ],
+      "docs": "Docs: https://design.edgecom.ai/components/tooltip/ · Contract: https://design.edgecom.ai/contracts/tooltip.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {

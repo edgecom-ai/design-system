@@ -1,0 +1,119 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "input-group",
+    "label": "Input group",
+    "registryItem": "edgecom-ai/design-system/input-group",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/input-group",
+    "docs": "https://design.edgecom.ai/components/input-group/",
+    "source": "src/components/ui/input-group.tsx",
+    "summary": "An input with attached add-ons. Wrap an InputGroupInput (or Textarea) with InputGroupAddon slots holding icons, text, or buttons.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": null,
+    "parts": [
+      {
+        "name": "InputGroup",
+        "description": "Bordered container that visually merges the control and add-ons."
+      },
+      {
+        "name": "InputGroupAddon",
+        "description": "An add-on slot; align sets inline/block start or end."
+      },
+      {
+        "name": "InputGroupButton",
+        "description": "A compact button inside an add-on."
+      },
+      {
+        "name": "InputGroupText",
+        "description": "Muted text inside an add-on (e.g. a unit like kWh)."
+      },
+      {
+        "name": "InputGroupInput",
+        "description": "The text input control inside the group."
+      },
+      {
+        "name": "InputGroupTextarea",
+        "description": "A multi-line control variant inside the group."
+      }
+    ],
+    "props": [
+      {
+        "part": "InputGroup",
+        "name": "align",
+        "type": "\"inline-start\" | \"inline-end\" | \"block-start\" | \"block-end\"",
+        "default": "\"inline-start\"",
+        "description": null
+      }
+    ],
+    "variants": [
+      {
+        "name": "align",
+        "options": [
+          "inline-start",
+          "inline-end",
+          "block-start",
+          "block-end"
+        ],
+        "default": "inline-start"
+      }
+    ],
+    "states": [
+      "aria-invalid",
+      "disabled",
+      "focus-visible",
+      "focus-within",
+      "group-data-[disabled=true]/input-group"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "border",
+        "family": "neutral"
+      },
+      {
+        "id": "destructive",
+        "family": "status"
+      },
+      {
+        "id": "input",
+        "family": "neutral"
+      },
+      {
+        "id": "muted-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "radius-lg",
+        "family": "radius"
+      },
+      {
+        "id": "ring",
+        "family": "neutral"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [
+        "aria-invalid",
+        "role=group"
+      ],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

@@ -1,0 +1,1545 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contracts": "https://design.edgecom.ai/contracts.json",
+  "docs": "https://design.edgecom.ai/design.md",
+  "guide": "https://design.edgecom.ai/agents.md",
+  "counts": {
+    "total": 56,
+    "authored": 12,
+    "withVariants": 14,
+    "withBaseUi": 26,
+    "tokenReferences": 470
+  },
+  "components": [
+    {
+      "id": "accordion",
+      "label": "Accordion",
+      "summary": "A collapsible disclosure list; each AccordionItem pairs an AccordionTrigger with an AccordionContent panel.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "Accordion",
+        "AccordionItem",
+        "AccordionTrigger",
+        "AccordionContent"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/accordion",
+      "registryItem": "edgecom-ai/design-system/accordion",
+      "docs": "https://design.edgecom.ai/components/accordion/",
+      "contract": "https://design.edgecom.ai/contracts/accordion.json"
+    },
+    {
+      "id": "alert",
+      "label": "Alert",
+      "summary": "A callout box laying out an optional icon, AlertTitle, AlertDescription, and a top-right AlertAction.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [
+        {
+          "name": "variant",
+          "options": [
+            "default",
+            "destructive",
+            "success",
+            "warning",
+            "info"
+          ],
+          "default": "default"
+        }
+      ],
+      "parts": [
+        "Alert",
+        "AlertTitle",
+        "AlertDescription",
+        "AlertAction"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/alert",
+      "registryItem": "edgecom-ai/design-system/alert",
+      "docs": "https://design.edgecom.ai/components/alert/",
+      "contract": "https://design.edgecom.ai/contracts/alert.json"
+    },
+    {
+      "id": "alert-dialog",
+      "label": "Alert dialog",
+      "summary": "The confirmation an irreversible action passes through: a Trigger opens a portalled, centered Content whose footer forces an explicit Cancel or Action choice.",
+      "purpose": "The confirmation gate for an irreversible action. It is the only overlay that omits the close, because a destructive flow has to end in an explicit choice rather than a dismissal.",
+      "useWhen": [
+        "An action deletes, removes, disconnects, resets or purges something.",
+        "An action is irreversible in any other way, or costs real money.",
+        "A bulk action applies to more rows than the user can see at once."
+      ],
+      "dontUseWhen": [
+        "The action is reversible and routine — commit it and confirm with a `toast`.",
+        "The overlay is a short create or edit form — that is `dialog`, which keeps its close."
+      ],
+      "variants": [],
+      "parts": [
+        "AlertDialog",
+        "AlertDialogAction",
+        "AlertDialogCancel",
+        "AlertDialogContent",
+        "AlertDialogDescription",
+        "AlertDialogFooter",
+        "AlertDialogHeader",
+        "AlertDialogMedia",
+        "AlertDialogOverlay",
+        "AlertDialogPortal",
+        "AlertDialogTitle",
+        "AlertDialogTrigger"
+      ],
+      "status": "stable",
+      "authored": true,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/alert-dialog",
+      "registryItem": "edgecom-ai/design-system/alert-dialog",
+      "docs": "https://design.edgecom.ai/components/alert-dialog/",
+      "contract": "https://design.edgecom.ai/contracts/alert-dialog.json"
+    },
+    {
+      "id": "avatar",
+      "label": "Avatar",
+      "summary": "A user or contact image with a text fallback. Compose Avatar with AvatarImage + AvatarFallback; stack them in an AvatarGroup with an overflow count.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "Avatar",
+        "AvatarImage",
+        "AvatarFallback",
+        "AvatarGroup",
+        "AvatarGroupCount",
+        "AvatarBadge"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/avatar",
+      "registryItem": "edgecom-ai/design-system/avatar",
+      "docs": "https://design.edgecom.ai/components/avatar/",
+      "contract": "https://design.edgecom.ai/contracts/avatar.json"
+    },
+    {
+      "id": "badge",
+      "label": "Badge & status tags",
+      "summary": "A compact pill label (renders a span by default) for statuses, counts, and tags.",
+      "purpose": "A compact label for a status, a count, or a category. The variant carries the meaning, so the meaning survives a theme change.",
+      "useWhen": [
+        "A row or card needs a status, a count, or a category label.",
+        "A commodity is being tagged — with that commodity's variant and nothing else."
+      ],
+      "dontUseWhen": [
+        "The label is interactive. A badge is not a button, a filter chip, or a toggle.",
+        "The state belongs to a whole surface — that is the surface's own variant, e.g. an `alert`."
+      ],
+      "variants": [
+        {
+          "name": "variant",
+          "options": [
+            "default",
+            "secondary",
+            "destructive",
+            "success",
+            "warning",
+            "info",
+            "electricity",
+            "water",
+            "gas",
+            "temperature",
+            "emissions",
+            "outline",
+            "ghost",
+            "link"
+          ],
+          "default": "default"
+        }
+      ],
+      "parts": [
+        "Badge"
+      ],
+      "status": "stable",
+      "authored": true,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/badge",
+      "registryItem": "edgecom-ai/design-system/badge",
+      "docs": "https://design.edgecom.ai/components/badge/",
+      "contract": "https://design.edgecom.ai/contracts/badge.json"
+    },
+    {
+      "id": "banner",
+      "label": "Banner",
+      "summary": "A full-width page-level strip; BannerContent centers and lays out the contents.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [
+        {
+          "name": "variant",
+          "options": [
+            "default",
+            "primary"
+          ],
+          "default": "default"
+        }
+      ],
+      "parts": [
+        "Banner",
+        "BannerContent"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/banner",
+      "registryItem": "edgecom-ai/design-system/banner",
+      "docs": "https://design.edgecom.ai/components/banner/",
+      "contract": "https://design.edgecom.ai/contracts/banner.json"
+    },
+    {
+      "id": "breadcrumb",
+      "label": "Breadcrumb",
+      "summary": "A navigation trail: a Breadcrumb nav wrapping a BreadcrumbList of items, links, the current page, and separators.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "Breadcrumb",
+        "BreadcrumbList",
+        "BreadcrumbItem",
+        "BreadcrumbLink",
+        "BreadcrumbPage",
+        "BreadcrumbSeparator",
+        "BreadcrumbEllipsis"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/breadcrumb",
+      "registryItem": "edgecom-ai/design-system/breadcrumb",
+      "docs": "https://design.edgecom.ai/components/breadcrumb/",
+      "contract": "https://design.edgecom.ai/contracts/breadcrumb.json"
+    },
+    {
+      "id": "button",
+      "label": "Button",
+      "summary": "A clickable button with class-variance-authority variants and sizes, including icon-only sizes.",
+      "purpose": "The one control for committing an action. Every clickable affordance is this primitive or composes it — a styled div or anchor loses the hover, focus ring, disabled and aria-invalid handling the variants already carry.",
+      "useWhen": [
+        "The user commits something: submit, save, open an overlay, trigger an export.",
+        "A secondary or utility action sits in a table toolbar or page header — as an icon button (`size=\"icon-sm\"`/`\"icon-lg\"`, usually `outline` or `ghost`) with an `aria-label` and a tooltip.",
+        "A destructive action has to stay quiet in a table row — `variant=\"ghost-destructive\"`, neutral at rest and red only on hover."
+      ],
+      "dontUseWhen": [
+        "The control only navigates. An anchor is the right element; `variant=\"link\"` styles a button to read as text, it does not make it a link.",
+        "The user is choosing among options rather than acting — that is `select`, `tabs`, or `toggle`."
+      ],
+      "variants": [
+        {
+          "name": "variant",
+          "options": [
+            "default",
+            "outline",
+            "secondary",
+            "ghost",
+            "ghost-destructive",
+            "destructive",
+            "success",
+            "warning",
+            "info",
+            "destructive-subtle",
+            "success-subtle",
+            "warning-subtle",
+            "info-subtle",
+            "link"
+          ],
+          "default": "default"
+        },
+        {
+          "name": "size",
+          "options": [
+            "default",
+            "xs",
+            "sm",
+            "lg",
+            "icon",
+            "icon-xs",
+            "icon-sm",
+            "icon-lg"
+          ],
+          "default": "default"
+        }
+      ],
+      "parts": [
+        "Button"
+      ],
+      "status": "stable",
+      "authored": true,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/button",
+      "registryItem": "edgecom-ai/design-system/button",
+      "docs": "https://design.edgecom.ai/components/button/",
+      "contract": "https://design.edgecom.ai/contracts/button.json"
+    },
+    {
+      "id": "button-group",
+      "label": "Button group",
+      "summary": "A container that visually joins adjacent buttons, with optional separators and text segments.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [
+        {
+          "name": "orientation",
+          "options": [
+            "horizontal",
+            "vertical"
+          ],
+          "default": "horizontal"
+        }
+      ],
+      "parts": [
+        "ButtonGroup",
+        "ButtonGroupSeparator",
+        "ButtonGroupText"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/button-group",
+      "registryItem": "edgecom-ai/design-system/button-group",
+      "docs": "https://design.edgecom.ai/components/button-group/",
+      "contract": "https://design.edgecom.ai/contracts/button-group.json"
+    },
+    {
+      "id": "calendar",
+      "label": "Calendar",
+      "summary": "A styled react-day-picker month grid with a custom day-button renderer.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "Calendar",
+        "CalendarDayButton"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/calendar",
+      "registryItem": "edgecom-ai/design-system/calendar",
+      "docs": "https://design.edgecom.ai/components/calendar/",
+      "contract": "https://design.edgecom.ai/contracts/calendar.json"
+    },
+    {
+      "id": "card",
+      "label": "Card",
+      "summary": "A styled container with composable header, content, and footer sections (all div-based).",
+      "purpose": "The standard content surface: the `card` token at radius `xl`, with header, content and footer slots sharing one 1.5rem content line.",
+      "useWhen": [
+        "A coherent block — a metric tile, a chart, a table — is grouped on the page background.",
+        "A surface needs to sit one step above `background` in the elevation order."
+      ],
+      "dontUseWhen": [
+        "The content is itself an overlay. `popover` and `elevated` sit above `card`, and a card inside an overlay flattens the stack.",
+        "The block is a page-level message — that is `banner` or `alert`."
+      ],
+      "variants": [],
+      "parts": [
+        "Card",
+        "CardHeader",
+        "CardFooter",
+        "CardTitle",
+        "CardAction",
+        "CardDescription",
+        "CardContent"
+      ],
+      "status": "stable",
+      "authored": true,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/card",
+      "registryItem": "edgecom-ai/design-system/card",
+      "docs": "https://design.edgecom.ai/components/card/",
+      "contract": "https://design.edgecom.ai/contracts/card.json"
+    },
+    {
+      "id": "category-bar",
+      "label": "Category bar",
+      "summary": "A single horizontal bar split into proportional colored segments, with an optional marker and numeric labels.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "CategoryBar"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/category-bar",
+      "registryItem": "edgecom-ai/design-system/category-bar",
+      "docs": "https://design.edgecom.ai/components/category-bar/",
+      "contract": "https://design.edgecom.ai/contracts/category-bar.json"
+    },
+    {
+      "id": "checkbox",
+      "label": "Checkbox",
+      "summary": "A checkbox styled as a small box, with a tick when selected and a dash when indeterminate.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "Checkbox"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/checkbox",
+      "registryItem": "edgecom-ai/design-system/checkbox",
+      "docs": "https://design.edgecom.ai/components/checkbox/",
+      "contract": "https://design.edgecom.ai/contracts/checkbox.json"
+    },
+    {
+      "id": "circular-progress",
+      "label": "Circular progress",
+      "summary": "A determinate ring, for a single figure that has a ceiling — a meter's share of its site total, or a job's completion.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "CircularProgress"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/circular-progress",
+      "registryItem": "edgecom-ai/design-system/circular-progress",
+      "docs": "https://design.edgecom.ai/components/circular-progress/",
+      "contract": "https://design.edgecom.ai/contracts/circular-progress.json"
+    },
+    {
+      "id": "collapsible",
+      "label": "Collapsible",
+      "summary": "An open/closed disclosure: a Trigger toggles a Content panel.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "Collapsible",
+        "CollapsibleTrigger",
+        "CollapsibleContent"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/collapsible",
+      "registryItem": "edgecom-ai/design-system/collapsible",
+      "docs": "https://design.edgecom.ai/components/collapsible/",
+      "contract": "https://design.edgecom.ai/contracts/collapsible.json"
+    },
+    {
+      "id": "combobox",
+      "label": "Combobox",
+      "summary": "A searchable, optionally multi-select picker: an input group plus a portalled popup list, with optional selected-value chips.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "Combobox",
+        "ComboboxInput",
+        "ComboboxContent",
+        "ComboboxList",
+        "ComboboxItem",
+        "ComboboxGroup",
+        "ComboboxLabel",
+        "ComboboxCollection",
+        "ComboboxEmpty",
+        "ComboboxSeparator",
+        "ComboboxChips",
+        "ComboboxChip",
+        "ComboboxChipsInput",
+        "ComboboxTrigger",
+        "ComboboxValue"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/combobox",
+      "registryItem": "edgecom-ai/design-system/combobox",
+      "docs": "https://design.edgecom.ai/components/combobox/",
+      "contract": "https://design.edgecom.ai/contracts/combobox.json"
+    },
+    {
+      "id": "command",
+      "label": "Command",
+      "summary": "A searchable command palette; type to filter grouped, keyboard-navigable items. Wrap in CommandDialog for a ⌘K overlay.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "Command",
+        "CommandDialog",
+        "CommandInput",
+        "CommandList",
+        "CommandEmpty",
+        "CommandGroup",
+        "CommandItem",
+        "CommandShortcut",
+        "CommandSeparator"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/command",
+      "registryItem": "edgecom-ai/design-system/command",
+      "docs": "https://design.edgecom.ai/components/command/",
+      "contract": "https://design.edgecom.ai/contracts/command.json"
+    },
+    {
+      "id": "context-menu",
+      "label": "Context menu",
+      "summary": "A right-click menu: a Trigger region opens a portalled popup of items, checkboxes, radios, labels, and nested submenus.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "ContextMenu",
+        "ContextMenuTrigger",
+        "ContextMenuContent",
+        "ContextMenuItem",
+        "ContextMenuCheckboxItem",
+        "ContextMenuRadioItem",
+        "ContextMenuLabel",
+        "ContextMenuSeparator",
+        "ContextMenuShortcut",
+        "ContextMenuGroup",
+        "ContextMenuPortal",
+        "ContextMenuSub",
+        "ContextMenuSubContent",
+        "ContextMenuSubTrigger",
+        "ContextMenuRadioGroup"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/context-menu",
+      "registryItem": "edgecom-ai/design-system/context-menu",
+      "docs": "https://design.edgecom.ai/components/context-menu/",
+      "contract": "https://design.edgecom.ai/contracts/context-menu.json"
+    },
+    {
+      "id": "date-picker",
+      "label": "Date picker",
+      "summary": "A single-date control pairing a popover-triggering button with a Calendar.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "DatePicker",
+        "MonthRangePicker",
+        "WindowRangePicker"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/date-picker",
+      "registryItem": "edgecom-ai/design-system/date-picker",
+      "docs": "https://design.edgecom.ai/components/date-picker/",
+      "contract": "https://design.edgecom.ai/contracts/date-picker.json"
+    },
+    {
+      "id": "dialog",
+      "label": "Dialog",
+      "summary": "A modal dialog: a Trigger opens a portalled overlay + centered Content, with styled header/footer, title, description, and close.",
+      "purpose": "The centered modal for one short, focused action. It keeps a top-right close so a modal is always dismissible.",
+      "useWhen": [
+        "A short create action of roughly one to four fields.",
+        "A focused, non-destructive confirmation."
+      ],
+      "dontUseWhen": [
+        "The form is long or dense — that is a right-side `sheet`.",
+        "The action is destructive or irreversible — that is an `alert-dialog`, which omits the close on purpose."
+      ],
+      "variants": [],
+      "parts": [
+        "Dialog",
+        "DialogClose",
+        "DialogContent",
+        "DialogDescription",
+        "DialogFooter",
+        "DialogHeader",
+        "DialogOverlay",
+        "DialogPortal",
+        "DialogTitle",
+        "DialogTrigger"
+      ],
+      "status": "stable",
+      "authored": true,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/dialog",
+      "registryItem": "edgecom-ai/design-system/dialog",
+      "docs": "https://design.edgecom.ai/components/dialog/",
+      "contract": "https://design.edgecom.ai/contracts/dialog.json"
+    },
+    {
+      "id": "drawer",
+      "label": "Drawer",
+      "summary": "A swipeable panel that slides in from an edge: a Trigger opens a portalled overlay + Content, with header/footer, title, and description.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "Drawer",
+        "DrawerPortal",
+        "DrawerOverlay",
+        "DrawerSwipeHandle",
+        "DrawerTrigger",
+        "DrawerClose",
+        "DrawerContent",
+        "DrawerHeader",
+        "DrawerFooter",
+        "DrawerTitle",
+        "DrawerDescription"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/drawer",
+      "registryItem": "edgecom-ai/design-system/drawer",
+      "docs": "https://design.edgecom.ai/components/drawer/",
+      "contract": "https://design.edgecom.ai/contracts/drawer.json"
+    },
+    {
+      "id": "dropdown-menu",
+      "label": "Dropdown menu",
+      "summary": "A menu opened from a button: a portalled popup of groups, labels, items, checkbox/radio items, separators, shortcuts, and submenus.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "DropdownMenu",
+        "DropdownMenuPortal",
+        "DropdownMenuTrigger",
+        "DropdownMenuContent",
+        "DropdownMenuGroup",
+        "DropdownMenuLabel",
+        "DropdownMenuItem",
+        "DropdownMenuCheckboxItem",
+        "DropdownMenuRadioGroup",
+        "DropdownMenuRadioItem",
+        "DropdownMenuSeparator",
+        "DropdownMenuShortcut",
+        "DropdownMenuSub",
+        "DropdownMenuSubTrigger",
+        "DropdownMenuSubContent"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/dropdown-menu",
+      "registryItem": "edgecom-ai/design-system/dropdown-menu",
+      "docs": "https://design.edgecom.ai/components/dropdown-menu/",
+      "contract": "https://design.edgecom.ai/contracts/dropdown-menu.json"
+    },
+    {
+      "id": "empty",
+      "label": "Empty state",
+      "summary": "An empty-state placeholder: a dashed-border container with a header (media, title, description) and a content area for actions.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [
+        {
+          "name": "variant",
+          "options": [
+            "default",
+            "icon"
+          ],
+          "default": "icon"
+        }
+      ],
+      "parts": [
+        "Empty",
+        "EmptyHeader",
+        "EmptyMedia",
+        "EmptyTitle",
+        "EmptyDescription",
+        "EmptyContent"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/empty",
+      "registryItem": "edgecom-ai/design-system/empty",
+      "docs": "https://design.edgecom.ai/components/empty/",
+      "contract": "https://design.edgecom.ai/contracts/empty.json"
+    },
+    {
+      "id": "field",
+      "label": "Field",
+      "summary": "Form-field scaffolding: a Field wraps a control with a label, description, and error; group fields with FieldGroup or a FieldSet.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [
+        {
+          "name": "orientation",
+          "options": [
+            "vertical",
+            "horizontal",
+            "responsive"
+          ],
+          "default": "vertical"
+        }
+      ],
+      "parts": [
+        "Field",
+        "FieldLabel",
+        "FieldDescription",
+        "FieldError",
+        "FieldGroup",
+        "FieldLegend",
+        "FieldSeparator",
+        "FieldSet",
+        "FieldContent",
+        "FieldTitle"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/field",
+      "registryItem": "edgecom-ai/design-system/field",
+      "docs": "https://design.edgecom.ai/components/field/",
+      "contract": "https://design.edgecom.ai/contracts/field.json"
+    },
+    {
+      "id": "hover-card",
+      "label": "Hover card",
+      "summary": "Richer detail revealed on hover or focus: a Trigger anchors a portalled, positioned Content that escapes any clipping container.",
+      "purpose": "The richer half of the density rule: detail that would otherwise need more columns, revealed on hover or focus while the primary value stays visible in place.",
+      "useWhen": [
+        "A dense table, metric tile or chart has secondary detail that does not deserve its own column.",
+        "An identifier in running text — a meter, a site, a tariff — is worth previewing without a navigation."
+      ],
+      "dontUseWhen": [
+        "The detail is one short line — that is a `tooltip`, which shrink-wraps and stays transient.",
+        "The content is interactive or needs a click to open — that is a `popover`.",
+        "The information is essential to the task. Anything a user must read cannot live behind a hover."
+      ],
+      "variants": [],
+      "parts": [
+        "HoverCard",
+        "HoverCardTrigger",
+        "HoverCardContent"
+      ],
+      "status": "stable",
+      "authored": true,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/hover-card",
+      "registryItem": "edgecom-ai/design-system/hover-card",
+      "docs": "https://design.edgecom.ai/components/hover-card/",
+      "contract": "https://design.edgecom.ai/contracts/hover-card.json"
+    },
+    {
+      "id": "input",
+      "label": "Input",
+      "summary": "A single-line text field with focus, disabled, and invalid states.",
+      "purpose": "The single-line text field. It renders the destructive border and ring from `aria-invalid`, so the invalid state is a data attribute rather than a class override.",
+      "useWhen": [
+        "A single line of free text or a number is entered.",
+        "It sits inside a `field`, which supplies the label, description and error slots."
+      ],
+      "dontUseWhen": [
+        "The value belongs to a known set — that is `select`, `combobox`, or `radio-group`.",
+        "The control needs an affix, icon, or button inside it — that is `input-group`."
+      ],
+      "variants": [],
+      "parts": [
+        "Input"
+      ],
+      "status": "stable",
+      "authored": true,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/input",
+      "registryItem": "edgecom-ai/design-system/input",
+      "docs": "https://design.edgecom.ai/components/input/",
+      "contract": "https://design.edgecom.ai/contracts/input.json"
+    },
+    {
+      "id": "input-group",
+      "label": "Input group",
+      "summary": "An input with attached add-ons. Wrap an InputGroupInput (or Textarea) with InputGroupAddon slots holding icons, text, or buttons.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [
+        {
+          "name": "align",
+          "options": [
+            "inline-start",
+            "inline-end",
+            "block-start",
+            "block-end"
+          ],
+          "default": "inline-start"
+        }
+      ],
+      "parts": [
+        "InputGroup",
+        "InputGroupAddon",
+        "InputGroupButton",
+        "InputGroupText",
+        "InputGroupInput",
+        "InputGroupTextarea"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/input-group",
+      "registryItem": "edgecom-ai/design-system/input-group",
+      "docs": "https://design.edgecom.ai/components/input-group/",
+      "contract": "https://design.edgecom.ai/contracts/input-group.json"
+    },
+    {
+      "id": "input-otp",
+      "label": "Input OTP",
+      "summary": "A one-time passcode split into slots, so the length of the code is visible before it is typed.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "InputOTP",
+        "InputOTPGroup",
+        "InputOTPSlot",
+        "InputOTPSeparator"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/input-otp",
+      "registryItem": "edgecom-ai/design-system/input-otp",
+      "docs": "https://design.edgecom.ai/components/input-otp/",
+      "contract": "https://design.edgecom.ai/contracts/input-otp.json"
+    },
+    {
+      "id": "list",
+      "label": "List",
+      "summary": "Structured rows built from the Item primitive — media, content (title + description), and trailing actions, grouped by ItemGroup.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [
+        {
+          "name": "variant",
+          "options": [
+            "default",
+            "outline",
+            "muted"
+          ],
+          "default": "default"
+        },
+        {
+          "name": "size",
+          "options": [
+            "default",
+            "sm",
+            "xs"
+          ],
+          "default": "default"
+        }
+      ],
+      "parts": [
+        "Item",
+        "ItemMedia",
+        "ItemContent",
+        "ItemActions",
+        "ItemGroup",
+        "ItemSeparator",
+        "ItemTitle",
+        "ItemDescription",
+        "ItemHeader",
+        "ItemFooter"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/list",
+      "registryItem": "edgecom-ai/design-system/list",
+      "docs": "https://design.edgecom.ai/components/list/",
+      "contract": "https://design.edgecom.ai/contracts/list.json"
+    },
+    {
+      "id": "multi-select",
+      "label": "Multi-select",
+      "summary": "Choosing several values at once: a trigger plus a searchable checkbox listbox with Select all and Clear. The one place a checkmark belongs. The tag-style selector on this page ships as a separate registry item.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "MultiSelect"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/multi-select",
+      "registryItem": "edgecom-ai/design-system/multi-select",
+      "docs": "https://design.edgecom.ai/components/multi-select/",
+      "contract": "https://design.edgecom.ai/contracts/multi-select.json"
+    },
+    {
+      "id": "native-select",
+      "label": "Native select",
+      "summary": "The platform select element, styled to match the design system — for dense forms and small screens where the OS picker is the better control.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "NativeSelect",
+        "NativeSelectOptGroup",
+        "NativeSelectOption"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/native-select",
+      "registryItem": "edgecom-ai/design-system/native-select",
+      "docs": "https://design.edgecom.ai/components/native-select/",
+      "contract": "https://design.edgecom.ai/contracts/native-select.json"
+    },
+    {
+      "id": "navigation-menu",
+      "label": "Navigation menu",
+      "summary": "A horizontal nav bar: a List of items whose Triggers open Content panels, with an indicator arrow and a portalled viewport.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "NavigationMenu",
+        "NavigationMenuContent",
+        "NavigationMenuIndicator",
+        "NavigationMenuItem",
+        "NavigationMenuLink",
+        "NavigationMenuList",
+        "NavigationMenuTrigger",
+        "NavigationMenuPositioner"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/navigation-menu",
+      "registryItem": "edgecom-ai/design-system/navigation-menu",
+      "docs": "https://design.edgecom.ai/components/navigation-menu/",
+      "contract": "https://design.edgecom.ai/contracts/navigation-menu.json"
+    },
+    {
+      "id": "pagination",
+      "label": "Pagination",
+      "summary": "Page navigation for long lists and tables — previous/next controls, numbered links, and an ellipsis.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "Pagination",
+        "PaginationContent",
+        "PaginationEllipsis",
+        "PaginationItem",
+        "PaginationLink",
+        "PaginationNext",
+        "PaginationPrevious"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/pagination",
+      "registryItem": "edgecom-ai/design-system/pagination",
+      "docs": "https://design.edgecom.ai/components/pagination/",
+      "contract": "https://design.edgecom.ai/contracts/pagination.json"
+    },
+    {
+      "id": "phone-input",
+      "label": "Phone input",
+      "summary": "A phone number field whose country selector keeps the dial code and the number in a single value.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "PhoneInput"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/phone-input",
+      "registryItem": "edgecom-ai/design-system/phone-input",
+      "docs": "https://design.edgecom.ai/components/phone-input/",
+      "contract": "https://design.edgecom.ai/contracts/phone-input.json"
+    },
+    {
+      "id": "popover",
+      "label": "Popover",
+      "summary": "A floating panel anchored to a trigger: PopoverContent can hold a header (title + description) and a close button.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "Popover",
+        "PopoverTrigger",
+        "PopoverContent",
+        "PopoverClose",
+        "PopoverHeader",
+        "PopoverTitle",
+        "PopoverDescription"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/popover",
+      "registryItem": "edgecom-ai/design-system/popover",
+      "docs": "https://design.edgecom.ai/components/popover/",
+      "contract": "https://design.edgecom.ai/contracts/popover.json"
+    },
+    {
+      "id": "progress",
+      "label": "Progress",
+      "summary": "A progress bar: the root auto-renders a Track containing an Indicator, with optional Label and Value.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "Progress",
+        "ProgressTrack",
+        "ProgressIndicator",
+        "ProgressLabel",
+        "ProgressValue"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/progress",
+      "registryItem": "edgecom-ai/design-system/progress",
+      "docs": "https://design.edgecom.ai/components/progress/",
+      "contract": "https://design.edgecom.ai/contracts/progress.json"
+    },
+    {
+      "id": "radio-group",
+      "label": "Radio group",
+      "summary": "A set of mutually-exclusive options: a RadioGroup coordinates its RadioGroupItems.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "RadioGroup",
+        "RadioGroupItem"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/radio-group",
+      "registryItem": "edgecom-ai/design-system/radio-group",
+      "docs": "https://design.edgecom.ai/components/radio-group/",
+      "contract": "https://design.edgecom.ai/contracts/radio-group.json"
+    },
+    {
+      "id": "resizable",
+      "label": "Resizable",
+      "summary": "Draggable split layouts: a PanelGroup arranges Panels separated by Handles.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "ResizablePanelGroup",
+        "ResizablePanel",
+        "ResizableHandle"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/resizable",
+      "registryItem": "edgecom-ai/design-system/resizable",
+      "docs": "https://design.edgecom.ai/components/resizable/",
+      "contract": "https://design.edgecom.ai/contracts/resizable.json"
+    },
+    {
+      "id": "scroll-area",
+      "label": "Scroll area",
+      "summary": "A scrollable region with a custom overlay scrollbar. Set orientation to vertical, horizontal, or both.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "ScrollArea",
+        "ScrollBar"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/scroll-area",
+      "registryItem": "edgecom-ai/design-system/scroll-area",
+      "docs": "https://design.edgecom.ai/components/scroll-area/",
+      "contract": "https://design.edgecom.ai/contracts/scroll-area.json"
+    },
+    {
+      "id": "select",
+      "label": "Select",
+      "summary": "Choose one value from a list. A Root holds the value and wraps a Trigger plus a portalled, positioned Content of Items.",
+      "purpose": "Choose one value from a known set. The popup is portaled to the app root and matches the trigger width, so options line up under the value they replace.",
+      "useWhen": [
+        "One value is chosen from a set too long for a `tabs` strip, or from one that grows.",
+        "A recurring job needs a control — a series selector, a date range — and then the same `select` appears wherever that job does."
+      ],
+      "dontUseWhen": [
+        "The set is small and fixed and the choice switches panels — that is `tabs`.",
+        "The user needs to type or search — that is `combobox`.",
+        "The list holds actions rather than values — that is a `dropdown-menu`, which shrink-wraps instead of matching the trigger."
+      ],
+      "variants": [],
+      "parts": [
+        "Select",
+        "SelectContent",
+        "SelectGroup",
+        "SelectItem",
+        "SelectLabel",
+        "SelectScrollDownButton",
+        "SelectScrollUpButton",
+        "SelectSeparator",
+        "SelectTrigger",
+        "SelectValue"
+      ],
+      "status": "stable",
+      "authored": true,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/select",
+      "registryItem": "edgecom-ai/design-system/select",
+      "docs": "https://design.edgecom.ai/components/select/",
+      "contract": "https://design.edgecom.ai/contracts/select.json"
+    },
+    {
+      "id": "separator",
+      "label": "Separator",
+      "summary": "A thin divider line. Set orientation to horizontal (default) or vertical.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "Separator"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/separator",
+      "registryItem": "edgecom-ai/design-system/separator",
+      "docs": "https://design.edgecom.ai/components/separator/",
+      "contract": "https://design.edgecom.ai/contracts/separator.json"
+    },
+    {
+      "id": "sheet",
+      "label": "Sheet",
+      "summary": "A dialog panel that slides in from an edge. A Trigger opens a portalled Content with header/footer, title, description, and close.",
+      "purpose": "The edge-anchored panel for longer edit flows. 420px on the inline edges by default, full width on mobile.",
+      "useWhen": [
+        "An edit or update form runs to many fields.",
+        "A detail panel should keep the page context visible behind it."
+      ],
+      "dontUseWhen": [
+        "The form is one to four fields — that is a `dialog`.",
+        "The flow is a destructive confirmation — that is an `alert-dialog`."
+      ],
+      "variants": [],
+      "parts": [
+        "Sheet",
+        "SheetTrigger",
+        "SheetClose",
+        "SheetContent",
+        "SheetHeader",
+        "SheetFooter",
+        "SheetTitle",
+        "SheetDescription"
+      ],
+      "status": "stable",
+      "authored": true,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/sheet",
+      "registryItem": "edgecom-ai/design-system/sheet",
+      "docs": "https://design.edgecom.ai/components/sheet/",
+      "contract": "https://design.edgecom.ai/contracts/sheet.json"
+    },
+    {
+      "id": "sidebar",
+      "label": "Sidebar",
+      "summary": "A composable application sidebar. SidebarProvider supplies collapse state; Sidebar holds a header, a scrollable body of grouped menus, and a footer, alongside a SidebarInset for the main area.",
+      "purpose": "The application navigation frame: a provider holding collapse state, a rail, and menus whose active item uses the component's own neutral highlight.",
+      "useWhen": [
+        "Top-level navigation of the app shell.",
+        "Grouped, collapsible navigation that has to survive a route change."
+      ],
+      "dontUseWhen": [
+        "The switch is between panels within one page — that is `tabs`.",
+        "The list is a set of actions on one element — that is a `dropdown-menu`."
+      ],
+      "variants": [
+        {
+          "name": "variant",
+          "options": [
+            "default",
+            "outline"
+          ],
+          "default": "default"
+        },
+        {
+          "name": "size",
+          "options": [
+            "default",
+            "sm",
+            "lg"
+          ],
+          "default": "default"
+        }
+      ],
+      "parts": [
+        "Sidebar",
+        "SidebarContent",
+        "SidebarFooter",
+        "SidebarGroup",
+        "SidebarGroupAction",
+        "SidebarGroupContent",
+        "SidebarGroupLabel",
+        "SidebarHeader",
+        "SidebarInput",
+        "SidebarInset",
+        "SidebarMenu",
+        "SidebarMenuAction",
+        "SidebarMenuBadge",
+        "SidebarMenuButton",
+        "SidebarMenuItem",
+        "SidebarMenuSkeleton",
+        "SidebarMenuSub",
+        "SidebarMenuSubButton",
+        "SidebarMenuSubItem",
+        "SidebarMenuSubmenu",
+        "SidebarProvider",
+        "SidebarRail",
+        "SidebarSeparator",
+        "SidebarTrigger"
+      ],
+      "status": "stable",
+      "authored": true,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/sidebar",
+      "registryItem": "edgecom-ai/design-system/sidebar",
+      "docs": "https://design.edgecom.ai/components/sidebar/",
+      "contract": "https://design.edgecom.ai/contracts/sidebar.json"
+    },
+    {
+      "id": "skeleton",
+      "label": "Skeleton",
+      "summary": "A muted placeholder block for loading states; pulses by default, or shimmers with a sweeping highlight.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [
+        {
+          "name": "animation",
+          "options": [
+            "pulse",
+            "shimmer",
+            "none"
+          ],
+          "default": "pulse"
+        }
+      ],
+      "parts": [
+        "Skeleton"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/skeleton",
+      "registryItem": "edgecom-ai/design-system/skeleton",
+      "docs": "https://design.edgecom.ai/components/skeleton/",
+      "contract": "https://design.edgecom.ai/contracts/skeleton.json"
+    },
+    {
+      "id": "slider",
+      "label": "Slider",
+      "summary": "A track-and-thumb control for a value or range; renders one thumb per value.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "Slider"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/slider",
+      "registryItem": "edgecom-ai/design-system/slider",
+      "docs": "https://design.edgecom.ai/components/slider/",
+      "contract": "https://design.edgecom.ai/contracts/slider.json"
+    },
+    {
+      "id": "sortable",
+      "label": "Sortable",
+      "summary": "Drag-and-drop reordering: Sortable provides context, SortableItem wraps each entry, and SortableOverlay renders the dragged preview.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "Sortable",
+        "SortableItem",
+        "SortableItemHandle",
+        "SortableOverlay"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/sortable",
+      "registryItem": "edgecom-ai/design-system/sortable",
+      "docs": "https://design.edgecom.ai/components/sortable/",
+      "contract": "https://design.edgecom.ai/contracts/sortable.json"
+    },
+    {
+      "id": "spinner",
+      "label": "Spinner",
+      "summary": "A spinning loading indicator with role=status.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "Spinner"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/spinner",
+      "registryItem": "edgecom-ai/design-system/spinner",
+      "docs": "https://design.edgecom.ai/components/spinner/",
+      "contract": "https://design.edgecom.ai/contracts/spinner.json"
+    },
+    {
+      "id": "stepper",
+      "label": "Stepper",
+      "summary": "A multi-step progress flow: a nav of items (trigger, indicator, separator, title, description) with switchable content panels.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "Stepper",
+        "StepperItem",
+        "StepperTrigger",
+        "StepperIndicator",
+        "StepperSeparator",
+        "StepperTitle",
+        "StepperDescription",
+        "StepperPanel",
+        "StepperContent",
+        "StepperNav"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/stepper",
+      "registryItem": "edgecom-ai/design-system/stepper",
+      "docs": "https://design.edgecom.ai/components/stepper/",
+      "contract": "https://design.edgecom.ai/contracts/stepper.json"
+    },
+    {
+      "id": "switch",
+      "label": "Switch",
+      "summary": "An on/off toggle with a sliding thumb.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "Switch"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/switch",
+      "registryItem": "edgecom-ai/design-system/switch",
+      "docs": "https://design.edgecom.ai/components/switch/",
+      "contract": "https://design.edgecom.ai/contracts/switch.json"
+    },
+    {
+      "id": "table",
+      "label": "Table",
+      "summary": "A styled HTML table wrapped for horizontal overflow — header, body, optional footer, rows, cells, and a caption.",
+      "purpose": "The data grid for text-first rows. It ships the row hover and the alignment that make every table in the product match.",
+      "useWhen": [
+        "Data reads as rows and columns.",
+        "Density is high and secondary detail can move into a `tooltip` or `hover-card` rather than another column."
+      ],
+      "dontUseWhen": [
+        "The rows are actions or navigation — that is a menu or the `sidebar`.",
+        "There is no data to show — that is `empty`, in the table's place."
+      ],
+      "variants": [],
+      "parts": [
+        "Table",
+        "TableHeader",
+        "TableBody",
+        "TableFooter",
+        "TableHead",
+        "TableRow",
+        "TableCell",
+        "TableCaption"
+      ],
+      "status": "stable",
+      "authored": true,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/table",
+      "registryItem": "edgecom-ai/design-system/table",
+      "docs": "https://design.edgecom.ai/components/table/",
+      "contract": "https://design.edgecom.ai/contracts/table.json"
+    },
+    {
+      "id": "tabs",
+      "label": "Tabs",
+      "summary": "A tabbed interface: a List of Triggers reveals matching Content panels.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [
+        {
+          "name": "variant",
+          "options": [
+            "default",
+            "adaptive",
+            "line"
+          ],
+          "default": "default"
+        }
+      ],
+      "parts": [
+        "Tabs",
+        "TabsList",
+        "TabsTrigger",
+        "TabsIndicator",
+        "TabsContent"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/tabs",
+      "registryItem": "edgecom-ai/design-system/tabs",
+      "docs": "https://design.edgecom.ai/components/tabs/",
+      "contract": "https://design.edgecom.ai/contracts/tabs.json"
+    },
+    {
+      "id": "tags-input",
+      "label": "Tags",
+      "summary": "A field for entering and removing multiple tag chips, with paste-splitting and validation.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "TagsInput"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/tags-input",
+      "registryItem": "edgecom-ai/design-system/tags-input",
+      "docs": "https://design.edgecom.ai/components/tags-input/",
+      "contract": "https://design.edgecom.ai/contracts/tags-input.json"
+    },
+    {
+      "id": "timeline",
+      "label": "Timeline",
+      "summary": "A vertical sequence of events. Each TimelineItem pairs a status TimelineDot with a TimelineHeading and TimelineContent, connected by a TimelineLine.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [
+        {
+          "name": "positions",
+          "options": [
+            "left",
+            "right",
+            "center"
+          ],
+          "default": "left"
+        }
+      ],
+      "parts": [
+        "Timeline",
+        "TimelineDot",
+        "TimelineItem",
+        "TimelineContent",
+        "TimelineHeading",
+        "TimelineLine",
+        "TimelineTag"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/timeline",
+      "registryItem": "edgecom-ai/design-system/timeline",
+      "docs": "https://design.edgecom.ai/components/timeline/",
+      "contract": "https://design.edgecom.ai/contracts/timeline.json"
+    },
+    {
+      "id": "toast",
+      "label": "Toast",
+      "summary": "App-wide notifications: mount one Toaster near the app root, then call the imperative toast() function to show messages.",
+      "purpose": "App-wide feedback for a completed interaction. One `Toaster` is mounted near the app root; everything else is the imperative `toast()` call from `sonner`.",
+      "useWhen": [
+        "An interaction has no other visible result — a saved form, a toggled switch.",
+        "The outcome of a destructive action needs reporting after its confirmation."
+      ],
+      "dontUseWhen": [
+        "The message belongs to one field — that is inline validation through `field`.",
+        "The message is a persistent page-level condition — that is `banner` or `alert`."
+      ],
+      "variants": [],
+      "parts": [
+        "Toaster"
+      ],
+      "status": "stable",
+      "authored": true,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/toast",
+      "registryItem": "edgecom-ai/design-system/toast",
+      "docs": "https://design.edgecom.ai/components/toast/",
+      "contract": "https://design.edgecom.ai/contracts/toast.json"
+    },
+    {
+      "id": "toggle",
+      "label": "Toggle",
+      "summary": "A two-state button that holds a pressed/on state.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [
+        {
+          "name": "variant",
+          "options": [
+            "default",
+            "outline"
+          ],
+          "default": "default"
+        },
+        {
+          "name": "size",
+          "options": [
+            "default",
+            "sm",
+            "lg"
+          ],
+          "default": "default"
+        }
+      ],
+      "parts": [
+        "Toggle"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/toggle",
+      "registryItem": "edgecom-ai/design-system/toggle",
+      "docs": "https://design.edgecom.ai/components/toggle/",
+      "contract": "https://design.edgecom.ai/contracts/toggle.json"
+    },
+    {
+      "id": "tooltip",
+      "label": "Tooltip",
+      "summary": "A hover hint: a Provider shares timing, a Trigger reveals a portalled Content on hover/focus.",
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [],
+      "parts": [
+        "Tooltip",
+        "TooltipTrigger",
+        "TooltipContent",
+        "TooltipProvider"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/tooltip",
+      "registryItem": "edgecom-ai/design-system/tooltip",
+      "docs": "https://design.edgecom.ai/components/tooltip/",
+      "contract": "https://design.edgecom.ai/contracts/tooltip.json"
+    }
+  ]
+}

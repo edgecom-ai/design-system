@@ -10,9 +10,16 @@
 // compositions, anti-patterns) come from src/docs/contracts.json, which is
 // hand-written and is the only place a human adds to a contract.
 //
+// The same run publishes the consumer-facing copies under public/ (plan §5.2):
+// the whole document, one file per contract, and a compact index for
+// resolving a designed element to a registry item. A coding agent in a
+// consuming app can only reach design.edgecom.ai, and a contract it cannot
+// fetch is one it infers from the catalogue instead — which is the visual
+// reverse-engineering the contracts exist to remove.
+//
 // Run by docs:gen. CI regenerates and fails on a diff.
 
-import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from "node:fs"
+import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, unlinkSync, copyFileSync } from "node:fs"
 import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 import { execFileSync } from "node:child_process"
@@ -22,6 +29,7 @@ import { readBlocks } from "./lib/tokens.mjs"
 import { parseSections } from "./lib/sections.mjs"
 import { buildContracts, OVERLAY_KEYS, ALIAS_FILE } from "./lib/contracts.mjs"
 import { freshness, forced } from "./lib/stale.mjs"
+import { PUBLISHED, urlOf, contractUrl, schemaUrl } from "./lib/publish.mjs"
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const read = (p) => readFileSync(resolve(root, p), "utf8")
@@ -29,6 +37,17 @@ const uiDir = resolve(root, "src/components/ui")
 
 const OVERLAY = "src/docs/contracts.json"
 const OUT = "src/docs/generated/contracts.json"
+
+// The published copies. The per-contract files are enumerated from the
+// sections so the stamp sees them; a contract that disappears takes its file
+// with it (see the prune below), so the stamp can never be satisfied by a
+// leftover.
+const publishedFiles = (ids) => [
+  PUBLISHED.contracts,
+  PUBLISHED.contractsIndex,
+  `${PUBLISHED.schemasDir}/contracts.schema.json`,
+  ...ids.map((id) => `${PUBLISHED.contractsDir}/${id}.json`),
+]
 
 const inputs = [
   "src/app/globals.css",
@@ -46,14 +65,18 @@ const inputs = [
     .map((f) => `src/components/ui/${f}`),
 ]
 
-const stamp = freshness({ name: "contracts", inputs, outputs: [OUT] })
+// --- inputs ------------------------------------------------------------------
+const sections = parseSections(read("src/app/sections.tsx"))
+
+const stamp = freshness({
+  name: "contracts",
+  inputs: [...inputs, "scripts/lib/publish.mjs", "schemas/contracts.schema.json"],
+  outputs: [OUT, ...publishedFiles(sections.filter((s) => s.group === "Components").map((s) => s.id))],
+})
 if (stamp.fresh && !forced()) {
   console.log("gen-contracts — up to date — skipped")
   process.exit(0)
 }
-
-// --- inputs ------------------------------------------------------------------
-const sections = parseSections(read("src/app/sections.tsx"))
 
 // gen-api writes a plain JSON object literal, so slice it out rather than
 // importing TypeScript for a file that is generated anyway.
@@ -152,10 +175,69 @@ const doc = {
 mkdirSync(resolve(root, dirname(OUT)), { recursive: true })
 writeFileSync(resolve(root, OUT), JSON.stringify(doc, null, 2) + "\n")
 
+// --- publish -----------------------------------------------------------------
+// The document at a stable URL. The repo copy's `$schema` is a relative path;
+// the served copy points at the served schema, which is the address the
+// schema's own `$id` already claims.
+const write = (p, data) => {
+  mkdirSync(resolve(root, dirname(p)), { recursive: true })
+  writeFileSync(resolve(root, p), JSON.stringify(data, null, 2) + "\n")
+}
+mkdirSync(resolve(root, PUBLISHED.schemasDir), { recursive: true })
+copyFileSync(
+  resolve(root, "schemas/contracts.schema.json"),
+  resolve(root, PUBLISHED.schemasDir, "contracts.schema.json"),
+)
+const provenance = { version: doc.version, digest: doc.digest }
+write(PUBLISHED.contracts, { ...doc, $schema: schemaUrl("contracts.schema.json") })
+
+// One file per contract, so an agent resolving one designed element fetches
+// one contract — about 3 KB — rather than the whole set.
+const dir = resolve(root, PUBLISHED.contractsDir)
+mkdirSync(dir, { recursive: true })
+const wanted = new Set(contracts.map((c) => `${c.id}.json`))
+wanted.add("index.json")
+for (const f of readdirSync(dir)) {
+  if (f.endsWith(".json") && !wanted.has(f)) unlinkSync(resolve(dir, f))
+}
+for (const c of contracts) {
+  write(`${PUBLISHED.contractsDir}/${c.id}.json`, { ...provenance, contract: c })
+}
+
+// The index is the search surface: enough to pick a component and its variant
+// without opening every contract, plus the address of the full one. Selection
+// criteria are included because that is the field selection is made on; the
+// derived detail (tokens, states, props) stays in the per-contract file.
+const index = {
+  ...provenance,
+  contracts: urlOf(PUBLISHED.contracts),
+  docs: `${urlOf("public/design.md")}`,
+  guide: `${urlOf("public/agents.md")}`,
+  counts: doc.counts,
+  components: contracts.map((c) => ({
+    id: c.id,
+    label: c.label,
+    summary: c.summary,
+    purpose: c.purpose,
+    useWhen: c.useWhen,
+    dontUseWhen: c.dontUseWhen,
+    variants: c.variants.map((v) => ({ name: v.name, options: v.options, default: v.default })),
+    parts: c.parts.map((p) => p.name),
+    status: c.status,
+    authored: c.authored,
+    install: c.install,
+    registryItem: c.registryItem,
+    docs: c.docs,
+    contract: contractUrl(c.id),
+  })),
+}
+write(PUBLISHED.contractsIndex, index)
+
 console.log(
   `gen-contracts — ${contracts.length} contracts ` +
     `(${authored.length} authored, ${doc.counts.withVariants} with variants, ` +
-    `${doc.counts.tokenReferences} token references) → ${OUT}`,
+    `${doc.counts.tokenReferences} token references) → ${OUT}, ` +
+    `published to ${PUBLISHED.contracts}, ${PUBLISHED.contractsIndex} and ${PUBLISHED.contractsDir}/<id>.json`,
 )
 
 stamp.save()

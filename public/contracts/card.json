@@ -1,0 +1,131 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "card",
+    "label": "Card",
+    "registryItem": "edgecom-ai/design-system/card",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/card",
+    "docs": "https://design.edgecom.ai/components/card/",
+    "source": "src/components/ui/card.tsx",
+    "summary": "A styled container with composable header, content, and footer sections (all div-based).",
+    "purpose": "The standard content surface: the `card` token at radius `xl`, with header, content and footer slots sharing one 1.5rem content line.",
+    "useWhen": [
+      "A coherent block — a metric tile, a chart, a table — is grouped on the page background.",
+      "A surface needs to sit one step above `background` in the elevation order."
+    ],
+    "dontUseWhen": [
+      "The content is itself an overlay. `popover` and `elevated` sit above `card`, and a card inside an overlay flattens the stack.",
+      "The block is a page-level message — that is `banner` or `alert`."
+    ],
+    "base": null,
+    "parts": [
+      {
+        "name": "Card",
+        "description": "Root container with ring, rounded corners, and consistent spacing."
+      },
+      {
+        "name": "CardHeader",
+        "description": "Grid header area for title, description, and optional action."
+      },
+      {
+        "name": "CardFooter",
+        "description": "Bottom bar with a top border and muted background."
+      },
+      {
+        "name": "CardTitle",
+        "description": "Heading-font title text for the card."
+      },
+      {
+        "name": "CardAction",
+        "description": "Slot positioned top-right of the header for actions."
+      },
+      {
+        "name": "CardDescription",
+        "description": "Muted secondary text below the title."
+      },
+      {
+        "name": "CardContent",
+        "description": "Padded region for the card's main body."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [
+      "data-[size=sm]",
+      "group-data-[size=sm]/card"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "card",
+        "family": "surface"
+      },
+      {
+        "id": "card-foreground",
+        "family": "surface"
+      },
+      {
+        "id": "font-heading",
+        "family": "typography"
+      },
+      {
+        "id": "foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "muted",
+        "family": "neutral"
+      },
+      {
+        "id": "muted-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "radius-xl",
+        "family": "radius"
+      },
+      {
+        "id": "text-body",
+        "family": "typography"
+      },
+      {
+        "id": "text-body-lg",
+        "family": "typography"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      }
+    ],
+    "requires": [
+      "Content aligned to the card's 1.5rem content line. A table inside it aligns its first and last cells to that line, not to the 0.75rem cell padding."
+    ],
+    "forbids": [
+      "A coloured strip along an edge to signal status — use the relevant component's own `-subtle` variant.",
+      "A hand-set radius. Cards are `xl` from the radius scale."
+    ],
+    "rules": [],
+    "behavior": {
+      "loading": "The card keeps its frame and fills its content slots with `skeleton` blocks — never a raw loading gap or a bare spinner in place of the layout.",
+      "empty": "No content is an `empty` state inside the content slot, carrying a retry action when the emptiness is a failed request."
+    },
+    "a11y": {
+      "attributes": [],
+      "requirements": [
+        "`CardTitle` renders a `div`, not a heading. Where the card is a section in the page outline, supply the heading element and level yourself."
+      ]
+    },
+    "examples": [
+      "`<Card><CardHeader><CardTitle>Consumption</CardTitle><CardAction><Button variant=\"ghost\" size=\"icon-sm\" aria-label=\"Export\"><Download /></Button></CardAction></CardHeader><CardContent>…</CardContent></Card>`"
+    ],
+    "antiPatterns": [
+      "A `border-l-4` status stripe down the card edge.",
+      "A card nested inside a dialog to re-create a surface the overlay already provides."
+    ],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": true
+  }
+}

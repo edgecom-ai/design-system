@@ -1,0 +1,115 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "multi-select",
+    "label": "Multi-select",
+    "registryItem": "edgecom-ai/design-system/multi-select",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/multi-select",
+    "docs": "https://design.edgecom.ai/components/multi-select/",
+    "source": "src/components/ui/multi-select-listbox.tsx",
+    "summary": "Choosing several values at once: a trigger plus a searchable checkbox listbox with Select all and Clear. The one place a checkmark belongs. The tag-style selector on this page ships as a separate registry item.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": {
+      "name": "Base UI Select",
+      "url": "https://base-ui.com/react/components/select"
+    },
+    "parts": [
+      {
+        "name": "MultiSelect",
+        "description": "The composed control — trigger, search, checkbox list, and the Select all / Clear row."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [
+      "data-[empty=true]",
+      "data-[selected]",
+      "data-closed",
+      "data-highlighted",
+      "data-open",
+      "disabled",
+      "focus-visible",
+      "focus-within",
+      "group-data-[selected]/ms-item",
+      "hover"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "accent",
+        "family": "neutral"
+      },
+      {
+        "id": "accent-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "background",
+        "family": "surface"
+      },
+      {
+        "id": "border",
+        "family": "neutral"
+      },
+      {
+        "id": "foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "input",
+        "family": "neutral"
+      },
+      {
+        "id": "muted-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "popover",
+        "family": "surface"
+      },
+      {
+        "id": "popover-foreground",
+        "family": "surface"
+      },
+      {
+        "id": "primary",
+        "family": "brand"
+      },
+      {
+        "id": "primary-foreground",
+        "family": "brand"
+      },
+      {
+        "id": "radius-lg",
+        "family": "radius"
+      },
+      {
+        "id": "radius-md",
+        "family": "radius"
+      },
+      {
+        "id": "ring",
+        "family": "neutral"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [
+        "aria-label"
+      ],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

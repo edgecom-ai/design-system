@@ -1,0 +1,45 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "spinner",
+    "label": "Spinner",
+    "registryItem": "edgecom-ai/design-system/spinner",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/spinner",
+    "docs": "https://design.edgecom.ai/components/spinner/",
+    "source": "src/components/ui/spinner.tsx",
+    "summary": "A spinning loading indicator with role=status.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": null,
+    "parts": [
+      {
+        "name": "Spinner",
+        "description": "Animated spinning loader icon with an accessible label."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [],
+    "responsive": [],
+    "tokens": [],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [
+        "aria-label",
+        "role=status"
+      ],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

@@ -1,0 +1,279 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "sidebar",
+    "label": "Sidebar",
+    "registryItem": "edgecom-ai/design-system/sidebar",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/sidebar",
+    "docs": "https://design.edgecom.ai/components/sidebar/",
+    "source": "src/components/ui/sidebar.tsx",
+    "summary": "A composable application sidebar. SidebarProvider supplies collapse state; Sidebar holds a header, a scrollable body of grouped menus, and a footer, alongside a SidebarInset for the main area.",
+    "purpose": "The application navigation frame: a provider holding collapse state, a rail, and menus whose active item uses the component's own neutral highlight.",
+    "useWhen": [
+      "Top-level navigation of the app shell.",
+      "Grouped, collapsible navigation that has to survive a route change."
+    ],
+    "dontUseWhen": [
+      "The switch is between panels within one page — that is `tabs`.",
+      "The list is a set of actions on one element — that is a `dropdown-menu`."
+    ],
+    "base": null,
+    "parts": [
+      {
+        "name": "Sidebar",
+        "description": "The sidebar container; collapsible offcanvas, icon, or none."
+      },
+      {
+        "name": "SidebarContent",
+        "description": "Scrollable body holding the navigation groups."
+      },
+      {
+        "name": "SidebarFooter",
+        "description": "Bottom region, e.g. settings or the account menu."
+      },
+      {
+        "name": "SidebarGroup",
+        "description": "A titled section of menu items."
+      },
+      {
+        "name": "SidebarGroupAction",
+        "description": null
+      },
+      {
+        "name": "SidebarGroupContent",
+        "description": null
+      },
+      {
+        "name": "SidebarGroupLabel",
+        "description": "Heading for a group."
+      },
+      {
+        "name": "SidebarHeader",
+        "description": "Top region, typically the logo or workspace switcher."
+      },
+      {
+        "name": "SidebarInput",
+        "description": null
+      },
+      {
+        "name": "SidebarInset",
+        "description": "The main content area beside the sidebar."
+      },
+      {
+        "name": "SidebarMenu",
+        "description": "The list of menu items within a group."
+      },
+      {
+        "name": "SidebarMenuAction",
+        "description": null
+      },
+      {
+        "name": "SidebarMenuBadge",
+        "description": null
+      },
+      {
+        "name": "SidebarMenuButton",
+        "description": "The interactive nav button; set isActive for the current page."
+      },
+      {
+        "name": "SidebarMenuItem",
+        "description": "A single menu row."
+      },
+      {
+        "name": "SidebarMenuSkeleton",
+        "description": null
+      },
+      {
+        "name": "SidebarMenuSub",
+        "description": null
+      },
+      {
+        "name": "SidebarMenuSubButton",
+        "description": null
+      },
+      {
+        "name": "SidebarMenuSubItem",
+        "description": null
+      },
+      {
+        "name": "SidebarMenuSubmenu",
+        "description": "A parent with subpages: an inline collapsible submenu when expanded, and an off-rail hover/focus flyout when the rail is collapsed to icons. Pass the parent button as `trigger` and the SidebarMenuSubItem rows as children. If the trigger renders something other than a <button> — a SidebarMenuButton with render={<Link />}, say — pass nativeButton={false} so Base UI does not warn on the collapsed-rail flyout."
+      },
+      {
+        "name": "SidebarProvider",
+        "description": "Context provider owning open/collapsed state; wrap the whole layout."
+      },
+      {
+        "name": "SidebarRail",
+        "description": null
+      },
+      {
+        "name": "SidebarSeparator",
+        "description": null
+      },
+      {
+        "name": "SidebarTrigger",
+        "description": "Button that toggles the sidebar open/collapsed."
+      }
+    ],
+    "props": [
+      {
+        "part": "Sidebar",
+        "name": "variant",
+        "type": "\"default\" | \"outline\"",
+        "default": "\"default\"",
+        "description": null
+      },
+      {
+        "part": "Sidebar",
+        "name": "size",
+        "type": "\"default\" | \"sm\" | \"lg\"",
+        "default": "\"default\"",
+        "description": null
+      }
+    ],
+    "variants": [
+      {
+        "name": "variant",
+        "options": [
+          "default",
+          "outline"
+        ],
+        "default": "default"
+      },
+      {
+        "name": "size",
+        "options": [
+          "default",
+          "sm",
+          "lg"
+        ],
+        "default": "default"
+      }
+    ],
+    "states": [
+      "active",
+      "aria-disabled",
+      "aria-expanded",
+      "data-[orientation=horizontal]",
+      "data-[side=left]",
+      "data-[side=right]",
+      "data-[size=md]",
+      "data-[size=sm]",
+      "data-active",
+      "data-open",
+      "disabled",
+      "focus-visible",
+      "group-data-[collapsible=icon]",
+      "group-data-[collapsible=offcanvas]",
+      "group-data-[side=left]",
+      "group-data-[side=right]",
+      "group-data-[variant=floating]",
+      "hover",
+      "peer-data-[size=default]/menu-button",
+      "peer-data-[size=lg]/menu-button",
+      "peer-data-[size=sm]/menu-button",
+      "peer-data-[state=collapsed]",
+      "peer-data-[variant=inset]",
+      "peer-data-active/menu-button"
+    ],
+    "responsive": [
+      "md",
+      "sm"
+    ],
+    "tokens": [
+      {
+        "id": "background",
+        "family": "surface"
+      },
+      {
+        "id": "input",
+        "family": "neutral"
+      },
+      {
+        "id": "muted-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "radius-lg",
+        "family": "radius"
+      },
+      {
+        "id": "radius-md",
+        "family": "radius"
+      },
+      {
+        "id": "radius-xl",
+        "family": "radius"
+      },
+      {
+        "id": "sidebar",
+        "family": "other"
+      },
+      {
+        "id": "sidebar-accent",
+        "family": "sidebar"
+      },
+      {
+        "id": "sidebar-accent-foreground",
+        "family": "sidebar"
+      },
+      {
+        "id": "sidebar-border",
+        "family": "sidebar"
+      },
+      {
+        "id": "sidebar-foreground",
+        "family": "sidebar"
+      },
+      {
+        "id": "sidebar-ring",
+        "family": "sidebar"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      },
+      {
+        "id": "text-caption",
+        "family": "typography"
+      }
+    ],
+    "requires": [
+      "A `SidebarProvider` above any `Sidebar`; the collapse state lives there.",
+      "`SidebarMenuButton isActive` for the current item, so the active styling is the component's own.",
+      "A gap between menu items so an active item and a hovered neighbour never merge into one block."
+    ],
+    "forbids": [
+      "Recolouring the active item with brand blue. The highlight is the neutral `sidebar-accent` surface, and the text and icon stay `foreground`.",
+      "Hand-rolling the highlight instead of composing `SidebarGroupLabel`, `SidebarMenuButton isActive`, and `SidebarMenuSub`."
+    ],
+    "rules": [],
+    "behavior": {
+      "loading": "`SidebarMenuSkeleton` holds the menu's shape while its items load."
+    },
+    "a11y": {
+      "attributes": [
+        "aria-label",
+        "sr-only",
+        "tabIndex"
+      ],
+      "requirements": [
+        "`SidebarTrigger` carries an `aria-label`.",
+        "Items collapsed to icons keep an accessible name."
+      ]
+    },
+    "examples": [
+      "`<SidebarProvider><Sidebar><SidebarContent><SidebarGroup><SidebarGroupLabel>Sites</SidebarGroupLabel><SidebarMenu><SidebarMenuItem><SidebarMenuButton isActive>Overview</SidebarMenuButton></SidebarMenuItem></SidebarMenu></SidebarGroup></SidebarContent></Sidebar><SidebarInset>…</SidebarInset></SidebarProvider>`"
+    ],
+    "antiPatterns": [
+      "A brand-blue active nav item.",
+      "Two parallel navigation patterns in one app shell."
+    ],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": true
+  }
+}

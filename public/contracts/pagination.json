@@ -1,0 +1,73 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "pagination",
+    "label": "Pagination",
+    "registryItem": "edgecom-ai/design-system/pagination",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/pagination",
+    "docs": "https://design.edgecom.ai/components/pagination/",
+    "source": "src/components/ui/pagination.tsx",
+    "summary": "Page navigation for long lists and tables — previous/next controls, numbered links, and an ellipsis.",
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": null,
+    "parts": [
+      {
+        "name": "Pagination",
+        "description": "Root nav landmark labelled for assistive tech."
+      },
+      {
+        "name": "PaginationContent",
+        "description": "The row that lays out the page items."
+      },
+      {
+        "name": "PaginationEllipsis",
+        "description": "Indicates skipped page ranges."
+      },
+      {
+        "name": "PaginationItem",
+        "description": "A single slot wrapping a link or control."
+      },
+      {
+        "name": "PaginationLink",
+        "description": "A page-number link; mark the current page with isActive."
+      },
+      {
+        "name": "PaginationNext",
+        "description": "Link to the next page."
+      },
+      {
+        "name": "PaginationPrevious",
+        "description": "Link to the previous page."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [],
+    "responsive": [
+      "sm"
+    ],
+    "tokens": [],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [
+        "aria-current",
+        "aria-label",
+        "role=navigation",
+        "sr-only"
+      ],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

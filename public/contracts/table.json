@@ -1,0 +1,118 @@
+{
+  "version": "v1.0.0",
+  "digest": "3a27629e9107153a",
+  "contract": {
+    "id": "table",
+    "label": "Table",
+    "registryItem": "edgecom-ai/design-system/table",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/table",
+    "docs": "https://design.edgecom.ai/components/table/",
+    "source": "src/components/ui/table.tsx",
+    "summary": "A styled HTML table wrapped for horizontal overflow — header, body, optional footer, rows, cells, and a caption.",
+    "purpose": "The data grid for text-first rows. It ships the row hover and the alignment that make every table in the product match.",
+    "useWhen": [
+      "Data reads as rows and columns.",
+      "Density is high and secondary detail can move into a `tooltip` or `hover-card` rather than another column."
+    ],
+    "dontUseWhen": [
+      "The rows are actions or navigation — that is a menu or the `sidebar`.",
+      "There is no data to show — that is `empty`, in the table's place."
+    ],
+    "base": null,
+    "parts": [
+      {
+        "name": "Table",
+        "description": "Root table, wrapped in an overflow-x container."
+      },
+      {
+        "name": "TableHeader",
+        "description": "The thead grouping header rows."
+      },
+      {
+        "name": "TableBody",
+        "description": "The tbody grouping data rows."
+      },
+      {
+        "name": "TableFooter",
+        "description": "Optional tfoot for totals or summaries."
+      },
+      {
+        "name": "TableHead",
+        "description": "A header cell (th)."
+      },
+      {
+        "name": "TableRow",
+        "description": "A single row with hover and selected states."
+      },
+      {
+        "name": "TableCell",
+        "description": "A data cell (td)."
+      },
+      {
+        "name": "TableCaption",
+        "description": "A caption describing the table."
+      }
+    ],
+    "props": [],
+    "variants": [],
+    "states": [
+      "data-[state=selected]",
+      "group-data-[density=compact]/table",
+      "hover",
+      "last"
+    ],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "muted",
+        "family": "neutral"
+      },
+      {
+        "id": "muted-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      }
+    ],
+    "requires": [
+      "Wide tables scroll inside their own container rather than forcing horizontal page scroll; the primitive wraps for this.",
+      "The first and last cell in a row align to the card's 1.5rem content padding."
+    ],
+    "forbids": [
+      "Icons in cells unless explicitly asked — cells are text-first.",
+      "A hand-rolled row hover. The primitive's light `primary` tint is what every table uses."
+    ],
+    "rules": [
+      "The first and last cell in a row align to the card's content padding (1.5rem), not the 0.75rem cell padding.",
+      "No icons in cells unless asked. Rely on the primitive's built-in row hover."
+    ],
+    "behavior": {
+      "loading": "Rows render as `skeleton` blocks in place, keeping the column layout, rather than collapsing the table.",
+      "empty": "No rows is an `empty` state with a retry action when a request failed."
+    },
+    "a11y": {
+      "attributes": [],
+      "requirements": [
+        "A `TableCaption` or an `aria-label` names the table.",
+        "Header cells are `TableHead`, not body cells styled to look like headers."
+      ]
+    },
+    "examples": [
+      "`<Table><TableHeader><TableRow><TableHead>Site</TableHead></TableRow></TableHeader><TableBody><TableRow><TableCell>North yard</TableCell></TableRow></TableBody></Table>`"
+    ],
+    "antiPatterns": [
+      "A metric and its delta crammed into one cell instead of moving the detail into a tooltip.",
+      "A first column sitting flush against the card border."
+    ],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": true
+  }
+}
