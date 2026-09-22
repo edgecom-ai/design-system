@@ -1,14 +1,14 @@
 {
   "version": "v1.0.0",
-  "digest": "927d9e77781a6e86",
+  "digest": "8d60a24b537c3cd9",
   "contract": {
     "id": "logo",
     "label": "Logo",
     "registryItem": "edgecom-ai/design-system/logo",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/logo",
-    "docs": null,
+    "docs": "https://design.edgecom.ai/foundations/logo/",
     "source": "src/components/ui/logo.tsx",
-    "summary": null,
+    "summary": "The Edgecom wordmark and glyph, with clear-space and color guidance.",
     "purpose": null,
     "useWhen": [],
     "dontUseWhen": [],

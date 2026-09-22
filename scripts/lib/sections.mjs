@@ -87,3 +87,21 @@ export function componentIds(src) {
     .filter((s) => s.group === "Components")
     .map((s) => s.id)
 }
+
+// Keep in sync with groupSlug() / sectionPath() in src/app/sections.tsx.
+export const groupSlug = (group) => group.toLowerCase().replace(/\s+/g, "-")
+
+/** Clean route path for a section, e.g. "/components/slider" or "/blocks/application-shell". */
+export const sectionPath = (s) => `/${groupSlug(s.group)}/${s.id}`
+
+/** The primitive file a section documents — its id, or its ALIAS_FILE target. */
+export const primitiveFileOf = (s) => `src/components/ui/${ALIAS_FILE[s.id] ?? s.id}.tsx`
+
+/**
+ * The sections backed by a primitive, in any group. A Blocks page can document
+ * a primitive too — the application shell does — and it must count as that
+ * primitive's page, or the contract says `docs: null` while a page exists.
+ */
+export function primitiveSections(sections, hasFile) {
+  return sections.filter((s) => hasFile(primitiveFileOf(s)))
+}

@@ -1,16 +1,16 @@
 {
   "version": "v1.0.0",
-  "digest": "927d9e77781a6e86",
+  "digest": "8d60a24b537c3cd9",
   "contracts": "https://design.edgecom.ai/contracts.json",
   "docs": "https://design.edgecom.ai/design.md",
   "guide": "https://design.edgecom.ai/agents.md",
   "counts": {
-    "total": 64,
-    "authored": 12,
+    "total": 65,
+    "authored": 13,
     "withVariants": 22,
     "withBaseUi": 26,
-    "undocumented": 8,
-    "tokenReferences": 500
+    "undocumented": 7,
+    "tokenReferences": 507
   },
   "components": [
     {
@@ -111,6 +111,40 @@
       "registryItem": "edgecom-ai/design-system/alert-dialog",
       "docs": "https://design.edgecom.ai/components/alert-dialog/",
       "contract": "https://design.edgecom.ai/contracts/alert-dialog.json"
+    },
+    {
+      "id": "application-shell",
+      "label": "Application shell",
+      "summary": "The portal page frame from data — a collapsible icon-rail sidebar with the logo, navigation and account menu, a top bar with the rail toggle, search, building switcher, app actions and theme toggle, and the scrolling content area — composed from the registry's sidebar, dropdown-menu, input-group, avatar and button.",
+      "purpose": "The one page frame every client-portal screen renders inside — the icon-rail sidebar with the product navigation and the account menu, the top bar with the rail toggle, search, building switcher, the app's actions and the theme toggle, and the scrolling content area. Built from the registry's own primitives, so its active item, menus, tooltips and badges are the ones found everywhere else.",
+      "useWhen": [
+        "Any screen of the client portal — a page is its `children`.",
+        "A design or prototype of a portal page: wrap the page in it so the frame is the real one, not an improvised sidebar."
+      ],
+      "dontUseWhen": [
+        "A marketing or auth page with no product navigation.",
+        "A second, nested navigation inside a page — that is `tabs` or the settings shell."
+      ],
+      "variants": [],
+      "parts": [
+        "ApplicationShell",
+        "ApplicationShellSidebar",
+        "ApplicationShellNav",
+        "ApplicationShellSidebarFooter",
+        "ApplicationShellUserMenu",
+        "ApplicationShellHeader",
+        "ApplicationShellSearch",
+        "ApplicationShellActions",
+        "ApplicationShellBuildingSwitcher",
+        "ApplicationShellThemeToggle",
+        "ApplicationShellContent"
+      ],
+      "status": "stable",
+      "authored": true,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/application-shell",
+      "registryItem": "edgecom-ai/design-system/application-shell",
+      "docs": "https://design.edgecom.ai/blocks/application-shell/",
+      "contract": "https://design.edgecom.ai/contracts/application-shell.json"
     },
     {
       "id": "avatar",
@@ -940,7 +974,7 @@
     {
       "id": "logo",
       "label": "Logo",
-      "summary": null,
+      "summary": "The Edgecom wordmark and glyph, with clear-space and color guidance.",
       "purpose": null,
       "useWhen": [],
       "dontUseWhen": [],
@@ -952,7 +986,7 @@
       "authored": false,
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/logo",
       "registryItem": "edgecom-ai/design-system/logo",
-      "docs": null,
+      "docs": "https://design.edgecom.ai/foundations/logo/",
       "contract": "https://design.edgecom.ai/contracts/logo.json"
     },
     {

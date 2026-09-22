@@ -1,7 +1,7 @@
 {
   "$schema": "https://design.edgecom.ai/schemas/contracts.schema.json",
   "version": "v1.0.0",
-  "digest": "927d9e77781a6e86",
+  "digest": "8d60a24b537c3cd9",
   "sources": [
     "src/components/ui/*.tsx",
     "src/app/sections.tsx",
@@ -10,12 +10,12 @@
   ],
   "generator": "scripts/gen-contracts.mjs",
   "counts": {
-    "total": 64,
-    "authored": 12,
+    "total": 65,
+    "authored": 13,
     "withVariants": 22,
     "withBaseUi": 26,
-    "undocumented": 8,
-    "tokenReferences": 500
+    "undocumented": 7,
+    "tokenReferences": 507
   },
   "contracts": [
     {
@@ -315,11 +315,11 @@
       ],
       "props": [
         {
-          "part": "AlertDialog",
+          "part": "AlertDialogContent",
           "name": "size",
           "type": "\"default\" | \"sm\"",
           "default": "\"default\"",
-          "description": null
+          "description": "Popup width — default, or sm for a two-column footer."
         }
       ],
       "variants": [
@@ -425,6 +425,152 @@
         "A row delete that fires on click, with only a toast afterwards offering an undo.",
         "A confirmation whose copy says \"This action cannot be undone\" without saying what the action is.",
         "Reusing `dialog` for a delete, so the user can dismiss their way out of a decision the product needs recorded."
+      ],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": true
+    },
+    {
+      "id": "application-shell",
+      "label": "Application shell",
+      "registryItem": "edgecom-ai/design-system/application-shell",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/application-shell",
+      "docs": "https://design.edgecom.ai/blocks/application-shell/",
+      "source": "src/components/ui/application-shell.tsx",
+      "summary": "The portal page frame from data — a collapsible icon-rail sidebar with the logo, navigation and account menu, a top bar with the rail toggle, search, building switcher, app actions and theme toggle, and the scrolling content area — composed from the registry's sidebar, dropdown-menu, input-group, avatar and button.",
+      "purpose": "The one page frame every client-portal screen renders inside — the icon-rail sidebar with the product navigation and the account menu, the top bar with the rail toggle, search, building switcher, the app's actions and the theme toggle, and the scrolling content area. Built from the registry's own primitives, so its active item, menus, tooltips and badges are the ones found everywhere else.",
+      "useWhen": [
+        "Any screen of the client portal — a page is its `children`.",
+        "A design or prototype of a portal page: wrap the page in it so the frame is the real one, not an improvised sidebar."
+      ],
+      "dontUseWhen": [
+        "A marketing or auth page with no product navigation.",
+        "A second, nested navigation inside a page — that is `tabs` or the settings shell."
+      ],
+      "base": null,
+      "parts": [
+        {
+          "name": "ApplicationShell",
+          "description": "The whole frame. Pass nav, activeItem, user, buildings and the page as children; the parts below are what it composes, exported for a custom header or footer."
+        },
+        {
+          "name": "ApplicationShellSidebar",
+          "description": "The rail: logo header (mark only when collapsed) above whatever navigation and footer are passed as children."
+        },
+        {
+          "name": "ApplicationShellNav",
+          "description": "One navigation group from items; an item with sub-items renders as a collapsible submenu that becomes a hover flyout on the collapsed rail."
+        },
+        {
+          "name": "ApplicationShellSidebarFooter",
+          "description": "The bottom of the rail — footer navigation (Settings) and the account menu."
+        },
+        {
+          "name": "ApplicationShellUserMenu",
+          "description": "The signed-in user, docked bottom-left, opening a dropdown-menu with the app's account items as children."
+        },
+        {
+          "name": "ApplicationShellHeader",
+          "description": "The top bar: the sidebar trigger, then search and the actions cluster."
+        },
+        {
+          "name": "ApplicationShellSearch",
+          "description": "Global search in the top bar — an input-group with a leading icon, hidden on phones."
+        },
+        {
+          "name": "ApplicationShellActions",
+          "description": "The right-hand cluster of the top bar; the app's own icon buttons go here, before the theme toggle."
+        },
+        {
+          "name": "ApplicationShellBuildingSwitcher",
+          "description": "A labelled outline button opening a radio dropdown-menu of buildings."
+        },
+        {
+          "name": "ApplicationShellThemeToggle",
+          "description": "A ghost icon button that flips .dark on <html>."
+        },
+        {
+          "name": "ApplicationShellContent",
+          "description": "The scrolling page area beside the rail, with the page padding."
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [
+        "group-data-[collapsible=icon]"
+      ],
+      "responsive": [
+        "md",
+        "sm"
+      ],
+      "tokens": [
+        {
+          "id": "background",
+          "family": "surface"
+        },
+        {
+          "id": "border",
+          "family": "neutral"
+        },
+        {
+          "id": "foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "muted-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "sidebar-foreground",
+          "family": "sidebar"
+        },
+        {
+          "id": "text-body-sm",
+          "family": "typography"
+        },
+        {
+          "id": "text-caption",
+          "family": "typography"
+        }
+      ],
+      "requires": [
+        "`nav` and `activeItem` — the current item is signalled by the component's own neutral highlight, never brand blue.",
+        "`user` when anyone is signed in, so the account menu is where every screen puts it.",
+        "Exactly one shell per page, at the root; overlays it opens portal to the app root."
+      ],
+      "forbids": [
+        "Rebuilding the frame from `sidebar` parts by hand when this is what is wanted — every portal page must share one frame.",
+        "A second top bar or a page-level header that repeats the shell's controls.",
+        "Recolouring the active navigation item or the rail with brand blue."
+      ],
+      "rules": [
+        "The rail collapses to icons (`collapsible=\"icon\"`); labels move to tooltips and a submenu becomes a hover flyout.",
+        "On a phone the rail becomes an offcanvas sheet behind the header's toggle and the search field hides.",
+        "The theme toggle flips `.dark` on `<html>`; nothing inside the shell hand-picks a dark colour."
+      ],
+      "behavior": {
+        "loading": "The page's own loading state renders inside `ApplicationShellContent`; the frame itself never skeletons.",
+        "empty": "The frame is unaffected; the page's `empty` state renders in the content area.",
+        "error": "The frame stays interactive; the page's error state, with its retry, renders in the content area."
+      },
+      "a11y": {
+        "attributes": [
+          "aria-current",
+          "aria-label",
+          "aria-pressed"
+        ],
+        "requirements": [
+          "`aria-current=\"page\"` is set on the active item; keep `activeItem` in step with the route.",
+          "Every icon-only control in `actions` carries an `aria-label` and a `tooltip`."
+        ]
+      },
+      "examples": [
+        "`<ApplicationShell nav={nav} activeItem=\"alarms\" user={{ name: \"Priya Sharma\", email: \"priya@example.com\" }} buildings={buildings} search>…page…</ApplicationShell>`"
+      ],
+      "antiPatterns": [
+        "A hand-rolled sidebar plus header on one screen and the shell on another.",
+        "A page that ships without the shell because the prompt only described the page."
       ],
       "status": "stable",
       "replaces": null,
@@ -2937,7 +3083,7 @@
       ],
       "props": [
         {
-          "part": "Empty",
+          "part": "EmptyMedia",
           "name": "variant",
           "type": "\"default\" | \"icon\"",
           "default": "\"icon\"",
@@ -3297,7 +3443,7 @@
           "name": "size",
           "type": "\"default\" | \"sm\"",
           "default": "\"default\"",
-          "description": null
+          "description": "Control height — default (2rem) or sm (1.75rem). Match the other controls in the same toolbar."
         }
       ],
       "variants": [
@@ -3427,7 +3573,7 @@
       ],
       "props": [
         {
-          "part": "InputGroup",
+          "part": "InputGroupAddon",
           "name": "align",
           "type": "\"inline-start\" | \"inline-end\" | \"block-start\" | \"block-end\"",
           "default": "\"inline-start\"",
@@ -3796,9 +3942,9 @@
       "label": "Logo",
       "registryItem": "edgecom-ai/design-system/logo",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/logo",
-      "docs": null,
+      "docs": "https://design.edgecom.ai/foundations/logo/",
       "source": "src/components/ui/logo.tsx",
-      "summary": null,
+      "summary": "The Edgecom wordmark and glyph, with clear-space and color guidance.",
       "purpose": null,
       "useWhen": [],
       "dontUseWhen": [],
@@ -4905,11 +5051,11 @@
       ],
       "props": [
         {
-          "part": "Select",
+          "part": "SelectTrigger",
           "name": "size",
           "type": "\"default\" | \"sm\"",
           "default": "\"default\"",
-          "description": null
+          "description": "Control height — default (2rem) or sm (1.75rem). Match the other controls in the same toolbar."
         }
       ],
       "variants": [
@@ -5348,14 +5494,14 @@
       ],
       "props": [
         {
-          "part": "Sidebar",
+          "part": "SidebarMenuButton",
           "name": "variant",
           "type": "\"default\" | \"outline\"",
           "default": "\"default\"",
           "description": null
         },
         {
-          "part": "Sidebar",
+          "part": "SidebarMenuButton",
           "name": "size",
           "type": "\"default\" | \"sm\" | \"lg\"",
           "default": "\"default\"",
@@ -6116,11 +6262,11 @@
       ],
       "props": [
         {
-          "part": "Tabs",
+          "part": "TabsList",
           "name": "variant",
           "type": "\"default\" | \"adaptive\" | \"line\"",
           "default": "\"default\"",
-          "description": "TabsList style. `default` is the filled segmented strip — a `muted` track with the active tab raised on it — and reads as a group by lightness alone, so it wants a plain host (`background`, `card`). `adaptive` is that same strip in a second colour set: its `track`/`track-active` surfaces are an alpha over whatever is behind them, plus a hairline, so the strip keeps its step on a surface the `muted` track would collide with — a `muted`/`secondary` panel, a `bg-muted/50` card footer, a selected row, or (in dark) inside any overlay, where `popover` and `elevated` sit within a hair of `muted`. `line` replaces the strip with an underline bar and needs no lightness step at all."
+          "description": null
         }
       ],
       "variants": [

@@ -414,6 +414,31 @@
       "type": "registry:ui"
     },
     {
+      "name": "application-shell",
+      "title": "Application Shell",
+      "description": "The portal page frame from data — a collapsible icon-rail sidebar with the logo, navigation and account menu, a top bar with the rail toggle, search, building switcher, app actions and theme toggle, and the scrolling content area — composed from the registry's sidebar, dropdown-menu, input-group, avatar and button.",
+      "dependencies": [
+        "lucide-react@^1.23.0"
+      ],
+      "registryDependencies": [
+        "edgecom-ai/design-system/theme",
+        "edgecom-ai/design-system/avatar",
+        "edgecom-ai/design-system/button",
+        "edgecom-ai/design-system/dropdown-menu",
+        "edgecom-ai/design-system/input-group",
+        "edgecom-ai/design-system/logo",
+        "edgecom-ai/design-system/sidebar"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/application-shell.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "docs": "Docs: https://design.edgecom.ai/blocks/application-shell/ · Contract: https://design.edgecom.ai/contracts/application-shell.json · Guardrails: https://design.edgecom.ai/design.md",
+      "type": "registry:ui"
+    },
+    {
       "name": "avatar",
       "title": "Avatar",
       "description": "A user or contact image with a text fallback. Compose Avatar with AvatarImage + AvatarFallback; stack them in an AvatarGroup with an overflow count.",
@@ -972,7 +997,7 @@
     {
       "name": "logo",
       "title": "Logo",
-      "description": "The Edgecom Logo component.",
+      "description": "The Edgecom wordmark and glyph, with clear-space and color guidance.",
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
       ],
@@ -982,7 +1007,7 @@
           "type": "registry:ui"
         }
       ],
-      "docs": "Docs: no page yet — read the contract · Contract: https://design.edgecom.ai/contracts/logo.json · Guardrails: https://design.edgecom.ai/design.md",
+      "docs": "Docs: https://design.edgecom.ai/foundations/logo/ · Contract: https://design.edgecom.ai/contracts/logo.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {

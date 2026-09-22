@@ -555,7 +555,7 @@ function writeComponents() {
   let specs = 0
 
   for (const s of sections) {
-    if (s.group !== "Components") continue
+    // Any group: a Blocks page that documents a primitive is its spec too.
     const file = resolve(uiDir, `${s.id}.tsx`)
     if (!existsSync(file)) continue
     const src = readFileSync(file, "utf8")

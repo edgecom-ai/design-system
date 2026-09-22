@@ -19,7 +19,7 @@
 
 import { familyOf } from "./tokens.mjs"
 import { extractCva } from "./cva.mjs"
-import { ALIAS_FILE } from "./sections.mjs"
+import { ALIAS_FILE, primitiveFileOf, sectionPath } from "./sections.mjs"
 
 export { ALIAS_FILE }
 
@@ -248,9 +248,9 @@ export function exportedParts(src) {
  * contract; everything else here gets a derived contract with no docs page.
  */
 export function undocumentedPrimitives(sections, primitiveIds) {
+  // Any group counts: a Blocks page that documents a primitive is its page.
   const covered = new Set()
   for (const s of sections) {
-    if (s.group !== "Components") continue
     covered.add(s.id)
     covered.add(ALIAS_FILE[s.id] ?? s.id)
   }
@@ -330,9 +330,10 @@ export function buildContracts({ sections, readPrimitive, api, curated, overlay,
     }
   }
 
+  // Every section that documents a primitive, whatever group its page sits in:
+  // the application shell is a Blocks page and is still that primitive's docs.
   for (const s of sections) {
-    if (s.group !== "Components") continue
-    const file = `src/components/ui/${ALIAS_FILE[s.id] ?? s.id}.tsx`
+    const file = primitiveFileOf(s)
     const src = readPrimitive(file)
     if (src == null) continue
     const c = curated[s.id] ?? {}
@@ -340,7 +341,7 @@ export function buildContracts({ sections, readPrimitive, api, curated, overlay,
       assemble({
         id: s.id,
         label: s.label,
-        docs: `https://design.edgecom.ai/components/${s.id}/`,
+        docs: `https://design.edgecom.ai${sectionPath(s)}/`,
         file,
         src,
         a: api[s.id] ?? {},

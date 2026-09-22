@@ -26,6 +26,7 @@ import { fileURLToPath } from "node:url"
 import { readBlocks } from "./lib/tokens.mjs"
 import { parseSections } from "./lib/sections.mjs"
 import { buildContracts, undocumentedPrimitives, OVERLAY_KEYS, ALIAS_FILE } from "./lib/contracts.mjs"
+import { primitiveSections } from "./lib/sections.mjs"
 import { freshness, forced } from "./lib/stale.mjs"
 import { PUBLISHED, urlOf, contractUrl, schemaUrl } from "./lib/publish.mjs"
 import { systemIdentity, systemSources } from "./lib/system.mjs"
@@ -76,7 +77,7 @@ const primitives = readdirSync(uiDir)
 // no section covers, which get a derived contract so a design citing them
 // resolves (lib/contracts undocumentedPrimitives).
 const contractIds = [
-  ...sections.filter((s) => s.group === "Components").map((s) => s.id),
+  ...primitiveSections(sections, (f) => existsSync(resolve(root, f))).map((s) => s.id),
   ...undocumentedPrimitives(sections, primitives),
 ]
 

@@ -4,7 +4,7 @@
   "design": "Settings.dc.html",
   "title": "Client portal — Settings, Permissions screen",
   "designSystemVersion": "v1.0.0",
-  "designSystemDigest": "927d9e77781a6e86",
+  "designSystemDigest": "8d60a24b537c3cd9",
   "screens": [
     {
       "id": "permissions",
@@ -13,6 +13,19 @@
     }
   ],
   "components": [
+    {
+      "instanceId": "portal-shell",
+      "component": "application-shell",
+      "label": "The portal frame every screen renders inside — navigation, account menu, building switcher; the page is its children",
+      "screen": "permissions",
+      "parts": [
+        "ApplicationShell",
+        "ApplicationShellNav",
+        "ApplicationShellUserMenu",
+        "ApplicationShellBuildingSwitcher",
+        "ApplicationShellContent"
+      ]
+    },
     {
       "instanceId": "settings-tabs",
       "component": "tabs",
@@ -220,6 +233,11 @@
     "success"
   ],
   "interactions": [
+    {
+      "instanceId": "portal-shell",
+      "event": "choose a navigation item",
+      "result": "navigates to that section; the active item takes the neutral highlight"
+    },
     {
       "instanceId": "invite-member",
       "event": "click",

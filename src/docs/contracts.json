@@ -54,7 +54,6 @@
       "Reusing `dialog` for a delete, so the user can dismiss their way out of a decision the product needs recorded."
     ]
   },
-
   "button": {
     "purpose": "The one control for committing an action. Every clickable affordance is this primitive or composes it — a styled div or anchor loses the hover, focus ring, disabled and aria-invalid handling the variants already carry.",
     "useWhen": [
@@ -99,7 +98,6 @@
       "Primary `default` on several buttons in one view."
     ]
   },
-
   "hover-card": {
     "purpose": "The richer half of the density rule: detail that would otherwise need more columns, revealed on hover or focus while the primary value stays visible in place.",
     "useWhen": [
@@ -136,7 +134,6 @@
       "A hover card holding the only Edit button for a row."
     ]
   },
-
   "input": {
     "purpose": "The single-line text field. It renders the destructive border and ring from `aria-invalid`, so the invalid state is a data attribute rather than a class override.",
     "useWhen": [
@@ -170,7 +167,6 @@
       "Hand-drawn focus styling that replaces the `ring` token."
     ]
   },
-
   "select": {
     "purpose": "Choose one value from a known set. The popup is portaled to the app root and matches the trigger width, so options line up under the value they replace.",
     "useWhen": [
@@ -209,7 +205,6 @@
       "A `select` for a job that a segmented control handles on another screen."
     ]
   },
-
   "badge": {
     "purpose": "A compact label for a status, a count, or a category. The variant carries the meaning, so the meaning survives a theme change.",
     "useWhen": [
@@ -244,7 +239,6 @@
       "A `success` badge used decoratively where nothing succeeded."
     ]
   },
-
   "card": {
     "purpose": "The standard content surface: the `card` token at radius `xl`, with header, content and footer slots sharing one 1.5rem content line.",
     "useWhen": [
@@ -277,7 +271,6 @@
       "A card nested inside a dialog to re-create a surface the overlay already provides."
     ]
   },
-
   "dialog": {
     "purpose": "The centered modal for one short, focused action. It keeps a top-right close so a modal is always dismissible.",
     "useWhen": [
@@ -316,7 +309,6 @@
       "A non-destructive modal with the close removed."
     ]
   },
-
   "sheet": {
     "purpose": "The edge-anchored panel for longer edit flows. 420px on the inline edges by default, full width on mobile.",
     "useWhen": [
@@ -335,7 +327,9 @@
       "Widening past the default unless the content genuinely needs it — and then through the `--sheet-width` custom property the primitive reads, not a `w-*` override.",
       "Removing the close."
     ],
-    "rules": ["Default width 420px, full-width on mobile. Keeps its top-right close (X)."],
+    "rules": [
+      "Default width 420px, full-width on mobile. Keeps its top-right close (X)."
+    ],
     "a11yRequirements": [
       "Focus moves into the panel on open and returns to the trigger on close."
     ],
@@ -347,7 +341,6 @@
       "A `w-[600px]` on `SheetContent` instead of setting `--sheet-width`."
     ]
   },
-
   "table": {
     "purpose": "The data grid for text-first rows. It ships the row hover and the alignment that make every table in the product match.",
     "useWhen": [
@@ -386,7 +379,6 @@
       "A first column sitting flush against the card border."
     ]
   },
-
   "sidebar": {
     "purpose": "The application navigation frame: a provider holding collapse state, a rail, and menus whose active item uses the component's own neutral highlight.",
     "useWhen": [
@@ -421,7 +413,6 @@
       "Two parallel navigation patterns in one app shell."
     ]
   },
-
   "toast": {
     "purpose": "App-wide feedback for a completed interaction. One `Toaster` is mounted near the app root; everything else is the imperative `toast()` call from `sonner`.",
     "useWhen": [
@@ -456,7 +447,6 @@
       "A failure reported by colour alone, with no title."
     ]
   },
-
   "dropdown-menu": {
     "rules": [
       "**Shrink-wraps to its widest item.** Never stretch it to the trigger width or pad items to a fixed width.",
@@ -481,9 +471,55 @@
     ]
   },
   "empty": {
-    "rules": ["Pair with a retry action on async failure — never a blank screen or an endless spinner."]
+    "rules": [
+      "Pair with a retry action on async failure — never a blank screen or an endless spinner."
+    ]
   },
   "skeleton": {
-    "rules": ["Use for loading, with `spinner` and `empty` for the other two states. Never a raw loading gap."]
+    "rules": [
+      "Use for loading, with `spinner` and `empty` for the other two states. Never a raw loading gap."
+    ]
+  },
+  "application-shell": {
+    "purpose": "The one page frame every client-portal screen renders inside — the icon-rail sidebar with the product navigation and the account menu, the top bar with the rail toggle, search, building switcher, the app's actions and the theme toggle, and the scrolling content area. Built from the registry's own primitives, so its active item, menus, tooltips and badges are the ones found everywhere else.",
+    "useWhen": [
+      "Any screen of the client portal — a page is its `children`.",
+      "A design or prototype of a portal page: wrap the page in it so the frame is the real one, not an improvised sidebar."
+    ],
+    "dontUseWhen": [
+      "A marketing or auth page with no product navigation.",
+      "A second, nested navigation inside a page — that is `tabs` or the settings shell."
+    ],
+    "requires": [
+      "`nav` and `activeItem` — the current item is signalled by the component's own neutral highlight, never brand blue.",
+      "`user` when anyone is signed in, so the account menu is where every screen puts it.",
+      "Exactly one shell per page, at the root; overlays it opens portal to the app root."
+    ],
+    "forbids": [
+      "Rebuilding the frame from `sidebar` parts by hand when this is what is wanted — every portal page must share one frame.",
+      "A second top bar or a page-level header that repeats the shell's controls.",
+      "Recolouring the active navigation item or the rail with brand blue."
+    ],
+    "rules": [
+      "The rail collapses to icons (`collapsible=\"icon\"`); labels move to tooltips and a submenu becomes a hover flyout.",
+      "On a phone the rail becomes an offcanvas sheet behind the header's toggle and the search field hides.",
+      "The theme toggle flips `.dark` on `<html>`; nothing inside the shell hand-picks a dark colour."
+    ],
+    "behavior": {
+      "loading": "The page's own loading state renders inside `ApplicationShellContent`; the frame itself never skeletons.",
+      "empty": "The frame is unaffected; the page's `empty` state renders in the content area.",
+      "error": "The frame stays interactive; the page's error state, with its retry, renders in the content area."
+    },
+    "a11yRequirements": [
+      "`aria-current=\"page\"` is set on the active item; keep `activeItem` in step with the route.",
+      "Every icon-only control in `actions` carries an `aria-label` and a `tooltip`."
+    ],
+    "examples": [
+      "`<ApplicationShell nav={nav} activeItem=\"alarms\" user={{ name: \"Priya Sharma\", email: \"priya@example.com\" }} buildings={buildings} search>…page…</ApplicationShell>`"
+    ],
+    "antiPatterns": [
+      "A hand-rolled sidebar plus header on one screen and the shell on another.",
+      "A page that ships without the shell because the prompt only described the page."
+    ]
   }
 }

@@ -62,6 +62,31 @@
       ]
     },
     {
+      "name": "application-shell",
+      "type": "registry:ui",
+      "title": "Application Shell",
+      "description": "The portal page frame from data — a collapsible icon-rail sidebar with the logo, navigation and account menu, a top bar with the rail toggle, search, building switcher, app actions and theme toggle, and the scrolling content area — composed from the registry's sidebar, dropdown-menu, input-group, avatar and button.",
+      "docs": "Docs: https://design.edgecom.ai/blocks/application-shell/ · Contract: https://design.edgecom.ai/contracts/application-shell.json · Guardrails: https://design.edgecom.ai/design.md",
+      "dependencies": [
+        "lucide-react@^1.23.0"
+      ],
+      "registryDependencies": [
+        "edgecom-ai/design-system/theme",
+        "edgecom-ai/design-system/avatar",
+        "edgecom-ai/design-system/button",
+        "edgecom-ai/design-system/dropdown-menu",
+        "edgecom-ai/design-system/input-group",
+        "edgecom-ai/design-system/logo",
+        "edgecom-ai/design-system/sidebar"
+      ],
+      "files": [
+        {
+          "path": "application-shell.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "avatar",
       "type": "registry:ui",
       "title": "Avatar",
@@ -621,8 +646,8 @@
       "name": "logo",
       "type": "registry:ui",
       "title": "Logo",
-      "description": "The Edgecom Logo component.",
-      "docs": "Docs: no page yet — read the contract · Contract: https://design.edgecom.ai/contracts/logo.json · Guardrails: https://design.edgecom.ai/design.md",
+      "description": "The Edgecom wordmark and glyph, with clear-space and color guidance.",
+      "docs": "Docs: https://design.edgecom.ai/foundations/logo/ · Contract: https://design.edgecom.ai/contracts/logo.json · Guardrails: https://design.edgecom.ai/design.md",
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
       ],

@@ -6,6 +6,12 @@ export type GeneratedApi = {
   props: GeneratedProp[];
 };
 export const generatedApi: Record<string, GeneratedApi> = {
+  "logo": {
+    "parts": [
+      "Logo"
+    ],
+    "props": []
+  },
   "button": {
     "base": {
       "name": "Base UI Button",
@@ -177,7 +183,7 @@ export const generatedApi: Record<string, GeneratedApi> = {
     ],
     "props": [
       {
-        "part": "AlertDialog",
+        "part": "AlertDialogContent",
         "name": "size",
         "type": "\"default\" | \"sm\"",
         "default": "\"default\""
@@ -268,7 +274,7 @@ export const generatedApi: Record<string, GeneratedApi> = {
     ],
     "props": [
       {
-        "part": "Empty",
+        "part": "EmptyMedia",
         "name": "variant",
         "type": "\"default\" | \"icon\"",
         "default": "\"icon\""
@@ -475,7 +481,7 @@ export const generatedApi: Record<string, GeneratedApi> = {
     ],
     "props": [
       {
-        "part": "InputGroup",
+        "part": "InputGroupAddon",
         "name": "align",
         "type": "\"inline-start\" | \"inline-end\" | \"block-start\" | \"block-end\"",
         "default": "\"inline-start\""
@@ -539,7 +545,7 @@ export const generatedApi: Record<string, GeneratedApi> = {
     ],
     "props": [
       {
-        "part": "Select",
+        "part": "SelectTrigger",
         "name": "size",
         "type": "\"default\" | \"sm\"",
         "default": "\"default\""
@@ -686,13 +692,13 @@ export const generatedApi: Record<string, GeneratedApi> = {
     ],
     "props": [
       {
-        "part": "Sidebar",
+        "part": "SidebarMenuButton",
         "name": "variant",
         "type": "\"default\" | \"outline\"",
         "default": "\"default\""
       },
       {
-        "part": "Sidebar",
+        "part": "SidebarMenuButton",
         "name": "size",
         "type": "\"default\" | \"sm\" | \"lg\"",
         "default": "\"default\""
@@ -796,7 +802,7 @@ export const generatedApi: Record<string, GeneratedApi> = {
     ],
     "props": [
       {
-        "part": "Tabs",
+        "part": "TabsList",
         "name": "variant",
         "type": "\"default\" | \"adaptive\" | \"line\"",
         "default": "\"default\""
@@ -858,6 +864,22 @@ export const generatedApi: Record<string, GeneratedApi> = {
   "toast": {
     "parts": [
       "Toaster"
+    ],
+    "props": []
+  },
+  "application-shell": {
+    "parts": [
+      "ApplicationShell",
+      "ApplicationShellSidebar",
+      "ApplicationShellNav",
+      "ApplicationShellSidebarFooter",
+      "ApplicationShellUserMenu",
+      "ApplicationShellHeader",
+      "ApplicationShellSearch",
+      "ApplicationShellActions",
+      "ApplicationShellBuildingSwitcher",
+      "ApplicationShellThemeToggle",
+      "ApplicationShellContent"
     ],
     "props": []
   }

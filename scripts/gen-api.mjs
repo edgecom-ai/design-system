@@ -16,7 +16,7 @@ import { dirname, resolve } from "node:path";
 import { codeToHtml } from "shiki";
 import { readdirSync } from "node:fs";
 import { freshness, forced } from "./lib/stale.mjs";
-import { componentIds as componentIdsOf, ALIAS_FILE } from "./lib/sections.mjs";
+import { parseSections, ALIAS_FILE } from "./lib/sections.mjs";
 import { extractCva } from "./lib/cva.mjs";
 import { exportedParts } from "./lib/contracts.mjs";
 
@@ -51,7 +51,9 @@ const baseDenylist = new Set(["merge-props", "use-render"]);
 
 // --- discover which section ids map to a primitive ------------------------
 const sectionsSrc = readFileSync(resolve(root, "src/app/sections.tsx"), "utf8");
-const componentIds = componentIdsOf(sectionsSrc);
+// Every section, in any group — extract() returns null where no primitive backs it,
+// so a Blocks page that documents one (the application shell) gets its API too.
+const componentIds = parseSections(sectionsSrc).map((s) => s.id);
 
 // --- helpers ---------------------------------------------------------------
 const titleCase = (slug) =>
@@ -84,14 +86,20 @@ function extract(id) {
   // local reader this replaced tracked quotes but not comments, so a single
   // apostrophe in a comment inside the variants object — "can't" in button's —
   // swallowed the rest of the block and the component documented no props.
+  //
+  // The cva belongs to the part its constant is named for — `selectTriggerVariants`
+  // sizes SelectTrigger, `alertDialogContentVariants` sizes AlertDialogContent —
+  // and only falls back to the root part when the name matches no export.
   const props = [];
   const cva = extractCva(src);
   if (cva) {
+    const owner = src.match(/const\s+(\w+)Variants\s*=\s*cva\(/)?.[1];
+    const ownerPart = owner && partList.find((p) => p.toLowerCase() === owner.toLowerCase());
     for (const [group, entries] of Object.entries(cva.groups)) {
       const options = Object.keys(entries);
       if (!options.length) continue;
       props.push({
-        part: mainPart,
+        part: ownerPart ?? mainPart,
         name: group,
         type: options.map((o) => `"${o}"`).join(" | "),
         default: cva.defaults[group] ? `"${cva.defaults[group]}"` : undefined,
