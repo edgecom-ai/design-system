@@ -4,6 +4,7 @@
   "contract": {
     "id": "motion-tabs",
     "label": "Motion tabs",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/motion-tabs",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/motion-tabs",
     "docs": null,

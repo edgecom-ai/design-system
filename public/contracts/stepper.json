@@ -4,6 +4,7 @@
   "contract": {
     "id": "stepper",
     "label": "Stepper",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/stepper",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/stepper",
     "docs": "https://design.edgecom.ai/components/stepper/",

@@ -4,6 +4,7 @@
   "contract": {
     "id": "combobox",
     "label": "Combobox",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/combobox",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/combobox",
     "docs": "https://design.edgecom.ai/components/combobox/",

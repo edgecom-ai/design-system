@@ -226,6 +226,7 @@ const index = {
   components: contracts.map((c) => ({
     id: c.id,
     label: c.label,
+    aliases: c.aliases,
     summary: c.summary,
     purpose: c.purpose,
     useWhen: c.useWhen,

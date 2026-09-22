@@ -4,6 +4,7 @@
   "contract": {
     "id": "input-group",
     "label": "Input group",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/input-group",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/input-group",
     "docs": "https://design.edgecom.ai/components/input-group/",

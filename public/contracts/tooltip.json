@@ -4,6 +4,7 @@
   "contract": {
     "id": "tooltip",
     "label": "Tooltip",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/tooltip",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/tooltip",
     "docs": "https://design.edgecom.ai/components/tooltip/",

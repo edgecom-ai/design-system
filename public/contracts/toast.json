@@ -4,6 +4,10 @@
   "contract": {
     "id": "toast",
     "label": "Toast",
+    "aliases": [
+      "sonner",
+      "toaster"
+    ],
     "registryItem": "edgecom-ai/design-system/toast",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/toast",
     "docs": "https://design.edgecom.ai/components/toast/",

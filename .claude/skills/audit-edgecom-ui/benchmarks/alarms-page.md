@@ -7,7 +7,7 @@ The prompt is deliberately naive. It says *what* the screen must do and nothing 
 ## How to run
 
 1. In Claude Design, start a new design and select the current Edgecom design system.
-2. Paste the prompt below **verbatim**. Add nothing.
+2. Paste the prompt below **verbatim**. Add nothing. Use a fresh project with the design system attached and nothing else in it — the system has to carry the whole instruction on its own.
 3. Save the output beside the earlier runs (design file, manifest if one was produced, and the agent's own summary) so runs can be diffed.
 4. Score it against the checklist below and record the score and date in the log at the bottom.
 
@@ -35,7 +35,7 @@ Make the copy realistic: real-sounding site and meter names, real units. Don't u
 
 ## How to judge it
 
-Score what a product manager can see, plus what the validator can check. One point each; the total is out of 12.
+Score what a product manager can see, plus what the validator can check. One point each; the total is out of 13.
 
 **Looks like ours**
 
@@ -51,17 +51,21 @@ Score what a product manager can see, plus what the validator can check. One poi
 7. Resolve confirms through `AlertDialog`; the quiet destructive action uses the destructive ghost button.
 8. The form for a new rule is in the right overlay for its length (sheet, not dialog).
 9. Loading, empty and error states exist and the empty state offers a way out (clear filters).
-10. The mobile layout is a real layout, not the desktop one squeezed.
+10. The mobile layout is a real layout, not the desktop one squeezed — the same file at a phone width, not a separate phone frame drawn on the canvas.
 
 **Ships correctly**
 
 11. A `<Name>.manifest.json` was written unprompted beside the design and cites the live system version and digest.
 12. `node scripts/check-design-manifest.mjs <manifest> --strict` passes.
 
+**Sits in the portal**
+
+13. The page renders inside the `application-shell` component — the rail, top bar and account menu are the component's, not a frame improvised from `Sidebar*` parts — and the design shows no on-canvas harness: state and theme are the Design Component's props.
+
 Record failures by number. A failure that repeats across runs is a design-system defect; open it against the primitive, the guideline or the contract it exposes.
 
 ## Log
 
-| Date | System version | Score / 12 | Failed items | Notes |
+| Date | System version | Score | Failed items | Notes |
 |---|---|---|---|---|
-| — | — | — | — | Not yet run. |
+| 2026-09-22 | v1.0.0 · `2694528e` | 7 / 12 | 3, 4, 7, 10, 12 | First run, scored before item 13 existed. Fresh project, no rulebook: the manifest still came, from the README paragraph alone, with every instance joined. The shell and the phone frame were improvised and later removed; the search field sat at a different height from the `sm` filters; chart axes used px type. Each became a system change: `application-shell`, the presenting conventions, `Input size="sm"`, `chart-container` as an alias of `chart`. |

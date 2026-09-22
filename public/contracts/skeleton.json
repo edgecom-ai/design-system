@@ -4,6 +4,7 @@
   "contract": {
     "id": "skeleton",
     "label": "Skeleton",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/skeleton",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/skeleton",
     "docs": "https://design.edgecom.ai/components/skeleton/",

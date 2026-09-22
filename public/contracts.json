@@ -21,6 +21,7 @@
     {
       "id": "accordion",
       "label": "Accordion",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/accordion",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/accordion",
       "docs": "https://design.edgecom.ai/components/accordion/",
@@ -109,6 +110,7 @@
     {
       "id": "alert",
       "label": "Alert",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/alert",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/alert",
       "docs": "https://design.edgecom.ai/components/alert/",
@@ -244,6 +246,7 @@
     {
       "id": "alert-dialog",
       "label": "Alert dialog",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/alert-dialog",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/alert-dialog",
       "docs": "https://design.edgecom.ai/components/alert-dialog/",
@@ -434,6 +437,7 @@
     {
       "id": "application-shell",
       "label": "Application shell",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/application-shell",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/application-shell",
       "docs": "https://design.edgecom.ai/blocks/application-shell/",
@@ -580,6 +584,7 @@
     {
       "id": "avatar",
       "label": "Avatar",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/avatar",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/avatar",
       "docs": "https://design.edgecom.ai/components/avatar/",
@@ -697,6 +702,7 @@
     {
       "id": "badge",
       "label": "Badge & status tags",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/badge",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/badge",
       "docs": "https://design.edgecom.ai/components/badge/",
@@ -936,6 +942,7 @@
     {
       "id": "banner",
       "label": "Banner",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/banner",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/banner",
       "docs": "https://design.edgecom.ai/components/banner/",
@@ -1015,6 +1022,7 @@
     {
       "id": "breadcrumb",
       "label": "Breadcrumb",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/breadcrumb",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/breadcrumb",
       "docs": "https://design.edgecom.ai/components/breadcrumb/",
@@ -1100,6 +1108,7 @@
     {
       "id": "button",
       "label": "Button",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/button",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/button",
       "docs": "https://design.edgecom.ai/components/button/",
@@ -1360,6 +1369,7 @@
     {
       "id": "button-group",
       "label": "Button group",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/button-group",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/button-group",
       "docs": "https://design.edgecom.ai/components/button-group/",
@@ -1452,6 +1462,7 @@
     {
       "id": "calendar",
       "label": "Calendar",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/calendar",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/calendar",
       "docs": "https://design.edgecom.ai/components/calendar/",
@@ -1547,6 +1558,7 @@
     {
       "id": "card",
       "label": "Card",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/card",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/card",
       "docs": "https://design.edgecom.ai/components/card/",
@@ -1690,6 +1702,7 @@
     {
       "id": "category-bar",
       "label": "Category bar",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/category-bar",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/category-bar",
       "docs": "https://design.edgecom.ai/components/category-bar/",
@@ -1749,6 +1762,9 @@
     {
       "id": "chart",
       "label": "Chart",
+      "aliases": [
+        "chart-container"
+      ],
       "registryItem": "edgecom-ai/design-system/chart",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/chart",
       "docs": null,
@@ -1840,6 +1856,7 @@
     {
       "id": "checkbox",
       "label": "Checkbox",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/checkbox",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/checkbox",
       "docs": "https://design.edgecom.ai/components/checkbox/",
@@ -1915,6 +1932,7 @@
     {
       "id": "circular-progress",
       "label": "Circular progress",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/circular-progress",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/circular-progress",
       "docs": "https://design.edgecom.ai/components/circular-progress/",
@@ -1966,6 +1984,7 @@
     {
       "id": "collapsible",
       "label": "Collapsible",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/collapsible",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/collapsible",
       "docs": "https://design.edgecom.ai/components/collapsible/",
@@ -2015,6 +2034,7 @@
     {
       "id": "combobox",
       "label": "Combobox",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/combobox",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/combobox",
       "docs": "https://design.edgecom.ai/components/combobox/",
@@ -2192,6 +2212,7 @@
     {
       "id": "command",
       "label": "Command",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/command",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/command",
       "docs": "https://design.edgecom.ai/components/command/",
@@ -2312,6 +2333,7 @@
     {
       "id": "context-menu",
       "label": "Context menu",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/context-menu",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/context-menu",
       "docs": "https://design.edgecom.ai/components/context-menu/",
@@ -2476,6 +2498,7 @@
     {
       "id": "date-picker",
       "label": "Date picker",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/date-picker",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/date-picker",
       "docs": "https://design.edgecom.ai/components/date-picker/",
@@ -2572,6 +2595,7 @@
     {
       "id": "dialog",
       "label": "Dialog",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/dialog",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/dialog",
       "docs": "https://design.edgecom.ai/components/dialog/",
@@ -2728,6 +2752,7 @@
     {
       "id": "drawer",
       "label": "Drawer",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/drawer",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/drawer",
       "docs": "https://design.edgecom.ai/components/drawer/",
@@ -2879,6 +2904,7 @@
     {
       "id": "dropdown-menu",
       "label": "Dropdown menu",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/dropdown-menu",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/dropdown-menu",
       "docs": "https://design.edgecom.ai/components/dropdown-menu/",
@@ -3046,6 +3072,7 @@
     {
       "id": "empty",
       "label": "Empty state",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/empty",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/empty",
       "docs": "https://design.edgecom.ai/components/empty/",
@@ -3158,6 +3185,7 @@
     {
       "id": "field",
       "label": "Field",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/field",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/field",
       "docs": "https://design.edgecom.ai/components/field/",
@@ -3309,6 +3337,7 @@
     {
       "id": "hover-card",
       "label": "Hover card",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/hover-card",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/hover-card",
       "docs": "https://design.edgecom.ai/components/hover-card/",
@@ -3413,6 +3442,7 @@
     {
       "id": "input",
       "label": "Input",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/input",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/input",
       "docs": "https://design.edgecom.ai/components/input/",
@@ -3536,6 +3566,7 @@
     {
       "id": "input-group",
       "label": "Input group",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/input-group",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/input-group",
       "docs": "https://design.edgecom.ai/components/input-group/",
@@ -3651,6 +3682,7 @@
     {
       "id": "input-otp",
       "label": "Input OTP",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/input-otp",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/input-otp",
       "docs": "https://design.edgecom.ai/components/input-otp/",
@@ -3734,6 +3766,7 @@
     {
       "id": "label",
       "label": "Label",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/label",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/label",
       "docs": null,
@@ -3780,6 +3813,9 @@
     {
       "id": "list",
       "label": "List",
+      "aliases": [
+        "item"
+      ],
       "registryItem": "edgecom-ai/design-system/list",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/list",
       "docs": "https://design.edgecom.ai/components/list/",
@@ -3940,6 +3976,7 @@
     {
       "id": "logo",
       "label": "Logo",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/logo",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/logo",
       "docs": "https://design.edgecom.ai/foundations/logo/",
@@ -3982,6 +4019,7 @@
     {
       "id": "motion-highlight",
       "label": "Motion highlight",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/motion-highlight",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/motion-highlight",
       "docs": null,
@@ -4029,6 +4067,7 @@
     {
       "id": "motion-tabs",
       "label": "Motion tabs",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/motion-tabs",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/motion-tabs",
       "docs": null,
@@ -4120,6 +4159,9 @@
     {
       "id": "multi-select",
       "label": "Multi-select",
+      "aliases": [
+        "multi-select-listbox"
+      ],
       "registryItem": "edgecom-ai/design-system/multi-select",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/multi-select",
       "docs": "https://design.edgecom.ai/components/multi-select/",
@@ -4231,6 +4273,7 @@
     {
       "id": "native-select",
       "label": "Native select",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/native-select",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/native-select",
       "docs": "https://design.edgecom.ai/components/native-select/",
@@ -4346,6 +4389,7 @@
     {
       "id": "navigation-menu",
       "label": "Navigation menu",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/navigation-menu",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/navigation-menu",
       "docs": "https://design.edgecom.ai/components/navigation-menu/",
@@ -4482,6 +4526,7 @@
     {
       "id": "pagination",
       "label": "Pagination",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/pagination",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/pagination",
       "docs": "https://design.edgecom.ai/components/pagination/",
@@ -4551,6 +4596,7 @@
     {
       "id": "phone-input",
       "label": "Phone input",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/phone-input",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/phone-input",
       "docs": "https://design.edgecom.ai/components/phone-input/",
@@ -4622,6 +4668,7 @@
     {
       "id": "popover",
       "label": "Popover",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/popover",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/popover",
       "docs": "https://design.edgecom.ai/components/popover/",
@@ -4719,6 +4766,7 @@
     {
       "id": "progress",
       "label": "Progress",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/progress",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/progress",
       "docs": "https://design.edgecom.ai/components/progress/",
@@ -4793,6 +4841,7 @@
     {
       "id": "radio-group",
       "label": "Radio group",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/radio-group",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/radio-group",
       "docs": "https://design.edgecom.ai/components/radio-group/",
@@ -4870,6 +4919,9 @@
     {
       "id": "resizable",
       "label": "Resizable",
+      "aliases": [
+        "resizable-panel-group"
+      ],
       "registryItem": "edgecom-ai/design-system/resizable",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/resizable",
       "docs": "https://design.edgecom.ai/components/resizable/",
@@ -4930,6 +4982,7 @@
     {
       "id": "scroll-area",
       "label": "Scroll area",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/scroll-area",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/scroll-area",
       "docs": "https://design.edgecom.ai/components/scroll-area/",
@@ -4988,6 +5041,7 @@
     {
       "id": "select",
       "label": "Select",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/select",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/select",
       "docs": "https://design.edgecom.ai/components/select/",
@@ -5192,6 +5246,7 @@
     {
       "id": "separator",
       "label": "Separator",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/separator",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/separator",
       "docs": "https://design.edgecom.ai/components/separator/",
@@ -5241,6 +5296,7 @@
     {
       "id": "sheet",
       "label": "Sheet",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/sheet",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/sheet",
       "docs": "https://design.edgecom.ai/components/sheet/",
@@ -5379,6 +5435,7 @@
     {
       "id": "sidebar",
       "label": "Sidebar",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/sidebar",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/sidebar",
       "docs": "https://design.edgecom.ai/components/sidebar/",
@@ -5654,6 +5711,7 @@
     {
       "id": "skeleton",
       "label": "Skeleton",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/skeleton",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/skeleton",
       "docs": "https://design.edgecom.ai/components/skeleton/",
@@ -5733,6 +5791,7 @@
     {
       "id": "slider",
       "label": "Slider",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/slider",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/slider",
       "docs": "https://design.edgecom.ai/components/slider/",
@@ -5799,6 +5858,7 @@
     {
       "id": "sortable",
       "label": "Sortable",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/sortable",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/sortable",
       "docs": "https://design.edgecom.ai/components/sortable/",
@@ -5849,6 +5909,7 @@
     {
       "id": "spinner",
       "label": "Spinner",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/spinner",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/spinner",
       "docs": "https://design.edgecom.ai/components/spinner/",
@@ -5890,6 +5951,7 @@
     {
       "id": "stepper",
       "label": "Stepper",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/stepper",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/stepper",
       "docs": "https://design.edgecom.ai/components/stepper/",
@@ -6027,6 +6089,7 @@
     {
       "id": "switch",
       "label": "Switch",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/switch",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/switch",
       "docs": "https://design.edgecom.ai/components/switch/",
@@ -6112,6 +6175,7 @@
     {
       "id": "table",
       "label": "Table",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/table",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/table",
       "docs": "https://design.edgecom.ai/components/table/",
@@ -6226,6 +6290,7 @@
     {
       "id": "tabs",
       "label": "Tabs",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/tabs",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/tabs",
       "docs": "https://design.edgecom.ai/components/tabs/",
@@ -6376,6 +6441,7 @@
     {
       "id": "tags-input",
       "label": "Tags",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/tags-input",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/tags-input",
       "docs": "https://design.edgecom.ai/components/tags-input/",
@@ -6468,6 +6534,9 @@
     {
       "id": "tanstack-form",
       "label": "Tanstack form",
+      "aliases": [
+        "textarea-field"
+      ],
       "registryItem": "edgecom-ai/design-system/tanstack-form",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/tanstack-form",
       "docs": null,
@@ -6520,6 +6589,7 @@
     {
       "id": "textarea",
       "label": "Textarea",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/textarea",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/textarea",
       "docs": null,
@@ -6597,6 +6667,7 @@
     {
       "id": "timeline",
       "label": "Timeline",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/timeline",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/timeline",
       "docs": "https://design.edgecom.ai/components/timeline/",
@@ -6717,6 +6788,10 @@
     {
       "id": "toast",
       "label": "Toast",
+      "aliases": [
+        "sonner",
+        "toaster"
+      ],
       "registryItem": "edgecom-ai/design-system/toast",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/toast",
       "docs": "https://design.edgecom.ai/components/toast/",
@@ -6778,6 +6853,7 @@
     {
       "id": "toggle",
       "label": "Toggle",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/toggle",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/toggle",
       "docs": "https://design.edgecom.ai/components/toggle/",
@@ -6898,6 +6974,7 @@
     {
       "id": "toggle-group",
       "label": "Toggle group",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/toggle-group",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/toggle-group",
       "docs": null,
@@ -6980,6 +7057,7 @@
     {
       "id": "tooltip",
       "label": "Tooltip",
+      "aliases": [],
       "registryItem": "edgecom-ai/design-system/tooltip",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/tooltip",
       "docs": "https://design.edgecom.ai/components/tooltip/",

@@ -4,6 +4,7 @@
   "contract": {
     "id": "sidebar",
     "label": "Sidebar",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/sidebar",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/sidebar",
     "docs": "https://design.edgecom.ai/components/sidebar/",

@@ -4,6 +4,7 @@
   "contract": {
     "id": "tags-input",
     "label": "Tags",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/tags-input",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/tags-input",
     "docs": "https://design.edgecom.ai/components/tags-input/",

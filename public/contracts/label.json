@@ -4,6 +4,7 @@
   "contract": {
     "id": "label",
     "label": "Label",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/label",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/label",
     "docs": null,

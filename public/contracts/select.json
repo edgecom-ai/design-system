@@ -4,6 +4,7 @@
   "contract": {
     "id": "select",
     "label": "Select",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/select",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/select",
     "docs": "https://design.edgecom.ai/components/select/",

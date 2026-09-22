@@ -4,6 +4,7 @@
   "contract": {
     "id": "phone-input",
     "label": "Phone input",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/phone-input",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/phone-input",
     "docs": "https://design.edgecom.ai/components/phone-input/",

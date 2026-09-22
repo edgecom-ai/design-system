@@ -4,6 +4,7 @@
   "contract": {
     "id": "card",
     "label": "Card",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/card",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/card",
     "docs": "https://design.edgecom.ai/components/card/",

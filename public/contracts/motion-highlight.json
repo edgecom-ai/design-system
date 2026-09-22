@@ -4,6 +4,7 @@
   "contract": {
     "id": "motion-highlight",
     "label": "Motion highlight",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/motion-highlight",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/motion-highlight",
     "docs": null,

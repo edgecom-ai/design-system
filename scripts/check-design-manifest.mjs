@@ -143,12 +143,20 @@ function readSystem(indexDoc, tokensDoc) {
   const list = indexDoc.components ?? indexDoc.contracts
   if (!Array.isArray(list)) fail(`${indexRef} has neither "components" nor "contracts"`)
   const components = new Map()
+  const aliases = new Map()
+  const partOwners = new Map()
   for (const c of list) {
+    const parts = (c.parts ?? []).map((p) => (typeof p === "string" ? p : p.name))
     components.set(c.id, {
       id: c.id,
       variants: new Map((c.variants ?? []).map((v) => [v.name, v.options ?? []])),
-      parts: new Set((c.parts ?? []).map((p) => (typeof p === "string" ? p : p.name))),
+      parts: new Set(parts),
     })
+    // Other ids that resolve to this component — the bundle exports
+    // ChartContainer and no Chart, so `chart-container` is what a design agent
+    // writes for `chart`. Accepted silently; the index says which they are.
+    for (const a of c.aliases ?? []) aliases.set(a, c.id)
+    for (const part of parts) partOwners.set(part.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase(), c.id)
   }
   if (!Array.isArray(tokensDoc.tokens)) fail(`${tokensRef} has no "tokens"`)
   return {
@@ -156,6 +164,8 @@ function readSystem(indexDoc, tokensDoc) {
     digest: indexDoc.digest,
     tokensDigest: tokensDoc.digest,
     components,
+    aliases,
+    partOwners,
     tokens: new Set(tokensDoc.tokens.map((t) => t.id)),
   }
 }
@@ -335,13 +345,22 @@ const resolved = new Set()
 for (const [i, c] of (Array.isArray(manifest.components) ? manifest.components : []).entries()) {
   if (!isObj(c) || !isStr(c.component)) continue
   const p = `/components/${i}`
-  const contract = system.components.get(c.component)
+  const contract = system.components.get(c.component) ?? system.components.get(system.aliases.get(c.component))
   if (!contract) {
     const s = suggest(c.component)
-    err(`${p}/component`, `unknown component "${c.component}"${s ? ` — did you mean "${s}"?` : " — not in contracts/index.json"}`)
+    const owner = system.partOwners.get(kebab(c.component))
+    err(
+      `${p}/component`,
+      `unknown component "${c.component}"` +
+        (s
+          ? ` — did you mean "${s}"?`
+          : owner
+            ? ` — that is a part of "${owner}"; cite "${owner}" and list the part under "parts"`
+            : " — not in contracts/index.json"),
+    )
     continue
   }
-  resolved.add(c.component)
+  resolved.add(contract.id)
   if (isStr(c.screen) && screens.size && !screens.has(c.screen)) err(`${p}/screen`, `"${c.screen}" is not declared in /screens`)
   if (isStr(c.screen) && !screens.size) err(`${p}/screen`, `"${c.screen}" — declare it in /screens first`)
   if (isObj(c.variants)) {

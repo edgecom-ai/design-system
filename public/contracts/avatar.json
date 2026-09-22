@@ -4,6 +4,7 @@
   "contract": {
     "id": "avatar",
     "label": "Avatar",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/avatar",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/avatar",
     "docs": "https://design.edgecom.ai/components/avatar/",

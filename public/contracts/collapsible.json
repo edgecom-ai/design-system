@@ -4,6 +4,7 @@
   "contract": {
     "id": "collapsible",
     "label": "Collapsible",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/collapsible",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/collapsible",
     "docs": "https://design.edgecom.ai/components/collapsible/",

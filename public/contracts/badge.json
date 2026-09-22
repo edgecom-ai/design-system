@@ -4,6 +4,7 @@
   "contract": {
     "id": "badge",
     "label": "Badge & status tags",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/badge",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/badge",
     "docs": "https://design.edgecom.ai/components/badge/",

@@ -4,6 +4,7 @@
   "contract": {
     "id": "tabs",
     "label": "Tabs",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/tabs",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/tabs",
     "docs": "https://design.edgecom.ai/components/tabs/",

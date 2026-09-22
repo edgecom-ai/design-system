@@ -4,6 +4,7 @@
   "contract": {
     "id": "field",
     "label": "Field",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/field",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/field",
     "docs": "https://design.edgecom.ai/components/field/",

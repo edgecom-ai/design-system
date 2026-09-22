@@ -4,6 +4,7 @@
   "contract": {
     "id": "sortable",
     "label": "Sortable",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/sortable",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/sortable",
     "docs": "https://design.edgecom.ai/components/sortable/",

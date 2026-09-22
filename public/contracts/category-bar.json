@@ -4,6 +4,7 @@
   "contract": {
     "id": "category-bar",
     "label": "Category bar",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/category-bar",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/category-bar",
     "docs": "https://design.edgecom.ai/components/category-bar/",

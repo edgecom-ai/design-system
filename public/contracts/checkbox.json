@@ -4,6 +4,7 @@
   "contract": {
     "id": "checkbox",
     "label": "Checkbox",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/checkbox",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/checkbox",
     "docs": "https://design.edgecom.ai/components/checkbox/",

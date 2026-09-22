@@ -4,6 +4,7 @@
   "contract": {
     "id": "button-group",
     "label": "Button group",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/button-group",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/button-group",
     "docs": "https://design.edgecom.ai/components/button-group/",

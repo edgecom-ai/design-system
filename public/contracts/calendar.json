@@ -4,6 +4,7 @@
   "contract": {
     "id": "calendar",
     "label": "Calendar",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/calendar",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/calendar",
     "docs": "https://design.edgecom.ai/components/calendar/",

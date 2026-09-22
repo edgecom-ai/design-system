@@ -4,6 +4,7 @@
   "contract": {
     "id": "application-shell",
     "label": "Application shell",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/application-shell",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/application-shell",
     "docs": "https://design.edgecom.ai/blocks/application-shell/",

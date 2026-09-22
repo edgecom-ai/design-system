@@ -4,6 +4,7 @@
   "contract": {
     "id": "accordion",
     "label": "Accordion",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/accordion",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/accordion",
     "docs": "https://design.edgecom.ai/components/accordion/",

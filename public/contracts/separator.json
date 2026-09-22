@@ -4,6 +4,7 @@
   "contract": {
     "id": "separator",
     "label": "Separator",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/separator",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/separator",
     "docs": "https://design.edgecom.ai/components/separator/",

@@ -4,6 +4,7 @@
   "contract": {
     "id": "date-picker",
     "label": "Date picker",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/date-picker",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/date-picker",
     "docs": "https://design.edgecom.ai/components/date-picker/",

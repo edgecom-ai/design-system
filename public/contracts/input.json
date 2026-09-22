@@ -4,6 +4,7 @@
   "contract": {
     "id": "input",
     "label": "Input",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/input",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/input",
     "docs": "https://design.edgecom.ai/components/input/",

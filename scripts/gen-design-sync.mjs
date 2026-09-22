@@ -259,6 +259,22 @@ https://design.edgecom.ai/design.md. It is required, not advisory.
   series. Commodity hues tag their commodity only.
 - **Reuse the primitives.** If nothing fits, stop and ask — do not hand-roll a parallel version.
 
+## Presenting a design
+
+- **A portal page renders inside \`ApplicationShell\`** — pass \`nav\`, \`activeItem\`, \`user\` and
+  \`buildings\`, and the page as its children. Never hand-build a sidebar and top bar from
+  \`Sidebar*\` parts; every portal screen shares one frame.
+- **One screen per design file, responsive.** The phone layout is the same file at a phone
+  width (preview width 390), never a phone frame drawn beside the desktop on one canvas.
+- **State and theme are the Design Component's props** (\`data-props\`: \`state\` as
+  \`live | loading | empty | error\`, \`theme\` as \`light | dark\`), switched from the props panel —
+  never an on-canvas harness bar above the page.
+- **One \`size\` per toolbar.** \`Input\`, \`SelectTrigger\` and \`Button\` share \`default\` (2rem) and
+  \`sm\` (1.75rem); a row mixes neither.
+- **Icons are lucide.** Inline the icon's 24×24 path at \`size-4\` with \`stroke="currentColor"\`
+  and name it on the element as \`data-lucide="bell-ring"\`, so the implementer installs the same
+  icon from \`lucide-react\`.
+
 ## Every design ships a manifest
 
 A rendered design carries no version and no component identity, so beside every design file you
@@ -273,8 +289,12 @@ produce, write one: \`<Name>.manifest.json\` next to \`<Name>.dc.html\`. Start f
   elements your logic creates (pass \`"data-instance"\` as a prop); the registry \`component\` id
   exactly as its spec is named (\`alert-dialog\`, not \`AlertDialog\`); the \`variants\` it sets, by
   axis (\`{ "variant": "outline", "size": "sm" }\`); the \`parts\` it composes. Variants are only the
-  axes the spec lists — a prop such as \`collapsible\`, \`compact\` or a trigger's \`size\` is not a
-  variant and is not recorded, and a component with no axes gets no \`variants\` at all.
+  axes the spec lists — \`size\` is an axis on every component that offers one; a prop such as
+  \`collapsible\` or \`compact\` is not a variant and is not recorded, and a component with no axes
+  gets no \`variants\` at all. A component inside another is its own entry — a \`Field\` in a
+  \`Sheet\` is a \`field\` instance, not a part of \`sheet\`. An instance's \`states\` are the screen
+  states it takes part in (\`loading\`, \`empty\`, \`error\`, \`success\`, \`disabled\`), never a
+  control's own state such as checked.
 - \`tokens\` lists every token the design reaches for directly, by id (\`primary\`, not \`--primary\`).
   Scale steps — \`radius-md\`, \`text-body\`, \`rounded-full\` — are utilities, not tokens; never list them.
 - \`viewports\` needs \`mobile\` and \`desktop\`; \`themes\` needs \`light\` and \`dark\`; \`states\` needs

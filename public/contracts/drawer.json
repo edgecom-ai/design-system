@@ -4,6 +4,7 @@
   "contract": {
     "id": "drawer",
     "label": "Drawer",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/drawer",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/drawer",
     "docs": "https://design.edgecom.ai/components/drawer/",

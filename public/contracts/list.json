@@ -4,6 +4,9 @@
   "contract": {
     "id": "list",
     "label": "List",
+    "aliases": [
+      "item"
+    ],
     "registryItem": "edgecom-ai/design-system/list",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/list",
     "docs": "https://design.edgecom.ai/components/list/",

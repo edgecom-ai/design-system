@@ -258,9 +258,10 @@ export function undocumentedPrimitives(sections, primitiveIds) {
 }
 
 const sentenceCase = (id) => id.charAt(0).toUpperCase() + id.slice(1).replace(/-/g, " ")
+const kebab = (name) => name.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase()
 
 /**
- * One contract per section in the Components group that has a primitive file,
+ * One contract per section, in any group, that has a primitive file,
  * plus one per primitive no section covers (`undocumentedPrimitives`), so that
  * everything a design can cite resolves.
  *
@@ -298,9 +299,22 @@ export function buildContracts({ sections, readPrimitive, api, curated, overlay,
       default: p.default ?? null,
       description: c.propDescriptions?.[`${p.part}.${p.name}`] ?? null,
     }))
+    // Ids a design agent will plausibly write for this component and that
+    // resolve to it: the primitive's file name where it differs from the id
+    // (`sonner` → toast, `item` → list), and the kebab-case of the first
+    // exported part when no part is named for the component (`chart-container`
+    // → chart — the bundle exports ChartContainer and no Chart). The validator
+    // accepts these silently; the canonical id stays the one to cite.
+    const fileId = file.replace(/^.*\//, "").replace(/\.tsx$/, "")
+    const rootPart = parts.find((p) => p.name.toLowerCase() === id.replace(/-/g, ""))
+    const aliases = [...new Set([
+      fileId !== id ? fileId : null,
+      !rootPart && parts[0] ? kebab(parts[0].name) : null,
+    ].filter(Boolean))]
     return {
       id,
       label,
+      aliases,
       registryItem: `edgecom-ai/design-system/${id}`,
       install: `pnpm dlx shadcn@latest add edgecom-ai/design-system/${id}`,
       docs,
@@ -372,6 +386,18 @@ export function buildContracts({ sections, readPrimitive, api, curated, overlay,
         o: EMPTY_OVERLAY,
       }),
     )
+  }
+
+  // An alias must not shadow a real id or another contract's alias — motion-tabs
+  // exports `Tabs` first, and `tabs` is a component of its own.
+  const ids = new Set(contracts.map((c) => c.id))
+  const taken = new Set()
+  for (const c of contracts) {
+    c.aliases = c.aliases.filter((a) => {
+      if (ids.has(a) || taken.has(a)) return false
+      taken.add(a)
+      return true
+    })
   }
 
   return contracts

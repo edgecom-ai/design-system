@@ -4,6 +4,9 @@
   "contract": {
     "id": "chart",
     "label": "Chart",
+    "aliases": [
+      "chart-container"
+    ],
     "registryItem": "edgecom-ai/design-system/chart",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/chart",
     "docs": null,

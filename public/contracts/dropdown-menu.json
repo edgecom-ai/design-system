@@ -4,6 +4,7 @@
   "contract": {
     "id": "dropdown-menu",
     "label": "Dropdown menu",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/dropdown-menu",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/dropdown-menu",
     "docs": "https://design.edgecom.ai/components/dropdown-menu/",
