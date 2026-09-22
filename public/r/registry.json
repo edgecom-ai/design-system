@@ -397,7 +397,8 @@
       "title": "Alert Dialog",
       "description": "The confirmation an irreversible action passes through: a Trigger opens a portalled, centered Content whose footer forces an explicit Cancel or Action choice.",
       "dependencies": [
-        "@base-ui/react@^1.6.0"
+        "@base-ui/react@^1.6.0",
+        "class-variance-authority@^0.7.1"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme",
@@ -417,7 +418,8 @@
       "title": "Avatar",
       "description": "A user or contact image with a text fallback. Compose Avatar with AvatarImage + AvatarFallback; stack them in an AvatarGroup with an overflow count.",
       "dependencies": [
-        "@base-ui/react@^1.6.0"
+        "@base-ui/react@^1.6.0",
+        "class-variance-authority@^0.7.1"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -556,6 +558,9 @@
       "name": "card",
       "title": "Card",
       "description": "A styled container with composable header, content, and footer sections (all div-based).",
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
       ],
@@ -870,7 +875,8 @@
       "title": "Input",
       "description": "A single-line text field with focus, disabled, and invalid states.",
       "dependencies": [
-        "@base-ui/react@^1.6.0"
+        "@base-ui/react@^1.6.0",
+        "class-variance-authority@^0.7.1"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -1064,6 +1070,7 @@
       "title": "Native Select",
       "description": "The platform select element, styled to match the design system — for dense forms and small screens where the OS picker is the better control.",
       "dependencies": [
+        "class-variance-authority@^0.7.1",
         "lucide-react@^1.23.0"
       ],
       "registryDependencies": [
@@ -1245,6 +1252,7 @@
       "description": "Choose one value from a list. A Root holds the value and wraps a Trigger plus a portalled, positioned Content of Items.",
       "dependencies": [
         "@base-ui/react@^1.6.0",
+        "class-variance-authority@^0.7.1",
         "lucide-react@^1.23.0"
       ],
       "registryDependencies": [
@@ -1455,7 +1463,8 @@
       "title": "Switch",
       "description": "An on/off toggle with a sliding thumb.",
       "dependencies": [
-        "@base-ui/react@^1.6.0"
+        "@base-ui/react@^1.6.0",
+        "class-variance-authority@^0.7.1"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"

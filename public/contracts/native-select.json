@@ -1,6 +1,6 @@
 {
   "version": "v1.0.0",
-  "digest": "2694528e294510cc",
+  "digest": "927d9e77781a6e86",
   "contract": {
     "id": "native-select",
     "label": "Native select",
@@ -27,11 +27,27 @@
         "description": "One option, painted on the OS canvas colours."
       }
     ],
-    "props": [],
-    "variants": [],
+    "props": [
+      {
+        "part": "NativeSelect",
+        "name": "size",
+        "type": "\"default\" | \"sm\"",
+        "default": "\"default\"",
+        "description": "Control height — sm (h-7) or default (h-8)."
+      }
+    ],
+    "variants": [
+      {
+        "name": "size",
+        "options": [
+          "default",
+          "sm"
+        ],
+        "default": "default"
+      }
+    ],
     "states": [
       "aria-invalid",
-      "data-[size=sm]",
       "disabled",
       "focus-visible",
       "hover"

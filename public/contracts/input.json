@@ -1,6 +1,6 @@
 {
   "version": "v1.0.0",
-  "digest": "2694528e294510cc",
+  "digest": "927d9e77781a6e86",
   "contract": {
     "id": "input",
     "label": "Input",
@@ -28,8 +28,25 @@
         "description": "Styled text input element."
       }
     ],
-    "props": [],
-    "variants": [],
+    "props": [
+      {
+        "part": "Input",
+        "name": "size",
+        "type": "\"default\" | \"sm\"",
+        "default": "\"default\"",
+        "description": null
+      }
+    ],
+    "variants": [
+      {
+        "name": "size",
+        "options": [
+          "default",
+          "sm"
+        ],
+        "default": "default"
+      }
+    ],
     "states": [
       "aria-invalid",
       "disabled",

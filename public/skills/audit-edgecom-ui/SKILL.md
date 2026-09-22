@@ -53,6 +53,10 @@ Read [design.md](https://design.edgecom.ai/design.md) and check against it. For 
 
 A consuming app's `theme` is a snapshot taken at install. Compare its `globals.css` token values with [tokens.json](https://design.edgecom.ai/tokens.json) — every token's current light and dark value, plus the `digest` of the stylesheet they came from. If they differ, the fix is re-running the theme install with `--overwrite`, not hand-editing values.
 
+## Benchmarking Claude Design output
+
+To measure the design system as a whole rather than one screen's defects, run [benchmarks/alarms-page.md](benchmarks/alarms-page.md): a fixed prompt in a product manager's words, pasted into Claude Design verbatim after each release and scored out of 12. Add a sibling file for another screen only when it exercises components this one does not.
+
 ## Reporting
 
 Group findings by severity, name the file and line, and say which rule each one breaks. Distinguish a violation from a judgement call, and don't pad the list — a report where every item is real gets acted on.

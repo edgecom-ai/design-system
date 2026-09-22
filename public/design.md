@@ -282,6 +282,10 @@ Radius scale, all derived from `--radius` (0.625rem): `sm` (0.6×), `md` (0.8×)
 - **Secondary/utility actions use icon buttons.** On table toolbars and page headers, secondary actions (export, upload, download, refresh, filter, print, …) are **icon buttons** (`size="icon-sm"`/`icon-lg`, usually `outline`/`ghost`) with an `aria-label` + ideally a `tooltip` — not full text buttons. Reserve a labeled button for the single primary action. (This is chrome — distinct from the no-icons-in-cells rule.)
 - **Destructive row actions use the `ghost-destructive` button variant.** A delete/remove action inside a table row has to stay quiet until the pointer reaches it: `destructive` is a solid fill and `destructive-subtle` a permanent tint, so either paints a red chip on every row. `ghost-destructive` is the quiet form — `destructive-emphasis` label at rest, `destructive-subtle` surface with `destructive-subtle-foreground` label on hover — and it already handles all four states in both themes. **Don't hand-compose it from `ghost` plus destructive utilities**: `ghost` re-asserts `hover:text-foreground`, so the label goes neutral at exactly the moment the tint turns red. (Still gate the action behind an `alert-dialog` — see *Destructive actions*.)
 
+### Toolbars — one height, one size
+
+A filter bar or table toolbar mixes fields, selects and buttons, and they read as one row only when they share a height. `input`, `select` (its trigger), `native-select` and `button` all offer the same two sizes — `default` (2rem) and `sm` (1.75rem) — so pick **one size for the whole row** and pass it to every control in it. Never a `default` search field beside `sm` filters, and never a `className` height override to make up the difference: if a control seems to need a size the row's neighbours don't have, the row is on the wrong size. `size` is a **variant axis** on every component that offers it, so a design cites it like any other variant.
+
 ### Overlays — dialog vs. sheet
 
 - **Short create actions (1–4 fields) → modal `dialog`** — quick, centered, focused.
@@ -384,6 +388,7 @@ Never a **zero gap** — touching bars read as one solid block. **Round only the
 - Move secondary/detail info into tooltips/hover-cards in dense UI.
 - Let tooltips shrink-wrap (one line per row) and flip/shift within the viewport; keep them portaled so no container clips them.
 - Use icon buttons for secondary table/page actions, and `ghost-destructive` for a quiet destructive row action.
+- Give every control in a toolbar or filter bar the same `size` (`default` or `sm`) so the row sits on one height.
 - Let a `dropdown-menu` shrink-wrap to its widest item; never stretch it to the trigger width or pad items with trailing whitespace.
 - Keep dropdowns and other anchored surfaces (`select`, `combobox`, `context-menu`, `popover`, `hover-card`) portaled so no `overflow` ancestor clips them; let them flip/shift within the viewport.
 - Give every chart the standard controls by default: one shared date range, a smooth/step toggle, statistical overlays, and one export icon-button dropdown (Download PNG / SVG / PDF / CSV / Print).
@@ -413,6 +418,7 @@ Never a **zero gap** — touching bars read as one solid block. **Round only the
 - Don't block a user on validation without inline, specific error text.
 - Don't leave async failures as a blank screen or endless spinner — show an error + retry.
 - Don't pin sizes to px; don't invent new sizes or override a component's built-in classes — use its variants / `size` props.
+- Don't mix sizes in one toolbar (a `default` input beside `sm` selects and buttons) or fix the mismatch with a height override — put the whole row on one `size`.
 - Don't ship a button or clickable control without a visible hover + focus state (and `cursor: pointer`).
 - Don't hand-compose a quiet destructive button from `ghost` + destructive utilities — use the `ghost-destructive` variant, which keeps the label red on hover.
 - Don't cram a long, many-field form into a centered modal — use a right `sheet`.

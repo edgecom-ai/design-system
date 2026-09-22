@@ -1,7 +1,7 @@
 {
   "$schema": "https://design.edgecom.ai/schemas/contracts.schema.json",
   "version": "v1.0.0",
-  "digest": "2694528e294510cc",
+  "digest": "927d9e77781a6e86",
   "sources": [
     "src/components/ui/*.tsx",
     "src/app/sections.tsx",
@@ -12,7 +12,7 @@
   "counts": {
     "total": 64,
     "authored": 12,
-    "withVariants": 15,
+    "withVariants": 22,
     "withBaseUi": 26,
     "undocumented": 8,
     "tokenReferences": 500
@@ -313,11 +313,26 @@
           "description": "Element that opens the confirmation on click."
         }
       ],
-      "props": [],
-      "variants": [],
+      "props": [
+        {
+          "part": "AlertDialog",
+          "name": "size",
+          "type": "\"default\" | \"sm\"",
+          "default": "\"default\"",
+          "description": null
+        }
+      ],
+      "variants": [
+        {
+          "name": "size",
+          "options": [
+            "default",
+            "sm"
+          ],
+          "default": "default"
+        }
+      ],
       "states": [
-        "data-[size=default]",
-        "data-[size=sm]",
         "data-closed",
         "data-open",
         "group-data-[size=default]/alert-dialog-content",
@@ -457,11 +472,27 @@
           "description": "A small status dot pinned to the avatar corner."
         }
       ],
-      "props": [],
-      "variants": [],
+      "props": [
+        {
+          "part": "Avatar",
+          "name": "size",
+          "type": "\"default\" | \"sm\" | \"lg\"",
+          "default": "\"default\"",
+          "description": null
+        }
+      ],
+      "variants": [
+        {
+          "name": "size",
+          "options": [
+            "default",
+            "sm",
+            "lg"
+          ],
+          "default": "default"
+        }
+      ],
       "states": [
-        "data-[size=lg]",
-        "data-[size=sm]",
         "data-[slot=avatar]",
         "group-data-[size=default]/avatar",
         "group-data-[size=lg]/avatar",
@@ -1415,10 +1446,26 @@
           "description": "Padded region for the card's main body."
         }
       ],
-      "props": [],
-      "variants": [],
+      "props": [
+        {
+          "part": "Card",
+          "name": "size",
+          "type": "\"default\" | \"sm\"",
+          "default": "\"default\"",
+          "description": null
+        }
+      ],
+      "variants": [
+        {
+          "name": "size",
+          "options": [
+            "default",
+            "sm"
+          ],
+          "default": "default"
+        }
+      ],
       "states": [
-        "data-[size=sm]",
         "group-data-[size=sm]/card"
       ],
       "responsive": [],
@@ -3244,8 +3291,25 @@
           "description": "Styled text input element."
         }
       ],
-      "props": [],
-      "variants": [],
+      "props": [
+        {
+          "part": "Input",
+          "name": "size",
+          "type": "\"default\" | \"sm\"",
+          "default": "\"default\"",
+          "description": null
+        }
+      ],
+      "variants": [
+        {
+          "name": "size",
+          "options": [
+            "default",
+            "sm"
+          ],
+          "default": "default"
+        }
+      ],
       "states": [
         "aria-invalid",
         "disabled",
@@ -4044,11 +4108,27 @@
           "description": "One option, painted on the OS canvas colours."
         }
       ],
-      "props": [],
-      "variants": [],
+      "props": [
+        {
+          "part": "NativeSelect",
+          "name": "size",
+          "type": "\"default\" | \"sm\"",
+          "default": "\"default\"",
+          "description": "Control height — sm (h-7) or default (h-8)."
+        }
+      ],
+      "variants": [
+        {
+          "name": "size",
+          "options": [
+            "default",
+            "sm"
+          ],
+          "default": "default"
+        }
+      ],
       "states": [
         "aria-invalid",
-        "data-[size=sm]",
         "disabled",
         "focus-visible",
         "hover"
@@ -4823,8 +4903,25 @@
           "description": "Renders the selected item's label, or the placeholder when empty."
         }
       ],
-      "props": [],
-      "variants": [],
+      "props": [
+        {
+          "part": "Select",
+          "name": "size",
+          "type": "\"default\" | \"sm\"",
+          "default": "\"default\"",
+          "description": null
+        }
+      ],
+      "variants": [
+        {
+          "name": "size",
+          "options": [
+            "default",
+            "sm"
+          ],
+          "default": "default"
+        }
+      ],
       "states": [
         "aria-invalid",
         "data-[align-trigger=true]",
@@ -4834,8 +4931,6 @@
         "data-[side=left]",
         "data-[side=right]",
         "data-[side=top]",
-        "data-[size=default]",
-        "data-[size=sm]",
         "data-[slot=select-value]",
         "data-closed",
         "data-disabled",
@@ -5804,8 +5899,25 @@
           "description": "Toggleable on/off switch; supports default and sm sizes."
         }
       ],
-      "props": [],
-      "variants": [],
+      "props": [
+        {
+          "part": "Switch",
+          "name": "size",
+          "type": "\"default\" | \"sm\"",
+          "default": "\"default\"",
+          "description": null
+        }
+      ],
+      "variants": [
+        {
+          "name": "size",
+          "options": [
+            "default",
+            "sm"
+          ],
+          "default": "default"
+        }
+      ],
       "states": [
         "data-[checked]",
         "data-[unchecked]",

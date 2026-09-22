@@ -1,6 +1,6 @@
 {
   "version": "v1.0.0",
-  "digest": "2694528e294510cc",
+  "digest": "927d9e77781a6e86",
   "contract": {
     "id": "alert-dialog",
     "label": "Alert dialog",
@@ -73,11 +73,26 @@
         "description": "Element that opens the confirmation on click."
       }
     ],
-    "props": [],
-    "variants": [],
+    "props": [
+      {
+        "part": "AlertDialog",
+        "name": "size",
+        "type": "\"default\" | \"sm\"",
+        "default": "\"default\"",
+        "description": null
+      }
+    ],
+    "variants": [
+      {
+        "name": "size",
+        "options": [
+          "default",
+          "sm"
+        ],
+        "default": "default"
+      }
+    ],
     "states": [
-      "data-[size=default]",
-      "data-[size=sm]",
       "data-closed",
       "data-open",
       "group-data-[size=default]/alert-dialog-content",
