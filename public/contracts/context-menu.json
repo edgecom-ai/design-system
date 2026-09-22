@@ -4,6 +4,7 @@
   "contract": {
     "id": "context-menu",
     "label": "Context menu",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/context-menu",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/context-menu",
     "docs": "https://design.edgecom.ai/components/context-menu/",

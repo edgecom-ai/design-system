@@ -4,6 +4,7 @@
   "contract": {
     "id": "radio-group",
     "label": "Radio group",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/radio-group",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/radio-group",
     "docs": "https://design.edgecom.ai/components/radio-group/",

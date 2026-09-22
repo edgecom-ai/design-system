@@ -4,6 +4,7 @@
   "contract": {
     "id": "table",
     "label": "Table",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/table",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/table",
     "docs": "https://design.edgecom.ai/components/table/",

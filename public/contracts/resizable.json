@@ -4,6 +4,9 @@
   "contract": {
     "id": "resizable",
     "label": "Resizable",
+    "aliases": [
+      "resizable-panel-group"
+    ],
     "registryItem": "edgecom-ai/design-system/resizable",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/resizable",
     "docs": "https://design.edgecom.ai/components/resizable/",

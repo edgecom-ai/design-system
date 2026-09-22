@@ -4,6 +4,7 @@
   "contract": {
     "id": "alert",
     "label": "Alert",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/alert",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/alert",
     "docs": "https://design.edgecom.ai/components/alert/",

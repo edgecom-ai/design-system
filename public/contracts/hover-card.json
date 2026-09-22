@@ -4,6 +4,7 @@
   "contract": {
     "id": "hover-card",
     "label": "Hover card",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/hover-card",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/hover-card",
     "docs": "https://design.edgecom.ai/components/hover-card/",

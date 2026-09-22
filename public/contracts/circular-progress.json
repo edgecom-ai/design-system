@@ -4,6 +4,7 @@
   "contract": {
     "id": "circular-progress",
     "label": "Circular progress",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/circular-progress",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/circular-progress",
     "docs": "https://design.edgecom.ai/components/circular-progress/",

@@ -4,6 +4,7 @@
   "contract": {
     "id": "progress",
     "label": "Progress",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/progress",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/progress",
     "docs": "https://design.edgecom.ai/components/progress/",

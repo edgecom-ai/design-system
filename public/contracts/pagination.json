@@ -4,6 +4,7 @@
   "contract": {
     "id": "pagination",
     "label": "Pagination",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/pagination",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/pagination",
     "docs": "https://design.edgecom.ai/components/pagination/",

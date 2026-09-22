@@ -4,6 +4,7 @@
   "contract": {
     "id": "dialog",
     "label": "Dialog",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/dialog",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/dialog",
     "docs": "https://design.edgecom.ai/components/dialog/",

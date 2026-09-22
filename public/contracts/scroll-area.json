@@ -4,6 +4,7 @@
   "contract": {
     "id": "scroll-area",
     "label": "Scroll area",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/scroll-area",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/scroll-area",
     "docs": "https://design.edgecom.ai/components/scroll-area/",

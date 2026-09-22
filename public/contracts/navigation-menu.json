@@ -4,6 +4,7 @@
   "contract": {
     "id": "navigation-menu",
     "label": "Navigation menu",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/navigation-menu",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/navigation-menu",
     "docs": "https://design.edgecom.ai/components/navigation-menu/",

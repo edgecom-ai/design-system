@@ -4,6 +4,7 @@
   "contract": {
     "id": "alert-dialog",
     "label": "Alert dialog",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/alert-dialog",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/alert-dialog",
     "docs": "https://design.edgecom.ai/components/alert-dialog/",

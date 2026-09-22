@@ -4,6 +4,7 @@
   "contract": {
     "id": "button",
     "label": "Button",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/button",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/button",
     "docs": "https://design.edgecom.ai/components/button/",

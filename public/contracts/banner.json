@@ -4,6 +4,7 @@
   "contract": {
     "id": "banner",
     "label": "Banner",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/banner",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/banner",
     "docs": "https://design.edgecom.ai/components/banner/",

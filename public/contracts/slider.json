@@ -4,6 +4,7 @@
   "contract": {
     "id": "slider",
     "label": "Slider",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/slider",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/slider",
     "docs": "https://design.edgecom.ai/components/slider/",

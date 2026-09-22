@@ -4,6 +4,7 @@
   "contract": {
     "id": "timeline",
     "label": "Timeline",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/timeline",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/timeline",
     "docs": "https://design.edgecom.ai/components/timeline/",

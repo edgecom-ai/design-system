@@ -4,6 +4,7 @@
   "contract": {
     "id": "native-select",
     "label": "Native select",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/native-select",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/native-select",
     "docs": "https://design.edgecom.ai/components/native-select/",

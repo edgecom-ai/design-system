@@ -4,6 +4,7 @@
   "contract": {
     "id": "empty",
     "label": "Empty state",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/empty",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/empty",
     "docs": "https://design.edgecom.ai/components/empty/",

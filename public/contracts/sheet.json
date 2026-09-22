@@ -4,6 +4,7 @@
   "contract": {
     "id": "sheet",
     "label": "Sheet",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/sheet",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/sheet",
     "docs": "https://design.edgecom.ai/components/sheet/",

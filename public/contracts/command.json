@@ -4,6 +4,7 @@
   "contract": {
     "id": "command",
     "label": "Command",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/command",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/command",
     "docs": "https://design.edgecom.ai/components/command/",

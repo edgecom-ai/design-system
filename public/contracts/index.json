@@ -16,6 +16,7 @@
     {
       "id": "accordion",
       "label": "Accordion",
+      "aliases": [],
       "summary": "A collapsible disclosure list; each AccordionItem pairs an AccordionTrigger with an AccordionContent panel.",
       "purpose": null,
       "useWhen": [],
@@ -37,6 +38,7 @@
     {
       "id": "alert",
       "label": "Alert",
+      "aliases": [],
       "summary": "A callout box laying out an optional icon, AlertTitle, AlertDescription, and a top-right AlertAction.",
       "purpose": null,
       "useWhen": [],
@@ -70,6 +72,7 @@
     {
       "id": "alert-dialog",
       "label": "Alert dialog",
+      "aliases": [],
       "summary": "The confirmation an irreversible action passes through: a Trigger opens a portalled, centered Content whose footer forces an explicit Cancel or Action choice.",
       "purpose": "The confirmation gate for an irreversible action. It is the only overlay that omits the close, because a destructive flow has to end in an explicit choice rather than a dismissal.",
       "useWhen": [
@@ -115,6 +118,7 @@
     {
       "id": "application-shell",
       "label": "Application shell",
+      "aliases": [],
       "summary": "The portal page frame from data — a collapsible icon-rail sidebar with the logo, navigation and account menu, a top bar with the rail toggle, search, building switcher, app actions and theme toggle, and the scrolling content area — composed from the registry's sidebar, dropdown-menu, input-group, avatar and button.",
       "purpose": "The one page frame every client-portal screen renders inside — the icon-rail sidebar with the product navigation and the account menu, the top bar with the rail toggle, search, building switcher, the app's actions and the theme toggle, and the scrolling content area. Built from the registry's own primitives, so its active item, menus, tooltips and badges are the ones found everywhere else.",
       "useWhen": [
@@ -149,6 +153,7 @@
     {
       "id": "avatar",
       "label": "Avatar",
+      "aliases": [],
       "summary": "A user or contact image with a text fallback. Compose Avatar with AvatarImage + AvatarFallback; stack them in an AvatarGroup with an overflow count.",
       "purpose": null,
       "useWhen": [],
@@ -182,6 +187,7 @@
     {
       "id": "badge",
       "label": "Badge & status tags",
+      "aliases": [],
       "summary": "A compact pill label (renders a span by default) for statuses, counts, and tags.",
       "purpose": "A compact label for a status, a count, or a category. The variant carries the meaning, so the meaning survives a theme change.",
       "useWhen": [
@@ -227,6 +233,7 @@
     {
       "id": "banner",
       "label": "Banner",
+      "aliases": [],
       "summary": "A full-width page-level strip; BannerContent centers and lays out the contents.",
       "purpose": null,
       "useWhen": [],
@@ -255,6 +262,7 @@
     {
       "id": "breadcrumb",
       "label": "Breadcrumb",
+      "aliases": [],
       "summary": "A navigation trail: a Breadcrumb nav wrapping a BreadcrumbList of items, links, the current page, and separators.",
       "purpose": null,
       "useWhen": [],
@@ -279,6 +287,7 @@
     {
       "id": "button",
       "label": "Button",
+      "aliases": [],
       "summary": "A clickable button with class-variance-authority variants and sizes, including icon-only sizes.",
       "purpose": "The one control for committing an action. Every clickable affordance is this primitive or composes it — a styled div or anchor loses the hover, focus ring, disabled and aria-invalid handling the variants already carry.",
       "useWhen": [
@@ -339,6 +348,7 @@
     {
       "id": "button-group",
       "label": "Button group",
+      "aliases": [],
       "summary": "A container that visually joins adjacent buttons, with optional separators and text segments.",
       "purpose": null,
       "useWhen": [],
@@ -368,6 +378,7 @@
     {
       "id": "calendar",
       "label": "Calendar",
+      "aliases": [],
       "summary": "A styled react-day-picker month grid with a custom day-button renderer.",
       "purpose": null,
       "useWhen": [],
@@ -387,6 +398,7 @@
     {
       "id": "card",
       "label": "Card",
+      "aliases": [],
       "summary": "A styled container with composable header, content, and footer sections (all div-based).",
       "purpose": "The standard content surface: the `card` token at radius `xl`, with header, content and footer slots sharing one 1.5rem content line.",
       "useWhen": [
@@ -426,6 +438,7 @@
     {
       "id": "category-bar",
       "label": "Category bar",
+      "aliases": [],
       "summary": "A single horizontal bar split into proportional colored segments, with an optional marker and numeric labels.",
       "purpose": null,
       "useWhen": [],
@@ -444,6 +457,9 @@
     {
       "id": "chart",
       "label": "Chart",
+      "aliases": [
+        "chart-container"
+      ],
       "summary": null,
       "purpose": null,
       "useWhen": [],
@@ -467,6 +483,7 @@
     {
       "id": "checkbox",
       "label": "Checkbox",
+      "aliases": [],
       "summary": "A checkbox styled as a small box, with a tick when selected and a dash when indeterminate.",
       "purpose": null,
       "useWhen": [],
@@ -485,6 +502,7 @@
     {
       "id": "circular-progress",
       "label": "Circular progress",
+      "aliases": [],
       "summary": "A determinate ring, for a single figure that has a ceiling — a meter's share of its site total, or a job's completion.",
       "purpose": null,
       "useWhen": [],
@@ -503,6 +521,7 @@
     {
       "id": "collapsible",
       "label": "Collapsible",
+      "aliases": [],
       "summary": "An open/closed disclosure: a Trigger toggles a Content panel.",
       "purpose": null,
       "useWhen": [],
@@ -523,6 +542,7 @@
     {
       "id": "combobox",
       "label": "Combobox",
+      "aliases": [],
       "summary": "A searchable, optionally multi-select picker: an input group plus a portalled popup list, with optional selected-value chips.",
       "purpose": null,
       "useWhen": [],
@@ -555,6 +575,7 @@
     {
       "id": "command",
       "label": "Command",
+      "aliases": [],
       "summary": "A searchable command palette; type to filter grouped, keyboard-navigable items. Wrap in CommandDialog for a ⌘K overlay.",
       "purpose": null,
       "useWhen": [],
@@ -581,6 +602,7 @@
     {
       "id": "context-menu",
       "label": "Context menu",
+      "aliases": [],
       "summary": "A right-click menu: a Trigger region opens a portalled popup of items, checkboxes, radios, labels, and nested submenus.",
       "purpose": null,
       "useWhen": [],
@@ -613,6 +635,7 @@
     {
       "id": "date-picker",
       "label": "Date picker",
+      "aliases": [],
       "summary": "A single-date control pairing a popover-triggering button with a Calendar.",
       "purpose": null,
       "useWhen": [],
@@ -633,6 +656,7 @@
     {
       "id": "dialog",
       "label": "Dialog",
+      "aliases": [],
       "summary": "A modal dialog: a Trigger opens a portalled overlay + centered Content, with styled header/footer, title, description, and close.",
       "purpose": "The centered modal for one short, focused action. It keeps a top-right close so a modal is always dismissible.",
       "useWhen": [
@@ -666,6 +690,7 @@
     {
       "id": "drawer",
       "label": "Drawer",
+      "aliases": [],
       "summary": "A swipeable panel that slides in from an edge: a Trigger opens a portalled overlay + Content, with header/footer, title, and description.",
       "purpose": null,
       "useWhen": [],
@@ -694,6 +719,7 @@
     {
       "id": "dropdown-menu",
       "label": "Dropdown menu",
+      "aliases": [],
       "summary": "A menu opened from a button: a portalled popup of groups, labels, items, checkbox/radio items, separators, shortcuts, and submenus.",
       "purpose": null,
       "useWhen": [],
@@ -726,6 +752,7 @@
     {
       "id": "empty",
       "label": "Empty state",
+      "aliases": [],
       "summary": "An empty-state placeholder: a dashed-border container with a header (media, title, description) and a content area for actions.",
       "purpose": null,
       "useWhen": [],
@@ -758,6 +785,7 @@
     {
       "id": "field",
       "label": "Field",
+      "aliases": [],
       "summary": "Form-field scaffolding: a Field wraps a control with a label, description, and error; group fields with FieldGroup or a FieldSet.",
       "purpose": null,
       "useWhen": [],
@@ -795,6 +823,7 @@
     {
       "id": "hover-card",
       "label": "Hover card",
+      "aliases": [],
       "summary": "Richer detail revealed on hover or focus: a Trigger anchors a portalled, positioned Content that escapes any clipping container.",
       "purpose": "The richer half of the density rule: detail that would otherwise need more columns, revealed on hover or focus while the primary value stays visible in place.",
       "useWhen": [
@@ -822,6 +851,7 @@
     {
       "id": "input",
       "label": "Input",
+      "aliases": [],
       "summary": "A single-line text field with focus, disabled, and invalid states.",
       "purpose": "The single-line text field. It renders the destructive border and ring from `aria-invalid`, so the invalid state is a data attribute rather than a class override.",
       "useWhen": [
@@ -855,6 +885,7 @@
     {
       "id": "input-group",
       "label": "Input group",
+      "aliases": [],
       "summary": "An input with attached add-ons. Wrap an InputGroupInput (or Textarea) with InputGroupAddon slots holding icons, text, or buttons.",
       "purpose": null,
       "useWhen": [],
@@ -889,6 +920,7 @@
     {
       "id": "input-otp",
       "label": "Input OTP",
+      "aliases": [],
       "summary": "A one-time passcode split into slots, so the length of the code is visible before it is typed.",
       "purpose": null,
       "useWhen": [],
@@ -910,6 +942,7 @@
     {
       "id": "label",
       "label": "Label",
+      "aliases": [],
       "summary": null,
       "purpose": null,
       "useWhen": [],
@@ -928,6 +961,9 @@
     {
       "id": "list",
       "label": "List",
+      "aliases": [
+        "item"
+      ],
       "summary": "Structured rows built from the Item primitive — media, content (title + description), and trailing actions, grouped by ItemGroup.",
       "purpose": null,
       "useWhen": [],
@@ -974,6 +1010,7 @@
     {
       "id": "logo",
       "label": "Logo",
+      "aliases": [],
       "summary": "The Edgecom wordmark and glyph, with clear-space and color guidance.",
       "purpose": null,
       "useWhen": [],
@@ -992,6 +1029,7 @@
     {
       "id": "motion-highlight",
       "label": "Motion highlight",
+      "aliases": [],
       "summary": null,
       "purpose": null,
       "useWhen": [],
@@ -1011,6 +1049,7 @@
     {
       "id": "motion-tabs",
       "label": "Motion tabs",
+      "aliases": [],
       "summary": null,
       "purpose": null,
       "useWhen": [],
@@ -1033,6 +1072,9 @@
     {
       "id": "multi-select",
       "label": "Multi-select",
+      "aliases": [
+        "multi-select-listbox"
+      ],
       "summary": "Choosing several values at once: a trigger plus a searchable checkbox listbox with Select all and Clear. The one place a checkmark belongs. The tag-style selector on this page ships as a separate registry item.",
       "purpose": null,
       "useWhen": [],
@@ -1051,6 +1093,7 @@
     {
       "id": "native-select",
       "label": "Native select",
+      "aliases": [],
       "summary": "The platform select element, styled to match the design system — for dense forms and small screens where the OS picker is the better control.",
       "purpose": null,
       "useWhen": [],
@@ -1080,6 +1123,7 @@
     {
       "id": "navigation-menu",
       "label": "Navigation menu",
+      "aliases": [],
       "summary": "A horizontal nav bar: a List of items whose Triggers open Content panels, with an indicator arrow and a portalled viewport.",
       "purpose": null,
       "useWhen": [],
@@ -1105,6 +1149,7 @@
     {
       "id": "pagination",
       "label": "Pagination",
+      "aliases": [],
       "summary": "Page navigation for long lists and tables — previous/next controls, numbered links, and an ellipsis.",
       "purpose": null,
       "useWhen": [],
@@ -1129,6 +1174,7 @@
     {
       "id": "phone-input",
       "label": "Phone input",
+      "aliases": [],
       "summary": "A phone number field whose country selector keeps the dial code and the number in a single value.",
       "purpose": null,
       "useWhen": [],
@@ -1147,6 +1193,7 @@
     {
       "id": "popover",
       "label": "Popover",
+      "aliases": [],
       "summary": "A floating panel anchored to a trigger: PopoverContent can hold a header (title + description) and a close button.",
       "purpose": null,
       "useWhen": [],
@@ -1171,6 +1218,7 @@
     {
       "id": "progress",
       "label": "Progress",
+      "aliases": [],
       "summary": "A progress bar: the root auto-renders a Track containing an Indicator, with optional Label and Value.",
       "purpose": null,
       "useWhen": [],
@@ -1193,6 +1241,7 @@
     {
       "id": "radio-group",
       "label": "Radio group",
+      "aliases": [],
       "summary": "A set of mutually-exclusive options: a RadioGroup coordinates its RadioGroupItems.",
       "purpose": null,
       "useWhen": [],
@@ -1212,6 +1261,9 @@
     {
       "id": "resizable",
       "label": "Resizable",
+      "aliases": [
+        "resizable-panel-group"
+      ],
       "summary": "Draggable split layouts: a PanelGroup arranges Panels separated by Handles.",
       "purpose": null,
       "useWhen": [],
@@ -1232,6 +1284,7 @@
     {
       "id": "scroll-area",
       "label": "Scroll area",
+      "aliases": [],
       "summary": "A scrollable region with a custom overlay scrollbar. Set orientation to vertical, horizontal, or both.",
       "purpose": null,
       "useWhen": [],
@@ -1251,6 +1304,7 @@
     {
       "id": "select",
       "label": "Select",
+      "aliases": [],
       "summary": "Choose one value from a list. A Root holds the value and wraps a Trigger plus a portalled, positioned Content of Items.",
       "purpose": "Choose one value from a known set. The popup is portaled to the app root and matches the trigger width, so options line up under the value they replace.",
       "useWhen": [
@@ -1294,6 +1348,7 @@
     {
       "id": "separator",
       "label": "Separator",
+      "aliases": [],
       "summary": "A thin divider line. Set orientation to horizontal (default) or vertical.",
       "purpose": null,
       "useWhen": [],
@@ -1312,6 +1367,7 @@
     {
       "id": "sheet",
       "label": "Sheet",
+      "aliases": [],
       "summary": "A dialog panel that slides in from an edge. A Trigger opens a portalled Content with header/footer, title, description, and close.",
       "purpose": "The edge-anchored panel for longer edit flows. 420px on the inline edges by default, full width on mobile.",
       "useWhen": [
@@ -1343,6 +1399,7 @@
     {
       "id": "sidebar",
       "label": "Sidebar",
+      "aliases": [],
       "summary": "A composable application sidebar. SidebarProvider supplies collapse state; Sidebar holds a header, a scrollable body of grouped menus, and a footer, alongside a SidebarInset for the main area.",
       "purpose": "The application navigation frame: a provider holding collapse state, a rail, and menus whose active item uses the component's own neutral highlight.",
       "useWhen": [
@@ -1408,6 +1465,7 @@
     {
       "id": "skeleton",
       "label": "Skeleton",
+      "aliases": [],
       "summary": "A muted placeholder block for loading states; pulses by default, or shimmers with a sweeping highlight.",
       "purpose": null,
       "useWhen": [],
@@ -1436,6 +1494,7 @@
     {
       "id": "slider",
       "label": "Slider",
+      "aliases": [],
       "summary": "A track-and-thumb control for a value or range; renders one thumb per value.",
       "purpose": null,
       "useWhen": [],
@@ -1454,6 +1513,7 @@
     {
       "id": "sortable",
       "label": "Sortable",
+      "aliases": [],
       "summary": "Drag-and-drop reordering: Sortable provides context, SortableItem wraps each entry, and SortableOverlay renders the dragged preview.",
       "purpose": null,
       "useWhen": [],
@@ -1475,6 +1535,7 @@
     {
       "id": "spinner",
       "label": "Spinner",
+      "aliases": [],
       "summary": "A spinning loading indicator with role=status.",
       "purpose": null,
       "useWhen": [],
@@ -1493,6 +1554,7 @@
     {
       "id": "stepper",
       "label": "Stepper",
+      "aliases": [],
       "summary": "A multi-step progress flow: a nav of items (trigger, indicator, separator, title, description) with switchable content panels.",
       "purpose": null,
       "useWhen": [],
@@ -1520,6 +1582,7 @@
     {
       "id": "switch",
       "label": "Switch",
+      "aliases": [],
       "summary": "An on/off toggle with a sliding thumb.",
       "purpose": null,
       "useWhen": [],
@@ -1547,6 +1610,7 @@
     {
       "id": "table",
       "label": "Table",
+      "aliases": [],
       "summary": "A styled HTML table wrapped for horizontal overflow — header, body, optional footer, rows, cells, and a caption.",
       "purpose": "The data grid for text-first rows. It ships the row hover and the alignment that make every table in the product match.",
       "useWhen": [
@@ -1578,6 +1642,7 @@
     {
       "id": "tabs",
       "label": "Tabs",
+      "aliases": [],
       "summary": "A tabbed interface: a List of Triggers reveals matching Content panels.",
       "purpose": null,
       "useWhen": [],
@@ -1610,6 +1675,7 @@
     {
       "id": "tags-input",
       "label": "Tags",
+      "aliases": [],
       "summary": "A field for entering and removing multiple tag chips, with paste-splitting and validation.",
       "purpose": null,
       "useWhen": [],
@@ -1628,6 +1694,9 @@
     {
       "id": "tanstack-form",
       "label": "Tanstack form",
+      "aliases": [
+        "textarea-field"
+      ],
       "summary": null,
       "purpose": null,
       "useWhen": [],
@@ -1649,6 +1718,7 @@
     {
       "id": "textarea",
       "label": "Textarea",
+      "aliases": [],
       "summary": null,
       "purpose": null,
       "useWhen": [],
@@ -1667,6 +1737,7 @@
     {
       "id": "timeline",
       "label": "Timeline",
+      "aliases": [],
       "summary": "A vertical sequence of events. Each TimelineItem pairs a status TimelineDot with a TimelineHeading and TimelineContent, connected by a TimelineLine.",
       "purpose": null,
       "useWhen": [],
@@ -1701,6 +1772,10 @@
     {
       "id": "toast",
       "label": "Toast",
+      "aliases": [
+        "sonner",
+        "toaster"
+      ],
       "summary": "App-wide notifications: mount one Toaster near the app root, then call the imperative toast() function to show messages.",
       "purpose": "App-wide feedback for a completed interaction. One `Toaster` is mounted near the app root; everything else is the imperative `toast()` call from `sonner`.",
       "useWhen": [
@@ -1725,6 +1800,7 @@
     {
       "id": "toggle",
       "label": "Toggle",
+      "aliases": [],
       "summary": "A two-state button that holds a pressed/on state.",
       "purpose": null,
       "useWhen": [],
@@ -1761,6 +1837,7 @@
     {
       "id": "toggle-group",
       "label": "Toggle group",
+      "aliases": [],
       "summary": null,
       "purpose": null,
       "useWhen": [],
@@ -1798,6 +1875,7 @@
     {
       "id": "tooltip",
       "label": "Tooltip",
+      "aliases": [],
       "summary": "A hover hint: a Provider shares timing, a Trigger reveals a portalled Content on hover/focus.",
       "purpose": null,
       "useWhen": [],

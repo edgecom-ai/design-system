@@ -4,6 +4,9 @@
   "contract": {
     "id": "multi-select",
     "label": "Multi-select",
+    "aliases": [
+      "multi-select-listbox"
+    ],
     "registryItem": "edgecom-ai/design-system/multi-select",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/multi-select",
     "docs": "https://design.edgecom.ai/components/multi-select/",

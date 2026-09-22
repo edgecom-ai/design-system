@@ -4,6 +4,9 @@
   "contract": {
     "id": "tanstack-form",
     "label": "Tanstack form",
+    "aliases": [
+      "textarea-field"
+    ],
     "registryItem": "edgecom-ai/design-system/tanstack-form",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/tanstack-form",
     "docs": null,

@@ -4,6 +4,7 @@
   "contract": {
     "id": "popover",
     "label": "Popover",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/popover",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/popover",
     "docs": "https://design.edgecom.ai/components/popover/",

@@ -4,6 +4,7 @@
   "contract": {
     "id": "switch",
     "label": "Switch",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/switch",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/switch",
     "docs": "https://design.edgecom.ai/components/switch/",

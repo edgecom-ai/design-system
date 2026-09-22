@@ -4,6 +4,7 @@
   "contract": {
     "id": "logo",
     "label": "Logo",
+    "aliases": [],
     "registryItem": "edgecom-ai/design-system/logo",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/logo",
     "docs": "https://design.edgecom.ai/foundations/logo/",
