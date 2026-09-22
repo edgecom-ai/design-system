@@ -36,7 +36,7 @@ import { execFileSync } from "node:child_process"
 import { readBlocks } from "./lib/tokens.mjs"
 import { buildBaseCss, probeUtilities, scanClasses } from "./lib/base-css.mjs"
 import { extractCva } from "./lib/cva.mjs"
-import { parseSections } from "./lib/sections.mjs"
+import { parseSections, sectionPath } from "./lib/sections.mjs"
 import { systemIdentity } from "./lib/system.mjs"
 import { PUBLISHED, urlOf, schemaUrl } from "./lib/publish.mjs"
 
@@ -590,7 +590,8 @@ function writeComponents() {
       "",
       `**Registry item:** \`edgecom-ai/design-system/${s.id}\``,
       `**Install:** \`pnpm dlx shadcn@latest add edgecom-ai/design-system/${s.id}\``,
-      `**Docs:** https://design.edgecom.ai/components/${s.id}/`,
+      // The page may sit in any group — the application shell is under Blocks.
+      `**Docs:** https://design.edgecom.ai${sectionPath(s)}/`,
       "",
     ]
     if (cva && Object.keys(cva.groups).length) {
