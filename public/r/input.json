@@ -4,7 +4,8 @@
   "title": "Input",
   "description": "A single-line text field with focus, disabled, and invalid states.",
   "dependencies": [
-    "@base-ui/react@^1.6.0"
+    "@base-ui/react@^1.6.0",
+    "class-variance-authority@^0.7.1"
   ],
   "registryDependencies": [
     "edgecom-ai/design-system/theme"
@@ -12,7 +13,7 @@
   "files": [
     {
       "path": "src/components/ui/input.tsx",
-      "content": "import * as React from \"react\"\nimport { Input as InputPrimitive } from \"@base-ui/react/input\"\n\nimport { cn } from \"@/lib/utils\"\n\nfunction Input({ className, type, ...props }: React.ComponentProps<\"input\">) {\n  return (\n    <InputPrimitive\n      type={type}\n      data-slot=\"input\"\n      className={cn(\n        \"h-8 w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-1 text-body-lg transition-colors outline-none file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-body-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-input/50 disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 md:text-body-sm dark:bg-input/30 dark:disabled:bg-input/80 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nexport { Input }\n",
+      "content": "import * as React from \"react\"\nimport { Input as InputPrimitive } from \"@base-ui/react/input\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n// `size` is a variant axis, not a prop, so a design can cite it and a toolbar\n// can hold this field level with a `SelectTrigger size=\"sm\"` and a\n// `Button size=\"sm\"` — the three share `default` (2rem) and `sm` (1.75rem).\nconst inputVariants = cva(\n  \"w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 text-body-lg transition-colors outline-none file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-body-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-input/50 disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 md:text-body-sm dark:bg-input/30 dark:disabled:bg-input/80 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40\",\n  {\n    variants: {\n      size: {\n        default: \"h-8 py-1\",\n        sm: \"h-7 rounded-[min(var(--radius-md),10px)] py-0.5\",\n      },\n    },\n    defaultVariants: {\n      size: \"default\",\n    },\n  }\n)\n\nfunction Input({\n  className,\n  type,\n  size = \"default\",\n  ...props\n}: Omit<React.ComponentProps<\"input\">, \"size\"> & VariantProps<typeof inputVariants>) {\n  return (\n    <InputPrimitive\n      type={type}\n      data-slot=\"input\"\n      data-size={size}\n      className={cn(inputVariants({ size }), className)}\n      {...props}\n    />\n  )\n}\n\nexport { Input, inputVariants }\n",
       "type": "registry:ui"
     }
   ],

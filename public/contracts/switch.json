@@ -1,6 +1,6 @@
 {
   "version": "v1.0.0",
-  "digest": "2694528e294510cc",
+  "digest": "927d9e77781a6e86",
   "contract": {
     "id": "switch",
     "label": "Switch",
@@ -22,8 +22,25 @@
         "description": "Toggleable on/off switch; supports default and sm sizes."
       }
     ],
-    "props": [],
-    "variants": [],
+    "props": [
+      {
+        "part": "Switch",
+        "name": "size",
+        "type": "\"default\" | \"sm\"",
+        "default": "\"default\"",
+        "description": null
+      }
+    ],
+    "variants": [
+      {
+        "name": "size",
+        "options": [
+          "default",
+          "sm"
+        ],
+        "default": "default"
+      }
+    ],
     "states": [
       "data-[checked]",
       "data-[unchecked]",

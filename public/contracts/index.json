@@ -1,13 +1,13 @@
 {
   "version": "v1.0.0",
-  "digest": "2694528e294510cc",
+  "digest": "927d9e77781a6e86",
   "contracts": "https://design.edgecom.ai/contracts.json",
   "docs": "https://design.edgecom.ai/design.md",
   "guide": "https://design.edgecom.ai/agents.md",
   "counts": {
     "total": 64,
     "authored": 12,
-    "withVariants": 15,
+    "withVariants": 22,
     "withBaseUi": 26,
     "undocumented": 8,
     "tokenReferences": 500
@@ -81,7 +81,16 @@
         "The action is reversible and routine — commit it and confirm with a `toast`.",
         "The overlay is a short create or edit form — that is `dialog`, which keeps its close."
       ],
-      "variants": [],
+      "variants": [
+        {
+          "name": "size",
+          "options": [
+            "default",
+            "sm"
+          ],
+          "default": "default"
+        }
+      ],
       "parts": [
         "AlertDialog",
         "AlertDialogAction",
@@ -110,7 +119,17 @@
       "purpose": null,
       "useWhen": [],
       "dontUseWhen": [],
-      "variants": [],
+      "variants": [
+        {
+          "name": "size",
+          "options": [
+            "default",
+            "sm",
+            "lg"
+          ],
+          "default": "default"
+        }
+      ],
       "parts": [
         "Avatar",
         "AvatarImage",
@@ -344,7 +363,16 @@
         "The content is itself an overlay. `popover` and `elevated` sit above `card`, and a card inside an overlay flattens the stack.",
         "The block is a page-level message — that is `banner` or `alert`."
       ],
-      "variants": [],
+      "variants": [
+        {
+          "name": "size",
+          "options": [
+            "default",
+            "sm"
+          ],
+          "default": "default"
+        }
+      ],
       "parts": [
         "Card",
         "CardHeader",
@@ -770,7 +798,16 @@
         "The value belongs to a known set — that is `select`, `combobox`, or `radio-group`.",
         "The control needs an affix, icon, or button inside it — that is `input-group`."
       ],
-      "variants": [],
+      "variants": [
+        {
+          "name": "size",
+          "options": [
+            "default",
+            "sm"
+          ],
+          "default": "default"
+        }
+      ],
       "parts": [
         "Input"
       ],
@@ -984,7 +1021,16 @@
       "purpose": null,
       "useWhen": [],
       "dontUseWhen": [],
-      "variants": [],
+      "variants": [
+        {
+          "name": "size",
+          "options": [
+            "default",
+            "sm"
+          ],
+          "default": "default"
+        }
+      ],
       "parts": [
         "NativeSelect",
         "NativeSelectOptGroup",
@@ -1182,7 +1228,16 @@
         "The user needs to type or search — that is `combobox`.",
         "The list holds actions rather than values — that is a `dropdown-menu`, which shrink-wraps instead of matching the trigger."
       ],
-      "variants": [],
+      "variants": [
+        {
+          "name": "size",
+          "options": [
+            "default",
+            "sm"
+          ],
+          "default": "default"
+        }
+      ],
       "parts": [
         "Select",
         "SelectContent",
@@ -1435,7 +1490,16 @@
       "purpose": null,
       "useWhen": [],
       "dontUseWhen": [],
-      "variants": [],
+      "variants": [
+        {
+          "name": "size",
+          "options": [
+            "default",
+            "sm"
+          ],
+          "default": "default"
+        }
+      ],
       "parts": [
         "Switch"
       ],

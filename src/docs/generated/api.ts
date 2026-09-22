@@ -37,7 +37,14 @@ export const generatedApi: Record<string, GeneratedApi> = {
     "parts": [
       "Input"
     ],
-    "props": []
+    "props": [
+      {
+        "part": "Input",
+        "name": "size",
+        "type": "\"default\" | \"sm\"",
+        "default": "\"default\""
+      }
+    ]
   },
   "input-otp": {
     "parts": [
@@ -92,7 +99,14 @@ export const generatedApi: Record<string, GeneratedApi> = {
       "CardDescription",
       "CardContent"
     ],
-    "props": []
+    "props": [
+      {
+        "part": "Card",
+        "name": "size",
+        "type": "\"default\" | \"sm\"",
+        "default": "\"default\""
+      }
+    ]
   },
   "badge": {
     "parts": [
@@ -161,7 +175,14 @@ export const generatedApi: Record<string, GeneratedApi> = {
       "AlertDialogTitle",
       "AlertDialogTrigger"
     ],
-    "props": []
+    "props": [
+      {
+        "part": "AlertDialog",
+        "name": "size",
+        "type": "\"default\" | \"sm\"",
+        "default": "\"default\""
+      }
+    ]
   },
   "dropdown-menu": {
     "base": {
@@ -313,7 +334,14 @@ export const generatedApi: Record<string, GeneratedApi> = {
     "parts": [
       "Switch"
     ],
-    "props": []
+    "props": [
+      {
+        "part": "Switch",
+        "name": "size",
+        "type": "\"default\" | \"sm\"",
+        "default": "\"default\""
+      }
+    ]
   },
   "toggle": {
     "base": {
@@ -405,7 +433,14 @@ export const generatedApi: Record<string, GeneratedApi> = {
       "AvatarGroupCount",
       "AvatarBadge"
     ],
-    "props": []
+    "props": [
+      {
+        "part": "Avatar",
+        "name": "size",
+        "type": "\"default\" | \"sm\" | \"lg\"",
+        "default": "\"default\""
+      }
+    ]
   },
   "field": {
     "parts": [
@@ -502,7 +537,14 @@ export const generatedApi: Record<string, GeneratedApi> = {
       "SelectTrigger",
       "SelectValue"
     ],
-    "props": []
+    "props": [
+      {
+        "part": "Select",
+        "name": "size",
+        "type": "\"default\" | \"sm\"",
+        "default": "\"default\""
+      }
+    ]
   },
   "multi-select": {
     "base": {
@@ -520,7 +562,14 @@ export const generatedApi: Record<string, GeneratedApi> = {
       "NativeSelectOptGroup",
       "NativeSelectOption"
     ],
-    "props": []
+    "props": [
+      {
+        "part": "NativeSelect",
+        "name": "size",
+        "type": "\"default\" | \"sm\"",
+        "default": "\"default\""
+      }
+    ]
   },
   "banner": {
     "parts": [

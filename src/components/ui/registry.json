@@ -47,7 +47,8 @@
       "description": "The confirmation an irreversible action passes through: a Trigger opens a portalled, centered Content whose footer forces an explicit Cancel or Action choice.",
       "docs": "Docs: https://design.edgecom.ai/components/alert-dialog/ · Contract: https://design.edgecom.ai/contracts/alert-dialog.json · Guardrails: https://design.edgecom.ai/design.md",
       "dependencies": [
-        "@base-ui/react@^1.6.0"
+        "@base-ui/react@^1.6.0",
+        "class-variance-authority@^0.7.1"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme",
@@ -67,7 +68,8 @@
       "description": "A user or contact image with a text fallback. Compose Avatar with AvatarImage + AvatarFallback; stack them in an AvatarGroup with an overflow count.",
       "docs": "Docs: https://design.edgecom.ai/components/avatar/ · Contract: https://design.edgecom.ai/contracts/avatar.json · Guardrails: https://design.edgecom.ai/design.md",
       "dependencies": [
-        "@base-ui/react@^1.6.0"
+        "@base-ui/react@^1.6.0",
+        "class-variance-authority@^0.7.1"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -206,6 +208,9 @@
       "title": "Card",
       "description": "A styled container with composable header, content, and footer sections (all div-based).",
       "docs": "Docs: https://design.edgecom.ai/components/card/ · Contract: https://design.edgecom.ai/contracts/card.json · Guardrails: https://design.edgecom.ai/design.md",
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
       ],
@@ -520,7 +525,8 @@
       "description": "A single-line text field with focus, disabled, and invalid states.",
       "docs": "Docs: https://design.edgecom.ai/components/input/ · Contract: https://design.edgecom.ai/contracts/input.json · Guardrails: https://design.edgecom.ai/design.md",
       "dependencies": [
-        "@base-ui/react@^1.6.0"
+        "@base-ui/react@^1.6.0",
+        "class-variance-authority@^0.7.1"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
@@ -714,6 +720,7 @@
       "description": "The platform select element, styled to match the design system — for dense forms and small screens where the OS picker is the better control.",
       "docs": "Docs: https://design.edgecom.ai/components/native-select/ · Contract: https://design.edgecom.ai/contracts/native-select.json · Guardrails: https://design.edgecom.ai/design.md",
       "dependencies": [
+        "class-variance-authority@^0.7.1",
         "lucide-react@^1.23.0"
       ],
       "registryDependencies": [
@@ -895,6 +902,7 @@
       "docs": "Docs: https://design.edgecom.ai/components/select/ · Contract: https://design.edgecom.ai/contracts/select.json · Guardrails: https://design.edgecom.ai/design.md",
       "dependencies": [
         "@base-ui/react@^1.6.0",
+        "class-variance-authority@^0.7.1",
         "lucide-react@^1.23.0"
       ],
       "registryDependencies": [
@@ -1105,7 +1113,8 @@
       "description": "An on/off toggle with a sliding thumb.",
       "docs": "Docs: https://design.edgecom.ai/components/switch/ · Contract: https://design.edgecom.ai/contracts/switch.json · Guardrails: https://design.edgecom.ai/design.md",
       "dependencies": [
-        "@base-ui/react@^1.6.0"
+        "@base-ui/react@^1.6.0",
+        "class-variance-authority@^0.7.1"
       ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"

@@ -1,6 +1,6 @@
 {
   "version": "v1.0.0",
-  "digest": "2694528e294510cc",
+  "digest": "927d9e77781a6e86",
   "contract": {
     "id": "select",
     "label": "Select",
@@ -65,8 +65,25 @@
         "description": "Renders the selected item's label, or the placeholder when empty."
       }
     ],
-    "props": [],
-    "variants": [],
+    "props": [
+      {
+        "part": "Select",
+        "name": "size",
+        "type": "\"default\" | \"sm\"",
+        "default": "\"default\"",
+        "description": null
+      }
+    ],
+    "variants": [
+      {
+        "name": "size",
+        "options": [
+          "default",
+          "sm"
+        ],
+        "default": "default"
+      }
+    ],
     "states": [
       "aria-invalid",
       "data-[align-trigger=true]",
@@ -76,8 +93,6 @@
       "data-[side=left]",
       "data-[side=right]",
       "data-[side=top]",
-      "data-[size=default]",
-      "data-[size=sm]",
       "data-[slot=select-value]",
       "data-closed",
       "data-disabled",

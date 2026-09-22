@@ -1,6 +1,6 @@
 {
   "version": "v1.0.0",
-  "digest": "2694528e294510cc",
+  "digest": "927d9e77781a6e86",
   "contract": {
     "id": "avatar",
     "label": "Avatar",
@@ -42,11 +42,27 @@
         "description": "A small status dot pinned to the avatar corner."
       }
     ],
-    "props": [],
-    "variants": [],
+    "props": [
+      {
+        "part": "Avatar",
+        "name": "size",
+        "type": "\"default\" | \"sm\" | \"lg\"",
+        "default": "\"default\"",
+        "description": null
+      }
+    ],
+    "variants": [
+      {
+        "name": "size",
+        "options": [
+          "default",
+          "sm",
+          "lg"
+        ],
+        "default": "default"
+      }
+    ],
     "states": [
-      "data-[size=lg]",
-      "data-[size=sm]",
       "data-[slot=avatar]",
       "group-data-[size=default]/avatar",
       "group-data-[size=lg]/avatar",
