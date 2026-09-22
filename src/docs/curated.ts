@@ -344,7 +344,7 @@ export const curatedApi: Record<string, CuratedApi> = {
     parts: {
       ApplicationShell: "The whole frame. Pass nav, activeItem, user, buildings and the page as children; the parts below are what it composes, exported for a custom header or footer.",
       ApplicationShellSidebar: "The rail: logo header (mark only when collapsed) above whatever navigation and footer are passed as children.",
-      ApplicationShellNav: "One navigation group from items; an item with sub-items renders as a collapsible submenu that becomes a hover flyout on the collapsed rail.",
+      ApplicationShellNav: "One navigation group from items — pass nav as an array of groups to draw a separator between them. An item with sub-items renders as a collapsible submenu that becomes a hover flyout on the collapsed rail; sub-items carry icons too. `bare` drops the group padding, for the footer.",
       ApplicationShellSidebarFooter: "The bottom of the rail — footer navigation (Settings) and the account menu.",
       ApplicationShellUserMenu: "The signed-in user, docked bottom-left, opening a dropdown-menu with the app's account items as children.",
       ApplicationShellHeader: "The top bar: the sidebar trigger, then search and the actions cluster.",

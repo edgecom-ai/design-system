@@ -1,7 +1,7 @@
 {
   "$schema": "https://design.edgecom.ai/schemas/contracts.schema.json",
   "version": "v1.0.0",
-  "digest": "8d60a24b537c3cd9",
+  "digest": "6f4e7bf0b8d3eee7",
   "sources": [
     "src/components/ui/*.tsx",
     "src/app/sections.tsx",
@@ -15,7 +15,7 @@
     "withVariants": 22,
     "withBaseUi": 26,
     "undocumented": 7,
-    "tokenReferences": 507
+    "tokenReferences": 508
   },
   "contracts": [
     {
@@ -464,7 +464,7 @@
         },
         {
           "name": "ApplicationShellNav",
-          "description": "One navigation group from items; an item with sub-items renders as a collapsible submenu that becomes a hover flyout on the collapsed rail."
+          "description": "One navigation group from items — pass nav as an array of groups to draw a separator between them. An item with sub-items renders as a collapsible submenu that becomes a hover flyout on the collapsed rail; sub-items carry icons too. `bare` drops the group padding, for the footer."
         },
         {
           "name": "ApplicationShellSidebarFooter",
@@ -524,6 +524,10 @@
         {
           "id": "muted-foreground",
           "family": "neutral"
+        },
+        {
+          "id": "sidebar-border",
+          "family": "sidebar"
         },
         {
           "id": "sidebar-foreground",

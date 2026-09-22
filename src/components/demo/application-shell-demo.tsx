@@ -2,16 +2,22 @@
 
 import * as React from "react"
 import {
-  Activity,
   Bell,
   BellRing,
+  CircleHelp,
+  Download,
+  Droplets,
   FileText,
+  Flame,
   Gauge,
   LayoutDashboard,
   LogOut,
+  Radio,
   Settings,
-  Sparkles,
+  TrendingUp,
+  Upload,
   UserRound,
+  Zap,
 } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -25,25 +31,33 @@ import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle }
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 
-const nav: ApplicationShellNavItem[] = [
-  { id: "overview", label: "Overview", icon: LayoutDashboard },
-  {
-    id: "datatrack",
-    label: "dataTrack™",
-    icon: Gauge,
-    items: [
-      { id: "datatrack-energy", label: "Energy" },
-      { id: "datatrack-bill", label: "Bill" },
-      { id: "datatrack-production", label: "Production" },
-    ],
-  },
-  { id: "ptrack", label: "pTrack®", icon: Activity },
-  { id: "assistant", label: "Assistant", icon: Sparkles },
-  { id: "reports", label: "Reports", icon: FileText },
-  { id: "alarms", label: "Alarms", icon: BellRing, badge: 3 },
+// Neutral labels: the frame is the portal's, the products are the app's.
+const nav: ApplicationShellNavItem[][] = [
+  [
+    { id: "overview", label: "Overview", icon: LayoutDashboard },
+    {
+      id: "monitoring",
+      label: "Monitoring",
+      icon: Gauge,
+      items: [
+        { id: "monitoring-electricity", label: "Electricity", icon: Zap },
+        { id: "monitoring-water", label: "Water", icon: Droplets },
+        { id: "monitoring-gas", label: "Gas", icon: Flame },
+      ],
+    },
+    { id: "forecasts", label: "Forecasts", icon: TrendingUp },
+    { id: "devices", label: "Devices", icon: Radio },
+  ],
+  [
+    { id: "reports", label: "Reports", icon: FileText },
+    { id: "downloads", label: "Downloads", icon: Download },
+    { id: "uploads", label: "Uploads", icon: Upload },
+    { id: "alarms", label: "Alarms", icon: BellRing, badge: 3 },
+  ],
 ]
 
 const footerNav: ApplicationShellNavItem[] = [
+  { id: "help", label: "Help", icon: CircleHelp },
   { id: "settings", label: "Settings", icon: Settings },
 ]
 
@@ -69,7 +83,7 @@ const stats = [
  * frame — an app renders it bare.
  */
 export function ApplicationShellDemo({ className }: { className?: string }) {
-  const [active, setActive] = React.useState("datatrack-energy")
+  const [active, setActive] = React.useState("monitoring-electricity")
   const [building, setBuilding] = React.useState(buildings[0])
 
   return (
@@ -94,7 +108,6 @@ export function ApplicationShellDemo({ className }: { className?: string }) {
       buildings={buildings}
       building={building}
       onBuildingChange={setBuilding}
-      search
       actions={
         <Tooltip>
           <TooltipTrigger

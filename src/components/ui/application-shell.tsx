@@ -45,6 +45,7 @@ import {
   SidebarMenuSubItem,
   SidebarMenuSubmenu,
   SidebarProvider,
+  SidebarSeparator,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
 
@@ -69,11 +70,11 @@ type ApplicationShellNavLeaf = {
   label: string
   /** Where the item navigates. Omit it and the item is a button that calls `onNavigate`. */
   href?: string
+  /** A lucide icon component. Sub-items carry one too, as the portal's do. */
+  icon?: React.ComponentType<{ className?: string }>
 }
 
 type ApplicationShellNavItem = ApplicationShellNavLeaf & {
-  /** A lucide icon component. */
-  icon?: React.ComponentType<{ className?: string }>
   /** A count or short tag shown at the row's end while the rail is expanded. */
   badge?: React.ReactNode
   /** Sub-pages; the item becomes a collapsible submenu (a hover flyout when the rail is collapsed). */
@@ -106,6 +107,10 @@ type NavLinkProps = {
 const ApplicationShellContext = React.createContext<
   NavLinkProps & { activeItem?: string }
 >({})
+
+const isGrouped = (
+  nav: ApplicationShellNavItem[] | ApplicationShellNavItem[][]
+): nav is ApplicationShellNavItem[][] => Array.isArray(nav[0])
 
 function initialsOf(name: string) {
   return name
@@ -157,8 +162,8 @@ function ApplicationShell({
   ...props
 }: Omit<React.ComponentProps<"div">, "children"> &
   NavLinkProps & {
-    /** Top-level navigation, in order. */
-    nav: ApplicationShellNavItem[]
+    /** Top-level navigation, in order — or several groups, drawn with a separator between them. */
+    nav: ApplicationShellNavItem[] | ApplicationShellNavItem[][]
     /** Items docked above the account menu — typically Settings. */
     footerNav?: ApplicationShellNavItem[]
     /** The id of the current item or sub-item. */
@@ -199,9 +204,14 @@ function ApplicationShell({
         {...props}
       >
         <ApplicationShellSidebar collapsible={collapsible}>
-          <ApplicationShellNav items={nav} />
+          {(isGrouped(nav) ? nav : [nav]).map((group, i) => (
+            <React.Fragment key={i}>
+              {i > 0 ? <SidebarSeparator /> : null}
+              <ApplicationShellNav items={group} />
+            </React.Fragment>
+          ))}
           <ApplicationShellSidebarFooter>
-            {footerNav?.length ? <ApplicationShellNav items={footerNav} /> : null}
+            {footerNav?.length ? <ApplicationShellNav items={footerNav} bare /> : null}
             {user ? <ApplicationShellUserMenu user={user}>{userMenu}</ApplicationShellUserMenu> : null}
           </ApplicationShellSidebarFooter>
         </ApplicationShellSidebar>
@@ -261,25 +271,35 @@ function ApplicationShellSidebar({
   )
 }
 
-/** One navigation group. Items with `items` render as submenus. */
+/**
+ * One navigation group. Items with `items` render as submenus. `bare` drops
+ * the group's own padding — for the footer, whose `SidebarFooter` already pads,
+ * so its rows line up with the main navigation on the collapsed rail.
+ */
 function ApplicationShellNav({
   items,
+  bare = false,
   className,
   ...props
-}: React.ComponentProps<typeof SidebarGroup> & { items: ApplicationShellNavItem[] }) {
+}: React.ComponentProps<typeof SidebarGroup> & {
+  items: ApplicationShellNavItem[]
+  bare?: boolean
+}) {
+  const menu = (
+    <SidebarMenu>
+      {items.map((item) =>
+        item.items?.length ? (
+          <ApplicationShellNavSubmenu key={item.id} item={item} />
+        ) : (
+          <ApplicationShellNavItem key={item.id} item={item} />
+        )
+      )}
+    </SidebarMenu>
+  )
+  if (bare) return menu
   return (
     <SidebarGroup data-part="application-shell-nav" className={className} {...props}>
-      <SidebarGroupContent>
-        <SidebarMenu>
-          {items.map((item) =>
-            item.items?.length ? (
-              <ApplicationShellNavSubmenu key={item.id} item={item} />
-            ) : (
-              <ApplicationShellNavItem key={item.id} item={item} />
-            )
-          )}
-        </SidebarMenu>
-      </SidebarGroupContent>
+      <SidebarGroupContent>{menu}</SidebarGroupContent>
     </SidebarGroup>
   )
 }
@@ -347,6 +367,7 @@ function ApplicationShellNavSubItem({ item }: { item: ApplicationShellNavLeaf })
   const { activeItem } = React.useContext(ApplicationShellContext)
   const { render, onClick } = useNavRender(item)
   const isActive = activeItem === item.id
+  const Icon = item.icon
   return (
     <SidebarMenuSubItem>
       <SidebarMenuSubButton
@@ -356,6 +377,7 @@ function ApplicationShellNavSubItem({ item }: { item: ApplicationShellNavLeaf })
         onClick={onClick}
         aria-current={isActive ? "page" : undefined}
       >
+        {Icon ? <Icon /> : null}
         <span>{item.label}</span>
       </SidebarMenuSubButton>
     </SidebarMenuSubItem>
@@ -389,17 +411,27 @@ function ApplicationShellUserMenu({
 }) {
   const initials = user.initials ?? initialsOf(user.name)
   return (
-    <SidebarMenu data-part="application-shell-user-menu">
+    // The rule above the block spans the rail's full width — the footer's own
+    // padding is undone and re-applied inside.
+    <SidebarMenu
+      data-part="application-shell-user-menu"
+      className="-mx-2 border-t border-sidebar-border px-2 pt-2"
+    >
       <SidebarMenuItem>
         <DropdownMenu>
           <DropdownMenuTrigger
             render={
-              <SidebarMenuButton size="lg" tooltip={user.name} aria-label={`Account: ${user.name}`}>
+              <SidebarMenuButton
+                size="lg"
+                tooltip={user.name}
+                aria-label={`Account: ${user.name}`}
+                className="group-data-[collapsible=icon]:justify-center"
+              >
                 <Avatar size="sm">
                   {user.avatar ? <AvatarImage src={user.avatar} alt="" /> : null}
                   <AvatarFallback>{initials}</AvatarFallback>
                 </Avatar>
-                <div className="flex min-w-0 flex-1 flex-col text-left">
+                <div className="flex min-w-0 flex-1 flex-col text-left group-data-[collapsible=icon]:hidden">
                   <span className="truncate text-body-sm font-medium">{user.name}</span>
                   {user.email ? (
                     <span className="truncate text-caption text-sidebar-foreground/70">
@@ -407,11 +439,17 @@ function ApplicationShellUserMenu({
                     </span>
                   ) : null}
                 </div>
-                <ChevronsUpDown className="ml-auto size-3.5 shrink-0 text-sidebar-foreground/70" />
+                <ChevronsUpDown className="ml-auto size-3.5 shrink-0 text-sidebar-foreground/70 group-data-[collapsible=icon]:hidden" />
               </SidebarMenuButton>
             }
           />
-          <DropdownMenuContent align={align} side="top" className="min-w-56">
+          {/* Opens upward, as wide as the block it opens from; a compact floor on the collapsed rail. */}
+          <DropdownMenuContent
+            align={align}
+            side="top"
+            sideOffset={8}
+            className="w-(--anchor-width) min-w-56"
+          >
             <DropdownMenuGroup>
               <DropdownMenuLabel className="flex items-center gap-2 font-normal">
                 <Avatar size="sm">
