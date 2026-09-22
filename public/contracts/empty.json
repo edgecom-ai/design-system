@@ -1,6 +1,6 @@
 {
   "version": "v1.0.0",
-  "digest": "927d9e77781a6e86",
+  "digest": "8d60a24b537c3cd9",
   "contract": {
     "id": "empty",
     "label": "Empty state",
@@ -41,7 +41,7 @@
     ],
     "props": [
       {
-        "part": "Empty",
+        "part": "EmptyMedia",
         "name": "variant",
         "type": "\"default\" | \"icon\"",
         "default": "\"icon\"",

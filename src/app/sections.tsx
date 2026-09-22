@@ -799,8 +799,9 @@ export const sections: Section[] = [
     id: "application-shell",
     label: "Application shell",
     group: "Blocks",
-    description: "The full page frame — sidebar, top bar, and content layout.",
-    install: "@edgecom/sidebar",
+    description:
+      "The portal page frame — icon-rail sidebar with navigation and account menu, top bar with search, building switcher and theme toggle, and the content area — from data.",
+    install: "@edgecom/application-shell",
     hasVariants: true,
   },
   {

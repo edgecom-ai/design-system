@@ -1,6 +1,6 @@
 {
   "version": "v1.0.0",
-  "digest": "927d9e77781a6e86",
+  "digest": "8d60a24b537c3cd9",
   "contract": {
     "id": "input",
     "label": "Input",
@@ -34,7 +34,7 @@
         "name": "size",
         "type": "\"default\" | \"sm\"",
         "default": "\"default\"",
-        "description": null
+        "description": "Control height — default (2rem) or sm (1.75rem). Match the other controls in the same toolbar."
       }
     ],
     "variants": [

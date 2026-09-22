@@ -338,10 +338,30 @@ export const curatedApi: Record<string, CuratedApi> = {
       CircularProgress: "The ring, its track, and the optional value in the centre.",
     },
   },
+  "application-shell": {
+    summary:
+      "The portal page frame from data — a collapsible icon-rail sidebar with the logo, navigation and account menu, a top bar with the rail toggle, search, building switcher, app actions and theme toggle, and the scrolling content area — composed from the registry's sidebar, dropdown-menu, input-group, avatar and button.",
+    parts: {
+      ApplicationShell: "The whole frame. Pass nav, activeItem, user, buildings and the page as children; the parts below are what it composes, exported for a custom header or footer.",
+      ApplicationShellSidebar: "The rail: logo header (mark only when collapsed) above whatever navigation and footer are passed as children.",
+      ApplicationShellNav: "One navigation group from items; an item with sub-items renders as a collapsible submenu that becomes a hover flyout on the collapsed rail.",
+      ApplicationShellSidebarFooter: "The bottom of the rail — footer navigation (Settings) and the account menu.",
+      ApplicationShellUserMenu: "The signed-in user, docked bottom-left, opening a dropdown-menu with the app's account items as children.",
+      ApplicationShellHeader: "The top bar: the sidebar trigger, then search and the actions cluster.",
+      ApplicationShellSearch: "Global search in the top bar — an input-group with a leading icon, hidden on phones.",
+      ApplicationShellActions: "The right-hand cluster of the top bar; the app's own icon buttons go here, before the theme toggle.",
+      ApplicationShellBuildingSwitcher: "A labelled outline button opening a radio dropdown-menu of buildings.",
+      ApplicationShellThemeToggle: "A ghost icon button that flips .dark on <html>.",
+      ApplicationShellContent: "The scrolling page area beside the rail, with the page padding.",
+    },
+  },
   input: {
     summary: "A single-line text field with focus, disabled, and invalid states.",
     parts: {
       Input: "Styled text input element.",
+    },
+    propDescriptions: {
+      "Input.size": "Control height — default (2rem) or sm (1.75rem). Match the other controls in the same toolbar.",
     },
   },
   "navigation-menu": {
@@ -610,6 +630,9 @@ export const curatedApi: Record<string, CuratedApi> = {
   select: {
     summary:
       "Choose one value from a list. A Root holds the value and wraps a Trigger plus a portalled, positioned Content of Items.",
+    propDescriptions: {
+      "SelectTrigger.size": "Control height — default (2rem) or sm (1.75rem). Match the other controls in the same toolbar.",
+    },
     parts: {
       Select: "Root. Owns the value state and wraps the trigger and content.",
       SelectTrigger: "The button that opens the listbox and shows the current value.",

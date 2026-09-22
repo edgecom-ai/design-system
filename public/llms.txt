@@ -109,7 +109,7 @@ Browse every component in light/dark with copyable code at [design.edgecom.ai](h
 - [File upload](https://design.edgecom.ai/blocks/file-upload/): Drag-and-drop and browse controls for uploading files.
 - [Statistic Cards](https://design.edgecom.ai/blocks/statistics/): Metric tiles and KPI blocks for dashboards.
 - [Widgets](https://design.edgecom.ai/blocks/widgets/): Composed dashboard widgets combining stats, charts, and lists.
-- [Application shell](https://design.edgecom.ai/blocks/application-shell/): The full page frame — sidebar, top bar, and content layout.
+- [Application shell](https://design.edgecom.ai/blocks/application-shell/): The portal page frame — icon-rail sidebar with navigation and account menu, top bar with search, building switcher and theme toggle, and the content area — from data.
 - [Settings](https://design.edgecom.ai/blocks/settings/): Account settings pages plus the settings shell that frames them with a grouped sub-nav.
 
 <!-- @@GENERATED:catalog-end -->

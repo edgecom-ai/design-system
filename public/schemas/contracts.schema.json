@@ -64,7 +64,7 @@
         "install": { "type": "string", "pattern": "^pnpm dlx shadcn@latest add " },
         "docs": {
           "type": ["string", "null"],
-          "pattern": "^https://design\\.edgecom\\.ai/components/[a-z0-9-]+/$",
+          "pattern": "^https://design\\.edgecom\\.ai/(components|blocks|foundations)/[a-z0-9-]+/$",
           "description": "The component's docs page. null for a primitive that ships with no section of its own — installable and contracted, but with no page to send a reader to."
         },
         "source": { "type": "string", "pattern": "^src/components/ui/[a-z0-9-]+\\.tsx$" },

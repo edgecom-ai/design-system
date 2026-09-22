@@ -14,56 +14,110 @@
   ],
   "components": [
     {
+      "instanceId": "portal-shell",
+      "component": "application-shell",
+      "label": "The portal frame every screen renders inside — navigation, account menu, building switcher; the page is its children",
+      "screen": "permissions",
+      "parts": [
+        "ApplicationShell",
+        "ApplicationShellNav",
+        "ApplicationShellUserMenu",
+        "ApplicationShellBuildingSwitcher",
+        "ApplicationShellContent"
+      ]
+    },
+    {
       "instanceId": "settings-tabs",
       "component": "tabs",
       "label": "Settings section switcher",
       "screen": "permissions",
-      "variants": { "variant": "line" },
-      "parts": ["Tabs", "TabsList", "TabsTrigger", "TabsContent"]
+      "variants": {
+        "variant": "line"
+      },
+      "parts": [
+        "Tabs",
+        "TabsList",
+        "TabsTrigger",
+        "TabsContent"
+      ]
     },
     {
       "instanceId": "invite-member",
       "component": "button",
       "label": "Invite member — the one labeled primary action on the screen",
       "screen": "permissions",
-      "variants": { "variant": "default", "size": "sm" }
+      "variants": {
+        "variant": "default",
+        "size": "sm"
+      }
     },
     {
       "instanceId": "members-table",
       "component": "table",
       "label": "Members and their roles",
       "screen": "permissions",
-      "parts": ["Table", "TableHeader", "TableHead", "TableBody", "TableRow", "TableCell"],
-      "states": ["default", "loading", "empty", "error"]
+      "parts": [
+        "Table",
+        "TableHeader",
+        "TableHead",
+        "TableBody",
+        "TableRow",
+        "TableCell"
+      ],
+      "states": [
+        "default",
+        "loading",
+        "empty",
+        "error"
+      ]
     },
     {
       "instanceId": "members-loading",
       "component": "skeleton",
       "label": "Row placeholders while the table loads",
       "screen": "permissions",
-      "variants": { "animation": "pulse" }
+      "variants": {
+        "animation": "pulse"
+      }
     },
     {
       "instanceId": "members-empty",
       "component": "empty",
       "label": "No members yet, with the invite action repeated",
       "screen": "permissions",
-      "variants": { "variant": "icon" },
-      "parts": ["Empty", "EmptyHeader", "EmptyMedia", "EmptyTitle", "EmptyDescription", "EmptyContent"]
+      "variants": {
+        "variant": "icon"
+      },
+      "parts": [
+        "Empty",
+        "EmptyHeader",
+        "EmptyMedia",
+        "EmptyTitle",
+        "EmptyDescription",
+        "EmptyContent"
+      ]
     },
     {
       "instanceId": "member-role",
       "component": "select",
       "label": "Role, one per member row",
       "screen": "permissions",
-      "parts": ["Select", "SelectTrigger", "SelectValue", "SelectContent", "SelectItem"]
+      "parts": [
+        "Select",
+        "SelectTrigger",
+        "SelectValue",
+        "SelectContent",
+        "SelectItem"
+      ]
     },
     {
       "instanceId": "member-status",
       "component": "badge",
       "label": "Invitation status — Active, Invited, Suspended",
       "screen": "permissions",
-      "variants": { "variant": "outline" }
+      "variants": {
+        "variant": "outline"
+      }
     },
     {
       "instanceId": "member-can-export",
@@ -76,35 +130,59 @@
       "component": "button",
       "label": "Quiet per-row remove, icon only, with aria-label and tooltip",
       "screen": "permissions",
-      "variants": { "variant": "ghost-destructive", "size": "icon-sm" }
+      "variants": {
+        "variant": "ghost-destructive",
+        "size": "icon-sm"
+      }
     },
     {
       "instanceId": "remove-member-tooltip",
       "component": "tooltip",
       "label": "Names the remove action",
       "screen": "permissions",
-      "parts": ["Tooltip", "TooltipTrigger", "TooltipContent"]
+      "parts": [
+        "Tooltip",
+        "TooltipTrigger",
+        "TooltipContent"
+      ]
     },
     {
       "instanceId": "members-pagination",
       "component": "pagination",
       "label": "25 members per page",
       "screen": "permissions",
-      "parts": ["Pagination", "PaginationContent", "PaginationItem", "PaginationPrevious", "PaginationLink", "PaginationNext"]
+      "parts": [
+        "Pagination",
+        "PaginationContent",
+        "PaginationItem",
+        "PaginationPrevious",
+        "PaginationLink",
+        "PaginationNext"
+      ]
     },
     {
       "instanceId": "invite-dialog",
       "component": "dialog",
       "label": "Invite a member — email and role, two fields",
       "screen": "permissions",
-      "parts": ["Dialog", "DialogContent", "DialogHeader", "DialogTitle", "DialogDescription", "DialogFooter"]
+      "parts": [
+        "Dialog",
+        "DialogContent",
+        "DialogHeader",
+        "DialogTitle",
+        "DialogDescription",
+        "DialogFooter"
+      ]
     },
     {
       "instanceId": "invite-email",
       "component": "input",
       "label": "Email address in the invite dialog",
       "screen": "permissions",
-      "states": ["default", "error"]
+      "states": [
+        "default",
+        "error"
+      ]
     },
     {
       "instanceId": "confirm-remove",
@@ -127,15 +205,44 @@
       "component": "toast",
       "label": "Confirms every invite, role change and removal",
       "screen": "permissions",
-      "parts": ["Toaster"]
+      "parts": [
+        "Toaster"
+      ]
     }
   ],
-  "tokens": ["background", "card", "border", "muted-foreground", "destructive-emphasis"],
-  "viewports": ["mobile", "desktop"],
-  "themes": ["light", "dark"],
-  "states": ["default", "loading", "empty", "error", "success"],
+  "tokens": [
+    "background",
+    "card",
+    "border",
+    "muted-foreground",
+    "destructive-emphasis"
+  ],
+  "viewports": [
+    "mobile",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark"
+  ],
+  "states": [
+    "default",
+    "loading",
+    "empty",
+    "error",
+    "success"
+  ],
   "interactions": [
-    { "instanceId": "invite-member", "event": "click", "result": "opens invite-dialog" },
+    {
+      "instanceId": "portal-shell",
+      "event": "choose a navigation item",
+      "result": "navigates to that section; the active item takes the neutral highlight"
+    },
+    {
+      "instanceId": "invite-member",
+      "event": "click",
+      "result": "opens invite-dialog"
+    },
     {
       "instanceId": "invite-dialog",
       "event": "submit",
@@ -156,7 +263,11 @@
       "event": "click",
       "result": "opens confirm-remove naming the member; nothing is removed until confirmed"
     },
-    { "instanceId": "confirm-remove", "event": "confirm", "result": "removes the row; outcome-toast success" }
+    {
+      "instanceId": "confirm-remove",
+      "event": "confirm",
+      "result": "removes the row; outcome-toast success"
+    }
   ],
   "approvedExceptions": [
     {

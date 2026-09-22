@@ -35,7 +35,6 @@ const extraPropsById: Record<string, ApiProp[]> = {
     { part: "EmptyMedia", name: "variant", type: `"default" | "icon"`, default: `"icon"`, description: "Media style — bare or a rounded muted icon tile." },
   ],
   select: [
-    { part: "SelectTrigger", name: "size", type: `"sm" | "default"`, default: `"default"`, description: "Control height — sm (h-7) or default (h-8)." },
     { part: "SelectContent", name: "side", type: `"top" | "bottom" | "left" | "right"`, default: `"bottom"`, description: "Which side of the trigger the popup opens on." },
     { part: "SelectContent", name: "align", type: `"start" | "center" | "end"`, default: `"start"`, description: "Alignment of the popup relative to the trigger." },
     { part: "SelectContent", name: "sideOffset", type: "number", default: "4", description: "Gap in pixels between the trigger and the popup." },

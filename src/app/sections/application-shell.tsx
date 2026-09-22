@@ -12,9 +12,9 @@ const content = {
   variants: [
       {
         id: "application-shell-dashboard",
-        name: "Dashboard shell",
+        name: "Portal shell",
         description:
-          "Sidebar navigation, a top bar with search and account menus, and a scrollable content area — composed from registry primitives.",
+          "The one frame every portal screen renders inside: pass the navigation, the active item, the user and the buildings, and the page as children. The rail collapses to icons, submenus become hover flyouts, and on a phone the rail becomes a sheet behind the toggle.",
         preview: <ApplicationShellPreview />,
         source: dm("application-shell-demo"),
       },
