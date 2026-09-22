@@ -219,7 +219,7 @@ Three files define it, all published by `docs:design-manifest`:
 
 CI runs `check:schemas`, which validates the published example against the real schema with Ajv, and `check:design-manifest`, which runs the hand-rolled validator over the same file — so the schema and the validator cannot drift apart without a red build. When you add a field, change all three and the SKILL.md section the bundle generator writes.
 
-Where the instruction to write one reaches the design agent: the bundle's `SKILL.md` (*Every design ships a manifest*), the conventions header the converter prepends to the project README, and the rulebook in each design project's `CLAUDE.md`.
+Where the instruction to write one reaches the design agent: the conventions header the converter prepends to the project README, and the bundle's `SKILL.md` (*Every design ships a manifest*). **The README is the only file of ours a project receives when it attaches the design system** — not `SKILL.md`, not `guidelines/`, not the component specs — so the header has to stand alone, naming a published address for everything it cannot ship. A rulebook pasted into a design project's `CLAUDE.md` was tried and retired: the people who open those projects are designers and product managers, not developers, and `DesignSync` cannot write the file for them.
 
 ## The changelog maintains itself
 
