@@ -4,12 +4,17 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 import { CircleIcon, CheckIcon, XIcon } from "lucide-react"
 
+// The column template is set from the root with a descendant selector, not a
+// child selector: hosts such as the Claude Design editor wrap each rendered
+// component in a `display: contents` element, which keeps the items in the grid
+// but breaks `ul > li`. `grid-template-columns` is inert on anything that is
+// not itself a grid, so nested lists inside TimelineContent are unaffected.
 const timelineVariants = cva('grid', {
   variants: {
     positions: {
-      left: '[&>li]:grid-cols-[0_min-content_1fr]',
-      right: '[&>li]:grid-cols-[1fr_min-content]',
-      center: '[&>li]:grid-cols-[1fr_min-content_1fr]'
+      left: '[&_li]:grid-cols-[0_min-content_1fr]',
+      right: '[&_li]:grid-cols-[1fr_min-content]',
+      center: '[&_li]:grid-cols-[1fr_min-content_1fr]'
     }
   },
   defaultVariants: {
