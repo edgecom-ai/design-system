@@ -83,3 +83,9 @@ yarn-error.log*
 # Internal programme notes — project ids, timelines, metrics. This repo is
 # public; these exist only on a maintainer's machine.
 /docs/
+
+# Route screenshots from `pnpm verify:docs --shots`, and what CI downloads and
+# diffs against them. Artifacts, never sources.
+/shots/
+/baseline/
+/shot-diffs/

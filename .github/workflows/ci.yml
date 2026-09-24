@@ -13,9 +13,11 @@ on:
     branches: [main]
   workflow_dispatch:
 
-# Read-only: nothing here writes to the repo, publishes, or comments.
+# Read-only: nothing here writes to the repo, publishes, or comments. `actions:
+# read` lets a pull request download the screenshot baseline from main's run.
 permissions:
   contents: read
+  actions: read
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -97,9 +99,47 @@ jobs:
 
       # `pnpm build` only proves the shells got written; they are empty and every
       # section renders client-side, so the site can build fine and render
-      # nothing. This loads real routes in a real browser, both themes.
-      - name: Verify the built site renders
-        run: pnpm verify:docs
+      # nothing. This loads every route in a real browser, both themes (the
+      # shell's own toggle, checked on <html>), and screenshots each one.
+      - name: Verify the built site renders, and screenshot every route
+        run: pnpm verify:docs --all --shots shots
+
+      # The screenshots are the visual baseline: every green run on main keeps
+      # its set for 30 days, and a pull request compares against the newest one.
+      - name: Keep the screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: docs-shots
+          path: shots/
+          retention-days: 30
+
+      # `verify:docs` proves a page renders, not that it looks right — two card
+      # defects passed every gate and were caught only by rendering them by hand.
+      # On a pull request, diff this run's screenshots against the last green
+      # run on main and put the changed routes in the job summary with a diff
+      # image. A visual change is usually intended, so this reports and never
+      # fails: the reviewer is the gate.
+      - name: Fetch the screenshot baseline from the last green main run
+        if: github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          run=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow ci.yml --branch main --status success --limit 1 --json databaseId --jq '.[0].databaseId')
+          if [ -z "$run" ]; then echo "No green main run yet — nothing to compare against."; exit 0; fi
+          gh run download "$run" --repo "$GITHUB_REPOSITORY" --name docs-shots --dir baseline \
+            || echo "Run $run has no docs-shots artifact (expired, or before this gate existed) — nothing to compare against."
+
+      - name: Compare the screenshots with the baseline
+        if: github.event_name == 'pull_request' && hashFiles('baseline/**') != ''
+        run: node scripts/compare-shots.mjs baseline shots --out shot-diffs --summary "$GITHUB_STEP_SUMMARY"
+
+      - name: Keep the diff images
+        if: github.event_name == 'pull_request' && hashFiles('shot-diffs/**') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: docs-shot-diffs
+          path: shot-diffs/
+          retention-days: 14
 
       - name: Upload build output on failure
         if: failure()
