@@ -144,9 +144,14 @@
         "screen": { "$ref": "#/$defs/kebab", "description": "The `screens[].id` this instance belongs to." },
         "variants": {
           "type": "object",
-          "description": "One entry per variant axis the instance sets, keyed by the axis name the contract lists — `variant`, `size`, `orientation`, … — with the chosen option as value. Omitted axes take the contract's default.",
+          "description": "One entry per variant axis the instance sets, keyed by the axis name the contract lists — `variant`, `size`, `orientation`, … — with the chosen option as value. An axis the data drives (a status badge that is `outline` or `success` per row) lists every option it takes, as an array. Omitted axes take the contract's default.",
           "propertyNames": { "pattern": "^[a-z][a-zA-Z0-9-]*$" },
-          "additionalProperties": { "type": "string", "minLength": 1 }
+          "additionalProperties": {
+            "oneOf": [
+              { "type": "string", "minLength": 1 },
+              { "type": "array", "minItems": 2, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+            ]
+          }
         },
         "parts": {
           "type": "array",

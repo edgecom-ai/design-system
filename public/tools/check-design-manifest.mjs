@@ -272,7 +272,10 @@ if ("components" in manifest) {
         else
           for (const [axis, value] of Object.entries(c.variants)) {
             if (!AXIS.test(axis)) err(`${p}/variants/${axis}`, "axis name must be like variant, size, orientation")
-            if (!isStr(value) || !value.length) err(`${p}/variants/${axis}`, "option must be a non-empty string")
+            if (Array.isArray(value)) {
+              if (value.length < 2 || value.some((v) => !isStr(v) || !v.length)) err(`${p}/variants/${axis}`, 'a data-driven axis lists two or more options, each a non-empty string: ["outline", "success"]')
+              else if (new Set(value).size !== value.length) err(`${p}/variants/${axis}`, "each option is listed once")
+            } else if (!isStr(value) || !value.length) err(`${p}/variants/${axis}`, 'option must be a non-empty string — or, for an axis the data drives, an array of every option it takes: ["outline", "success"]')
           }
       }
       checkPatternArray(c, "parts", p, PART, "must be a part name as the contract lists it (DialogFooter)")
@@ -326,8 +329,8 @@ if (isStr(manifest.designSystemVersion) && isStr(manifest.designSystemDigest)) {
     err(
       "/designSystemDigest",
       `stale — the design was built against ${manifest.designSystemVersion} / ${manifest.designSystemDigest}, ` +
-        `the system is now ${system.version} / ${system.digest}. Re-check the design against the current ` +
-        `contracts before implementing it, and re-sync the design project.`,
+        `the system is now ${system.version} / ${system.digest}. The design may be right and the system moved after it: ` +
+        `re-check it against the current contracts before implementing, re-stamp the identity, and re-sync the design project.`,
     )
   }
 }
@@ -372,8 +375,13 @@ for (const [i, c] of (Array.isArray(manifest.components) ? manifest.components :
           (axes.length ? `"${c.component}" has no "${axis}" axis — it has ${axes.join(", ")}` : `"${c.component}" has no variant axes; drop "variants"`) +
             ` — a prop is not a variant and is not recorded here`,
         )
-      } else if (!contract.variants.get(axis).includes(value)) {
-        err(`${p}/variants/${axis}`, `"${value}" is not an option of ${c.component}.${axis} — options: ${contract.variants.get(axis).join(", ")}`)
+      } else {
+        const options = contract.variants.get(axis)
+        for (const v of Array.isArray(value) ? value : [value]) {
+          if (options.includes(v)) continue
+          const union = isStr(v) && v.includes("|") ? ' — an axis the data drives lists its options as an array, ["destructive", "warning"], not as an "a | b" string' : ""
+          err(`${p}/variants/${axis}`, `"${v}" is not an option of ${c.component}.${axis} — options: ${options.join(", ")}${union}`)
+        }
       }
     }
   }
@@ -411,13 +419,35 @@ const designRef = opts.design ?? (!isUrl(opts.file) && isStr(manifest.design) ? 
 let joined = null
 if (designRef && existsSync(designRef)) {
   const html = readFileSync(designRef, "utf8")
-  const inMarkup = new Set()
-  for (const re of [/data-instance\s*=\s*["']([^"']+)["']/g, /["']data-instance["']\s*:\s*["']([^"']+)["']/g])
-    for (const m of html.matchAll(re)) inMarkup.add(m[1])
   const design = isStr(manifest.design) ? manifest.design : designRef
+  const inMarkup = new Set()
+  const carried = new Map() // id → the tag that carries it, when the markup shows one
+  let templated = 0
+  // `<x-import … data-instance="id">` in a design file; `<Button data-instance="id">`
+  // in JSX; `"data-instance": "id"` in a props object.
+  for (const m of html.matchAll(/<([A-Za-z][\w.-]*)\b[^<>]*?\bdata-instance\s*=\s*["']([^"']+)["']/g)) carried.set(m[2], m[1])
+  for (const re of [/data-instance\s*=\s*["']([^"']+)["']/g, /["']data-instance["']\s*:\s*["']([^"']+)["']/g])
+    for (const m of html.matchAll(re)) {
+      const id = m[1]
+      if (/\{\{|\$\{/.test(id)) {
+        // The second real design stamped `data-instance="{{ k.instance }}"` on a
+        // looped card — a template, so no literal id reaches the markup.
+        templated++
+        err("/components", `${design} carries data-instance="${id}", a template expression — the id is a literal; a loop that renders several of one component declares one instance and stamps that one id on every item`)
+        continue
+      }
+      const tag = carried.get(id)
+      if (tag && tag !== "x-import" && !/^[A-Z]/.test(tag)) {
+        // Two plain <div>s grouped the filters and the bulk bar and carried ids.
+        err("/components", `${design} puts data-instance="${id}" on a <${tag}> — the attribute belongs on a design-system element (an x-import or a component), never on a layout element`)
+        continue
+      }
+      inMarkup.add(id)
+    }
+  const loopHint = templated ? " — a template expression stamps no literal id; write the id literally, or declare one instance for the loop" : ""
   for (const [i, c] of (Array.isArray(manifest.components) ? manifest.components : []).entries()) {
     if (isObj(c) && isStr(c.instanceId) && !inMarkup.has(c.instanceId))
-      err(`/components/${i}/instanceId`, `no element in ${design} carries data-instance="${c.instanceId}" — put it on the element, including ones the logic creates`)
+      err(`/components/${i}/instanceId`, `no element in ${design} carries data-instance="${c.instanceId}" — put it on the element, including ones the logic creates${loopHint}`)
   }
   for (const id of [...inMarkup].sort()) {
     if (!instances.has(id)) err("/components", `${design} carries data-instance="${id}", which is not a declared instance`)

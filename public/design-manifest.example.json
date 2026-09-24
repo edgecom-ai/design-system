@@ -113,10 +113,14 @@
     {
       "instanceId": "member-status",
       "component": "badge",
-      "label": "Invitation status — Active, Invited, Suspended",
+      "label": "Invitation status per row — Active is success, Invited is outline, Suspended is warning",
       "screen": "permissions",
       "variants": {
-        "variant": "outline"
+        "variant": [
+          "success",
+          "outline",
+          "warning"
+        ]
       }
     },
     {
