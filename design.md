@@ -346,7 +346,17 @@ Every chart/graph carries a **consistent control cluster** in its header — the
 - **Export / download.** Always a single **icon button** in the header (never a text button or a row of buttons) opening a `dropdown-menu`. The default menu is the **same on every graph, in this order**: **Download PNG**, **Download SVG**, **Download PDF**, **Download CSV**, **Print**. Keep this set and order identical across all charts so the export affordance is the same everywhere; omit an item only when a chart genuinely cannot produce it. (This is header chrome, an icon button per *Buttons & interaction*.)
 - **Series / metric selector — identical across every graph.** Choosing which data series or metric a chart shows uses the **same** control on every graph: the same component (a `select` for one choice; a multi-select for several; `tabs` only for a small fixed set), in the same place and size. A user should never meet a dropdown on one chart and a segmented control on another for the same job (see *Same job → same component* above).
 
-Only omit one of these five when the spec explicitly says so.
+Only omit one of these five when the spec explicitly says so, or when the chart is an event-window chart.
+
+**Event-window chart — the event sets the window.** A chart that shows the reading around **one event** — an alarm's trigger, an outage, a demand peak — inside that event's detail (a sheet, a dialog, a detail page). Its window comes from the event, not the reader: a lead-in before the event, through to its end, or to now while it is still open. It is a record of what happened, so it carries **only the export menu**:
+
+- **No date range**, and it does not join the view's shared one — moving the window off the event defeats the chart, and no page filter (a list's time filter, the dashboard's range) moves it.
+- **No statistical overlays.** Its reference line is the **threshold the event crossed**, labelled with its value and drawn like any reference line — dashed, neutral/`muted`, never `destructive`, however severe the event.
+- **No smooth/step toggle.** Draw it one way, by the interpolation default above — smooth for a continuous reading, step for discrete or stateful data — so everyone who opens the event sees the same line.
+- **No series selector** — it plots the one metric the event is about.
+- **Keeps the export menu**, with the standard items in the standard order.
+
+If the reader can change the window, it is an ordinary chart and carries all five. An event-window chart is the rule, not an exception to it.
 
 **Header chrome is icon buttons.** The date-range picker and the export control both sit in the header as **icon buttons** by default (the compact `date-picker` trigger and the export `dropdown-menu` icon button), not full-width fields or text buttons, so the header reads as a tight row of affordances. Reserve a labeled control for a genuine primary action only.
 
@@ -392,6 +402,7 @@ Never a **zero gap** — touching bars read as one solid block. **Round only the
 - Let a `dropdown-menu` shrink-wrap to its widest item; never stretch it to the trigger width or pad items with trailing whitespace.
 - Keep dropdowns and other anchored surfaces (`select`, `combobox`, `context-menu`, `popover`, `hover-card`) portaled so no `overflow` ancestor clips them; let them flip/shift within the viewport.
 - Give every chart the standard controls by default: one shared date range, a smooth/step toggle, statistical overlays, and one export icon-button dropdown (Download PNG / SVG / PDF / CSV / Print).
+- Give an event-window chart — one event's reading, over a window the event sets — only the export menu, with the threshold it crossed as its one reference line.
 - In a chart header, default to icon buttons for the date-range picker and export control, and center every chart's legend.
 - Use the same component for the same job everywhere (e.g. one series-selector control shared across all charts).
 - Size bar width and gap to the data density (bar ~75% of its slot; gap ≥ 2px; cap width for few bars; aggregate or scroll past ~60).
@@ -425,6 +436,7 @@ Never a **zero gap** — touching bars read as one solid block. **Round only the
 - Don't add a checkmark to the selected item in a single-select `select` — the trigger value plus the highlighted option already show it; reserve checks for multi-select.
 - Don't ship a dialog/sheet without its top-right close (X), or move it off the top-right corner (`showCloseButton={false}`) — only the `alert-dialog` omits it.
 - Don't ship a chart without the standard controls, or give each chart its own date range that drifts out of sync with the others on the view.
+- Don't give an event-window chart a date range or tie it to the page's range — the event sets its window. A chart whose window the reader can change is not an event-window chart and carries the full set.
 - Don't solve the same job with different components across screens or graphs (a `select` here, a segmented control there) — pick one and reuse it.
 - Don't pack many bars edge-to-edge into a solid block — widen the inter-bar gap (or aggregate) so they stay legible.
 - Don't fully-round, pill-shape, or bottom-round bars, and don't vary the bar radius or thickness between charts — round only the top corners with one uniform radius.
