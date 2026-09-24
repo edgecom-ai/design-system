@@ -37,6 +37,7 @@ import { specifiersOf, classify } from "./lib/imports.mjs";
 import { withVersion, typesFor } from "./lib/deps.mjs";
 import { readBlocks } from "./lib/tokens.mjs";
 import { PUBLIC_BASE, contractUrl } from "./lib/publish.mjs";
+import { systemIdentity } from "./lib/system.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const uiDir = resolve(root, "src/components/ui");
@@ -76,6 +77,15 @@ function keyframeRules() {
   return rules;
 }
 const themeCss = keyframeRules();
+
+// The theme item is copy-on-install: a consuming app keeps the token values it
+// received until someone re-syncs. Stamp the system identity into `:root` as
+// `--edgecom-theme: "<version> <digest>"`, so staleness is one grep of the
+// app's globals.css against tokens.json's `digest` — the same pair every
+// published artifact carries. A custom property survives minification and can
+// be read at runtime; a comment would not.
+const identity = systemIdentity();
+const stampedLightVars = { "edgecom-theme": `"${identity.version} ${identity.digest}"`, ...lightVars };
 
 // --- contracts ---------------------------------------------------------------
 // The registry description used to be a templated string that could say
@@ -162,7 +172,7 @@ writeChunk(libDir, [
       "Edgecom Energy design tokens (light + dark), Tailwind theme mappings, and the cn() utility. Installed automatically as a dependency of every Edgecom component.",
     dependencies: ["clsx", "tailwind-merge"].map(withVersion),
     files: [{ path: "utils.ts", type: "registry:lib" }],
-    cssVars: { theme: themeVars, light: lightVars, dark: darkVars },
+    cssVars: { theme: themeVars, light: stampedLightVars, dark: darkVars },
     ...(Object.keys(themeCss).length ? { css: themeCss } : {}),
   },
 ]);

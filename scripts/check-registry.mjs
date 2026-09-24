@@ -32,6 +32,7 @@ import { fileURLToPath } from "node:url";
 
 import { specifiersOf, classify } from "./lib/imports.mjs";
 import { pkgName, typesFor, UNPINNED } from "./lib/deps.mjs";
+import { systemIdentity } from "./lib/system.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const builtDir = resolve(root, "public/r");
@@ -112,7 +113,22 @@ for (const item of items) {
 // leading-none` renders 1rem/1rem — the token's whole purpose, overridden. Same
 // for the slash form (`text-body/relaxed`) and for a weight on a token that sets
 // one (`text-caption font-normal` drops caption's 500).
-const themeVars = items.find((i) => i.name === "theme")?.cssVars?.theme ?? {};
+const themeItem = items.find((i) => i.name === "theme");
+const themeVars = themeItem?.cssVars?.theme ?? {};
+
+// --- audit 1b: the theme item stamps the current system identity ------------
+// `--edgecom-theme: "<version> <digest>"` in `:root` is how a consuming app
+// tells whether its copied tokens are stale. The parity gate keeps the built
+// item regenerated; this says so in the audit's own words when it is not.
+{
+  const { version, digest } = systemIdentity();
+  const stamp = themeItem?.cssVars?.light?.["edgecom-theme"];
+  if (stamp !== `"${version} ${digest}"`) {
+    problems.push(
+      `theme item: --edgecom-theme is ${stamp ?? "missing"}, the tree is "${version} ${digest}" — run \`pnpm registry:build\``
+    );
+  }
+}
 const typeTokens = Object.keys(themeVars)
   .filter((k) => k.startsWith("text-") && !k.includes("--"))
   .map((name) => name.replace(/^text-/, ""))

@@ -51,7 +51,7 @@ Read [design.md](https://design.edgecom.ai/design.md) and check against it. For 
 
 ## Stale tokens
 
-A consuming app's `theme` is a snapshot taken at install. Compare its `globals.css` token values with [tokens.json](https://design.edgecom.ai/tokens.json) — every token's current light and dark value, plus the `digest` of the stylesheet they came from. If they differ, the fix is re-running the theme install with `--overwrite`, not hand-editing values.
+A consuming app's `theme` is a snapshot taken at install, and the install stamps `--edgecom-theme: "<version> <digest>"` into `:root` of the app's `globals.css`. Grep for it and compare with the `version` and `digest` in [tokens.json](https://design.edgecom.ai/tokens.json); a missing stamp means a theme installed before the stamp existed, which is stale by definition. If they differ, the fix is re-running the theme install with `--overwrite`, not hand-editing values — tokens.json lists every token's current light and dark value, so the diff is readable before you overwrite.
 
 ## Benchmarking Claude Design output
 
