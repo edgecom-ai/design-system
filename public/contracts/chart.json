@@ -9,7 +9,7 @@
     ],
     "registryItem": "edgecom-ai/design-system/chart",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/chart",
-    "docs": null,
+    "docs": "https://design.edgecom.ai/foundations/charts/",
     "source": "src/components/ui/chart.tsx",
     "summary": null,
     "purpose": null,

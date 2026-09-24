@@ -9,7 +9,7 @@
     ],
     "registryItem": "edgecom-ai/design-system/tanstack-form",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/tanstack-form",
-    "docs": null,
+    "docs": "https://design.edgecom.ai/blocks/form/",
     "source": "src/components/ui/tanstack-form.tsx",
     "summary": null,
     "purpose": null,

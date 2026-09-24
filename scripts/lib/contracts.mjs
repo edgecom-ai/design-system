@@ -19,7 +19,7 @@
 
 import { familyOf } from "./tokens.mjs"
 import { extractCva } from "./cva.mjs"
-import { ALIAS_FILE, primitiveFileOf, sectionPath } from "./sections.mjs"
+import { ALIAS_FILE, hostSectionOf, primitiveFileOf, sectionPath } from "./sections.mjs"
 
 export { ALIAS_FILE }
 
@@ -365,20 +365,26 @@ export function buildContracts({ sections, readPrimitive, api, curated, overlay,
     )
   }
 
-  // No section means no page, no api.ts entry and no overlay: the parts come
-  // straight from the export block, the summary from curated.ts if anyone wrote
-  // one, and `docs` is null — honestly, so a reader knows there is nothing to
-  // follow. The contract still names the parts, variants and tokens, which is
-  // what an implementing agent resolving a manifest needs.
+  // No section of its own means no api.ts entry and no overlay: the parts come
+  // straight from the export block and the summary from curated.ts if anyone
+  // wrote one. The docs page is the one that installs it, when one does — the
+  // "Label & textarea" page installs `label` and `textarea`, Toggle installs
+  // `toggle-group`, Tabs installs `motion-tabs`, Chart ramp installs `chart`,
+  // Form installs `tanstack-form` — so `docs` points there and the registry's
+  // install note names the page. Only a primitive no page installs gets
+  // `docs: null` — honestly, so a reader knows there is nothing to follow.
+  // Either way the contract names the parts, variants and tokens, which is what
+  // an implementing agent resolving a manifest needs.
   for (const id of undocumentedPrimitives(sections, primitives)) {
     const file = `src/components/ui/${id}.tsx`
     const src = readPrimitive(file)
     if (src == null) continue
+    const host = hostSectionOf(sections, id)
     contracts.push(
       assemble({
         id,
         label: sentenceCase(id),
-        docs: null,
+        docs: host ? `https://design.edgecom.ai${sectionPath(host)}/` : null,
         file,
         src,
         a: { parts: exportedParts(src) },
