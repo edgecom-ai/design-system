@@ -46,7 +46,7 @@ Read [design.md](https://design.edgecom.ai/design.md) and check against it. For 
 - **Overlays.** A dialog or sheet without its top-right close (X). A destructive action wired straight to its trigger with no `alert-dialog`. A fourth z-index layer, or a z-index on a Popup instead of its Positioner.
 - **Tabs variant** left on `default` over a tinted surface or inside an overlay, where the `muted` track has no lightness step left.
 - **States.** Missing loading / empty / error handling; an async failure with no retry; a blocked submit with no inline, specific error text.
-- **Charts.** Missing the standard control set (one shared date range, smooth/step toggle, statistical overlays, one export icon-button dropdown). A left- or right-aligned legend. Bars with no gap, pill-shaped or bottom-rounded bars, reference lines in a status or commodity hue.
+- **Charts.** Missing the standard control set (one shared date range, smooth/step toggle, statistical overlays, one export icon-button dropdown). An event-window chart — one event's reading, over a window the event sets — carries only the export menu, with the crossed threshold as its reference line; don't flag the controls it drops, but do flag one given a date range or tied to the page's range. A left- or right-aligned legend. Bars with no gap, pill-shaped or bottom-rounded bars, reference lines in a status or commodity hue.
 - **Accessibility.** Contrast under 4.5:1 for body text or 3:1 for large text and UI, in *either* theme. `outline: none` with no replacement focus ring. Unlabelled fields. Status signalled by colour alone.
 
 ## Stale tokens
