@@ -65,7 +65,7 @@ Contracts at **v1.0.0**, digest `bcb5aa899c56da28` — 65 components, 13 with au
 ## Tokens in a consuming app
 
 - **The `theme` item is copy-on-install.** The first `add` injects the Edgecom light + dark OKLCH tokens (and the `cn` helper) into *your* `globals.css`. This is a **snapshot, not a live link** — if the design system retunes a token later, your app keeps the old value until you re-sync.
-- **Re-sync tokens** by re-running the theme install with `--overwrite` (this discards local edits to those files — see [REGISTRY.md](https://github.com/edgecom-ai/design-system/blob/main/REGISTRY.md)). Prefer syncing over hand-editing token values. To tell whether you are stale, compare your `globals.css` against [tokens.json](https://design.edgecom.ai/tokens.json) — it carries every token's current light and dark value and the digest of the stylesheet they came from.
+- **Re-sync tokens** by re-running the theme install with `--overwrite` (this discards local edits to those files — see [REGISTRY.md](https://github.com/edgecom-ai/design-system/blob/main/REGISTRY.md)). Prefer syncing over hand-editing token values. To tell whether you are stale, read the stamp the install wrote into your `globals.css` — `--edgecom-theme: "<version> <digest>"` in `:root` — and compare it with the `version` and `digest` in [tokens.json](https://design.edgecom.ai/tokens.json). Different means re-sync; tokens.json also carries every token's current light and dark value, so you can see what moved.
 - **Add the app-level CSS the `theme` item does _not_ ship.** A few rules are app-level, not part of `theme` — most importantly the Tailwind-v4 pointer-cursor fix. Add this to your `globals.css`:
   ```css
   @layer base {

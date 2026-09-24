@@ -145,6 +145,7 @@
           "animate-skeleton-shimmer": "skeleton-shimmer 1.8s ease-in-out infinite"
         },
         "light": {
+          "edgecom-theme": "\"v1.0.0 bcb5aa899c56da28\"",
           "font-sans": "ui-sans-serif, -apple-system, \"SF Pro Text\", system-ui, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
           "font-mono": "ui-monospace, \"SF Mono\", SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace",
           "font-heading": "var(--font-sans)",

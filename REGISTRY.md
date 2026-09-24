@@ -49,6 +49,7 @@ What happens on install:
 - **Cross-component deps** resolve automatically (e.g. `dialog` pulls `button`; `sidebar` pulls `input`, `separator`, `sheet`, `skeleton`, `tooltip`, and the `use-mobile` hook).
 - **Package deps** (e.g. `@base-ui/react`, `class-variance-authority`, `recharts`) are installed.
 - Already-present files are **skipped** (safe to re-run; use `--overwrite` only if you intend to discard local edits).
+- The tokens are a **snapshot**. The install stamps `--edgecom-theme: "<version> <digest>"` into your `:root`; when it no longer matches the `digest` in [tokens.json](https://design.edgecom.ai/tokens.json), re-run the theme install with `--overwrite` to re-sync.
 
 ### Requirements in the consuming app
 
