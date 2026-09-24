@@ -29,8 +29,11 @@ export const ALIAS_FILE = {
 }
 
 /**
- * Every section entry, in file order: `{ id, label, group, description }`.
- * Entries with no group (the catalogue's non-doc rows) are dropped.
+ * Every section entry, in file order: `{ id, label, group, description, install }`.
+ * `install` is the registry ids the page's install line names (`@edgecom/label
+ * @edgecom/textarea` → `["label", "textarea"]`) — the page demos and installs
+ * each of them, so it is each one's docs page. Entries with no group (the
+ * catalogue's non-doc rows) are dropped.
  */
 export function parseSections(src) {
   const lines = src.split("\n")
@@ -41,7 +44,7 @@ export function parseSections(src) {
   for (const l of lines.slice(start)) {
     const id = l.match(/^\s{4}id:\s*"([^"]+)"/)
     if (id) {
-      cur = { id: id[1], label: id[1], group: null, description: "" }
+      cur = { id: id[1], label: id[1], group: null, description: "", install: [] }
       out.push(cur)
       awaiting = false
       continue
@@ -55,6 +58,11 @@ export function parseSections(src) {
     const grp = l.match(/^\s{4}group:\s*"([^"]+)"/)
     if (grp) {
       cur.group = grp[1]
+      continue
+    }
+    const inst = l.match(/^\s{4}install:\s*"([^"]*)"/)
+    if (inst) {
+      cur.install = [...inst[1].matchAll(/@edgecom\/([a-z0-9-]+)/g)].map((m) => m[1])
       continue
     }
     const dIn = l.match(/^\s{4}description:\s*"((?:[^"\\]|\\.)*)"/)
@@ -104,4 +112,15 @@ export const primitiveFileOf = (s) => `src/components/ui/${ALIAS_FILE[s.id] ?? s
  */
 export function primitiveSections(sections, hasFile) {
   return sections.filter((s) => hasFile(primitiveFileOf(s)))
+}
+
+/**
+ * The page that demos and installs a primitive with no section of its own —
+ * the first section, in file order, whose install line names it. `label` and
+ * `textarea` share the "Label & textarea" page, `toggle-group` sits on Toggle,
+ * `motion-tabs` on Tabs, `chart` on Chart ramp, `tanstack-form` on Form. Null
+ * when no page installs it.
+ */
+export function hostSectionOf(sections, id) {
+  return sections.find((s) => s.install.includes(id)) ?? null
 }

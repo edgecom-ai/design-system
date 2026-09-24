@@ -9,7 +9,7 @@
     "authored": 13,
     "withVariants": 22,
     "withBaseUi": 26,
-    "undocumented": 7,
+    "undocumented": 1,
     "tokenReferences": 508
   },
   "components": [
@@ -477,7 +477,7 @@
       "authored": false,
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/chart",
       "registryItem": "edgecom-ai/design-system/chart",
-      "docs": null,
+      "docs": "https://design.edgecom.ai/foundations/charts/",
       "contract": "https://design.edgecom.ai/contracts/chart.json"
     },
     {
@@ -955,7 +955,7 @@
       "authored": false,
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/label",
       "registryItem": "edgecom-ai/design-system/label",
-      "docs": null,
+      "docs": "https://design.edgecom.ai/components/label-textarea/",
       "contract": "https://design.edgecom.ai/contracts/label.json"
     },
     {
@@ -1066,7 +1066,7 @@
       "authored": false,
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/motion-tabs",
       "registryItem": "edgecom-ai/design-system/motion-tabs",
-      "docs": null,
+      "docs": "https://design.edgecom.ai/components/tabs/",
       "contract": "https://design.edgecom.ai/contracts/motion-tabs.json"
     },
     {
@@ -1712,7 +1712,7 @@
       "authored": false,
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/tanstack-form",
       "registryItem": "edgecom-ai/design-system/tanstack-form",
-      "docs": null,
+      "docs": "https://design.edgecom.ai/blocks/form/",
       "contract": "https://design.edgecom.ai/contracts/tanstack-form.json"
     },
     {
@@ -1731,7 +1731,7 @@
       "authored": false,
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/textarea",
       "registryItem": "edgecom-ai/design-system/textarea",
-      "docs": null,
+      "docs": "https://design.edgecom.ai/components/label-textarea/",
       "contract": "https://design.edgecom.ai/contracts/textarea.json"
     },
     {
@@ -1869,7 +1869,7 @@
       "authored": false,
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/toggle-group",
       "registryItem": "edgecom-ai/design-system/toggle-group",
-      "docs": null,
+      "docs": "https://design.edgecom.ai/components/toggle/",
       "contract": "https://design.edgecom.ai/contracts/toggle-group.json"
     },
     {

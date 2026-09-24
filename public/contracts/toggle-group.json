@@ -7,7 +7,7 @@
     "aliases": [],
     "registryItem": "edgecom-ai/design-system/toggle-group",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/toggle-group",
-    "docs": null,
+    "docs": "https://design.edgecom.ai/components/toggle/",
     "source": "src/components/ui/toggle-group.tsx",
     "summary": null,
     "purpose": null,

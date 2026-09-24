@@ -7,7 +7,7 @@
     "aliases": [],
     "registryItem": "edgecom-ai/design-system/motion-tabs",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/motion-tabs",
-    "docs": null,
+    "docs": "https://design.edgecom.ai/components/tabs/",
     "source": "src/components/ui/motion-tabs.tsx",
     "summary": null,
     "purpose": null,

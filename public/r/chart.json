@@ -16,6 +16,6 @@
       "type": "registry:ui"
     }
   ],
-  "docs": "Docs: no page yet — read the contract · Contract: https://design.edgecom.ai/contracts/chart.json · Guardrails: https://design.edgecom.ai/design.md",
+  "docs": "Docs: https://design.edgecom.ai/foundations/charts/ · Contract: https://design.edgecom.ai/contracts/chart.json · Guardrails: https://design.edgecom.ai/design.md",
   "type": "registry:ui"
 }

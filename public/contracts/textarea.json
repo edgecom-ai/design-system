@@ -7,7 +7,7 @@
     "aliases": [],
     "registryItem": "edgecom-ai/design-system/textarea",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/textarea",
-    "docs": null,
+    "docs": "https://design.edgecom.ai/components/label-textarea/",
     "source": "src/components/ui/textarea.tsx",
     "summary": null,
     "purpose": null,
