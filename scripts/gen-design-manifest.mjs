@@ -24,7 +24,7 @@ import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 
 import { freshness, forced } from "./lib/stale.mjs"
-import { systemIdentity, systemSources } from "./lib/system.mjs"
+import { systemIdentity, systemSources, systemVersion } from "./lib/system.mjs"
 import { PUBLISHED, schemaUrl } from "./lib/publish.mjs"
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..")
@@ -39,6 +39,7 @@ const stamp = freshness({
   name: "design-manifest",
   inputs: [SCHEMA, EXAMPLE_SRC, CHECK_SRC, "scripts/gen-design-manifest.mjs", "scripts/lib/publish.mjs", "scripts/lib/system.mjs", ...systemSources()],
   outputs: [SCHEMA_OUT, PUBLISHED.designManifestExample, PUBLISHED.checkDesignManifest],
+  extra: systemVersion(),
 })
 if (stamp.fresh && !forced()) {
   console.log("gen-design-manifest — up to date — skipped")
