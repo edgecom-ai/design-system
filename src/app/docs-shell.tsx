@@ -11,6 +11,7 @@ import { ComponentPreview, InstallCommand } from "@/components/docs/component-pr
 import { Toc } from "@/components/docs/toc";
 import { ApiReference } from "@/components/docs/api-reference";
 import { getApi } from "@/docs/api";
+import { currentVersion } from "@/docs/generated/changelog";
 import {
   SidebarProvider,
   Sidebar,
@@ -187,7 +188,7 @@ export function DocsShell({ group, slug }: { group: string; slug: string }) {
             <Logo className="h-6 w-auto" />
           </div>
           <div className="px-4 pb-1 text-xs font-medium text-muted-foreground">
-            Design System v1.0
+            Design System{currentVersion ? ` ${currentVersion}` : ""}
           </div>
         </SidebarHeader>
 

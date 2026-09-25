@@ -9,6 +9,9 @@
   },
   "//releases": "Release key (git tag, or the YYYY-MM-DD date while the repo is untagged, or \"unreleased\") -> a title and a lead-in paragraph for that release.",
   "releases": {
+    "v3.0.0": {
+      "summary": "Version 3 takes its number from the design system's name, Edgecom Energy Design System V3; no change in it breaks an existing install. A left or right sheet is full width on a phone, as the design language specifies. The design-manifest validator reports a data-instance on a layout element once and says how an element built in code carries one, as the design-project README now teaches. Emphasis inside body text is font-medium. The docs site drops dependencies and code nothing used, and the filled-icon toggle demo draws lucide's heart."
+    },
     "v1.1.0": {
       "summary": "The design system becomes something an agent can read and check. Every component has a published contract and the tokens a validated model, all stamped with one version and digest, and a design drawn in Claude Design ships a manifest that a dependency-free validator checks against them. The portal page frame ships as the application shell, inputs gain a compact sm size, the installed theme names the system it came from, and the design language names the event-window chart. The docs site now runs on Vite and TanStack Router."
     },
