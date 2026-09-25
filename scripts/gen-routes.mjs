@@ -1,8 +1,7 @@
 // Extracts the static route list — one { group, slug } per docs section — from
-// src/app/sections.tsx into a server-safe module. sections.tsx is a "use client"
-// module, so a server component (the [group]/[slug] route's generateStaticParams,
-// which the static export needs) can't import its runtime values directly; it
-// imports this generated data instead.
+// src/app/sections.tsx into plain data. sections.tsx is TSX that lazily imports
+// every section, so the node scripts that need the list — prerender.mjs, which
+// writes one HTML shell per route, and verify-docs.mjs — read this file instead.
 //
 // Output: src/docs/generated/routes.ts
 //
@@ -14,6 +13,7 @@ import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { freshness, forced } from "./lib/stale.mjs";
+import { groupSlug } from "./lib/sections.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -21,7 +21,7 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 // `--force` / DOCS_GEN_FORCE=1 rebuilds regardless.
 const stamp = freshness({
   name: "routes",
-  inputs: ["src/app/sections.tsx", "scripts/gen-routes.mjs"],
+  inputs: ["src/app/sections.tsx", "scripts/gen-routes.mjs", "scripts/lib/sections.mjs"],
   outputs: ["src/docs/generated/routes.ts"],
 });
 if (stamp.fresh && !forced()) {
@@ -32,9 +32,6 @@ if (stamp.fresh && !forced()) {
 const src = readFileSync(resolve(root, "src/app/sections.tsx"), "utf8");
 const lines = src.split("\n");
 const start = lines.findIndex((l) => l.includes("const sections: Section[]"));
-
-// Keep in sync with groupSlug() in src/app/sections.tsx.
-const groupSlug = (g) => g.toLowerCase().replace(/\s+/g, "-");
 
 const params = [];
 let cur = null;

@@ -31,27 +31,17 @@
 import { readFileSync, writeFileSync, mkdirSync, rmSync, readdirSync, existsSync, copyFileSync } from "node:fs"
 import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
-import { execFileSync } from "node:child_process"
 
 import { readBlocks } from "./lib/tokens.mjs"
 import { buildBaseCss, probeUtilities, scanClasses } from "./lib/base-css.mjs"
 import { extractCva } from "./lib/cva.mjs"
 import { parseSections, sectionPath } from "./lib/sections.mjs"
-import { systemIdentity } from "./lib/system.mjs"
+import { git, systemIdentity } from "./lib/system.mjs"
 import { PUBLISHED, urlOf, schemaUrl } from "./lib/publish.mjs"
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const outDir = resolve(root, ".design-sync/bundle")
 const read = (p) => readFileSync(resolve(root, p), "utf8")
-
-// --- git identity ------------------------------------------------------------
-const git = (...a) => {
-  try {
-    return execFileSync("git", a, { cwd: root, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).trim()
-  } catch {
-    return null
-  }
-}
 
 // --- inputs ------------------------------------------------------------------
 const css = read("src/app/globals.css")

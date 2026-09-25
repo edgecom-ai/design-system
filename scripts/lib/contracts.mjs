@@ -105,11 +105,6 @@ export function scanSource(src) {
   return { fragments, code }
 }
 
-/** Every whitespace-separated string-literal fragment, comments excluded. */
-export function stringFragments(src) {
-  return scanSource(src).fragments
-}
-
 /**
  * Split a utility into its modifiers and the utility itself, respecting the
  * brackets in `data-[state=open]:` and `[&>svg]:` so a `:` inside one never

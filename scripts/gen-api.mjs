@@ -58,7 +58,6 @@ const componentIds = parseSections(sectionsSrc).map((s) => s.id);
 // --- helpers ---------------------------------------------------------------
 const titleCase = (slug) =>
   slug.replace(/(^|-)([a-z])/g, (_, __, c) => c.toUpperCase());
-const pascal = (id) => titleCase(id);
 
 function extract(id) {
   const file = resolve(uiDir, `${ALIAS_FILE[id] ?? id}.tsx`);
@@ -80,7 +79,7 @@ function extract(id) {
   const mainPart =
     partList.find((p) => p.toLowerCase() === id.replace(/-/g, "")) ??
     partList[0] ??
-    pascal(id);
+    titleCase(id);
 
   // props: cva variant groups, via the one cva reader (lib/cva.mjs). The
   // local reader this replaced tracked quotes but not comments, so a single
