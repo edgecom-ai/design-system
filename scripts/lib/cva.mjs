@@ -131,11 +131,3 @@ export function extractCva(src) {
   }
   return { base, groups, defaults }
 }
-
-/** Every class string a cva result can produce: base plus every variant option. */
-export function allClasses(cva) {
-  if (!cva) return []
-  const out = [cva.base]
-  for (const entries of Object.values(cva.groups)) out.push(...Object.values(entries))
-  return out.filter(Boolean)
-}

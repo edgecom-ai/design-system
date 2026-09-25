@@ -89,13 +89,6 @@ export function parseSections(src) {
   return out.filter((s) => s.group)
 }
 
-/** Section ids in the Components group — the ones backed by a primitive. */
-export function componentIds(src) {
-  return parseSections(src)
-    .filter((s) => s.group === "Components")
-    .map((s) => s.id)
-}
-
 // Keep in sync with groupSlug() / sectionPath() in src/app/sections.tsx.
 export const groupSlug = (group) => group.toLowerCase().replace(/\s+/g, "-")
 

@@ -40,7 +40,8 @@ export function systemSources() {
   ]
 }
 
-const git = (...a) => {
+/** Run git at the repo root; its trimmed stdout, or null if it fails. */
+export const git = (...a) => {
   try {
     return execFileSync("git", a, { cwd: root, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).trim()
   } catch {
@@ -76,6 +77,3 @@ export function systemIdentity() {
     sources,
   }
 }
-
-/** The pattern every stamped digest matches; shared with the schemas. */
-export const DIGEST_PATTERN = /^[0-9a-f]{16}$/

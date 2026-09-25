@@ -36,6 +36,7 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync, copyFileSync } from
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { freshness, forced } from "./lib/stale.mjs";
+import { git } from "./lib/system.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const outFile = resolve(root, "src/docs/generated/changelog.ts");
@@ -58,7 +59,7 @@ try {
 const stamp = gitKey
   ? freshness({
       name: "changelog",
-      inputs: ["scripts/gen-changelog.mjs"],
+      inputs: ["scripts/gen-changelog.mjs", "scripts/lib/system.mjs"],
       outputs: ["src/docs/generated/changelog.ts", "public/changelog.md"],
       extra: gitKey,
     })
@@ -71,14 +72,6 @@ if (stamp.fresh && !forced()) {
 
 const REPO_URL = "https://github.com/edgecom-ai/design-system";
 const MAX_COMMITS = 500;
-
-const git = (...args) => {
-  try {
-    return execFileSync("git", args, { cwd: root, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).trim();
-  } catch {
-    return null;
-  }
-};
 
 // --- bail out rather than truncate on a shallow / non-git tree ---------------
 const inRepo = git("rev-parse", "--is-inside-work-tree") === "true";

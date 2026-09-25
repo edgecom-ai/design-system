@@ -15,6 +15,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { freshness, forced } from "./lib/stale.mjs";
+import { groupSlug } from "./lib/sections.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -22,7 +23,7 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 // `--force` / DOCS_GEN_FORCE=1 rebuilds regardless.
 const stamp = freshness({
   name: "llms",
-  inputs: ["src/app/sections.tsx", "scripts/gen-llms.mjs"],
+  inputs: ["src/app/sections.tsx", "scripts/gen-llms.mjs", "scripts/lib/sections.mjs"],
   outputs: ["public/llms.txt"],
 });
 if (stamp.fresh && !forced()) {
@@ -34,8 +35,6 @@ const src = readFileSync(resolve(root, "src/app/sections.tsx"), "utf8");
 const llmsPath = resolve(root, "public/llms.txt");
 
 const BASE = "https://design.edgecom.ai";
-// Keep in sync with groupSlug() in src/app/sections.tsx.
-const groupSlug = (g) => g.toLowerCase().replace(/\s+/g, "-");
 // Display order of the top-level groups.
 const GROUP_ORDER = ["Getting Started", "Foundations", "Components", "Blocks"];
 

@@ -122,11 +122,3 @@ export function buildTokens(css) {
 
   return { tokens, darkOnly }
 }
-
-/** Follow an alias chain to the value it ultimately shares. */
-export function resolveValue(tokens, id, depth = 6) {
-  const byId = tokens instanceof Map ? tokens : new Map(tokens.map((t) => [t.id, t]))
-  let t = byId.get(id)
-  for (let i = 0; i < depth && t?.aliasOf; i++) t = byId.get(t.aliasOf)
-  return t?.light ?? null
-}
