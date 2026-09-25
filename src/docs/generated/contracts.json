@@ -1,7 +1,7 @@
 {
   "$schema": "../../../schemas/contracts.schema.json",
   "version": "v1.1.0",
-  "digest": "22062d670ac5ad24",
+  "digest": "2f1b57dd5e4c54fd",
   "sources": [
     "src/components/ui/*.tsx",
     "src/app/sections.tsx",
