@@ -59,7 +59,7 @@ try {
 const stamp = gitKey
   ? freshness({
       name: "changelog",
-      inputs: ["scripts/gen-changelog.mjs", "scripts/lib/system.mjs"],
+      inputs: ["scripts/gen-changelog.mjs", "scripts/lib/system.mjs", "src/docs/changelog-notes.json"],
       outputs: ["src/docs/generated/changelog.ts", "public/changelog.md"],
       extra: gitKey,
     })
@@ -281,6 +281,9 @@ export const commitUrl = (sha: string) => \`${REPO_URL}/commit/\${sha}\`;
 
 export const changelog: ChangelogRelease[] = ${JSON.stringify(
 releases, null, 2)};
+
+/** The newest release tag — the version every published artifact carries — or null while untagged. */
+export const currentVersion: string | null = ${JSON.stringify(releases.find((r) => r.version)?.version ?? null)};
 `
 );
 

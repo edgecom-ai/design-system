@@ -3,6 +3,7 @@
 
 import * as React from "react"
 import { CheckCircle2, XCircle } from "lucide-react";
+import { currentVersion } from "@/docs/generated/changelog";
 import { Code, Snippet } from "./shared";
 
 function StepHeading({ n, children }: { n: number; children: React.ReactNode }) {
@@ -57,7 +58,7 @@ function GetStartedDoc() {
 edgecom-ai/design-system/<name>
 
 # pin to a tag, branch, or commit
-edgecom-ai/design-system/button#v1.0.0`}</Snippet>
+edgecom-ai/design-system/button#${currentVersion ?? "main"}`}</Snippet>
       </section>
 
       <section className="flex flex-col gap-3">

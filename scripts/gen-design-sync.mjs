@@ -1,4 +1,4 @@
-// Builds the Claude Design bundle for the "Edgecom Energy Design System V2"
+// Builds the Claude Design bundle for the "Edgecom Energy Design System V3"
 // project — the design-system context package the plan calls for.
 //
 // Everything here is DERIVED. The authorities are:
