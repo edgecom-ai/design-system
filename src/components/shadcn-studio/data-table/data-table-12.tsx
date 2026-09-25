@@ -2,8 +2,6 @@
 
 import { useState } from 'react'
 
-import Papa from 'papaparse'
-
 import type { ColumnDef, ColumnFiltersState, SortingState, VisibilityState } from '@tanstack/react-table'
 import {
   flexRender,
@@ -196,9 +194,10 @@ const DataTableWithExportDemo = () => {
         ? selectedRows.map(row => row.original)
         : table.getFilteredRowModel().rows.map(row => row.original)
 
-    const csv = Papa.unparse(dataToExport, {
-      header: true
-    })
+    const headers = Object.keys(dataToExport[0] ?? {}) as (keyof Payment)[]
+    const rows: unknown[][] = [headers, ...dataToExport.map(payment => headers.map(key => payment[key]))]
+
+    const csv = rows.map(cells => cells.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(',')).join('\r\n')
 
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' })
     const link = document.createElement('a')
