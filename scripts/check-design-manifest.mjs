@@ -422,6 +422,7 @@ if (designRef && existsSync(designRef)) {
   const design = isStr(manifest.design) ? manifest.design : designRef
   const inMarkup = new Set()
   const carried = new Map() // id → the tag that carries it, when the markup shows one
+  const misplaced = new Set() // ids already reported on a layout element
   let templated = 0
   // `<x-import … data-instance="id">` in a design file; `<Button data-instance="id">`
   // in JSX; `"data-instance": "id"` in a props object.
@@ -438,15 +439,18 @@ if (designRef && existsSync(designRef)) {
       }
       const tag = carried.get(id)
       if (tag && tag !== "x-import" && !/^[A-Z]/.test(tag)) {
-        // Two plain <div>s grouped the filters and the bulk bar and carried ids.
-        err("/components", `${design} puts data-instance="${id}" on a <${tag}> — the attribute belongs on a design-system element (an x-import or a component), never on a layout element`)
+        // Two plain <div>s grouped the filters and the bulk bar and carried ids;
+        // the third design wrapped a chart its logic builds in one.
+        misplaced.add(id)
+        err("/components", `${design} puts data-instance="${id}" on a <${tag}> — the attribute belongs on a design-system element (an x-import or a component), never on a layout element; an element the logic builds takes it in its props ("data-instance": "${id}")`)
         continue
       }
       inMarkup.add(id)
     }
   const loopHint = templated ? " — a template expression stamps no literal id; write the id literally, or declare one instance for the loop" : ""
   for (const [i, c] of (Array.isArray(manifest.components) ? manifest.components : []).entries()) {
-    if (isObj(c) && isStr(c.instanceId) && !inMarkup.has(c.instanceId))
+    // A misplaced id is one defect, already reported where it sits.
+    if (isObj(c) && isStr(c.instanceId) && !inMarkup.has(c.instanceId) && !misplaced.has(c.instanceId))
       err(`/components/${i}/instanceId`, `no element in ${design} carries data-instance="${c.instanceId}" — put it on the element, including ones the logic creates${loopHint}`)
   }
   for (const id of [...inMarkup].sort()) {
