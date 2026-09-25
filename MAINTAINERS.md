@@ -238,6 +238,8 @@ Two curation escape hatches:
 
 Releases are cut at **git tags** (`git tag v1.2.0` — the tagged commit is the newest of its release, commits after the newest tag show as **Unreleased**). Until the repo is tagged, entries group **by date** instead, so the page works from day one.
 
+The tag is also the `version` every published artifact carries, so a release is two steps. Push an annotated tag on the release's newest commit on `main`; then, on a branch, run `pnpm build`, bump `package.json` to match, add the release's `summary` to `changelog-notes.json`, and land that restamp as `chore: release vX.Y.Z` — a `chore` whose summary starts with *release* is left off the changelog. Land it before anything else merges: until it does, every other PR's parity gate fails, because CI restamps to the new tag.
+
 Two things to keep intact:
 
 - The Pages workflow checks out with **`fetch-depth: 0`**. A shallow checkout sees one commit; the generator detects that (and a non-git tree) and keeps the committed changelog rather than truncating it, but the deploy would then go stale.

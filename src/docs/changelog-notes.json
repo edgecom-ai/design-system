@@ -9,6 +9,9 @@
   },
   "//releases": "Release key (git tag, or the YYYY-MM-DD date while the repo is untagged, or \"unreleased\") -> a title and a lead-in paragraph for that release.",
   "releases": {
+    "v1.1.0": {
+      "summary": "The design system becomes something an agent can read and check. Every component has a published contract and the tokens a validated model, all stamped with one version and digest, and a design drawn in Claude Design ships a manifest that a dependency-free validator checks against them. The portal page frame ships as the application shell, inputs gain a compact sm size, the installed theme names the system it came from, and the design language names the event-window chart. The docs site now runs on Vite and TanStack Router."
+    },
     "2026-08-27": {
       "summary": "The semantic type scale becomes real: tokens carry their own size, line-height, and weight, cn() stops dropping them, and every primitive in the registry now uses them."
     }

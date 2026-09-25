@@ -3,7 +3,7 @@
   "schemaVersion": "1",
   "design": "Settings.dc.html",
   "title": "Client portal — Settings, Permissions screen",
-  "designSystemVersion": "v1.0.0",
+  "designSystemVersion": "v1.1.0",
   "designSystemDigest": "0219b54b78a13cd6",
   "screens": [
     {
