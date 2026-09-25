@@ -3,7 +3,6 @@
 import { useId, useMemo, useState } from 'react'
 
 import Papa from 'papaparse'
-import * as XLSX from 'xlsx'
 
 import type { Column, ColumnDef, ColumnFiltersState, PaginationState, RowData } from '@tanstack/react-table'
 import {
@@ -39,7 +38,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { usePagination } from '@/hooks/use-pagination'
 
 import { cn } from '@/lib/utils'
-import { Gamepad2Icon, ShirtIcon, ArmchairIcon, HeadphonesIcon, LaptopIcon, SmartphoneIcon, WatchIcon, UploadIcon, FileTextIcon, FileSpreadsheetIcon, PlusIcon, ChevronUpIcon, ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon, SearchIcon, EllipsisVerticalIcon } from "lucide-react"
+import { Gamepad2Icon, ShirtIcon, ArmchairIcon, HeadphonesIcon, LaptopIcon, SmartphoneIcon, WatchIcon, UploadIcon, FileTextIcon, PlusIcon, ChevronUpIcon, ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon, SearchIcon, EllipsisVerticalIcon } from "lucide-react"
 
 declare module '@tanstack/react-table' {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -259,26 +258,6 @@ const ProductDatatable = ({ data }: { data: Item[] }) => {
     document.body.removeChild(link)
   }
 
-  const exportToExcel = () => {
-    const selectedRows = table.getSelectedRowModel().rows
-
-    const dataToExport =
-      selectedRows.length > 0
-        ? selectedRows.map(row => row.original)
-        : table.getFilteredRowModel().rows.map(row => row.original)
-
-    const worksheet = XLSX.utils.json_to_sheet(dataToExport)
-    const workbook = XLSX.utils.book_new()
-
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Meters')
-
-    const cols = [{ wch: 10 }, { wch: 20 }, { wch: 15 }, { wch: 25 }, { wch: 15 }]
-
-    worksheet['!cols'] = cols
-
-    XLSX.writeFile(workbook, `meters-export-${new Date().toISOString().split('T')[0]}.xlsx`)
-  }
-
   const exportToJSON = () => {
     const selectedRows = table.getSelectedRowModel().rows
 
@@ -338,10 +317,6 @@ const ProductDatatable = ({ data }: { data: Item[] }) => {
                 <DropdownMenuItem onClick={exportToCSV}>
                   <FileTextIcon className='mr-2 size-4' />
                   Export as CSV
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={exportToExcel}>
-                  <FileSpreadsheetIcon className='mr-2 size-4' />
-                  Export as Excel
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={exportToJSON}>

@@ -3,7 +3,6 @@
 import { useState } from 'react'
 
 import Papa from 'papaparse'
-import * as XLSX from 'xlsx'
 
 import type { ColumnDef, ColumnFiltersState, SortingState, VisibilityState } from '@tanstack/react-table'
 import {
@@ -26,7 +25,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Input } from '@/components/ui/input'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { DownloadIcon, FileTextIcon, FileSpreadsheetIcon } from "lucide-react"
+import { DownloadIcon, FileTextIcon } from "lucide-react"
 
 const data: Payment[] = [
   {
@@ -213,26 +212,6 @@ const DataTableWithExportDemo = () => {
     document.body.removeChild(link)
   }
 
-  const exportToExcel = () => {
-    const selectedRows = table.getSelectedRowModel().rows
-
-    const dataToExport =
-      selectedRows.length > 0
-        ? selectedRows.map(row => row.original)
-        : table.getFilteredRowModel().rows.map(row => row.original)
-
-    const worksheet = XLSX.utils.json_to_sheet(dataToExport)
-    const workbook = XLSX.utils.book_new()
-
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sites')
-
-    const cols = [{ wch: 10 }, { wch: 20 }, { wch: 15 }, { wch: 25 }, { wch: 15 }]
-
-    worksheet['!cols'] = cols
-
-    XLSX.writeFile(workbook, `sites-export-${new Date().toISOString().split('T')[0]}.xlsx`)
-  }
-
   const exportToJSON = () => {
     const selectedRows = table.getSelectedRowModel().rows
 
@@ -274,10 +253,6 @@ const DataTableWithExportDemo = () => {
             <DropdownMenuItem onClick={exportToCSV}>
               <FileTextIcon className='mr-2 size-4' />
               Export as CSV
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={exportToExcel}>
-              <FileSpreadsheetIcon className='mr-2 size-4' />
-              Export as Excel
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={exportToJSON}>
@@ -322,7 +297,7 @@ const DataTableWithExportDemo = () => {
         </Table>
       </div>
       <p className='text-muted-foreground mt-4 text-center text-sm'>
-        Data table with export functionality (CSV, Excel, JSON)
+        Data table with export functionality (CSV, JSON)
       </p>
     </div>
   )
