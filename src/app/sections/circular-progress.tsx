@@ -1,5 +1,3 @@
-"use client"
-
 // Content for the "circular-progress" section. Loaded lazily by DocsShell — see
 // sections.tsx and .claude/rules/docs-site.md.
 

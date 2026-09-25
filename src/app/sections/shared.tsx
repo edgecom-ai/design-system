@@ -1,5 +1,3 @@
-"use client"
-
 // Declarations used by more than one section. Split out of sections.tsx by
 // scratchpad/split-sections.mjs; see .claude/rules/docs-site.md.
 

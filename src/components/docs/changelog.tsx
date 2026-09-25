@@ -1,5 +1,3 @@
-"use client"
-
 import { Link } from "@/components/docs/link"
 
 import { Badge } from "@/components/ui/badge"
