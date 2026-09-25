@@ -29,7 +29,7 @@ import { buildContracts, undocumentedPrimitives, OVERLAY_KEYS, ALIAS_FILE } from
 import { primitiveSections } from "./lib/sections.mjs"
 import { freshness, forced } from "./lib/stale.mjs"
 import { PUBLISHED, urlOf, contractUrl, schemaUrl } from "./lib/publish.mjs"
-import { systemIdentity, systemSources } from "./lib/system.mjs"
+import { systemIdentity, systemSources, systemVersion } from "./lib/system.mjs"
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const read = (p) => readFileSync(resolve(root, p), "utf8")
@@ -85,6 +85,7 @@ const stamp = freshness({
   name: "contracts",
   inputs: [...inputs, "scripts/lib/publish.mjs", "schemas/contracts.schema.json"],
   outputs: [OUT, ...publishedFiles(contractIds)],
+  extra: systemVersion(),
 })
 if (stamp.fresh && !forced()) {
   console.log("gen-contracts — up to date — skipped")

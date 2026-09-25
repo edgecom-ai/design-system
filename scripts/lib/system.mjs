@@ -49,6 +49,14 @@ const git = (...a) => {
 }
 
 /**
+ * The latest tag, or "untagged". No file records it, so a generator that stamps
+ * it passes it to freshness() as `extra` — a new tag must restamp, not skip.
+ */
+export function systemVersion() {
+  return git("describe", "--tags", "--abbrev=0") || "untagged"
+}
+
+/**
  * @returns {{ version: string, digest: string, commit: string | null, sources: string[] }}
  *   version — the latest tag, or "untagged"; digest — 16 hex chars of sha256
  *   over every source, path and content; commit — HEAD, for artifacts that are
@@ -62,7 +70,7 @@ export function systemIdentity() {
     h.update(existsSync(resolve(root, p)) ? readFileSync(resolve(root, p)) : "\0missing")
   }
   return {
-    version: git("describe", "--tags", "--abbrev=0") || "untagged",
+    version: systemVersion(),
     digest: h.digest("hex").slice(0, 16),
     commit: git("rev-parse", "HEAD"),
     sources,

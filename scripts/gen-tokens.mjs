@@ -15,7 +15,7 @@ import { fileURLToPath } from "node:url"
 import { buildTokens } from "./lib/tokens.mjs"
 import { freshness, forced } from "./lib/stale.mjs";
 import { PUBLISHED, schemaUrl } from "./lib/publish.mjs"
-import { systemIdentity, systemSources } from "./lib/system.mjs"
+import { systemIdentity, systemSources, systemVersion } from "./lib/system.mjs"
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 
@@ -34,6 +34,7 @@ const stamp = freshness({
     ...systemSources(),
   ],
   outputs: ["src/docs/generated/tokens.json", PUBLISHED.tokens, `${PUBLISHED.schemasDir}/tokens.schema.json`],
+  extra: systemVersion(),
 });
 if (stamp.fresh && !forced()) {
   console.log("gen-tokens — up to date — skipped");
