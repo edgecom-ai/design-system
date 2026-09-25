@@ -4,7 +4,7 @@
   "design": "Settings.dc.html",
   "title": "Client portal — Settings, Permissions screen",
   "designSystemVersion": "v1.1.0",
-  "designSystemDigest": "291720b473457638",
+  "designSystemDigest": "22062d670ac5ad24",
   "screens": [
     {
       "id": "permissions",

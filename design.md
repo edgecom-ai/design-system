@@ -227,6 +227,8 @@ Use the **semantic type scale** — one token sets size + line-height + weight +
 
 The tokens carry their own line-height and weight — **don't pair them with `leading-*`**, and don't restate a weight the token already sets. `leading-snug` is Tailwind's unitless ratio 1.375, not `1.375rem`; reaching for it where a token was meant is a silent 3px error.
 
+**Emphasis inside body text is `font-medium`** — a table row's primary line, an item or field label, a count beside a bulk action: `text-body-sm font-medium`. It is the weight the primitives themselves use on `body-sm` and `body-lg` (`Button`, `Label`, `ItemTitle`, `TableHead`, `CardTitle`). Write it as the class, never as an inline `font-weight`.
+
 The scale is in `rem` — it respects user font settings. Font family is SF Pro / system sans via `--font-sans`; `--font-mono` is a real monospace stack, for code, identifiers, and tabular figures. Both tokens are defaults — an app that wants its own face redefines them in its own `:root`.
 
 ## Layout
