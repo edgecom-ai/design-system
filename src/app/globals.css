@@ -311,7 +311,9 @@
      semantic token. Hence the `legacy` in every name, and no `--color-*`
      mapping in `@theme`: there is deliberately no `stroke-chart-legacy-*`
      utility to reach for from a class, and `registry:check` fails any shipped
-     primitive that references one. No hue is added to this set.
+     primitive that references one. The set is closed to new features: it
+     grows only to absorb existing plots operators already read by colour,
+     as `emerald`, `cyan` and `purple` did for a second set of them.
      Named by colour on purpose: which hue a given series takes is the
      porting product's own convention, so the token carries no meaning of
      its own — the product keeps that mapping in one place and takes each
@@ -326,7 +328,7 @@
   --chart-legacy-line-green: oklch(0.649 0.157 142.6); /* 3.06:1 on white, the bar exactly. Merges a green 1 OKLCH point off and a lighter one (1.9:1) */
   --chart-legacy-line-brown: oklch(0.564 0.126 60.4);
   --chart-legacy-line-orange: oklch(0.672 0.143 70.7); /* legacy 0.793 fell to 1.97:1 on white. Merges an amber (0.715, 2.6:1) that converged with it once tuned */
-  --chart-legacy-line-red: oklch(0.612 0.227 29.2);
+  --chart-legacy-line-red: oklch(0.612 0.227 29.2); /* merges two reds from a second set of existing plots, 0.033 and 0.045 off */
   --chart-legacy-line-magenta: oklch(0.626 0.268 322.6);
   --chart-legacy-line-sky: oklch(0.659 0.135 236.6); /* legacy 0.688 fell to 2.7:1 on white */
   --chart-legacy-line-yellow: oklch(0.662 0.139 104.2); /* legacy 0.871 fell to 1.5:1 on white */
@@ -334,6 +336,9 @@
   --chart-legacy-line-wine: oklch(0.452 0.158 4.9);
   --chart-legacy-line-olive: oklch(0.452 0.098 110.5);
   --chart-legacy-line-steel: oklch(0.588 0.099 245.7); /* merges a sky blue (0.789, 1.9:1) that shares its hue */
+  --chart-legacy-line-emerald: oklch(0.65 0.157 156.2); /* legacy 0.739 fell to 2.15:1 on white. 0.037 from `legacy-line-green`, the set's closest pair: the two come from different sets of plots and never share one */
+  --chart-legacy-line-cyan: oklch(0.657 0.112 205); /* legacy 0.797 fell to 1.8:1 on white. 0.071 from `legacy-line-sky`, the next closest pair, which never shares a plot either */
+  --chart-legacy-line-purple: oklch(0.421 0.193 328.4);
   /* Legacy peak rank lines — one hue per rank, in the order operators know them.
      Rank is the identity, so the order never rotates */
   --chart-legacy-peak-1: var(--chart-legacy-line-magenta);
@@ -348,7 +353,7 @@
      the softest band never becomes the brightest thing on a dark plot */
   --chart-legacy-window-high: oklch(0.612 0.176 23.9); /* ranks 1–2 */
   --chart-legacy-window-normal: oklch(0.704 0.128 20.8); /* rank 3 */
-  --chart-legacy-window-low: oklch(0.861 0.057 18.3); /* rank 4 and past */
+  --chart-legacy-window-low: oklch(0.861 0.057 18.3); /* rank 4 and past, and a plot's single unranked window */
   --radius: 0.625rem;
   --sidebar: oklch(0.985 0.002 254);
   --sidebar-foreground: oklch(0.16 0.01 254);
@@ -427,7 +432,7 @@
   --track-active: oklch(1 0 0 / 10%);
   /* Commodity ramps are mode-independent (defined once in :root). The legacy
      line palette is not: it drew one set for both modes, and these are the
-     lines a dark card swallowed (2.2–3.8:1) lifted in lightness only, plus
+     lines a dark card swallowed (1.9–3.8:1) lifted in lightness only, plus
      the lines whose legacy value already clears the dark card and keeps the
      hue as known there. The peak aliases follow. */
   --chart-legacy-line-teal: oklch(0.669 0.082 201.6);
@@ -438,6 +443,9 @@
   --chart-legacy-line-lime: oklch(0.898 0.256 133.9);
   --chart-legacy-line-wine: oklch(0.645 0.157 4.8);
   --chart-legacy-line-olive: oklch(0.619 0.098 110.3);
+  --chart-legacy-line-emerald: oklch(0.739 0.176 156.2);
+  --chart-legacy-line-cyan: oklch(0.797 0.136 205);
+  --chart-legacy-line-purple: oklch(0.527 0.193 328.4); /* legacy 0.421 fell to 1.9:1 on the dark card */
   --chart-legacy-window-normal: oklch(0.502 0.133 22.6);
   --chart-legacy-window-low: oklch(0.329 0.061 16.4);
   --sidebar: oklch(0.205 0.008 254);

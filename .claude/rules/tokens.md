@@ -17,4 +17,4 @@ Which token means what, and the WCAG bar each has to clear, are in `design.md` â
 
 ## Legacy palettes
 
-`--chart-legacy-*` exists only so a product porting plots operators already read by colour can delete its hex literals. Never add a hue or a role to that set, never build a new feature on it, and never give it a `--color-*` mapping. `pnpm registry:check` fails the build if a shipped primitive references one.
+`--chart-legacy-*` exists only so a product porting plots operators already read by colour can delete its hex literals. It is closed to new features: a hue joins only to absorb another existing plot of that kind, and no role is ever added. Never build a new feature on it, and never give it a `--color-*` mapping. `pnpm registry:check` fails the build if a shipped primitive references one.

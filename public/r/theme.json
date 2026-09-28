@@ -142,7 +142,7 @@
       "animate-skeleton-shimmer": "skeleton-shimmer 1.8s ease-in-out infinite"
     },
     "light": {
-      "edgecom-theme": "\"v3.0.0 ca8e46373d04ff3c\"",
+      "edgecom-theme": "\"v3.0.0 72d561bbad05123c\"",
       "font-sans": "ui-sans-serif, -apple-system, \"SF Pro Text\", system-ui, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
       "font-mono": "ui-monospace, \"SF Mono\", SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace",
       "font-heading": "var(--font-sans)",
@@ -240,6 +240,9 @@
       "chart-legacy-line-wine": "oklch(0.452 0.158 4.9)",
       "chart-legacy-line-olive": "oklch(0.452 0.098 110.5)",
       "chart-legacy-line-steel": "oklch(0.588 0.099 245.7)",
+      "chart-legacy-line-emerald": "oklch(0.65 0.157 156.2)",
+      "chart-legacy-line-cyan": "oklch(0.657 0.112 205)",
+      "chart-legacy-line-purple": "oklch(0.421 0.193 328.4)",
       "chart-legacy-peak-1": "var(--chart-legacy-line-magenta)",
       "chart-legacy-peak-2": "var(--chart-legacy-line-sky)",
       "chart-legacy-peak-3": "var(--chart-legacy-line-red)",
@@ -319,6 +322,9 @@
       "chart-legacy-line-lime": "oklch(0.898 0.256 133.9)",
       "chart-legacy-line-wine": "oklch(0.645 0.157 4.8)",
       "chart-legacy-line-olive": "oklch(0.619 0.098 110.3)",
+      "chart-legacy-line-emerald": "oklch(0.739 0.176 156.2)",
+      "chart-legacy-line-cyan": "oklch(0.797 0.136 205)",
+      "chart-legacy-line-purple": "oklch(0.527 0.193 328.4)",
       "chart-legacy-window-normal": "oklch(0.502 0.133 22.6)",
       "chart-legacy-window-low": "oklch(0.329 0.061 16.4)",
       "sidebar": "oklch(0.205 0.008 254)",
