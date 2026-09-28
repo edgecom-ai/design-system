@@ -103,10 +103,10 @@ function IntroductionDoc() {
             reserved. Third-party code keeps its own license.
           </li>
           <li>
-            <strong className="font-medium text-foreground">Trademarks.</strong> Edgecom, the
-            Edgecom logo, dataTrack™, pTrack®, and NeuraCharge™ are trademarks of Edgecom Energy.
-            Access to this code grants no right to use them, or to suggest that your work comes
-            from or is endorsed by Edgecom. Other names belong to their owners.
+            <strong className="font-medium text-foreground">Trademarks.</strong> dataTrack™,
+            pTrack®, and NeuraCharge™ are trademarks of Edgecom Energy. Access to this code grants
+            no right to use them, or to suggest that your work comes from or is endorsed by
+            Edgecom. Other names belong to their owners.
           </li>
           <li>
             <strong className="font-medium text-foreground">No tracking.</strong> The site runs no
