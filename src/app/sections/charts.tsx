@@ -22,7 +22,7 @@ const content = {
         id: "chart-legacy-palette",
         name: "Legacy line palette — migration only",
         description:
-          "The plot-line hues operators already read existing plots by, kept only so a product porting those plots can delete its literals. Twelve hues named by colour and tuned to 3:1 on card in both themes, with the peak-rank aliases and peak-window bands. Never for a new feature: new charts take the commodity ramp above.",
+          "The plot-line hues operators already read existing plots by, kept only so a product porting those plots can delete its literals. Fifteen hues named by colour and tuned to 3:1 on card in both themes, with the peak-rank aliases and peak-window bands. Never for a new feature: new charts take the commodity ramp above.",
         preview: <ChartLegacyPaletteDemo />,
         source: dm("chart-legacy-palette-demo"),
       },

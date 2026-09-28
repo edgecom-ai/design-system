@@ -47,6 +47,9 @@ const chartLines = [
   { name: "chart-legacy-line-wine", also: "legacy-peak-6" },
   { name: "chart-legacy-line-olive", also: "legacy-peak-7" },
   { name: "chart-legacy-line-steel", also: "" },
+  { name: "chart-legacy-line-emerald", also: "" },
+  { name: "chart-legacy-line-cyan", also: "" },
+  { name: "chart-legacy-line-purple", also: "" },
 ];
 
 const surfaces = [

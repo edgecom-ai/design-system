@@ -54,6 +54,7 @@ const COMMODITIES = ["electricity", "water", "gas", "temperature", "emissions", 
 const LEGACY_TOKENS = [
   "legacy-line-teal", "legacy-line-green", "legacy-line-brown", "legacy-line-orange", "legacy-line-red", "legacy-line-magenta",
   "legacy-line-sky", "legacy-line-yellow", "legacy-line-lime", "legacy-line-wine", "legacy-line-olive", "legacy-line-steel",
+  "legacy-line-emerald", "legacy-line-cyan", "legacy-line-purple",
   "legacy-peak-1", "legacy-peak-2", "legacy-peak-3", "legacy-peak-4", "legacy-peak-5", "legacy-peak-6", "legacy-peak-7",
   "legacy-window-high", "legacy-window-normal", "legacy-window-low",
 ];

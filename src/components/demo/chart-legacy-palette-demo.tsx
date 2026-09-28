@@ -30,7 +30,7 @@ type Swatch = { token: string; label: string; alias?: string }
 const families: { name: string; note: string; swatches: Swatch[] }[] = [
   {
     name: "Legacy line hues",
-    note: "Twelve plot-line hues, each tuned to 3:1 on card in both themes. The porting product maps its series onto them in one place and takes each line by hue.",
+    note: "Fifteen plot-line hues, each tuned to 3:1 on card in both themes. The porting product maps its series onto them in one place and takes each line by hue.",
     swatches: [
       { token: "legacy-line-teal", label: "Teal" },
       { token: "legacy-line-green", label: "Green" },
@@ -44,6 +44,9 @@ const families: { name: string; note: string; swatches: Swatch[] }[] = [
       { token: "legacy-line-wine", label: "Wine" },
       { token: "legacy-line-olive", label: "Olive" },
       { token: "legacy-line-steel", label: "Steel" },
+      { token: "legacy-line-emerald", label: "Emerald" },
+      { token: "legacy-line-cyan", label: "Cyan" },
+      { token: "legacy-line-purple", label: "Purple" },
     ],
   },
   {
@@ -61,7 +64,7 @@ const families: { name: string; note: string; swatches: Swatch[] }[] = [
   },
   {
     name: "Legacy peak windows",
-    note: "Filled bands behind the lines, graded by rank. One red mixed toward the surface, so the softest band stays soft on a dark card.",
+    note: "Filled bands behind the lines, graded by rank. One red mixed toward the surface, so the softest band stays soft on a dark card. A plot with a single unranked window takes the softest.",
     swatches: [
       { token: "legacy-window-high", label: "Ranks 1–2" },
       { token: "legacy-window-normal", label: "Rank 3" },
