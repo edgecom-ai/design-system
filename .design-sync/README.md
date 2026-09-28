@@ -27,10 +27,13 @@ docs site has no page for.
 
 Two constraints that are easy to miss:
 
-- **Only utility classes the repo's own source already uses exist in the
-  generated stylesheet.** It is compiled by scanning `src/**`, so an arbitrary
-  class in a preview silently does nothing. Type-scale utilities carry no size
-  suffix — `text-heading`, never `text-heading-md`.
+- **The generated stylesheet holds only the classes the repo writes.** It is
+  compiled by scanning `src/**`, these previews and `conventions.md`, so a class
+  used in a preview is compiled with it — and a class that leaves the last file
+  using it disappears from every design built with the system. A class named in
+  `conventions.md` is guaranteed to exist, because the header is scanned too.
+  Type-scale utilities carry no size suffix — `text-heading`, never
+  `text-heading-md`.
 - **Overlay roots must render open**, via `open`, `defaultOpen` or
   `defaultValue`, and their trigger needs room in the configured viewport or
   Base UI flips the popup to the other side and the cell stops illustrating what
