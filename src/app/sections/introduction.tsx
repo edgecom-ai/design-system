@@ -65,6 +65,65 @@ function IntroductionDoc() {
           to install it and start building.
         </p>
       </section>
+
+      <section id="terms" className="flex scroll-mt-6 flex-col gap-3 border-t border-border pt-8">
+        <h2 className="text-title">Terms of use</h2>
+        <p className="text-body text-muted-foreground">
+          This site and the registry behind it are public so that our product teams, and the AI
+          tools they build with, can reach them without signing in. Being public doesn&rsquo;t
+          change what they are:
+        </p>
+        <ul className="ml-4 flex list-disc flex-col gap-2 text-body text-muted-foreground marker:text-muted-foreground/60">
+          <li>
+            <strong className="font-medium text-foreground">A reference, not a service.</strong>{" "}
+            Nothing here is an offer, a product, or a promise of service. There is no support,
+            uptime, or maintenance commitment, and any part of it — a component, a token, a URL,
+            the registry itself — can change, break, or be withdrawn without notice.
+          </li>
+          <li>
+            <strong className="font-medium text-foreground">Provided as is.</strong> The code and
+            guidance come with no warranty of any kind, and you use them at your own risk. To the
+            fullest extent the law allows, Edgecom Energy is not liable for any loss arising from
+            their use.
+          </li>
+          <li>
+            <strong className="font-medium text-foreground">Example data is invented.</strong> Every
+            company, site, person, meter reading, cost, and savings figure in the examples is made
+            up for illustration. None of it is customer data, a measurement, or a performance or
+            savings claim, and none of it is energy, engineering, or financial advice.
+          </li>
+          <li>
+            <strong className="font-medium text-foreground">Not a roadmap.</strong> A component or
+            pattern shown here doesn&rsquo;t mean a feature exists, will ship, or is available in
+            dataTrack™, pTrack®, NeuraCharge™, or any other Edgecom product.
+          </li>
+          <li>
+            <strong className="font-medium text-foreground">Public is not open source.</strong>{" "}
+            Unless a file says otherwise, the code and content are © Edgecom Energy, all rights
+            reserved. Third-party code keeps its own license.
+          </li>
+          <li>
+            <strong className="font-medium text-foreground">Trademarks.</strong> Edgecom, the
+            Edgecom logo, dataTrack™, pTrack®, and NeuraCharge™ are trademarks of Edgecom Energy.
+            Access to this code grants no right to use them, or to suggest that your work comes
+            from or is endorsed by Edgecom. Other names belong to their owners.
+          </li>
+          <li>
+            <strong className="font-medium text-foreground">No tracking.</strong> The site runs no
+            analytics or tracking scripts and asks for no personal information. It is hosted on
+            GitHub Pages, which keeps its own server logs under{" "}
+            <a
+              className="font-medium text-primary underline underline-offset-4 dark:text-primary-emphasis"
+              href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
+              target="_blank"
+              rel="noreferrer"
+            >
+              GitHub&rsquo;s privacy statement
+            </a>
+            .
+          </li>
+        </ul>
+      </section>
     </div>
   );
 }
