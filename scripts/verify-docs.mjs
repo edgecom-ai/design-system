@@ -42,7 +42,7 @@ const SAMPLE = [
   "/components/select/",
   "/components/tabs/",
   "/components/skeleton/",
-  "/blocks/chart-blocks/",
+  "/blocks/datatable/",
 ]
 
 // `--all` checks every generated route instead of the sample. The sample is the

@@ -1,4 +1,3 @@
-import * as React from "react";
 import {
   createRootRoute,
   createRoute,
@@ -80,40 +79,9 @@ const indexRoute = createRoute({
   },
 });
 
-/**
- * Standalone block previews, outside the docs chrome — one route per
- * `src/app/statistics-component-*\/page.tsx`. Listed explicitly rather than
- * built from a template literal so each one becomes its own Rollup chunk and
- * none of them enter the docs bundle. `scripts/prerender.mjs` discovers the
- * same directories from disk; keep the two in step.
- */
-const blockPreviews: Record<
-  string,
-  () => Promise<{ default: React.ComponentType }>
-> = {
-  "statistics-component-02": () => import("@/app/statistics-component-02/page"),
-  "statistics-component-07": () => import("@/app/statistics-component-07/page"),
-  "statistics-component-09": () => import("@/app/statistics-component-09/page"),
-  "statistics-component-10": () => import("@/app/statistics-component-10/page"),
-  "statistics-component-14": () => import("@/app/statistics-component-14/page"),
-  "statistics-component-15": () => import("@/app/statistics-component-15/page"),
-  "statistics-component-19": () => import("@/app/statistics-component-19/page"),
-  "statistics-component-21": () => import("@/app/statistics-component-21/page"),
-  "statistics-component-22": () => import("@/app/statistics-component-22/page"),
-};
-
-const blockPreviewRoutes = Object.entries(blockPreviews).map(([name, load]) =>
-  createRoute({
-    getParentRoute: () => rootRoute,
-    path: `/${name}`,
-    component: React.lazy(load),
-  }),
-);
-
 const routeTree = rootRoute.addChildren([
   indexRoute,
   docsLayoutRoute.addChildren([docsRoute]),
-  ...blockPreviewRoutes,
 ]);
 
 export const router = createRouter({

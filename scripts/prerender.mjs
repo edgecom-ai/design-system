@@ -16,11 +16,10 @@
 //
 //   out/index.html                            ->  /
 //   out/{group}/{slug}/index.html             ->  /{group}/{slug}/
-//   out/statistics-component-NN/index.html    ->  standalone block previews
 //
 // Output: files written into out/. Run after `vite build`.
 
-import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { resolve, dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -57,17 +56,7 @@ if (docsRoutes.length === 0) {
   process.exit(1);
 }
 
-// The standalone block previews, discovered rather than listed, so adding one
-// directory is all it takes. Keep in sync with src/router.tsx.
-const blockPreviews = readdirSync(resolve(root, "src/app"), { withFileTypes: true })
-  .filter((d) => d.isDirectory() && d.name.startsWith("statistics-component-"))
-  .map((d) => d.name)
-  .sort();
-
-const paths = [
-  ...docsRoutes.map((r) => `${r.group}/${r.slug}`),
-  ...blockPreviews,
-];
+const paths = docsRoutes.map((r) => `${r.group}/${r.slug}`);
 
 for (const p of paths) {
   const dir = join(outDir, p);
@@ -76,5 +65,5 @@ for (const p of paths) {
 }
 
 console.log(
-  `prerender — ${paths.length + 1} HTML files (1 root + ${docsRoutes.length} docs + ${blockPreviews.length} block previews)`,
+  `prerender — ${paths.length + 1} HTML files (1 root + ${docsRoutes.length} docs)`,
 );
