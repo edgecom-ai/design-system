@@ -82,15 +82,11 @@ export const sectionContent: Record<string, () => Promise<{ default: SectionCont
   "toast": () => import("./sections/toast"),
   "authorization": () => import("./sections/authorization"),
   "detail-dialog": () => import("./sections/detail-dialog"),
-  "chart-blocks": () => import("./sections/chart-blocks"),
   "datatable": () => import("./sections/datatable"),
   "form": () => import("./sections/form"),
   "page-header": () => import("./sections/page-header"),
-  "file-upload": () => import("./sections/file-upload"),
-  "statistics": () => import("./sections/statistics"),
   "widgets": () => import("./sections/widgets"),
   "application-shell": () => import("./sections/application-shell"),
-  "settings": () => import("./sections/settings"),
 };
 
 export type Variant = {
@@ -714,18 +710,6 @@ export const sections: Section[] = [
     hasVariants: true,
   },
   {
-    id: "chart-blocks",
-    label: "Charts",
-    group: "Blocks",
-    description: "Prebuilt chart blocks themed with the commodity color ramps.",
-    install: "@edgecom/chart",
-    toc: [
-      { id: "chart-consumption", name: "Consumption metrics" },
-      { id: "chart-spend", name: "Energy spend" },
-      { id: "chart-demand-response", name: "Demand response" },
-    ],
-  },
-  {
     id: "datatable",
     label: "Data table",
     group: "Blocks",
@@ -751,45 +735,12 @@ export const sections: Section[] = [
     hasVariants: true,
   },
   {
-    id: "file-upload",
-    label: "File upload",
-    group: "Blocks",
-    description: "Drag-and-drop and browse controls for uploading files.",
-    install: "@edgecom/file-upload",
-    toc: [],
-  },
-  {
-    id: "statistics",
-    label: "Statistic Cards",
-    group: "Blocks",
-    description: "Metric tiles and KPI blocks for dashboards.",
-    install:
-      "@ss-blocks/statistics-component-15 @ss-blocks/statistics-component-02 @ss-blocks/statistics-component-14 @ss-blocks/statistics-component-22 @ss-blocks/statistics-component-21 @ss-blocks/statistics-component-19 @ss-blocks/statistics-component-07 @ss-blocks/statistics-component-09 @ss-blocks/statistics-component-10",
-    toc: [
-      { id: "stats-usage", name: "Usage / allocation meters" },
-      { id: "stats-kpi", name: "KPI tiles with period" },
-      { id: "stats-score", name: "Score gauge" },
-      { id: "stats-health", name: "Service-health meters" },
-      { id: "stats-line-trend", name: "Line-trend KPIs" },
-      { id: "stats-channel", name: "Channel distribution" },
-      { id: "stats-overview", name: "Overview grid" },
-      { id: "stats-activity", name: "Activity / traffic" },
-      { id: "stats-expense-income", name: "Expense / income" },
-    ],
-  },
-  {
     id: "widgets",
     label: "Widgets",
     group: "Blocks",
     description: "Composed dashboard widgets combining stats, charts, and lists.",
-    install:
-      "@ss-blocks/widget-component-07 @ss-blocks/widget-component-17 @ss-blocks/widget-component-15 @ss-blocks/widget-component-20 @ss-blocks/widget-component-09 @ss-blocks/widget-component-02",
+    install: "@ss-blocks/widget-component-02",
     toc: [
-      { id: "widget-finance", name: "Finance review summary" },
-      { id: "widget-orders", name: "Timeline orders" },
-      { id: "widget-user-order", name: "User order summary" },
-      { id: "widget-activity", name: "Customer activity" },
-      { id: "widget-campaign", name: "Monthly campaign state" },
       { id: "widget-insights", name: "Product insights" },
     ],
   },
@@ -800,15 +751,6 @@ export const sections: Section[] = [
     description:
       "The portal page frame — icon-rail sidebar with navigation and account menu, top bar with search, building switcher and theme toggle, and the content area — from data.",
     install: "@edgecom/application-shell",
-    hasVariants: true,
-  },
-  {
-    id: "settings",
-    label: "Settings",
-    group: "Blocks",
-    description:
-      "Account settings pages plus the settings shell that frames them with a grouped sub-nav.",
-    install: "@edgecom/settings-shell",
     hasVariants: true,
   },
 ];

@@ -2,9 +2,7 @@
 // sections.tsx and .claude/rules/docs-site.md.
 
 import * as React from "react"
-import { dm, ss } from "./shared";
-
-const DataTableAdvancedDemo = React.lazy(() => import("@/components/demo/datatable-demo").then((m) => ({ default: m.DataTableAdvancedDemo })));
+import { ss } from "./shared";
 
 const DataTableBasicDemo = React.lazy(() => import("@/components/shadcn-studio/data-table/data-table-01"));
 
@@ -18,13 +16,6 @@ const EditableDataTableDemo = React.lazy(() => import("@/components/shadcn-studi
 
 const content = {
   variants: [
-      {
-        id: "data-table-advanced",
-        name: "Advanced (filters · columns · pagination)",
-        description: "A complete table with filtering, column toggles, and paging.",
-        preview: <DataTableAdvancedDemo />,
-        source: dm("datatable-demo"),
-      },
       {
         id: "data-table-default",
         name: "Default (sortable, selectable)",

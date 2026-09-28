@@ -8,8 +8,6 @@ const FormLayoutPersonalInfo = React.lazy(() => import("@/components/shadcn-stud
 
 const FormValidatedTanstack = React.lazy(() => import("@/components/shadcn-studio/blocks/form-validated/form-validated"));
 
-const FormLayoutOnboardingWizard = React.lazy(() => import("@/components/shadcn-studio/blocks/form-layout-09/form-layout-09"));
-
 const content = {
   variants: [
       {
@@ -26,13 +24,6 @@ const content = {
         description: "A single-step form for capturing basic profile details.",
         preview: <FormLayoutPersonalInfo />,
         source: ss("blocks/form-layout-01/form-layout-01"),
-      },
-      {
-        id: "form-onboarding-wizard",
-        name: "Onboarding wizard (multi-step)",
-        description: "A guided multi-step flow for onboarding new users.",
-        preview: <FormLayoutOnboardingWizard />,
-        source: ss("blocks/form-layout-09/form-layout-09"),
       },
     ],
 };
