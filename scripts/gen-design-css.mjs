@@ -11,7 +11,11 @@
 //      the design agent may reuse for its own layout, with the same scanner
 //      the CLI uses. Unlike the card stylesheet (lib/base-css.mjs) nothing is
 //      resolved away: designs compose utilities dynamically, so `--tw-*`
-//      composition has to keep working.
+//      composition has to keep working. The sync's own inputs are scanned
+//      too: the preview cards render against this file, and the conventions
+//      header promises the design agent that every class it names is here.
+//      Without them, deleting a demo silently drops a class the header still
+//      teaches.
 //   2. The Edgecom `:root` / `.dark` blocks — plus the `@theme inline` scales
 //      Tailwind never emits as variables — are moved to the very top, so the
 //      platform's token manifest reads Edgecom's tokens before anything else.
@@ -38,7 +42,13 @@ const { Scanner } = createRequire(createRequire(import.meta.url).resolve("@tailw
 const globalsCss = readFileSync(resolve(root, "src/app/globals.css"), "utf8")
 const { light, theme } = readBlocks(globalsCss)
 
-const scanner = new Scanner({ sources: [{ base: resolve(root, "src"), pattern: "**/*.{ts,tsx,mdx,md,html}", negated: false }] })
+const scanner = new Scanner({
+  sources: [
+    { base: resolve(root, "src"), pattern: "**/*.{ts,tsx,mdx,md,html}", negated: false },
+    { base: resolve(root, ".design-sync/previews"), pattern: "**/*.tsx", negated: false },
+    { base: resolve(root, ".design-sync"), pattern: "conventions.md", negated: false },
+  ],
+})
 const candidates = scanner.scan()
 
 const compiler = await compile(globalsCss, { base: resolve(root, "src/app"), onDependency: () => {} })
