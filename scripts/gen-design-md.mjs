@@ -10,6 +10,11 @@
 //
 // Parsing mirrors gen-registry.mjs (blockVars): :root is the canonical light
 // token set; dark deltas are documented in the body, not the front-matter.
+//
+// Runs first in `docs:gen`. design.md is a source of the system digest
+// (lib/system.mjs), so a token change rewrites it, and every generator that
+// stamps the digest (tokens, contracts, design manifest, agents.md) has to
+// read the rewritten file. Run later, one pass leaves them on the old digest.
 
 import { readFileSync, writeFileSync, copyFileSync } from "node:fs";
 import { resolve, dirname } from "node:path";
