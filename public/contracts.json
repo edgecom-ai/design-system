@@ -1,7 +1,7 @@
 {
   "$schema": "https://design.edgecom.ai/schemas/contracts.schema.json",
   "version": "v3.0.0",
-  "digest": "6e01bd9e14118f10",
+  "digest": "e6657eb810278630",
   "sources": [
     "src/components/ui/*.tsx",
     "src/app/sections.tsx",

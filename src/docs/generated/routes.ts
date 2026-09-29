@@ -290,10 +290,22 @@ export const staticParams: { group: string; slug: string }[] = [
   },
   {
     "group": "blocks",
+    "slug": "file-upload"
+  },
+  {
+    "group": "blocks",
+    "slug": "statistics"
+  },
+  {
+    "group": "blocks",
     "slug": "widgets"
   },
   {
     "group": "blocks",
     "slug": "application-shell"
+  },
+  {
+    "group": "blocks",
+    "slug": "settings"
   }
 ];

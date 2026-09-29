@@ -86,8 +86,11 @@ export const sectionContent: Record<string, () => Promise<{ default: SectionCont
   "datatable": () => import("./sections/datatable"),
   "form": () => import("./sections/form"),
   "page-header": () => import("./sections/page-header"),
+  "file-upload": () => import("./sections/file-upload"),
+  "statistics": () => import("./sections/statistics"),
   "widgets": () => import("./sections/widgets"),
   "application-shell": () => import("./sections/application-shell"),
+  "settings": () => import("./sections/settings"),
 };
 
 export type Variant = {
@@ -745,14 +748,30 @@ export const sections: Section[] = [
     hasVariants: true,
   },
   {
+    id: "file-upload",
+    label: "File upload",
+    group: "Blocks",
+    description:
+      "A drop zone with its chosen and rejected states, the import dialog it sits in, and a three-step import wizard that maps a file's columns before anything is added.",
+    install: "@edgecom/button @edgecom/dialog @edgecom/stepper @edgecom/field @edgecom/select @edgecom/alert @edgecom/card",
+    hasVariants: true,
+  },
+  {
+    id: "statistics",
+    label: "Statistic cards",
+    group: "Blocks",
+    description:
+      "Metric tiles, KPI cards, status tiles and summary strips — the headline figures a dashboard leads with.",
+    install: "@edgecom/card @edgecom/badge @edgecom/chart @edgecom/circular-progress @edgecom/select @edgecom/button",
+    hasVariants: true,
+  },
+  {
     id: "widgets",
     label: "Widgets",
     group: "Blocks",
     description: "Composed dashboard widgets combining stats, charts, and lists.",
     install: "@ss-blocks/widget-component-02",
-    toc: [
-      { id: "widget-insights", name: "Product insights" },
-    ],
+    hasVariants: true,
   },
   {
     id: "application-shell",
@@ -761,6 +780,15 @@ export const sections: Section[] = [
     description:
       "The portal page frame — icon-rail sidebar with navigation and account menu, top bar with search, building switcher and theme toggle, and the content area — from data.",
     install: "@edgecom/application-shell",
+    hasVariants: true,
+  },
+  {
+    id: "settings",
+    label: "Settings",
+    group: "Blocks",
+    description:
+      "The settings shell — a grouped section rail that folds to icons and then to a select — with a profile form on a sticky save bar, and preference cards that apply as they change.",
+    install: "@edgecom/field @edgecom/input @edgecom/select @edgecom/combobox @edgecom/card @edgecom/tooltip @edgecom/empty @edgecom/sonner",
     hasVariants: true,
   },
 ];

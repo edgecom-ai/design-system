@@ -106,8 +106,11 @@ Browse every component in light/dark with copyable code at [design.edgecom.ai](h
 - [Data table](https://design.edgecom.ai/blocks/datatable/): Full-featured tables with sorting, filtering, pagination, and selection.
 - [Form](https://design.edgecom.ai/blocks/form/): Composed form layouts, from single-step to multi-step wizards.
 - [Page header](https://design.edgecom.ai/blocks/page-header/): A breadcrumb above the H1, plus optional tab and toolbar rows. Any crumb — including the current page — can open a dropdown to pivot between peers.
+- [File upload](https://design.edgecom.ai/blocks/file-upload/): A drop zone with its chosen and rejected states, the import dialog it sits in, and a three-step import wizard that maps a file's columns before anything is added.
+- [Statistic cards](https://design.edgecom.ai/blocks/statistics/): Metric tiles, KPI cards, status tiles and summary strips — the headline figures a dashboard leads with.
 - [Widgets](https://design.edgecom.ai/blocks/widgets/): Composed dashboard widgets combining stats, charts, and lists.
 - [Application shell](https://design.edgecom.ai/blocks/application-shell/): The portal page frame — icon-rail sidebar with navigation and account menu, top bar with search, building switcher and theme toggle, and the content area — from data.
+- [Settings](https://design.edgecom.ai/blocks/settings/): The settings shell — a grouped section rail that folds to icons and then to a select — with a profile form on a sticky save bar, and preference cards that apply as they change.
 
 <!-- @@GENERATED:catalog-end -->
 
