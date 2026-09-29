@@ -102,6 +102,7 @@ Browse every component in light/dark with copyable code at [design.edgecom.ai](h
 
 - [Authorization](https://design.edgecom.ai/blocks/authorization/): A connection-progress screen for OAuth-style utility linking flows.
 - [Detail dialog](https://design.edgecom.ai/blocks/detail-dialog/): Composed, opinionated dialogs that assemble many primitives into a full editing screen.
+- [Charts](https://design.edgecom.ai/blocks/chart-blocks/): Chart cards with the standard header controls — metric selector, shared date range, statistical overlays, smooth/step, and export — coloured from the commodity ramps.
 - [Data table](https://design.edgecom.ai/blocks/datatable/): Full-featured tables with sorting, filtering, pagination, and selection.
 - [Form](https://design.edgecom.ai/blocks/form/): Composed form layouts, from single-step to multi-step wizards.
 - [Page header](https://design.edgecom.ai/blocks/page-header/): A breadcrumb above the H1, plus optional tab and toolbar rows. Any crumb — including the current page — can open a dropdown to pivot between peers.
