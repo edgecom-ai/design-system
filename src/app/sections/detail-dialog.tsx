@@ -8,6 +8,8 @@ const UserDetailsDialogDemo = React.lazy(() => import("@/components/demo/user-de
 
 const CreateAlarmDialogDemo = React.lazy(() => import("@/components/demo/create-alarm-dialog-demo").then((m) => ({ default: m.CreateAlarmDialogDemo })));
 
+const MemberDetailSheetDemo = React.lazy(() => import("@/components/demo/member-detail-sheet-demo").then((m) => ({ default: m.MemberDetailSheetDemo })));
+
 const content = {
   variants: [
       {
@@ -23,6 +25,14 @@ const content = {
         description: "A scrollable record editor combining avatar, inputs, select, calendar, and popover.",
         preview: <UserDetailsDialogDemo />,
         source: dm("user-details-dialog-demo"),
+      },
+      {
+        id: "detail-dialog-member-sheet",
+        name: "Member detail sheet",
+        description:
+          "A longer edit, so a right sheet — widened past its 420px default because project access needs two columns. Sections stack under small headings, read-only values line up with the inputs beside them, closing with unsaved access asks first, and removing the member sits in the footer behind an alert dialog.",
+        preview: <MemberDetailSheetDemo />,
+        source: dm("member-detail-sheet-demo"),
       },
     ],
 };
