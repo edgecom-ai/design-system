@@ -82,6 +82,7 @@ export const sectionContent: Record<string, () => Promise<{ default: SectionCont
   "toast": () => import("./sections/toast"),
   "authorization": () => import("./sections/authorization"),
   "detail-dialog": () => import("./sections/detail-dialog"),
+  "chart-blocks": () => import("./sections/chart-blocks"),
   "datatable": () => import("./sections/datatable"),
   "form": () => import("./sections/form"),
   "page-header": () => import("./sections/page-header"),
@@ -707,6 +708,15 @@ export const sections: Section[] = [
     group: "Blocks",
     description: "Composed, opinionated dialogs that assemble many primitives into a full editing screen.",
     install: "@edgecom/detail-dialog",
+    hasVariants: true,
+  },
+  {
+    id: "chart-blocks",
+    label: "Charts",
+    group: "Blocks",
+    description:
+      "Chart cards with the standard header controls — metric selector, shared date range, statistical overlays, smooth/step, and export — coloured from the commodity ramps.",
+    install: "@edgecom/chart @edgecom/card @edgecom/toggle-group @edgecom/date-picker @edgecom/dropdown-menu @edgecom/tooltip @edgecom/multi-select-listbox @edgecom/circular-progress",
     hasVariants: true,
   },
   {

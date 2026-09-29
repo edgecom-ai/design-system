@@ -274,6 +274,10 @@ export const staticParams: { group: string; slug: string }[] = [
   },
   {
     "group": "blocks",
+    "slug": "chart-blocks"
+  },
+  {
+    "group": "blocks",
     "slug": "datatable"
   },
   {
