@@ -1,6 +1,6 @@
 {
   "version": "v3.0.0",
-  "digest": "3cdb1f4a2c9e8d10",
+  "digest": "6e01bd9e14118f10",
   "contract": {
     "id": "application-shell",
     "label": "Application shell",
@@ -89,6 +89,10 @@
         "family": "neutral"
       },
       {
+        "id": "muted",
+        "family": "neutral"
+      },
+      {
         "id": "muted-foreground",
         "family": "neutral"
       },
@@ -122,7 +126,8 @@
     "rules": [
       "The rail collapses to icons (`collapsible=\"icon\"`); labels move to tooltips and a submenu becomes a hover flyout.",
       "On a phone the rail becomes an offcanvas sheet behind the header's toggle and the search field hides.",
-      "The theme toggle flips `.dark` on `<html>`; nothing inside the shell hand-picks a dark colour."
+      "The theme toggle flips `.dark` on `<html>`; nothing inside the shell hand-picks a dark colour.",
+      "The content area paints `muted` in both themes and the page's cards sit on it; a page never repaints that surface, and a tab strip placed straight on it takes the `adaptive` or `line` variant."
     ],
     "behavior": {
       "loading": "The page's own loading state renders inside `ApplicationShellContent`; the frame itself never skeletons.",
