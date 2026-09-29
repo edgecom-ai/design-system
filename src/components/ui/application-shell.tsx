@@ -626,12 +626,12 @@ function ApplicationShellThemeToggle({
   )
 }
 
-/** The scrolling page area beside the rail. */
+/** The scrolling page area beside the rail, on `muted` so the page's cards stand off it. */
 function ApplicationShellContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="application-shell-content"
-      className={cn("min-h-0 flex-1 overflow-y-auto p-4 md:p-6", className)}
+      className={cn("min-h-0 flex-1 overflow-y-auto bg-muted p-4 md:p-6", className)}
       {...props}
     />
   )
