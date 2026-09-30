@@ -2,17 +2,17 @@
 // sections.tsx and .claude/rules/docs-site.md.
 
 import * as React from "react"
-import { dm, ss } from "./shared";
+import { dm } from "./shared";
 
-const SkeletonText = React.lazy(() => import("@/components/shadcn-studio/skeleton/skeleton-02"));
+const SkeletonText = React.lazy(() => import("@/components/demo/skeleton-text-demo").then((m) => ({ default: m.SkeletonTextDemo })));
 
-const SkeletonForm = React.lazy(() => import("@/components/shadcn-studio/skeleton/skeleton-04"));
+const SkeletonForm = React.lazy(() => import("@/components/demo/skeleton-form-demo").then((m) => ({ default: m.SkeletonFormDemo })));
 
-const SkeletonAccordion = React.lazy(() => import("@/components/shadcn-studio/skeleton/skeleton-07"));
+const SkeletonAccordion = React.lazy(() => import("@/components/demo/skeleton-accordion-demo").then((m) => ({ default: m.SkeletonAccordionDemo })));
 
-const SkeletonTable = React.lazy(() => import("@/components/shadcn-studio/skeleton/skeleton-11"));
+const SkeletonTable = React.lazy(() => import("@/components/demo/skeleton-table-demo").then((m) => ({ default: m.SkeletonTableDemo })));
 
-const SkeletonWidgetsCards = React.lazy(() => import("@/components/shadcn-studio/skeleton/skeleton-12"));
+const SkeletonWidgetsCards = React.lazy(() => import("@/components/demo/skeleton-stat-tiles-demo").then((m) => ({ default: m.SkeletonStatTilesDemo })));
 
 const SkeletonAvatarDemo = React.lazy(() => import("@/components/demo/skeleton-avatar-demo").then((m) => ({ default: m.SkeletonAvatarDemo })));
 
@@ -38,41 +38,41 @@ const content = {
       {
         id: "skeleton-text",
         name: "Text blocks",
-        description: "Stacked lines standing in for a paragraph.",
+        description: "A report summary while it loads: a title, a meta line, and two paragraphs whose last lines run short.",
         preview: <SkeletonText />,
-        source: ss("skeleton/skeleton-02"),
+        source: dm("skeleton-text-demo"),
       },
       {
         id: "skeleton-form",
         name: "Form",
-        description: "Placeholder fields mirroring a form layout.",
+        description: "An edit form while its values load: the labels render, and each control is a placeholder at its own height.",
         preview: <SkeletonForm />,
-        source: ss("skeleton/skeleton-04"),
+        source: dm("skeleton-form-demo"),
       },
       {
         id: "skeleton-accordion",
         name: "Accordion",
-        description: "Placeholder rows mirroring collapsed accordion items.",
+        description: "Grouped rows drawn as placeholders, the first group's body open — no controls until the data arrives.",
         preview: (
           <div className="w-full max-w-md">
             <SkeletonAccordion />
           </div>
         ),
-        source: ss("skeleton/skeleton-07"),
+        source: dm("skeleton-accordion-demo"),
       },
       {
         id: "skeleton-table",
         name: "Table",
-        description: "Placeholder rows and columns mirroring a table.",
+        description: "Placeholder rows under the real column headers, so the table keeps its layout while it loads.",
         preview: <SkeletonTable />,
-        source: ss("skeleton/skeleton-11"),
+        source: dm("skeleton-table-demo"),
       },
       {
         id: "skeleton-widgets",
         name: "Widget cards",
-        description: "Placeholder dashboard widget cards.",
+        description: "Dashboard tiles with their labels in place and placeholders for the figures.",
         preview: <SkeletonWidgetsCards />,
-        source: ss("skeleton/skeleton-12"),
+        source: dm("skeleton-stat-tiles-demo"),
       },
     ],
 };

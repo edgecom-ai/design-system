@@ -8,7 +8,7 @@ const sept = new Date(2026, 8, 16)
 
 export { default as RangeTwoMonths } from "@/components/shadcn-studio/calendar/calendar-04"
 export { default as WithEventList } from "@/components/shadcn-studio/calendar/calendar-11"
-export { default as DailyCostPerDay } from "@/components/shadcn-studio/calendar/calendar-25"
+export { CalendarDailyCostDemo as DailyCostPerDay } from "@/components/demo/calendar-daily-cost-demo"
 
 export function SingleSelected() {
   const [date, setDate] = React.useState<Date | undefined>(sept)

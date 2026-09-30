@@ -8,7 +8,7 @@ const ContextMenuDemo = React.lazy(() => import("@/components/demo/context-menu-
 
 const ContextMenuBasicDemo = React.lazy(() => import("@/components/shadcn-studio/context-menu/context-menu-01"));
 
-const ContextMenuSubmenuDemo = React.lazy(() => import("@/components/shadcn-studio/context-menu/context-menu-02"));
+const ContextMenuSubmenuDemo = React.lazy(() => import("@/components/demo/context-menu-submenu-demo").then((m) => ({ default: m.ContextMenuSubmenuDemo })));
 
 const content = {
   variants: [
@@ -32,7 +32,7 @@ const content = {
         name: "With submenu",
         description: "A menu that nests further actions in a submenu.",
         preview: <ContextMenuSubmenuDemo />,
-        source: ss("context-menu/context-menu-02"),
+        source: dm("context-menu-submenu-demo"),
       },
     ],
 };

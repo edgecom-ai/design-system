@@ -8,7 +8,7 @@ const SliderWithTicksDemo = React.lazy(() => import("@/components/shadcn-studio/
 
 const SliderMultiThumbDemo = React.lazy(() => import("@/components/shadcn-studio/slider/slider-02"));
 
-const SliderMultiTooltipDemo = React.lazy(() => import("@/components/shadcn-studio/slider/slider-12"));
+const SliderMultiTooltipDemo = React.lazy(() => import("@/components/demo/slider-value-tooltip-demo").then((m) => ({ default: m.SliderValueTooltipDemo })));
 
 const SliderBasicDemo = React.lazy(() => import("@/components/demo/slider-basic-demo").then((m) => ({ default: m.SliderBasicDemo })));
 
@@ -38,9 +38,9 @@ const content = {
       {
         id: "slider-tooltip",
         name: "With value tooltips",
-        description: "Thumbs surface their current value in a tooltip while dragging.",
+        description: "Each thumb shows its value in a tooltip while the slider is hovered, dragged or focused.",
         preview: <SliderMultiTooltipDemo />,
-        source: ss("slider/slider-12"),
+        source: dm("slider-value-tooltip-demo"),
       },
     ],
 };

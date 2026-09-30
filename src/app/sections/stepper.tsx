@@ -2,9 +2,9 @@
 // sections.tsx and .claude/rules/docs-site.md.
 
 import * as React from "react"
-import { ss } from "./shared";
+import { dm, ss } from "./shared";
 
-const StepperInlineDescriptionDemo = React.lazy(() => import("@/components/shadcn-studio/stepper/stepper-05"));
+const StepperEnrollmentDemo = React.lazy(() => import("@/components/demo/stepper-enrollment-demo").then((m) => ({ default: m.StepperEnrollmentDemo })));
 
 const StepperHorizontalSubmitDemo = React.lazy(() => import("@/components/shadcn-studio/stepper/stepper-08"));
 
@@ -15,9 +15,9 @@ const content = {
       {
         id: "stepper-inline-descriptions",
         name: "Inline descriptions (responsive)",
-        description: "A stepper with per-step descriptions that adapt to width.",
-        preview: <StepperInlineDescriptionDemo />,
-        source: ss("stepper/stepper-05"),
+        description: "A stepper with a description under each title — a row from md up, stacked below it with `responsive`.",
+        preview: <StepperEnrollmentDemo />,
+        source: dm("stepper-enrollment-demo"),
       },
       {
         id: "stepper-horizontal-submit",

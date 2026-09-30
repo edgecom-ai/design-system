@@ -14,7 +14,7 @@ import {
   StepperTrigger,
 } from "@/components/ui/stepper"
 
-export { default as InlineDescriptions } from "@/components/shadcn-studio/stepper/stepper-05"
+export { StepperEnrollmentDemo as InlineDescriptions } from "@/components/demo/stepper-enrollment-demo"
 export { default as HorizontalWithSubmit } from "@/components/shadcn-studio/stepper/stepper-08"
 export { default as VerticalWithPanel } from "@/components/shadcn-studio/stepper/stepper-09"
 

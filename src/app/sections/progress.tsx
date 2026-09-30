@@ -6,7 +6,7 @@ import { dm, ss } from "./shared";
 
 const ProgressLinearDemo = React.lazy(() => import("@/components/demo/progress-linear-demo").then((m) => ({ default: m.ProgressLinearDemo })));
 
-const ProgressShapeDemo = React.lazy(() => import("@/components/shadcn-studio/progress/progress-04"));
+const ProgressShapeDemo = React.lazy(() => import("@/components/demo/progress-formatted-demo").then((m) => ({ default: m.ProgressFormattedDemo })));
 
 const ProgressChecklistDemo = React.lazy(() => import("@/components/shadcn-studio/progress/progress-14"));
 
@@ -21,14 +21,14 @@ const content = {
       },
       {
         id: "progress-shapes",
-        name: "Shapes",
-        description: "Progress rendered in alternative bar shapes.",
+        name: "Formatted values",
+        description: "A label and a value formatted for the measure — a percentage, kilowatts against a contracted maximum, dollars against a budget.",
         preview: (
           <div className="sm:max-w-sm">
             <ProgressShapeDemo />
           </div>
         ),
-        source: ss("progress/progress-04"),
+        source: dm("progress-formatted-demo"),
       },
       {
         id: "progress-checklist",

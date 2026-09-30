@@ -17,7 +17,7 @@ const BadgeBlockedDemo = React.lazy(() => import("@/components/shadcn-studio/bad
 
 const BadgeCompletedDemo = React.lazy(() => import("@/components/shadcn-studio/badge/badge-18"));
 
-const BadgeDotDemo = React.lazy(() => import("@/components/shadcn-studio/badge/badge-05"));
+const BadgeDotDemo = React.lazy(() => import("@/components/demo/badge-dot-demo").then((m) => ({ default: m.BadgeDotDemo })));
 
 function ClosableBadgeDemo() {
   const [key, setKey] = React.useState(0);
@@ -50,9 +50,9 @@ const content = {
       {
         id: "badge-dot",
         name: "Dot badge",
-        description: "Minimal badge with a leading status dot.",
+        description: "An outline badge with a leading status dot — the dot carries the state, the word names it.",
         preview: <BadgeDotDemo />,
-        source: ss("badge/badge-05"),
+        source: dm("badge-dot-demo"),
       },
       {
         id: "badge-in-progress",

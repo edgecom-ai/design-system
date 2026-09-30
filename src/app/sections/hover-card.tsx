@@ -8,11 +8,11 @@ const HoverCardDemo = React.lazy(() => import("@/components/demo/hover-card-demo
 
 const HoverCardReferenceDemo = React.lazy(() => import("@/components/demo/hover-card-reference-demo").then((m) => ({ default: m.HoverCardReferenceDemo })));
 
-const HoverCardStatsDemo = React.lazy(() => import("@/components/shadcn-studio/tooltip/tooltip-12"));
+const HoverCardStatsDemo = React.lazy(() => import("@/components/demo/hover-card-stats-demo").then((m) => ({ default: m.HoverCardStatsDemo })));
 
 const HoverCardProjectDemo = React.lazy(() => import("@/components/shadcn-studio/tooltip/tooltip-13"));
 
-const HoverCardTasksDemo = React.lazy(() => import("@/components/shadcn-studio/tooltip/tooltip-15"));
+const HoverCardTasksDemo = React.lazy(() => import("@/components/demo/hover-card-tasks-demo").then((m) => ({ default: m.HoverCardTasksDemo })));
 
 const content = {
   variants: [
@@ -35,7 +35,7 @@ const content = {
         name: "Stats",
         description: "A rich hover card surfacing key metrics at a glance.",
         preview: <HoverCardStatsDemo />,
-        source: ss("tooltip/tooltip-12"),
+        source: dm("hover-card-stats-demo"),
       },
       {
         id: "hover-card-project",
@@ -47,9 +47,9 @@ const content = {
       {
         id: "hover-card-tasks",
         name: "Tasks",
-        description: "Show a summary task list on hover.",
+        description: "A count that opens the list behind it: open work orders with their assignees and due dates.",
         preview: <HoverCardTasksDemo />,
-        source: ss("tooltip/tooltip-15"),
+        source: dm("hover-card-tasks-demo"),
       },
     ],
 };

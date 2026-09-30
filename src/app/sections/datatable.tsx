@@ -4,7 +4,7 @@
 import * as React from "react"
 import { dm, ss } from "./shared";
 
-const DataTableBasicDemo = React.lazy(() => import("@/components/shadcn-studio/data-table/data-table-01"));
+const DataTableBasicDemo = React.lazy(() => import("@/components/demo/data-table-sortable-demo").then((m) => ({ default: m.DataTableSortableDemo })));
 
 const DataTableWithExpandableRowsDemo = React.lazy(() => import("@/components/shadcn-studio/data-table/data-table-09"));
 
@@ -29,9 +29,9 @@ const content = {
       {
         id: "data-table-default",
         name: "Default (sortable, selectable)",
-        description: "A baseline table with sortable columns and row selection.",
+        description: "A baseline table with sortable columns, row selection and a select-all checkbox.",
         preview: <DataTableBasicDemo />,
-        source: ss("data-table/data-table-01"),
+        source: dm("data-table-sortable-demo"),
       },
       {
         id: "data-table-expandable",

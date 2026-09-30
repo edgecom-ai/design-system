@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/progress"
 
 export { ProgressLinearDemo as Linear } from "@/components/demo/progress-linear-demo"
-export { default as Shapes } from "@/components/shadcn-studio/progress/progress-04"
+export { ProgressFormattedDemo as Formatted } from "@/components/demo/progress-formatted-demo"
 export { default as Checklist } from "@/components/shadcn-studio/progress/progress-14"
 
 export function WithLabelAndValue() {
