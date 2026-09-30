@@ -34,7 +34,7 @@ export const curatedApi: Record<string, CuratedApi> = {
       "A callout box laying out an optional icon, AlertTitle, AlertDescription, and a top-right AlertAction.",
     parts: {
       Alert: "Root callout container with role=alert and variant styling.",
-      AlertTitle: "Bold single-line heading text for the alert.",
+      AlertTitle: "Bold heading text for the alert. A long title wraps rather than truncating.",
       AlertDescription: "Secondary descriptive body text below the title.",
       AlertAction: "Top-right slot for a dismiss or action button.",
     },

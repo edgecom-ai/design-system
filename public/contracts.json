@@ -1,7 +1,7 @@
 {
   "$schema": "https://design.edgecom.ai/schemas/contracts.schema.json",
   "version": "v3.0.0",
-  "digest": "924840e11d5b4539",
+  "digest": "c23fc735881ab0bf",
   "sources": [
     "src/components/ui/*.tsx",
     "src/app/sections.tsx",
@@ -127,7 +127,7 @@
         },
         {
           "name": "AlertTitle",
-          "description": "Bold single-line heading text for the alert."
+          "description": "Bold heading text for the alert. A long title wraps rather than truncating."
         },
         {
           "name": "AlertDescription",
