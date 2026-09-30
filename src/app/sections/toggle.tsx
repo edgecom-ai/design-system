@@ -9,11 +9,11 @@ const ToggleFilledIcon = React.lazy(() => import("@/components/shadcn-studio/tog
 
 const ToggleIconPattern = React.lazy(() => import("@/components/shadcn-studio/toggle/toggle-07"));
 
-const ToggleGroupSizes = React.lazy(() => import("@/components/shadcn-studio/toggle-group/toggle-group-03"));
+const ToggleGroupSizesDemo = React.lazy(() => import("@/components/demo/toggle-group-sizes-demo").then((m) => ({ default: m.ToggleGroupSizesDemo })));
 
 const ToggleGroupLayout = React.lazy(() => import("@/components/shadcn-studio/toggle-group/toggle-group-08"));
 
-const ToggleGroupTooltip = React.lazy(() => import("@/components/shadcn-studio/toggle-group/toggle-group-09"));
+const ToggleGroupRangeTooltipDemo = React.lazy(() => import("@/components/demo/toggle-group-range-tooltip-demo").then((m) => ({ default: m.ToggleGroupRangeTooltipDemo })));
 
 const ToggleFormattingDemo = React.lazy(() => import("@/components/demo/toggle-formatting-demo").then((m) => ({ default: m.ToggleFormattingDemo })));
 
@@ -44,8 +44,8 @@ const content = {
         id: "toggle-group-sizes",
         name: "Group sizes",
         description: "A toggle group shown across the size scale.",
-        preview: <ToggleGroupSizes />,
-        source: ss("toggle-group/toggle-group-03"),
+        preview: <ToggleGroupSizesDemo />,
+        source: dm("toggle-group-sizes-demo"),
       },
       {
         id: "toggle-group-layout",
@@ -57,13 +57,13 @@ const content = {
       {
         id: "toggle-group-tooltip",
         name: "Group with tooltips",
-        description: "A toggle group where each option has a tooltip.",
+        description: "Range presets whose tooltips spell out the dates each one covers.",
         preview: (
           <TooltipProvider>
-            <ToggleGroupTooltip />
+            <ToggleGroupRangeTooltipDemo />
           </TooltipProvider>
         ),
-        source: ss("toggle-group/toggle-group-09"),
+        source: dm("toggle-group-range-tooltip-demo"),
       },
     ],
 };

@@ -3,7 +3,7 @@
 // spacing) shape, multi-select and disabled.
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 
-export { default as Sizes } from "@/components/shadcn-studio/toggle-group/toggle-group-03"
+export { ToggleGroupSizesDemo as Sizes } from "@/components/demo/toggle-group-sizes-demo"
 export { default as ConnectedIcons } from "@/components/shadcn-studio/toggle-group/toggle-group-08"
 
 export function PaddedRange() {

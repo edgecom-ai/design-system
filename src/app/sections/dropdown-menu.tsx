@@ -2,7 +2,7 @@
 // sections.tsx and .claude/rules/docs-site.md.
 
 import * as React from "react"
-import { ss } from "./shared";
+import { dm, ss } from "./shared";
 
 const DropdownMenuDemo = React.lazy(() => import("@/components/shadcn-studio/dropdown-menu/dropdown-menu-01"));
 
@@ -10,9 +10,9 @@ const DropdownMenuItemActionDemo = React.lazy(() => import("@/components/shadcn-
 
 const DropdownMenuUserMenuDemo = React.lazy(() => import("@/components/shadcn-studio/dropdown-menu/dropdown-menu-07"));
 
-const DropdownMenuUserProfileDemo = React.lazy(() => import("@/components/shadcn-studio/dropdown-menu/dropdown-menu-08"));
+const DropdownMenuUserProfileDemo = React.lazy(() => import("@/components/demo/dropdown-menu-profile-demo").then((m) => ({ default: m.DropdownMenuProfileDemo })));
 
-const DropdownMenuCheckboxDemo = React.lazy(() => import("@/components/shadcn-studio/dropdown-menu/dropdown-menu-13"));
+const DropdownMenuCheckboxDemo = React.lazy(() => import("@/components/demo/dropdown-menu-checkbox-demo").then((m) => ({ default: m.DropdownMenuCheckboxDemo })));
 
 const content = {
   variants: [
@@ -33,9 +33,9 @@ const content = {
       {
         id: "dropdown-checkbox",
         name: "Checkbox items",
-        description: "Toggleable menu items that persist their checked state.",
+        description: "Toggleable items that keep their checked state while the menu stays open, with one item locked on.",
         preview: <DropdownMenuCheckboxDemo />,
-        source: ss("dropdown-menu/dropdown-menu-13"),
+        source: dm("dropdown-menu-checkbox-demo"),
       },
       {
         id: "dropdown-user-menu",
@@ -47,9 +47,9 @@ const content = {
       {
         id: "dropdown-user-profile",
         name: "User profile",
-        description: "An account menu headed by the user's profile details.",
+        description: "An account menu headed by the user's profile details, with a submenu to switch organization.",
         preview: <DropdownMenuUserProfileDemo />,
-        source: ss("dropdown-menu/dropdown-menu-08"),
+        source: dm("dropdown-menu-profile-demo"),
       },
     ],
 };

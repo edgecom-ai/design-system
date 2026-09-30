@@ -16,7 +16,7 @@ const DatePickerWindowDemo = React.lazy(() => import("@/components/demo/date-pic
 
 const DatePickerNaturalLanguageDemo = React.lazy(() => import("@/components/shadcn-studio/date-picker/date-picker-05"));
 
-const DatePickerTimeDemo = React.lazy(() => import("@/components/shadcn-studio/date-picker/date-picker-08"));
+const DatePickerTimeDemo = React.lazy(() => import("@/components/demo/date-picker-time-demo").then((m) => ({ default: m.DatePickerTimeDemo })));
 
 const DatePickerDateTimeDemo = React.lazy(() => import("@/components/shadcn-studio/date-picker/date-picker-10"));
 
@@ -69,9 +69,9 @@ const content = {
       {
         id: "date-picker-time",
         name: "Time",
-        description: "A time input for selecting an hour and minute.",
+        description: "Time inputs for the start and end of a window, in hours and minutes.",
         preview: <DatePickerTimeDemo />,
-        source: ss("date-picker/date-picker-08"),
+        source: dm("date-picker-time-demo"),
       },
       {
         id: "date-picker-date-time",

@@ -2,17 +2,17 @@
 // sections.tsx and .claude/rules/docs-site.md.
 
 import * as React from "react"
-import { ss } from "./shared";
+import { dm, ss } from "./shared";
 
 const CalendarRangeCalendarMultiMonthDemo = React.lazy(() => import("@/components/shadcn-studio/calendar/calendar-04"));
 
 const CalendarEventListDemo = React.lazy(() => import("@/components/shadcn-studio/calendar/calendar-11"));
 
-const CalendarWithRangePresetsDemo = React.lazy(() => import("@/components/shadcn-studio/calendar/calendar-23"));
+const CalendarBillingPresetsDemo = React.lazy(() => import("@/components/demo/calendar-billing-presets-demo").then((m) => ({ default: m.CalendarBillingPresetsDemo })));
 
 const CalendarAppointmentBookingDemo = React.lazy(() => import("@/components/shadcn-studio/calendar/calendar-24"));
 
-const CalendarPricingDemo = React.lazy(() => import("@/components/shadcn-studio/calendar/calendar-25"));
+const CalendarDailyCostDemo = React.lazy(() => import("@/components/demo/calendar-daily-cost-demo").then((m) => ({ default: m.CalendarDailyCostDemo })));
 
 const content = {
   variants: [
@@ -30,13 +30,13 @@ const content = {
       {
         id: "calendar-presets",
         name: "Range with presets",
-        description: "A range calendar with quick presets like Today, Last 7 days, and Year to date.",
+        description: "A range calendar beside reporting presets — this billing period, last 30 days, year to date — with the selected span in the header.",
         preview: (
           <div className="w-fit max-w-full">
-            <CalendarWithRangePresetsDemo />
+            <CalendarBillingPresetsDemo />
           </div>
         ),
-        source: ss("calendar/calendar-23"),
+        source: dm("calendar-billing-presets-demo"),
       },
       {
         id: "calendar-event-list",
@@ -62,10 +62,10 @@ const content = {
       },
       {
         id: "calendar-pricing",
-        name: "Pricing",
-        description: "A date-range calendar for a pricing period.",
-        preview: <CalendarPricingDemo />,
-        source: ss("calendar/calendar-25"),
+        name: "Daily cost",
+        description: "Each day carries its energy cost under the date, from a custom day button; days without a reading yet are disabled.",
+        preview: <CalendarDailyCostDemo />,
+        source: dm("calendar-daily-cost-demo"),
       },
     ],
 };

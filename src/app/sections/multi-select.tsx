@@ -6,7 +6,7 @@ import { dm, ss } from "./shared";
 
 const MultipleSelectWithPlaceholderDemo = React.lazy(() => import("@/components/shadcn-studio/select/select-33"));
 
-const MultiSelectPreselectedDemo = React.lazy(() => import("@/components/shadcn-studio/select/select-32"));
+const MultiSelectPreselectedDemo = React.lazy(() => import("@/components/demo/multi-select-preset-demo").then((m) => ({ default: m.MultiSelectPresetDemo })));
 
 const MultiSelectDemo = React.lazy(() => import("@/components/demo/multi-select-demo").then((m) => ({ default: m.MultiSelectDemo })));
 
@@ -29,9 +29,9 @@ const content = {
       {
         id: "multi-select-preselected",
         name: "Tags with preset values",
-        description: "The same selector opening with values already chosen.",
+        description: "The same selector opening with values already chosen, with its options grouped by region.",
         preview: <MultiSelectPreselectedDemo />,
-        source: ss("select/select-32"),
+        source: dm("multi-select-preset-demo"),
       },
     ],
 };
