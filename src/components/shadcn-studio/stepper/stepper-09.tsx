@@ -73,7 +73,7 @@ const StepperVerticalDemo = () => {
                 </div>
               </StepperTrigger>
               {index < steps.length - 1 && (
-                <StepperSeparator className='absolute inset-y-0 top-[calc(50%-22px)] left-2 group-data-[orientation=vertical]/stepper-nav:h-15' />
+                <StepperSeparator className='absolute inset-y-0 top-[calc(50%-22px)] left-0 group-data-[orientation=vertical]/stepper-nav:h-15' />
               )}
             </StepperItem>
           ))}
