@@ -10,7 +10,14 @@ export const generatedApi: Record<string, GeneratedApi> = {
     "parts": [
       "Logo"
     ],
-    "props": []
+    "props": [
+      {
+        "part": "Logo",
+        "name": "variant",
+        "type": "\"combination\" | \"mark\"",
+        "default": "\"combination\""
+      }
+    ]
   },
   "button": {
     "base": {
@@ -65,7 +72,13 @@ export const generatedApi: Record<string, GeneratedApi> = {
     "parts": [
       "PhoneInput"
     ],
-    "props": []
+    "props": [
+      {
+        "part": "PhoneInput",
+        "name": "variant",
+        "type": "\"sm\" | \"default\" | \"lg\""
+      }
+    ]
   },
   "list": {
     "parts": [
@@ -91,6 +104,12 @@ export const generatedApi: Record<string, GeneratedApi> = {
         "part": "Item",
         "name": "size",
         "type": "\"default\" | \"sm\" | \"xs\"",
+        "default": "\"default\""
+      },
+      {
+        "part": "ItemMedia",
+        "name": "variant",
+        "type": "\"default\" | \"icon\" | \"image\"",
         "default": "\"default\""
       }
     ]
@@ -212,7 +231,14 @@ export const generatedApi: Record<string, GeneratedApi> = {
       "DropdownMenuSubTrigger",
       "DropdownMenuSubContent"
     ],
-    "props": []
+    "props": [
+      {
+        "part": "DropdownMenuItem",
+        "name": "variant",
+        "type": "\"default\" | \"destructive\"",
+        "default": "\"default\""
+      }
+    ]
   },
   "context-menu": {
     "base": {
@@ -236,7 +262,14 @@ export const generatedApi: Record<string, GeneratedApi> = {
       "ContextMenuSubTrigger",
       "ContextMenuRadioGroup"
     ],
-    "props": []
+    "props": [
+      {
+        "part": "ContextMenuItem",
+        "name": "variant",
+        "type": "\"default\" | \"destructive\"",
+        "default": "\"default\""
+      }
+    ]
   },
   "navigation-menu": {
     "base": {
@@ -404,7 +437,14 @@ export const generatedApi: Record<string, GeneratedApi> = {
       "StepperContent",
       "StepperNav"
     ],
-    "props": []
+    "props": [
+      {
+        "part": "StepperIndicator",
+        "name": "variant",
+        "type": "\"default\" | \"outline\"",
+        "default": "\"default\""
+      }
+    ]
   },
   "progress": {
     "base": {
@@ -424,7 +464,14 @@ export const generatedApi: Record<string, GeneratedApi> = {
     "parts": [
       "CircularProgress"
     ],
-    "props": []
+    "props": [
+      {
+        "part": "CircularProgress",
+        "name": "variant",
+        "type": "\"default\" | \"animated\"",
+        "default": "\"default\""
+      }
+    ]
   },
   "avatar": {
     "base": {
@@ -467,6 +514,12 @@ export const generatedApi: Record<string, GeneratedApi> = {
         "name": "orientation",
         "type": "\"vertical\" | \"horizontal\" | \"responsive\"",
         "default": "\"vertical\""
+      },
+      {
+        "part": "FieldLegend",
+        "name": "variant",
+        "type": "\"legend\" | \"label\"",
+        "default": "\"legend\""
       }
     ]
   },
@@ -485,6 +538,12 @@ export const generatedApi: Record<string, GeneratedApi> = {
         "name": "align",
         "type": "\"inline-start\" | \"inline-end\" | \"block-start\" | \"block-end\"",
         "default": "\"inline-start\""
+      },
+      {
+        "part": "InputGroupButton",
+        "name": "size",
+        "type": "\"xs\" | \"sm\" | \"icon-xs\" | \"icon-sm\"",
+        "default": "\"xs\""
       }
     ]
   },
@@ -702,6 +761,18 @@ export const generatedApi: Record<string, GeneratedApi> = {
         "name": "size",
         "type": "\"default\" | \"sm\" | \"lg\"",
         "default": "\"default\""
+      },
+      {
+        "part": "Sidebar",
+        "name": "variant",
+        "type": "\"sidebar\" | \"floating\" | \"inset\"",
+        "default": "\"sidebar\""
+      },
+      {
+        "part": "SidebarMenuSubButton",
+        "name": "size",
+        "type": "\"sm\" | \"md\"",
+        "default": "\"md\""
       }
     ]
   },
@@ -734,6 +805,42 @@ export const generatedApi: Record<string, GeneratedApi> = {
         "name": "positions",
         "type": "\"left\" | \"right\" | \"center\"",
         "default": "\"left\""
+      },
+      {
+        "part": "TimelineItem",
+        "name": "status",
+        "type": "\"done\" | \"default\"",
+        "default": "\"default\""
+      },
+      {
+        "part": "TimelineDot",
+        "name": "status",
+        "type": "\"default\" | \"current\" | \"done\" | \"error\" | \"custom\"",
+        "default": "\"default\""
+      },
+      {
+        "part": "TimelineTag",
+        "name": "side",
+        "type": "\"left\" | \"right\"",
+        "default": "\"left\""
+      },
+      {
+        "part": "TimelineContent",
+        "name": "side",
+        "type": "\"right\" | \"left\"",
+        "default": "\"right\""
+      },
+      {
+        "part": "TimelineHeading",
+        "name": "side",
+        "type": "\"right\" | \"left\"",
+        "default": "\"right\""
+      },
+      {
+        "part": "TimelineHeading",
+        "name": "variant",
+        "type": "\"primary\" | \"secondary\"",
+        "default": "\"primary\""
       }
     ]
   },

@@ -51,6 +51,48 @@
         "type": "\"left\" | \"right\" | \"center\"",
         "default": "\"left\"",
         "description": null
+      },
+      {
+        "part": "TimelineItem",
+        "name": "status",
+        "type": "\"done\" | \"default\"",
+        "default": "\"default\"",
+        "description": null
+      },
+      {
+        "part": "TimelineDot",
+        "name": "status",
+        "type": "\"default\" | \"current\" | \"done\" | \"error\" | \"custom\"",
+        "default": "\"default\"",
+        "description": null
+      },
+      {
+        "part": "TimelineTag",
+        "name": "side",
+        "type": "\"left\" | \"right\"",
+        "default": "\"left\"",
+        "description": null
+      },
+      {
+        "part": "TimelineContent",
+        "name": "side",
+        "type": "\"right\" | \"left\"",
+        "default": "\"right\"",
+        "description": null
+      },
+      {
+        "part": "TimelineHeading",
+        "name": "side",
+        "type": "\"right\" | \"left\"",
+        "default": "\"right\"",
+        "description": null
+      },
+      {
+        "part": "TimelineHeading",
+        "name": "variant",
+        "type": "\"primary\" | \"secondary\"",
+        "default": "\"primary\"",
+        "description": null
       }
     ],
     "variants": [
@@ -62,6 +104,33 @@
           "center"
         ],
         "default": "left"
+      },
+      {
+        "name": "status",
+        "options": [
+          "done",
+          "default",
+          "current",
+          "error",
+          "custom"
+        ],
+        "default": "default"
+      },
+      {
+        "name": "side",
+        "options": [
+          "left",
+          "right"
+        ],
+        "default": "left"
+      },
+      {
+        "name": "variant",
+        "options": [
+          "primary",
+          "secondary"
+        ],
+        "default": "primary"
       }
     ],
     "states": [],

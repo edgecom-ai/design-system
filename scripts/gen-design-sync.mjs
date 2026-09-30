@@ -35,6 +35,7 @@ import { fileURLToPath } from "node:url"
 import { readBlocks } from "./lib/tokens.mjs"
 import { buildBaseCss, probeUtilities, scanClasses } from "./lib/base-css.mjs"
 import { extractCva } from "./lib/cva.mjs"
+import { axesOf } from "./lib/axes.mjs"
 import { parseSections, sectionPath } from "./lib/sections.mjs"
 import { git, systemIdentity } from "./lib/system.mjs"
 import { PUBLISHED, urlOf, schemaUrl } from "./lib/publish.mjs"
@@ -584,13 +585,17 @@ function writeComponents() {
       `**Docs:** https://design.edgecom.ai${sectionPath(s)}/`,
       "",
     ]
-    if (cva && Object.keys(cva.groups).length) {
+    // Every axis the source declares (lib/axes.mjs) — the same list the
+    // contract and the API table carry. An axis on a part other than the root
+    // names its part, so `variant` on StepperIndicator is not read as Stepper's.
+    const parts = a.parts ?? []
+    const rootPart = parts.find((p) => p.toLowerCase() === s.id.replace(/-/g, "")) ?? parts[0]
+    const axes = axesOf(src, parts, rootPart)
+    if (axes.length) {
       spec.push("## Variants", "")
-      for (const [g, entries] of Object.entries(cva.groups)) {
-        const opts = Object.keys(entries)
-        if (!opts.length) continue
-        const def = cva.defaults[g]
-        spec.push(`- **${g}** — ${opts.map((o) => (o === def ? `\`${o}\` (default)` : `\`${o}\``)).join(", ")}`)
+      for (const ax of axes) {
+        const on = ax.part && ax.part !== rootPart ? ` (on \`${ax.part}\`)` : ""
+        spec.push(`- **${ax.name}**${on} — ${ax.options.map((o) => (o === ax.default ? `\`${o}\` (default)` : `\`${o}\``)).join(", ")}`)
       }
       spec.push("")
     }
@@ -607,7 +612,7 @@ function writeComponents() {
     if (a.base) {
       spec.push(`Built on [${a.base.name}](${a.base.url}).`, "")
     }
-    const hasVariants = cva && Object.keys(cva.groups).length
+    const hasVariants = axes.length > 0
     spec.push("## Rules", "")
     if (contractRules[s.id]) spec.push(...contractRules[s.id].map((r) => `- ${r}`), "")
     spec.push(

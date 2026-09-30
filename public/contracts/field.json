@@ -63,6 +63,13 @@
         "type": "\"vertical\" | \"horizontal\" | \"responsive\"",
         "default": "\"vertical\"",
         "description": null
+      },
+      {
+        "part": "FieldLegend",
+        "name": "variant",
+        "type": "\"legend\" | \"label\"",
+        "default": "\"legend\"",
+        "description": null
       }
     ],
     "variants": [
@@ -74,6 +81,14 @@
           "responsive"
         ],
         "default": "vertical"
+      },
+      {
+        "name": "variant",
+        "options": [
+          "legend",
+          "label"
+        ],
+        "default": "legend"
       }
     ],
     "states": [

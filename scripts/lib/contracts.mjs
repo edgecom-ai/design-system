@@ -6,7 +6,7 @@
 // repo already knows:
 //
 //   src/app/sections.tsx          label, group, one-line blurb   (lib/sections)
-//   src/components/ui/<id>.tsx    cva variants + every class the primitive uses
+//   src/components/ui/<id>.tsx    variant axes (lib/axes) + every class it uses
 //   src/docs/generated/api.ts     Base UI origin, parts, cva props (gen-api)
 //   src/docs/curated.ts           hand-written summary and part prose
 //   src/app/globals.css           the token names a class may legitimately reach
@@ -19,6 +19,7 @@
 
 import { familyOf } from "./tokens.mjs"
 import { extractCva } from "./cva.mjs"
+import { axesOf, mergeAxes } from "./axes.mjs"
 import { ALIAS_FILE, hostSectionOf, primitiveFileOf, sectionPath } from "./sections.mjs"
 
 export { ALIAS_FILE }
@@ -190,7 +191,7 @@ export function deriveFromSource(src, known) {
   }
 }
 
-/** cva variant groups as an ordered, contract-shaped list. */
+/** One cva's variant groups as an ordered, contract-shaped list. */
 export function variantsOf(cva) {
   if (!cva) return []
   return Object.entries(cva.groups)
@@ -281,12 +282,16 @@ export function buildContracts({ sections, readPrimitive, api, curated, overlay,
   }
 
   const assemble = ({ id, label, docs, file, src, a, c, o }) => {
-    const cva = extractCva(src) ?? borrowedCva(src)
     const derived = deriveFromSource(src, known)
     const parts = (a.parts ?? []).map((name) => ({
       name,
       description: c.parts?.[name] ?? null,
     }))
+    // Every axis the source declares (lib/axes.mjs: each cva, and closed
+    // `variant`/`size` props with no cva), else the axes it borrows.
+    const names = parts.map((p) => p.name)
+    const own = axesOf(src, names, names.find((n) => n.toLowerCase() === id.replace(/-/g, "")) ?? names[0])
+    const variants = own.length ? mergeAxes(own) : variantsOf(borrowedCva(src))
     const props = (a.props ?? []).map((p) => ({
       part: p.part,
       name: p.name,
@@ -321,7 +326,7 @@ export function buildContracts({ sections, readPrimitive, api, curated, overlay,
       base: a.base ?? null,
       parts,
       props,
-      variants: variantsOf(cva),
+      variants,
       states: derived.states,
       responsive: derived.responsive,
       tokens: derived.tokens.map((id) => ({ id, family: familyOf(id) })),

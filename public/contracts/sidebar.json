@@ -132,6 +132,20 @@
         "type": "\"default\" | \"sm\" | \"lg\"",
         "default": "\"default\"",
         "description": null
+      },
+      {
+        "part": "Sidebar",
+        "name": "variant",
+        "type": "\"sidebar\" | \"floating\" | \"inset\"",
+        "default": "\"sidebar\"",
+        "description": null
+      },
+      {
+        "part": "SidebarMenuSubButton",
+        "name": "size",
+        "type": "\"sm\" | \"md\"",
+        "default": "\"md\"",
+        "description": null
       }
     ],
     "variants": [
@@ -139,7 +153,10 @@
         "name": "variant",
         "options": [
           "default",
-          "outline"
+          "outline",
+          "sidebar",
+          "floating",
+          "inset"
         ],
         "default": "default"
       },
@@ -148,7 +165,8 @@
         "options": [
           "default",
           "sm",
-          "lg"
+          "lg",
+          "md"
         ],
         "default": "default"
       }

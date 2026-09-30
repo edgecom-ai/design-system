@@ -12,7 +12,7 @@
   "counts": {
     "total": 65,
     "authored": 13,
-    "withVariants": 22,
+    "withVariants": 28,
     "withBaseUi": 26,
     "undocumented": 1,
     "tokenReferences": 509
@@ -1958,8 +1958,25 @@
           "description": "The ring, its track, and the optional value in the centre."
         }
       ],
-      "props": [],
-      "variants": [],
+      "props": [
+        {
+          "part": "CircularProgress",
+          "name": "variant",
+          "type": "\"default\" | \"animated\"",
+          "default": "\"default\"",
+          "description": null
+        }
+      ],
+      "variants": [
+        {
+          "name": "variant",
+          "options": [
+            "default",
+            "animated"
+          ],
+          "default": "default"
+        }
+      ],
       "states": [],
       "responsive": [],
       "tokens": [
@@ -2418,8 +2435,25 @@
           "description": "Coordinates selection among radio items."
         }
       ],
-      "props": [],
-      "variants": [],
+      "props": [
+        {
+          "part": "ContextMenuItem",
+          "name": "variant",
+          "type": "\"default\" | \"destructive\"",
+          "default": "\"default\"",
+          "description": null
+        }
+      ],
+      "variants": [
+        {
+          "name": "variant",
+          "options": [
+            "default",
+            "destructive"
+          ],
+          "default": "default"
+        }
+      ],
       "states": [
         "data-[side=bottom]",
         "data-[side=inline-end]",
@@ -2989,8 +3023,25 @@
           "description": "Portalled popup for a submenu."
         }
       ],
-      "props": [],
-      "variants": [],
+      "props": [
+        {
+          "part": "DropdownMenuItem",
+          "name": "variant",
+          "type": "\"default\" | \"destructive\"",
+          "default": "\"default\"",
+          "description": null
+        }
+      ],
+      "variants": [
+        {
+          "name": "variant",
+          "options": [
+            "default",
+            "destructive"
+          ],
+          "default": "default"
+        }
+      ],
       "states": [
         "data-[side=bottom]",
         "data-[side=inline-end]",
@@ -3254,6 +3305,13 @@
           "type": "\"vertical\" | \"horizontal\" | \"responsive\"",
           "default": "\"vertical\"",
           "description": null
+        },
+        {
+          "part": "FieldLegend",
+          "name": "variant",
+          "type": "\"legend\" | \"label\"",
+          "default": "\"legend\"",
+          "description": null
         }
       ],
       "variants": [
@@ -3265,6 +3323,14 @@
             "responsive"
           ],
           "default": "vertical"
+        },
+        {
+          "name": "variant",
+          "options": [
+            "legend",
+            "label"
+          ],
+          "default": "legend"
         }
       ],
       "states": [
@@ -3619,6 +3685,13 @@
           "type": "\"inline-start\" | \"inline-end\" | \"block-start\" | \"block-end\"",
           "default": "\"inline-start\"",
           "description": null
+        },
+        {
+          "part": "InputGroupButton",
+          "name": "size",
+          "type": "\"xs\" | \"sm\" | \"icon-xs\" | \"icon-sm\"",
+          "default": "\"xs\"",
+          "description": null
         }
       ],
       "variants": [
@@ -3631,6 +3704,16 @@
             "block-end"
           ],
           "default": "inline-start"
+        },
+        {
+          "name": "size",
+          "options": [
+            "xs",
+            "sm",
+            "icon-xs",
+            "icon-sm"
+          ],
+          "default": "xs"
         }
       ],
       "states": [
@@ -3891,6 +3974,13 @@
           "type": "\"default\" | \"sm\" | \"xs\"",
           "default": "\"default\"",
           "description": "Row density (padding)."
+        },
+        {
+          "part": "ItemMedia",
+          "name": "variant",
+          "type": "\"default\" | \"icon\" | \"image\"",
+          "default": "\"default\"",
+          "description": null
         }
       ],
       "variants": [
@@ -3899,7 +3989,9 @@
           "options": [
             "default",
             "outline",
-            "muted"
+            "muted",
+            "icon",
+            "image"
           ],
           "default": "default"
         },
@@ -4002,8 +4094,25 @@
           "description": null
         }
       ],
-      "props": [],
-      "variants": [],
+      "props": [
+        {
+          "part": "Logo",
+          "name": "variant",
+          "type": "\"combination\" | \"mark\"",
+          "default": "\"combination\"",
+          "description": null
+        }
+      ],
+      "variants": [
+        {
+          "name": "variant",
+          "options": [
+            "combination",
+            "mark"
+          ],
+          "default": "combination"
+        }
+      ],
       "states": [],
       "responsive": [],
       "tokens": [],
@@ -4622,8 +4731,26 @@
           "description": "The composed field — country selector plus number entry."
         }
       ],
-      "props": [],
-      "variants": [],
+      "props": [
+        {
+          "part": "PhoneInput",
+          "name": "variant",
+          "type": "\"sm\" | \"default\" | \"lg\"",
+          "default": null,
+          "description": null
+        }
+      ],
+      "variants": [
+        {
+          "name": "variant",
+          "options": [
+            "sm",
+            "default",
+            "lg"
+          ],
+          "default": null
+        }
+      ],
       "states": [
         "aria-pressed",
         "data-[slot=input-group]",
@@ -5573,6 +5700,20 @@
           "type": "\"default\" | \"sm\" | \"lg\"",
           "default": "\"default\"",
           "description": null
+        },
+        {
+          "part": "Sidebar",
+          "name": "variant",
+          "type": "\"sidebar\" | \"floating\" | \"inset\"",
+          "default": "\"sidebar\"",
+          "description": null
+        },
+        {
+          "part": "SidebarMenuSubButton",
+          "name": "size",
+          "type": "\"sm\" | \"md\"",
+          "default": "\"md\"",
+          "description": null
         }
       ],
       "variants": [
@@ -5580,7 +5721,10 @@
           "name": "variant",
           "options": [
             "default",
-            "outline"
+            "outline",
+            "sidebar",
+            "floating",
+            "inset"
           ],
           "default": "default"
         },
@@ -5589,7 +5733,8 @@
           "options": [
             "default",
             "sm",
-            "lg"
+            "lg",
+            "md"
           ],
           "default": "default"
         }
@@ -6013,8 +6158,25 @@
           "description": "Flex nav laying out the stepper items."
         }
       ],
-      "props": [],
-      "variants": [],
+      "props": [
+        {
+          "part": "StepperIndicator",
+          "name": "variant",
+          "type": "\"default\" | \"outline\"",
+          "default": "\"default\"",
+          "description": null
+        }
+      ],
+      "variants": [
+        {
+          "name": "variant",
+          "options": [
+            "default",
+            "outline"
+          ],
+          "default": "default"
+        }
+      ],
       "states": [
         "data-[orientation=horizontal]",
         "data-[orientation=vertical]",
@@ -6724,6 +6886,48 @@
           "type": "\"left\" | \"right\" | \"center\"",
           "default": "\"left\"",
           "description": null
+        },
+        {
+          "part": "TimelineItem",
+          "name": "status",
+          "type": "\"done\" | \"default\"",
+          "default": "\"default\"",
+          "description": null
+        },
+        {
+          "part": "TimelineDot",
+          "name": "status",
+          "type": "\"default\" | \"current\" | \"done\" | \"error\" | \"custom\"",
+          "default": "\"default\"",
+          "description": null
+        },
+        {
+          "part": "TimelineTag",
+          "name": "side",
+          "type": "\"left\" | \"right\"",
+          "default": "\"left\"",
+          "description": null
+        },
+        {
+          "part": "TimelineContent",
+          "name": "side",
+          "type": "\"right\" | \"left\"",
+          "default": "\"right\"",
+          "description": null
+        },
+        {
+          "part": "TimelineHeading",
+          "name": "side",
+          "type": "\"right\" | \"left\"",
+          "default": "\"right\"",
+          "description": null
+        },
+        {
+          "part": "TimelineHeading",
+          "name": "variant",
+          "type": "\"primary\" | \"secondary\"",
+          "default": "\"primary\"",
+          "description": null
         }
       ],
       "variants": [
@@ -6735,6 +6939,33 @@
             "center"
           ],
           "default": "left"
+        },
+        {
+          "name": "status",
+          "options": [
+            "done",
+            "default",
+            "current",
+            "error",
+            "custom"
+          ],
+          "default": "default"
+        },
+        {
+          "name": "side",
+          "options": [
+            "left",
+            "right"
+          ],
+          "default": "left"
+        },
+        {
+          "name": "variant",
+          "options": [
+            "primary",
+            "secondary"
+          ],
+          "default": "primary"
         }
       ],
       "states": [],

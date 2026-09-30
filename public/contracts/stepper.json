@@ -56,8 +56,25 @@
         "description": "Flex nav laying out the stepper items."
       }
     ],
-    "props": [],
-    "variants": [],
+    "props": [
+      {
+        "part": "StepperIndicator",
+        "name": "variant",
+        "type": "\"default\" | \"outline\"",
+        "default": "\"default\"",
+        "description": null
+      }
+    ],
+    "variants": [
+      {
+        "name": "variant",
+        "options": [
+          "default",
+          "outline"
+        ],
+        "default": "default"
+      }
+    ],
     "states": [
       "data-[orientation=horizontal]",
       "data-[orientation=vertical]",

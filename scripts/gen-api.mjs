@@ -2,7 +2,7 @@
 // matches a src/components/ui/<id>.tsx primitive:
 //   - base       the wrapped Base UI primitive (+ docs link), from the import
 //   - parts      exported PascalCase component names
-//   - props      cva variant groups -> { options, default } as prop rows
+//   - props      variant axes (lib/axes.mjs) -> { options, default } as prop rows
 // Then Shiki-highlights all code-ish strings (part names, types, defaults) with
 // the SAME github dual-theme as the Code tabs, so the API tables match them.
 //
@@ -17,7 +17,7 @@ import { codeToHtml } from "shiki";
 import { readdirSync } from "node:fs";
 import { freshness, forced } from "./lib/stale.mjs";
 import { parseSections, ALIAS_FILE } from "./lib/sections.mjs";
-import { extractCva } from "./lib/cva.mjs";
+import { axesOf } from "./lib/axes.mjs";
 import { exportedParts } from "./lib/contracts.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -34,6 +34,7 @@ const stamp = freshness({
     "scripts/gen-api.mjs",
     "scripts/lib/sections.mjs",
     "scripts/lib/cva.mjs",
+    "scripts/lib/axes.mjs",
     ...readdirSync(uiDir)
       .filter((f) => f.endsWith(".tsx"))
       .map((f) => `src/components/ui/${f}`),
@@ -81,30 +82,18 @@ function extract(id) {
     partList[0] ??
     titleCase(id);
 
-  // props: cva variant groups, via the one cva reader (lib/cva.mjs). The
-  // local reader this replaced tracked quotes but not comments, so a single
-  // apostrophe in a comment inside the variants object — "can't" in button's —
-  // swallowed the rest of the block and the component documented no props.
-  //
-  // The cva belongs to the part its constant is named for — `selectTriggerVariants`
-  // sizes SelectTrigger, `alertDialogContentVariants` sizes AlertDialogContent —
-  // and only falls back to the root part when the name matches no export.
-  const props = [];
-  const cva = extractCva(src);
-  if (cva) {
-    const owner = src.match(/const\s+(\w+)Variants\s*=\s*cva\(/)?.[1];
-    const ownerPart = owner && partList.find((p) => p.toLowerCase() === owner.toLowerCase());
-    for (const [group, entries] of Object.entries(cva.groups)) {
-      const options = Object.keys(entries);
-      if (!options.length) continue;
-      props.push({
-        part: ownerPart ?? mainPart,
-        name: group,
-        type: options.map((o) => `"${o}"`).join(" | "),
-        default: cva.defaults[group] ? `"${cva.defaults[group]}"` : undefined,
-      });
-    }
-  }
+  // props: every variant axis, via the one axes reader (lib/axes.mjs) — each
+  // cva group, attributed to the part its constant is named for
+  // (`selectTriggerVariants` sizes SelectTrigger), plus any `variant` or `size`
+  // prop a part types as a closed set with no cva behind it (Logo's `variant`).
+  // The contracts and the design-sync specs read the same list, so the three
+  // cannot disagree about what a component can look like.
+  const props = axesOf(src, partList, mainPart).map((a) => ({
+    part: a.part,
+    name: a.name,
+    type: a.options.map((o) => `"${o}"`).join(" | "),
+    default: a.default ? `"${a.default}"` : undefined,
+  }));
 
   return { base, parts: partList, props };
 }
