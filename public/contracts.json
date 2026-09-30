@@ -1,7 +1,7 @@
 {
   "$schema": "https://design.edgecom.ai/schemas/contracts.schema.json",
   "version": "v3.0.0",
-  "digest": "e6657eb810278630",
+  "digest": "3e2cc128eef293c0",
   "sources": [
     "src/components/ui/*.tsx",
     "src/app/sections.tsx",
@@ -1573,7 +1573,7 @@
       "docs": "https://design.edgecom.ai/components/card/",
       "source": "src/components/ui/card.tsx",
       "summary": "A styled container with composable header, content, and footer sections (all div-based).",
-      "purpose": "The standard content surface: the `card` token at radius `xl`, with header, content and footer slots sharing one 1.5rem content line.",
+      "purpose": "The standard content surface: the `card` token at radius `xl`, with header, content and footer slots sharing one content line at `--card-spacing` (1rem, 0.75rem at `size=\"sm\"`).",
       "useWhen": [
         "A coherent block — a metric tile, a chart, a table — is grouped on the page background.",
         "A surface needs to sit one step above `background` in the elevation order."
@@ -1679,11 +1679,12 @@
         }
       ],
       "requires": [
-        "Content aligned to the card's 1.5rem content line. A table inside it aligns its first and last cells to that line, not to the 0.75rem cell padding."
+        "Content placed in `CardHeader`, `CardContent` and `CardFooter`, which pad to `--card-spacing` together. A table flush in the card aligns its first and last cells to that line with `first:pl-(--card-spacing) last:pr-(--card-spacing)`, not to the 0.5rem cell padding."
       ],
       "forbids": [
         "A coloured strip along an edge to signal status — use the relevant component's own `-subtle` variant.",
-        "A hand-set radius. Cards are `xl` from the radius scale."
+        "A hand-set radius. Cards are `xl` from the radius scale.",
+        "Hand-padding the card's children (`px-6` and the like) in place of its slots — the footer keeps `--card-spacing`, so the two edges part."
       ],
       "rules": [],
       "behavior": {
@@ -6263,14 +6264,14 @@
       ],
       "requires": [
         "Wide tables scroll inside their own container rather than forcing horizontal page scroll; the primitive wraps for this.",
-        "The first and last cell in a row align to the card's 1.5rem content padding."
+        "In a table flush in a card, the first and last cell in a row align to the card's content padding, `--card-spacing`."
       ],
       "forbids": [
         "Icons in cells unless explicitly asked — cells are text-first.",
         "A hand-rolled row hover. The primitive's light `primary` tint is what every table uses."
       ],
       "rules": [
-        "The first and last cell in a row align to the card's content padding (1.5rem), not the 0.75rem cell padding.",
+        "The first and last cell in a row align to the card's content padding — `first:pl-(--card-spacing) last:pr-(--card-spacing)` — not the 0.5rem cell padding. Inside already-padded content they add nothing.",
         "No icons in cells unless asked. Rely on the primitive's built-in row hover."
       ],
       "behavior": {

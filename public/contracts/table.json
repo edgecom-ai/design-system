@@ -1,6 +1,6 @@
 {
   "version": "v3.0.0",
-  "digest": "e6657eb810278630",
+  "digest": "3e2cc128eef293c0",
   "contract": {
     "id": "table",
     "label": "Table",
@@ -83,14 +83,14 @@
     ],
     "requires": [
       "Wide tables scroll inside their own container rather than forcing horizontal page scroll; the primitive wraps for this.",
-      "The first and last cell in a row align to the card's 1.5rem content padding."
+      "In a table flush in a card, the first and last cell in a row align to the card's content padding, `--card-spacing`."
     ],
     "forbids": [
       "Icons in cells unless explicitly asked — cells are text-first.",
       "A hand-rolled row hover. The primitive's light `primary` tint is what every table uses."
     ],
     "rules": [
-      "The first and last cell in a row align to the card's content padding (1.5rem), not the 0.75rem cell padding.",
+      "The first and last cell in a row align to the card's content padding — `first:pl-(--card-spacing) last:pr-(--card-spacing)` — not the 0.5rem cell padding. Inside already-padded content they add nothing.",
       "No icons in cells unless asked. Rely on the primitive's built-in row hover."
     ],
     "behavior": {
