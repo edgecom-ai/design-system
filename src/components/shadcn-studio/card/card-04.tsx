@@ -9,7 +9,7 @@ const CardBottomImageDemo = () => {
       </CardHeader>
       <CardContent className='px-0'>
         <img
-          src='https://cdn.shadcnstudio.com/ss-assets/components/card/image-1.png?height=280&format=auto'
+          src='https://design.edgecom.ai/demo/images/site-overview.jpg'
           alt='Distribution Center site overview'
           className='aspect-video h-70 rounded-b-xl object-cover'
         />

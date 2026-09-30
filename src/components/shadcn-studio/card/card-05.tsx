@@ -6,7 +6,7 @@ const CardTopImageDemo = () => {
     <Card className='max-w-md pt-0'>
       <CardContent className='px-0'>
         <img
-          src='https://cdn.shadcnstudio.com/ss-assets/components/card/image-2.png?height=280&format=auto'
+          src='https://design.edgecom.ai/demo/images/energy-report.jpg'
           alt='Plant 2 monthly energy report'
           className='aspect-video h-70 rounded-t-xl object-cover'
         />

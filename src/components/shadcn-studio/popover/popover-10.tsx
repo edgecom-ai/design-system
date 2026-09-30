@@ -9,18 +9,18 @@ import { SearchIcon, LoaderCircleIcon } from "lucide-react"
 
 const users = [
   {
-    image: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-3.png',
+    image: 'https://design.edgecom.ai/demo/avatars/avatar-3.png',
     name: 'Priya Sharma',
     fallback: 'PS',
     notifications: 3
   },
   {
-    image: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-6.png',
+    image: 'https://design.edgecom.ai/demo/avatars/avatar-6.png',
     name: 'Marcus Lee',
     fallback: 'ML'
   },
   {
-    image: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png',
+    image: 'https://design.edgecom.ai/demo/avatars/avatar-5.png',
     name: 'Hallie Richards',
     fallback: 'HR',
     notifications: 1

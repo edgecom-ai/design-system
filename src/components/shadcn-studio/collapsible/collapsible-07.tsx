@@ -27,7 +27,7 @@ const CollapsibleCardDemo = () => {
               Open a meter under Alarms, set a kW threshold, and we&apos;ll notify you by email whenever demand exceeds it.
             </p>
             <img
-              src='https://cdn.shadcnstudio.com/ss-assets/components/accordion/image-1.jpg?width=446&format=auto'
+              src='https://design.edgecom.ai/demo/images/alert-threshold.jpg'
               alt='Peak-demand alert threshold configuration'
               className='aspect-video h-70 rounded-b-xl object-cover'
             />

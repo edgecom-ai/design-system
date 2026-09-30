@@ -11,7 +11,7 @@ export function AvatarBasicDemo() {
     <div className="flex items-center gap-4">
       <Avatar>
         <AvatarImage
-          src="https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-1.png"
+          src="https://design.edgecom.ai/demo/avatars/avatar-1.png"
           alt="Jordan Ng"
         />
         <AvatarFallback>JN</AvatarFallback>
@@ -28,7 +28,7 @@ export function AvatarGroupDemo() {
     <AvatarGroup>
       <Avatar>
         <AvatarImage
-          src="https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-1.png"
+          src="https://design.edgecom.ai/demo/avatars/avatar-1.png"
           alt="Jordan Ng"
         />
         <AvatarFallback>JN</AvatarFallback>
