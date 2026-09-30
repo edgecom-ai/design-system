@@ -112,7 +112,7 @@ components:
     background: "{colors.card}"
     foreground: "{colors.card-foreground}"
     rounded: "{rounded.xl}"
-    padding: 1.5rem
+    padding: 1rem   # --card-spacing; 0.75rem at size="sm"
   dialog:
     background: "{colors.popover}"
     scrim: "{colors.scrim}"
@@ -243,7 +243,7 @@ The scale is in `rem` — it respects user font settings. Font family is SF Pro 
 - **Density → hover.** In data-dense tables, metric tiles, and charts, keep the **primary value visible** and move secondary/detail info into a `tooltip` (brief) or `hover-card` (richer). Don't cram, shrink, or clip.
 - **Tables:**
   - Text-first cells — no icons in cells unless explicitly asked.
-  - The first/last cell in a row (`th`/`td`) aligns to the **card's content padding (1.5rem)** on its outer edge, not the 0.75rem cell padding — headers, edge values, and totals sit on the card's content line, never flush to the border.
+  - The first/last cell in a row (`th`/`td`) aligns to the **card's content padding** on its outer edge — `--card-spacing`, 1rem on a default card and 0.75rem on `size="sm"` — not the 0.5rem cell padding. Give each head and cell of a table that sits flush in a `Card` `first:pl-(--card-spacing) last:pr-(--card-spacing)`, so headers, edge values, and totals sit on the card title's line, never flush to the border. A table inside content that is already padded (`CardContent`, a padded panel) adds no edge padding of its own.
   - Body rows get a subtle light-blue (`primary` tint) hover highlight — rely on the primitive's built-in one so every table matches.
 
 ## Elevation
@@ -423,7 +423,7 @@ Never a **zero gap** — touching bars read as one solid block. **Round only the
 - Don't hand-tint a `TabsList` with a `bg-*` override to make it visible on its host — that's what the `adaptive` colour set is for.
 - Don't make dark `popover` equal to `card`, and don't hardcode a modal scrim — overlays sit above cards; scrims use the `scrim` token.
 - Don't add accent bars (colored border strips) to signal status — use the component's `-subtle`/`-emphasis` variant.
-- Don't put icons in table cells unless asked; don't let edge cells sit flush to the card border (align to 1.5rem).
+- Don't put icons in table cells unless asked; don't let edge cells sit flush to the card border (align them to the card's `--card-spacing`).
 - Don't give tooltips a `max-w`/fixed width that wraps the text; don't pin a side that lets one run off-screen (let it flip/shift within the viewport); don't let a container clip one (keep it portaled).
 - Don't fix a row menu clipped by an `overflow-x-auto` table with `min-height` — toggle the wrapper to `overflow: visible` while open.
 - Don't stretch a `dropdown-menu` to its trigger width or pad its items with trailing whitespace; it shrink-wraps to its widest item.

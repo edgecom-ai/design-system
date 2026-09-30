@@ -1,6 +1,6 @@
 {
   "version": "v3.0.0",
-  "digest": "e6657eb810278630",
+  "digest": "3e2cc128eef293c0",
   "contracts": "https://design.edgecom.ai/contracts.json",
   "docs": "https://design.edgecom.ai/design.md",
   "guide": "https://design.edgecom.ai/agents.md",
@@ -400,7 +400,7 @@
       "label": "Card",
       "aliases": [],
       "summary": "A styled container with composable header, content, and footer sections (all div-based).",
-      "purpose": "The standard content surface: the `card` token at radius `xl`, with header, content and footer slots sharing one 1.5rem content line.",
+      "purpose": "The standard content surface: the `card` token at radius `xl`, with header, content and footer slots sharing one content line at `--card-spacing` (1rem, 0.75rem at `size=\"sm\"`).",
       "useWhen": [
         "A coherent block — a metric tile, a chart, a table — is grouped on the page background.",
         "A surface needs to sit one step above `background` in the elevation order."
