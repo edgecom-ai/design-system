@@ -51,6 +51,11 @@ function FieldGroup({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+// The horizontal selectors reach the label, content and control as
+// descendants, not as direct children (`has-[>…]`, `*:`): a host that wraps each
+// rendered component in its own element — Claude Design puts a
+// `display:contents` div around every one — keeps the layout but breaks every
+// child combinator, which left a checkbox centred on a three-line label.
 const fieldVariants = cva(
   "group/field flex w-full gap-2 data-[invalid=true]:text-destructive-emphasis",
   {
@@ -58,9 +63,9 @@ const fieldVariants = cva(
       orientation: {
         vertical: "flex-col *:w-full [&>.sr-only]:w-auto",
         horizontal:
-          "flex-row items-center has-[>[data-slot=field-content]]:items-start *:data-[slot=field-label]:flex-auto has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px",
+          "flex-row items-center has-[[data-slot=field-content]]:items-start **:data-[slot=field-label]:flex-auto has-[[data-slot=field-content]]:[&_[role=checkbox]]:mt-px has-[[data-slot=field-content]]:[&_[role=radio]]:mt-px",
         responsive:
-          "flex-col *:w-full @md/field-group:flex-row @md/field-group:items-center @md/field-group:*:w-auto @md/field-group:has-[>[data-slot=field-content]]:items-start @md/field-group:*:data-[slot=field-label]:flex-auto [&>.sr-only]:w-auto @md/field-group:has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px",
+          "flex-col *:w-full @md/field-group:flex-row @md/field-group:items-center @md/field-group:*:w-auto @md/field-group:has-[[data-slot=field-content]]:items-start @md/field-group:**:data-[slot=field-label]:flex-auto [&>.sr-only]:w-auto @md/field-group:has-[[data-slot=field-content]]:[&_[role=checkbox]]:mt-px @md/field-group:has-[[data-slot=field-content]]:[&_[role=radio]]:mt-px",
       },
     },
     defaultVariants: {
@@ -106,8 +111,8 @@ function FieldLabel({
     <Label
       data-slot="field-label"
       className={cn(
-        "group/field-label peer/field-label flex w-fit gap-2 leading-snug group-data-[disabled=true]/field:opacity-50 has-data-checked:border-primary/30 has-data-checked:bg-primary/5 has-[>[data-slot=field]]:rounded-lg has-[>[data-slot=field]]:border *:data-[slot=field]:p-2.5 dark:has-data-checked:border-primary/20 dark:has-data-checked:bg-primary/10",
-        "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col",
+        "group/field-label peer/field-label flex w-fit gap-2 leading-snug group-data-[disabled=true]/field:opacity-50 has-data-checked:border-primary/30 has-data-checked:bg-primary/5 has-[[data-slot=field]]:rounded-lg has-[[data-slot=field]]:border **:data-[slot=field]:p-2.5 dark:has-data-checked:border-primary/20 dark:has-data-checked:bg-primary/10",
+        "has-[[data-slot=field]]:w-full has-[[data-slot=field]]:flex-col",
         className
       )}
       {...props}
