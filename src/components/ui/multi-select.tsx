@@ -232,6 +232,8 @@ const MultipleSelector = ({
 
   const handleUnselect = React.useCallback(
     (option: Option) => {
+      // A fixed option stays selected, whatever asks to remove it.
+      if (option.fixed) return
       const newOptions = selected.filter(s => s.value !== option.value)
 
       setSelected(newOptions)
@@ -462,26 +464,28 @@ const MultipleSelector = ({
  'animate-fadeIn bg-background text-secondary-foreground hover:bg-background relative inline-flex h-7 cursor-default items-center rounded-md border pr-7 pl-2 text-caption transition-all disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 data-fixed:pr-2',
                   badgeClassName
                 )}
-                data-fixed={option.fixed}
+                data-fixed={option.fixed || undefined}
                 data-disabled={disabled || undefined}
               >
                 {option.label}
-                <button
-                  className='text-muted-foreground/80 hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 absolute -inset-y-px -right-px flex size-7 items-center justify-center rounded-r-md border border-transparent p-0 outline-hidden transition-[color,box-shadow] outline-none focus-visible:ring-[3px]'
-                  onKeyDown={e => {
-                    if (e.key === 'Enter') {
-                      handleUnselect(option)
-                    }
-                  }}
-                  onMouseDown={e => {
-                    e.preventDefault()
-                    e.stopPropagation()
-                  }}
-                  onClick={() => handleUnselect(option)}
-                  aria-label='Remove'
-                >
-                  <XIcon size={14} aria-hidden='true' />
-                </button>
+                {!option.fixed && (
+                  <button
+                    className='text-muted-foreground/80 hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 absolute -inset-y-px -right-px flex size-7 items-center justify-center rounded-r-md border border-transparent p-0 outline-hidden transition-[color,box-shadow] outline-none focus-visible:ring-[3px]'
+                    onKeyDown={e => {
+                      if (e.key === 'Enter') {
+                        handleUnselect(option)
+                      }
+                    }}
+                    onMouseDown={e => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                    }}
+                    onClick={() => handleUnselect(option)}
+                    aria-label='Remove'
+                  >
+                    <XIcon size={14} aria-hidden='true' />
+                  </button>
+                )}
               </div>
             )
           })}
