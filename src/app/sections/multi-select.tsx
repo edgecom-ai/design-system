@@ -10,6 +10,8 @@ const MultiSelectPreselectedDemo = React.lazy(() => import("@/components/demo/mu
 
 const MultiSelectDemo = React.lazy(() => import("@/components/demo/multi-select-demo").then((m) => ({ default: m.MultiSelectDemo })));
 
+const MultiSelectFixedDemo = React.lazy(() => import("@/components/demo/multi-select-fixed-demo").then((m) => ({ default: m.MultiSelectFixedDemo })));
+
 const content = {
   variants: [
       {
@@ -32,6 +34,13 @@ const content = {
         description: "The same selector opening with values already chosen, with its options grouped by region.",
         preview: <MultiSelectPreselectedDemo />,
         source: dm("multi-select-preset-demo"),
+      },
+      {
+        id: "multi-select-fixed",
+        name: "Locked selections",
+        description: "An option marked as fixed stays selected: its chip has no remove button, and neither Backspace nor Clear all takes it out.",
+        preview: <MultiSelectFixedDemo />,
+        source: dm("multi-select-fixed-demo"),
       },
     ],
 };
