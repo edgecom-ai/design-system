@@ -72,6 +72,13 @@
         "type": "\"default\" | \"sm\" | \"xs\"",
         "default": "\"default\"",
         "description": "Row density (padding)."
+      },
+      {
+        "part": "ItemMedia",
+        "name": "variant",
+        "type": "\"default\" | \"icon\" | \"image\"",
+        "default": "\"default\"",
+        "description": null
       }
     ],
     "variants": [
@@ -80,7 +87,9 @@
         "options": [
           "default",
           "outline",
-          "muted"
+          "muted",
+          "icon",
+          "image"
         ],
         "default": "default"
       },

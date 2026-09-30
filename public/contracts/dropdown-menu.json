@@ -79,8 +79,25 @@
         "description": "Portalled popup for a submenu."
       }
     ],
-    "props": [],
-    "variants": [],
+    "props": [
+      {
+        "part": "DropdownMenuItem",
+        "name": "variant",
+        "type": "\"default\" | \"destructive\"",
+        "default": "\"default\"",
+        "description": null
+      }
+    ],
+    "variants": [
+      {
+        "name": "variant",
+        "options": [
+          "default",
+          "destructive"
+        ],
+        "default": "default"
+      }
+    ],
     "states": [
       "data-[side=bottom]",
       "data-[side=inline-end]",

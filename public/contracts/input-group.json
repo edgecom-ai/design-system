@@ -47,6 +47,13 @@
         "type": "\"inline-start\" | \"inline-end\" | \"block-start\" | \"block-end\"",
         "default": "\"inline-start\"",
         "description": null
+      },
+      {
+        "part": "InputGroupButton",
+        "name": "size",
+        "type": "\"xs\" | \"sm\" | \"icon-xs\" | \"icon-sm\"",
+        "default": "\"xs\"",
+        "description": null
       }
     ],
     "variants": [
@@ -59,6 +66,16 @@
           "block-end"
         ],
         "default": "inline-start"
+      },
+      {
+        "name": "size",
+        "options": [
+          "xs",
+          "sm",
+          "icon-xs",
+          "icon-sm"
+        ],
+        "default": "xs"
       }
     ],
     "states": [

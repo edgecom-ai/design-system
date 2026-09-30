@@ -58,6 +58,7 @@ const inputs = [
   "scripts/gen-contracts.mjs",
   "scripts/lib/contracts.mjs",
   "scripts/lib/cva.mjs",
+  "scripts/lib/axes.mjs",
   "scripts/lib/sections.mjs",
   "scripts/lib/tokens.mjs",
   "scripts/lib/system.mjs",

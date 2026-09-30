@@ -20,8 +20,25 @@
         "description": "The ring, its track, and the optional value in the centre."
       }
     ],
-    "props": [],
-    "variants": [],
+    "props": [
+      {
+        "part": "CircularProgress",
+        "name": "variant",
+        "type": "\"default\" | \"animated\"",
+        "default": "\"default\"",
+        "description": null
+      }
+    ],
+    "variants": [
+      {
+        "name": "variant",
+        "options": [
+          "default",
+          "animated"
+        ],
+        "default": "default"
+      }
+    ],
     "states": [],
     "responsive": [],
     "tokens": [

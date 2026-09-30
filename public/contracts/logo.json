@@ -20,8 +20,25 @@
         "description": null
       }
     ],
-    "props": [],
-    "variants": [],
+    "props": [
+      {
+        "part": "Logo",
+        "name": "variant",
+        "type": "\"combination\" | \"mark\"",
+        "default": "\"combination\"",
+        "description": null
+      }
+    ],
+    "variants": [
+      {
+        "name": "variant",
+        "options": [
+          "combination",
+          "mark"
+        ],
+        "default": "combination"
+      }
+    ],
     "states": [],
     "responsive": [],
     "tokens": [],
