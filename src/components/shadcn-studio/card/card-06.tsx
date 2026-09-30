@@ -6,7 +6,7 @@ const CardHorizontalDemo = () => {
     <Card className='max-w-lg overflow-hidden py-0 sm:flex-row sm:gap-0'>
       <CardContent className='grow px-0'>
         <img
-          src='https://cdn.shadcnstudio.com/ss-assets/components/card/image-3.png'
+          src='https://design.edgecom.ai/demo/images/insights.jpg'
           alt='AI-assisted energy insights'
           className='size-full'
         />

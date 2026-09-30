@@ -38,31 +38,31 @@ const pendingTaskItems: TaskItem[] = [
   {
     id: 'pending-1',
     title: 'Investigate peak demand alarm at HQ – Main Campus.',
-    avatarSrc: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-1.png',
+    avatarSrc: 'https://design.edgecom.ai/demo/avatars/avatar-1.png',
     avatarFallback: 'PS'
   },
   {
     id: 'pending-2',
     title: 'Finalize Q3 energy cost report.',
-    avatarSrc: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-2.png',
+    avatarSrc: 'https://design.edgecom.ai/demo/avatars/avatar-2.png',
     avatarFallback: 'ML'
   },
   {
     id: 'pending-3',
     title: 'Schedule DR event readiness review.',
-    avatarSrc: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-3.png',
+    avatarSrc: 'https://design.edgecom.ai/demo/avatars/avatar-3.png',
     avatarFallback: 'TC'
   },
   {
     id: 'pending-4',
     title: 'Reconcile submeter data for Warehouse B.',
-    avatarSrc: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-4.png',
+    avatarSrc: 'https://design.edgecom.ai/demo/avatars/avatar-4.png',
     avatarFallback: 'ZV'
   },
   {
     id: 'pending-5',
     title: 'Set net-zero emissions targets by site.',
-    avatarSrc: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png',
+    avatarSrc: 'https://design.edgecom.ai/demo/avatars/avatar-5.png',
     avatarFallback: 'KP'
   }
 ]
@@ -71,31 +71,31 @@ const completedTaskItems: TaskItem[] = [
   {
     id: 'completed-1',
     title: 'Onboard Plant 2 meters.',
-    avatarSrc: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-6.png',
+    avatarSrc: 'https://design.edgecom.ai/demo/avatars/avatar-6.png',
     avatarFallback: 'SP'
   },
   {
     id: 'completed-2',
     title: 'Prepare M&V baseline report.',
-    avatarSrc: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-7.png',
+    avatarSrc: 'https://design.edgecom.ai/demo/avatars/avatar-7.png',
     avatarFallback: 'KW'
   },
   {
     id: 'completed-3',
     title: 'Resolve meter offline alarm at Chiller Plant.',
-    avatarSrc: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-8.png',
+    avatarSrc: 'https://design.edgecom.ai/demo/avatars/avatar-8.png',
     avatarFallback: 'DP'
   },
   {
     id: 'completed-4',
     title: 'Verify utility bill anomaly for Distribution Center.',
-    avatarSrc: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-3.png',
+    avatarSrc: 'https://design.edgecom.ai/demo/avatars/avatar-3.png',
     avatarFallback: 'TC'
   },
   {
     id: 'completed-5',
     title: 'Review tariff change for West region market.',
-    avatarSrc: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png',
+    avatarSrc: 'https://design.edgecom.ai/demo/avatars/avatar-5.png',
     avatarFallback: 'KP'
   }
 ]

@@ -55,7 +55,7 @@ const DropdownMenuUserMenuDemo = () => {
         render={
           <Button variant='ghost' size='icon' className='rounded-full'>
             <Avatar>
-              <AvatarImage src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png' alt='Hallie Richards' />
+              <AvatarImage src='https://design.edgecom.ai/demo/avatars/avatar-5.png' alt='Hallie Richards' />
               <AvatarFallback className='text-xs'>HR</AvatarFallback>
             </Avatar>
           </Button>

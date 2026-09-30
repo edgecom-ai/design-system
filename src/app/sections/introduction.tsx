@@ -100,7 +100,25 @@ function IntroductionDoc() {
           <li>
             <strong className="font-medium text-foreground">Public is not open source.</strong>{" "}
             Unless a file says otherwise, the code and content are © Edgecom Energy, all rights
-            reserved. Third-party code keeps its own license.
+            reserved. Third-party code keeps its own license: examples adapted from{" "}
+            <a
+              className="font-medium text-primary underline underline-offset-4 dark:text-primary-emphasis"
+              href="https://shadcnstudio.com"
+              target="_blank"
+              rel="noreferrer"
+            >
+              shadcn/studio
+            </a>
+            &rsquo;s free components stay under{" "}
+            <a
+              className="font-medium text-primary underline underline-offset-4 dark:text-primary-emphasis"
+              href="https://github.com/edgecom-ai/design-system/blob/main/src/components/shadcn-studio/LICENSE"
+              target="_blank"
+              rel="noreferrer"
+            >
+              its license
+            </a>
+            .
           </li>
           <li>
             <strong className="font-medium text-foreground">Trademarks.</strong> dataTrack™,

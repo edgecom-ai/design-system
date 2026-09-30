@@ -47,7 +47,7 @@ const ProductInsightsCard = ({ className }: { className?: string }) => {
           <span className='text-muted-foreground text-sm'>Updated on 12 MAY 2025 - 6:10 PM</span>
         </div>
         <img
-          src='https://cdn.shadcnstudio.com/ss-assets/blocks/dashboard-application/widgets/image-7.png'
+          src='https://design.edgecom.ai/demo/images/meter.png'
           alt='Meter'
           className='w-20.5 rounded-md'
         />

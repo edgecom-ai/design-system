@@ -10,21 +10,21 @@ import { BellIcon } from "lucide-react"
 const notifications = [
   {
     id: 1,
-    image: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-3.png',
+    image: 'https://design.edgecom.ai/demo/avatars/avatar-3.png',
     message: 'Peak demand alert: Main Building hit 480 kW',
     fallback: 'HL',
     time: '15 Minutes'
   },
   {
     id: 2,
-    image: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-6.png',
+    image: 'https://design.edgecom.ai/demo/avatars/avatar-6.png',
     message: 'DR event starts in 30 min for Warehouse B',
     fallback: 'OS',
     time: '35 Minutes'
   },
   {
     id: 3,
-    image: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png',
+    image: 'https://design.edgecom.ai/demo/avatars/avatar-5.png',
     message: 'Bill anomaly detected on Chiller Plant',
     fallback: 'HR',
     time: '3 days'

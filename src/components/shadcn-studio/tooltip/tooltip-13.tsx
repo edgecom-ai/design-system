@@ -6,17 +6,17 @@ import { CalendarIcon } from "lucide-react"
 
 const avatars = [
   {
-    src: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-3.png',
+    src: 'https://design.edgecom.ai/demo/avatars/avatar-3.png',
     fallback: 'OS',
     name: 'Olivia Sparks'
   },
   {
-    src: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-6.png',
+    src: 'https://design.edgecom.ai/demo/avatars/avatar-6.png',
     fallback: 'HL',
     name: 'Howard Lloyd'
   },
   {
-    src: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png',
+    src: 'https://design.edgecom.ai/demo/avatars/avatar-5.png',
     fallback: 'HR',
     name: 'Hallie Richards'
   }
