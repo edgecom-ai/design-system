@@ -259,7 +259,7 @@ function StepperItem({
       <div
         data-slot='stepper-item'
         className={cn(
-          'group/step flex items-center justify-center not-last:flex-1 group-data-[orientation=horizontal]/stepper-nav:flex-row group-data-[orientation=vertical]/stepper-nav:flex-col',
+          'group/step flex items-center justify-center not-last:flex-1 group-data-[orientation=horizontal]/stepper-nav:flex-row group-data-[orientation=vertical]/stepper-nav:flex-col group-data-[orientation=vertical]/stepper-nav:items-start',
           className
         )}
         data-state={state}
@@ -353,7 +353,7 @@ function StepperTrigger({ asChild = false, className, children, tabIndex, ...pro
       data-state={state}
       data-loading={isLoading}
       className={cn(
-        'inline-flex cursor-pointer items-center outline-none disabled:pointer-events-none disabled:opacity-60',
+        'inline-flex cursor-pointer items-center outline-none disabled:pointer-events-none disabled:opacity-60 group-data-[orientation=vertical]/stepper-nav:text-start',
         'gap-2.5 rounded-full',
         className
       )}
@@ -403,12 +403,14 @@ function StepperIndicator({ children, className, variant = 'default' }: StepperI
 function StepperSeparator({ className }: React.ComponentProps<'div'>) {
   const { state } = useStepItem()
 
+  // Vertical: the item aligns to its start edge, so the 0.5-wide line sits
+  // under the centre of the size-8 indicator at (8 - 0.5) / 2 = 3.75.
   return (
     <div
       data-slot='stepper-separator'
       data-state={state}
       className={cn(
-        'bg-muted group-data-[state=completed]/step:bg-primary m-2 rounded-sm transition-colors duration-500 group-data-[orientation=horizontal]/stepper-nav:h-0.5 group-data-[orientation=horizontal]/stepper-nav:flex-1 group-data-[orientation=vertical]/stepper-nav:h-12 group-data-[orientation=vertical]/stepper-nav:w-0.5',
+        'bg-muted group-data-[state=completed]/step:bg-primary m-2 rounded-sm transition-colors duration-500 group-data-[orientation=horizontal]/stepper-nav:h-0.5 group-data-[orientation=horizontal]/stepper-nav:flex-1 group-data-[orientation=vertical]/stepper-nav:h-12 group-data-[orientation=vertical]/stepper-nav:w-0.5 group-data-[orientation=vertical]/stepper-nav:ms-3.75',
         className
       )}
     />
