@@ -291,6 +291,7 @@ export const apiHighlight: Record<string, string> = {
   "TableRow": "<span style=\"--shiki-light:#24292E;--shiki-dark:#E1E4E8\">TableRow</span>",
   "TableCell": "<span style=\"--shiki-light:#24292E;--shiki-dark:#E1E4E8\">TableCell</span>",
   "TableCaption": "<span style=\"--shiki-light:#24292E;--shiki-dark:#E1E4E8\">TableCaption</span>",
+  "\"default\" | \"muted\"": "<span style=\"--shiki-light:#032F62;--shiki-dark:#9ECBFF\">\"default\"</span><span style=\"--shiki-light:#D73A49;--shiki-dark:#F97583\"> |</span><span style=\"--shiki-light:#032F62;--shiki-dark:#9ECBFF\"> \"muted\"</span>",
   "Timeline": "<span style=\"--shiki-light:#24292E;--shiki-dark:#E1E4E8\">Timeline</span>",
   "TimelineDot": "<span style=\"--shiki-light:#24292E;--shiki-dark:#E1E4E8\">TimelineDot</span>",
   "TimelineItem": "<span style=\"--shiki-light:#24292E;--shiki-dark:#E1E4E8\">TimelineItem</span>",

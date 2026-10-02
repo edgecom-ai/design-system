@@ -145,7 +145,7 @@
           "animate-skeleton-shimmer": "skeleton-shimmer 1.8s ease-in-out infinite"
         },
         "light": {
-          "edgecom-theme": "\"v3.0.0 162bfc440280e4da\"",
+          "edgecom-theme": "\"v3.0.0 910f3f03e52903ea\"",
           "font-sans": "ui-sans-serif, -apple-system, \"SF Pro Text\", system-ui, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
           "font-mono": "ui-monospace, \"SF Mono\", SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace",
           "font-heading": "var(--font-sans)",
@@ -1514,6 +1514,9 @@
       "name": "table",
       "title": "Table",
       "description": "A styled HTML table wrapped for horizontal overflow — header, body, optional footer, rows, cells, and a caption.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
       ],

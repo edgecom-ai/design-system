@@ -8,6 +8,8 @@ const TableDemo = React.lazy(() => import("@/components/demo/table-demo").then((
 
 const TableCompactDemo = React.lazy(() => import("@/components/demo/table-compact-demo").then((m) => ({ default: m.TableCompactDemo })));
 
+const TableHeaderMutedDemo = React.lazy(() => import("@/components/demo/table-header-muted-demo").then((m) => ({ default: m.TableHeaderMutedDemo })));
+
 const content = {
   variants: [
       {
@@ -23,6 +25,13 @@ const content = {
         description: "The `density=\"compact\"` prop tightens row padding for dense, text-heavy datasets.",
         preview: <TableCompactDemo />,
         source: dm("table-compact-demo"),
+      },
+      {
+        id: "table-header-muted",
+        name: "Muted header",
+        description: "`variant=\"muted\"` on `TableHeader` fills the header row, so it reads as a band above the body — for long or many-column tables.",
+        preview: <TableHeaderMutedDemo />,
+        source: dm("table-header-muted-demo"),
       },
     ],
 };
