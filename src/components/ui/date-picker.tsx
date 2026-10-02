@@ -262,8 +262,6 @@ const isSameDay = (a: Date, b: Date) =>
   a.getMonth() === b.getMonth() &&
   a.getDate() === b.getDate()
 
-const isLastOfMonth = (d: Date) => d.getMonth() !== addDays(d, 1).getMonth()
-
 const within = (day: Date, start: Date, end: Date) => {
   const t = dayStart(day).getTime()
   return t >= dayStart(start).getTime() && t <= dayStart(end).getTime()
@@ -274,10 +272,9 @@ const WindowBandContext = React.createContext<{
   preview?: WindowRange
 } | null>(null)
 
-// Custom day button that paints the committed and preview window bands. The band
-// wraps across grid rows: outer corners round at each row edge (Sunday, Saturday,
-// first/last of the month) so a window spanning two rows reads as a continuous
-// band rather than two floating pills.
+// Custom day button that paints the committed and preview window bands. Each day
+// in a band keeps its own rounded cell, set apart from its neighbours by the
+// calendar's day gap, the same way a day range reads.
 function WindowDayButton({
   className,
   day,
@@ -311,9 +308,6 @@ function WindowDayButton({
   const inBand = band !== null
   const isStart = inBand && isSameDay(date, start!)
   const isEnd = inBand && isSameDay(date, end!)
-  const dow = date.getDay()
-  const roundLeft = inBand && (isStart || dow === 0 || date.getDate() === 1)
-  const roundRight = inBand && (isEnd || dow === 6 || isLastOfMonth(date))
 
   return (
     <Button
@@ -329,13 +323,11 @@ function WindowDayButton({
       }
       data-window-preview={band === "preview" ? true : undefined}
       className={cn(
-        "relative isolate z-10 flex aspect-square size-auto w-full min-w-(--cell-size) flex-col gap-1 border-0 leading-none font-normal",
+        "relative isolate z-10 flex aspect-square size-auto w-full min-w-(--cell-size) flex-col gap-1 rounded-(--cell-radius) border-0 leading-none font-normal",
         "group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-10 group-data-[focused=true]/day:border-ring group-data-[focused=true]/day:ring-[3px] group-data-[focused=true]/day:ring-ring/50",
         "data-[window-endpoint=true]:bg-primary data-[window-endpoint=true]:text-primary-foreground data-[window-endpoint=true]:hover:bg-primary data-[window-endpoint=true]:hover:text-primary-foreground",
         "data-[window-middle=true]:bg-muted data-[window-middle=true]:text-foreground data-[window-middle=true]:hover:bg-muted data-[window-middle=true]:hover:text-foreground",
         "data-[window-preview=true]:bg-accent data-[window-preview=true]:text-accent-foreground data-[window-preview=true]:hover:bg-accent data-[window-preview=true]:hover:text-accent-foreground",
-        inBand && (roundLeft ? "rounded-l-(--cell-radius)" : "rounded-l-none"),
-        inBand && (roundRight ? "rounded-r-(--cell-radius)" : "rounded-r-none"),
         "dark:hover:text-foreground [&>span]:text-caption [&>span]:opacity-70",
         defaultClassNames.day,
         className

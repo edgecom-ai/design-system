@@ -1,7 +1,7 @@
 {
   "$schema": "../../../schemas/contracts.schema.json",
   "version": "v3.0.0",
-  "digest": "918e67465adfc410",
+  "digest": "8cae19189c35e762",
   "sources": [
     "src/components/ui/*.tsx",
     "src/app/sections.tsx",
@@ -1500,7 +1500,6 @@
         "data-[range-middle=true]",
         "data-[range-start=true]",
         "data-[selected-single=true]",
-        "data-[selected=true]",
         "group-data-[focused=true]/day",
         "hover"
       ],
