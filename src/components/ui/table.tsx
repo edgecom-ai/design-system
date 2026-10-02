@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
@@ -24,11 +25,30 @@ function Table({
   )
 }
 
-function TableHeader({ className, ...props }: React.ComponentProps<"thead">) {
+// `muted` fills the header row so it reads as a band above the body — a step
+// darker than the surface in light, a step up from it in dark.
+const tableHeaderVariants = cva("[&_tr]:border-b", {
+  variants: {
+    variant: {
+      default: "",
+      muted: "bg-muted",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+})
+
+function TableHeader({
+  className,
+  variant = "default",
+  ...props
+}: React.ComponentProps<"thead"> & VariantProps<typeof tableHeaderVariants>) {
   return (
     <thead
       data-slot="table-header"
-      className={cn("[&_tr]:border-b", className)}
+      data-variant={variant}
+      className={cn(tableHeaderVariants({ variant }), className)}
       {...props}
     />
   )
@@ -118,4 +138,5 @@ export {
   TableRow,
   TableCell,
   TableCaption,
+  tableHeaderVariants,
 }

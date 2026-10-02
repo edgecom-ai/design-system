@@ -787,7 +787,14 @@ export const generatedApi: Record<string, GeneratedApi> = {
       "TableCell",
       "TableCaption"
     ],
-    "props": []
+    "props": [
+      {
+        "part": "TableHeader",
+        "name": "variant",
+        "type": "\"default\" | \"muted\"",
+        "default": "\"default\""
+      }
+    ]
   },
   "timeline": {
     "parts": [

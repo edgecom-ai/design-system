@@ -1,6 +1,6 @@
 {
   "version": "v3.0.0",
-  "digest": "918e67465adfc410",
+  "digest": "910f3f03e52903ea",
   "contract": {
     "id": "table",
     "label": "Table",
@@ -27,7 +27,7 @@
       },
       {
         "name": "TableHeader",
-        "description": "The thead grouping header rows."
+        "description": "The thead grouping header rows; `muted` fills it as a band above the body."
       },
       {
         "name": "TableBody",
@@ -54,8 +54,25 @@
         "description": "A caption describing the table."
       }
     ],
-    "props": [],
-    "variants": [],
+    "props": [
+      {
+        "part": "TableHeader",
+        "name": "variant",
+        "type": "\"default\" | \"muted\"",
+        "default": "\"default\"",
+        "description": "Header surface: default (the table's own surface) or muted (a filled header row, darker than the body in light and a step up from it in dark)."
+      }
+    ],
+    "variants": [
+      {
+        "name": "variant",
+        "options": [
+          "default",
+          "muted"
+        ],
+        "default": "default"
+      }
+    ],
     "states": [
       "data-[state=selected]",
       "group-data-[density=compact]/table",

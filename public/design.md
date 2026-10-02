@@ -245,6 +245,7 @@ The scale is in `rem` — it respects user font settings. Font family is SF Pro 
   - Text-first cells — no icons in cells unless explicitly asked.
   - The first/last cell in a row (`th`/`td`) aligns to the **card's content padding** on its outer edge — `--card-spacing`, 1rem on a default card and 0.75rem on `size="sm"` — not the 0.5rem cell padding. Give each head and cell of a table that sits flush in a `Card` `first:pl-(--card-spacing) last:pr-(--card-spacing)`, so headers, edge values, and totals sit on the card title's line, never flush to the border. A table inside content that is already padded (`CardContent`, a padded panel) adds no edge padding of its own.
   - Body rows get a subtle light-blue (`primary` tint) hover highlight — rely on the primitive's built-in one so every table matches.
+  - **Header surface — `default` or `muted`.** `TableHeader` sits on the table's own surface by default; `variant="muted"` fills the header row so it reads as a band above the body, for long, scrolling, or many-column tables. Give every table on a view the same header. The fill is `muted`, so like the `default` tabs strip it wants a plain host (`background`, `card`): in a dark overlay `muted` sits within a hair of `popover` and the band disappears.
 
 ## Elevation
 

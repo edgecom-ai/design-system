@@ -713,7 +713,7 @@ export const curatedApi: Record<string, CuratedApi> = {
       "A styled HTML table wrapped for horizontal overflow — header, body, optional footer, rows, cells, and a caption.",
     parts: {
       Table: "Root table, wrapped in an overflow-x container.",
-      TableHeader: "The thead grouping header rows.",
+      TableHeader: "The thead grouping header rows; `muted` fills it as a band above the body.",
       TableBody: "The tbody grouping data rows.",
       TableFooter: "Optional tfoot for totals or summaries.",
       TableRow: "A single row with hover and selected states.",
@@ -723,6 +723,7 @@ export const curatedApi: Record<string, CuratedApi> = {
     },
     propDescriptions: {
       "Table.density": "Row density: default (8px cell padding) or compact (tighter 4px vertical) for dense, text-heavy datasets.",
+      "TableHeader.variant": "Header surface: default (the table's own surface) or muted (a filled header row, darker than the body in light and a step up from it in dark).",
     },
   },
   timeline: {

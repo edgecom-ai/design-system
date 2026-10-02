@@ -6,8 +6,10 @@ import {
   getDefaultClassNames,
   useDayPicker,
   type ChevronProps,
+  type DateRange,
   type DayButton,
   type Locale,
+  type OnSelectHandler,
   type RootProps,
   type WeekNumberProps,
 } from "react-day-picker"
@@ -16,20 +18,70 @@ import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { ChevronLeftIcon, ChevronRightIcon, ChevronDownIcon } from "lucide-react"
 
+type SameUnit = "day" | "month" | "year"
+
+const isSameUnit = (a: Date, b: Date, unit: SameUnit) =>
+  a.getFullYear() === b.getFullYear() &&
+  (unit === "year" || a.getMonth() === b.getMonth()) &&
+  (unit !== "day" || a.getDate() === b.getDate())
+
 function Calendar({
   className,
   classNames,
   showOutsideDays = true,
   captionLayout = "label",
   buttonVariant = "ghost",
+  disallowSame,
   locale,
   formatters,
   components,
   ...props
 }: React.ComponentProps<typeof DayPicker> & {
   buttonVariant?: React.ComponentProps<typeof Button>["variant"]
+  /**
+   * Range mode only: reject a range whose start and end fall in the same day,
+   * month, or year. Once a start is picked, every other date in its unit is
+   * disabled and clicking the start again clears it; a click on a complete
+   * range starts a new one.
+   */
+  disallowSame?: SameUnit
 }) {
   const defaultClassNames = getDefaultClassNames()
+
+  // The guard has to see the pending start, so an uncontrolled range calendar
+  // (`selected` without `onSelect`) keeps its own copy of the range.
+  const [ownRange, setOwnRange] = React.useState(
+    props.mode === "range" ? props.selected : undefined
+  )
+
+  let dayPickerProps: React.ComponentProps<typeof DayPicker> = props
+  if (disallowSame && props.mode === "range") {
+    // A `required` range is never cleared, so one handler serves both forms.
+    const onSelect = props.onSelect as OnSelectHandler<DateRange | undefined> | undefined
+    const range = onSelect ? props.selected : ownRange
+    const start = range?.from && !range.to ? range.from : undefined
+    const handleSelect: OnSelectHandler<DateRange | undefined> = (next, ...rest) => {
+      if (!onSelect) setOwnRange(next)
+      onSelect?.(next, ...rest)
+    }
+    dayPickerProps = {
+      ...props,
+      selected: range,
+      onSelect: handleSelect,
+      // At least one night: the first click leaves the range open, so the
+      // start alone never counts as a range, and clicking it again clears it.
+      min: Math.max(props.min ?? 0, 1),
+      resetOnSelect: true,
+      disabled: start
+        ? [
+            ...[props.disabled ?? []].flat(),
+            (date: Date) =>
+              isSameUnit(date, start, disallowSame) &&
+              !isSameUnit(date, start, "day"),
+          ]
+        : props.disabled,
+    } as typeof props
+  }
 
   return (
     <DayPicker
@@ -92,12 +144,14 @@ function Calendar({
           defaultClassNames.caption_label
         ),
         month_grid: cn("w-full border-collapse", defaultClassNames.month_grid),
-        weekdays: cn("flex", defaultClassNames.weekdays),
+        weekdays: cn("flex gap-0.5", defaultClassNames.weekdays),
         weekday: cn(
           "flex-1 rounded-(--cell-radius) text-[0.8rem] font-normal text-muted-foreground select-none",
           defaultClassNames.weekday
         ),
-        week: cn("mt-2 flex w-full", defaultClassNames.week),
+        // A hairline gap between days, so neighbouring highlights — a range,
+        // today, a hovered day — read as separate cells, never one block.
+        week: cn("mt-2 flex w-full gap-0.5", defaultClassNames.week),
         week_number_header: cn(
           "w-(--cell-size) select-none",
           defaultClassNames.week_number_header
@@ -107,23 +161,11 @@ function Calendar({
           defaultClassNames.week_number
         ),
         day: cn(
-          "group/day relative aspect-square h-full w-full rounded-(--cell-radius) p-0 text-center select-none [&:last-child[data-selected=true]_button]:rounded-r-(--cell-radius)",
-          props.showWeekNumber
-            ? "[&:nth-child(2)[data-selected=true]_button]:rounded-l-(--cell-radius)"
-            : "[&:first-child[data-selected=true]_button]:rounded-l-(--cell-radius)",
+          "group/day relative aspect-square h-full w-full rounded-(--cell-radius) p-0 text-center select-none",
           defaultClassNames.day
         ),
-        range_start: cn(
-          "relative isolate z-0 rounded-l-(--cell-radius) bg-muted after:absolute after:inset-y-0 after:right-0 after:w-4 after:bg-muted",
-          defaultClassNames.range_start
-        ),
-        range_middle: cn("rounded-none", defaultClassNames.range_middle),
-        range_end: cn(
-          "relative isolate z-0 rounded-r-(--cell-radius) bg-muted after:absolute after:inset-y-0 after:left-0 after:w-4 after:bg-muted",
-          defaultClassNames.range_end
-        ),
         today: cn(
-          "rounded-(--cell-radius) bg-muted text-foreground data-[selected=true]:rounded-none",
+          "rounded-(--cell-radius) bg-muted text-foreground",
           defaultClassNames.today
         ),
         outside: cn(
@@ -144,7 +186,7 @@ function Calendar({
         WeekNumber: CalendarWeekNumber,
         ...components,
       }}
-      {...props}
+      {...dayPickerProps}
     />
   )
 }
@@ -217,7 +259,7 @@ function CalendarDayButton({
       data-range-end={modifiers.range_end}
       data-range-middle={modifiers.range_middle}
       className={cn(
-        "relative isolate z-10 flex aspect-square size-auto w-full min-w-(--cell-size) flex-col gap-1 border-0 font-normal group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-10 group-data-[focused=true]/day:border-ring group-data-[focused=true]/day:ring-[3px] group-data-[focused=true]/day:ring-ring/50 data-[range-end=true]:rounded-(--cell-radius) data-[range-end=true]:rounded-r-(--cell-radius) data-[range-end=true]:bg-primary data-[range-end=true]:text-primary-foreground data-[range-middle=true]:rounded-none data-[range-middle=true]:bg-muted data-[range-middle=true]:text-foreground data-[range-start=true]:rounded-(--cell-radius) data-[range-start=true]:rounded-l-(--cell-radius) data-[range-start=true]:bg-primary data-[range-start=true]:text-primary-foreground data-[selected-single=true]:bg-primary data-[selected-single=true]:text-primary-foreground dark:hover:text-foreground [&>span]:text-caption [&>span]:opacity-70",
+        "relative isolate z-10 flex aspect-square size-auto w-full min-w-(--cell-size) flex-col gap-1 rounded-(--cell-radius) border-0 font-normal group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-10 group-data-[focused=true]/day:border-ring group-data-[focused=true]/day:ring-[3px] group-data-[focused=true]/day:ring-ring/50 data-[range-end=true]:bg-primary data-[range-end=true]:text-primary-foreground data-[range-middle=true]:bg-accent data-[range-middle=true]:text-accent-foreground data-[range-start=true]:bg-primary data-[range-start=true]:text-primary-foreground data-[selected-single=true]:bg-primary data-[selected-single=true]:text-primary-foreground dark:hover:text-foreground [&>span]:text-caption [&>span]:opacity-70",
         defaultClassNames.day,
         className
       )}

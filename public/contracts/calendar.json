@@ -1,6 +1,6 @@
 {
   "version": "v3.0.0",
-  "digest": "918e67465adfc410",
+  "digest": "910f3f03e52903ea",
   "contract": {
     "id": "calendar",
     "label": "Calendar",
@@ -33,7 +33,6 @@
       "data-[range-middle=true]",
       "data-[range-start=true]",
       "data-[selected-single=true]",
-      "data-[selected=true]",
       "group-data-[focused=true]/day",
       "hover"
     ],
@@ -41,6 +40,14 @@
       "md"
     ],
     "tokens": [
+      {
+        "id": "accent",
+        "family": "neutral"
+      },
+      {
+        "id": "accent-foreground",
+        "family": "neutral"
+      },
       {
         "id": "background",
         "family": "surface"
