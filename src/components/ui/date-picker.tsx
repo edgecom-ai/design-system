@@ -89,10 +89,16 @@ type MonthRange = { from?: Date; to?: Date }
 
 const monthOrd = (d: Date) => d.getFullYear() * 12 + d.getMonth()
 
+const isSameMonthUnit = (a: Date, b: Date, unit: "month" | "year") =>
+  unit === "year"
+    ? a.getFullYear() === b.getFullYear()
+    : monthOrd(a) === monthOrd(b)
+
 function MonthRangePicker({
   value,
   defaultValue,
   onValueChange,
+  disallowSame,
   placeholder = "Pick a month range",
   compact = false,
   disabled,
@@ -101,6 +107,12 @@ function MonthRangePicker({
   value?: MonthRange
   defaultValue?: MonthRange
   onValueChange?: (range: MonthRange) => void
+  /**
+   * Reject a range whose start and end fall in the same month or year. Once a
+   * start is picked, every other month in its unit is disabled and clicking
+   * the start again clears it.
+   */
+  disallowSame?: "month" | "year"
   placeholder?: string
   /** Render the trigger as an icon-only button instead of the full field. */
   compact?: boolean
@@ -129,6 +141,9 @@ function MonthRangePicker({
   function handleSelect(month: Date) {
     if (!from || to) {
       commit({ from: month, to: undefined })
+    } else if (disallowSame && monthOrd(month) === monthOrd(from)) {
+      // The start alone is not a range, so clicking it again clears it.
+      commit({ from: undefined, to: undefined })
     } else {
       const ordered =
         monthOrd(month) < monthOrd(from)
@@ -151,6 +166,13 @@ function MonthRangePicker({
         : placeholder
 
   const months = Array.from({ length: 12 }, (_, m) => new Date(year, m, 1))
+  // While a start waits for its end, the rest of its unit can't close the range.
+  const pending = from && !to ? from : undefined
+  const isBanned = (month: Date) =>
+    !!pending &&
+    !!disallowSame &&
+    isSameMonthUnit(month, pending, disallowSame) &&
+    monthOrd(month) !== monthOrd(pending)
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -215,6 +237,7 @@ function MonthRangePicker({
                 key={o}
                 type="button"
                 variant="ghost"
+                disabled={isBanned(month)}
                 data-selected={isEndpoint || undefined}
                 data-in-range={inRange || undefined}
                 onClick={() => handleSelect(month)}
