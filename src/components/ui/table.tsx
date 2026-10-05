@@ -25,10 +25,11 @@ function Table({
   )
 }
 
-// A filled header reads as a band above the body. `muted` is an absolute fill
-// for a table on `background` or `card`; `strong` is a relative one that steps
-// from whatever the table sits on — a `muted` page, a panel, an overlay. A
-// filled header drops the row hover, which would only wash the band out.
+// A filled header reads as a band above the body. `strong` is the default fill:
+// a light, relative band that steps from whatever the table sits on — a `card`,
+// a `muted` page, a panel, an overlay. `muted` is an absolute fill for a table
+// on `background` only; on a `card` it repeats the page surface. A filled
+// header drops the row hover, which would only wash the band out.
 const tableHeaderVariants = cva("[&_tr]:border-b", {
   variants: {
     variant: {

@@ -145,7 +145,7 @@
           "animate-skeleton-shimmer": "skeleton-shimmer 1.8s ease-in-out infinite"
         },
         "light": {
-          "edgecom-theme": "\"v3.0.0 e2b470343bbbd6c0\"",
+          "edgecom-theme": "\"v3.0.0 aad97e8de73149a4\"",
           "font-sans": "ui-sans-serif, -apple-system, \"SF Pro Text\", system-ui, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
           "font-mono": "ui-monospace, \"SF Mono\", SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace",
           "font-heading": "var(--font-sans)",
@@ -196,7 +196,7 @@
           "input-hover": "var(--outline-hover)",
           "track": "oklch(0.16 0.01 254 / 5%)",
           "track-active": "var(--background)",
-          "table-header": "oklch(0.16 0.01 254 / 10%)",
+          "table-header": "oklch(0.16 0.01 254 / 3%)",
           "chart-electricity-100": "oklch(0.94 0.05 75)",
           "chart-electricity-300": "oklch(0.86 0.11 75)",
           "chart-electricity-500": "oklch(0.75 0.15 75)",
@@ -318,7 +318,7 @@
           "input-surface": "color-mix(in oklab, var(--input) 30%, transparent)",
           "track": "oklch(1 0 0 / 8%)",
           "track-active": "oklch(1 0 0 / 10%)",
-          "table-header": "oklch(1 0 0 / 10%)",
+          "table-header": "oklch(1 0 0 / 5%)",
           "chart-legacy-line-teal": "oklch(0.669 0.082 201.6)",
           "chart-legacy-line-brown": "oklch(0.628 0.126 60.3)",
           "chart-legacy-line-orange": "oklch(0.793 0.171 70.7)",

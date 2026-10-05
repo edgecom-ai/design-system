@@ -31,14 +31,14 @@ const content = {
       {
         id: "table-header-muted",
         name: "Muted header",
-        description: "`variant=\"muted\"` on `TableHeader` fills the header row with `muted`, so it reads as a band above the body — for a table on `background` or `card`.",
+        description: "`variant=\"muted\"` on `TableHeader` fills the header row with `muted`, so it reads as a band above the body — for a table on `background` only. On a `card` it repeats the page surface; use `strong` there.",
         preview: <TableHeaderMutedDemo />,
         source: dm("table-header-muted-demo"),
       },
       {
         id: "table-header-strong",
         name: "Strong header",
-        description: "`variant=\"strong\"` is a deeper band that steps from whatever the table sits on — darker on white or on a `muted` page in light, lighter on any surface in dark. Use it where a `muted` header would vanish: a `muted` page or panel, or an overlay in dark.",
+        description: "`variant=\"strong\"` is the default header fill: a light band that steps from whatever the table sits on — a touch darker than the host in light, a touch lighter in dark. It holds on a `card`, a `muted` page or panel, and an overlay, where a `muted` header repeats or vanishes.",
         preview: <TableHeaderStrongDemo />,
         source: dm("table-header-strong-demo"),
       },
