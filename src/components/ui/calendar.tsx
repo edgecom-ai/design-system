@@ -6,8 +6,10 @@ import {
   getDefaultClassNames,
   useDayPicker,
   type ChevronProps,
+  type DateRange,
   type DayButton,
   type Locale,
+  type OnSelectHandler,
   type RootProps,
   type WeekNumberProps,
 } from "react-day-picker"
@@ -16,20 +18,70 @@ import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { ChevronLeftIcon, ChevronRightIcon, ChevronDownIcon } from "lucide-react"
 
+type SameUnit = "day" | "month" | "year"
+
+const isSameUnit = (a: Date, b: Date, unit: SameUnit) =>
+  a.getFullYear() === b.getFullYear() &&
+  (unit === "year" || a.getMonth() === b.getMonth()) &&
+  (unit !== "day" || a.getDate() === b.getDate())
+
 function Calendar({
   className,
   classNames,
   showOutsideDays = true,
   captionLayout = "label",
   buttonVariant = "ghost",
+  disallowSame,
   locale,
   formatters,
   components,
   ...props
 }: React.ComponentProps<typeof DayPicker> & {
   buttonVariant?: React.ComponentProps<typeof Button>["variant"]
+  /**
+   * Range mode only: reject a range whose start and end fall in the same day,
+   * month, or year. Once a start is picked, every other date in its unit is
+   * disabled and clicking the start again clears it; a click on a complete
+   * range starts a new one.
+   */
+  disallowSame?: SameUnit
 }) {
   const defaultClassNames = getDefaultClassNames()
+
+  // The guard has to see the pending start, so an uncontrolled range calendar
+  // (`selected` without `onSelect`) keeps its own copy of the range.
+  const [ownRange, setOwnRange] = React.useState(
+    props.mode === "range" ? props.selected : undefined
+  )
+
+  let dayPickerProps: React.ComponentProps<typeof DayPicker> = props
+  if (disallowSame && props.mode === "range") {
+    // A `required` range is never cleared, so one handler serves both forms.
+    const onSelect = props.onSelect as OnSelectHandler<DateRange | undefined> | undefined
+    const range = onSelect ? props.selected : ownRange
+    const start = range?.from && !range.to ? range.from : undefined
+    const handleSelect: OnSelectHandler<DateRange | undefined> = (next, ...rest) => {
+      if (!onSelect) setOwnRange(next)
+      onSelect?.(next, ...rest)
+    }
+    dayPickerProps = {
+      ...props,
+      selected: range,
+      onSelect: handleSelect,
+      // At least one night: the first click leaves the range open, so the
+      // start alone never counts as a range, and clicking it again clears it.
+      min: Math.max(props.min ?? 0, 1),
+      resetOnSelect: true,
+      disabled: start
+        ? [
+            ...[props.disabled ?? []].flat(),
+            (date: Date) =>
+              isSameUnit(date, start, disallowSame) &&
+              !isSameUnit(date, start, "day"),
+          ]
+        : props.disabled,
+    } as typeof props
+  }
 
   return (
     <DayPicker
@@ -144,7 +196,7 @@ function Calendar({
         WeekNumber: CalendarWeekNumber,
         ...components,
       }}
-      {...props}
+      {...dayPickerProps}
     />
   )
 }

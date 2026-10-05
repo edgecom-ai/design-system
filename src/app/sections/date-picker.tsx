@@ -10,6 +10,8 @@ const DatePickerRangeDemo = React.lazy(() => import("@/components/shadcn-studio/
 
 const DatePickerMonthRangeDemo = React.lazy(() => import("@/components/demo/date-picker-month-range-demo").then((m) => ({ default: m.DatePickerMonthRangeDemo })));
 
+const DatePickerDisallowSameDemo = React.lazy(() => import("@/components/demo/date-picker-disallow-same-demo").then((m) => ({ default: m.DatePickerDisallowSameDemo })));
+
 const DatePickerCompactDemo = React.lazy(() => import("@/components/demo/date-picker-compact-demo").then((m) => ({ default: m.DatePickerCompactDemo })));
 
 const DatePickerWindowDemo = React.lazy(() => import("@/components/demo/date-picker-window-demo").then((m) => ({ default: m.DatePickerWindowDemo })));
@@ -44,6 +46,13 @@ const content = {
         description: "A month-granularity range picker — pick a start and end month across years.",
         preview: <DatePickerMonthRangeDemo />,
         source: dm("date-picker-month-range-demo"),
+      },
+      {
+        id: "date-picker-disallow-same",
+        name: "No same-period range",
+        description: "`disallowSame` rejects a range that starts and ends in the same period — `day`, `month`, or `year` on a range `Calendar`, `month` or `year` on a `MonthRangePicker`. Once a start is picked, the rest of its period is disabled; clicking the start again clears it.",
+        preview: <DatePickerDisallowSameDemo />,
+        source: dm("date-picker-disallow-same-demo"),
       },
       {
         id: "date-picker-window",
