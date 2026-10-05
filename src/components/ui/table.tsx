@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
@@ -24,11 +25,33 @@ function Table({
   )
 }
 
-function TableHeader({ className, ...props }: React.ComponentProps<"thead">) {
+// A filled header reads as a band above the body. `muted` is an absolute fill
+// for a table on `background` or `card`; `strong` is a relative one that steps
+// from whatever the table sits on — a `muted` page, a panel, an overlay. A
+// filled header drops the row hover, which would only wash the band out.
+const tableHeaderVariants = cva("[&_tr]:border-b", {
+  variants: {
+    variant: {
+      default: "",
+      muted: "bg-muted [&_tr]:hover:bg-transparent",
+      strong: "bg-table-header [&_tr]:hover:bg-transparent",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+})
+
+function TableHeader({
+  className,
+  variant = "default",
+  ...props
+}: React.ComponentProps<"thead"> & VariantProps<typeof tableHeaderVariants>) {
   return (
     <thead
       data-slot="table-header"
-      className={cn("[&_tr]:border-b", className)}
+      data-variant={variant}
+      className={cn(tableHeaderVariants({ variant }), className)}
       {...props}
     />
   )
@@ -118,4 +141,5 @@ export {
   TableRow,
   TableCell,
   TableCaption,
+  tableHeaderVariants,
 }

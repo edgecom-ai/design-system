@@ -442,7 +442,7 @@ const COLOR_GROUPS = [
   ["Status — subtle", ["success-subtle", "warning-subtle", "info-subtle", "destructive-subtle"]],
   ["Form / outline", ["border", "input", "ring"]],
   ["Interaction", ["ghost-hover", "outline-surface", "outline-hover", "input-surface", "input-hover"]],
-  ["Relative surfaces", ["track", "track-active"]],
+  ["Relative surfaces", ["track", "track-active", "table-header"]],
   ["Commodities", ["chart-electricity-500", "chart-water-500", "chart-gas-500", "chart-temperature-500", "chart-emissions-500", "chart-misc-500"]],
 ]
 

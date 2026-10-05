@@ -1,16 +1,16 @@
 {
   "version": "v3.0.0",
-  "digest": "9246590854f88cb4",
+  "digest": "e2b470343bbbd6c0",
   "contracts": "https://design.edgecom.ai/contracts.json",
   "docs": "https://design.edgecom.ai/design.md",
   "guide": "https://design.edgecom.ai/agents.md",
   "counts": {
     "total": 65,
     "authored": 13,
-    "withVariants": 28,
+    "withVariants": 29,
     "withBaseUi": 26,
     "undocumented": 1,
-    "tokenReferences": 511
+    "tokenReferences": 512
   },
   "components": [
     {
@@ -1700,7 +1700,17 @@
         "The rows are actions or navigation — that is a menu or the `sidebar`.",
         "There is no data to show — that is `empty`, in the table's place."
       ],
-      "variants": [],
+      "variants": [
+        {
+          "name": "variant",
+          "options": [
+            "default",
+            "muted",
+            "strong"
+          ],
+          "default": "default"
+        }
+      ],
       "parts": [
         "Table",
         "TableHeader",
