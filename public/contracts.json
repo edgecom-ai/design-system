@@ -1,7 +1,7 @@
 {
   "$schema": "https://design.edgecom.ai/schemas/contracts.schema.json",
   "version": "v3.0.0",
-  "digest": "918e67465adfc410",
+  "digest": "e92bd8fe090961b5",
   "sources": [
     "src/components/ui/*.tsx",
     "src/app/sections.tsx",
@@ -15,7 +15,7 @@
     "withVariants": 28,
     "withBaseUi": 26,
     "undocumented": 1,
-    "tokenReferences": 509
+    "tokenReferences": 511
   },
   "contracts": [
     {
@@ -1508,6 +1508,14 @@
         "md"
       ],
       "tokens": [
+        {
+          "id": "accent",
+          "family": "neutral"
+        },
+        {
+          "id": "accent-foreground",
+          "family": "neutral"
+        },
         {
           "id": "background",
           "family": "surface"
