@@ -1,7 +1,7 @@
 {
   "$schema": "../../../schemas/contracts.schema.json",
   "version": "v3.0.0",
-  "digest": "e2b470343bbbd6c0",
+  "digest": "aad97e8de73149a4",
   "sources": [
     "src/components/ui/*.tsx",
     "src/app/sections.tsx",
@@ -6378,7 +6378,7 @@
         },
         {
           "name": "TableHeader",
-          "description": "The thead grouping header rows; `muted` or `strong` fills it as a band above the body."
+          "description": "The thead grouping header rows; `strong` (or `muted`, on `background` only) fills it as a band above the body."
         },
         {
           "name": "TableBody",
@@ -6411,7 +6411,7 @@
           "name": "variant",
           "type": "\"default\" | \"muted\" | \"strong\"",
           "default": "\"default\"",
-          "description": "Header surface: default (the table's own surface), muted (an absolute `muted` fill, for a table on `background` or `card`), or strong (a relative `table-header` fill that steps from any host — a `muted` page or panel, or an overlay in dark)."
+          "description": "Header surface: default (the table's own surface), strong (the default fill — a light, relative `table-header` band that steps from any host, a `card` included), or muted (an absolute `muted` fill, for a table on `background` only; on a `card` it repeats the page surface)."
         }
       ],
       "variants": [

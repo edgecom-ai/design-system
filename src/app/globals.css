@@ -271,10 +271,11 @@
   /* The `strong` table header (`TableHeader variant="strong"`) — relative for
      the same reason as the track: the `muted` header is an absolute fill, so on
      a `muted` page or panel it lands on its own value (1.00:1) and the band is
-     gone. Twice the track's alpha, since a header band has to stand apart from
-     the rows under it, not just group a strip: a 1.24:1 step on every light
-     surface, against the `muted` header's 1.10:1 on white. */
-  --table-header: oklch(0.16 0.01 254 / 10%);
+     gone, and on a `card` it repeats the page surface behind the card. A band,
+     not a block: lighter than the track, a 1.06:1 step on every light surface
+     (L ≈ 0.98 on white, above `muted`'s 0.97), with the thead's `border-b`
+     edging it. At 10% it landed darker than `border` and read as a block. */
+  --table-header: oklch(0.16 0.01 254 / 3%);
   /* Commodity tint ramps — one hue per commodity, mode-independent */
   --chart-electricity-100: oklch(0.94 0.05 75); /* amber */
   --chart-electricity-300: oklch(0.86 0.11 75);
@@ -440,8 +441,8 @@
   --track: oklch(1 0 0 / 8%);
   --track-active: oklch(1 0 0 / 10%);
   /* Lightens, like the track — dark `background` has nowhere darker to go —
-     for a 1.27–1.37:1 step on every dark surface, overlays included. */
-  --table-header: oklch(1 0 0 / 10%);
+     for a 1.11–1.17:1 step on every dark surface, overlays included. */
+  --table-header: oklch(1 0 0 / 5%);
   /* Commodity ramps are mode-independent (defined once in :root). The legacy
      line palette is not: it drew one set for both modes, and these are the
      lines a dark card swallowed (1.9–3.8:1) lifted in lightness only, plus
