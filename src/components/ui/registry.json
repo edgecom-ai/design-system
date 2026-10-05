@@ -1157,6 +1157,9 @@
       "title": "Table",
       "description": "A styled HTML table wrapped for horizontal overflow — header, body, optional footer, rows, cells, and a caption.",
       "docs": "Docs: https://design.edgecom.ai/components/table/ · Contract: https://design.edgecom.ai/contracts/table.json · Guardrails: https://design.edgecom.ai/design.md",
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
       ],

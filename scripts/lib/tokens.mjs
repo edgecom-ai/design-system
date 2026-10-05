@@ -44,7 +44,7 @@ const FAMILIES = [
   [/^primary(-|$)/, "brand"],
   [/^(success|warning|info|destructive)(-|$)/, "status"],
   [/^(ghost-hover|outline-surface|outline-hover|input-surface|input-hover)$/, "interaction"],
-  [/^(track|track-active)$/, "relative-surface"],
+  [/^(track|track-active|table-header)$/, "relative-surface"],
   [/^(secondary|muted|accent|foreground|border|input|ring)(-|$)/, "neutral"],
   [/^text-/, "typography"],
   [/^font-/, "typography"],

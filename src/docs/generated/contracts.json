@@ -1,7 +1,7 @@
 {
   "$schema": "../../../schemas/contracts.schema.json",
   "version": "v3.0.0",
-  "digest": "9246590854f88cb4",
+  "digest": "e2b470343bbbd6c0",
   "sources": [
     "src/components/ui/*.tsx",
     "src/app/sections.tsx",
@@ -12,10 +12,10 @@
   "counts": {
     "total": 65,
     "authored": 13,
-    "withVariants": 28,
+    "withVariants": 29,
     "withBaseUi": 26,
     "undocumented": 1,
-    "tokenReferences": 511
+    "tokenReferences": 512
   },
   "contracts": [
     {
@@ -6378,7 +6378,7 @@
         },
         {
           "name": "TableHeader",
-          "description": "The thead grouping header rows."
+          "description": "The thead grouping header rows; `muted` or `strong` fills it as a band above the body."
         },
         {
           "name": "TableBody",
@@ -6405,8 +6405,26 @@
           "description": "A caption describing the table."
         }
       ],
-      "props": [],
-      "variants": [],
+      "props": [
+        {
+          "part": "TableHeader",
+          "name": "variant",
+          "type": "\"default\" | \"muted\" | \"strong\"",
+          "default": "\"default\"",
+          "description": "Header surface: default (the table's own surface), muted (an absolute `muted` fill, for a table on `background` or `card`), or strong (a relative `table-header` fill that steps from any host — a `muted` page or panel, or an overlay in dark)."
+        }
+      ],
+      "variants": [
+        {
+          "name": "variant",
+          "options": [
+            "default",
+            "muted",
+            "strong"
+          ],
+          "default": "default"
+        }
+      ],
       "states": [
         "data-[state=selected]",
         "group-data-[density=compact]/table",
@@ -6426,6 +6444,10 @@
         {
           "id": "muted-foreground",
           "family": "neutral"
+        },
+        {
+          "id": "table-header",
+          "family": "relative-surface"
         },
         {
           "id": "text-body-sm",

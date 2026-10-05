@@ -96,6 +96,8 @@
   /* Sunken strip + the raised thumb on it (the segmented `tabs` track) */
   --color-track: var(--track);
   --color-track-active: var(--track-active);
+  /* The `strong` table header band */
+  --color-table-header: var(--table-header);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-secondary: var(--secondary);
   --color-primary-foreground: var(--primary-foreground);
@@ -266,6 +268,13 @@
      colour — a near-black strip on anything that lacks `color-mix()`. */
   --track: oklch(0.16 0.01 254 / 5%);
   --track-active: var(--background);
+  /* The `strong` table header (`TableHeader variant="strong"`) — relative for
+     the same reason as the track: the `muted` header is an absolute fill, so on
+     a `muted` page or panel it lands on its own value (1.00:1) and the band is
+     gone. Twice the track's alpha, since a header band has to stand apart from
+     the rows under it, not just group a strip: a 1.24:1 step on every light
+     surface, against the `muted` header's 1.10:1 on white. */
+  --table-header: oklch(0.16 0.01 254 / 10%);
   /* Commodity tint ramps — one hue per commodity, mode-independent */
   --chart-electricity-100: oklch(0.94 0.05 75); /* amber */
   --chart-electricity-300: oklch(0.86 0.11 75);
@@ -430,6 +439,9 @@
      a matching host. The active tab's `border-input` edge still reads. */
   --track: oklch(1 0 0 / 8%);
   --track-active: oklch(1 0 0 / 10%);
+  /* Lightens, like the track — dark `background` has nowhere darker to go —
+     for a 1.27–1.37:1 step on every dark surface, overlays included. */
+  --table-header: oklch(1 0 0 / 10%);
   /* Commodity ramps are mode-independent (defined once in :root). The legacy
      line palette is not: it drew one set for both modes, and these are the
      lines a dark card swallowed (1.9–3.8:1) lifted in lightness only, plus
