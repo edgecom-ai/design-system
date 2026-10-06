@@ -1,6 +1,6 @@
 {
   "version": "v3.0.0",
-  "digest": "aad97e8de73149a4",
+  "digest": "d28b7c2ae7c8c60f",
   "contracts": "https://design.edgecom.ai/contracts.json",
   "docs": "https://design.edgecom.ai/design.md",
   "guide": "https://design.edgecom.ai/agents.md",
@@ -10,7 +10,7 @@
     "withVariants": 29,
     "withBaseUi": 26,
     "undocumented": 1,
-    "tokenReferences": 512
+    "tokenReferences": 514
   },
   "components": [
     {
@@ -1702,6 +1702,15 @@
       ],
       "variants": [
         {
+          "name": "surface",
+          "options": [
+            "card",
+            "background",
+            "popover"
+          ],
+          "default": "card"
+        },
+        {
           "name": "variant",
           "options": [
             "default",
@@ -1709,6 +1718,22 @@
             "strong"
           ],
           "default": "default"
+        },
+        {
+          "name": "sticky",
+          "options": [
+            "true",
+            "false"
+          ],
+          "default": null
+        },
+        {
+          "name": "pinned",
+          "options": [
+            "left",
+            "right"
+          ],
+          "default": null
         }
       ],
       "parts": [

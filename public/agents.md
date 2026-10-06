@@ -42,7 +42,7 @@ A design arrives as a Claude Design link read through its MCP, or as a spec or a
 
 <!-- @@GENERATED:contracts — from src/docs/generated/contracts.json by scripts/gen-agents-md.mjs (run `pnpm docs:gen`); do not hand-edit until the closing marker -->
 
-Contracts at **v3.0.0**, digest `aad97e8de73149a4` — 65 components, 13 with authored selection criteria. The version and digest are stamped into every file below; a design or an app built against a different digest is working from a different system.
+Contracts at **v3.0.0**, digest `d28b7c2ae7c8c60f` — 65 components, 13 with authored selection criteria. The version and digest are stamped into every file below; a design or an app built against a different digest is working from a different system.
 
 | Address | What it is |
 |---|---|

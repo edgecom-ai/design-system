@@ -789,10 +789,26 @@ export const generatedApi: Record<string, GeneratedApi> = {
     ],
     "props": [
       {
+        "part": "Table",
+        "name": "surface",
+        "type": "\"card\" | \"background\" | \"popover\"",
+        "default": "\"card\""
+      },
+      {
         "part": "TableHeader",
         "name": "variant",
         "type": "\"default\" | \"muted\" | \"strong\"",
         "default": "\"default\""
+      },
+      {
+        "part": "TableHeader",
+        "name": "sticky",
+        "type": "\"true\" | \"false\""
+      },
+      {
+        "part": "TableCell",
+        "name": "pinned",
+        "type": "\"left\" | \"right\""
       }
     ]
   },

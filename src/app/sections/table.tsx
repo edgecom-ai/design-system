@@ -12,6 +12,8 @@ const TableHeaderMutedDemo = React.lazy(() => import("@/components/demo/table-he
 
 const TableHeaderStrongDemo = React.lazy(() => import("@/components/demo/table-header-strong-demo").then((m) => ({ default: m.TableHeaderStrongDemo })));
 
+const TablePinnedDemo = React.lazy(() => import("@/components/demo/table-pinned-demo").then((m) => ({ default: m.TablePinnedDemo })));
+
 const content = {
   variants: [
       {
@@ -41,6 +43,13 @@ const content = {
         description: "`variant=\"strong\"` is the default header fill: a light band that steps from whatever the table sits on — a touch darker than the host in light, a touch lighter in dark. It holds on a `card`, a `muted` page or panel, and an overlay, where a `muted` header repeats or vanishes.",
         preview: <TableHeaderStrongDemo />,
         source: dm("table-header-strong-demo"),
+      },
+      {
+        id: "table-pinned",
+        name: "Pinned columns",
+        description: "`pinned=\"left\"` / `pinned=\"right\"` on a head and its cells keeps the row's identity and its total in view while the twelve months scroll between them. The cells paint the host surface — `surface=\"card\"` on `Table` — under the row's own tint, and show a hairline divider only while columns are hidden past that edge.",
+        preview: <TablePinnedDemo />,
+        source: dm("table-pinned-demo"),
       },
     ],
 };
