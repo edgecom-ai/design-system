@@ -29,7 +29,7 @@ const badgeVariants = cva(
         emissions:
           "bg-chart-emissions-500/10 text-chart-emissions-700 focus-visible:ring-chart-emissions-500/20 dark:text-chart-emissions-300 [a]:hover:bg-chart-emissions-500/20",
         outline:
-          "border-border text-foreground [a]:hover:bg-muted [a]:hover:text-muted-foreground",
+          "border-border text-foreground [a]:hover:bg-ghost-hover [a]:hover:text-muted-foreground",
         ghost:
           "hover:bg-ghost-hover hover:text-muted-foreground",
         link: "text-primary dark:text-primary-emphasis underline-offset-4 hover:underline",
