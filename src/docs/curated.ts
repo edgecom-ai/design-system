@@ -712,18 +712,22 @@ export const curatedApi: Record<string, CuratedApi> = {
     summary:
       "A styled HTML table wrapped for horizontal overflow — header, body, optional footer, rows, cells, and a caption.",
     parts: {
-      Table: "Root table, wrapped in an overflow-x container.",
-      TableHeader: "The thead grouping header rows; `strong` (or `muted`, on `background` only) fills it as a band above the body.",
+      Table: "Root table, wrapped in an overflow-x container that names the host surface for pinned cells and a sticky header.",
+      TableHeader: "The thead grouping header rows; `strong` (or `muted`, on `background` only) fills it as a band above the body. `sticky` keeps it in view while the rows scroll.",
       TableBody: "The tbody grouping data rows.",
       TableFooter: "Optional tfoot for totals or summaries.",
       TableRow: "A single row with hover and selected states.",
-      TableHead: "A header cell (th).",
-      TableCell: "A data cell (td).",
+      TableHead: "A header cell (th); `pinned` keeps it at the left or right edge while the other columns scroll.",
+      TableCell: "A data cell (td); `pinned` keeps it at the left or right edge while the other columns scroll.",
       TableCaption: "A caption describing the table.",
     },
     propDescriptions: {
       "Table.density": "Row density: default (8px cell padding) or compact (tighter 4px vertical) for dense, text-heavy datasets.",
+      "Table.surface": "The surface the table sits on — card (default), background, or popover. Pinned cells and a sticky header paint it under the row tint so they cover the columns scrolling beneath them.",
       "TableHeader.variant": "Header surface: default (the table's own surface), strong (the default fill — a light, relative `table-header` band that steps from any host, a `card` included), or muted (an absolute `muted` fill, for a table on `background` only; on a `card` it repeats the page surface).",
+      "TableHeader.sticky": "Keeps the header at the top of the table's vertical scroll container, above the pinned cells (`z-20`, in the Page layer). The container needs a height and `overflow-y`.",
+      "TableHead.pinned": "Sticks the cell to the left or right edge of the table's scroll container, painting the host surface under the row tint. Several pinned columns on one side stack on their own — the container measures each one.",
+      "TableCell.pinned": "Sticks the cell to the left or right edge of the table's scroll container, painting the host surface under the row tint. Several pinned columns on one side stack on their own — the container measures each one.",
     },
   },
   timeline: {

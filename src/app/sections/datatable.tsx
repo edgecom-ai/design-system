@@ -14,6 +14,8 @@ const DataTableWithExportDemo = React.lazy(() => import("@/components/shadcn-stu
 
 const EditableDataTableDemo = React.lazy(() => import("@/components/shadcn-studio/data-table/data-table-13"));
 
+const DataTablePinnedDemo = React.lazy(() => import("@/components/demo/data-table-pinned-demo").then((m) => ({ default: m.DataTablePinnedDemo })));
+
 const DatatableListCardDemo = React.lazy(() => import("@/components/demo/datatable-list-card-demo").then((m) => ({ default: m.DatatableListCardDemo })));
 
 const content = {
@@ -32,6 +34,13 @@ const content = {
         description: "A baseline table with sortable columns, row selection and a select-all checkbox.",
         preview: <DataTableBasicDemo />,
         source: dm("data-table-sortable-demo"),
+      },
+      {
+        id: "data-table-pinned",
+        name: "Pinned columns",
+        description: "TanStack `columnPinning` drives the primitive's `pinned` prop — `column.getIsPinned()` names the side — so the selection box and the meter ID stay at the left edge and the row actions at the right. The primitive measures the pinned cells and stacks them itself; the column model declares no sizes.",
+        preview: <DataTablePinnedDemo />,
+        source: dm("data-table-pinned-demo"),
       },
       {
         id: "data-table-expandable",

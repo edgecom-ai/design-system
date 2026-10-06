@@ -1,6 +1,6 @@
 {
   "version": "v3.0.0",
-  "digest": "aad97e8de73149a4",
+  "digest": "257369f30033172d",
   "contract": {
     "id": "table",
     "label": "Table",
@@ -23,11 +23,11 @@
     "parts": [
       {
         "name": "Table",
-        "description": "Root table, wrapped in an overflow-x container."
+        "description": "Root table, wrapped in an overflow-x container that names the host surface for pinned cells and a sticky header."
       },
       {
         "name": "TableHeader",
-        "description": "The thead grouping header rows; `strong` (or `muted`, on `background` only) fills it as a band above the body."
+        "description": "The thead grouping header rows; `strong` (or `muted`, on `background` only) fills it as a band above the body. `sticky` keeps it in view while the rows scroll."
       },
       {
         "name": "TableBody",
@@ -39,7 +39,7 @@
       },
       {
         "name": "TableHead",
-        "description": "A header cell (th)."
+        "description": "A header cell (th); `pinned` keeps it at the left or right edge while the other columns scroll."
       },
       {
         "name": "TableRow",
@@ -47,7 +47,7 @@
       },
       {
         "name": "TableCell",
-        "description": "A data cell (td)."
+        "description": "A data cell (td); `pinned` keeps it at the left or right edge while the other columns scroll."
       },
       {
         "name": "TableCaption",
@@ -56,14 +56,44 @@
     ],
     "props": [
       {
+        "part": "Table",
+        "name": "surface",
+        "type": "\"card\" | \"background\" | \"popover\"",
+        "default": "\"card\"",
+        "description": "The surface the table sits on — card (default), background, or popover. Pinned cells and a sticky header paint it under the row tint so they cover the columns scrolling beneath them."
+      },
+      {
         "part": "TableHeader",
         "name": "variant",
         "type": "\"default\" | \"muted\" | \"strong\"",
         "default": "\"default\"",
         "description": "Header surface: default (the table's own surface), strong (the default fill — a light, relative `table-header` band that steps from any host, a `card` included), or muted (an absolute `muted` fill, for a table on `background` only; on a `card` it repeats the page surface)."
+      },
+      {
+        "part": "TableHeader",
+        "name": "sticky",
+        "type": "\"true\" | \"false\"",
+        "default": null,
+        "description": "Keeps the header at the top of the table's vertical scroll container, above the pinned cells (`z-20`, in the Page layer). The container needs a height and `overflow-y`."
+      },
+      {
+        "part": "TableCell",
+        "name": "pinned",
+        "type": "\"left\" | \"right\"",
+        "default": null,
+        "description": "Sticks the cell to the left or right edge of the table's scroll container, painting the host surface under the row tint. Several pinned columns on one side stack on their own — the container measures each one."
       }
     ],
     "variants": [
+      {
+        "name": "surface",
+        "options": [
+          "card",
+          "background",
+          "popover"
+        ],
+        "default": "card"
+      },
       {
         "name": "variant",
         "options": [
@@ -72,16 +102,42 @@
           "strong"
         ],
         "default": "default"
+      },
+      {
+        "name": "sticky",
+        "options": [
+          "true",
+          "false"
+        ],
+        "default": null
+      },
+      {
+        "name": "pinned",
+        "options": [
+          "left",
+          "right"
+        ],
+        "default": null
       }
     ],
     "states": [
       "data-[state=selected]",
       "group-data-[density=compact]/table",
+      "group-data-overflow-left/table-container",
+      "group-data-overflow-right/table-container",
       "hover",
       "last"
     ],
     "responsive": [],
     "tokens": [
+      {
+        "id": "border",
+        "family": "neutral"
+      },
+      {
+        "id": "card",
+        "family": "surface"
+      },
       {
         "id": "foreground",
         "family": "neutral"
