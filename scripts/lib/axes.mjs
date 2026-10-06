@@ -109,10 +109,20 @@ function typedAxesOf(src, part) {
 export function axesOf(src, parts, mainPart) {
   const axes = []
   const partOf = (owner) => (owner && parts.find((p) => p.toLowerCase() === owner.toLowerCase())) ?? mainPart
+  // A cva named for one part may be shared: TableHead and TableCell both type
+  // their props as `VariantProps<typeof tableCellVariants>`. Every part whose
+  // parameters name the cva owns its axes; the name alone is the fallback.
+  const usersOf = (owner) =>
+    owner
+      ? parts.filter((p) => new RegExp(String.raw`typeof\s+${owner}Variants\b`).test(paramsOf(src, p) ?? ""))
+      : []
   for (const cva of cvaCalls(src)) {
+    const users = usersOf(cva.owner)
+    const owners = users.length ? users : [partOf(cva.owner)]
     for (const [name, entries] of Object.entries(cva.groups ?? {})) {
       const options = Object.keys(entries)
-      if (options.length) axes.push({ part: partOf(cva.owner), name, options, default: cva.defaults?.[name] ?? null })
+      if (!options.length) continue
+      for (const part of owners) axes.push({ part, name, options, default: cva.defaults?.[name] ?? null })
     }
   }
   const seen = new Set(axes.map((a) => `${a.part}.${a.name}`))
