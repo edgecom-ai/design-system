@@ -6428,6 +6428,13 @@
           "description": "Keeps the header at the top of the table's vertical scroll container, above the pinned cells (`z-20`, in the Page layer). The container needs a height and `overflow-y`."
         },
         {
+          "part": "TableHead",
+          "name": "pinned",
+          "type": "\"left\" | \"right\"",
+          "default": null,
+          "description": "Sticks the cell to the left or right edge of the table's scroll container, painting the host surface under the row tint. Several pinned columns on one side stack on their own — the container measures each one."
+        },
+        {
           "part": "TableCell",
           "name": "pinned",
           "type": "\"left\" | \"right\"",

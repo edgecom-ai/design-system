@@ -806,6 +806,11 @@ export const generatedApi: Record<string, GeneratedApi> = {
         "type": "\"true\" | \"false\""
       },
       {
+        "part": "TableHead",
+        "name": "pinned",
+        "type": "\"left\" | \"right\""
+      },
+      {
         "part": "TableCell",
         "name": "pinned",
         "type": "\"left\" | \"right\""
