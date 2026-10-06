@@ -198,15 +198,18 @@ function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
 
 // A pinned cell sticks to the container's edge and paints the host surface
 // under the row tint, so it covers the columns scrolling beneath it and still
-// reads as part of its row. Its divider is a hairline drawn only while columns
-// are hidden past that edge. Several pinned columns stack by `--pin-offset`,
-// which the container measures and sets on each cell.
+// reads as part of its row. The tint is an `::after` layer behind the content
+// rather than a gradient on the cell: a background-color fades with the same
+// `transition-colors` as the row, where a background-image would snap. The
+// `::before` is the divider, a hairline drawn only while columns are hidden
+// past that edge. Several pinned columns stack by `--pin-offset`, which the
+// container measures and sets on each cell.
 const tableCellVariants = cva("", {
   variants: {
     pinned: {
-      left: "sticky left-(--pin-offset,0px) z-10 bg-(--table-surface) bg-[image:linear-gradient(var(--table-tint,transparent),var(--table-tint,transparent))] after:pointer-events-none after:absolute after:inset-y-0 after:right-0 after:w-px after:bg-border after:opacity-0 after:transition-opacity group-data-overflow-left/table-container:after:opacity-100",
+      left: "sticky left-(--pin-offset,0px) z-10 bg-(--table-surface) after:pointer-events-none after:absolute after:inset-0 after:-z-10 after:bg-(--table-tint,transparent) after:transition-colors before:pointer-events-none before:absolute before:inset-y-0 before:right-0 before:w-px before:bg-border before:opacity-0 before:transition-opacity group-data-overflow-left/table-container:before:opacity-100",
       right:
-        "sticky right-(--pin-offset,0px) z-10 bg-(--table-surface) bg-[image:linear-gradient(var(--table-tint,transparent),var(--table-tint,transparent))] after:pointer-events-none after:absolute after:inset-y-0 after:left-0 after:w-px after:bg-border after:opacity-0 after:transition-opacity group-data-overflow-right/table-container:after:opacity-100",
+        "sticky right-(--pin-offset,0px) z-10 bg-(--table-surface) after:pointer-events-none after:absolute after:inset-0 after:-z-10 after:bg-(--table-tint,transparent) after:transition-colors before:pointer-events-none before:absolute before:inset-y-0 before:left-0 before:w-px before:bg-border before:opacity-0 before:transition-opacity group-data-overflow-right/table-container:before:opacity-100",
     },
   },
 })
