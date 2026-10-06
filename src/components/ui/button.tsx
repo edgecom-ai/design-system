@@ -10,7 +10,7 @@ const buttonVariants = cva(
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary/80",
         outline:
-          "border-border bg-outline-surface hover:bg-outline-hover hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input",
+          "border-border bg-outline-surface hover:bg-outline-hover hover:text-foreground aria-expanded:bg-outline-hover aria-expanded:text-foreground dark:border-input",
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)] aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
         // Quiet variants. Their surfaces are single unmodified `bg-*`/`hover:bg-*`
@@ -21,8 +21,11 @@ const buttonVariants = cva(
         // is also why the resting surface can't stay `dark:bg-*` while the hover
         // is a plain `hover:bg-*`: they weigh the same, the `dark:` one is
         // emitted later, and the control would stop reacting to hover in dark.
+        // The open trigger (`aria-expanded`) wears the hover token too, not an
+        // absolute `muted`: open is a held hover, and the relative wash is what
+        // keeps it visible when the control sits on a `muted` panel.
         ghost:
-          "hover:bg-ghost-hover hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground",
+          "hover:bg-ghost-hover hover:text-foreground aria-expanded:bg-ghost-hover aria-expanded:text-foreground",
         // The quiet destructive: invisible until hovered, red throughout. For
         // row actions (a trash icon button in a table row), where a solid
         // `destructive` fill or a resting `destructive-subtle` tint would paint

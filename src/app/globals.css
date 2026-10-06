@@ -244,12 +244,24 @@
      survived the merge and then won in dark on source order.
      The same order decides `dark:bg-*` vs `hover:bg-*`: both weigh the same, so
      a `dark:` resting surface would outrank the hover and the control would stop
-     reacting in dark. Both surfaces are tokens for that reason. */
+     reacting in dark. Both surfaces are tokens for that reason.
+     The hovers are *relative* — a foreground wash over whatever is behind the
+     control, like `--track` and `--table-header` — not the absolute `muted`
+     they used to be. Apps put this chrome straight on a `muted` panel (filter
+     chips, a rows-per-page select), and an absolute `muted` hover landed on
+     its own value there: a ghost button showed no hover at all, and an outline
+     button's white resting fill *vanished* into the page on hover. At 6% the
+     wash is a 1.13:1 step on every light surface (L 0.957 on white, below
+     today's `muted` 0.968, so no weaker than before on `card`/`background`;
+     0.926 on `muted`), a hair darker than the 5% track, and a neutral grey
+     that stays apart from the blue-tinted `accent` a pressed `toggle` wears.
+     The same token paints an open menu trigger (`aria-expanded`): open is a
+     held hover, and it must step from a `muted` panel for the same reason. */
   --outline-surface: var(--background);
-  --ghost-hover: var(--muted);
-  --outline-hover: var(--muted);
+  --ghost-hover: oklch(0.16 0.01 254 / 6%);
+  --outline-hover: oklch(0.16 0.01 254 / 6%);
   /* A field trigger (select / native-select) rests transparent so a tinted row
-     or panel shows through, and hovers to the same surface as an outline
+     or panel shows through, and hovers to the same wash as an outline
      button — light had no hover at all until the `dark:` classes came out. */
   --input-surface: transparent;
   --input-hover: var(--outline-hover);
@@ -428,9 +440,14 @@
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.62 0.16 254.3);
   /* Dark keeps the translucent surfaces the variants used to apply themselves
-     with `dark:` modifiers — see :root for why they live in tokens now */
+     with `dark:` modifiers — see :root for why they live in tokens now. The
+     ghost hover was `muted` at 50%, which is a white wash on `background` and
+     `card` and nothing at all on `muted` (1.00:1) or inside an overlay
+     (`popover` 1.01:1). It is now the same kind of white alpha as the outline
+     hover (`--input` at 50% is white at 7.5%) — a 1.17–1.24:1 lift on every
+     dark surface, overlays included, and well below the blue `accent`. */
   --outline-surface: color-mix(in oklab, var(--input) 30%, transparent);
-  --ghost-hover: color-mix(in oklab, var(--muted) 50%, transparent);
+  --ghost-hover: oklch(1 0 0 / 7%);
   --outline-hover: color-mix(in oklab, var(--input) 50%, transparent);
   --input-surface: color-mix(in oklab, var(--input) 30%, transparent);
   /* Dark *lightens* both: `background` is already near-black, so a darkening
