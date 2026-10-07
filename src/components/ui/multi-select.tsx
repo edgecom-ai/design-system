@@ -359,6 +359,7 @@ const MultipleSelector = ({
     const Item = (
       <CommandItem
         value={inputValue}
+        keywords={[inputValue]}
         className='cursor-pointer'
         onMouseDown={e => {
           e.preventDefault()
@@ -419,8 +420,12 @@ const MultipleSelector = ({
     }
 
     if (creatable) {
-      return (value: string, search: string) => {
-        return value.toLowerCase().includes(search.toLowerCase()) ? 1 : -1
+      // Match the label (passed as a keyword) as well as the value, which is
+      // often an id that the person typing never sees.
+      return (value: string, search: string, keywords?: string[]) => {
+        const needle = search.toLowerCase()
+
+        return [value, ...(keywords ?? [])].some(text => text.toLowerCase().includes(needle)) ? 1 : -1
       }
     }
 
@@ -583,6 +588,7 @@ const MultipleSelector = ({
                             <CommandItem
                               key={option.value}
                               value={option.value}
+                              keywords={[option.label]}
                               disabled={option.disable}
                               onMouseDown={e => {
                                 e.preventDefault()
