@@ -53,9 +53,9 @@ Read [design.md](https://design.edgecom.ai/design.md) and check against it. For 
 
 A consuming app's `theme` is a snapshot taken at install, and the install stamps `--edgecom-theme: "<version> <digest>"` into `:root` of the app's `globals.css`. Grep for it and compare with the `version` and `digest` in [tokens.json](https://design.edgecom.ai/tokens.json); a missing stamp means a theme installed before the stamp existed, which is stale by definition. If they differ, the fix is re-running the theme install with `--overwrite`, not hand-editing values — tokens.json lists every token's current light and dark value, so the diff is readable before you overwrite.
 
-## Benchmarking Claude Design output
+## Benchmarking Claude design output
 
-To measure the design system as a whole rather than one screen's defects, run [benchmarks/alarms-page.md](benchmarks/alarms-page.md): a fixed prompt in a product manager's words, pasted into Claude Design verbatim after each release and scored out of 12. Add a sibling file for another screen only when it exercises components this one does not.
+To measure the design system as a whole rather than one screen's defects, run [benchmarks/alarms-page.md](benchmarks/alarms-page.md): a fixed prompt in a product manager's words, pasted verbatim into a new Claude conversation with the design system as the default, after each release, and scored out of 13. Add a sibling file for another screen only when it exercises components this one does not.
 
 ## Reporting
 

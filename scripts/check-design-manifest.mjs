@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Validates a design handoff manifest (plan §5.4) — the `<Name>.manifest.json`
-// a Claude Design output ships beside `<Name>.dc.html`.
+// a Claude design ships beside `<Name>.dc.html` (in a Design canvas, both
+// under `project/`).
 //
 // Two layers, both reported:
 //
@@ -330,7 +331,7 @@ if (isStr(manifest.designSystemVersion) && isStr(manifest.designSystemDigest)) {
       "/designSystemDigest",
       `stale — the design was built against ${manifest.designSystemVersion} / ${manifest.designSystemDigest}, ` +
         `the system is now ${system.version} / ${system.digest}. The design may be right and the system moved after it: ` +
-        `re-check it against the current contracts before implementing, re-stamp the identity, and re-sync the design project.`,
+        `re-check it against the current contracts before implementing, re-stamp the identity, and re-install the system on the canvas.`,
     )
   }
 }
