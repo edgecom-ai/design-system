@@ -13,7 +13,7 @@
 
 import { existsSync, readFileSync, readdirSync } from "node:fs"
 import { createServer } from "node:http"
-import { dirname, extname, join, resolve } from "node:path"
+import { dirname, join, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 
 import { chromium } from "playwright"
@@ -37,24 +37,31 @@ const cards = readdirSync(join(project, "components"))
   .filter((d) => existsSync(join(project, "components", d, "preview.html")))
   .sort()
 
+// Serves only what the build named: a card from the list above, and the two
+// files every card preloads. Nothing from the request reaches a path or the page.
+const STATIC = {
+  "/components/bundle.css": ["components/bundle.css", "text/css"],
+  "/components/bundle.js": ["components/bundle.js", "text/javascript"],
+}
 const server = createServer((req, res) => {
   const url = new URL(req.url, "http://localhost")
-  const card = url.pathname.match(/^\/card\/(\w+)$/)?.[1]
+  const card = cards.find((c) => url.pathname === `/card/${c}`)
   if (card) {
+    const theme = url.searchParams.get("theme") === "dark" ? "dark" : "light"
     const head = `<link rel="stylesheet" href="/components/bundle.css"><script>${react}</script><script src="/components/bundle.js"></script>`
     const html = readFileSync(join(project, "components", card, "preview.html"), "utf8")
       .replace("<head>", `<head>${head}`)
-      .replace("<html>", `<html data-theme="${url.searchParams.get("theme")}">`)
+      .replace("<html>", `<html data-theme="${theme}">`)
     res.setHeader("content-type", "text/html")
     return res.end(html)
   }
-  const file = join(project, url.pathname)
-  if (!file.startsWith(project) || !existsSync(file)) {
+  const asset = STATIC[url.pathname]
+  if (!asset) {
     res.statusCode = 404
     return res.end()
   }
-  res.setHeader("content-type", { ".js": "text/javascript", ".css": "text/css" }[extname(file)] ?? "application/octet-stream")
-  res.end(readFileSync(file))
+  res.setHeader("content-type", asset[1])
+  res.end(readFileSync(join(project, asset[0])))
 })
 await new Promise((ok) => server.listen(0, ok))
 const port = server.address().port
