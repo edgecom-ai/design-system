@@ -13,8 +13,9 @@
 //     components/Cover/preview.html the system's cover (.design-sync/cover.html)
 //     _system.json                  version, commit, digest — copied into every canvas
 //     _manifest.example.json        the design manifest a canvas starts from
-//     design-system.json            the index fields this build owns; the publish
-//                                   step merges them into the live index
+//   .design-sync/artifact/index-fields.json  the index fields this build owns;
+//                                   scripts/plan-design-publish.mjs merges them
+//                                   into the live index as project/design-system.json
 //
 // Inputs, all regenerated before this runs (`pnpm design:build`, then the
 // converter driver for the guides and types):
@@ -384,8 +385,10 @@ write("_system.json", read(inputs.system))
 write("_manifest.example.json", read(inputs.example))
 
 // ---- index -------------------------------------------------------------------
-write(
-  "design-system.json",
+// The index fields this build owns. Not a file of the system: the publish plan
+// (scripts/plan-design-publish.mjs) merges them into the live index.
+writeFileSync(
+  join(out, "index-fields.json"),
   `${JSON.stringify(
     {
       v: 3,
@@ -396,7 +399,6 @@ write(
         { name: "react", version: "18" },
         { name: "react-dom", version: "18" },
       ],
-      docs: { readme: "project/README.md", sections: ["project/guidelines/design.md"] },
       lastChange: {
         by: "Claude",
         at: new Date().toISOString(),
