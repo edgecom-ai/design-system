@@ -1,0 +1,58 @@
+<!-- @dsCard height=320 -->
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Cover</title>
+<style>
+  body { margin: 0; background: var(--background); }
+  .cover { position: relative; width: 960px; height: 320px; overflow: hidden; background: var(--background); }
+  .brand { fill: var(--primary); }
+  .ink { fill: var(--chart-water-900); }
+  .tint { fill: var(--chart-water-100); }
+  .power { fill: var(--chart-electricity-500); }
+  .cool { fill: var(--chart-temperature-500); }
+  .tile { rx: var(--radius-sm); ry: var(--radius-sm); }
+  .name { position: absolute; left: 48px; top: 156px; width: 864px; margin: 0; font: 700 64px/0.95 var(--font-heading); letter-spacing: -0.02em; color: var(--foreground); }
+  .tagline { position: absolute; left: 48px; top: 288px; margin: 0; font: 400 14px/20px var(--font-sans); color: var(--muted-foreground); }
+</style>
+</head><body>
+<div class="cover">
+  <svg width="960" height="136" viewBox="0 0 960 136" aria-hidden="true" style="position:absolute;left:0;top:0">
+    <!--
+      blocks: primary 336×112, chart-water-900 96×112, chart-water-100 240×112, chart-temperature-500 72×112, chart-electricity-500 216×112 — brand and the two commodity hues the product is known by, water-900 as ink
+      arrangement: a strip of unequal bands across the top, bleeding off the right edge; the name is too wide for the 440px zone, so it takes the top-band skeleton
+      pattern: geometric, modular, dense UI — the dashboards are grids of cards, some spanning two columns; tiles merged two-wide say that
+      steps: band 112 (spacing 28), tiles 24 (spacing 6) on an 8 gap (spacing 2), inset 16 (spacing 4), corners radius-sm
+    -->
+    <rect class="brand" x="0" y="24" width="336" height="112"/>
+    <rect class="ink" x="336" y="24" width="96" height="112"/>
+    <rect class="tint" x="432" y="24" width="240" height="112"/>
+    <rect class="cool" x="672" y="24" width="72" height="112"/>
+    <rect class="power" x="744" y="24" width="216" height="112"/>
+    <rect class="tile ink" x="448" y="40" width="56" height="24"/>
+    <rect class="tile ink" x="512" y="40" width="24" height="24"/>
+    <rect class="tile brand" x="544" y="40" width="24" height="24"/>
+    <rect class="tile ink" x="576" y="40" width="56" height="24"/>
+    <rect class="tile ink" x="640" y="40" width="24" height="24"/>
+    <rect class="tile brand" x="448" y="72" width="24" height="24"/>
+    <rect class="tile ink" x="480" y="72" width="56" height="24"/>
+    <rect class="tile ink" x="544" y="72" width="24" height="24"/>
+    <rect class="tile ink" x="576" y="72" width="24" height="24"/>
+    <rect class="tile brand" x="608" y="72" width="56" height="24"/>
+    <rect class="tile ink" x="448" y="104" width="24" height="24"/>
+    <rect class="tile ink" x="480" y="104" width="24" height="24"/>
+    <rect class="tile brand" x="512" y="104" width="24" height="24"/>
+    <rect class="tile ink" x="544" y="104" width="56" height="24"/>
+    <rect class="tile ink" x="608" y="104" width="24" height="24"/>
+    <rect class="tile ink" x="640" y="104" width="24" height="24"/>
+  </svg>
+  <h1 class="name">Edgecom Energy<br>Design System V3</h1>
+  <p class="tagline">OKLCH tokens, one type scale, light and dark — for energy operations software.</p>
+</div>
+<script>
+  // The system's dark tokens hang off .dark; the frame marks the theme on <html data-theme>.
+  ;(function () {
+    var html = document.documentElement
+    function theme() { html.classList.toggle("dark", html.getAttribute("data-theme") === "dark") }
+    theme(); new MutationObserver(theme).observe(html, { attributes: true, attributeFilter: ["data-theme"] })
+  })()
+</script>
+</body></html>
