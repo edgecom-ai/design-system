@@ -27,7 +27,7 @@ A **client-rendered SPA built to static files** with Vite + TanStack Router, pub
 
 ## Sections are split in two
 
-`src/app/sections.tsx` holds **metadata only** and is eager — the sidebar, the ⌘K dialog, and all four generators (`gen-api`, `gen-routes`, `gen-llms`, `gen-design-sync`) read every entry. Those generators parse the file *textually*, matching top-level fields at **exactly four spaces** of indentation, so keep the array formatted the way it is.
+`src/app/sections.tsx` holds **metadata only** and is eager — the sidebar, the ⌘K dialog, and all five generators (`gen-api`, `gen-routes`, `gen-llms`, `gen-design-sync`, `gen-design-artifact`) read every entry. Those generators parse the file *textually*, matching top-level fields at **exactly four spaces** of indentation, so keep the array formatted the way it is.
 
 Each section's content lives in `src/app/sections/<id>.tsx`, default-exporting `{ node }` or `{ variants }`, and is registered in the `sectionContent` map as a dynamic import. `DocsShell` resolves it with `React.use()` against a module-level promise cache — the cache is load-bearing, since `use()` re-reads the promise every render and a fresh one would suspend forever. Helpers two or more sections share go in `src/app/sections/shared.tsx`.
 
