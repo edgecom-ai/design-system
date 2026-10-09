@@ -1,14 +1,14 @@
 # Benchmark: the Alarms page, asked for in a product manager's words
 
-**Purpose:** a whole-screen benchmark for the design system as Claude Design sees it. The mechanical checks in the audit skill each isolate one drift class; this measures the opposite end — what a non-specialist gets when they select the design system in Claude Design and describe a screen in their own words, with no knowledge of components, tokens or guidelines.
+**Purpose:** a whole-screen benchmark for the design system as Claude's design canvas sees it. The mechanical checks in the audit skill each isolate one drift class; this measures the opposite end — what a non-specialist gets when they ask Claude for a screen in their own words, with the design system as their default and no knowledge of components, tokens or guidelines.
 
 The prompt is deliberately naive. It says *what* the screen must do and nothing about *how*. Every instruction a specialist would add — read the guidelines, use `Table`, colour severity by meaning, write the manifest — is exactly what the design system itself has to teach. If the output drifts, the system is what gets fixed, never this prompt.
 
 ## How to run
 
-1. In Claude Design, start a new design and select the current Edgecom design system.
-2. Paste the prompt below **verbatim**. Add nothing. Use a fresh project with the design system attached and nothing else in it — the system has to carry the whole instruction on its own.
-3. Save the output beside the earlier runs (design file, manifest if one was produced, and the agent's own summary) so runs can be diffed.
+1. Make the Edgecom Energy Design System V3 artifact your default design system on claude.ai, so a new design installs it without the prompt naming it.
+2. Start a new conversation and paste the prompt below **verbatim**. Add nothing — the system has to carry the whole instruction on its own. Before scoring, read the new canvas's `project/canvas.json` and check that `designSystems` names V3; a canvas built on another system is not a run.
+3. Save the output beside the earlier runs (each `project/<Name>.dc.html`, its manifest if one was produced, `project/canvas.json`, and the agent's own summary) so runs can be diffed. Read them with Claude Code's Artifact tool. To render a file headless, serve it over HTTP beside the canvas's `ds/` copy and the canvas runtime, never from `file://`.
 4. Score it against the checklist below and record the score and date in the log at the bottom.
 
 Re-run after any release of the design system. Never edit the prompt between runs; if the page needs a feature the prompt does not describe, add it once, then freeze it again and note the change in the log.
