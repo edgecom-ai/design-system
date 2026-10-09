@@ -62,6 +62,10 @@ yarn-error.log*
 # stylesheet, so it is rebuilt rather than committed.
 /.design-sync/bundle/
 
+# The design system as a Claude Design System artifact (run `pnpm design:artifact`);
+# published to the artifact, rebuilt rather than committed.
+/.design-sync/artifact/
+
 # design-sync (official converter) machine state — see .design-sync/README.md
 /.ds-sync/
 /ds-bundle/
