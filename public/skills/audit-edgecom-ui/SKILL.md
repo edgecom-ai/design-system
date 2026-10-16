@@ -29,6 +29,32 @@ grep -rn 'chart-legacy-' src/ --include='*.tsx'
 
 # Fixed px where the rem scales belong
 grep -rnE '\b(w|h|text|p|m|gap)-\[[0-9.]+px\]' src/ --include='*.tsx'
+
+# A field re-tinted to read on the muted page body — surface="page" is the fix.
+# bg-outline-surface is the hand-patched form of the same thing. Single-line
+# matches only: a multi-line className needs the runtime check below.
+grep -rnE '<(Input|InputGroup|Textarea|SelectTrigger|NativeSelect|ComboboxInput|ComboboxChips|MultiSelect|MultipleSelector|TagsInput)\b[^>]*\b(bg-background|bg-card|bg-white|bg-outline-surface)\b' src/ --include='*.tsx'
+```
+
+Every field and trigger renders `data-surface`, so the surface rule is also checkable in the running app. Paste this into the console on each page that has a filter row; it lists the fields painted straight on the `muted` page body (no `card` around them) that are still on `surface="default"`:
+
+```js
+(() => {
+  const probe = document.body.appendChild(Object.assign(document.createElement("div"), { style: "background: var(--muted)" }))
+  const muted = getComputedStyle(probe).backgroundColor
+  probe.remove()
+  const painted = (el) => {
+    for (let p = el.parentElement; p; p = p.parentElement) {
+      const bg = getComputedStyle(p).backgroundColor
+      if (bg !== "rgba(0, 0, 0, 0)" && bg !== "transparent") return bg
+    }
+  }
+  return [...document.querySelectorAll('[data-surface="default"]')].filter((el) =>
+    !el.matches('[data-slot="native-select-wrapper"]') && // its <select> is checked instead
+    !el.parentElement?.closest('[data-slot="input-group"]') && // the group carries the surface
+    !el.closest('[data-slot="card"]') &&
+    painted(el) === muted)
+})()
 ```
 
 In the design-system repo itself, `pnpm registry:check` is the deterministic gate and already covers undeclared imports, unversioned deps, missing registry dependencies, type-token overrides, and legacy-token references in shipped primitives.
@@ -45,6 +71,7 @@ Read [design.md](https://design.edgecom.ai/design.md) and check against it. For 
 - **Active states** recoloured with brand blue instead of the neutral `accent` highlight.
 - **Overlays.** A dialog or sheet without its top-right close (X). A destructive action wired straight to its trigger with no `alert-dialog`. A fourth z-index layer, or a z-index on a Popup instead of its Positioner.
 - **Tabs variant** left on `default` over a tinted surface or inside an overlay, where the `muted` track has no lightness step left.
+- **Field surface.** A field or trigger placed straight on the `muted` page body, not inside a `card`, without `data-surface="page"`: it has no face there and dissolves into the grey beside the outline buttons. And any field given `bg-background`, `bg-card` or `bg-white` to fix that: in dark `background` is darker than `card`, so the field sinks below the cards beside it. The fix for both is `surface="page"`. Inside a card, sheet, dialog or table row the field stays on `default`, so a tinted row still shows through it.
 - **States.** Missing loading / empty / error handling; an async failure with no retry; a blocked submit with no inline, specific error text.
 - **Charts.** Missing the standard control set (one shared date range, smooth/step toggle, statistical overlays, one export icon-button dropdown). An event-window chart — one event's reading, over a window the event sets — carries only the export menu, with the crossed threshold as its reference line; don't flag the controls it drops, but do flag one given a date range or tied to the page's range. A left- or right-aligned legend. Bars with no gap, pill-shaped or bottom-rounded bars, reference lines in a status or commodity hue.
 - **Accessibility.** Contrast under 4.5:1 for body text or 3:1 for large text and UI, in *either* theme. `outline: none` with no replacement focus ring. Unlabelled fields. Status signalled by colour alone.

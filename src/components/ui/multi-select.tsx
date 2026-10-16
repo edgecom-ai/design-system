@@ -4,6 +4,7 @@ import * as React from "react"
 
 import { useEffect } from "react"
 
+import { cva, type VariantProps } from "class-variance-authority"
 import { Command as CommandPrimitive, useCommandState } from "cmdk"
 import { Command, CommandGroup, CommandItem, CommandList } from "@/components/ui/command"
 import { cn } from "@/lib/utils"
@@ -24,7 +25,24 @@ interface GroupOption {
   [key: string]: Option[]
 }
 
-interface MultipleSelectorProps {
+// What the field sits on — see `inputVariants`. `page` gives it the outline
+// Button's resting face for the shell's `muted` content area.
+const multipleSelectorVariants = cva(
+  'border-input focus-within:border-ring focus-within:ring-ring/50 has-aria-invalid:ring-destructive/20 dark:has-aria-invalid:ring-destructive/40 has-aria-invalid:border-destructive relative min-h-9.5 rounded-md border text-body-sm transition-[color,box-shadow] outline-none focus-within:ring-[3px] has-disabled:pointer-events-none has-disabled:cursor-not-allowed has-disabled:opacity-50',
+  {
+    variants: {
+      surface: {
+        default: '',
+        page: 'bg-outline-surface'
+      }
+    },
+    defaultVariants: {
+      surface: 'default'
+    }
+  }
+)
+
+interface MultipleSelectorProps extends VariantProps<typeof multipleSelectorVariants> {
   value?: Option[]
   defaultOptions?: Option[]
 
@@ -194,7 +212,8 @@ const MultipleSelector = ({
   triggerSearchOnFocus = false,
   commandProps,
   inputProps,
-  hideClearAllButton = false
+  hideClearAllButton = false,
+  surface = 'default'
 }: MultipleSelectorProps) => {
   const inputRef = React.useRef<HTMLInputElement>(null)
   const [open, setOpen] = React.useState(false)
@@ -446,8 +465,9 @@ const MultipleSelector = ({
       filter={commandFilter()}
     >
       <div
+        data-surface={surface}
         className={cn(
-          'border-input focus-within:border-ring focus-within:ring-ring/50 has-aria-invalid:ring-destructive/20 dark:has-aria-invalid:ring-destructive/40 has-aria-invalid:border-destructive relative min-h-9.5 rounded-md border text-body-sm transition-[color,box-shadow] outline-none focus-within:ring-[3px] has-disabled:pointer-events-none has-disabled:cursor-not-allowed has-disabled:opacity-50',
+          multipleSelectorVariants({ surface }),
           {
             'p-1': selected.length !== 0,
             'cursor-text': !disabled && selected.length !== 0
@@ -631,3 +651,4 @@ const MultipleSelector = ({
 
 MultipleSelector.displayName = 'MultipleSelector'
 export default MultipleSelector
+export { multipleSelectorVariants }

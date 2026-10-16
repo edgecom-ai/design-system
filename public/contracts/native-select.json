@@ -1,6 +1,6 @@
 {
   "version": "v3.0.0",
-  "digest": "ca4a536b9df9ddae",
+  "digest": "e381d0ec2c6a3e93",
   "contract": {
     "id": "native-select",
     "label": "Native select",
@@ -35,6 +35,13 @@
         "type": "\"default\" | \"sm\"",
         "default": "\"default\"",
         "description": "Control height — sm (h-7) or default (h-8)."
+      },
+      {
+        "part": "NativeSelect",
+        "name": "surface",
+        "type": "\"default\" | \"page\"",
+        "default": "\"default\"",
+        "description": "What the trigger sits on — default inside a card, sheet, dialog or table row, where it rests clear so the surface shows through; page straight on the shell's muted content area, where it rests and hovers like an outline Button so a filter row reads as one surface."
       }
     ],
     "variants": [
@@ -43,6 +50,14 @@
         "options": [
           "default",
           "sm"
+        ],
+        "default": "default"
+      },
+      {
+        "name": "surface",
+        "options": [
+          "default",
+          "page"
         ],
         "default": "default"
       }
@@ -80,6 +95,14 @@
         "family": "neutral"
       },
       {
+        "id": "outline-hover",
+        "family": "interaction"
+      },
+      {
+        "id": "outline-surface",
+        "family": "interaction"
+      },
+      {
         "id": "primary",
         "family": "brand"
       },
@@ -102,7 +125,9 @@
     ],
     "requires": [],
     "forbids": [],
-    "rules": [],
+    "rules": [
+      "**Pick the surface by what is underneath.** A trigger placed straight on the shell's `muted` content area — a filter row, a page-size select — takes `surface=\"page\"`, which rests and hovers like an outline Button (`outline-surface`, `outline-hover`), so the row reads as one surface. Inside a `card`, `sheet`, `dialog` or table row it keeps `default`."
+    ],
     "behavior": {},
     "a11y": {
       "attributes": [
@@ -111,7 +136,9 @@
       "requirements": []
     },
     "examples": [],
-    "antiPatterns": [],
+    "antiPatterns": [
+      "A field on the muted page body given `bg-background`, `bg-card` or `bg-white` instead of `surface=\"page\"` — in dark mode `background` is darker than `card`, so the field sinks below the cards beside it."
+    ],
     "status": "stable",
     "replaces": null,
     "deprecated": null,

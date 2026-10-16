@@ -1,6 +1,6 @@
 {
   "version": "v3.0.0",
-  "digest": "ca4a536b9df9ddae",
+  "digest": "e381d0ec2c6a3e93",
   "contract": {
     "id": "input-group",
     "label": "Input group",
@@ -42,6 +42,13 @@
     ],
     "props": [
       {
+        "part": "InputGroup",
+        "name": "surface",
+        "type": "\"default\" | \"page\"",
+        "default": "\"default\"",
+        "description": "What the field sits on — default inside a card, sheet, dialog or table row, where it rests clear so the surface shows through; page straight on the shell's muted content area, where it takes the outline Button's face so a filter row reads as one surface. The group owns the surface; its control stays clear."
+      },
+      {
         "part": "InputGroupAddon",
         "name": "align",
         "type": "\"inline-start\" | \"inline-end\" | \"block-start\" | \"block-end\"",
@@ -57,6 +64,14 @@
       }
     ],
     "variants": [
+      {
+        "name": "surface",
+        "options": [
+          "default",
+          "page"
+        ],
+        "default": "default"
+      },
       {
         "name": "align",
         "options": [
@@ -104,6 +119,10 @@
         "family": "neutral"
       },
       {
+        "id": "outline-surface",
+        "family": "interaction"
+      },
+      {
         "id": "radius-lg",
         "family": "radius"
       },
@@ -118,7 +137,9 @@
     ],
     "requires": [],
     "forbids": [],
-    "rules": [],
+    "rules": [
+      "**Pick the surface by what is underneath.** A field placed straight on the shell's `muted` content area — a search box, a filter row — takes `surface=\"page\"`, the outline Button's resting face (`outline-surface`), so the row reads as one surface. Inside a `card`, `sheet`, `dialog` or table row it keeps `default`."
+    ],
     "behavior": {},
     "a11y": {
       "attributes": [
@@ -128,7 +149,9 @@
       "requirements": []
     },
     "examples": [],
-    "antiPatterns": [],
+    "antiPatterns": [
+      "A field on the muted page body given `bg-background`, `bg-card` or `bg-white` instead of `surface=\"page\"` — in dark mode `background` is darker than `card`, so the field sinks below the cards beside it."
+    ],
     "status": "stable",
     "replaces": null,
     "deprecated": null,

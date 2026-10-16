@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority"
 import { XIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -28,11 +29,30 @@ function useControllableState<T>(
   return [value, setValue] as const
 }
 
+// `surface` names what the field sits on — see `inputVariants`. `page` gives
+// it the outline Button's resting face for the shell's `muted` content area,
+// which is also what keeps its `muted` tags visible there.
+const tagsInputVariants = cva(
+  "flex min-h-8 flex-wrap items-center gap-1 rounded-lg border border-input bg-transparent bg-clip-padding px-2.5 py-1 text-body-sm transition-colors focus-within:border-ring focus-within:ring-3 focus-within:ring-ring/50 has-data-[slot=tags-input-item]:px-1 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 data-disabled:pointer-events-none data-disabled:opacity-50 dark:bg-input/30 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40",
+  {
+    variants: {
+      surface: {
+        default: "",
+        page: "bg-outline-surface dark:bg-outline-surface",
+      },
+    },
+    defaultVariants: {
+      surface: "default",
+    },
+  }
+)
+
 export interface TagsInputProps
   extends Omit<
-    React.ComponentProps<"div">,
-    "onChange" | "defaultValue" | "children"
-  > {
+      React.ComponentProps<"div">,
+      "onChange" | "defaultValue" | "children"
+    >,
+    VariantProps<typeof tagsInputVariants> {
   /** Controlled list of tags. */
   value?: string[]
   /** Initial tags when uncontrolled. */
@@ -79,6 +99,7 @@ function TagsInput({
   className,
   inputClassName,
   inputProps,
+  surface = "default",
   "aria-invalid": ariaInvalid,
   ...props
 }: TagsInputProps) {
@@ -175,12 +196,10 @@ function TagsInput({
   return (
     <div
       data-slot="tags-input"
+      data-surface={surface}
       data-disabled={disabled || undefined}
       aria-invalid={ariaInvalid}
-      className={cn(
-        "flex min-h-8 flex-wrap items-center gap-1 rounded-lg border border-input bg-transparent bg-clip-padding px-2.5 py-1 text-body-sm transition-colors focus-within:border-ring focus-within:ring-3 focus-within:ring-ring/50 has-data-[slot=tags-input-item]:px-1 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 data-disabled:pointer-events-none data-disabled:opacity-50 dark:bg-input/30 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40",
-        className
-      )}
+      className={cn(tagsInputVariants({ surface }), className)}
       onMouseDown={(event) => {
         // Focus the input when clicking empty space, but let chip buttons work.
         if (event.target === event.currentTarget) {
@@ -246,4 +265,4 @@ function TagsInput({
   )
 }
 
-export { TagsInput }
+export { TagsInput, tagsInputVariants }

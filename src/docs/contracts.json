@@ -150,7 +150,8 @@
     ],
     "forbids": [
       "Re-styling the invalid state with border or ring utilities — the primitive renders it from `aria-invalid`.",
-      "A fixed px width. The field fills its container and the layout decides the measure."
+      "A fixed px width. The field fills its container and the layout decides the measure.",
+      "Re-tinting the resting surface with a `bg-*` class so the field reads on the page body — set `surface=\"page\"`, which is the outline Button's face in both themes."
     ],
     "behavior": {
       "error": "Invalid means `aria-invalid` on the control plus an inline `FieldError` naming the problem — never a generic toast, and never a silently blocked submit button."
@@ -160,11 +161,16 @@
       "Colour is never the only error signal; the message carries the meaning."
     ],
     "examples": [
-      "`<Field><FieldLabel>Site name</FieldLabel><Input aria-invalid={!valid} /><FieldError>Site name is required</FieldError></Field>`"
+      "`<Field><FieldLabel>Site name</FieldLabel><Input aria-invalid={!valid} /><FieldError>Site name is required</FieldError></Field>`",
+      "`<Input size=\"sm\" surface=\"page\" placeholder=\"Search meters\" />` beside `<Button variant=\"outline\" size=\"sm\">` in a filter row on the page body."
     ],
     "antiPatterns": [
       "A required field that blocks submission with no inline message.",
-      "Hand-drawn focus styling that replaces the `ring` token."
+      "Hand-drawn focus styling that replaces the `ring` token.",
+      "A field on the muted page body given `bg-background`, `bg-card` or `bg-white` instead of `surface=\"page\"` — in dark mode `background` is darker than `card`, so the field sinks below the cards beside it."
+    ],
+    "rules": [
+      "**Pick the surface by what is underneath.** A field placed straight on the shell's `muted` content area — a search box, a filter row — takes `surface=\"page\"`, the outline Button's resting face (`outline-surface`), so the row reads as one surface. Inside a `card`, `sheet`, `dialog` or table row it keeps `default`."
     ]
   },
   "select": {
@@ -185,11 +191,13 @@
     "forbids": [
       "A checkmark on the selected option in a single-select. The trigger value and the option highlight already say it; a check belongs only to multi-select.",
       "Pinning a side that lets the popup run off-screen — the positioner flips and shifts by default.",
-      "Stretching or shrinking the list away from the trigger width."
+      "Stretching or shrinking the list away from the trigger width.",
+      "Re-tinting the resting surface with a `bg-*` class so the field reads on the page body — set `surface=\"page\"`, which is the outline Button's face in both themes."
     ],
     "rules": [
       "**No checkmark on the selected option** in a single-select — the trigger value plus the option highlight already say it. A check belongs only in multi-select.",
-      "The list matches the trigger width so options line up under the shown value."
+      "The list matches the trigger width so options line up under the shown value.",
+      "**Pick the surface by what is underneath.** A trigger placed straight on the shell's `muted` content area — a filter row, a page-size select — takes `surface=\"page\"`, which rests and hovers like an outline Button (`outline-surface`, `outline-hover`), so the row reads as one surface. Inside a `card`, `sheet`, `dialog` or table row it keeps `default`."
     ],
     "behavior": {
       "error": "`aria-invalid` on the trigger renders the destructive border and ring, exactly as on `input`."
@@ -198,11 +206,13 @@
       "The trigger is labelled — by a `field` label or an `aria-label`."
     ],
     "examples": [
-      "`<Select><SelectTrigger><SelectValue placeholder=\"All sites\" /></SelectTrigger><SelectContent><SelectItem value=\"a\">Site A</SelectItem></SelectContent></Select>`"
+      "`<Select><SelectTrigger><SelectValue placeholder=\"All sites\" /></SelectTrigger><SelectContent><SelectItem value=\"a\">Site A</SelectItem></SelectContent></Select>`",
+      "`<SelectTrigger size=\"sm\" surface=\"page\"><SelectValue placeholder=\"All sites\" /></SelectTrigger>` in a filter row on the page body."
     ],
     "antiPatterns": [
       "Adding a tick to the chosen item because a design tool drew one.",
-      "A `select` for a job that a segmented control handles on another screen."
+      "A `select` for a job that a segmented control handles on another screen.",
+      "A field on the muted page body given `bg-background`, `bg-card` or `bg-white` instead of `surface=\"page\"` — in dark mode `background` is darker than `card`, so the field sinks below the cards beside it."
     ]
   },
   "badge": {
@@ -505,7 +515,7 @@
       "The rail collapses to icons (`collapsible=\"icon\"`); labels move to tooltips and a submenu becomes a hover flyout.",
       "On a phone the rail becomes an offcanvas sheet behind the header's toggle and the search field hides.",
       "The theme toggle flips `.dark` on `<html>`; nothing inside the shell hand-picks a dark colour.",
-      "The content area paints `muted` in both themes and the page's cards sit on it; a page never repaints that surface, and a tab strip placed straight on it takes the `adaptive` or `line` variant."
+      "The content area paints `muted` in both themes and the page's cards sit on it; a page never repaints that surface. A tab strip placed straight on it takes the `adaptive` or `line` variant, and a field or select trigger placed straight on it takes `surface=\"page\"`."
     ],
     "behavior": {
       "loading": "The page's own loading state renders inside `ApplicationShellContent`; the frame itself never skeletons.",
@@ -522,6 +532,46 @@
     "antiPatterns": [
       "A hand-rolled sidebar plus header on one screen and the shell on another.",
       "A page that ships without the shell because the prompt only described the page."
+    ]
+  },
+  "input-group": {
+    "rules": [
+      "**Pick the surface by what is underneath.** A field placed straight on the shell's `muted` content area — a search box, a filter row — takes `surface=\"page\"`, the outline Button's resting face (`outline-surface`), so the row reads as one surface. Inside a `card`, `sheet`, `dialog` or table row it keeps `default`."
+    ],
+    "antiPatterns": [
+      "A field on the muted page body given `bg-background`, `bg-card` or `bg-white` instead of `surface=\"page\"` — in dark mode `background` is darker than `card`, so the field sinks below the cards beside it."
+    ]
+  },
+  "tags-input": {
+    "rules": [
+      "**Pick the surface by what is underneath.** A field placed straight on the shell's `muted` content area — a search box, a filter row — takes `surface=\"page\"`, the outline Button's resting face (`outline-surface`), so the row reads as one surface. Inside a `card`, `sheet`, `dialog` or table row it keeps `default`."
+    ],
+    "antiPatterns": [
+      "A field on the muted page body given `bg-background`, `bg-card` or `bg-white` instead of `surface=\"page\"` — in dark mode `background` is darker than `card`, so the field sinks below the cards beside it."
+    ]
+  },
+  "native-select": {
+    "rules": [
+      "**Pick the surface by what is underneath.** A trigger placed straight on the shell's `muted` content area — a filter row, a page-size select — takes `surface=\"page\"`, which rests and hovers like an outline Button (`outline-surface`, `outline-hover`), so the row reads as one surface. Inside a `card`, `sheet`, `dialog` or table row it keeps `default`."
+    ],
+    "antiPatterns": [
+      "A field on the muted page body given `bg-background`, `bg-card` or `bg-white` instead of `surface=\"page\"` — in dark mode `background` is darker than `card`, so the field sinks below the cards beside it."
+    ]
+  },
+  "multi-select": {
+    "rules": [
+      "**Pick the surface by what is underneath.** A trigger placed straight on the shell's `muted` content area — a filter row, a page-size select — takes `surface=\"page\"`, which rests and hovers like an outline Button (`outline-surface`, `outline-hover`), so the row reads as one surface. Inside a `card`, `sheet`, `dialog` or table row it keeps `default`."
+    ],
+    "antiPatterns": [
+      "A field on the muted page body given `bg-background`, `bg-card` or `bg-white` instead of `surface=\"page\"` — in dark mode `background` is darker than `card`, so the field sinks below the cards beside it."
+    ]
+  },
+  "combobox": {
+    "rules": [
+      "**Pick the surface by what is underneath.** A `ComboboxInput` or `ComboboxChips` placed straight on the shell's `muted` content area — a search box, a filter row — takes `surface=\"page\"`, the outline Button's resting face (`outline-surface`), so the row reads as one surface. Inside a `card`, `sheet`, `dialog` or table row it keeps `default`."
+    ],
+    "antiPatterns": [
+      "A field on the muted page body given `bg-background`, `bg-card` or `bg-white` instead of `surface=\"page\"` — in dark mode `background` is darker than `card`, so the field sinks below the cards beside it."
     ]
   }
 }

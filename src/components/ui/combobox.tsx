@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { Combobox as ComboboxPrimitive } from "@base-ui/react"
+import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -10,6 +11,7 @@ import {
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
+  inputGroupVariants,
 } from "@/components/ui/input-group"
 import { ChevronDownIcon, XIcon, CheckIcon } from "lucide-react"
 
@@ -55,13 +57,15 @@ function ComboboxInput({
   disabled = false,
   showTrigger = true,
   showClear = false,
+  surface = "default",
   ...props
-}: ComboboxPrimitive.Input.Props & {
-  showTrigger?: boolean
-  showClear?: boolean
-}) {
+}: ComboboxPrimitive.Input.Props &
+  VariantProps<typeof inputGroupVariants> & {
+    showTrigger?: boolean
+    showClear?: boolean
+  }) {
   return (
-    <InputGroup className={cn("w-auto", className)}>
+    <InputGroup surface={surface} className={cn("w-auto", className)}>
       <ComboboxPrimitive.Input
         render={<InputGroupInput disabled={disabled} />}
         {...props}
@@ -212,18 +216,35 @@ function ComboboxSeparator({
   )
 }
 
+// `surface` names what the field sits on — see `inputVariants`. `page` gives
+// it the outline Button's resting face for the shell's `muted` content area.
+const comboboxChipsVariants = cva(
+  "flex min-h-8 flex-wrap items-center gap-1 rounded-lg border border-input bg-transparent bg-clip-padding px-2.5 py-1 text-body-sm transition-colors focus-within:border-ring focus-within:ring-3 focus-within:ring-ring/50 has-aria-invalid:border-destructive has-aria-invalid:ring-3 has-aria-invalid:ring-destructive/20 has-data-[slot=combobox-chip]:px-1 dark:bg-input/30 dark:has-aria-invalid:border-destructive/50 dark:has-aria-invalid:ring-destructive/40",
+  {
+    variants: {
+      surface: {
+        default: "",
+        page: "bg-outline-surface dark:bg-outline-surface",
+      },
+    },
+    defaultVariants: {
+      surface: "default",
+    },
+  }
+)
+
 function ComboboxChips({
   className,
+  surface = "default",
   ...props
 }: React.ComponentPropsWithRef<typeof ComboboxPrimitive.Chips> &
-  ComboboxPrimitive.Chips.Props) {
+  ComboboxPrimitive.Chips.Props &
+  VariantProps<typeof comboboxChipsVariants>) {
   return (
     <ComboboxPrimitive.Chips
       data-slot="combobox-chips"
-      className={cn(
-        "flex min-h-8 flex-wrap items-center gap-1 rounded-lg border border-input bg-transparent bg-clip-padding px-2.5 py-1 text-body-sm transition-colors focus-within:border-ring focus-within:ring-3 focus-within:ring-ring/50 has-aria-invalid:border-destructive has-aria-invalid:ring-3 has-aria-invalid:ring-destructive/20 has-data-[slot=combobox-chip]:px-1 dark:bg-input/30 dark:has-aria-invalid:border-destructive/50 dark:has-aria-invalid:ring-destructive/40",
-        className
-      )}
+      data-surface={surface}
+      className={cn(comboboxChipsVariants({ surface }), className)}
       {...props}
     />
   )
@@ -293,5 +314,6 @@ export {
   ComboboxChipsInput,
   ComboboxTrigger,
   ComboboxValue,
+  comboboxChipsVariants,
   useComboboxAnchor,
 }

@@ -345,6 +345,7 @@
       "docs": "Docs: https://design.edgecom.ai/components/combobox/ · Contract: https://design.edgecom.ai/contracts/combobox.json · Guardrails: https://design.edgecom.ai/design.md",
       "dependencies": [
         "@base-ui/react@^1.6.0",
+        "class-variance-authority@^0.7.1",
         "lucide-react@^1.23.0"
       ],
       "registryDependencies": [
@@ -703,6 +704,7 @@
       "title": "Multi Select",
       "description": "The Edgecom Multi Select component.",
       "dependencies": [
+        "class-variance-authority@^0.7.1",
         "cmdk@^1.1.1",
         "lucide-react@^1.23.0"
       ],
@@ -725,6 +727,7 @@
       "docs": "Docs: https://design.edgecom.ai/components/multi-select/ · Contract: https://design.edgecom.ai/contracts/multi-select.json · Guardrails: https://design.edgecom.ai/design.md",
       "dependencies": [
         "@base-ui/react@^1.6.0",
+        "class-variance-authority@^0.7.1",
         "lucide-react@^1.23.0"
       ],
       "registryDependencies": [
@@ -1197,6 +1200,7 @@
       "description": "A field for entering and removing multiple tag chips, with paste-splitting and validation.",
       "docs": "Docs: https://design.edgecom.ai/components/tags-input/ · Contract: https://design.edgecom.ai/contracts/tags-input.json · Guardrails: https://design.edgecom.ai/design.md",
       "dependencies": [
+        "class-variance-authority@^0.7.1",
         "lucide-react@^1.23.0"
       ],
       "registryDependencies": [
@@ -1241,6 +1245,9 @@
       "title": "Textarea",
       "description": "The Edgecom Textarea component.",
       "docs": "Docs: https://design.edgecom.ai/components/label-textarea/ · Contract: https://design.edgecom.ai/contracts/textarea.json · Guardrails: https://design.edgecom.ai/design.md",
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
       "registryDependencies": [
         "edgecom-ai/design-system/theme"
       ],

@@ -56,6 +56,12 @@ export const generatedApi: Record<string, GeneratedApi> = {
         "name": "size",
         "type": "\"default\" | \"sm\"",
         "default": "\"default\""
+      },
+      {
+        "part": "Input",
+        "name": "surface",
+        "type": "\"default\" | \"page\"",
+        "default": "\"default\""
       }
     ]
   },
@@ -534,6 +540,12 @@ export const generatedApi: Record<string, GeneratedApi> = {
     ],
     "props": [
       {
+        "part": "InputGroup",
+        "name": "surface",
+        "type": "\"default\" | \"page\"",
+        "default": "\"default\""
+      },
+      {
         "part": "InputGroupAddon",
         "name": "align",
         "type": "\"inline-start\" | \"inline-end\" | \"block-start\" | \"block-end\"",
@@ -608,6 +620,12 @@ export const generatedApi: Record<string, GeneratedApi> = {
         "name": "size",
         "type": "\"default\" | \"sm\"",
         "default": "\"default\""
+      },
+      {
+        "part": "SelectTrigger",
+        "name": "surface",
+        "type": "\"default\" | \"page\"",
+        "default": "\"default\""
       }
     ]
   },
@@ -619,7 +637,14 @@ export const generatedApi: Record<string, GeneratedApi> = {
     "parts": [
       "MultiSelect"
     ],
-    "props": []
+    "props": [
+      {
+        "part": "MultiSelect",
+        "name": "surface",
+        "type": "\"default\" | \"page\"",
+        "default": "\"default\""
+      }
+    ]
   },
   "native-select": {
     "parts": [
@@ -632,6 +657,12 @@ export const generatedApi: Record<string, GeneratedApi> = {
         "part": "NativeSelect",
         "name": "size",
         "type": "\"default\" | \"sm\"",
+        "default": "\"default\""
+      },
+      {
+        "part": "NativeSelect",
+        "name": "surface",
+        "type": "\"default\" | \"page\"",
         "default": "\"default\""
       }
     ]
@@ -900,13 +931,27 @@ export const generatedApi: Record<string, GeneratedApi> = {
       "ComboboxTrigger",
       "ComboboxValue"
     ],
-    "props": []
+    "props": [
+      {
+        "part": "ComboboxChips",
+        "name": "surface",
+        "type": "\"default\" | \"page\"",
+        "default": "\"default\""
+      }
+    ]
   },
   "tags-input": {
     "parts": [
       "TagsInput"
     ],
-    "props": []
+    "props": [
+      {
+        "part": "TagsInput",
+        "name": "surface",
+        "type": "\"default\" | \"page\"",
+        "default": "\"default\""
+      }
+    ]
   },
   "button-group": {
     "parts": [

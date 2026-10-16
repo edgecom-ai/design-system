@@ -54,7 +54,7 @@ When the two disagree, resolve in this order:
    pnpm dlx shadcn@latest add edgecom-ai/design-system/<name>
    ```
    Preview with `--dry-run`; pin with `#ref`. The first `add` injects the theme. The CLI prints each item's docs page and contract address after installing it.
-7. **Implement layout and behaviour** — compose the installed primitives. Never copy a primitive to tweak it, reach into its internals, or hand-roll a parallel version. Extend through its exposed `cva` variants and `size` props.
+7. **Implement layout and behaviour** — compose the installed primitives. Never copy a primitive to tweak it, reach into its internals, or hand-roll a parallel version. Extend through its exposed `cva` variants and `size` props. Pick a field's `surface` by what is underneath it: every field and trigger straight on the shell's `muted` page body takes `surface="page"`, inside a card, sheet, dialog or table row it takes nothing, and it is never re-tinted with a `bg-*` class.
 8. **Cover the states the design implies** — loading, empty, error, success — plus light/dark and mobile/desktop. The manifest's `states`, `themes` and `viewports` say which the design actually drew; the validator warns about any it lacks, and those gaps are yours to fill from the contract's `behavior`, which says what each primitive does in those paths. The manifest's `interactions` are the behaviour to wire; anything in `approvedExceptions` is the only deviation from a contract you may keep.
 9. **Verify:** both themes, both viewport ends, keyboard reachability and focus rings, and every status colour used by meaning. Check each contract's `antiPatterns` against what you built.
 

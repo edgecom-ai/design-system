@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { Select as SelectPrimitive } from "@base-ui/react/select"
+import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -15,6 +16,23 @@ type MultiSelectOption = {
   /** Optional trailing color dot (e.g. a series color); any CSS color. */
   swatch?: string
 }
+
+// What the trigger sits on — see `selectTriggerVariants`. `page` rests and
+// hovers like an outline Button, for the shell's `muted` content area.
+const multiSelectTriggerVariants = cva(
+  "flex h-8 min-w-48 items-center gap-1.5 rounded-md border border-input bg-background pr-2 pl-2.5 text-left text-sm transition-colors outline-none hover:bg-accent focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 data-[empty=true]:text-muted-foreground",
+  {
+    variants: {
+      surface: {
+        default: "",
+        page: "bg-outline-surface hover:bg-outline-hover aria-expanded:bg-outline-hover",
+      },
+    },
+    defaultVariants: {
+      surface: "default",
+    },
+  }
+)
 
 /**
  * A trigger + popover listbox for selecting many items from a flat list — a
@@ -34,6 +52,7 @@ function MultiSelect({
   showSearch = true,
   showCount = false,
   align = "end",
+  surface = "default",
   className,
   ...props
 }: {
@@ -48,10 +67,11 @@ function MultiSelect({
   showSearch?: boolean
   align?: "start" | "end"
   className?: string
-} & Omit<
-  React.ComponentProps<typeof SelectPrimitive.Trigger>,
-  "value" | "onChange" | "className"
->) {
+} & VariantProps<typeof multiSelectTriggerVariants> &
+  Omit<
+    React.ComponentProps<typeof SelectPrimitive.Trigger>,
+    "value" | "onChange" | "className"
+  >) {
   const [open, setOpen] = React.useState(false)
   const [query, setQuery] = React.useState("")
 
@@ -87,11 +107,9 @@ function MultiSelect({
     >
       <SelectPrimitive.Trigger
         data-slot="multi-select-trigger"
+        data-surface={surface}
         data-empty={showCount && count === 0}
-        className={cn(
-          "flex h-8 min-w-48 items-center gap-1.5 rounded-md border border-input bg-background pr-2 pl-2.5 text-left text-sm transition-colors outline-none hover:bg-accent focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 data-[empty=true]:text-muted-foreground",
-          className
-        )}
+        className={cn(multiSelectTriggerVariants({ surface }), className)}
         {...props}
       >
         <span className="flex-1 truncate">{label}</span>
@@ -202,5 +220,5 @@ function MultiSelect({
   )
 }
 
-export { MultiSelect }
+export { MultiSelect, multiSelectTriggerVariants }
 export type { MultiSelectOption }
