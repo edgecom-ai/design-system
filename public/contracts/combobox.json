@@ -1,6 +1,6 @@
 {
   "version": "v3.0.0",
-  "digest": "ca4a536b9df9ddae",
+  "digest": "e381d0ec2c6a3e93",
   "contract": {
     "id": "combobox",
     "label": "Combobox",
@@ -21,7 +21,7 @@
       },
       {
         "name": "ComboboxInput",
-        "description": "The combobox input, with optional trigger and clear buttons."
+        "description": "The combobox input, with optional trigger and clear buttons. Takes `surface` (as ComboboxChips) and passes it to its input group."
       },
       {
         "name": "ComboboxContent",
@@ -76,8 +76,25 @@
         "description": "Displays the current selected value."
       }
     ],
-    "props": [],
-    "variants": [],
+    "props": [
+      {
+        "part": "ComboboxChips",
+        "name": "surface",
+        "type": "\"default\" | \"page\"",
+        "default": "\"default\"",
+        "description": "What the field sits on — default inside a card, sheet, dialog or table row, where it rests clear so the surface shows through; page straight on the shell's muted content area, where it takes the outline Button's face so a filter row reads as one surface."
+      }
+    ],
+    "variants": [
+      {
+        "name": "surface",
+        "options": [
+          "default",
+          "page"
+        ],
+        "default": "default"
+      }
+    ],
     "states": [
       "data-[chips=true]",
       "data-[side=bottom]",
@@ -132,6 +149,10 @@
         "family": "neutral"
       },
       {
+        "id": "outline-surface",
+        "family": "interaction"
+      },
+      {
         "id": "popover",
         "family": "surface"
       },
@@ -166,14 +187,18 @@
     ],
     "requires": [],
     "forbids": [],
-    "rules": [],
+    "rules": [
+      "**Pick the surface by what is underneath.** A `ComboboxInput` or `ComboboxChips` placed straight on the shell's `muted` content area — a search box, a filter row — takes `surface=\"page\"`, the outline Button's resting face (`outline-surface`), so the row reads as one surface. Inside a `card`, `sheet`, `dialog` or table row it keeps `default`."
+    ],
     "behavior": {},
     "a11y": {
       "attributes": [],
       "requirements": []
     },
     "examples": [],
-    "antiPatterns": [],
+    "antiPatterns": [
+      "A field on the muted page body given `bg-background`, `bg-card` or `bg-white` instead of `surface=\"page\"` — in dark mode `background` is darker than `card`, so the field sinks below the cards beside it."
+    ],
     "status": "stable",
     "replaces": null,
     "deprecated": null,

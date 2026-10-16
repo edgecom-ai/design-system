@@ -146,7 +146,7 @@ export const curatedApi: Record<string, CuratedApi> = {
       "A searchable, optionally multi-select picker: an input group plus a portalled popup list, with optional selected-value chips.",
     parts: {
       Combobox: "Root managing the value, query, and filtering.",
-      ComboboxInput: "The combobox input, with optional trigger and clear buttons.",
+      ComboboxInput: "The combobox input, with optional trigger and clear buttons. Takes `surface` (as ComboboxChips) and passes it to its input group.",
       ComboboxContent: "Portalled, positioned popup panel for the listbox.",
       ComboboxList: "Scrollable list container holding the items.",
       ComboboxItem: "A selectable option; shows a check when selected.",
@@ -160,6 +160,9 @@ export const curatedApi: Record<string, CuratedApi> = {
       ComboboxChipsInput: "Bare inline input used inside the chips container.",
       ComboboxTrigger: "Button that toggles the popup; appends a chevron.",
       ComboboxValue: "Displays the current selected value.",
+    },
+    propDescriptions: {
+      "ComboboxChips.surface": "What the field sits on — default inside a card, sheet, dialog or table row, where it rests clear so the surface shows through; page straight on the shell's muted content area, where it takes the outline Button's face so a filter row reads as one surface.",
     },
   },
   "context-menu": {
@@ -322,6 +325,7 @@ export const curatedApi: Record<string, CuratedApi> = {
     },
     propDescriptions: {
       "NativeSelect.size": "Control height — sm (h-7) or default (h-8).",
+      "NativeSelect.surface": "What the trigger sits on — default inside a card, sheet, dialog or table row, where it rests clear so the surface shows through; page straight on the shell's muted content area, where it rests and hovers like an outline Button so a filter row reads as one surface.",
     },
   },
   "multi-select": {
@@ -329,6 +333,9 @@ export const curatedApi: Record<string, CuratedApi> = {
       "Choosing several values at once: a trigger plus a searchable checkbox listbox with Select all and Clear. The one place a checkmark belongs. The tag-style selector on this page ships as a separate registry item.",
     parts: {
       MultiSelect: "The composed control — trigger, search, checkbox list, and the Select all / Clear row.",
+    },
+    propDescriptions: {
+      "MultiSelect.surface": "What the trigger sits on — default inside a card, sheet, dialog or table row, where it rests clear so the surface shows through; page straight on the shell's muted content area, where it rests and hovers like an outline Button so a filter row reads as one surface.",
     },
   },
   "circular-progress": {
@@ -362,6 +369,7 @@ export const curatedApi: Record<string, CuratedApi> = {
     },
     propDescriptions: {
       "Input.size": "Control height — default (2rem) or sm (1.75rem). Match the other controls in the same toolbar.",
+      "Input.surface": "What the field sits on — default inside a card, sheet, dialog or table row, where it rests clear so the surface shows through; page straight on the shell's muted content area, where it takes the outline Button's face so a filter row reads as one surface.",
     },
   },
   "navigation-menu": {
@@ -500,6 +508,9 @@ export const curatedApi: Record<string, CuratedApi> = {
     parts: {
       TagsInput: "Multi-tag input with removable chips, delimiters, and validation.",
     },
+    propDescriptions: {
+      "TagsInput.surface": "What the field sits on — default inside a card, sheet, dialog or table row, where it rests clear so the surface shows through; page straight on the shell's muted content area, where it takes the outline Button's face so a filter row reads as one surface.",
+    },
   },
   toggle: {
     summary: "A two-state button that holds a pressed/on state.",
@@ -554,7 +565,7 @@ export const curatedApi: Record<string, CuratedApi> = {
       "A labelled multi-line text field — associate a Label with a Textarea via htmlFor / id.",
     parts: {
       Label: "Accessible caption; link to a field with htmlFor.",
-      Textarea: "Multi-line text input with focus and invalid states.",
+      Textarea: "Multi-line text input with focus and invalid states. Takes `surface` — page when it sits straight on the shell's muted content area.",
     },
   },
   avatar: {
@@ -596,6 +607,9 @@ export const curatedApi: Record<string, CuratedApi> = {
       InputGroupText: "Muted text inside an add-on (e.g. a unit like kWh).",
       InputGroupButton: "A compact button inside an add-on.",
     },
+    propDescriptions: {
+      "InputGroup.surface": "What the field sits on — default inside a card, sheet, dialog or table row, where it rests clear so the surface shows through; page straight on the shell's muted content area, where it takes the outline Button's face so a filter row reads as one surface. The group owns the surface; its control stays clear.",
+    },
   },
   "scroll-area": {
     summary:
@@ -632,6 +646,7 @@ export const curatedApi: Record<string, CuratedApi> = {
       "Choose one value from a list. A Root holds the value and wraps a Trigger plus a portalled, positioned Content of Items.",
     propDescriptions: {
       "SelectTrigger.size": "Control height — default (2rem) or sm (1.75rem). Match the other controls in the same toolbar.",
+      "SelectTrigger.surface": "What the trigger sits on — default inside a card, sheet, dialog or table row, where it rests clear so the surface shows through; page straight on the shell's muted content area, where it rests and hovers like an outline Button so a filter row reads as one surface.",
     },
     parts: {
       Select: "Root. Owns the value state and wraps the trigger and content.",

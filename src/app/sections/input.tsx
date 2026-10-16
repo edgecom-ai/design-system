@@ -2,9 +2,11 @@
 // sections.tsx and .claude/rules/docs-site.md.
 
 import * as React from "react"
-import { ss } from "./shared";
+import { dm, ss } from "./shared";
 
 const InputDemo = React.lazy(() => import("@/components/shadcn-studio/input/input-01"));
+
+const InputPageSurfaceDemo = React.lazy(() => import("@/components/demo/input-page-surface-demo").then((m) => ({ default: m.InputPageSurfaceDemo })));
 
 const InputLabelDemo = React.lazy(() => import("@/components/shadcn-studio/input/input-02"));
 
@@ -39,6 +41,14 @@ const InputWithPlusMinusButtonsDemo = React.lazy(() => import("@/components/shad
 const content = {
   variants: [
       { id: "input-default", name: "Default", description: "A bare text field with placeholder text.", preview: <InputDemo />, source: ss("input/input-01") },
+      {
+        id: "input-page-surface",
+        name: "On the page body",
+        description:
+          "A field straight on the shell's muted content area takes `surface=\"page\"`, the outline button's face, so a search box and the buttons beside it read as one surface. Inside a card it keeps `default`.",
+        preview: <InputPageSurfaceDemo />,
+        source: dm("input-page-surface-demo"),
+      },
       { id: "input-label", name: "With label", description: "An input paired with an associated label.", preview: <InputLabelDemo />, source: ss("input/input-02") },
       { id: "input-required", name: "Required", description: "Marks the field as required for the user.", preview: <InputRequiredDemo />, source: ss("input/input-03") },
       { id: "input-disabled", name: "Disabled", description: "A non-interactive, dimmed field.", preview: <InputDisabledDemo />, source: ss("input/input-04") },

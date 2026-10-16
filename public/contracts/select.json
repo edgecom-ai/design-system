@@ -1,6 +1,6 @@
 {
   "version": "v3.0.0",
-  "digest": "ca4a536b9df9ddae",
+  "digest": "e381d0ec2c6a3e93",
   "contract": {
     "id": "select",
     "label": "Select",
@@ -73,6 +73,13 @@
         "type": "\"default\" | \"sm\"",
         "default": "\"default\"",
         "description": "Control height — default (2rem) or sm (1.75rem). Match the other controls in the same toolbar."
+      },
+      {
+        "part": "SelectTrigger",
+        "name": "surface",
+        "type": "\"default\" | \"page\"",
+        "default": "\"default\"",
+        "description": "What the trigger sits on — default inside a card, sheet, dialog or table row, where it rests clear so the surface shows through; page straight on the shell's muted content area, where it rests and hovers like an outline Button so a filter row reads as one surface."
       }
     ],
     "variants": [
@@ -81,6 +88,14 @@
         "options": [
           "default",
           "sm"
+        ],
+        "default": "default"
+      },
+      {
+        "name": "surface",
+        "options": [
+          "default",
+          "page"
         ],
         "default": "default"
       }
@@ -145,6 +160,14 @@
         "family": "neutral"
       },
       {
+        "id": "outline-hover",
+        "family": "interaction"
+      },
+      {
+        "id": "outline-surface",
+        "family": "interaction"
+      },
+      {
         "id": "popover",
         "family": "surface"
       },
@@ -180,11 +203,13 @@
     "forbids": [
       "A checkmark on the selected option in a single-select. The trigger value and the option highlight already say it; a check belongs only to multi-select.",
       "Pinning a side that lets the popup run off-screen — the positioner flips and shifts by default.",
-      "Stretching or shrinking the list away from the trigger width."
+      "Stretching or shrinking the list away from the trigger width.",
+      "Re-tinting the resting surface with a `bg-*` class so the field reads on the page body — set `surface=\"page\"`, which is the outline Button's face in both themes."
     ],
     "rules": [
       "**No checkmark on the selected option** in a single-select — the trigger value plus the option highlight already say it. A check belongs only in multi-select.",
-      "The list matches the trigger width so options line up under the shown value."
+      "The list matches the trigger width so options line up under the shown value.",
+      "**Pick the surface by what is underneath.** A trigger placed straight on the shell's `muted` content area — a filter row, a page-size select — takes `surface=\"page\"`, which rests and hovers like an outline Button (`outline-surface`, `outline-hover`), so the row reads as one surface. Inside a `card`, `sheet`, `dialog` or table row it keeps `default`."
     ],
     "behavior": {
       "error": "`aria-invalid` on the trigger renders the destructive border and ring, exactly as on `input`."
@@ -196,11 +221,13 @@
       ]
     },
     "examples": [
-      "`<Select><SelectTrigger><SelectValue placeholder=\"All sites\" /></SelectTrigger><SelectContent><SelectItem value=\"a\">Site A</SelectItem></SelectContent></Select>`"
+      "`<Select><SelectTrigger><SelectValue placeholder=\"All sites\" /></SelectTrigger><SelectContent><SelectItem value=\"a\">Site A</SelectItem></SelectContent></Select>`",
+      "`<SelectTrigger size=\"sm\" surface=\"page\"><SelectValue placeholder=\"All sites\" /></SelectTrigger>` in a filter row on the page body."
     ],
     "antiPatterns": [
       "Adding a tick to the chosen item because a design tool drew one.",
-      "A `select` for a job that a segmented control handles on another screen."
+      "A `select` for a job that a segmented control handles on another screen.",
+      "A field on the muted page body given `bg-background`, `bg-card` or `bg-white` instead of `surface=\"page\"` — in dark mode `background` is darker than `card`, so the field sinks below the cards beside it."
     ],
     "status": "stable",
     "replaces": null,

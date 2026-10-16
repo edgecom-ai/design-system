@@ -1,6 +1,6 @@
 {
   "version": "v3.0.0",
-  "digest": "ca4a536b9df9ddae",
+  "digest": "e381d0ec2c6a3e93",
   "contract": {
     "id": "input",
     "label": "Input",
@@ -36,6 +36,13 @@
         "type": "\"default\" | \"sm\"",
         "default": "\"default\"",
         "description": "Control height — default (2rem) or sm (1.75rem). Match the other controls in the same toolbar."
+      },
+      {
+        "part": "Input",
+        "name": "surface",
+        "type": "\"default\" | \"page\"",
+        "default": "\"default\"",
+        "description": "What the field sits on — default inside a card, sheet, dialog or table row, where it rests clear so the surface shows through; page straight on the shell's muted content area, where it takes the outline Button's face so a filter row reads as one surface."
       }
     ],
     "variants": [
@@ -44,6 +51,14 @@
         "options": [
           "default",
           "sm"
+        ],
+        "default": "default"
+      },
+      {
+        "name": "surface",
+        "options": [
+          "default",
+          "page"
         ],
         "default": "default"
       }
@@ -78,6 +93,10 @@
         "family": "neutral"
       },
       {
+        "id": "outline-surface",
+        "family": "interaction"
+      },
+      {
         "id": "radius-lg",
         "family": "radius"
       },
@@ -100,9 +119,12 @@
     ],
     "forbids": [
       "Re-styling the invalid state with border or ring utilities — the primitive renders it from `aria-invalid`.",
-      "A fixed px width. The field fills its container and the layout decides the measure."
+      "A fixed px width. The field fills its container and the layout decides the measure.",
+      "Re-tinting the resting surface with a `bg-*` class so the field reads on the page body — set `surface=\"page\"`, which is the outline Button's face in both themes."
     ],
-    "rules": [],
+    "rules": [
+      "**Pick the surface by what is underneath.** A field placed straight on the shell's `muted` content area — a search box, a filter row — takes `surface=\"page\"`, the outline Button's resting face (`outline-surface`), so the row reads as one surface. Inside a `card`, `sheet`, `dialog` or table row it keeps `default`."
+    ],
     "behavior": {
       "error": "Invalid means `aria-invalid` on the control plus an inline `FieldError` naming the problem — never a generic toast, and never a silently blocked submit button."
     },
@@ -114,11 +136,13 @@
       ]
     },
     "examples": [
-      "`<Field><FieldLabel>Site name</FieldLabel><Input aria-invalid={!valid} /><FieldError>Site name is required</FieldError></Field>`"
+      "`<Field><FieldLabel>Site name</FieldLabel><Input aria-invalid={!valid} /><FieldError>Site name is required</FieldError></Field>`",
+      "`<Input size=\"sm\" surface=\"page\" placeholder=\"Search meters\" />` beside `<Button variant=\"outline\" size=\"sm\">` in a filter row on the page body."
     ],
     "antiPatterns": [
       "A required field that blocks submission with no inline message.",
-      "Hand-drawn focus styling that replaces the `ring` token."
+      "Hand-drawn focus styling that replaces the `ring` token.",
+      "A field on the muted page body given `bg-background`, `bg-card` or `bg-white` instead of `surface=\"page\"` — in dark mode `background` is darker than `card`, so the field sinks below the cards beside it."
     ],
     "status": "stable",
     "replaces": null,

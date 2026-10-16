@@ -12,6 +12,8 @@ const SelectCommodityDemo = React.lazy(() => import("@/components/demo/select-co
 
 const SelectCommodityPlaceholderDemo = React.lazy(() => import("@/components/demo/select-commodity-placeholder-demo").then((m) => ({ default: m.SelectCommodityPlaceholderDemo })));
 
+const SelectPageSurfaceDemo = React.lazy(() => import("@/components/demo/select-page-surface-demo").then((m) => ({ default: m.SelectPageSurfaceDemo })));
+
 const content = {
   variants: [
       {
@@ -34,6 +36,14 @@ const content = {
         description: "A select showing a placeholder until a value is chosen.",
         preview: <SelectCommodityPlaceholderDemo />,
         source: dm("select-commodity-placeholder-demo"),
+      },
+      {
+        id: "select-page-surface",
+        name: "On the page body",
+        description:
+          "A trigger straight on the shell's muted content area takes `surface=\"page\"`, so it rests and hovers like the outline button beside it. Inside a card it keeps `default`.",
+        preview: <SelectPageSurfaceDemo />,
+        source: dm("select-page-surface-demo"),
       },
       {
         id: "select-option-groups",

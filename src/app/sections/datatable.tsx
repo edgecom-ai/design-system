@@ -16,6 +16,8 @@ const EditableDataTableDemo = React.lazy(() => import("@/components/shadcn-studi
 
 const DataTablePinnedDemo = React.lazy(() => import("@/components/demo/data-table-pinned-demo").then((m) => ({ default: m.DataTablePinnedDemo })));
 
+const DataTablePageToolbarDemo = React.lazy(() => import("@/components/demo/data-table-page-toolbar-demo").then((m) => ({ default: m.DataTablePageToolbarDemo })));
+
 const DatatableListCardDemo = React.lazy(() => import("@/components/demo/datatable-list-card-demo").then((m) => ({ default: m.DatatableListCardDemo })));
 
 const content = {
@@ -27,6 +29,14 @@ const content = {
           "A list in a card: a count and the primary action in the card header, a sortable table whose edge cells sit on the card's content line, quiet row actions with tooltips, and a \"Showing 1–5 of 12\" footer with pagination. Create and edit share one dialog; delete goes through an alert dialog.",
         preview: <DatatableListCardDemo />,
         source: dm("datatable-list-card-demo"),
+      },
+      {
+        id: "data-table-page-toolbar",
+        name: "Filters on the page body",
+        description:
+          "A list page's filter row sits straight on the shell's muted content area, above the card that holds the table — so the search field and the commodity select take `surface=\"page\"` and share the outline export button's face. No match shows an empty state with a reset.",
+        preview: <DataTablePageToolbarDemo />,
+        source: dm("data-table-page-toolbar-demo"),
       },
       {
         id: "data-table-default",

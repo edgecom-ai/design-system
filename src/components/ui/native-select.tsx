@@ -12,9 +12,16 @@ const nativeSelectVariants = cva(
         default: "h-8 py-1",
         sm: "h-7 rounded-[min(var(--radius-md),10px)] py-0.5",
       },
+      // What the control sits on — see `selectTriggerVariants`. `page` rests
+      // and hovers like an outline Button, for the shell's `muted` content area.
+      surface: {
+        default: "",
+        page: "bg-outline-surface hover:bg-outline-hover",
+      },
     },
     defaultVariants: {
       size: "default",
+      surface: "default",
     },
   }
 )
@@ -34,6 +41,7 @@ function NativeSelect({
   className,
   selectClassName,
   size = "default",
+  surface = "default",
   ...props
 }: NativeSelectProps) {
   return (
@@ -44,12 +52,14 @@ function NativeSelect({
       )}
       data-slot="native-select-wrapper"
       data-size={size}
+      data-surface={surface}
     >
       <select
         data-slot="native-select"
         data-size={size}
+        data-surface={surface}
         className={cn(
-          nativeSelectVariants({ size }),
+          nativeSelectVariants({ size, surface }),
           selectClassName
         )}
         {...props}

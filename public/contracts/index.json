@@ -1,16 +1,16 @@
 {
   "version": "v3.0.0",
-  "digest": "ca4a536b9df9ddae",
+  "digest": "e381d0ec2c6a3e93",
   "contracts": "https://design.edgecom.ai/contracts.json",
   "docs": "https://design.edgecom.ai/design.md",
   "guide": "https://design.edgecom.ai/agents.md",
   "counts": {
     "total": 65,
     "authored": 13,
-    "withVariants": 29,
+    "withVariants": 33,
     "withBaseUi": 26,
     "undocumented": 1,
-    "tokenReferences": 512
+    "tokenReferences": 523
   },
   "components": [
     {
@@ -556,7 +556,16 @@
       "purpose": null,
       "useWhen": [],
       "dontUseWhen": [],
-      "variants": [],
+      "variants": [
+        {
+          "name": "surface",
+          "options": [
+            "default",
+            "page"
+          ],
+          "default": "default"
+        }
+      ],
       "parts": [
         "Combobox",
         "ComboboxInput",
@@ -905,6 +914,14 @@
             "sm"
           ],
           "default": "default"
+        },
+        {
+          "name": "surface",
+          "options": [
+            "default",
+            "page"
+          ],
+          "default": "default"
         }
       ],
       "parts": [
@@ -926,6 +943,14 @@
       "useWhen": [],
       "dontUseWhen": [],
       "variants": [
+        {
+          "name": "surface",
+          "options": [
+            "default",
+            "page"
+          ],
+          "default": "default"
+        },
         {
           "name": "align",
           "options": [
@@ -1135,7 +1160,16 @@
       "purpose": null,
       "useWhen": [],
       "dontUseWhen": [],
-      "variants": [],
+      "variants": [
+        {
+          "name": "surface",
+          "options": [
+            "default",
+            "page"
+          ],
+          "default": "default"
+        }
+      ],
       "parts": [
         "MultiSelect"
       ],
@@ -1160,6 +1194,14 @@
           "options": [
             "default",
             "sm"
+          ],
+          "default": "default"
+        },
+        {
+          "name": "surface",
+          "options": [
+            "default",
+            "page"
           ],
           "default": "default"
         }
@@ -1388,6 +1430,14 @@
           "options": [
             "default",
             "sm"
+          ],
+          "default": "default"
+        },
+        {
+          "name": "surface",
+          "options": [
+            "default",
+            "page"
           ],
           "default": "default"
         }
@@ -1794,7 +1844,16 @@
       "purpose": null,
       "useWhen": [],
       "dontUseWhen": [],
-      "variants": [],
+      "variants": [
+        {
+          "name": "surface",
+          "options": [
+            "default",
+            "page"
+          ],
+          "default": "default"
+        }
+      ],
       "parts": [
         "TagsInput"
       ],
@@ -1837,7 +1896,16 @@
       "purpose": null,
       "useWhen": [],
       "dontUseWhen": [],
-      "variants": [],
+      "variants": [
+        {
+          "name": "surface",
+          "options": [
+            "default",
+            "page"
+          ],
+          "default": "default"
+        }
+      ],
       "parts": [
         "Textarea"
       ],

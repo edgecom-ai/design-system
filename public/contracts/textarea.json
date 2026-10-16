@@ -1,6 +1,6 @@
 {
   "version": "v3.0.0",
-  "digest": "ca4a536b9df9ddae",
+  "digest": "e381d0ec2c6a3e93",
   "contract": {
     "id": "textarea",
     "label": "Textarea",
@@ -21,7 +21,16 @@
       }
     ],
     "props": [],
-    "variants": [],
+    "variants": [
+      {
+        "name": "surface",
+        "options": [
+          "default",
+          "page"
+        ],
+        "default": "default"
+      }
+    ],
     "states": [
       "aria-invalid",
       "disabled",
@@ -46,6 +55,10 @@
       {
         "id": "muted-foreground",
         "family": "neutral"
+      },
+      {
+        "id": "outline-surface",
+        "family": "interaction"
       },
       {
         "id": "radius-lg",

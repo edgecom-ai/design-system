@@ -37,9 +37,18 @@ const selectTriggerVariants = cva(
         default: "h-8",
         sm: "h-7 rounded-[min(var(--radius-md),10px)]",
       },
+      // What the trigger sits on. `default` rests on `input-surface`, clear in
+      // light so a tinted row shows through. `page` is for a trigger straight
+      // on the shell's `muted` content area, where clear has no face: it rests
+      // and hovers like an outline Button, so a filter row reads as one surface.
+      surface: {
+        default: "",
+        page: "bg-outline-surface hover:bg-outline-hover aria-expanded:bg-outline-hover",
+      },
     },
     defaultVariants: {
       size: "default",
+      surface: "default",
     },
   }
 )
@@ -47,6 +56,7 @@ const selectTriggerVariants = cva(
 function SelectTrigger({
   className,
   size = "default",
+  surface = "default",
   children,
   ...props
 }: SelectPrimitive.Trigger.Props & VariantProps<typeof selectTriggerVariants>) {
@@ -54,7 +64,8 @@ function SelectTrigger({
     <SelectPrimitive.Trigger
       data-slot="select-trigger"
       data-size={size}
-      className={cn(selectTriggerVariants({ size }), className)}
+      data-surface={surface}
+      className={cn(selectTriggerVariants({ size, surface }), className)}
       {...props}
     >
       {children}
