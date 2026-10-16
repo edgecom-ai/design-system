@@ -5,7 +5,7 @@ paths:
 
 # Demos
 
-Demos are what the docs site renders and what `/design-sync` will author component previews from — they are the visible surface of the design system, so they have to be exemplary UI, not filler.
+Demos are what the docs site renders and what the design artifact's preview cards are authored from — they are the visible surface of the design system, so they have to be exemplary UI, not filler.
 
 - **Named export**, PascalCase ending in `Demo`, matching the filename: `sheet-demo.tsx` → `export function SheetDemo()`.
 - **`"use client"` only when the demo is interactive.**

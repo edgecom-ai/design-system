@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://design.edgecom.ai/schemas/design-manifest.schema.json",
   "title": "Edgecom design handoff manifest",
-  "description": "The file a Claude Design output ships beside itself — `<Name>.manifest.json` next to `<Name>.dc.html` — naming the design-system version and digest the design was built against and the registry component behind every designed element. It is authored by the design step, not extracted afterwards: a rendered design carries neither. A coding agent reads it to verify the version, resolve each instance to its published contract at https://design.edgecom.ai/contracts/<component>.json, and check that the variants, tokens and states the design relies on exist. Validate with https://design.edgecom.ai/tools/check-design-manifest.mjs.",
+  "description": "The file a Claude design ships beside itself — `<Name>.manifest.json` next to `<Name>.dc.html` in the canvas's `project/` folder — naming the design-system version and digest the design was built against and the registry component behind every designed element. It is authored by the design step, not extracted afterwards: a rendered design carries neither. A coding agent reads it to verify the version, resolve each instance to its published contract at https://design.edgecom.ai/contracts/<component>.json, and check that the variants, tokens and states the design relies on exist. Validate with https://design.edgecom.ai/tools/check-design-manifest.mjs.",
   "type": "object",
   "required": [
     "schemaVersion",
@@ -24,13 +24,13 @@
     "design": {
       "type": "string",
       "minLength": 1,
-      "description": "Path of the design this manifest describes, relative to the design project root — `Settings.dc.html`, `screens/permissions.dc.html`. One manifest per design file."
+      "description": "Path of the design this manifest describes, relative to the canvas's `project/` folder (a standalone Claude Design project's root) — `Settings.dc.html`, `screens/permissions.dc.html`. One manifest per design file."
     },
     "title": { "type": "string", "description": "What the design is, for a human reading the manifest." },
     "designSystemVersion": {
       "type": "string",
       "pattern": "^(v[0-9]+\\.[0-9]+\\.[0-9]+|untagged)$",
-      "description": "Copied from the design project's `_system.json` → `designSystemVersion`. Must equal `version` in https://design.edgecom.ai/contracts/index.json for the design to be current."
+      "description": "Copied from the `_system.json` the canvas installed with the system (`project/ds/<folder>/_system.json`) → `designSystemVersion`. Must equal `version` in https://design.edgecom.ai/contracts/index.json for the design to be current."
     },
     "designSystemDigest": {
       "type": "string",

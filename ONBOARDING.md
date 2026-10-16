@@ -15,9 +15,9 @@ One repository with three outputs, only two of which are visible in the file tre
 2. **The shadcn registry** — the thing consuming apps install from, with
    `pnpm dlx shadcn@latest add edgecom-ai/design-system/<name>`. Every file in
    `src/components/ui/` becomes a registry item by directory scan.
-3. **The Claude Design bundle** — cards, specs and rules pushed into a design-system project so
-   designers work from the same source the code does. It is generated on demand and uploaded; it
-   is not committed.
+3. **The Design System artifact** — the component bundle, tokens, guides and live cards that
+   Claude's design canvases install, so designers work from the same source the code does. It is
+   generated on demand and published to its artifact on claude.ai; it is not committed.
 
 **This repo is not the consumer guide.** Someone building an app *with* the design system reads
 [design.edgecom.ai/agents.md](https://design.edgecom.ai/agents.md) instead. Keeping those two
@@ -136,21 +136,22 @@ check passed.
 
 ## 7. The design-system half
 
-`pnpm design:sync` compiles the bundle designers work from: a skill entry point, the rules from
-`design.md`, foundations cards, per-component specs, a curated stylesheet, and a provenance stamp
-naming the tag, commit and content digest it was built from. Cards are static HTML using the
-components' real utility classes, so a card cannot drift from its primitive.
+`pnpm design:artifact` builds what designers work from: the README a design agent reads first,
+`tokens.json`, one classic-script bundle assigning `window.EdgecomDS` with its stylesheet, a guide
+per component, a live card per authored preview, and a provenance stamp (`_system.json`) naming the
+tag, commit and content digest it was built from. Claude Code publishes it to the artifact; the
+procedure is in [MAINTAINERS.md](MAINTAINERS.md) → *The Design System artifact*.
 
 Three things about it that are not obvious:
 
-- It **refuses to build on a dirty tree**, because the provenance stamp would then name a commit
-  whose content the bundle does not match.
-- The destination project may already be populated by the official Claude Design converter, in
-  which case only part of the bundle should be uploaded. The build writes `_overlay.json` naming
-  exactly which paths.
-- **Uploading changes nothing on its own.** The platform compiles its card index and token manifest
-  during a self-check that runs when someone opens the project with a recompile marker present.
-  Upload that marker last, then open the project once.
+- **A canvas runs React 18, the primitives are React 19.** The bundle carries an adapter for the
+  refs React 18 drops; without it every popover renders invisible. `pnpm design:check` renders every
+  card on React 18 in both themes — run it after changing a primitive that composes refs.
+- **A canvas copies the system when it is made**, and keeps that copy. A design's manifest cites the
+  copy's `_system.json`, which is why the build is published only from a clean, merged `main`.
+- **The README is the whole instruction.** A design agent installs the files the README names and
+  reads nothing else of ours first, so whatever it must know is in `.design-sync/conventions.md` or
+  at an address that file names.
 
 ## 8. Where everything else lives
 
