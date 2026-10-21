@@ -1,6 +1,6 @@
 {
   "version": "v3.0.0",
-  "digest": "e381d0ec2c6a3e93",
+  "digest": "d3f22b364a476fda",
   "contract": {
     "id": "dialog",
     "label": "Dialog",
@@ -128,7 +128,8 @@
     "forbids": [
       "`showCloseButton={false}` — only `alert-dialog` omits the close.",
       "Moving the close elsewhere, or hand-rolling a modal without one.",
-      "An inline scrim colour; the scrim is the `scrim` token."
+      "An inline scrim colour; the scrim is the `scrim` token.",
+      "Re-adding a viewport cap at the call site (`max-h-[90vh] overflow-y-auto`) — the content already stops 1rem short of each edge and scrolls inside."
     ],
     "rules": [
       "Short create actions (1–4 fields). Longer or dense edit forms go to a right `sheet` at 420px.",

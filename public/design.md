@@ -310,6 +310,7 @@ It is the same principle as *Tabs — pick the variant by the surface underneath
 - **Longer edit/update actions (many fields) → right-side `sheet`** — default width **420px**, full-width on mobile; go wider only when content genuinely needs it.
 - **Dialogs & sheets keep a close (X) in the top-right corner** — the `dialog`/`sheet` primitives render it there by default (`showCloseButton`, positioned `absolute top-2 right-2`); never pass `showCloseButton={false}`, move it elsewhere, or hand-roll a modal without one. A modal must always be dismissible. The **only** exception is the `alert-dialog`, which omits the X so a destructive/confirmation flow forces an explicit choice.
 - Overlays are **hidden by default** and **mounted at the app/template root**, so their visibility never depends on the current view.
+- **A dialog never outgrows the viewport.** `dialog` and `alert-dialog` stop 1rem short of each edge and scroll inside, so on a short screen the dialog scrolls to its footer instead of cutting it off. Don't re-add a viewport cap at the call site (`max-h-[90vh] overflow-y-auto`) — a `max-h-*` there replaces the built-in one. A dialog with its own inner scroll region takes `flex flex-col`, with `min-h-0` on that region.
 
 ### Feedback — toasts
 
