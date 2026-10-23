@@ -1,6 +1,6 @@
 {
   "version": "v3.0.0",
-  "digest": "d3f22b364a476fda",
+  "digest": "5166bcd5434eb42b",
   "contract": {
     "id": "toggle-group",
     "label": "Toggle group",
@@ -9,7 +9,7 @@
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/toggle-group",
     "docs": "https://design.edgecom.ai/components/toggle/",
     "source": "src/components/ui/toggle-group.tsx",
-    "summary": null,
+    "summary": "A set of toggles sharing one pressed value, spaced in a frame or joined into a segmented control.",
     "purpose": null,
     "useWhen": [],
     "dontUseWhen": [],
@@ -17,11 +17,11 @@
     "parts": [
       {
         "name": "ToggleGroup",
-        "description": null
+        "description": "Root holding the value; passes variant, size and surface to its items."
       },
       {
         "name": "ToggleGroupItem",
-        "description": null
+        "description": "One pressable option, styled from the group's variant, size and surface."
       }
     ],
     "props": [],
@@ -40,6 +40,14 @@
           "default",
           "sm",
           "lg"
+        ],
+        "default": "default"
+      },
+      {
+        "name": "surface",
+        "options": [
+          "default",
+          "page"
         ],
         "default": "default"
       }
@@ -63,6 +71,10 @@
       {
         "id": "input",
         "family": "neutral"
+      },
+      {
+        "id": "outline-surface",
+        "family": "interaction"
       },
       {
         "id": "radius-lg",

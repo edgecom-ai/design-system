@@ -83,6 +83,12 @@ export const generatedApi: Record<string, GeneratedApi> = {
         "part": "PhoneInput",
         "name": "variant",
         "type": "\"sm\" | \"default\" | \"lg\""
+      },
+      {
+        "part": "PhoneInput",
+        "name": "surface",
+        "type": "\"default\" | \"page\"",
+        "default": "\"default\""
       }
     ]
   },
@@ -407,6 +413,12 @@ export const generatedApi: Record<string, GeneratedApi> = {
         "part": "Toggle",
         "name": "size",
         "type": "\"default\" | \"sm\" | \"lg\"",
+        "default": "\"default\""
+      },
+      {
+        "part": "Toggle",
+        "name": "surface",
+        "type": "\"default\" | \"page\"",
         "default": "\"default\""
       }
     ]

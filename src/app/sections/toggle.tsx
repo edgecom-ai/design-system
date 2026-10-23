@@ -17,6 +17,8 @@ const ToggleGroupRangeTooltipDemo = React.lazy(() => import("@/components/demo/t
 
 const ToggleFormattingDemo = React.lazy(() => import("@/components/demo/toggle-formatting-demo").then((m) => ({ default: m.ToggleFormattingDemo })));
 
+const TogglePageSurfaceDemo = React.lazy(() => import("@/components/demo/toggle-page-surface-demo").then((m) => ({ default: m.TogglePageSurfaceDemo })));
+
 const content = {
   variants: [
       {
@@ -39,6 +41,14 @@ const content = {
         description: "A recommended icon-plus-label toggle pattern.",
         preview: <ToggleIconPattern />,
         source: ss("toggle/toggle-07"),
+      },
+      {
+        id: "toggle-page-surface",
+        name: "On the page body",
+        description:
+          "An outline toggle or a connected outline group straight on the shell's muted content area takes `surface=\"page\"`, so it rests and hovers like the outline button beside it. Inside a card it keeps `default`; the ghost `default` variant needs nothing either way.",
+        preview: <TogglePageSurfaceDemo />,
+        source: dm("toggle-page-surface-demo"),
       },
       {
         id: "toggle-group-sizes",

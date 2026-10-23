@@ -1,7 +1,7 @@
 {
   "$schema": "../../../schemas/contracts.schema.json",
   "version": "v3.0.0",
-  "digest": "d3f22b364a476fda",
+  "digest": "5166bcd5434eb42b",
   "sources": [
     "src/components/ui/*.tsx",
     "src/app/sections.tsx",
@@ -15,7 +15,7 @@
     "withVariants": 33,
     "withBaseUi": 26,
     "undocumented": 1,
-    "tokenReferences": 523
+    "tokenReferences": 526
   },
   "contracts": [
     {
@@ -4869,6 +4869,13 @@
           "type": "\"sm\" | \"default\" | \"lg\"",
           "default": null,
           "description": null
+        },
+        {
+          "part": "PhoneInput",
+          "name": "surface",
+          "type": "\"default\" | \"page\"",
+          "default": "\"default\"",
+          "description": "What the field sits on — default inside a card, sheet, dialog or table row, where the number entry rests clear so the surface shows through; page straight on the shell's muted content area, where it and the extension take the outline Button's face, level with the country trigger."
         }
       ],
       "variants": [
@@ -4880,6 +4887,14 @@
             "lg"
           ],
           "default": null
+        },
+        {
+          "name": "surface",
+          "options": [
+            "default",
+            "page"
+          ],
+          "default": "default"
         }
       ],
       "states": [
@@ -4916,7 +4931,9 @@
       ],
       "requires": [],
       "forbids": [],
-      "rules": [],
+      "rules": [
+        "**Pick the surface by what is underneath.** A phone field placed straight on the shell's `muted` content area takes `surface=\"page\"`, which gives the number entry and the extension the outline Button's face, level with the country trigger. Inside a `card`, `sheet`, `dialog` or table row it keeps `default`."
+      ],
       "behavior": {},
       "a11y": {
         "attributes": [
@@ -4927,7 +4944,9 @@
         "requirements": []
       },
       "examples": [],
-      "antiPatterns": [],
+      "antiPatterns": [
+        "A field on the muted page body given `bg-background`, `bg-card` or `bg-white` instead of `surface=\"page\"` — in dark mode `background` is darker than `card`, so the field sinks below the cards beside it."
+      ],
       "status": "stable",
       "replaces": null,
       "deprecated": null,
@@ -7409,6 +7428,13 @@
           "type": "\"default\" | \"sm\" | \"lg\"",
           "default": "\"default\"",
           "description": "Size: default, sm, or lg."
+        },
+        {
+          "part": "Toggle",
+          "name": "surface",
+          "type": "\"default\" | \"page\"",
+          "default": "\"default\"",
+          "description": "What the toggle sits on — default inside a card, sheet, dialog or table row, where an outline toggle rests clear so the surface shows through; page straight on the shell's muted content area, where it rests and hovers like an outline Button so a toolbar reads as one surface. Only the outline variant has a face to swap; the ghost default needs nothing on either."
         }
       ],
       "variants": [
@@ -7426,6 +7452,14 @@
             "default",
             "sm",
             "lg"
+          ],
+          "default": "default"
+        },
+        {
+          "name": "surface",
+          "options": [
+            "default",
+            "page"
           ],
           "default": "default"
         }
@@ -7467,6 +7501,14 @@
           "family": "neutral"
         },
         {
+          "id": "outline-hover",
+          "family": "interaction"
+        },
+        {
+          "id": "outline-surface",
+          "family": "interaction"
+        },
+        {
           "id": "radius-lg",
           "family": "radius"
         },
@@ -7481,14 +7523,23 @@
       ],
       "requires": [],
       "forbids": [],
-      "rules": [],
+      "rules": [
+        "**Pick the surface by what is underneath.** An outline toggle placed straight on the shell's `muted` content area — a toolbar, a filter row — takes `surface=\"page\"`, which rests and hovers like an outline Button (`outline-surface`, `outline-hover`), so the row reads as one surface. Inside a `card`, `sheet`, `dialog` or table row it keeps `default`. The ghost `default` variant has no resting face on either, exactly like a ghost Button, so `surface` leaves it alone.",
+        "A `toggle-group` placed straight on the shell's `muted` content area — an interval or view switcher in a toolbar — takes `surface=\"page\"`, so it rests and hovers like the outline Buttons beside it. A connected group (`spacing={0}`) puts the face on its outline items; a spaced group puts it on its frame and the items inside stay `default`. Inside a `card`, `sheet`, `dialog` or table row it keeps `default`."
+      ],
       "behavior": {},
       "a11y": {
         "attributes": [],
         "requirements": []
       },
-      "examples": [],
-      "antiPatterns": [],
+      "examples": [
+        "`<Toggle variant=\"outline\" surface=\"page\" aria-label=\"Compare to last period\">Compare</Toggle>` beside `<Button variant=\"outline\">` in a toolbar on the page body.",
+        "`<ToggleGroup variant=\"outline\" spacing={0} surface=\"page\" defaultValue={[\"hourly\"]}>` in a filter row on the page body."
+      ],
+      "antiPatterns": [
+        "An outline toggle on the muted page body given `bg-background`, `bg-card` or `bg-white` instead of `surface=\"page\"` — in dark mode `background` is darker than `card`, so the toggle sinks below the cards beside it.",
+        "A toggle group on the muted page body given `bg-background`, `bg-card` or `bg-white` instead of `surface=\"page\"` — in dark mode `background` is darker than `card`, so the group sinks below the cards beside it."
+      ],
       "status": "stable",
       "replaces": null,
       "deprecated": null,
@@ -7502,7 +7553,7 @@
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/toggle-group",
       "docs": "https://design.edgecom.ai/components/toggle/",
       "source": "src/components/ui/toggle-group.tsx",
-      "summary": null,
+      "summary": "A set of toggles sharing one pressed value, spaced in a frame or joined into a segmented control.",
       "purpose": null,
       "useWhen": [],
       "dontUseWhen": [],
@@ -7510,11 +7561,11 @@
       "parts": [
         {
           "name": "ToggleGroup",
-          "description": null
+          "description": "Root holding the value; passes variant, size and surface to its items."
         },
         {
           "name": "ToggleGroupItem",
-          "description": null
+          "description": "One pressable option, styled from the group's variant, size and surface."
         }
       ],
       "props": [],
@@ -7533,6 +7584,14 @@
             "default",
             "sm",
             "lg"
+          ],
+          "default": "default"
+        },
+        {
+          "name": "surface",
+          "options": [
+            "default",
+            "page"
           ],
           "default": "default"
         }
@@ -7556,6 +7615,10 @@
         {
           "id": "input",
           "family": "neutral"
+        },
+        {
+          "id": "outline-surface",
+          "family": "interaction"
         },
         {
           "id": "radius-lg",

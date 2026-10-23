@@ -314,6 +314,9 @@ export const curatedApi: Record<string, CuratedApi> = {
     parts: {
       PhoneInput: "The composed field — country selector plus number entry.",
     },
+    propDescriptions: {
+      "PhoneInput.surface": "What the field sits on — default inside a card, sheet, dialog or table row, where the number entry rests clear so the surface shows through; page straight on the shell's muted content area, where it and the extension take the outline Button's face, level with the country trigger.",
+    },
   },
   "native-select": {
     summary:
@@ -520,6 +523,18 @@ export const curatedApi: Record<string, CuratedApi> = {
     propDescriptions: {
       "Toggle.variant": "Style: default (transparent) or outline (bordered).",
       "Toggle.size": "Size: default, sm, or lg.",
+      "Toggle.surface": "What the toggle sits on — default inside a card, sheet, dialog or table row, where an outline toggle rests clear so the surface shows through; page straight on the shell's muted content area, where it rests and hovers like an outline Button so a toolbar reads as one surface. Only the outline variant has a face to swap; the ghost default needs nothing on either.",
+    },
+  },
+  "toggle-group": {
+    summary: "A set of toggles sharing one pressed value, spaced in a frame or joined into a segmented control.",
+    parts: {
+      ToggleGroup: "Root holding the value; passes variant, size and surface to its items.",
+      ToggleGroupItem: "One pressable option, styled from the group's variant, size and surface.",
+    },
+    propDescriptions: {
+      "ToggleGroup.surface": "What the group sits on — default inside a card, sheet, dialog or table row; page straight on the shell's muted content area, where it takes the outline Button's face. A connected group (spacing 0) puts it on its outline items; a spaced group puts it on its frame and the items inside stay default.",
+      "ToggleGroup.spacing": "Gap between items; 0 joins them into one segmented control with no frame.",
     },
   },
   tooltip: {

@@ -1,6 +1,6 @@
 {
   "version": "v3.0.0",
-  "digest": "d3f22b364a476fda",
+  "digest": "5166bcd5434eb42b",
   "contracts": "https://design.edgecom.ai/contracts.json",
   "docs": "https://design.edgecom.ai/design.md",
   "guide": "https://design.edgecom.ai/agents.md",
@@ -10,7 +10,7 @@
     "withVariants": 33,
     "withBaseUi": 26,
     "undocumented": 1,
-    "tokenReferences": 523
+    "tokenReferences": 526
   },
   "components": [
     {
@@ -1286,6 +1286,14 @@
             "lg"
           ],
           "default": null
+        },
+        {
+          "name": "surface",
+          "options": [
+            "default",
+            "page"
+          ],
+          "default": "default"
         }
       ],
       "parts": [
@@ -2031,6 +2039,14 @@
             "lg"
           ],
           "default": "default"
+        },
+        {
+          "name": "surface",
+          "options": [
+            "default",
+            "page"
+          ],
+          "default": "default"
         }
       ],
       "parts": [
@@ -2047,7 +2063,7 @@
       "id": "toggle-group",
       "label": "Toggle group",
       "aliases": [],
-      "summary": null,
+      "summary": "A set of toggles sharing one pressed value, spaced in a frame or joined into a segmented control.",
       "purpose": null,
       "useWhen": [],
       "dontUseWhen": [],
@@ -2066,6 +2082,14 @@
             "default",
             "sm",
             "lg"
+          ],
+          "default": "default"
+        },
+        {
+          "name": "surface",
+          "options": [
+            "default",
+            "page"
           ],
           "default": "default"
         }
