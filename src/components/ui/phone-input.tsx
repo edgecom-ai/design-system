@@ -24,8 +24,15 @@ import { EarthIcon } from "lucide-react"
 
 type PhoneInputSize = 'sm' | 'default' | 'lg'
 
+// What the field sits on — the Input's `surface` axis, listed as a literal
+// like `PhoneInputSize` so the docs can read it. The number entry and the
+// extension are Inputs, so they take it as one; the country trigger is an
+// outline Button and already rests on `outline-surface` in both modes.
+type PhoneInputSurface = 'default' | 'page'
+
 const PhoneInputContext = createContext<{
   variant: PhoneInputSize
+  surface: PhoneInputSurface
   popupClassName?: string
   scrollAreaClassName?: string
   inputClassName?: string
@@ -33,6 +40,7 @@ const PhoneInputContext = createContext<{
   readOnly?: boolean
 }>({
   variant: 'default',
+  surface: 'default',
   popupClassName: undefined,
   scrollAreaClassName: undefined,
   inputClassName: undefined,
@@ -47,6 +55,7 @@ type PhoneInputProps = Omit<ComponentProps<'input'>, 'onChange' | 'value' | 'ref
   > & {
     onChange?: (value: BasePhoneInput.Value) => void
     variant?: PhoneInputSize
+    surface?: PhoneInputSurface
     popupClassName?: string
     scrollAreaClassName?: string
     inputClassName?: string
@@ -67,6 +76,7 @@ type PhoneInputProps = Omit<ComponentProps<'input'>, 'onChange' | 'value' | 'ref
 const PhoneInput = ({
   className,
   variant,
+  surface = 'default',
   popupClassName,
   scrollAreaClassName,
   inputClassName,
@@ -113,6 +123,7 @@ const PhoneInput = ({
     <PhoneInputContext.Provider
       value={{
         variant: phoneInputSize,
+        surface,
         popupClassName,
         scrollAreaClassName,
         inputClassName,
@@ -125,6 +136,7 @@ const PhoneInput = ({
           {phoneField}
           <Input
             data-slot='phone-input-extension'
+            surface={surface}
             className={cn('ml-2 h-auto w-24 shrink-0', extensionClassName)}
             inputMode='numeric'
             autoComplete='tel-extension'
@@ -148,10 +160,11 @@ const PhoneInput = ({
 }
 
 const InputComponent = ({ className, ...props }: ComponentProps<typeof Input>) => {
-  const { variant, inputClassName } = useContext(PhoneInputContext)
+  const { variant, surface, inputClassName } = useContext(PhoneInputContext)
 
   return (
     <Input
+      surface={surface}
       className={cn(
         'rounded-l-none focus:z-1',
         variant === 'sm' && 'h-auto! py-0!',

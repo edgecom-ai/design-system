@@ -1,6 +1,6 @@
 {
   "version": "v3.0.0",
-  "digest": "d3f22b364a476fda",
+  "digest": "5166bcd5434eb42b",
   "contract": {
     "id": "phone-input",
     "label": "Phone input",
@@ -27,6 +27,13 @@
         "type": "\"sm\" | \"default\" | \"lg\"",
         "default": null,
         "description": null
+      },
+      {
+        "part": "PhoneInput",
+        "name": "surface",
+        "type": "\"default\" | \"page\"",
+        "default": "\"default\"",
+        "description": "What the field sits on — default inside a card, sheet, dialog or table row, where the number entry rests clear so the surface shows through; page straight on the shell's muted content area, where it and the extension take the outline Button's face, level with the country trigger."
       }
     ],
     "variants": [
@@ -38,6 +45,14 @@
           "lg"
         ],
         "default": null
+      },
+      {
+        "name": "surface",
+        "options": [
+          "default",
+          "page"
+        ],
+        "default": "default"
       }
     ],
     "states": [
@@ -74,7 +89,9 @@
     ],
     "requires": [],
     "forbids": [],
-    "rules": [],
+    "rules": [
+      "**Pick the surface by what is underneath.** A phone field placed straight on the shell's `muted` content area takes `surface=\"page\"`, which gives the number entry and the extension the outline Button's face, level with the country trigger. Inside a `card`, `sheet`, `dialog` or table row it keeps `default`."
+    ],
     "behavior": {},
     "a11y": {
       "attributes": [
@@ -85,7 +102,9 @@
       "requirements": []
     },
     "examples": [],
-    "antiPatterns": [],
+    "antiPatterns": [
+      "A field on the muted page body given `bg-background`, `bg-card` or `bg-white` instead of `surface=\"page\"` — in dark mode `background` is darker than `card`, so the field sinks below the cards beside it."
+    ],
     "status": "stable",
     "replaces": null,
     "deprecated": null,

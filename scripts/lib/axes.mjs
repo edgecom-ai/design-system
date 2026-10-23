@@ -10,9 +10,10 @@
 //    A cva belongs to the part its constant is named for — `selectTriggerVariants`
 //    sizes SelectTrigger — and falls back to the root part when no export matches.
 //
-// 2. A `variant` or `size` prop typed as a closed set of string literals with
-//    no cva behind it — Logo's `variant`, StepperIndicator's `variant`,
-//    DropdownMenuItem's `variant="destructive"`. Those read as variants to anyone
+// 2. A `variant`, `size` or `surface` prop typed as a closed set of string
+//    literals with no cva behind it — Logo's `variant`, StepperIndicator's
+//    `variant`, DropdownMenuItem's `variant="destructive"`, PhoneInput's
+//    `surface`. Those read as variants to anyone
 //    holding the source or its .d.ts, and a contract that left them out made a
 //    design that recorded them fail the manifest validator. Other closed props
 //    (`side`, `collapsible`, `orientation`) stay props: the design-sync
@@ -22,7 +23,7 @@
 
 import { braceBody, extractCva } from "./cva.mjs"
 
-const TYPED_AXES = ["variant", "size"]
+const TYPED_AXES = ["variant", "size", "surface"]
 const LIT = /(["'])([^"'\n]*)\1/g
 
 /** Body of the paren block that opens at `openIdx`, or null if unbalanced. */
@@ -75,7 +76,7 @@ function paramsOf(src, part) {
   return parenBody(src, m.index + m[0].length - 1)
 }
 
-/** `variant`/`size` props a part types as a closed union, with their defaults. */
+/** `variant`/`size`/`surface` props a part types as a closed union, with their defaults. */
 function typedAxesOf(src, part) {
   const params = paramsOf(src, part)
   if (params == null) return []
