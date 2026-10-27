@@ -597,5 +597,81 @@
     "antiPatterns": [
       "A field on the muted page body given `bg-background`, `bg-card` or `bg-white` instead of `surface=\"page\"` — in dark mode `background` is darker than `card`, so the field sinks below the cards beside it."
     ]
+  },
+  "checkbox": {
+    "purpose": "Turn one option on or off, or pick any number from a short visible set. The box rests on an opaque face — `outline-surface`, the outline Button's — so an empty box keeps its edge on a tinted row, a filled table header or the `muted` page body, and in dark it is the same `input` lift every other field has.",
+    "useWhen": [
+      "One independent yes/no setting that is saved with the form around it — a consent, an opt-in.",
+      "Any number of options from a short set that should all be visible at once, each with its own label.",
+      "Row selection in a `table`: a header box selects every row and shows `indeterminate` while only some are selected."
+    ],
+    "dontUseWhen": [
+      "Exactly one option is chosen — that is `radio-group`.",
+      "The set is long or needs searching — that is `multi-select`.",
+      "The setting takes effect the moment it is flipped rather than on submit — that is `switch`."
+    ],
+    "requires": [
+      "A visible label on every box, wired through `label` so the text toggles it; a box with no visible text, such as a table's select-all, carries an `aria-label`.",
+      "`aria-invalid` on the control when validation fails, paired with a `FieldError` that names what is wrong."
+    ],
+    "forbids": [
+      "Re-tinting the resting face with a `bg-*` class so the box reads on a row or the page body. The face is already opaque in light and the `input` lift in dark on every surface, so there is no `surface` prop to set and nothing to override.",
+      "Hand-drawing the checked or indeterminate look — both come from the `data-checked` and `data-indeterminate` attributes, with the glyph from the primitive's own indicator."
+    ],
+    "rules": [
+      "**The face is opaque by default, on every surface.** An unchecked box paints `outline-surface` — white in light, the `input/30` lift in dark — so it reads on a `destructive-subtle` row, a filled table header, a selected row and the `muted` page body without any prop. Unlike `input` or `select` there is no `surface=\"page\"`: a 16px box has no text or size to read by, so transparency never works for it, and a white face has no surface where it looks wrong."
+    ],
+    "behavior": {
+      "error": "Invalid means `aria-invalid` on the box plus an inline `FieldError` — a required consent that blocks submit says so next to the box."
+    },
+    "a11yRequirements": [
+      "Every box has an accessible name — its label, or an `aria-label` where no text is shown.",
+      "Colour is never the only state signal; checked and indeterminate carry a glyph, and invalid carries a message."
+    ],
+    "examples": [
+      "`<Label className=\"flex items-center gap-2\"><Checkbox /> Email me peak demand alerts</Label>` — the label text toggles the box.",
+      "`<Checkbox aria-label=\"Select all meters\" checked={allSelected ? true : someSelected ? \"indeterminate\" : false} />` in a table header."
+    ],
+    "antiPatterns": [
+      "A column of unlabeled boxes whose meaning sits only in a header cell the screen reader never links to them.",
+      "A box given `bg-background` or `bg-card` to show on a tinted row — the default face already does, and in dark `background` would sink it below the cards beside it."
+    ]
+  },
+  "radio-group": {
+    "purpose": "Choose exactly one option from a short visible set. Each item rests on the same opaque face as a `checkbox` — `outline-surface` — so an unselected ring stays visible on a tinted row or the `muted` page body, and dark keeps the `input` lift every other field has.",
+    "useWhen": [
+      "Two to about six mutually exclusive options that should all be visible at once, so the user can compare them before choosing.",
+      "Each option needs a line of description — lay the items out as cards."
+    ],
+    "dontUseWhen": [
+      "More options than fit comfortably in view — that is `select`.",
+      "Several options can be chosen — that is `checkbox`.",
+      "Two states switched in place in a toolbar — that is `toggle-group` with a single value."
+    ],
+    "requires": [
+      "A label on every item, wired through `label` so the text selects it, and an accessible name on the group — `aria-labelledby` pointing at its heading, or `aria-label`.",
+      "`aria-invalid` on the items when a required choice is missing, paired with a `FieldError`."
+    ],
+    "forbids": [
+      "Re-tinting an item's resting face with a `bg-*` class. It is opaque in light and the `input` lift in dark on every surface, with no `surface` prop to set.",
+      "A single radio on its own — one yes/no is a `checkbox`."
+    ],
+    "rules": [
+      "**The face is opaque by default, on every surface.** An unselected item paints `outline-surface` — white in light, the `input/30` lift in dark — so it reads on a tinted card option, a selected row and the `muted` page body without any prop. There is no `surface=\"page\"`: a 16px ring has nothing but its edge to read by, so it never rests transparent."
+    ],
+    "behavior": {
+      "error": "A required group with no selection marks its items `aria-invalid` and says so in an inline `FieldError` under the group — never a blocked submit with no message."
+    },
+    "a11yRequirements": [
+      "The group is one tab stop; arrow keys move the selection between items.",
+      "Every item has an accessible name from its label, and the group has one of its own."
+    ],
+    "examples": [
+      "`<RadioGroup defaultValue=\"day\" aria-label=\"Interval\"><Label className=\"flex items-center gap-2\"><RadioGroupItem value=\"day\" /> Day</Label>…</RadioGroup>`"
+    ],
+    "antiPatterns": [
+      "A group with no accessible name, so a screen reader announces three unrelated radios.",
+      "An item given `bg-background` or `bg-card` to show on a tinted row — the default face already does, and in dark `background` would sink it below the cards beside it."
+    ]
   }
 }

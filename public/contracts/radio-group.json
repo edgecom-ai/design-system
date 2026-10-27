@@ -1,6 +1,6 @@
 {
   "version": "v3.0.0",
-  "digest": "5166bcd5434eb42b",
+  "digest": "58d613ac743f2657",
   "contract": {
     "id": "radio-group",
     "label": "Radio group",
@@ -10,9 +10,16 @@
     "docs": "https://design.edgecom.ai/components/radio-group/",
     "source": "src/components/ui/radio-group.tsx",
     "summary": "A set of mutually-exclusive options: a RadioGroup coordinates its RadioGroupItems.",
-    "purpose": null,
-    "useWhen": [],
-    "dontUseWhen": [],
+    "purpose": "Choose exactly one option from a short visible set. Each item rests on the same opaque face as a `checkbox` — `outline-surface` — so an unselected ring stays visible on a tinted row or the `muted` page body, and dark keeps the `input` lift every other field has.",
+    "useWhen": [
+      "Two to about six mutually exclusive options that should all be visible at once, so the user can compare them before choosing.",
+      "Each option needs a line of description — lay the items out as cards."
+    ],
+    "dontUseWhen": [
+      "More options than fit comfortably in view — that is `select`.",
+      "Several options can be chosen — that is `checkbox`.",
+      "Two states switched in place in a toolbar — that is `toggle-group` with a single value."
+    ],
     "base": {
       "name": "Base UI Radio",
       "url": "https://base-ui.com/react/components/radio"
@@ -52,6 +59,10 @@
         "family": "neutral"
       },
       {
+        "id": "outline-surface",
+        "family": "interaction"
+      },
+      {
         "id": "primary",
         "family": "brand"
       },
@@ -64,19 +75,37 @@
         "family": "neutral"
       }
     ],
-    "requires": [],
-    "forbids": [],
-    "rules": [],
-    "behavior": {},
+    "requires": [
+      "A label on every item, wired through `label` so the text selects it, and an accessible name on the group — `aria-labelledby` pointing at its heading, or `aria-label`.",
+      "`aria-invalid` on the items when a required choice is missing, paired with a `FieldError`."
+    ],
+    "forbids": [
+      "Re-tinting an item's resting face with a `bg-*` class. It is opaque in light and the `input` lift in dark on every surface, with no `surface` prop to set.",
+      "A single radio on its own — one yes/no is a `checkbox`."
+    ],
+    "rules": [
+      "**The face is opaque by default, on every surface.** An unselected item paints `outline-surface` — white in light, the `input/30` lift in dark — so it reads on a tinted card option, a selected row and the `muted` page body without any prop. There is no `surface=\"page\"`: a 16px ring has nothing but its edge to read by, so it never rests transparent."
+    ],
+    "behavior": {
+      "error": "A required group with no selection marks its items `aria-invalid` and says so in an inline `FieldError` under the group — never a blocked submit with no message."
+    },
     "a11y": {
       "attributes": [],
-      "requirements": []
+      "requirements": [
+        "The group is one tab stop; arrow keys move the selection between items.",
+        "Every item has an accessible name from its label, and the group has one of its own."
+      ]
     },
-    "examples": [],
-    "antiPatterns": [],
+    "examples": [
+      "`<RadioGroup defaultValue=\"day\" aria-label=\"Interval\"><Label className=\"flex items-center gap-2\"><RadioGroupItem value=\"day\" /> Day</Label>…</RadioGroup>`"
+    ],
+    "antiPatterns": [
+      "A group with no accessible name, so a screen reader announces three unrelated radios.",
+      "An item given `bg-background` or `bg-card` to show on a tinted row — the default face already does, and in dark `background` would sink it below the cards beside it."
+    ],
     "status": "stable",
     "replaces": null,
     "deprecated": null,
-    "authored": false
+    "authored": true
   }
 }
