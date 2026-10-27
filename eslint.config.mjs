@@ -29,6 +29,7 @@ export default defineConfig([
     "dist/**",
     ".design-sync/.cache/**",
     ".design-sync/bundle/**",
+    ".design-sync/artifact/**",
     // A byte-for-byte mirror of scripts/check-design-manifest.mjs, published
     // for consumers by gen-design-manifest. The source is linted; this is not.
     "public/tools/**",

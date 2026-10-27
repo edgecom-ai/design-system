@@ -32,6 +32,8 @@
     "design:css": "node scripts/gen-design-css.mjs",
     "design:entry": "node scripts/gen-design-entry.mjs",
     "design:build": "pnpm run design:css && DESIGN_SYNC_ALLOW_DIRTY=1 pnpm run design:sync && pnpm run design:entry",
+    "design:artifact": "node scripts/gen-design-artifact.mjs",
+    "design:check": "node scripts/check-design-artifact.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -79,6 +81,7 @@
     "@types/react-payment-inputs": "^1.1.4",
     "@vitejs/plugin-react": "^6.1.1",
     "ajv": "^8.20.0",
+    "esbuild": "0.28.2",
     "eslint": "^9",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.5",
