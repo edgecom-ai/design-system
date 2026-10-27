@@ -15,9 +15,11 @@ One repository with three outputs, only two of which are visible in the file tre
 2. **The shadcn registry** — the thing consuming apps install from, with
    `pnpm dlx shadcn@latest add edgecom-ai/design-system/<name>`. Every file in
    `src/components/ui/` becomes a registry item by directory scan.
-3. **The Claude Design bundle** — cards, specs and rules pushed into a design-system project so
-   designers work from the same source the code does. It is generated on demand and uploaded; it
-   is not committed.
+3. **The design system for designers** — cards, specs, tokens and a component bundle, built from
+   the same source the code uses and published to two places: the standalone Claude Design project
+   (until that product closes on 2026-12-14) and a Design System artifact on claude.ai that
+   Claude's design canvases install. Both are generated on demand and uploaded; neither is
+   committed.
 
 **This repo is not the consumer guide.** Someone building an app *with* the design system reads
 [design.edgecom.ai/agents.md](https://design.edgecom.ai/agents.md) instead. Keeping those two
@@ -136,21 +138,29 @@ check passed.
 
 ## 7. The design-system half
 
-`pnpm design:sync` compiles the bundle designers work from: a skill entry point, the rules from
-`design.md`, foundations cards, per-component specs, a curated stylesheet, and a provenance stamp
-naming the tag, commit and content digest it was built from. Cards are static HTML using the
-components' real utility classes, so a card cannot drift from its primitive.
+The design system reaches designers in two places, built from one set of inputs. `pnpm design:sync`
+feeds the standalone Claude Design project: the authored layer (`SKILL.md`, foundations cards, a
+curated stylesheet, a provenance stamp naming the tag, commit and content digest) over the tree the
+official converter writes. `pnpm design:artifact` builds the Design System artifact that Claude's
+design canvases install: the README a design agent reads first, `tokens.json`, one classic-script
+bundle assigning `window.EdgecomDS` with its stylesheet, a guide per component, a live card per
+authored preview, and the same `_system.json`. Both procedures are in
+[MAINTAINERS.md](MAINTAINERS.md) → *Two destinations for the design system*.
 
-Three things about it that are not obvious:
+Four things about it that are not obvious:
 
-- It **refuses to build on a dirty tree**, because the provenance stamp would then name a commit
-  whose content the bundle does not match.
-- The destination project may already be populated by the official Claude Design converter, in
-  which case only part of the bundle should be uploaded. The build writes `_overlay.json` naming
-  exactly which paths.
-- **Uploading changes nothing on its own.** The platform compiles its card index and token manifest
-  during a self-check that runs when someone opens the project with a recompile marker present.
-  Upload that marker last, then open the project once.
+- **A project upload changes nothing on its own.** The standalone platform compiles its card index
+  and token manifest during a self-check that runs when someone opens the project with a recompile
+  marker present. Upload that marker last, then open the project once.
+- **A canvas runs React 18, the primitives are React 19.** The bundle carries an adapter for the
+  refs React 18 drops; without it every popover renders invisible. `pnpm design:check` renders every
+  card on React 18 in both themes — run it after changing a primitive that composes refs.
+- **A canvas copies the system when it is made**, and keeps that copy. A design's manifest cites the
+  copy's `_system.json`, which is why the build is published only from a clean, merged `main`.
+- **The README is the whole instruction.** A design agent reads nothing else of ours first, so
+  whatever it must know is in `.design-sync/conventions.md` (the project's README header) and
+  `.design-sync/conventions.artifact.md` (the artifact's README), or at an address those files
+  name. The two share every rule; a rule that changes, changes in both.
 
 ## 8. Where everything else lives
 

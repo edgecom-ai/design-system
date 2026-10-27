@@ -42,7 +42,9 @@ Two of the three skills are **consumer** skills — `implement-edgecom-design` a
 | `pnpm registry:check` | Audit built items for imports their manifest doesn't declare, dependencies with no version range, registry dependencies no item provides, type tokens paired with a `leading-*`/weight override, and any reference to a `--chart-legacy-*` token (that palette is for migrating existing plots, never a primitive). |
 | `pnpm docs:gen` | Regenerate all docs-source / tokens / api / contracts / routes / changelog artifacts, including the copies published under `public/`. |
 | `pnpm check:schemas` | Validate the generated artifacts against `schemas/*.schema.json`. |
-| `pnpm design:sync` | Rebuild the Claude Design bundle from tokens, `design.md`, and the primitives. Compiles its own stylesheet from `globals.css`; needs a clean tree, not a prior build. |
+| `pnpm design:artifact` | Build the design system as a Claude Design System artifact under `.design-sync/artifact/` (see *Two destinations*). Needs `pnpm design:build` and the converter's output first. |
+| `pnpm design:check` | Render every card of that build on React 18.3.1 in light and dark, as the artifact's page does; fails on an error. Needs Chrome. |
+| `pnpm design:sync` | Rebuild the Claude Design bundle and overlay for the standalone project (see *Two destinations*); also writes the `_system.json` and manifest example the artifact ships. Needs a clean tree. |
 | `pnpm docs:changelog` | Regenerate the changelog from git history (part of `docs:gen`). |
 
 You rarely run the generators by hand — `predev`/`prebuild` do it. Run `pnpm registry:build` yourself after changing a component or token so the generated registry reflects it.
@@ -97,61 +99,85 @@ All tokens live in [`src/app/globals.css`](src/app/globals.css): `@theme inline`
 - After any token change, run `pnpm registry:build` so the `theme` item regenerates.
 - The live **Foundations → Semantic colors** page is the interactive reference + contrast meter — verify new/tuned colors there in **both** light and dark.
 
-## The Claude Design project
+## Two destinations for the design system
 
-Designers work in the **Edgecom Energy Design System** project on Claude Design, and everything in it except `brand/` is **generated from this repo** by [`scripts/gen-design-sync.mjs`](scripts/gen-design-sync.mjs).
+The design system is published to **two places from the same inputs**, and both stay live for as long as the standalone product does:
 
-The project id is **not in this repo**. It lives in `.design-sync/config.json`, which is git-ignored for that reason — this repository is public, and a project id is an address into the organisation's Claude Design workspace, not something a reader of the registry needs. Get it from a maintainer, or read it back with the `DesignSync` tool's `list_projects`, which only ever returns projects you can already write to.
+| | Standalone Claude Design project | Design System artifact |
+|---|---|---|
+| Where designers find it | **Edgecom Energy Design System** on claude.ai/design — the richer editor, and where designers work today. Closes **2026-12-14**. | **Edgecom Energy Design System V3 (canvas)**, a Design System artifact on claude.ai. A Design canvas made in an ordinary conversation copies it in at that version. |
+| What ships | the converter's tree plus our overlay (`_overlay.json`) | our own bundle, tokens, guides and live cards (`.design-sync/artifact/`) |
+| Build | `pnpm design:build` → converter driver → `DesignSync` upload | `pnpm design:build` → converter driver → `pnpm design:artifact` → `pnpm design:check` → `plan-design-publish` → the Artifact tool |
+| README source | [`.design-sync/conventions.md`](.design-sync/conventions.md) | [`.design-sync/conventions.artifact.md`](.design-sync/conventions.artifact.md) |
+| Runtime | the project's own | React 18.3.1, supplied by the canvas |
 
-Run `pnpm design:sync` after a component, token, or `design.md` change, then upload the bundle with the `DesignSync` tool. It emits:
+Everything else — previews, the stylesheet, `_system.json`, the manifest example, the converter's guides and types — is one input feeding both. The two README sources share every rule and differ only in how the system is loaded, the stylesheet's path, *Where the truth lives* and the closing example: **a rule that changes, changes in both files.**
+
+Neither address is in this repo: the project id lives in the git-ignored `.design-sync/config.json`, and the artifact is found with Claude Code's Artifact tool (`action: "list"`, `type: "Design System"`) — this repository is public, and both are addresses into the organisation's workspace.
+
+**Sync and publish from a clean tree on `main`, after the change has merged.** `_system.json` stamps `HEAD`, so a bundle built from uncommitted work claims a version whose content it does not match — and the version stamp is the whole reason the file exists. `gen-design-sync` refuses to build on a dirty tree; `DESIGN_SYNC_ALLOW_DIRTY=1` overrides it for a throwaway preview you do not upload.
+
+### The standalone Claude Design project
+
+Everything in the project except `brand/` is **generated from this repo**: the official converter writes `components/**`, `guidelines/**`, `_preview/**`, `_vendor/**`, `styles.css` and its own `README.md` (built from `conventions.md` through the config's `readmeHeader`), and [`scripts/gen-design-sync.mjs`](scripts/gen-design-sync.mjs) writes the **authored layer** the converter has no equivalent of:
 
 | Path | From |
 |---|---|
-| `_system.json` | git tag + commit + a digest of `globals.css` and `design.md` — this is how a design can name the version it was built against |
+| `_system.json` | git tag + commit + the system digest — how a design names the version it was built against |
+| `_manifest.example.json` | the design handoff manifest a design copies, stamped with the same identity |
 | `SKILL.md` | the `edgecom-design` entry point |
-| `README.md` | `design.md`, verbatim |
-| `foundations/*.html` | `globals.css` |
-| `components/*.html` | each primitive's real `cva` base + variant classes |
-| `components/*.md` | variants, sizes, defaults, install address |
-| `_base.css` | the Edgecom `:root`/`.dark` tokens plus only the utilities the cards use, compiled by `scripts/lib/base-css.mjs` with every Tailwind internal resolved away — Claude Design builds its token manifest from this file, so nothing but Edgecom's tokens may declare a custom property in it |
+| `foundations/*.html`, `_base.css` | `globals.css` — the tokens plus only the utilities the cards use, compiled by `scripts/lib/base-css.mjs` with every Tailwind internal resolved away. Claude Design builds its token manifest from this file, so nothing but Edgecom's tokens may declare a custom property in it |
+| `components/*.html`, `components/*.md` | each primitive's real `cva` classes and its spec — these reach the project through the converter's `docsDir`, not by upload |
 
-Cards are static HTML using the components' **actual utility classes**, so a card cannot drift from its primitive: change the `cva`, re-sync, the card changes.
-
-### Two shapes of destination, and `_overlay.json`
-
-A destination project is one of two things, and the build says which paths suit which.
-
-A **standalone** project is one this generator owns end to end: the whole bundle goes up, and the seven component cards here are all the cards there are.
-
-An **overlay** target is a project the official Claude Design converter has already populated. It brings its own `components/**` — one directory per component, with real `.d.ts` and a rendered card — plus `guidelines/**`, `_preview/**`, `_vendor/**`, `styles.css` and its own `README.md`. Uploading ours into `components/` would collide with that tree for nothing: the specs already reach it by another route, because the converter's config points its `docsDir` at `.design-sync/bundle/components`. What the converter has no equivalent of is the **authored layer** — the skill entry point, the provenance stamp, the manifest example a design agent copies, and the foundations cards with the stylesheet they link.
-
-`_overlay.json` is written by the build and names exactly those paths, so the upload plan is derived from the bundle rather than remembered:
+`_overlay.json` is written by the build and names exactly which paths go up, so the upload plan is derived from the bundle rather than remembered:
 
 ```
 writes:         SKILL.md  _system.json  _manifest.example.json  _base.css  foundations/**  _ds_needs_recompile
 standaloneOnly: README.md  components/**
 ```
 
-Scope the `DesignSync` `finalize_plan` to `writes` when the destination is an overlay target. The plan boundary is what structurally prevents a sync from touching hand-authored `brand/` material or the converter's component tree.
+Scope the `DesignSync` `finalize_plan` to `writes`. The plan boundary is what structurally prevents a sync from touching hand-authored `brand/` material or the converter's component tree.
 
-### An upload is invisible until the project is opened
+**An upload is invisible until the project is opened.** The platform does not read the bundle when you upload it. It compiles its own card index and token manifest during a self-check that runs when **someone opens the project while a `_ds_needs_recompile` marker is present**, and deletes the marker when the check completes. A generator-built project that never wrote the marker was an accidental control: its manifest still described a stylesheet replaced two PRs earlier (~250 Tailwind internals and 89 utility classes misread as themes), and it was deleted on 2026-09-18 rather than repaired. So the build emits the marker and `_overlay.json` names it in `uploadLast`. **Upload it last**, after every other file, so the self-check can never run against a half-written bundle; then open the project once.
 
-The platform does not read the bundle when you upload it. It compiles its own card index and token manifest during a **self-check**, and what runs that check is **someone opening the project while a `_ds_needs_recompile` marker is present**. The app deletes the marker when the check completes.
+### The Design System artifact
 
-This is not a detail you can skip. The two projects this bundle was sent to were an accidental controlled experiment in what happens if you do:
+Claude Design moved into Claude on 2026-09-16: a design is now a Design artifact (a canvas made in an ordinary conversation), and the canvas **copies** the design system into itself when it is made, at that version. The artifact is a **second, separate system**, built by [`scripts/gen-design-artifact.mjs`](scripts/gen-design-artifact.mjs) — not a replacement for the project above, and not the artifact the 2026-10-01 migration made from it (see *The migrated artifacts*). Everything under its `project/` except `assets/` is generated:
 
-| | Marker written? | Opened | Result |
-|---|---|---|---|
-| Converter-built | yes, by the converter | 2026-09-18 | recompiled — 328 cards, all 118 Edgecom tokens, one theme |
-| Generator-built | no — this script never wrote one | 2026-09-16 | **nothing.** Its manifest still described a stylesheet replaced two PRs earlier: ~250 Tailwind internals and 89 utility classes misread as themes. It was deleted on 2026-09-18 rather than repaired. |
+| Path under `project/` | From |
+|---|---|
+| `README.md` | [`.design-sync/conventions.artifact.md`](.design-sync/conventions.artifact.md) — the whole instruction a design agent gets: what to install, how to mount, the styling idiom, the manifest rules. It has to stand alone. |
+| `tokens.json` | `public/tokens.json` and the `@theme` type scale and radii in `globals.css`, in the type's list shape. `color-mix()` and `transparent`, which the page cannot read, are written as the colour they compute to. |
+| `components/bundle.js` | `dist/index.js` (`design:entry`), bundled by [`scripts/lib/design-bundle.mjs`](scripts/lib/design-bundle.mjs) into one classic script that assigns `window.EdgecomDS` |
+| `components/bundle.css` | the compiled stylesheet (`design:css`) |
+| `components/index.d.ts`, `components/<Name>/README.md` | the converter's types and guides (`ds-bundle/`), the guide's first sentence taken from the contract |
+| `components/<Name>/preview.html` | each [`.design-sync/previews/<Name>.tsx`](.design-sync/previews), bundled against `window.EdgecomDS` |
+| `components/Cover/preview.html` | [`.design-sync/cover.html`](.design-sync/cover.html), authored |
+| `guidelines/design.md`, `_system.json`, `_manifest.example.json` | `design.md`, the system identity, the manifest example |
 
-So the build now emits `_ds_needs_recompile`, and `_overlay.json` lists it in `writes` with `uploadLast` naming it. **Upload it last**, after every other file, so the self-check can never run against a half-written bundle. Then open the project once — that is what makes the sync take effect.
+#### Canvases run React 18
 
-**Sync from a clean tree on `main`, after the change has merged.** `_system.json` stamps `HEAD`, so a bundle built from uncommitted work claims a version whose content it does not match — and the version stamp is the whole reason the file exists. The generator refuses to build on a dirty tree; `DESIGN_SYNC_ALLOW_DIRTY=1` overrides it for a throwaway preview you do not upload.
+A canvas supplies React 18.3.1 and loads no React of a system's. The primitives are React 19 code — plain function components that take `ref` as a prop — and on React 18 a function component never receives one, so every popover, menu, tooltip and select rendered unpositioned and invisible until the bundle gained an adapter. `design-bundle.mjs` wraps such a component in `forwardRef` when the page's React is older than 19 and passes straight through on 19, so the registry source stays React 19 code. It also folds an `x-import`'s `class` attribute into the component's own classes: the canvas passes `class` through as a literal prop, which replaced a Card's border, surface and padding.
 
-**The upload plan is scoped to those paths**, so a sync structurally cannot touch `brand/` — hand-authored marketing material that is deliberately not in this public repo. Keep it that way.
+`pnpm design:check` renders every card the way the artifact's page does — React 18.3.1, the stylesheet and bundle preloaded, both themes — and fails on an error. Run it after any change to a primitive that composes refs or portals.
 
-**There is one project to sync to.** The old `Edgecom Energy Design System` is **legacy**: a Figma reconstruction that teaches hex colours, px type, px radii and no dark mode, with nine of the ten token names it documents absent from `globals.css`. Its skill is being renamed `edgecom-design-legacy`. Don't sync to it, and don't point anyone at it — a designer who opens it gets confidently wrong answers.
+#### Publishing
+
+A design's manifest copies `_system.json` from the canvas's installed copy for as long as that canvas lives, so publish only from a clean, merged `main`.
+
+1. `pnpm docs:gen`, then `pnpm design:build` (its three generators), then the converter for the guides and types — it runs locally, no project needed (about 15 minutes):
+   ```bash
+   node .ds-sync/resync.mjs --config .design-sync/config.json --node-modules node_modules --out ./ds-bundle --entry dist/index.js --no-render-check
+   ```
+   then `pnpm design:artifact` and `pnpm design:check`. `.ds-sync/` is the official converter, installed locally and git-ignored; ask a maintainer for it.
+2. **First publish:** in Claude Code, create the artifact from the Design System type (`Artifact` publish with the type's `type_url` and the title above, no files), then `node scripts/plan-design-publish.mjs --new`. **Every later publish:** read the live index back (`Artifact` `read`, `path: "project/design-system.json"`, into a folder of your choosing) and run `node scripts/plan-design-publish.mjs --live <that folder>`. Either writes `.design-sync/artifact/publish-plan.json`: the index and the calls — deletes first, at most 255 paths each.
+3. Make each call with `root: ".design-sync/artifact"` and that call's `files`; the last one carries `file_path` = the absolute path of `.design-sync/artifact/project/design-system.json`. A delete of a path you have not listed in this session needs it named in `overwrite_unread`.
+
+Nothing is invisible after a publish: there is no recompile marker to arm and no project to open. Canvases made before it keep the copy they installed; a designer refreshes one by asking for the design system to be re-installed.
+
+### The migrated artifacts
+
+The 2026-10-01 migration copied every standalone project into an artifact of its own. **Edgecom Energy Design System V3** (no suffix) is that copy of the project above: byte-for-byte, read-only, over the type's file cap, with no `tokens.json`. Leave it as it is — it is the archive of the standalone project once the site closes, and the canvas artifact is published beside it, never over it. The migrated `[LEGACY] Edgecom Energy Design System` teaches hex colours, px type, px radii and no dark mode; don't publish to it, and don't point anyone at it.
 
 ## Adding or changing a component
 
@@ -185,7 +211,7 @@ Note: `src/docs/api.ts`, `src/docs/curated.ts`, `src/docs/contracts.json`, `src/
 
 ## Component contracts
 
-`src/docs/generated/contracts.json` is one contract per registry primitive: what it is for, what it may compose with, which tokens it reaches, which states it implements. It is what an agent reads instead of all of `design.md`, and `pnpm design:sync` publishes its `rules` into each Claude Design spec.
+`src/docs/generated/contracts.json` is one contract per registry primitive: what it is for, what it may compose with, which tokens it reaches, which states it implements. It is what an agent reads instead of all of `design.md`, and `pnpm design:sync` publishes its `rules` into each component's spec — the spec in the standalone Claude Design project, and the component's guide in the design artifact.
 
 The split matters when you edit one:
 
@@ -197,7 +223,7 @@ The split matters when you edit one:
 The contracts have four consumers now, and each reads them rather than restating them:
 
 - **The registry.** `gen-registry` takes each component item's `description` from its contract's `summary`, and its `docs` — the note `shadcn add` prints after installing — from the contract's page and contract addresses. A primitive with no docs section has no contract and keeps a templated description; `registry:gen` fails if `contracts.json` is missing, so run `docs:gen` first (`prebuild` does).
-- **The design bundle.** `design:sync` publishes each contract's `rules` into its Claude Design spec.
+- **The design bundle and the artifact.** `design:sync` publishes each contract's `rules` into its spec; the converter carries the spec into the standalone project, and the artifact build makes it the component's guide (`components/<Name>/README.md`).
 - **Consuming agents**, over HTTP. `gen-contracts` publishes the document to `public/contracts.json`, one file per contract to `public/contracts/<id>.json` — pruned when a contract goes away — and a compact `public/contracts/index.json` carrying what selection is made on: summary, purpose, `useWhen`/`dontUseWhen`, variants, parts, install command, and each full contract's URL. The served copies point `$schema` at `public/schemas/`, where the schemas are published too, so the `$id` each schema declares is a real address. `check:schemas` validates the served pair as well as the repo pair. All published addresses are spelled out once, in [`scripts/lib/publish.mjs`](scripts/lib/publish.mjs).
 - **Design manifests.** `check-design-manifest` resolves every instance a manifest declares to a contract and checks its variants and parts against it — see the next section.
 
@@ -209,17 +235,17 @@ It used to be three digests — tokens over `globals.css`, contracts over the co
 
 ## Design manifests
 
-A design produced in Claude Design carries no version and no component identity, so the design step **authors** one beside it: `<Name>.manifest.json` next to `<Name>.dc.html` (plan §5.4). It is the instance-level form of the old hand-written screen map — one entry per designed element naming its registry `component`, `variants` by axis and `parts`, plus the system identity, the tokens reached for, the viewports, themes and states covered, the interactions, and any approved exceptions.
+A Claude design carries no version and no component identity, so the design step **authors** one beside it: `<Name>.manifest.json` next to `<Name>.dc.html`, both under the canvas's `project/` (plan §5.4). It is the instance-level form of the old hand-written screen map — one entry per designed element naming its registry `component`, `variants` by axis and `parts`, plus the system identity, the tokens reached for, the viewports, themes and states covered, the interactions, and any approved exceptions.
 
 Three files define it, all published by `docs:design-manifest`:
 
 - [`schemas/design-manifest.schema.json`](schemas/design-manifest.schema.json) — the shape. Strict: unknown fields fail.
-- [`src/docs/design-manifest.example.json`](src/docs/design-manifest.example.json) — a complete example, hand-written with `@@version` / `@@digest` placeholders that the generator fills with the current identity. It is published at `design.edgecom.ai/design-manifest.example.json` and copied into the design bundle as `_manifest.example.json`, so a design agent has the shape beside `_system.json`. The generator refuses a literal identity in the source, and `design:sync` refuses to bundle an example whose digest is not the tree's — run `docs:gen` first.
+- [`src/docs/design-manifest.example.json`](src/docs/design-manifest.example.json) — a complete example, hand-written with `@@version` / `@@digest` placeholders that the generator fills with the current identity. It is published at `design.edgecom.ai/design-manifest.example.json` and copied into the design bundle and the artifact as `_manifest.example.json`, so a design agent has the shape beside `_system.json` in either. The generator refuses a literal identity in the source, and `design:sync` refuses to bundle an example whose digest is not the tree's — run `docs:gen` first.
 - [`scripts/check-design-manifest.mjs`](scripts/check-design-manifest.mjs) — the validator, deliberately **dependency-free** so a consumer can `curl` it from `design.edgecom.ai/tools/` and run it with Node alone. It checks the shape by hand, then the meaning against the system: identity current, every `component` a contract, every variant axis and option on that contract, every part listed by it, every token in the model, every cited instance declared, and coverage of mobile/desktop, light/dark, loading/empty/error/success (warnings; errors under `--strict`). Inside the repo it reads `src/docs/generated/`; anywhere else, or with `--remote`, it fetches from the site.
 
 CI runs `check:schemas`, which validates the published example against the real schema with Ajv, and `check:design-manifest`, which runs the hand-rolled validator over the same file — so the schema and the validator cannot drift apart without a red build. When you add a field, change all three and the SKILL.md section the bundle generator writes.
 
-Where the instruction to write one reaches the design agent: the conventions header the converter prepends to the project README, and the bundle's `SKILL.md` (*Every design ships a manifest*). **The README is the only file of ours a project receives when it attaches the design system** — not `SKILL.md`, not `guidelines/`, not the component specs — so the header has to stand alone, naming a published address for everything it cannot ship. A rulebook pasted into a design project's `CLAUDE.md` was tried and retired: the people who open those projects are designers and product managers, not developers, and `DesignSync` cannot write the file for them.
+Where the instruction to write one reaches the design agent: the README — the converter builds the standalone project's from `.design-sync/conventions.md`, and the artifact's is `.design-sync/conventions.artifact.md` (*Every design ships a manifest*, in both). **The README is the only text of ours a design agent reads before it builds** — a project receives nothing else of ours, and a canvas installs the four files the README names and nothing else — so it has to stand alone, naming a published address for everything it cannot ship. A rulebook pasted into a design project's `CLAUDE.md` was tried and retired: the people who make designs are designers and product managers, not developers.
 
 ## The changelog maintains itself
 
