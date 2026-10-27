@@ -2,7 +2,8 @@
 // design canvas copies into itself, and the page a designer browses. This is
 // the second destination the design system is published to, beside the
 // standalone Claude Design project `pnpm design:sync` feeds (MAINTAINERS.md →
-// *Two destinations*); the two share every input except the README.
+// *Two destinations*); the two share every input except the README. The
+// artifact is the one the migration made from that project, published over.
 //
 //   .design-sync/artifact/project/
 //     README.md                     the instruction a design agent reads first (.design-sync/conventions.artifact.md)
@@ -48,9 +49,9 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const out = resolve(root, ".design-sync/artifact")
 const project = join(out, "project")
 const NS = "EdgecomDS"
-// Not the title of the migrated standalone project's artifact, which keeps its
-// own: the two are listed side by side and a designer picks one by name.
-const TITLE = "Edgecom Energy Design System V3 (canvas)"
+// The artifact the 2026-10-01 migration made from the standalone project; this
+// build replaces the migrated copy in place, so the title is the one designers know.
+const TITLE = "Edgecom Energy Design System V3"
 
 const inputs = {
   entry: resolve(root, "dist/index.js"),

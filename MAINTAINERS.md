@@ -105,7 +105,7 @@ The design system is published to **two places from the same inputs**, and both 
 
 | | Standalone Claude Design project | Design System artifact |
 |---|---|---|
-| Where designers find it | **Edgecom Energy Design System** on claude.ai/design — the richer editor, and where designers work today. Closes **2026-12-14**. | **Edgecom Energy Design System V3 (canvas)**, a Design System artifact on claude.ai. A Design canvas made in an ordinary conversation copies it in at that version. |
+| Where designers find it | **Edgecom Energy Design System** on claude.ai/design — the richer editor, and where designers work today. Closes **2026-12-14**. | **Edgecom Energy Design System V3**, a Design System artifact on claude.ai — the artifact the 2026-10-01 migration made from the project, now published from this repo. A Design canvas made in an ordinary conversation copies it in at that version. |
 | What ships | the converter's tree plus our overlay (`_overlay.json`) | our own bundle, tokens, guides and live cards (`.design-sync/artifact/`) |
 | Build | `pnpm design:build` → converter driver → `DesignSync` upload | `pnpm design:build` → converter driver → `pnpm design:artifact` → `pnpm design:check` → `plan-design-publish` → the Artifact tool |
 | README source | [`.design-sync/conventions.md`](.design-sync/conventions.md) | [`.design-sync/conventions.artifact.md`](.design-sync/conventions.artifact.md) |
@@ -142,7 +142,7 @@ Scope the `DesignSync` `finalize_plan` to `writes`. The plan boundary is what st
 
 ### The Design System artifact
 
-Claude Design moved into Claude on 2026-09-16: a design is now a Design artifact (a canvas made in an ordinary conversation), and the canvas **copies** the design system into itself when it is made, at that version. The artifact is a **second, separate system**, built by [`scripts/gen-design-artifact.mjs`](scripts/gen-design-artifact.mjs) — not a replacement for the project above, and not the artifact the 2026-10-01 migration made from it (see *The migrated artifacts*). Everything under its `project/` except `assets/` is generated:
+Claude Design moved into Claude on 2026-09-16: a design is now a Design artifact (a canvas made in an ordinary conversation), and the canvas **copies** the design system into itself when it is made, at that version. The artifact is the one the 2026-10-01 migration made from the project above; the first publish from this repo replaced the migrated copy with the build of [`scripts/gen-design-artifact.mjs`](scripts/gen-design-artifact.mjs), and every publish since keeps it current beside the project. Everything under its `project/` except `assets/` (the migration's notes and any uploads) is generated:
 
 | Path under `project/` | From |
 |---|---|
@@ -170,14 +170,14 @@ A design's manifest copies `_system.json` from the canvas's installed copy for a
    node .ds-sync/resync.mjs --config .design-sync/config.json --node-modules node_modules --out ./ds-bundle --entry dist/index.js --no-render-check
    ```
    then `pnpm design:artifact` and `pnpm design:check`. `.ds-sync/` is the official converter, installed locally and git-ignored; ask a maintainer for it.
-2. **First publish:** in Claude Code, create the artifact from the Design System type (`Artifact` publish with the type's `type_url` and the title above, no files), then `node scripts/plan-design-publish.mjs --new`. **Every later publish:** read the live index back (`Artifact` `read`, `path: "project/design-system.json"`, into a folder of your choosing) and run `node scripts/plan-design-publish.mjs --live <that folder>`. Either writes `.design-sync/artifact/publish-plan.json`: the index and the calls — deletes first, at most 255 paths each.
+2. In Claude Code, read the live index back (`Artifact` `read`, `path: "project/design-system.json"`, into a folder of your choosing) and run `node scripts/plan-design-publish.mjs --live <that folder>`. It writes `.design-sync/artifact/publish-plan.json`: the merged index and the calls — deletes first, at most 255 paths each. (`--new` plans the first publish to an artifact just created from the type, should the system ever move again.)
 3. Make each call with `root: ".design-sync/artifact"` and that call's `files`; the last one carries `file_path` = the absolute path of `.design-sync/artifact/project/design-system.json`. A delete of a path you have not listed in this session needs it named in `overwrite_unread`.
 
 Nothing is invisible after a publish: there is no recompile marker to arm and no project to open. Canvases made before it keep the copy they installed; a designer refreshes one by asking for the design system to be re-installed.
 
-### The migrated artifacts
+### The other migrated artifact
 
-The 2026-10-01 migration copied every standalone project into an artifact of its own. **Edgecom Energy Design System V3** (no suffix) is that copy of the project above: byte-for-byte, read-only, over the type's file cap, with no `tokens.json`. Leave it as it is — it is the archive of the standalone project once the site closes, and the canvas artifact is published beside it, never over it. The migrated `[LEGACY] Edgecom Energy Design System` teaches hex colours, px type, px radii and no dark mode; don't publish to it, and don't point anyone at it.
+The 2026-10-01 migration copied every standalone project into an artifact of its own. The migrated `[LEGACY] Edgecom Energy Design System` teaches hex colours, px type, px radii and no dark mode; don't publish to it, and don't point anyone at it.
 
 ## Adding or changing a component
 
