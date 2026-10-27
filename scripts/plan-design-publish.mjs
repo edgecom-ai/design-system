@@ -36,7 +36,9 @@ import { fileURLToPath } from "node:url"
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const out = resolve(root, ".design-sync/artifact")
 const project = join(out, "project")
-const PER_CALL = 255
+// The Artifact tool takes 255 paths a call, and `file_path` is one of them: a
+// call made only of deletes still has to carry a file, so plan for 254.
+const PER_CALL = 254
 
 const args = process.argv.slice(2)
 const fresh = args.includes("--new")
