@@ -46,7 +46,7 @@ const scanner = new Scanner({
   sources: [
     { base: resolve(root, "src"), pattern: "**/*.{ts,tsx,mdx,md,html}", negated: false },
     { base: resolve(root, ".design-sync/previews"), pattern: "**/*.tsx", negated: false },
-    { base: resolve(root, ".design-sync"), pattern: "conventions.md", negated: false },
+    { base: resolve(root, ".design-sync"), pattern: "conventions*.md", negated: false },
   ],
 })
 const candidates = scanner.scan()
