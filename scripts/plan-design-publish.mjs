@@ -10,9 +10,9 @@
 //   node scripts/plan-design-publish.mjs --new          a system just created
 //        from the Design System type, with no files yet — the first publish
 //
-// The target is the canvas artifact (MAINTAINERS.md → *Two destinations*),
-// never the artifact the 2026-10-01 migration made from the standalone project:
-// that one is the standalone project's archive and is left as it is.
+// The target is the Design System artifact the 2026-10-01 migration made from
+// the standalone project (MAINTAINERS.md → *Two destinations*): the first
+// publish over it is the clean-up that replaces the migrated copy.
 //
 // Writes .design-sync/artifact/publish-plan.json:
 //   { index, calls: [{ files: { "project/<path>": "project/<path>" | { from, contentType } | null } }] }

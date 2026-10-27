@@ -6,8 +6,8 @@ The prompt is deliberately naive. It says *what* the screen must do and nothing 
 
 ## How to run
 
-1. Pick the destination and record it in the log: **the standalone project** (in Claude Design, start a fresh project with the Edgecom Energy Design System attached and nothing else) or **the artifact** (make Edgecom Energy Design System V3 (canvas) your default design system on claude.ai, so a new design installs it without the prompt naming it). The two are scored on the same checklist and compared across the log.
-2. Start a new design (or a new conversation) and paste the prompt below **verbatim**. Add nothing — the system has to carry the whole instruction on its own. For a canvas run, read the new canvas's `project/canvas.json` before scoring and check that `designSystems` names the canvas artifact; a canvas built on another system is not a run.
+1. Pick the destination and record it in the log: **the standalone project** (in Claude Design, start a fresh project with the Edgecom Energy Design System attached and nothing else) or **the artifact** (make Edgecom Energy Design System V3 your default design system on claude.ai, so a new design installs it without the prompt naming it). The two are scored on the same checklist and compared across the log.
+2. Start a new design (or a new conversation) and paste the prompt below **verbatim**. Add nothing — the system has to carry the whole instruction on its own. For a canvas run, read the new canvas's `project/canvas.json` before scoring and check that `designSystems` names V3; a canvas built on another system is not a run.
 3. Save the output beside the earlier runs (each `<Name>.dc.html`, its manifest if one was produced, the canvas's `project/canvas.json`, and the agent's own summary) so runs can be diffed. Read a project through the Claude Design MCP and a canvas with Claude Code's Artifact tool. To render a file headless, serve it over HTTP beside the canvas's `ds/` copy and the canvas runtime, never from `file://`.
 4. Score it against the checklist below and record the score and date in the log at the bottom.
 
