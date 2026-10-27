@@ -2,7 +2,9 @@
 // sections.tsx and .claude/rules/docs-site.md.
 
 import * as React from "react"
-import { ss } from "./shared";
+import { dm, ss } from "./shared";
+
+const CheckboxSurfacesDemo = React.lazy(() => import("@/components/demo/checkbox-surfaces-demo").then((m) => ({ default: m.CheckboxSurfacesDemo })));
 
 const CheckboxDemo = React.lazy(() => import("@/components/shadcn-studio/checkbox/checkbox-01"));
 
@@ -29,6 +31,14 @@ const content = {
         description: "A checkbox with supporting helper text.",
         preview: <CheckboxDescriptionDemo />,
         source: ss("checkbox/checkbox-07"),
+      },
+      {
+        id: "checkbox-surfaces",
+        name: "On every surface",
+        description:
+          "An unchecked box rests on an opaque face — `outline-surface`, white in light and the `input` lift in dark — so it keeps its edge in a filled table header, on a selected row, straight on the muted page body, and on an invalid row's destructive tint. Nothing here sets a surface; unlike `input`, there is no `surface=\"page\"` to remember.",
+        preview: <CheckboxSurfacesDemo />,
+        source: dm("checkbox-surfaces-demo"),
       },
       {
         id: "checkbox-horizontal-group",

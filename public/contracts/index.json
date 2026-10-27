@@ -1,16 +1,16 @@
 {
   "version": "v3.0.0",
-  "digest": "5166bcd5434eb42b",
+  "digest": "58d613ac743f2657",
   "contracts": "https://design.edgecom.ai/contracts.json",
   "docs": "https://design.edgecom.ai/design.md",
   "guide": "https://design.edgecom.ai/agents.md",
   "counts": {
     "total": 65,
-    "authored": 13,
+    "authored": 15,
     "withVariants": 33,
     "withBaseUi": 26,
     "undocumented": 1,
-    "tokenReferences": 526
+    "tokenReferences": 528
   },
   "components": [
     {
@@ -485,15 +485,23 @@
       "label": "Checkbox",
       "aliases": [],
       "summary": "A checkbox styled as a small box, with a tick when selected and a dash when indeterminate.",
-      "purpose": null,
-      "useWhen": [],
-      "dontUseWhen": [],
+      "purpose": "Turn one option on or off, or pick any number from a short visible set. The box rests on an opaque face — `outline-surface`, the outline Button's — so an empty box keeps its edge on a tinted row, a filled table header or the `muted` page body, and in dark it is the same `input` lift every other field has.",
+      "useWhen": [
+        "One independent yes/no setting that is saved with the form around it — a consent, an opt-in.",
+        "Any number of options from a short set that should all be visible at once, each with its own label.",
+        "Row selection in a `table`: a header box selects every row and shows `indeterminate` while only some are selected."
+      ],
+      "dontUseWhen": [
+        "Exactly one option is chosen — that is `radio-group`.",
+        "The set is long or needs searching — that is `multi-select`.",
+        "The setting takes effect the moment it is flipped rather than on submit — that is `switch`."
+      ],
       "variants": [],
       "parts": [
         "Checkbox"
       ],
       "status": "stable",
-      "authored": false,
+      "authored": true,
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/checkbox",
       "registryItem": "edgecom-ai/design-system/checkbox",
       "docs": "https://design.edgecom.ai/components/checkbox/",
@@ -1359,16 +1367,23 @@
       "label": "Radio group",
       "aliases": [],
       "summary": "A set of mutually-exclusive options: a RadioGroup coordinates its RadioGroupItems.",
-      "purpose": null,
-      "useWhen": [],
-      "dontUseWhen": [],
+      "purpose": "Choose exactly one option from a short visible set. Each item rests on the same opaque face as a `checkbox` — `outline-surface` — so an unselected ring stays visible on a tinted row or the `muted` page body, and dark keeps the `input` lift every other field has.",
+      "useWhen": [
+        "Two to about six mutually exclusive options that should all be visible at once, so the user can compare them before choosing.",
+        "Each option needs a line of description — lay the items out as cards."
+      ],
+      "dontUseWhen": [
+        "More options than fit comfortably in view — that is `select`.",
+        "Several options can be chosen — that is `checkbox`.",
+        "Two states switched in place in a toolbar — that is `toggle-group` with a single value."
+      ],
       "variants": [],
       "parts": [
         "RadioGroup",
         "RadioGroupItem"
       ],
       "status": "stable",
-      "authored": false,
+      "authored": true,
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/radio-group",
       "registryItem": "edgecom-ai/design-system/radio-group",
       "docs": "https://design.edgecom.ai/components/radio-group/",

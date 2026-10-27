@@ -2,7 +2,9 @@
 // sections.tsx and .claude/rules/docs-site.md.
 
 import * as React from "react"
-import { ss } from "./shared";
+import { dm, ss } from "./shared";
+
+const CheckboxSurfacesDemo = React.lazy(() => import("@/components/demo/checkbox-surfaces-demo").then((m) => ({ default: m.CheckboxSurfacesDemo })));
 
 const RadioGroupDemo = React.lazy(() => import("@/components/shadcn-studio/radio-group/radio-group-01"));
 
@@ -27,6 +29,14 @@ const content = {
         description: "Radio options laid out in a row.",
         preview: <RadioGroupHorizontalDemo />,
         source: ss("radio-group/radio-group-02"),
+      },
+      {
+        id: "radio-group-surfaces",
+        name: "On every surface",
+        description:
+          "An unselected item rests on the same opaque face as a checkbox — `outline-surface` — so its ring stays visible straight on the muted page body and beside the boxes on a tinted row. Nothing here sets a surface.",
+        preview: <CheckboxSurfacesDemo />,
+        source: dm("checkbox-surfaces-demo"),
       },
       {
         id: "radio-group-cards",

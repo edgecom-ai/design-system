@@ -1,6 +1,6 @@
 {
   "version": "v3.0.0",
-  "digest": "5166bcd5434eb42b",
+  "digest": "58d613ac743f2657",
   "contract": {
     "id": "checkbox",
     "label": "Checkbox",
@@ -10,9 +10,17 @@
     "docs": "https://design.edgecom.ai/components/checkbox/",
     "source": "src/components/ui/checkbox.tsx",
     "summary": "A checkbox styled as a small box, with a tick when selected and a dash when indeterminate.",
-    "purpose": null,
-    "useWhen": [],
-    "dontUseWhen": [],
+    "purpose": "Turn one option on or off, or pick any number from a short visible set. The box rests on an opaque face — `outline-surface`, the outline Button's — so an empty box keeps its edge on a tinted row, a filled table header or the `muted` page body, and in dark it is the same `input` lift every other field has.",
+    "useWhen": [
+      "One independent yes/no setting that is saved with the form around it — a consent, an opt-in.",
+      "Any number of options from a short set that should all be visible at once, each with its own label.",
+      "Row selection in a `table`: a header box selects every row and shows `indeterminate` while only some are selected."
+    ],
+    "dontUseWhen": [
+      "Exactly one option is chosen — that is `radio-group`.",
+      "The set is long or needs searching — that is `multi-select`.",
+      "The setting takes effect the moment it is flipped rather than on submit — that is `switch`."
+    ],
     "base": {
       "name": "Base UI Checkbox",
       "url": "https://base-ui.com/react/components/checkbox"
@@ -50,6 +58,10 @@
         "family": "neutral"
       },
       {
+        "id": "outline-surface",
+        "family": "interaction"
+      },
+      {
         "id": "primary",
         "family": "brand"
       },
@@ -62,19 +74,38 @@
         "family": "neutral"
       }
     ],
-    "requires": [],
-    "forbids": [],
-    "rules": [],
-    "behavior": {},
+    "requires": [
+      "A visible label on every box, wired through `label` so the text toggles it; a box with no visible text, such as a table's select-all, carries an `aria-label`.",
+      "`aria-invalid` on the control when validation fails, paired with a `FieldError` that names what is wrong."
+    ],
+    "forbids": [
+      "Re-tinting the resting face with a `bg-*` class so the box reads on a row or the page body. The face is already opaque in light and the `input` lift in dark on every surface, so there is no `surface` prop to set and nothing to override.",
+      "Hand-drawing the checked or indeterminate look — both come from the `data-checked` and `data-indeterminate` attributes, with the glyph from the primitive's own indicator."
+    ],
+    "rules": [
+      "**The face is opaque by default, on every surface.** An unchecked box paints `outline-surface` — white in light, the `input/30` lift in dark — so it reads on a `destructive-subtle` row, a filled table header, a selected row and the `muted` page body without any prop. Unlike `input` or `select` there is no `surface=\"page\"`: a 16px box has no text or size to read by, so transparency never works for it, and a white face has no surface where it looks wrong."
+    ],
+    "behavior": {
+      "error": "Invalid means `aria-invalid` on the box plus an inline `FieldError` — a required consent that blocks submit says so next to the box."
+    },
     "a11y": {
       "attributes": [],
-      "requirements": []
+      "requirements": [
+        "Every box has an accessible name — its label, or an `aria-label` where no text is shown.",
+        "Colour is never the only state signal; checked and indeterminate carry a glyph, and invalid carries a message."
+      ]
     },
-    "examples": [],
-    "antiPatterns": [],
+    "examples": [
+      "`<Label className=\"flex items-center gap-2\"><Checkbox /> Email me peak demand alerts</Label>` — the label text toggles the box.",
+      "`<Checkbox aria-label=\"Select all meters\" checked={allSelected ? true : someSelected ? \"indeterminate\" : false} />` in a table header."
+    ],
+    "antiPatterns": [
+      "A column of unlabeled boxes whose meaning sits only in a header cell the screen reader never links to them.",
+      "A box given `bg-background` or `bg-card` to show on a tinted row — the default face already does, and in dark `background` would sink it below the cards beside it."
+    ],
     "status": "stable",
     "replaces": null,
     "deprecated": null,
-    "authored": false
+    "authored": true
   }
 }
