@@ -188,7 +188,7 @@ export function LegacyPeakPlot() {
             domain={[13000, 22000]}
             tickFormatter={(v: number) => `${Math.round(v / 1000)}k`}
           />
-          <ReferenceArea x1="13:00" x2="17:00" fill="var(--chart-legacy-window-high)" fillOpacity={0.18} strokeOpacity={0} />
+          <ReferenceArea x1="13:00" x2="17:00" fill="var(--chart-legacy-window-high)" fillOpacity={1} strokeOpacity={0} />
           {peakLines.map((p) => (
             <ReferenceLine
               key={p.rank}
