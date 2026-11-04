@@ -181,7 +181,7 @@ export function ChartLegacyPaletteDemo() {
               x1="13:00"
               x2="17:00"
               fill="var(--chart-legacy-window-high)"
-              fillOpacity={0.18}
+              fillOpacity={1}
               strokeOpacity={0}
             />
             {peakLines.map((p) => (

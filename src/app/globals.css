@@ -371,11 +371,12 @@
   --chart-legacy-peak-6: var(--chart-legacy-line-wine);
   --chart-legacy-peak-7: var(--chart-legacy-line-olive);
   /* Legacy peak window bands — filled regions behind the lines, no stroke. One red
-     graded toward the surface: light toward white, dark toward the card, so
-     the softest band never becomes the brightest thing on a dark plot */
-  --chart-legacy-window-high: oklch(0.612 0.176 23.9); /* ranks 1–2 */
-  --chart-legacy-window-normal: oklch(0.704 0.128 20.8); /* rank 3 */
-  --chart-legacy-window-low: oklch(0.861 0.057 18.3); /* rank 4 and past, and a plot's single unranked window */
+     tinted toward the surface: light toward white, dark toward the card, so
+     the softest band never becomes the brightest thing on a dark plot. Each
+     grade keeps every legacy line at or above roughly 2:1 against it */
+  --chart-legacy-window-high: oklch(0.8 0.1 24); /* ranks 1–2 */
+  --chart-legacy-window-normal: oklch(0.88 0.065 21); /* rank 3 */
+  --chart-legacy-window-low: oklch(0.94 0.03 18); /* rank 4 and past, and a plot's single unranked window */
   --radius: 0.625rem;
   --sidebar: oklch(0.985 0.002 254);
   --sidebar-foreground: oklch(0.16 0.01 254);
@@ -476,8 +477,9 @@
   --chart-legacy-line-emerald: oklch(0.739 0.176 156.2);
   --chart-legacy-line-cyan: oklch(0.797 0.136 205);
   --chart-legacy-line-purple: oklch(0.527 0.193 328.4); /* legacy 0.421 fell to 1.9:1 on the dark card */
-  --chart-legacy-window-normal: oklch(0.502 0.133 22.6);
-  --chart-legacy-window-low: oklch(0.329 0.061 16.4);
+  --chart-legacy-window-high: oklch(0.4 0.11 24);
+  --chart-legacy-window-normal: oklch(0.34 0.075 22);
+  --chart-legacy-window-low: oklch(0.28 0.04 16);
   --sidebar: oklch(0.205 0.008 254);
   --sidebar-foreground: oklch(0.985 0 0);
   --sidebar-primary: oklch(0.514 0.161 254.3);

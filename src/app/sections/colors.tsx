@@ -330,7 +330,8 @@ function ColorsPage() {
         </div>
         <p className="text-caption text-muted-foreground">
           Line hue on the card surface. The peak-window bands are fills read against the
-          lines over them, not against the card, so they carry no bar of their own.
+          lines over them, not against the card: each is a tint of the window red that keeps
+          every legacy line at or above roughly 2:1 against it.
         </p>
       </section>
 
