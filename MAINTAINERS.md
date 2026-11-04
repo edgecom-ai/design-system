@@ -101,7 +101,7 @@ All tokens live in [`src/app/globals.css`](src/app/globals.css): `@theme inline`
 
 ## Two destinations for the design system
 
-The design system is published to **two places from the same inputs**, and both stay live for as long as the standalone product does:
+The design system is published to **two places from the same inputs**, and both stay live for as long as the standalone product does. **Since 2026-11-04 only the artifact takes an upload:** the standalone project's server refuses every `DesignSync` write with *"This design system moved to Claude. /design-sync can't send updates to Claude yet, so this upload stopped."* — `finalize_plan` still succeeds, the first `write_files` is refused, and the rule is to relay that message and stop, not retry. The project is frozen at its last accepted build until the tool gains a write path to Claude; the converter driver is still worth running for its render check and sha partition.
 
 | | Standalone Claude Design project | Design System artifact |
 |---|---|---|
