@@ -73,9 +73,9 @@ colors:
   chart-legacy-peak-5: oklch(0.56 0.16 133.9)
   chart-legacy-peak-6: oklch(0.452 0.158 4.9)
   chart-legacy-peak-7: oklch(0.452 0.098 110.5)
-  chart-legacy-window-high: oklch(0.612 0.176 23.9)
-  chart-legacy-window-normal: oklch(0.704 0.128 20.8)
-  chart-legacy-window-low: oklch(0.861 0.057 18.3)
+  chart-legacy-window-high: oklch(0.8 0.1 24)
+  chart-legacy-window-normal: oklch(0.88 0.065 21)
+  chart-legacy-window-low: oklch(0.94 0.03 18)
 typography:
   font-family: SF Pro / system-ui sans (var --font-sans)
   font-family-mono: SF Mono / ui-monospace (var --font-mono)
@@ -195,7 +195,7 @@ A handful of existing demand plots, and a second set of existing plots, are read
 - **The bar is 3:1 on `card`, in both themes.** These are 1.5–2 px plot lines, not text. Light values are the legacy hues; the ones that fell under 3:1 on white were lowered in **lightness only** (hue kept, chroma clipped only where the gamut forced it) — `orange`, `sky`, `yellow`, `lime`, `emerald`, `cyan` — and `lime` is held below `green` so the two greens stay apart. Dark keeps each hue as known, lifting only the lines a dark card swallowed (`teal`, `brown`, `wine`, `olive`, `purple`). Don't re-tune a hue in a product; tune the token here.
 - **Two pairs sit closer than the rest, and never on one plot.** In light mode `emerald` is 0.037 from `green` and `cyan` 0.071 from `sky` (OKLab distance), against 0.082 for the next closest pair. Each pair spans the two sets of plots, and no existing plot draws both of a pair, so they were tuned like every other line rather than pushed apart. Keep it that way: never draw `emerald` beside `green`, or `cyan` beside `sky`, on one plot.
 - **Reds tag data here, not status.** `chart-legacy-line-red` (hue 29) — which also stands for the second set's two reds, 0.033 and 0.045 from it — and the `chart-legacy-window-*` reds sit in `destructive`'s band, alongside `chart-gas` and `chart-emissions`. They mean a line and a peak window, never an error — and `destructive` is never a line on a plot.
-- **Window bands are fills, not lines.** `chart-legacy-window-{high,normal,low}` grade the peak-window bands by rank (ranks 1–2, rank 3, rank 4 and past). They are read against the lines drawn over them, so they carry no contrast bar of their own; light grades toward white, dark toward the card, so the softest band never becomes the brightest thing on a dark plot. A plot with a single unranked window draws it with `window-low`: that is the nearest band to its legacy colour (0.064 away on white), and it keeps the softest grade in both themes.
+- **Window bands are fills, not lines.** `chart-legacy-window-{high,normal,low}` grade the peak-window bands by rank (ranks 1–2, rank 3, rank 4 and past). They are read against the lines drawn over them, so each rank is a tint of the window red that keeps every legacy line at or above roughly 2:1 against it — light grading toward white, dark toward the card — and the softest band never becomes the brightest thing on a dark plot. A plot with a single unranked window draws it with `window-low`, the softest grade in both themes.
 
 ### Brand blue is mode-independent
 

@@ -42,7 +42,7 @@ A design arrives as a claude.ai Design artifact link — read its files with Cla
 
 <!-- @@GENERATED:contracts — from src/docs/generated/contracts.json by scripts/gen-agents-md.mjs (run `pnpm docs:gen`); do not hand-edit until the closing marker -->
 
-Contracts at **v3.0.0**, digest `58d613ac743f2657` — 65 components, 15 with authored selection criteria. The version and digest are stamped into every file below; a design or an app built against a different digest is working from a different system.
+Contracts at **v3.0.0**, digest `a40101934083632d` — 65 components, 15 with authored selection criteria. The version and digest are stamped into every file below; a design or an app built against a different digest is working from a different system.
 
 | Address | What it is |
 |---|---|
