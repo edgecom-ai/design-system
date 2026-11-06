@@ -5,6 +5,8 @@ import * as React from "react"
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { dm, ss } from "./shared";
 
+const ToggleGroupToolbarDemo = React.lazy(() => import("@/components/demo/toggle-group-toolbar-demo").then((m) => ({ default: m.ToggleGroupToolbarDemo })));
+
 const ToggleFilledIcon = React.lazy(() => import("@/components/shadcn-studio/toggle/toggle-05"));
 
 const ToggleIconPattern = React.lazy(() => import("@/components/shadcn-studio/toggle/toggle-07"));
@@ -21,6 +23,18 @@ const TogglePageSurfaceDemo = React.lazy(() => import("@/components/demo/toggle-
 
 const content = {
   variants: [
+      {
+        id: "toggle-group-toolbar",
+        name: "Toolbar: connected and spaced",
+        description:
+          "`layout` is the group's shape. `connected` joins the items into one strip with no frame — the chart header's range presets, the same height as the two-state toggle and the icon buttons beside it, and the default for an outline group. `spaced` sets ghost items a gap apart in a padded frame, for a formatting toolbar. A two-state switch (\"Previous week\") is an outline `Toggle`, never a `Button` swapping variants.",
+        preview: (
+          <TooltipProvider>
+            <ToggleGroupToolbarDemo />
+          </TooltipProvider>
+        ),
+        source: dm("toggle-group-toolbar-demo"),
+      },
       {
         id: "toggle-formatting",
         name: "Formatting toolbar",
@@ -53,14 +67,14 @@ const content = {
       {
         id: "toggle-group-sizes",
         name: "Group sizes",
-        description: "A toggle group shown across the size scale.",
+        description: "A connected outline group shown across the size scale. Pick the size the rest of the toolbar is on.",
         preview: <ToggleGroupSizesDemo />,
         source: dm("toggle-group-sizes-demo"),
       },
       {
         id: "toggle-group-layout",
         name: "Group layout",
-        description: "Horizontal and vertical toggle group arrangements.",
+        description: "Icon-only items in a connected strip — a view switcher.",
         preview: <ToggleGroupLayout />,
         source: ss("toggle-group/toggle-group-08"),
       },

@@ -10,7 +10,7 @@ export function ToggleGroupSizesDemo() {
       {sizes.map((size) => (
         <div key={size} className="contents">
           <span className="text-caption text-muted-foreground">{size}</span>
-          <ToggleGroup variant="outline" size={size} spacing={0} defaultValue={["hourly"]} aria-label={`Interval, ${size}`}>
+          <ToggleGroup variant="outline" size={size} defaultValue={["hourly"]} aria-label={`Interval, ${size}`}>
             <ToggleGroupItem value="15min">15 min</ToggleGroupItem>
             <ToggleGroupItem value="hourly">Hourly</ToggleGroupItem>
             <ToggleGroupItem value="daily">Daily</ToggleGroupItem>

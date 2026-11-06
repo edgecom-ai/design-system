@@ -15,7 +15,6 @@ function Toolbar({ surface }: { surface: "default" | "page" }) {
     <div className="flex items-center gap-2">
       <ToggleGroup
         variant="outline"
-        spacing={0}
         surface={surface}
         defaultValue={["hourly"]}
         aria-label="Interval"
@@ -39,8 +38,8 @@ function Toolbar({ surface }: { surface: "default" | "page" }) {
   )
 }
 
-// An interval toggle group, an outline toggle and an outline button straight
-// on a muted panel — the shell's content area. `default` rests clear and has
+// An interval toggle group (outline, so connected by default), an outline
+// toggle and an outline button straight on a muted panel — the shell's content area. `default` rests clear and has
 // no face here; `page` takes the button's, so the row reads as one surface.
 export function TogglePageSurfaceDemo() {
   return (

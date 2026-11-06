@@ -31,7 +31,6 @@ export function ToggleGroupRangeTooltipDemo() {
     <ToggleGroup
       variant="outline"
       size="sm"
-      spacing={0}
       value={value}
       onValueChange={(next) => next.length && setValue(next)}
       aria-label="Date range"
