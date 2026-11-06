@@ -117,7 +117,9 @@ function ItemContent({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="item-content"
       className={cn(
-        "flex flex-1 flex-col gap-1 group-data-[size=xs]/item:gap-0 [&+[data-slot=item-content]]:flex-none",
+        // A second content column does not stretch — read off the sibling,
+        // and off the wrapper a Design canvas puts around every mounted part.
+        "flex flex-1 flex-col gap-1 group-data-[size=xs]/item:gap-0 [&+[data-slot=item-content]]:flex-none [:has(>[data-slot=item-content])+*>&]:flex-none",
         className
       )}
       {...props}

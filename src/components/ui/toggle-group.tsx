@@ -19,12 +19,33 @@ import { toggleVariants } from "@/components/ui/toggle"
 // The default follows `variant`: an outline group is connected, since outline
 // items carry their own borders and a frame around them doubles up; a ghost
 // group is spaced, since the frame is the only edge its items have.
+//
+// A connected group owns its corners and its outer border: it clips the items
+// to its own radius and, for outline items, draws the frame they share. The
+// items owe nothing to sibling position — a Design canvas wraps every mounted
+// item in an element of its own, so `first:`/`last:` rules there made every
+// item a fully rounded, fully bordered pill.
 const toggleGroupVariants = cva("flex w-fit items-center rounded-lg", {
   variants: {
     layout: {
-      connected: "",
+      connected: "overflow-hidden",
       spaced: "gap-1 border border-input bg-background p-1",
     },
+    variant: {
+      default: "",
+      outline: "",
+    },
+  },
+  compoundVariants: [
+    {
+      layout: "connected",
+      variant: "outline",
+      className: "border border-input",
+    },
+  ],
+  // `layout` has no fixed default: it follows `variant` (below).
+  defaultVariants: {
+    variant: "default",
   },
 })
 
@@ -80,7 +101,7 @@ function ToggleGroup({
       data-surface={surface}
       data-layout={resolvedLayout}
       className={cn(
-        toggleGroupVariants({ layout: resolvedLayout }),
+        toggleGroupVariants({ layout: resolvedLayout, variant: variant ?? "default" }),
         !connected && surface === "page" && "bg-outline-surface",
         className
       )}
@@ -126,8 +147,12 @@ function ToggleGroupItem({
           size: resolvedSize,
           surface: resolvedSurface,
         }),
+        // Inside the group's clip: no corners of its own, an inset focus ring,
+        // and for an outline item only its left border, pulled a pixel under
+        // the item before it — so it is the divider between two items and
+        // disappears under the group's frame on the first.
         connected &&
-          "rounded-none first:rounded-l-lg last:rounded-r-lg focus-visible:z-10 data-[variant=outline]:border-l-0 data-[variant=outline]:first:border-l",
+          "rounded-none focus-visible:ring-2 focus-visible:ring-inset data-[variant=outline]:-ml-px data-[variant=outline]:border-y-0 data-[variant=outline]:border-r-0",
         className
       )}
       {...props}
