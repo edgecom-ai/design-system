@@ -3,6 +3,10 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
+// A Toggle is the two-state control: a horizon or overlay switch ("14 day
+// forecast", "Compare to last period") is an outline Toggle that holds its
+// pressed state, never a Button swapping variants to fake one.
+//
 // `surface` names what the toggle sits on — see `inputVariants`. Only
 // `outline` has a resting face to swap: it rests clear like a field, which is
 // right inside a card and wrong straight on the shell's `muted` content area,
@@ -15,8 +19,11 @@ const toggleVariants = cva(
     variants: {
       variant: {
         default: "bg-transparent",
+        // No shadow: the outline toggle sits beside outline Buttons and
+        // connected groups in a toolbar, none of which cast one, so a shadow
+        // here needed a `shadow-none` override on every toolbar it joined.
         outline:
-          "border border-input bg-transparent shadow-xs hover:bg-ghost-hover hover:text-foreground",
+          "border border-input bg-transparent hover:bg-ghost-hover hover:text-foreground",
       },
       size: {
         default: "h-8 min-w-8 px-2",
