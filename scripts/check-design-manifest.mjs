@@ -30,8 +30,12 @@
 //   node scripts/check-design-manifest.mjs <manifest.json | URL> [--remote] [--strict] [--design <file>]
 //       [--index <contracts.json | index.json | URL>] [--tokens <tokens.json | URL>]
 //
-// Exit 0 when the manifest is valid; 1 on any error. Coverage gaps are
-// warnings, and errors under --strict.
+// Exit 0 when the manifest is valid; 1 on any error. The four coverage gaps —
+// mobile and desktop, light and dark, loading/empty/error/success — are errors
+// in the canvas flow (a manifest whose `design` is a `.dc.html`, or one checked
+// with --design against one), since a canvas design that shows only the happy
+// path is not implementable; elsewhere they are warnings, and errors under
+// --strict.
 
 import { readFileSync, existsSync } from "node:fs"
 import { resolve, dirname } from "node:path"
@@ -91,7 +95,7 @@ for (let i = 0; i < argv.length; i++) {
 }
 if (opts.help || !opts.file) {
   console.log(
-    "usage: check-design-manifest <manifest.json | URL> [--remote] [--strict] [--index <path|URL>] [--tokens <path|URL>]\n" +
+    "usage: check-design-manifest <manifest.json | URL> [--remote] [--strict] [--design <file>] [--index <path|URL>] [--tokens <path|URL>]\n" +
       "  Validates a design handoff manifest against its schema and against the design system it names.\n" +
       "  --remote  read the system from design.edgecom.ai even inside the design-system repo\n" +
       "  --strict  coverage gaps (viewports, themes, states) are errors, not warnings\n" +
@@ -464,11 +468,19 @@ if (designRef && existsSync(designRef)) {
 const joinNote = joined === null ? "; data-instance join not checked (no design file beside the manifest — pass --design <file>)" : `; ${joined} data-instance element(s) join the markup`
 
 // Coverage: what an implementation needs and a happy-path-only design omits.
-const coverage = opts.strict ? err : warn
+// In the canvas flow — the manifest sits beside a `.dc.html` — a gap is an
+// error: the first real designs passed the validator with the default state
+// alone, and the implementer met the missing states first. Elsewhere (a
+// manifest written for a design in another tool) it stays a warning unless
+// --strict.
+const isCanvas = (ref) => isStr(ref) && /\.dc\.html$/i.test(ref)
+const canvasFlow = isCanvas(manifest.design) || isCanvas(opts.design)
+const coverage = opts.strict || canvasFlow ? err : warn
 const missing = (have, need) => need.filter((x) => !(Array.isArray(have) && have.includes(x)))
-for (const v of missing(manifest.viewports, REQUIRED_VIEWPORTS)) coverage("/viewports", `does not cover "${v}" — both mobile and desktop are required`)
-for (const t of missing(manifest.themes, REQUIRED_THEMES)) coverage("/themes", `does not cover "${t}" — every token has both values; check the design in both`)
-for (const s of missing(manifest.states, REQUIRED_STATES)) coverage("/states", `does not cover "${s}" — a screen that shows only the happy path is not implementable`)
+const because = canvasFlow ? " (an error for a canvas design)" : ""
+for (const v of missing(manifest.viewports, REQUIRED_VIEWPORTS)) coverage("/viewports", `does not cover "${v}" — both mobile and desktop are required${because}`)
+for (const t of missing(manifest.themes, REQUIRED_THEMES)) coverage("/themes", `does not cover "${t}" — every token has both values; check the design in both${because}`)
+for (const s of missing(manifest.states, REQUIRED_STATES)) coverage("/states", `does not cover "${s}" — a screen that shows only the happy path is not implementable${because}`)
 if (Array.isArray(manifest.components) && manifest.components.length === 0) coverage("/components", "lists no instances — a design with no design-system components is either freeform or undocumented")
 
 // --- output ---------------------------------------------------------------------
