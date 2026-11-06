@@ -43,7 +43,8 @@ export type PageHeaderProps = {
   description?: ReactNode
   /**
    * Ancestor crumbs only — the current page (`title`) is appended automatically as the leaf.
-   * Every page should carry a breadcrumb; pass an empty array only for genuinely top-level pages.
+   * For a page outside the portal shell; inside it the breadcrumb is the shell's `heading` slot,
+   * so pass an empty array there and let the page start at its H1.
    */
   breadcrumb?: PageHeaderCrumb[]
   /** Right-aligned page toolbar: date-range, primary CTA, etc. */

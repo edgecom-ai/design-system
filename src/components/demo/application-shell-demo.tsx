@@ -27,6 +27,14 @@ import {
 } from "@/components/ui/application-shell"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
 import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
@@ -108,6 +116,21 @@ export function ApplicationShellDemo({ className }: { className?: string }) {
       buildings={buildings}
       building={building}
       onBuildingChange={setBuilding}
+      // The breadcrumb lives in the top bar, as the portal draws it; the page
+      // below starts at its H1.
+      heading={
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="#">Monitoring</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>Electricity</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+      }
       actions={
         <Tooltip>
           <TooltipTrigger

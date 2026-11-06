@@ -16,7 +16,7 @@ const content = {
         id: "page-header-default",
         name: "Breadcrumb + title",
         description:
-          "The baseline every page should have: an ancestor breadcrumb above the H1. Any crumb can carry a dropdown (here 'Downtown Plant') for switching between sibling pages.",
+          "The H1 with an ancestor breadcrumb above it. Any crumb can carry a dropdown (here 'Downtown Plant') for switching between sibling pages. Inside the portal shell the breadcrumb goes in the shell's `heading` slot, beside the rail toggle, and the page starts at its H1 — this in-page form is for a page outside the shell.",
         preview: <PageHeaderDemo />,
         source: ss("blocks/page-header/page-header-demo"),
       },
