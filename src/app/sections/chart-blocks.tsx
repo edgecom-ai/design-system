@@ -4,6 +4,8 @@
 import * as React from "react"
 import { dm } from "./shared";
 
+const ChartHeaderDemo = React.lazy(() => import("@/components/demo/chart-header-demo").then((m) => ({ default: m.ChartHeaderDemo })));
+
 const ChartLiveDemandDemo = React.lazy(() => import("@/components/demo/chart-live-demand-demo").then((m) => ({ default: m.ChartLiveDemandDemo })));
 
 const ChartDailyConsumptionDemo = React.lazy(() => import("@/components/demo/chart-daily-consumption-demo").then((m) => ({ default: m.ChartDailyConsumptionDemo })));
@@ -20,6 +22,14 @@ const ChartGaugeDemo = React.lazy(() => import("@/components/demo/chart-gauge-de
 
 const content = {
   variants: [
+      {
+        id: "chart-header",
+        name: "The chart header",
+        description:
+          "The canonical chart card: `CardHeader` carries the title and its last-updated line; `CardAction` carries, in order, the primary action, the two-state overlay `Toggle`, the connected range presets with the compact range calendar, and the export menu — every control at `size=\"default\"`. The axis caption reads above the plot, the time-zone line under it, the legend is centred, and the threshold strip closes the card.",
+        preview: <ChartHeaderDemo />,
+        source: dm("chart-header-demo"),
+      },
       {
         id: "chart-power-demand",
         name: "Multi-series line",
@@ -72,7 +82,7 @@ const content = {
         id: "chart-gauge",
         name: "Gauge",
         description:
-          "A single figure against its ceiling. The ring takes a status tone only because the figure is judged against a target, and a badge says the same in words, so colour never carries it alone.",
+          "A single figure against its ceiling, drawn with `radial-gauge` at its `card` size. The ring takes a status tone only because the figure is judged against a target, and a badge says the same in words, so colour never carries it alone.",
         preview: <ChartGaugeDemo />,
         source: dm("chart-gauge-demo"),
       },

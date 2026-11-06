@@ -1,6 +1,6 @@
 {
   "version": "v3.0.0",
-  "digest": "d46c526baf79e59e",
+  "digest": "b6c810f3d864d860",
   "contracts": "https://design.edgecom.ai/contracts.json",
   "docs": "https://design.edgecom.ai/design.md",
   "guide": "https://design.edgecom.ai/agents.md",
@@ -10,7 +10,7 @@
     "withVariants": 34,
     "withBaseUi": 26,
     "undocumented": 2,
-    "tokenReferences": 534
+    "tokenReferences": 537
   },
   "components": [
     {
