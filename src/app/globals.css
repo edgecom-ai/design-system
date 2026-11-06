@@ -23,6 +23,9 @@
   --color-chart-3: var(--chart-3);
   --color-chart-2: var(--chart-2);
   --color-chart-1: var(--chart-1);
+  --color-chart-grid: var(--chart-grid);
+  --color-chart-axis-label: var(--chart-axis-label);
+  --color-chart-reference: var(--chart-reference);
   /* Commodity tint ramps (100 lightest → 900 darkest; 500 = categorical base) */
   --color-chart-electricity-100: var(--chart-electricity-100);
   --color-chart-electricity-300: var(--chart-electricity-300);
@@ -325,6 +328,16 @@
   --chart-3: var(--chart-gas-500);
   --chart-4: var(--chart-temperature-500);
   --chart-5: var(--chart-emissions-500);
+  /* Chart theme — what every plot shares, whichever library draws it: the grid,
+     the axis labels, the neutral reference line, and the two stroke widths.
+     ChartContainer applies the colours to a Recharts plot; any other library
+     reads the same five (design.md → Charts & graphs → Chart theme). Aliases,
+     so they follow the theme without a .dark entry of their own. */
+  --chart-grid: color-mix(in oklab, var(--border) 50%, transparent);
+  --chart-axis-label: var(--muted-foreground);
+  --chart-reference: var(--muted-foreground);
+  --chart-series-width: 2px;
+  --chart-reference-width: 1.5px;
   /* LEGACY line palette — migration only. The plot-line hues operators read
      their existing plots by, carried from the legacy portal and owned here so
      the product porting those plots can delete its literals. That is the
