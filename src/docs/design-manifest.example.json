@@ -72,6 +72,18 @@
       ]
     },
     {
+      "instanceId": "activity-chart",
+      "component": "chart",
+      "label": "Sign-ins per day, drawn in the logic block with React.createElement — the id is passed in its props as { \"data-instance\": \"activity-chart\" }",
+      "screen": "permissions",
+      "parts": [
+        "ChartContainer",
+        "ChartTooltip",
+        "ChartTooltipContent"
+      ],
+      "note": "Built by the logic, not written as an x-import, so data-instance rides in the props object."
+    },
+    {
       "instanceId": "members-loading",
       "component": "skeleton",
       "label": "Row placeholders while the table loads",
@@ -116,7 +128,11 @@
       "label": "Invitation status per row — Active is success, Invited is outline, Suspended is warning",
       "screen": "permissions",
       "variants": {
-        "variant": ["success", "outline", "warning"]
+        "variant": [
+          "success",
+          "outline",
+          "warning"
+        ]
       }
     },
     {

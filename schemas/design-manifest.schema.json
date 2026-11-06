@@ -91,7 +91,7 @@
       "uniqueItems": true,
       "minItems": 1,
       "items": { "$ref": "#/$defs/state" },
-      "description": "The states the design shows for the screen as a whole. `loading`, `empty`, `error` and `success` are required for a design to be complete — a screen that only shows the happy path is not implementable."
+      "description": "The states the design shows for the screen as a whole. `loading`, `empty`, `error` and `success` are required for a design to be complete — a screen that only shows the happy path is not implementable, and the validator reports a missing one as an error for a canvas design."
     },
     "interactions": {
       "type": "array",
@@ -134,7 +134,7 @@
       "properties": {
         "instanceId": {
           "$ref": "#/$defs/kebab",
-          "description": "Unique within the manifest. Put the same value on the element as `data-instance=\"…\"` so the manifest and the markup can be joined."
+          "description": "Unique within the manifest. Put the same value on the design-system element as `data-instance=\"…\"` so the manifest and the markup can be joined — on the `x-import` or the component, never on a layout `<div>`. An element the logic builds with `React.createElement` takes it in its props object, `{ \"data-instance\": \"reading-chart\" }`, where the validator reads it the same way. A loop that renders several of one component declares one instance and stamps that one id on every item."
         },
         "component": {
           "$ref": "#/$defs/kebab",
