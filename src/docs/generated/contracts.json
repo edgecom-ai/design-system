@@ -1,7 +1,7 @@
 {
   "$schema": "../../../schemas/contracts.schema.json",
   "version": "v3.0.0",
-  "digest": "bd469331f5691761",
+  "digest": "0b1a60a672e0ee8d",
   "sources": [
     "src/components/ui/*.tsx",
     "src/app/sections.tsx",
@@ -15,7 +15,7 @@
     "withVariants": 34,
     "withBaseUi": 26,
     "undocumented": 1,
-    "tokenReferences": 537
+    "tokenReferences": 538
   },
   "contracts": [
     {
@@ -1449,7 +1449,6 @@
       "states": [
         "data-[orientation=horizontal]",
         "data-[orientation=vertical]",
-        "data-slot",
         "focus-visible"
       ],
       "responsive": [],
@@ -3986,12 +3985,14 @@
       "states": [
         "aria-invalid",
         "data-[active=true]",
-        "disabled",
-        "first",
-        "last"
+        "disabled"
       ],
       "responsive": [],
       "tokens": [
+        {
+          "id": "border",
+          "family": "neutral"
+        },
         {
           "id": "destructive",
           "family": "status"
@@ -6896,8 +6897,7 @@
         "group-data-[density=compact]/table",
         "group-data-overflow-left/table-container",
         "group-data-overflow-right/table-container",
-        "hover",
-        "last"
+        "hover"
       ],
       "responsive": [],
       "tokens": [
@@ -7858,9 +7858,7 @@
       ],
       "states": [
         "data-[variant=outline]",
-        "first",
-        "focus-visible",
-        "last"
+        "focus-visible"
       ],
       "responsive": [],
       "tokens": [
