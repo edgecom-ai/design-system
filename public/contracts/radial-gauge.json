@@ -1,0 +1,81 @@
+{
+  "version": "v3.0.0",
+  "digest": "85acca016904f569",
+  "contract": {
+    "id": "radial-gauge",
+    "label": "Radial gauge",
+    "aliases": [],
+    "registryItem": "edgecom-ai/design-system/radial-gauge",
+    "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/radial-gauge",
+    "docs": null,
+    "source": "src/components/ui/radial-gauge.tsx",
+    "summary": null,
+    "purpose": null,
+    "useWhen": [],
+    "dontUseWhen": [],
+    "base": null,
+    "parts": [
+      {
+        "name": "RadialGauge",
+        "description": null
+      }
+    ],
+    "props": [],
+    "variants": [
+      {
+        "name": "size",
+        "options": [
+          "card",
+          "tile"
+        ],
+        "default": "card"
+      }
+    ],
+    "states": [],
+    "responsive": [],
+    "tokens": [
+      {
+        "id": "card",
+        "family": "surface"
+      },
+      {
+        "id": "foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "muted-foreground",
+        "family": "neutral"
+      },
+      {
+        "id": "text-body-sm",
+        "family": "typography"
+      },
+      {
+        "id": "text-caption",
+        "family": "typography"
+      },
+      {
+        "id": "text-display",
+        "family": "typography"
+      }
+    ],
+    "requires": [],
+    "forbids": [],
+    "rules": [],
+    "behavior": {},
+    "a11y": {
+      "attributes": [
+        "aria-hidden",
+        "aria-label",
+        "role=img"
+      ],
+      "requirements": []
+    },
+    "examples": [],
+    "antiPatterns": [],
+    "status": "stable",
+    "replaces": null,
+    "deprecated": null,
+    "authored": false
+  }
+}

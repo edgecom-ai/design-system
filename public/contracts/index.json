@@ -1,16 +1,16 @@
 {
   "version": "v3.0.0",
-  "digest": "a48719b7ef58bad5",
+  "digest": "85acca016904f569",
   "contracts": "https://design.edgecom.ai/contracts.json",
   "docs": "https://design.edgecom.ai/design.md",
   "guide": "https://design.edgecom.ai/agents.md",
   "counts": {
-    "total": 65,
+    "total": 66,
     "authored": 15,
-    "withVariants": 33,
+    "withVariants": 34,
     "withBaseUi": 26,
-    "undocumented": 1,
-    "tokenReferences": 528
+    "undocumented": 2,
+    "tokenReferences": 534
   },
   "components": [
     {
@@ -1361,6 +1361,34 @@
       "registryItem": "edgecom-ai/design-system/progress",
       "docs": "https://design.edgecom.ai/components/progress/",
       "contract": "https://design.edgecom.ai/contracts/progress.json"
+    },
+    {
+      "id": "radial-gauge",
+      "label": "Radial gauge",
+      "aliases": [],
+      "summary": null,
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "variants": [
+        {
+          "name": "size",
+          "options": [
+            "card",
+            "tile"
+          ],
+          "default": "card"
+        }
+      ],
+      "parts": [
+        "RadialGauge"
+      ],
+      "status": "stable",
+      "authored": false,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/radial-gauge",
+      "registryItem": "edgecom-ai/design-system/radial-gauge",
+      "docs": null,
+      "contract": "https://design.edgecom.ai/contracts/radial-gauge.json"
     },
     {
       "id": "radio-group",
