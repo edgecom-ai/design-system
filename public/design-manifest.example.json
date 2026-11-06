@@ -4,7 +4,7 @@
   "design": "Settings.dc.html",
   "title": "Client portal — Settings, Permissions screen",
   "designSystemVersion": "v3.0.0",
-  "designSystemDigest": "a40101934083632d",
+  "designSystemDigest": "49f2989cf25025a4",
   "screens": [
     {
       "id": "permissions",
@@ -70,6 +70,18 @@
         "empty",
         "error"
       ]
+    },
+    {
+      "instanceId": "activity-chart",
+      "component": "chart",
+      "label": "Sign-ins per day, drawn in the logic block with React.createElement — the id is passed in its props as { \"data-instance\": \"activity-chart\" }",
+      "screen": "permissions",
+      "parts": [
+        "ChartContainer",
+        "ChartTooltip",
+        "ChartTooltipContent"
+      ],
+      "note": "Built by the logic, not written as an x-import, so data-instance rides in the props object."
     },
     {
       "instanceId": "members-loading",
