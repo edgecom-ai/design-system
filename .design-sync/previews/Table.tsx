@@ -16,6 +16,10 @@ export { TableCompactDemo as Compact } from "@/components/demo/table-compact-dem
 // A `strong` header band, a footer, and the site and total columns pinned
 // while the twelve months scroll between them.
 export { TablePinnedDemo as PinnedColumns } from "@/components/demo/table-pinned-demo"
+// The in-card recipe: `CardContent` without horizontal padding, a `strong`
+// header, edge cells on `--card-spacing`, right-aligned tabular numbers, a
+// link-button date and a tooltip footnote.
+export { TableInCardDemo as InCard } from "@/components/demo/table-in-card-demo"
 
 const meters = [
   { meter: "MTR-4410-0021", site: "Northridge Distribution Center", peak: "1,480 kW", status: "Alarm", selected: true },
