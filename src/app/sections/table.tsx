@@ -12,6 +12,8 @@ const TableHeaderMutedDemo = React.lazy(() => import("@/components/demo/table-he
 
 const TableHeaderStrongDemo = React.lazy(() => import("@/components/demo/table-header-strong-demo").then((m) => ({ default: m.TableHeaderStrongDemo })));
 
+const TableInCardDemo = React.lazy(() => import("@/components/demo/table-in-card-demo").then((m) => ({ default: m.TableInCardDemo })));
+
 const TablePinnedDemo = React.lazy(() => import("@/components/demo/table-pinned-demo").then((m) => ({ default: m.TablePinnedDemo })));
 
 const content = {
@@ -43,6 +45,13 @@ const content = {
         description: "`variant=\"strong\"` is the default header fill: a light band that steps from whatever the table sits on — a touch darker than the host in light, a touch lighter in dark. It holds on a `card`, a `muted` page or panel, and an overlay, where a `muted` header repeats or vanishes.",
         preview: <TableHeaderStrongDemo />,
         source: dm("table-header-strong-demo"),
+      },
+      {
+        id: "table-in-card",
+        name: "In a card",
+        description: "The one recipe for a table in a card: `CardContent className=\"px-0\"`, `TableHeader variant=\"strong\"`, the first and last cells on `--card-spacing`, numbers `text-right tabular-nums`, a date that opens the day as `Button variant=\"link\" className=\"h-auto p-0\"`, and a footnote marker as a `Tooltip`, not a column.",
+        preview: <TableInCardDemo />,
+        source: dm("table-in-card-demo"),
       },
       {
         id: "table-pinned",
