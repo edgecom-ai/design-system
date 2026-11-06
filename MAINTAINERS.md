@@ -147,7 +147,7 @@ Claude Design moved into Claude on 2026-09-16: a design is now a Design artifact
 | Path under `project/` | From |
 |---|---|
 | `README.md` | [`.design-sync/conventions.artifact.md`](.design-sync/conventions.artifact.md) — the whole instruction a design agent gets: what to install, how to mount, the styling idiom, the manifest rules. It has to stand alone. |
-| `tokens.json` | `public/tokens.json` and the `@theme` type scale and radii in `globals.css`, in the type's list shape. `color-mix()` and `transparent`, which the page cannot read, are written as the colour they compute to. |
+| `tokens.json` | `public/tokens.json` and the `@theme` type scale and radii in `globals.css`, in the type's list shape; a length token (the chart stroke widths) goes in a `stroke` family. `color-mix()` and `transparent`, which the page cannot read, are written as the colour they compute to. |
 | `components/bundle.js` | `dist/index.js` (`design:entry`), bundled by [`scripts/lib/design-bundle.mjs`](scripts/lib/design-bundle.mjs) into one classic script that assigns `window.EdgecomDS` |
 | `components/bundle.css` | the compiled stylesheet (`design:css`) |
 | `components/index.d.ts`, `components/<Name>/README.md` | the converter's types and guides (`ds-bundle/`), the guide's first sentence taken from the contract |
