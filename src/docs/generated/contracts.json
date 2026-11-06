@@ -1,7 +1,7 @@
 {
   "$schema": "../../../schemas/contracts.schema.json",
   "version": "v3.0.0",
-  "digest": "a40101934083632d",
+  "digest": "49f2989cf25025a4",
   "sources": [
     "src/components/ui/*.tsx",
     "src/app/sections.tsx",
@@ -10,12 +10,12 @@
   ],
   "generator": "scripts/gen-contracts.mjs",
   "counts": {
-    "total": 65,
-    "authored": 15,
-    "withVariants": 33,
+    "total": 66,
+    "authored": 18,
+    "withVariants": 34,
     "withBaseUi": 26,
     "undocumented": 1,
-    "tokenReferences": 528
+    "tokenReferences": 537
   },
   "contracts": [
     {
@@ -115,10 +115,17 @@
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/alert",
       "docs": "https://design.edgecom.ai/components/alert/",
       "source": "src/components/ui/alert.tsx",
-      "summary": "A callout box laying out an optional icon, AlertTitle, AlertDescription, and a top-right AlertAction.",
-      "purpose": null,
-      "useWhen": [],
-      "dontUseWhen": [],
+      "summary": "The one tinted callout: a box laying out an optional icon, AlertTitle, AlertDescription, and a top-right AlertAction. Any tinted message with an icon and a title is this component, never a hand-built subtle-tinted box.",
+      "purpose": "The one tinted callout. Any message in a tinted box with an icon and a title — a notice, a warning, an error, a confirmation that stays on the page — is this component, so every callout in the product reads the same and adapts to dark on its own.",
+      "useWhen": [
+        "A message belongs to the content it sits beside and stays until the condition clears — a meter offline, a tariff change coming, a reconciliation done.",
+        "The message carries a status: the tone says what kind of thing happened before the title is read."
+      ],
+      "dontUseWhen": [
+        "The message is page-wide and above the content — that is `banner`.",
+        "The message is transient confirmation of an action — that is `toast`.",
+        "Nothing has happened; the box would only decorate a paragraph."
+      ],
       "base": null,
       "parts": [
         {
@@ -144,7 +151,7 @@
           "name": "variant",
           "type": "\"default\" | \"destructive\" | \"success\" | \"warning\" | \"info\"",
           "default": "\"default\"",
-          "description": "Tone: default, destructive, success, warning, or info."
+          "description": "Tone: default, destructive, success, warning, or info. A status tone tints the surface with the status colour and sets the text to its -emphasis token — the only text colour on a tint."
         }
       ],
       "variants": [
@@ -226,22 +233,42 @@
           "family": "status"
         }
       ],
-      "requires": [],
-      "forbids": [],
-      "rules": [],
-      "behavior": {},
+      "requires": [
+        "A title; a description where the title alone does not say what to do.",
+        "A status `variant` chosen by meaning — `destructive` only for an error, `warning` for a condition to act on, `info` for a notice, `success` for a done thing."
+      ],
+      "forbids": [
+        "A hand-built callout — a `div` with `bg-warning-subtle`, an icon and a bold line. It is this component.",
+        "Text on a tint in any colour but the tone's `-emphasis` token: never the base fill colour, never `foreground` on a status tint.",
+        "A coloured strip along an edge to signal the status — the tint and the icon carry it."
+      ],
+      "rules": [
+        "**Any tinted callout with an icon and a title is `Alert`**, never a hand-built `bg-*-subtle` box. The component tints the surface, draws the icon in the tone and sets the text to the tone's `-emphasis` token — the only text colour on a tint.",
+        "Status tones are picked by meaning, as everywhere: `destructive` is an error, `warning` a condition to act on, `info` a notice, `success` a done thing."
+      ],
+      "behavior": {
+        "error": "An error that has a retry carries it in `AlertAction` or in the description, so the alert is not a dead end."
+      },
       "a11y": {
         "attributes": [
           "role=alert"
         ],
-        "requirements": []
+        "requirements": [
+          "The root carries `role=\"alert\"`; a message that is not an interruption and only informs may be given `role=\"status\"` instead.",
+          "The tone is never the only signal: the title says what happened in words."
+        ]
       },
-      "examples": [],
-      "antiPatterns": [],
+      "examples": [
+        "`<Alert variant=\"warning\"><TriangleAlertIcon /><AlertTitle>Approaching demand threshold</AlertTitle><AlertDescription>Meter MTR-4471-0092 is at 94% of the 1,200 kW monthly peak.</AlertDescription></Alert>`"
+      ],
+      "antiPatterns": [
+        "A `div className=\"bg-warning-subtle rounded-lg p-3\"` with an icon and a bold title — a redrawn `Alert`, which will drift from the real one on the next token change.",
+        "`text-warning` or `text-foreground` on a warning tint — text on a tint is `text-warning-emphasis`."
+      ],
       "status": "stable",
       "replaces": null,
       "deprecated": null,
-      "authored": false
+      "authored": true
     },
     {
       "id": "alert-dialog",
@@ -457,7 +484,7 @@
       "parts": [
         {
           "name": "ApplicationShell",
-          "description": "The whole frame. Pass nav, activeItem, user, buildings and the page as children; the parts below are what it composes, exported for a custom header or footer."
+          "description": "The whole frame, bound to the viewport (h-svh) so the top bar stays and the content area is the one scrollport. Pass nav, activeItem, user, buildings, the page's breadcrumb as heading, and the page as children; the parts below are what it composes, exported for a custom header or footer."
         },
         {
           "name": "ApplicationShellSidebar",
@@ -477,7 +504,7 @@
         },
         {
           "name": "ApplicationShellHeader",
-          "description": "The top bar: the sidebar trigger, then search and the actions cluster."
+          "description": "The top bar: the sidebar trigger, the heading slot beside it — the page's breadcrumb, which the page itself does not repeat — then search and the actions cluster."
         },
         {
           "name": "ApplicationShellSearch",
@@ -497,7 +524,7 @@
         },
         {
           "name": "ApplicationShellContent",
-          "description": "The scrolling page area beside the rail, with the page padding."
+          "description": "The frame's one scrollport beside the rail, on muted. It already pads the page (p-4, md:p-6): a page adds no padding and no max-width of its own."
         }
       ],
       "props": [],
@@ -550,7 +577,8 @@
       "requires": [
         "`nav` and `activeItem` — the current item is signalled by the component's own neutral highlight, never brand blue.",
         "`user` when anyone is signed in, so the account menu is where every screen puts it.",
-        "Exactly one shell per page, at the root; overlays it opens portal to the app root."
+        "Exactly one shell per page, at the root; overlays it opens portal to the app root.",
+        "The frame is bound to the viewport (`h-svh`): the top bar stays, and `ApplicationShellContent` is the one scrollport — a sticky table header has it to stick to."
       ],
       "forbids": [
         "Rebuilding the frame from `sidebar` parts by hand when this is what is wanted — every portal page must share one frame.",
@@ -561,7 +589,9 @@
         "The rail collapses to icons (`collapsible=\"icon\"`); labels move to tooltips and a submenu becomes a hover flyout.",
         "On a phone the rail becomes an offcanvas sheet behind the header's toggle and the search field hides.",
         "The theme toggle flips `.dark` on `<html>`; nothing inside the shell hand-picks a dark colour.",
-        "The content area paints `muted` in both themes and the page's cards sit on it; a page never repaints that surface. A tab strip placed straight on it takes the `adaptive` or `line` variant, and a field or select trigger placed straight on it takes `surface=\"page\"`."
+        "The content area paints `muted` in both themes and the page's cards sit on it; a page never repaints that surface. A tab strip placed straight on it takes the `adaptive` or `line` variant, and a field or select trigger placed straight on it takes `surface=\"page\"`.",
+        "**The page's breadcrumb is the shell's `heading`**, rendered after the rail toggle in the top bar, as the portal draws it. The page itself starts at its H1 and carries no breadcrumb of its own.",
+        "**The content area already pads the page** (`p-4`, `md:p-6`): a page adds no padding and no max-width of its own. Its cards sit on the `muted` content area edge to edge of that padding."
       ],
       "behavior": {
         "loading": "The page's own loading state renders inside `ApplicationShellContent`; the frame itself never skeletons.",
@@ -584,7 +614,9 @@
       ],
       "antiPatterns": [
         "A hand-rolled sidebar plus header on one screen and the shell on another.",
-        "A page that ships without the shell because the prompt only described the page."
+        "A page that ships without the shell because the prompt only described the page.",
+        "A page that wraps itself in `p-6` or `max-w-7xl mx-auto` inside the shell — the content area pads, and the portal's pages fill it.",
+        "A breadcrumb drawn inside the page above the H1 — inside the shell it goes in the `heading` slot."
       ],
       "status": "stable",
       "replaces": null,
@@ -1778,12 +1810,17 @@
       ],
       "registryItem": "edgecom-ai/design-system/chart",
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/chart",
-      "docs": "https://design.edgecom.ai/foundations/charts/",
+      "docs": "https://design.edgecom.ai/components/chart/",
       "source": "src/components/ui/chart.tsx",
-      "summary": null,
-      "purpose": null,
-      "useWhen": [],
-      "dontUseWhen": [],
+      "summary": "The chart surface — ChartContainer with its config, colours and the chart theme — and the one header composition every chart card follows.",
+      "purpose": "The chart surface: `ChartContainer` sets the plot's config, colours and the chart theme — grid, axis labels, the neutral reference line — so every Recharts plot in a consuming app reads as one system, and the same tokens theme a Highcharts plot in the portal.",
+      "useWhen": [
+        "A reading over time, a breakdown, a ranking — anything the eye should compare.",
+        "A single figure against a ceiling is not a chart: that is `radial-gauge`."
+      ],
+      "dontUseWhen": [
+        "The data is a handful of numbers — a stat tile or a table says it faster."
+      ],
       "base": null,
       "parts": [
         {
@@ -1825,6 +1862,18 @@
           "family": "neutral"
         },
         {
+          "id": "chart-axis-label",
+          "family": "chart"
+        },
+        {
+          "id": "chart-grid",
+          "family": "chart"
+        },
+        {
+          "id": "chart-reference",
+          "family": "chart"
+        },
+        {
           "id": "font-mono",
           "family": "typography"
         },
@@ -1849,20 +1898,44 @@
           "family": "typography"
         }
       ],
-      "requires": [],
-      "forbids": [],
-      "rules": [],
-      "behavior": {},
+      "requires": [
+        "The canonical header: `CardHeader` with the title and its last-updated line; `CardAction` with, in order, the primary action (if any), the two-state overlay `Toggle`, the connected range presets `ToggleGroup` with the compact `date-picker` trigger, and the export `dropdown-menu` icon button — every control at `size=\"default\"`.",
+        "Below the header: the axis caption as `text-caption` above the plot, the time-zone line under it, the legend centred, then the threshold strip.",
+        "Series coloured from the commodity ramp by meaning; reference lines in the neutral `chart-reference` token, dashed."
+      ],
+      "forbids": [
+        "A header that swaps the order of the controls, or mixes `size` across them.",
+        "A `fontSize` on a Recharts element — the text inherits the scale from the container.",
+        "A second copy of recharts — the chart primitives share a React context with `ChartContainer`."
+      ],
+      "rules": [
+        "**The chart header is one composition.** `CardHeader` > `CardTitle` + a last-updated `CardDescription`; `CardAction` > [primary action] [`Toggle`] [connected `ToggleGroup`] [`date-picker` icon] [export icon], all `size=\"default\"`. Then the axis caption (`text-caption`) above the plot, the time-zone line under it, the legend centred, the threshold strip last.",
+        "**The chart theme is five tokens**, read by `ChartContainer` for a Recharts plot and by a Highcharts chart in the portal: `chart-grid`, `chart-axis-label`, `chart-reference`, `chart-series-width`, `chart-reference-width`.",
+        "A ported plot cites the legacy line and window variables that ship in the stylesheet — `--chart-legacy-line-<colour>`, `--chart-legacy-peak-1..7`, `--chart-legacy-window-high|normal|low` — through the product's series-to-hue mapping, never a literal, and never for a new feature."
+      ],
+      "behavior": {
+        "loading": "The card keeps its header and shows a `skeleton` the plot's height in the plot's place.",
+        "empty": "No series selected or no data in range is an `empty` state in the plot's place, with the header's controls still live."
+      },
       "a11y": {
         "attributes": [],
-        "requirements": []
+        "requirements": [
+          "`accessibilityLayer` on the Recharts chart; every control in the header labelled.",
+          "A series is never told apart by hue alone: the legend names it and the tooltip reads its value."
+        ]
       },
-      "examples": [],
-      "antiPatterns": [],
+      "examples": [
+        "`<Card><CardHeader><CardTitle>Power demand</CardTitle><CardDescription>Last updated 2:45 PM</CardDescription><CardAction><Button>Set alert</Button><Toggle variant=\"outline\">14-day forecast</Toggle><ToggleGroup variant=\"outline\" layout=\"connected\">…</ToggleGroup><DatePicker compact /><ChartExportMenu /></CardAction></CardHeader><CardContent><ChartContainer config={config}>…</ChartContainer></CardContent></Card>`"
+      ],
+      "antiPatterns": [
+        "A text \"Export\" button, or a full-width date field, in the header.",
+        "A range preset strip drawn as a spaced frame, taller than the toggle beside it.",
+        "A hex grid colour or axis label colour set on the Recharts element instead of the theme tokens."
+      ],
       "status": "stable",
       "replaces": null,
       "deprecated": null,
-      "authored": false
+      "authored": true
     },
     {
       "id": "checkbox",
@@ -5157,6 +5230,116 @@
       "authored": false
     },
     {
+      "id": "radial-gauge",
+      "label": "Radial gauge",
+      "aliases": [],
+      "registryItem": "edgecom-ai/design-system/radial-gauge",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/radial-gauge",
+      "docs": "https://design.edgecom.ai/components/radial-gauge/",
+      "source": "src/components/ui/radial-gauge.tsx",
+      "summary": "The portal's gauge — one figure against its ceiling, drawn as an arc on a 100-unit ring with a 10-unit stroke and a 15% track, both in currentColor, at card and tile sizes.",
+      "purpose": "The portal's gauge — one figure against its ceiling, drawn as an arc on a 100-unit ring with a 10-unit stroke and a 15% track in the same colour, so the ring reads as one hue and follows the element's text colour.",
+      "useWhen": [
+        "One percentage that has a ceiling and a target — demand reduction against a commitment, readings received against expected.",
+        "A list of such figures, one glanceable ring per row, at `size=\"tile\"`."
+      ],
+      "dontUseWhen": [
+        "A progress of a job in time — that is `progress` or `circular-progress`.",
+        "Several values to compare — that is a chart."
+      ],
+      "base": null,
+      "parts": [
+        {
+          "name": "RadialGauge",
+          "description": "The ring, its track, and the figure in the centre — a caption under it at card size, or any children in its place. Tone it with a text colour: a status -emphasis token when the figure is judged against a target, nothing for a neutral reading."
+        }
+      ],
+      "props": [
+        {
+          "part": "RadialGauge",
+          "name": "size",
+          "type": "\"card\" | \"tile\"",
+          "default": "\"card\"",
+          "description": "card (11rem) is the gauge as a card's own content, with the figure in display type and a caption; tile (4rem) is the glanceable one in a list row or a metric tile, with the figure alone."
+        }
+      ],
+      "variants": [
+        {
+          "name": "size",
+          "options": [
+            "card",
+            "tile"
+          ],
+          "default": "card"
+        }
+      ],
+      "states": [],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "card",
+          "family": "surface"
+        },
+        {
+          "id": "foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "muted-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "text-body-sm",
+          "family": "typography"
+        },
+        {
+          "id": "text-caption",
+          "family": "typography"
+        },
+        {
+          "id": "text-display",
+          "family": "typography"
+        }
+      ],
+      "requires": [
+        "A tone only when the figure is judged against a target: `text-success-emphasis` when met, `text-warning-emphasis` when short, and a `badge` beside it that says the same in words. A neutral reading sets no colour.",
+        "An `aria-label` that says what the figure is and how it stands."
+      ],
+      "forbids": [
+        "A hex or a hand-drawn SVG ring — the gauge is this component in both themes.",
+        "A status colour chosen for looks; `destructive` only when the figure is an error."
+      ],
+      "rules": [
+        "`size=\"card\"` is the gauge as a card's own content, with the figure in display type and a caption under it; `size=\"tile\"` is the glanceable one in a list row or a metric tile, with the figure alone.",
+        "The tone is the element's text colour (`currentColor`), never a prop: `className=\"text-warning-emphasis\"`."
+      ],
+      "behavior": {
+        "loading": "A `skeleton` circle of the gauge's size in its place."
+      },
+      "a11y": {
+        "attributes": [
+          "aria-hidden",
+          "aria-label",
+          "role=img"
+        ],
+        "requirements": [
+          "The root is `role=\"img\"` with an `aria-label` naming the figure and its standing; the SVG is hidden from assistive tech."
+        ]
+      },
+      "examples": [
+        "`<RadialGauge value={86} label=\"of target\" className=\"text-warning-emphasis\" aria-label=\"Demand reduction: 86% of target, below target\" />`",
+        "`<RadialGauge size=\"tile\" value={98} className=\"text-success-emphasis\" aria-label=\"98% of readings received\" />`"
+      ],
+      "antiPatterns": [
+        "A `circular-progress` with its stroke and track hand-tuned to look like the portal's gauge.",
+        "A ring in `destructive` because the figure is low — short of target is `warning`."
+      ],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": true
+    },
+    {
       "id": "radio-group",
       "label": "Radio group",
       "aliases": [],
@@ -6590,7 +6773,7 @@
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/table",
       "docs": "https://design.edgecom.ai/components/table/",
       "source": "src/components/ui/table.tsx",
-      "summary": "A styled HTML table wrapped for horizontal overflow — header, body, optional footer, rows, cells, and a caption.",
+      "summary": "A styled HTML table wrapped for horizontal overflow — header, body, optional footer, rows, cells, and a caption. In a card it follows one recipe: CardContent without horizontal padding, a strong header, edge cells on --card-spacing, right-aligned tabular numbers.",
       "purpose": "The data grid for text-first rows. It ships the row hover and the alignment that make every table in the product match.",
       "useWhen": [
         "Data reads as rows and columns.",
@@ -6756,8 +6939,10 @@
         "A hand-rolled row hover. The primitive's light `primary` tint is what every table uses."
       ],
       "rules": [
+        "**In a card, one recipe.** `CardContent className=\"px-0\"` so the table runs to the card's edges; `TableHeader variant=\"strong\"` for the band; every head and cell in the first and last column `first:pl-(--card-spacing) last:pr-(--card-spacing)`, so the edge cells sit on the card's content line; numbers `text-right tabular-nums`; a date that opens the day is `<Button variant=\"link\" className=\"h-auto p-0\">`, a link with no box of its own; a footnote marker is a `Tooltip` on a `*`, not a column.",
         "The first and last cell in a row align to the card's content padding — `first:pl-(--card-spacing) last:pr-(--card-spacing)` — not the 0.5rem cell padding. Inside already-padded content they add nothing.",
-        "No icons in cells unless asked. Rely on the primitive's built-in row hover."
+        "No icons in cells unless asked. Rely on the primitive's built-in row hover.",
+        "**On a canvas, alignment goes in `class-name`.** `TableHead` and `TableCell` take `class-name=\"text-right tabular-nums\"`; a `style` attribute on an `x-import` never reaches the cell, so an inline `text-align` does nothing."
       ],
       "behavior": {
         "loading": "Rows render as `skeleton` blocks in place, keeping the column layout, rather than collapsing the table.",
@@ -6771,11 +6956,13 @@
         ]
       },
       "examples": [
-        "`<Table><TableHeader><TableRow><TableHead>Site</TableHead></TableRow></TableHeader><TableBody><TableRow><TableCell>North yard</TableCell></TableRow></TableBody></Table>`"
+        "`<Table><TableHeader><TableRow><TableHead>Site</TableHead></TableRow></TableHeader><TableBody><TableRow><TableCell>North yard</TableCell></TableRow></TableBody></Table>`",
+        "`<Card><CardHeader><CardTitle>Coincident peaks</CardTitle></CardHeader><CardContent className=\"px-0\"><Table><TableHeader variant=\"strong\"><TableRow><TableHead className=\"first:pl-(--card-spacing)\">Rank</TableHead><TableHead className=\"text-right last:pr-(--card-spacing)\">Site demand</TableHead></TableRow></TableHeader>…</Table></CardContent></Card>`"
       ],
       "antiPatterns": [
         "A metric and its delta crammed into one cell instead of moving the detail into a tooltip.",
-        "A first column sitting flush against the card border."
+        "A first column sitting flush against the card border.",
+        "A table in a `CardContent` that keeps its padding, so the header band stops short of the card's edges."
       ],
       "status": "stable",
       "replaces": null,
@@ -7460,7 +7647,7 @@
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/toggle",
       "docs": "https://design.edgecom.ai/components/toggle/",
       "source": "src/components/ui/toggle.tsx",
-      "summary": "A two-state button that holds a pressed/on state.",
+      "summary": "A two-state button that holds a pressed/on state — the control for a horizon or overlay switch (\"14-day forecast\", \"Compare\"), never a Button swapping variants to fake one.",
       "purpose": null,
       "useWhen": [],
       "dontUseWhen": [],
@@ -7471,7 +7658,7 @@
       "parts": [
         {
           "name": "Toggle",
-          "description": "Pressable button toggling a pressed/on state."
+          "description": "Pressable button toggling a pressed/on state. The outline variant casts no shadow, so it sits level with the outline buttons and connected groups beside it in a toolbar."
         }
       ],
       "props": [
@@ -7584,8 +7771,10 @@
       "requires": [],
       "forbids": [],
       "rules": [
+        "**A two-state switch is an outline `Toggle`.** A horizon or overlay switch — \"14-day forecast\", \"Compare to last period\" — is a `Toggle` with `variant=\"outline\"` that holds its pressed state, never a `Button` swapping `variant` to fake one. It casts no shadow, so it sits level with the outline buttons and connected groups beside it.",
+        "**`layout` is a `toggle-group`'s shape.** `connected` joins the items into one strip with no frame — the range presets or interval switcher in a chart header or toolbar, the same height as the controls beside it — and is the default for an outline group. `spaced` sets ghost items a gap apart inside a padded, bordered frame — a formatting toolbar, where the frame is what groups them — and is the default for a ghost group. Cite it as a variant axis; `spacing={0}` is its alias in code.",
         "**Pick the surface by what is underneath.** An outline toggle placed straight on the shell's `muted` content area — a toolbar, a filter row — takes `surface=\"page\"`, which rests and hovers like an outline Button (`outline-surface`, `outline-hover`), so the row reads as one surface. Inside a `card`, `sheet`, `dialog` or table row it keeps `default`. The ghost `default` variant has no resting face on either, exactly like a ghost Button, so `surface` leaves it alone.",
-        "A `toggle-group` placed straight on the shell's `muted` content area — an interval or view switcher in a toolbar — takes `surface=\"page\"`, so it rests and hovers like the outline Buttons beside it. A connected group (`spacing={0}`) puts the face on its outline items; a spaced group puts it on its frame and the items inside stay `default`. Inside a `card`, `sheet`, `dialog` or table row it keeps `default`."
+        "A `toggle-group` placed straight on the shell's `muted` content area — an interval or view switcher in a toolbar — takes `surface=\"page\"`, so it rests and hovers like the outline Buttons beside it. A connected group puts the face on its outline items; a spaced group puts it on its frame and the items inside stay `default`. Inside a `card`, `sheet`, `dialog` or table row it keeps `default`."
       ],
       "behavior": {},
       "a11y": {
@@ -7593,10 +7782,13 @@
         "requirements": []
       },
       "examples": [
+        "`<Toggle variant=\"outline\">14-day forecast</Toggle>` beside `<ToggleGroup variant=\"outline\" layout=\"connected\">` in a chart header, every control at `size=\"default\"`.",
         "`<Toggle variant=\"outline\" surface=\"page\" aria-label=\"Compare to last period\">Compare</Toggle>` beside `<Button variant=\"outline\">` in a toolbar on the page body.",
-        "`<ToggleGroup variant=\"outline\" spacing={0} surface=\"page\" defaultValue={[\"hourly\"]}>` in a filter row on the page body."
+        "`<ToggleGroup variant=\"outline\" layout=\"connected\" surface=\"page\" defaultValue={[\"hourly\"]}>` in a filter row on the page body."
       ],
       "antiPatterns": [
+        "A `Button` whose `variant` flips between `default` and `outline` to show that an overlay is on — that is a `Toggle`, which carries the pressed state for assistive tech and the design alike.",
+        "An outline group drawn as a spaced frame beside a toggle, standing taller than the controls on its row — the presets are `layout=\"connected\"`.",
         "An outline toggle on the muted page body given `bg-background`, `bg-card` or `bg-white` instead of `surface=\"page\"` — in dark mode `background` is darker than `card`, so the toggle sinks below the cards beside it.",
         "A toggle group on the muted page body given `bg-background`, `bg-card` or `bg-white` instead of `surface=\"page\"` — in dark mode `background` is darker than `card`, so the group sinks below the cards beside it."
       ],
@@ -7613,7 +7805,7 @@
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/toggle-group",
       "docs": "https://design.edgecom.ai/components/toggle/",
       "source": "src/components/ui/toggle-group.tsx",
-      "summary": "A set of toggles sharing one pressed value, spaced in a frame or joined into a segmented control.",
+      "summary": "A set of toggles sharing one pressed value — joined into one connected strip, or spaced inside a padded frame.",
       "purpose": null,
       "useWhen": [],
       "dontUseWhen": [],
@@ -7621,15 +7813,23 @@
       "parts": [
         {
           "name": "ToggleGroup",
-          "description": "Root holding the value; passes variant, size and surface to its items."
+          "description": "Root holding the value; passes variant, size, surface and layout to its items."
         },
         {
           "name": "ToggleGroupItem",
-          "description": "One pressable option, styled from the group's variant, size and surface."
+          "description": "One pressable option, styled from the group's variant, size, surface and layout."
         }
       ],
       "props": [],
       "variants": [
+        {
+          "name": "layout",
+          "options": [
+            "connected",
+            "spaced"
+          ],
+          "default": null
+        },
         {
           "name": "variant",
           "options": [

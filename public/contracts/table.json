@@ -1,6 +1,6 @@
 {
   "version": "v3.0.0",
-  "digest": "a40101934083632d",
+  "digest": "49f2989cf25025a4",
   "contract": {
     "id": "table",
     "label": "Table",
@@ -9,7 +9,7 @@
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/table",
     "docs": "https://design.edgecom.ai/components/table/",
     "source": "src/components/ui/table.tsx",
-    "summary": "A styled HTML table wrapped for horizontal overflow — header, body, optional footer, rows, cells, and a caption.",
+    "summary": "A styled HTML table wrapped for horizontal overflow — header, body, optional footer, rows, cells, and a caption. In a card it follows one recipe: CardContent without horizontal padding, a strong header, edge cells on --card-spacing, right-aligned tabular numbers.",
     "purpose": "The data grid for text-first rows. It ships the row hover and the alignment that make every table in the product match.",
     "useWhen": [
       "Data reads as rows and columns.",
@@ -175,8 +175,10 @@
       "A hand-rolled row hover. The primitive's light `primary` tint is what every table uses."
     ],
     "rules": [
+      "**In a card, one recipe.** `CardContent className=\"px-0\"` so the table runs to the card's edges; `TableHeader variant=\"strong\"` for the band; every head and cell in the first and last column `first:pl-(--card-spacing) last:pr-(--card-spacing)`, so the edge cells sit on the card's content line; numbers `text-right tabular-nums`; a date that opens the day is `<Button variant=\"link\" className=\"h-auto p-0\">`, a link with no box of its own; a footnote marker is a `Tooltip` on a `*`, not a column.",
       "The first and last cell in a row align to the card's content padding — `first:pl-(--card-spacing) last:pr-(--card-spacing)` — not the 0.5rem cell padding. Inside already-padded content they add nothing.",
-      "No icons in cells unless asked. Rely on the primitive's built-in row hover."
+      "No icons in cells unless asked. Rely on the primitive's built-in row hover.",
+      "**On a canvas, alignment goes in `class-name`.** `TableHead` and `TableCell` take `class-name=\"text-right tabular-nums\"`; a `style` attribute on an `x-import` never reaches the cell, so an inline `text-align` does nothing."
     ],
     "behavior": {
       "loading": "Rows render as `skeleton` blocks in place, keeping the column layout, rather than collapsing the table.",
@@ -190,11 +192,13 @@
       ]
     },
     "examples": [
-      "`<Table><TableHeader><TableRow><TableHead>Site</TableHead></TableRow></TableHeader><TableBody><TableRow><TableCell>North yard</TableCell></TableRow></TableBody></Table>`"
+      "`<Table><TableHeader><TableRow><TableHead>Site</TableHead></TableRow></TableHeader><TableBody><TableRow><TableCell>North yard</TableCell></TableRow></TableBody></Table>`",
+      "`<Card><CardHeader><CardTitle>Coincident peaks</CardTitle></CardHeader><CardContent className=\"px-0\"><Table><TableHeader variant=\"strong\"><TableRow><TableHead className=\"first:pl-(--card-spacing)\">Rank</TableHead><TableHead className=\"text-right last:pr-(--card-spacing)\">Site demand</TableHead></TableRow></TableHeader>…</Table></CardContent></Card>`"
     ],
     "antiPatterns": [
       "A metric and its delta crammed into one cell instead of moving the detail into a tooltip.",
-      "A first column sitting flush against the card border."
+      "A first column sitting flush against the card border.",
+      "A table in a `CardContent` that keeps its padding, so the header band stops short of the card's edges."
     ],
     "status": "stable",
     "replaces": null,

@@ -1,6 +1,6 @@
 {
   "version": "v3.0.0",
-  "digest": "a40101934083632d",
+  "digest": "49f2989cf25025a4",
   "contract": {
     "id": "chart",
     "label": "Chart",
@@ -9,12 +9,17 @@
     ],
     "registryItem": "edgecom-ai/design-system/chart",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/chart",
-    "docs": "https://design.edgecom.ai/foundations/charts/",
+    "docs": "https://design.edgecom.ai/components/chart/",
     "source": "src/components/ui/chart.tsx",
-    "summary": null,
-    "purpose": null,
-    "useWhen": [],
-    "dontUseWhen": [],
+    "summary": "The chart surface — ChartContainer with its config, colours and the chart theme — and the one header composition every chart card follows.",
+    "purpose": "The chart surface: `ChartContainer` sets the plot's config, colours and the chart theme — grid, axis labels, the neutral reference line — so every Recharts plot in a consuming app reads as one system, and the same tokens theme a Highcharts plot in the portal.",
+    "useWhen": [
+      "A reading over time, a breakdown, a ranking — anything the eye should compare.",
+      "A single figure against a ceiling is not a chart: that is `radial-gauge`."
+    ],
+    "dontUseWhen": [
+      "The data is a handful of numbers — a stat tile or a table says it faster."
+    ],
     "base": null,
     "parts": [
       {
@@ -56,6 +61,18 @@
         "family": "neutral"
       },
       {
+        "id": "chart-axis-label",
+        "family": "chart"
+      },
+      {
+        "id": "chart-grid",
+        "family": "chart"
+      },
+      {
+        "id": "chart-reference",
+        "family": "chart"
+      },
+      {
         "id": "font-mono",
         "family": "typography"
       },
@@ -80,19 +97,43 @@
         "family": "typography"
       }
     ],
-    "requires": [],
-    "forbids": [],
-    "rules": [],
-    "behavior": {},
+    "requires": [
+      "The canonical header: `CardHeader` with the title and its last-updated line; `CardAction` with, in order, the primary action (if any), the two-state overlay `Toggle`, the connected range presets `ToggleGroup` with the compact `date-picker` trigger, and the export `dropdown-menu` icon button — every control at `size=\"default\"`.",
+      "Below the header: the axis caption as `text-caption` above the plot, the time-zone line under it, the legend centred, then the threshold strip.",
+      "Series coloured from the commodity ramp by meaning; reference lines in the neutral `chart-reference` token, dashed."
+    ],
+    "forbids": [
+      "A header that swaps the order of the controls, or mixes `size` across them.",
+      "A `fontSize` on a Recharts element — the text inherits the scale from the container.",
+      "A second copy of recharts — the chart primitives share a React context with `ChartContainer`."
+    ],
+    "rules": [
+      "**The chart header is one composition.** `CardHeader` > `CardTitle` + a last-updated `CardDescription`; `CardAction` > [primary action] [`Toggle`] [connected `ToggleGroup`] [`date-picker` icon] [export icon], all `size=\"default\"`. Then the axis caption (`text-caption`) above the plot, the time-zone line under it, the legend centred, the threshold strip last.",
+      "**The chart theme is five tokens**, read by `ChartContainer` for a Recharts plot and by a Highcharts chart in the portal: `chart-grid`, `chart-axis-label`, `chart-reference`, `chart-series-width`, `chart-reference-width`.",
+      "A ported plot cites the legacy line and window variables that ship in the stylesheet — `--chart-legacy-line-<colour>`, `--chart-legacy-peak-1..7`, `--chart-legacy-window-high|normal|low` — through the product's series-to-hue mapping, never a literal, and never for a new feature."
+    ],
+    "behavior": {
+      "loading": "The card keeps its header and shows a `skeleton` the plot's height in the plot's place.",
+      "empty": "No series selected or no data in range is an `empty` state in the plot's place, with the header's controls still live."
+    },
     "a11y": {
       "attributes": [],
-      "requirements": []
+      "requirements": [
+        "`accessibilityLayer` on the Recharts chart; every control in the header labelled.",
+        "A series is never told apart by hue alone: the legend names it and the tooltip reads its value."
+      ]
     },
-    "examples": [],
-    "antiPatterns": [],
+    "examples": [
+      "`<Card><CardHeader><CardTitle>Power demand</CardTitle><CardDescription>Last updated 2:45 PM</CardDescription><CardAction><Button>Set alert</Button><Toggle variant=\"outline\">14-day forecast</Toggle><ToggleGroup variant=\"outline\" layout=\"connected\">…</ToggleGroup><DatePicker compact /><ChartExportMenu /></CardAction></CardHeader><CardContent><ChartContainer config={config}>…</ChartContainer></CardContent></Card>`"
+    ],
+    "antiPatterns": [
+      "A text \"Export\" button, or a full-width date field, in the header.",
+      "A range preset strip drawn as a spaced frame, taller than the toggle beside it.",
+      "A hex grid colour or axis label colour set on the Recharts element instead of the theme tokens."
+    ],
     "status": "stable",
     "replaces": null,
     "deprecated": null,
-    "authored": false
+    "authored": true
   }
 }
