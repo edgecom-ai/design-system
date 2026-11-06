@@ -50,6 +50,8 @@ export const sectionContent: Record<string, () => Promise<{ default: SectionCont
   "stepper": () => import("./sections/stepper"),
   "progress": () => import("./sections/progress"),
   "circular-progress": () => import("./sections/circular-progress"),
+  "radial-gauge": () => import("./sections/radial-gauge"),
+  "chart": () => import("./sections/chart"),
   "avatar": () => import("./sections/avatar"),
   "field": () => import("./sections/field"),
   "input-group": () => import("./sections/input-group"),
@@ -409,7 +411,7 @@ export const sections: Section[] = [
     id: "toggle",
     label: "Toggle",
     group: "Components",
-    description: "Buttons that hold a pressed state, individually or as a group.",
+    description: "Buttons that hold a pressed state — a two-state switch on its own, or a connected strip or spaced frame as a group.",
     install: "@edgecom/toggle @edgecom/toggle-group",
     hasVariants: true,
   },
@@ -451,6 +453,24 @@ export const sections: Section[] = [
     group: "Components",
     description: "A determinate ring, for a single figure that has a ceiling.",
     install: "@edgecom/circular-progress",
+    hasVariants: true,
+  },
+  {
+    id: "radial-gauge",
+    label: "Radial gauge",
+    group: "Components",
+    description:
+      "A radial gauge — one figure against its ceiling as an arc on a 100-unit ring, toned by the status it is judged against — at card and tile sizes.",
+    install: "@edgecom/radial-gauge",
+    hasVariants: true,
+  },
+  {
+    id: "chart",
+    label: "Chart",
+    group: "Components",
+    description:
+      "The chart surface — ChartContainer with its config, colours and the chart theme — and the one header composition every chart card follows.",
+    install: "@edgecom/chart @edgecom/card @edgecom/toggle @edgecom/toggle-group @edgecom/date-picker @edgecom/dropdown-menu @edgecom/tooltip",
     hasVariants: true,
   },
   {
@@ -718,8 +738,8 @@ export const sections: Section[] = [
     label: "Charts",
     group: "Blocks",
     description:
-      "Chart cards with the standard header controls — metric selector, shared date range, statistical overlays, smooth/step, and export — coloured from the commodity ramps.",
-    install: "@edgecom/chart @edgecom/card @edgecom/toggle-group @edgecom/date-picker @edgecom/dropdown-menu @edgecom/tooltip @edgecom/multi-select-listbox @edgecom/circular-progress",
+      "Chart cards with the canonical header — title and last-updated line, then the primary action, overlay toggle, connected range presets, range calendar and export — coloured from the commodity ramps.",
+    install: "@edgecom/chart @edgecom/card @edgecom/toggle @edgecom/toggle-group @edgecom/date-picker @edgecom/dropdown-menu @edgecom/tooltip @edgecom/multi-select-listbox @edgecom/radial-gauge",
     hasVariants: true,
   },
   {
@@ -743,7 +763,7 @@ export const sections: Section[] = [
     label: "Page header",
     group: "Blocks",
     description:
-      "A breadcrumb above the H1, plus optional tab and toolbar rows. Any crumb — including the current page — can open a dropdown to pivot between peers.",
+      "The H1 with optional tab and toolbar rows, and a breadcrumb above it for a page outside the application shell — inside the shell the breadcrumb is the shell's heading slot. Any crumb, the current page included, can open a dropdown to pivot between peers.",
     install: "@edgecom/page-header",
     hasVariants: true,
   },
@@ -778,7 +798,7 @@ export const sections: Section[] = [
     label: "Application shell",
     group: "Blocks",
     description:
-      "The portal page frame — icon-rail sidebar with navigation and account menu, top bar with search, building switcher and theme toggle, and the content area — from data.",
+      "The app's page frame — icon-rail sidebar with navigation and account menu, a viewport-bound top bar with the page's breadcrumb, search, building switcher and theme toggle, and the content area as the one scrollport — from data.",
     install: "@edgecom/application-shell",
     hasVariants: true,
   },

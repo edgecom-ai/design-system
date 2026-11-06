@@ -149,7 +149,7 @@
           "animate-skeleton-shimmer": "skeleton-shimmer 1.8s ease-in-out infinite"
         },
         "light": {
-          "edgecom-theme": "\"v3.0.0 b6c810f3d864d860\"",
+          "edgecom-theme": "\"v3.0.0 bd469331f5691761\"",
           "font-sans": "ui-sans-serif, -apple-system, \"SF Pro Text\", system-ui, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
           "font-mono": "ui-monospace, \"SF Mono\", SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace",
           "font-heading": "var(--font-sans)",
@@ -395,7 +395,7 @@
     {
       "name": "alert",
       "title": "Alert",
-      "description": "A callout box laying out an optional icon, AlertTitle, AlertDescription, and a top-right AlertAction.",
+      "description": "The one tinted callout: a box laying out an optional icon, AlertTitle, AlertDescription, and a top-right AlertAction. Any tinted message with an icon and a title is this component, never a hand-built subtle-tinted box.",
       "dependencies": [
         "class-variance-authority@^0.7.1"
       ],
@@ -637,7 +637,7 @@
     {
       "name": "chart",
       "title": "Chart",
-      "description": "The Edgecom Chart component.",
+      "description": "The chart surface — ChartContainer with its config, colours and the chart theme — and the one header composition every chart card follows.",
       "dependencies": [
         "recharts@^3.8.0"
       ],
@@ -650,7 +650,7 @@
           "type": "registry:ui"
         }
       ],
-      "docs": "Docs: https://design.edgecom.ai/foundations/charts/ · Contract: https://design.edgecom.ai/contracts/chart.json · Guardrails: https://design.edgecom.ai/design.md",
+      "docs": "Docs: https://design.edgecom.ai/components/chart/ · Contract: https://design.edgecom.ai/contracts/chart.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
@@ -1238,7 +1238,7 @@
     {
       "name": "radial-gauge",
       "title": "Radial Gauge",
-      "description": "The Edgecom Radial Gauge component.",
+      "description": "A radial gauge — one figure against its ceiling, drawn as an arc on a 100-unit ring with a 10-unit stroke and a 15% track, both in currentColor, at card and tile sizes.",
       "dependencies": [
         "class-variance-authority@^0.7.1"
       ],
@@ -1251,7 +1251,7 @@
           "type": "registry:ui"
         }
       ],
-      "docs": "Docs: no page yet — read the contract · Contract: https://design.edgecom.ai/contracts/radial-gauge.json · Guardrails: https://design.edgecom.ai/design.md",
+      "docs": "Docs: https://design.edgecom.ai/components/radial-gauge/ · Contract: https://design.edgecom.ai/contracts/radial-gauge.json · Guardrails: https://design.edgecom.ai/design.md",
       "type": "registry:ui"
     },
     {
@@ -1547,7 +1547,7 @@
     {
       "name": "table",
       "title": "Table",
-      "description": "A styled HTML table wrapped for horizontal overflow — header, body, optional footer, rows, cells, and a caption.",
+      "description": "A styled HTML table wrapped for horizontal overflow — header, body, optional footer, rows, cells, and a caption. In a card it follows one recipe: CardContent without horizontal padding, a strong header, edge cells on --card-spacing, right-aligned tabular numbers.",
       "dependencies": [
         "class-variance-authority@^0.7.1"
       ],
@@ -1671,7 +1671,7 @@
     {
       "name": "toggle",
       "title": "Toggle",
-      "description": "A two-state button that holds a pressed/on state.",
+      "description": "A two-state button that holds a pressed/on state — the control for a horizon or overlay switch (\"Previous week\", \"Compare\"), never a Button swapping variants to fake one.",
       "dependencies": [
         "@base-ui/react@^1.6.0",
         "class-variance-authority@^0.7.1"
@@ -1691,7 +1691,7 @@
     {
       "name": "toggle-group",
       "title": "Toggle Group",
-      "description": "A set of toggles sharing one pressed value, spaced in a frame or joined into a segmented control.",
+      "description": "A set of toggles sharing one pressed value — joined into one connected strip, or spaced inside a padded frame.",
       "dependencies": [
         "@base-ui/react@^1.6.0",
         "class-variance-authority@^0.7.1"

@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "alert",
   "title": "Alert",
-  "description": "A callout box laying out an optional icon, AlertTitle, AlertDescription, and a top-right AlertAction.",
+  "description": "The one tinted callout: a box laying out an optional icon, AlertTitle, AlertDescription, and a top-right AlertAction. Any tinted message with an icon and a title is this component, never a hand-built subtle-tinted box.",
   "dependencies": [
     "class-variance-authority@^0.7.1"
   ],

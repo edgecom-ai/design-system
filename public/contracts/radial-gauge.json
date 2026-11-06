@@ -1,26 +1,40 @@
 {
   "version": "v3.0.0",
-  "digest": "b6c810f3d864d860",
+  "digest": "bd469331f5691761",
   "contract": {
     "id": "radial-gauge",
     "label": "Radial gauge",
     "aliases": [],
     "registryItem": "edgecom-ai/design-system/radial-gauge",
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/radial-gauge",
-    "docs": null,
+    "docs": "https://design.edgecom.ai/components/radial-gauge/",
     "source": "src/components/ui/radial-gauge.tsx",
-    "summary": null,
-    "purpose": null,
-    "useWhen": [],
-    "dontUseWhen": [],
+    "summary": "A radial gauge — one figure against its ceiling, drawn as an arc on a 100-unit ring with a 10-unit stroke and a 15% track, both in currentColor, at card and tile sizes.",
+    "purpose": "A radial gauge — one figure against its ceiling, drawn as an arc on a 100-unit ring with a 10-unit stroke and a 15% track in the same colour, so the ring reads as one hue and follows the element's text colour.",
+    "useWhen": [
+      "One percentage that has a ceiling and a target — responses received against a goal, devices backed up against the fleet.",
+      "A list of such figures, one glanceable ring per row, at `size=\"tile\"`."
+    ],
+    "dontUseWhen": [
+      "A progress of a job in time — that is `progress` or `circular-progress`.",
+      "Several values to compare — that is a chart."
+    ],
     "base": null,
     "parts": [
       {
         "name": "RadialGauge",
-        "description": null
+        "description": "The ring, its track, and the figure in the centre — a caption under it at card size, or any children in its place. Tone it with a text colour: a status -emphasis token when the figure is judged against a target, nothing for a neutral reading."
       }
     ],
-    "props": [],
+    "props": [
+      {
+        "part": "RadialGauge",
+        "name": "size",
+        "type": "\"card\" | \"tile\"",
+        "default": "\"card\"",
+        "description": "card (11rem) is the gauge as a card's own content, with the figure in display type and a caption; tile (4rem) is the glanceable one in a list row or a metric tile, with the figure alone."
+      }
+    ],
     "variants": [
       {
         "name": "size",
@@ -59,23 +73,42 @@
         "family": "typography"
       }
     ],
-    "requires": [],
-    "forbids": [],
-    "rules": [],
-    "behavior": {},
+    "requires": [
+      "A tone only when the figure is judged against a target: `text-success-emphasis` when met, `text-warning-emphasis` when short, and a `badge` beside it that says the same in words. A neutral reading sets no colour.",
+      "An `aria-label` that says what the figure is and how it stands."
+    ],
+    "forbids": [
+      "A hex or a hand-drawn SVG ring — the gauge is this component in both themes.",
+      "A status colour chosen for looks; `destructive` only when the figure is an error."
+    ],
+    "rules": [
+      "`size=\"card\"` is the gauge as a card's own content, with the figure in display type and a caption under it; `size=\"tile\"` is the glanceable one in a list row or a metric tile, with the figure alone.",
+      "The tone is the element's text colour (`currentColor`), never a prop: `className=\"text-warning-emphasis\"`."
+    ],
+    "behavior": {
+      "loading": "A `skeleton` circle of the gauge's size in its place."
+    },
     "a11y": {
       "attributes": [
         "aria-hidden",
         "aria-label",
         "role=img"
       ],
-      "requirements": []
+      "requirements": [
+        "The root is `role=\"img\"` with an `aria-label` naming the figure and its standing; the SVG is hidden from assistive tech."
+      ]
     },
-    "examples": [],
-    "antiPatterns": [],
+    "examples": [
+      "`<RadialGauge value={86} label=\"of target\" className=\"text-warning-emphasis\" aria-label=\"Response rate: 86% of target, below target\" />`",
+      "`<RadialGauge size=\"tile\" value={98} className=\"text-success-emphasis\" aria-label=\"98% of readings received\" />`"
+    ],
+    "antiPatterns": [
+      "A `circular-progress` with its stroke and track hand-tuned to look like a gauge.",
+      "A ring in `destructive` because the figure is low — short of target is `warning`."
+    ],
     "status": "stable",
     "replaces": null,
     "deprecated": null,
-    "authored": false
+    "authored": true
   }
 }
