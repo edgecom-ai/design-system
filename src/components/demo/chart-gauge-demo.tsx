@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { CircularProgress } from "@/components/ui/circular-progress"
+import { RadialGauge } from "@/components/ui/radial-gauge"
 
 // A gauge reads one figure against its ceiling. The ring takes a status tone
 // only because the figure is judged against a target — met is success, short
@@ -44,22 +44,11 @@ export function ChartGaugeDemo() {
               <CardDescription>{gauge.description}</CardDescription>
             </CardHeader>
             <CardContent className="flex flex-col items-center gap-6">
-              <CircularProgress
+              <RadialGauge
                 value={gauge.value}
-                size={176}
-                strokeWidth={16}
+                label={gauge.caption}
                 className={gauge.status.tone}
-                progressBgClassName="text-current opacity-15"
-                showLabel
-                labelClassName="flex-col gap-0.5"
-                renderLabel={(value) => (
-                  <>
-                    <span className="text-display text-foreground tabular-nums">{value}%</span>
-                    <span className="text-caption text-muted-foreground">{gauge.caption}</span>
-                  </>
-                )}
-                role="img"
-                aria-label={`${gauge.title}: ${gauge.value}% — ${gauge.status.label.toLowerCase()}`}
+                aria-label={`${gauge.title}: ${gauge.value}% ${gauge.caption} — ${gauge.status.label.toLowerCase()}`}
               />
               <Badge variant={gauge.status.variant}>{gauge.status.label}</Badge>
               <dl className="grid w-full grid-cols-3 gap-3 border-t pt-4 text-center">

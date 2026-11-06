@@ -1,7 +1,7 @@
 {
   "$schema": "https://design.edgecom.ai/schemas/contracts.schema.json",
   "version": "v3.0.0",
-  "digest": "a48719b7ef58bad5",
+  "digest": "85acca016904f569",
   "sources": [
     "src/components/ui/*.tsx",
     "src/app/sections.tsx",
@@ -10,12 +10,12 @@
   ],
   "generator": "scripts/gen-contracts.mjs",
   "counts": {
-    "total": 65,
+    "total": 66,
     "authored": 15,
-    "withVariants": 33,
+    "withVariants": 34,
     "withBaseUi": 26,
-    "undocumented": 1,
-    "tokenReferences": 528
+    "undocumented": 2,
+    "tokenReferences": 534
   },
   "contracts": [
     {
@@ -5147,6 +5147,83 @@
       "behavior": {},
       "a11y": {
         "attributes": [],
+        "requirements": []
+      },
+      "examples": [],
+      "antiPatterns": [],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": false
+    },
+    {
+      "id": "radial-gauge",
+      "label": "Radial gauge",
+      "aliases": [],
+      "registryItem": "edgecom-ai/design-system/radial-gauge",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/radial-gauge",
+      "docs": null,
+      "source": "src/components/ui/radial-gauge.tsx",
+      "summary": null,
+      "purpose": null,
+      "useWhen": [],
+      "dontUseWhen": [],
+      "base": null,
+      "parts": [
+        {
+          "name": "RadialGauge",
+          "description": null
+        }
+      ],
+      "props": [],
+      "variants": [
+        {
+          "name": "size",
+          "options": [
+            "card",
+            "tile"
+          ],
+          "default": "card"
+        }
+      ],
+      "states": [],
+      "responsive": [],
+      "tokens": [
+        {
+          "id": "card",
+          "family": "surface"
+        },
+        {
+          "id": "foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "muted-foreground",
+          "family": "neutral"
+        },
+        {
+          "id": "text-body-sm",
+          "family": "typography"
+        },
+        {
+          "id": "text-caption",
+          "family": "typography"
+        },
+        {
+          "id": "text-display",
+          "family": "typography"
+        }
+      ],
+      "requires": [],
+      "forbids": [],
+      "rules": [],
+      "behavior": {},
+      "a11y": {
+        "attributes": [
+          "aria-hidden",
+          "aria-label",
+          "role=img"
+        ],
         "requirements": []
       },
       "examples": [],

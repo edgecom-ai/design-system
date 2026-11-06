@@ -865,6 +865,25 @@
       ]
     },
     {
+      "name": "radial-gauge",
+      "type": "registry:ui",
+      "title": "Radial Gauge",
+      "description": "The Edgecom Radial Gauge component.",
+      "docs": "Docs: no page yet — read the contract · Contract: https://design.edgecom.ai/contracts/radial-gauge.json · Guardrails: https://design.edgecom.ai/design.md",
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "edgecom-ai/design-system/theme"
+      ],
+      "files": [
+        {
+          "path": "radial-gauge.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "radio-group",
       "type": "registry:ui",
       "title": "Radio Group",
