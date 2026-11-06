@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "toggle-group",
   "title": "Toggle Group",
-  "description": "A set of toggles sharing one pressed value, spaced in a frame or joined into a segmented control.",
+  "description": "A set of toggles sharing one pressed value — joined into one connected strip, or spaced inside a padded frame.",
   "dependencies": [
     "@base-ui/react@^1.6.0",
     "class-variance-authority@^0.7.1"

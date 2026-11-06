@@ -31,7 +31,7 @@ export const curatedApi: Record<string, CuratedApi> = {
   },
   alert: {
     summary:
-      "A callout box laying out an optional icon, AlertTitle, AlertDescription, and a top-right AlertAction.",
+      "The one tinted callout: a box laying out an optional icon, AlertTitle, AlertDescription, and a top-right AlertAction. Any tinted message with an icon and a title is this component, never a hand-built subtle-tinted box.",
     parts: {
       Alert: "Root callout container with role=alert and variant styling.",
       AlertTitle: "Bold heading text for the alert. A long title wraps rather than truncating.",
@@ -39,7 +39,7 @@ export const curatedApi: Record<string, CuratedApi> = {
       AlertAction: "Top-right slot for a dismiss or action button.",
     },
     propDescriptions: {
-      "Alert.variant": "Tone: default, destructive, success, warning, or info.",
+      "Alert.variant": "Tone: default, destructive, success, warning, or info. A status tone tints the surface with the status colour and sets the text to its -emphasis token — the only text colour on a tint.",
     },
   },
   badge: {
@@ -348,21 +348,31 @@ export const curatedApi: Record<string, CuratedApi> = {
       CircularProgress: "The ring, its track, and the optional value in the centre.",
     },
   },
+  "radial-gauge": {
+    summary:
+      "A radial gauge — one figure against its ceiling, drawn as an arc on a 100-unit ring with a 10-unit stroke and a 15% track, both in currentColor, at card and tile sizes.",
+    parts: {
+      RadialGauge: "The ring, its track, and the figure in the centre — a caption under it at card size, or any children in its place. Tone it with a text colour: a status -emphasis token when the figure is judged against a target, nothing for a neutral reading.",
+    },
+    propDescriptions: {
+      "RadialGauge.size": "card (11rem) is the gauge as a card's own content, with the figure in display type and a caption; tile (4rem) is the glanceable one in a list row or a metric tile, with the figure alone.",
+    },
+  },
   "application-shell": {
     summary:
       "The portal page frame from data — a collapsible icon-rail sidebar with the logo, navigation and account menu, a top bar with the rail toggle, search, building switcher, app actions and theme toggle, and the scrolling content area — composed from the registry's sidebar, dropdown-menu, input-group, avatar and button.",
     parts: {
-      ApplicationShell: "The whole frame. Pass nav, activeItem, user, buildings and the page as children; the parts below are what it composes, exported for a custom header or footer.",
+      ApplicationShell: "The whole frame, bound to the viewport (h-svh) so the top bar stays and the content area is the one scrollport. Pass nav, activeItem, user, buildings, the page's breadcrumb as heading, and the page as children; the parts below are what it composes, exported for a custom header or footer.",
       ApplicationShellSidebar: "The rail: logo header (mark only when collapsed) above whatever navigation and footer are passed as children.",
       ApplicationShellNav: "One navigation group from items — pass nav as an array of groups to draw a separator between them. An item with sub-items renders as a collapsible submenu that becomes a hover flyout on the collapsed rail; sub-items carry icons too. `bare` drops the group padding, for the footer.",
       ApplicationShellSidebarFooter: "The bottom of the rail — footer navigation (Settings) and the account menu.",
       ApplicationShellUserMenu: "The signed-in user, docked bottom-left, opening a dropdown-menu with the app's account items as children.",
-      ApplicationShellHeader: "The top bar: the sidebar trigger, then search and the actions cluster.",
+      ApplicationShellHeader: "The top bar: the sidebar trigger, the heading slot beside it — the page's breadcrumb, which the page itself does not repeat — then search and the actions cluster.",
       ApplicationShellSearch: "Global search in the top bar — an input-group with a leading icon, hidden on phones.",
       ApplicationShellActions: "The right-hand cluster of the top bar; the app's own icon buttons go here, before the theme toggle.",
       ApplicationShellBuildingSwitcher: "A labelled outline button opening a radio dropdown-menu of buildings.",
       ApplicationShellThemeToggle: "A ghost icon button that flips .dark on <html>.",
-      ApplicationShellContent: "The scrolling page area beside the rail, with the page padding.",
+      ApplicationShellContent: "The frame's one scrollport beside the rail, on muted. It already pads the page (p-4, md:p-6): a page adds no padding and no max-width of its own.",
     },
   },
   input: {
@@ -516,9 +526,9 @@ export const curatedApi: Record<string, CuratedApi> = {
     },
   },
   toggle: {
-    summary: "A two-state button that holds a pressed/on state.",
+    summary: "A two-state button that holds a pressed/on state — the control for a horizon or overlay switch (\"Previous week\", \"Compare\"), never a Button swapping variants to fake one.",
     parts: {
-      Toggle: "Pressable button toggling a pressed/on state.",
+      Toggle: "Pressable button toggling a pressed/on state. The outline variant casts no shadow, so it sits level with the outline buttons and connected groups beside it in a toolbar.",
     },
     propDescriptions: {
       "Toggle.variant": "Style: default (transparent) or outline (bordered).",
@@ -527,14 +537,15 @@ export const curatedApi: Record<string, CuratedApi> = {
     },
   },
   "toggle-group": {
-    summary: "A set of toggles sharing one pressed value, spaced in a frame or joined into a segmented control.",
+    summary: "A set of toggles sharing one pressed value — joined into one connected strip, or spaced inside a padded frame.",
     parts: {
-      ToggleGroup: "Root holding the value; passes variant, size and surface to its items.",
-      ToggleGroupItem: "One pressable option, styled from the group's variant, size and surface.",
+      ToggleGroup: "Root holding the value; passes variant, size, surface and layout to its items.",
+      ToggleGroupItem: "One pressable option, styled from the group's variant, size, surface and layout.",
     },
     propDescriptions: {
-      "ToggleGroup.surface": "What the group sits on — default inside a card, sheet, dialog or table row; page straight on the shell's muted content area, where it takes the outline Button's face. A connected group (spacing 0) puts it on its outline items; a spaced group puts it on its frame and the items inside stay default.",
-      "ToggleGroup.spacing": "Gap between items; 0 joins them into one segmented control with no frame.",
+      "ToggleGroup.layout": "The group's shape. connected joins the items into one strip with no frame — the range presets or interval switcher in a chart header or toolbar, the same height as the controls beside it — and is the default for an outline group. spaced sets the items a gap apart inside a padded, bordered frame — a formatting toolbar of ghost icon toggles, where the frame is what groups them — and is the default for a ghost group. A string, so a design cites it and a canvas passes it as an attribute.",
+      "ToggleGroup.spacing": "Alias of layout for code that already passes a number: 0 is connected, any other value spaced. layout wins when both are set.",
+      "ToggleGroup.surface": "What the group sits on — default inside a card, sheet, dialog or table row; page straight on the shell's muted content area, where it takes the outline Button's face. A connected group puts it on its outline items; a spaced group puts it on its frame and the items inside stay default.",
     },
   },
   tooltip: {
@@ -740,7 +751,7 @@ export const curatedApi: Record<string, CuratedApi> = {
   },
   table: {
     summary:
-      "A styled HTML table wrapped for horizontal overflow — header, body, optional footer, rows, cells, and a caption.",
+      "A styled HTML table wrapped for horizontal overflow — header, body, optional footer, rows, cells, and a caption. In a card it follows one recipe: CardContent without horizontal padding, a strong header, edge cells on --card-spacing, right-aligned tabular numbers.",
     parts: {
       Table: "Root table, wrapped in an overflow-x container that names the host surface for pinned cells and a sticky header.",
       TableHeader: "The thead grouping header rows; `strong` (or `muted`, on `background` only) fills it as a band above the body. `sticky` keeps it in view while the rows scroll.",

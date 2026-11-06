@@ -1,6 +1,6 @@
 {
   "version": "v3.0.0",
-  "digest": "b6c810f3d864d860",
+  "digest": "bd469331f5691761",
   "contract": {
     "id": "application-shell",
     "label": "Application shell",
@@ -23,7 +23,7 @@
     "parts": [
       {
         "name": "ApplicationShell",
-        "description": "The whole frame. Pass nav, activeItem, user, buildings and the page as children; the parts below are what it composes, exported for a custom header or footer."
+        "description": "The whole frame, bound to the viewport (h-svh) so the top bar stays and the content area is the one scrollport. Pass nav, activeItem, user, buildings, the page's breadcrumb as heading, and the page as children; the parts below are what it composes, exported for a custom header or footer."
       },
       {
         "name": "ApplicationShellSidebar",
@@ -43,7 +43,7 @@
       },
       {
         "name": "ApplicationShellHeader",
-        "description": "The top bar: the sidebar trigger, then search and the actions cluster."
+        "description": "The top bar: the sidebar trigger, the heading slot beside it — the page's breadcrumb, which the page itself does not repeat — then search and the actions cluster."
       },
       {
         "name": "ApplicationShellSearch",
@@ -63,7 +63,7 @@
       },
       {
         "name": "ApplicationShellContent",
-        "description": "The scrolling page area beside the rail, with the page padding."
+        "description": "The frame's one scrollport beside the rail, on muted. It already pads the page (p-4, md:p-6): a page adds no padding and no max-width of its own."
       }
     ],
     "props": [],
@@ -116,7 +116,8 @@
     "requires": [
       "`nav` and `activeItem` — the current item is signalled by the component's own neutral highlight, never brand blue.",
       "`user` when anyone is signed in, so the account menu is where every screen puts it.",
-      "Exactly one shell per page, at the root; overlays it opens portal to the app root."
+      "Exactly one shell per page, at the root; overlays it opens portal to the app root.",
+      "The frame is bound to the viewport (`h-svh`): the top bar stays, and `ApplicationShellContent` is the one scrollport — a sticky table header has it to stick to."
     ],
     "forbids": [
       "Rebuilding the frame from `sidebar` parts by hand when this is what is wanted — every portal page must share one frame.",
@@ -127,7 +128,9 @@
       "The rail collapses to icons (`collapsible=\"icon\"`); labels move to tooltips and a submenu becomes a hover flyout.",
       "On a phone the rail becomes an offcanvas sheet behind the header's toggle and the search field hides.",
       "The theme toggle flips `.dark` on `<html>`; nothing inside the shell hand-picks a dark colour.",
-      "The content area paints `muted` in both themes and the page's cards sit on it; a page never repaints that surface. A tab strip placed straight on it takes the `adaptive` or `line` variant, and a field or select trigger placed straight on it takes `surface=\"page\"`."
+      "The content area paints `muted` in both themes and the page's cards sit on it; a page never repaints that surface. A tab strip placed straight on it takes the `adaptive` or `line` variant, and a field or select trigger placed straight on it takes `surface=\"page\"`.",
+      "**The page's breadcrumb is the shell's `heading`**, rendered after the rail toggle in the top bar. The page itself starts at its H1 and carries no breadcrumb of its own.",
+      "**The content area already pads the page** (`p-4`, `md:p-6`): a page adds no padding and no max-width of its own. Its cards sit on the `muted` content area edge to edge of that padding."
     ],
     "behavior": {
       "loading": "The page's own loading state renders inside `ApplicationShellContent`; the frame itself never skeletons.",
@@ -150,7 +153,9 @@
     ],
     "antiPatterns": [
       "A hand-rolled sidebar plus header on one screen and the shell on another.",
-      "A page that ships without the shell because the prompt only described the page."
+      "A page that ships without the shell because the prompt only described the page.",
+      "A page that wraps itself in `p-6` or `max-w-7xl mx-auto` inside the shell — the content area pads, and pages fill it.",
+      "A breadcrumb drawn inside the page above the H1 — inside the shell it goes in the `heading` slot."
     ],
     "status": "stable",
     "replaces": null,

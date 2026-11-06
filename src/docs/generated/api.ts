@@ -491,6 +491,30 @@ export const generatedApi: Record<string, GeneratedApi> = {
       }
     ]
   },
+  "radial-gauge": {
+    "parts": [
+      "RadialGauge"
+    ],
+    "props": [
+      {
+        "part": "RadialGauge",
+        "name": "size",
+        "type": "\"card\" | \"tile\"",
+        "default": "\"card\""
+      }
+    ]
+  },
+  "chart": {
+    "parts": [
+      "ChartContainer",
+      "ChartTooltip",
+      "ChartTooltipContent",
+      "ChartLegend",
+      "ChartLegendContent",
+      "ChartStyle"
+    ],
+    "props": []
+  },
   "avatar": {
     "base": {
       "name": "Base UI Avatar",

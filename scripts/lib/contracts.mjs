@@ -291,7 +291,11 @@ export function buildContracts({ sections, readPrimitive, api, curated, overlay,
     // `variant`/`size` props with no cva), else the axes it borrows.
     const names = parts.map((p) => p.name)
     const own = axesOf(src, names, names.find((n) => n.toLowerCase() === id.replace(/-/g, "")) ?? names[0])
-    const variants = own.length ? mergeAxes(own) : variantsOf(borrowedCva(src))
+    // Own axes and borrowed ones together: toggle-group declares `layout` in
+    // a cva of its own and still types its items with toggle's `variant`,
+    // `size` and `surface`, so a design citing either must resolve.
+    const borrowed = variantsOf(borrowedCva(src)).map((v) => ({ part: names[0], ...v }))
+    const variants = mergeAxes([...own, ...borrowed.filter((b) => !own.some((o) => o.name === b.name))])
     const props = (a.props ?? []).map((p) => ({
       part: p.part,
       name: p.name,

@@ -241,9 +241,11 @@ The scale is in `rem` — it respects user font settings. Font family is SF Pro 
 - **Relative units.** Use the `rem` type scale and the spacing / radius scales — never fixed px for type or container dimensions.
 - **Fluid, reflowing.** Content must never clip or force horizontal page scroll. Wide content (tables, code) scrolls inside its own `overflow-x-auto` container.
 - **Density → hover.** In data-dense tables, metric tiles, and charts, keep the **primary value visible** and move secondary/detail info into a `tooltip` (brief) or `hover-card` (richer). Don't cram, shrink, or clip.
+- **The page frame is `application-shell`.** Every app screen renders inside it: the frame is bound to the viewport (`h-svh`), the top bar stays, and `ApplicationShellContent` is the one scrollport. The page's breadcrumb is the shell's `heading` slot, after the rail toggle — the page itself starts at its H1 and carries no breadcrumb. The content area already pads the page (`p-4`, `md:p-6`): **a page adds no padding and no max-width of its own.** The in-page breadcrumb of the *Page header* block is for a page outside the shell.
 - **Tables:**
   - Text-first cells — no icons in cells unless explicitly asked.
   - The first/last cell in a row (`th`/`td`) aligns to the **card's content padding** on its outer edge — `--card-spacing`, 1rem on a default card and 0.75rem on `size="sm"` — not the 0.5rem cell padding. Give each head and cell of a table that sits flush in a `Card` `first:pl-(--card-spacing) last:pr-(--card-spacing)`, so headers, edge values, and totals sit on the card title's line, never flush to the border. A table inside content that is already padded (`CardContent`, a padded panel) adds no edge padding of its own.
+  - **In a card, one recipe** (the *In a card* story on the Table page): `CardContent className="px-0"` so the table runs to the card's edges; `TableHeader variant="strong"`; edge cells on `--card-spacing` as above; numbers `text-right tabular-nums`; a date that opens the day is `<Button variant="link" className="h-auto p-0">`, a link with no box of its own; a footnote marker is a `tooltip` on a `*`, not a column. On a canvas the alignment goes in `class-name` — a `style` on an `x-import` never reaches the cell.
   - Body rows get a subtle light-blue (`primary` tint) hover highlight — rely on the primitive's built-in one so every table matches.
   - **Header surface — `strong` is the default fill.** `TableHeader` sits on the table's own surface by default. To set the header row apart as a band — for long, scrolling, or many-column tables — fill it with `variant="strong"`, on any host, a `card` included: the relative `table-header` token darkens whatever is under it in light and lightens it in dark, a light band that steps from every surface. `variant="muted"` is for a table on `background` only. It is an absolute fill, so on a `card` it repeats the `muted` page the card sits on, on a `muted` page or panel it lands on its own value and vanishes, and in a dark overlay it sits within a hair of `popover`. Give every table on a view the same header, and never hand-tint one with a `bg-*` override — switch the variant.
   - **Pinned columns — the last responsive step, never the first.** When a table has more columns than fit *and* a column that says what the row is (a name, an ID, a site), pin that column at the left edge with `pinned="left"` on its head and cells, so the row keeps its identity while the rest scrolls. The selection checkbox may pin beside it, and a row-actions or total column may pin at the right edge — at most two columns on the left and one on the right, never a metric column. Hide low-priority columns first (column visibility), then pin; never shrink. A pinned cell has to be opaque or the columns scrolling under it show through, so it paints the **host surface** — name it with `surface` on `Table` (`card`, the default; `background`; `popover`) — under the row's own hover, selected, header, and footer tint, so it reads identical to the cells beside it. Never give a pinned cell a `bg-*` of its own. Its divider is a hairline that appears only while columns are hidden past that edge and goes away at the scroll start and end — a table that does not scroll shows no edge, and never a drop shadow. On small screens a pinned column takes at most about 40% of the container's width: truncate the value in a `truncate` span and put the full text in a `tooltip`; past that, don't pin. Several pinned columns on one side stack on their own — the container measures each pinned cell and offsets the next, so don't compute offsets from a column model's declared sizes (auto table layout doesn't render them). With TanStack, `column.getIsPinned()` is the whole mapping.
@@ -294,11 +296,16 @@ Radius scale, all derived from `--radius` (0.625rem): `sm` (0.6×), `md` (0.8×)
 
 A filter bar or table toolbar mixes fields, selects and buttons, and they read as one row only when they share a height. `input`, `select` (its trigger), `native-select` and `button` all offer the same two sizes — `default` (2rem) and `sm` (1.75rem) — so pick **one size for the whole row** and pass it to every control in it. Never a `default` search field beside `sm` filters, and never a `className` height override to make up the difference: if a control seems to need a size the row's neighbours don't have, the row is on the wrong size. `size` is a **variant axis** on every component that offers it, so a design cites it like any other variant.
 
+### Toolbars — toggles and groups
+
+- **A two-state switch is an outline `toggle`.** A horizon or overlay switch — "Previous week", "Compare to last period" — is a `toggle` with `variant="outline"` that holds its pressed state, never a `button` swapping `variant` to fake one. The outline toggle casts no shadow, so it sits level with the outline buttons and connected groups beside it and a toolbar needs no `shadow-none` override.
+- **A `toggle-group` has two shapes, named by `layout`.** `connected` joins the items into one strip with no frame — the range presets (`Today` / `1D` / `1W` / `1M`) or interval switcher in a chart header or toolbar, the same height as the controls beside it — and is the **default for an outline group**. `spaced` sets ghost items a gap apart inside a padded, bordered frame — a formatting toolbar, where the frame is what groups them — and is the default for a ghost group. `layout` is a variant axis, so a design cites it and a canvas passes it as an attribute; `spacing={0}` is its alias in code. Never draw the presets as a spaced frame: it stands taller than the row.
+
 ### Toolbars — pick the surface by what is underneath
 
 A field rests clear — `input-surface`, transparent in light — so a tinted row or panel shows through it. That is right inside a `card`, `sheet`, `dialog` or table row, and wrong straight on the shell's `muted` content area: there a clear field has no face and dissolves into the grey, while the outline `button` beside it keeps its white one. So the fields take a **`surface` variant axis**, kept orthogonal to `size`:
 
-- **On the `muted` page body → `surface="page"`** on every field and trigger in the row — `input`, `input-group`, `textarea`, `phone-input`, `select` (its trigger), `native-select`, `combobox`, `multi-select`, `tags-input` — and on an outline `toggle` or `toggle-group` beside them. It is the outline button's face (`outline-surface`, and `outline-hover` on the triggers that hover), so a search box, its filters, an interval switcher and the buttons beside them read as one surface in both themes. A `date-picker` trigger and every button need nothing: they are outline buttons already. Nor does a ghost `toggle`: like a ghost button it has no resting face, so `surface` leaves the `default` variant alone. A connected `toggle-group` (`spacing={0}`) puts the face on its items; a spaced one puts it on its frame.
+- **On the `muted` page body → `surface="page"`** on every field and trigger in the row — `input`, `input-group`, `textarea`, `phone-input`, `select` (its trigger), `native-select`, `combobox`, `multi-select`, `tags-input` — and on an outline `toggle` or `toggle-group` beside them. It is the outline button's face (`outline-surface`, and `outline-hover` on the triggers that hover), so a search box, its filters, an interval switcher and the buttons beside them read as one surface in both themes. A `date-picker` trigger and every button need nothing: they are outline buttons already. Nor does a ghost `toggle`: like a ghost button it has no resting face, so `surface` leaves the `default` variant alone. A connected `toggle-group` (`layout="connected"`) puts the face on its items; a spaced one puts it on its frame.
 - **Inside a `card`, `sheet`, `dialog` or table row → `default`** — set nothing.
 - **Never re-tint a field by hand** to make it read on the page — no `bg-background`, `bg-card` or `bg-white`. In dark `background` is *darker* than `card`, so a field painted with it sinks below the cards beside it; `outline-surface` stays a light wash over whatever is behind. Switch the variant.
 
@@ -311,6 +318,10 @@ It is the same principle as *Tabs — pick the variant by the surface underneath
 - **Dialogs & sheets keep a close (X) in the top-right corner** — the `dialog`/`sheet` primitives render it there by default (`showCloseButton`, positioned `absolute top-2 right-2`); never pass `showCloseButton={false}`, move it elsewhere, or hand-roll a modal without one. A modal must always be dismissible. The **only** exception is the `alert-dialog`, which omits the X so a destructive/confirmation flow forces an explicit choice.
 - Overlays are **hidden by default** and **mounted at the app/template root**, so their visibility never depends on the current view.
 - **A dialog never outgrows the viewport.** `dialog` and `alert-dialog` stop 1rem short of each edge and scroll inside, so on a short screen the dialog scrolls to its footer instead of cutting it off. Don't re-add a viewport cap at the call site (`max-h-[90vh] overflow-y-auto`) — a `max-h-*` there replaces the built-in one. A dialog with its own inner scroll region takes `flex flex-col`, with `min-h-0` on that region.
+
+### Callouts — `alert`
+
+- **Any tinted callout with an icon and a title is `alert`**, never a hand-built `bg-*-subtle` box. The component tints the surface by its `variant`, draws the icon in the tone and sets the text to the tone's **`-emphasis` token** — the only text colour on a tint; never the base fill colour, never `foreground`. Pick the tone by meaning, as everywhere: `destructive` is an error, `warning` a condition to act on, `info` a notice, `success` a done thing. A page-wide message above the content is a `banner`; a transient confirmation is a `toast`.
 
 ### Feedback — toasts
 
@@ -379,6 +390,28 @@ If the reader can change the window, it is an ordinary chart and carries all fiv
 
 **Header chrome is icon buttons.** The date-range picker and the export control both sit in the header as **icon buttons** by default (the compact `date-picker` trigger and the export `dropdown-menu` icon button), not full-width fields or text buttons, so the header reads as a tight row of affordances. Reserve a labeled control for a genuine primary action only.
 
+**The chart header — one composition.** Every chart card is laid out the same way, so a design and an implementation can be checked against it line by line:
+
+- `CardHeader` > `CardTitle`, then a `CardDescription` that says when the reading was last updated ("Last updated 2:45 PM").
+- `CardAction` > in this order: **[primary action]** (a labeled `button`, only when the chart has one — "Share"), **[`toggle`]** (the two-state overlay or horizon switch, `variant="outline"`), **[connected `toggle-group`]** (the range presets, `layout="connected"`), **[`date-picker` icon]** (the compact range-calendar trigger), **[export icon]** (the `dropdown-menu` icon button). Every control at **`size="default"`** — one height across the row.
+- Below the header, in `CardContent`: the **axis caption** as `text-caption` above the plot ("Demand, kW"), not rotated along the axis; the plot; the **time-zone line** under it ("Times in Mountain Time"); the **legend centred**; then the **threshold strip** — what the dashed line and the window mean, as label–value pairs.
+
+The *Charts* block on the docs site draws it (`chart-header-demo`), and the `chart` contract at [contracts/chart.json](https://design.edgecom.ai/contracts/chart.json) carries the same composition for an agent that cannot render the page.
+
+**Two libraries, one theme.** An app may draw its plots with another library (Highcharts, say); the design-system bundle, the docs blocks and a Design canvas draw with **Recharts** (from the bundle: `window.EdgecomDS.Recharts`, never a second copy). They share the **chart theme** — five tokens in `globals.css` and [tokens.json](https://design.edgecom.ai/tokens.json), carried by the canvas stylesheet too:
+
+| Token | What it sets | Recharts (applied by `ChartContainer`) | Highcharts |
+|---|---|---|---|
+| `chart-grid` | grid lines — `border` at 50% | `CartesianGrid`, `PolarGrid` default stroke | `xAxis/yAxis.gridLineColor` |
+| `chart-axis-label` | axis tick labels — `muted-foreground` | axis tick text fill | `xAxis/yAxis.labels.style.color` |
+| `chart-reference` | a reference or threshold line — `muted-foreground`, dashed | `ReferenceLine` default stroke | `plotLines[].color` (`dashStyle: "Dash"`) |
+| `chart-series-width` | a series line — `2px` | `strokeWidth={2}` on `Line`/`Area` | `plotOptions.series.lineWidth` |
+| `chart-reference-width` | a reference line — `1.5px` | `strokeWidth={1.5}` on `ReferenceLine` | `plotLines[].width` |
+
+Read them as CSS variables (`getComputedStyle(el).getPropertyValue("--chart-grid")`) or from `tokens.json`; never restate their values as hexes in a chart options object.
+
+**Legacy line and window variables.** The hues a ported plot keeps — `--chart-legacy-line-<colour>` (fifteen named hues), the peak-rank aliases `--chart-legacy-peak-1` … `-7`, and the peak-window bands `--chart-legacy-window-high` / `-normal` / `-low` — ship in `globals.css`, in `tokens.json` and in the canvas stylesheet, so a ported plot can cite them (`var(--chart-legacy-window-high)`). Deliberately no utility classes: a new chart cannot reach them by accident. See *Legacy line palette — migration only*.
+
 **Legend — always centered.** Center the legend horizontally relative to the plot on **every** chart (below the plot by default), and keep that placement identical across all charts on a view. A centered legend keeps single- and multi-series charts balanced and consistent; never left- or right-align it on one chart and center it on another.
 
 **Legible bars — size the bar width and gap to the data density.** A bar chart reads clearly only when bars keep a comfortable width and never touch. Think in terms of each category's **slot** (plot width ÷ number of bars): the bar fills part of the slot, the rest is the gap. Default to a bar at **~75% of its slot** (≈25% gap), then adjust by how many bars there are:
@@ -418,6 +451,12 @@ Never a **zero gap** — touching bars read as one solid block. **Round only the
 - Let tooltips shrink-wrap (one line per row) and flip/shift within the viewport; keep them portaled so no container clips them.
 - Use icon buttons for secondary table/page actions, and `ghost-destructive` for a quiet destructive row action.
 - Give every control in a toolbar or filter bar the same `size` (`default` or `sm`) so the row sits on one height.
+- Draw range presets and interval switchers as a connected `toggle-group` (`layout="connected"`, the outline default), and a two-state switch as an outline `toggle`.
+- Lay out every chart card as the one header composition — title and last-updated line; primary action, toggle, connected presets, range icon, export icon at `size="default"`; axis caption above, time-zone line below, legend centred, threshold strip last.
+- Theme every plot, whichever library draws it, from the five `chart-*` theme tokens.
+- Use `alert` for every tinted callout with an icon and a title, with the tone's `-emphasis` token as its text.
+- Render every app page inside `application-shell`, its breadcrumb in the shell's `heading`, and let the content area pad it.
+- Draw a figure against its ceiling with `radial-gauge`, toned only when it is judged against a target.
 - Give every field, trigger and outline toggle in a filter bar on the `muted` page body `surface="page"`, so it shares the outline button's face; inside a card, set nothing.
 - Let a `dropdown-menu` shrink-wrap to its widest item; never stretch it to the trigger width or pad items with trailing whitespace.
 - Keep dropdowns and other anchored surfaces (`select`, `combobox`, `context-menu`, `popover`, `hover-card`) portaled so no `overflow` ancestor clips them; let them flip/shift within the viewport.
@@ -451,6 +490,10 @@ Never a **zero gap** — touching bars read as one solid block. **Round only the
 - Don't leave async failures as a blank screen or endless spinner — show an error + retry.
 - Don't pin sizes to px; don't invent new sizes or override a component's built-in classes — use its variants / `size` props.
 - Don't mix sizes in one toolbar (a `default` input beside `sm` selects and buttons) or fix the mismatch with a height override — put the whole row on one `size`.
+- Don't draw range presets as a spaced `toggle-group` frame, or fake a two-state switch with a `button` that swaps variants.
+- Don't hand-build a tinted callout from a `bg-*-subtle` div, or put `text-foreground` or a base fill colour on a tint.
+- Don't pad or cap the width of a page inside `application-shell`, or draw its breadcrumb inside the page.
+- Don't set a chart's grid or axis-label colour as a hex in an options object — read the `chart-*` theme tokens.
 - Don't give a field or an outline toggle on the `muted` page body `bg-background`, `bg-card` or `bg-white` to make it visible — in dark `background` sinks below the cards beside it; set `surface="page"`.
 - Don't ship a button or clickable control without a visible hover + focus state (and `cursor: pointer`).
 - Don't hand-compose a quiet destructive button from `ghost` + destructive utilities — use the `ghost-destructive` variant, which keeps the label red on hover.

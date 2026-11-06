@@ -1,15 +1,15 @@
 {
   "version": "v3.0.0",
-  "digest": "b6c810f3d864d860",
+  "digest": "bd469331f5691761",
   "contracts": "https://design.edgecom.ai/contracts.json",
   "docs": "https://design.edgecom.ai/design.md",
   "guide": "https://design.edgecom.ai/agents.md",
   "counts": {
     "total": 66,
-    "authored": 15,
+    "authored": 18,
     "withVariants": 34,
     "withBaseUi": 26,
-    "undocumented": 2,
+    "undocumented": 1,
     "tokenReferences": 537
   },
   "components": [
@@ -39,10 +39,17 @@
       "id": "alert",
       "label": "Alert",
       "aliases": [],
-      "summary": "A callout box laying out an optional icon, AlertTitle, AlertDescription, and a top-right AlertAction.",
-      "purpose": null,
-      "useWhen": [],
-      "dontUseWhen": [],
+      "summary": "The one tinted callout: a box laying out an optional icon, AlertTitle, AlertDescription, and a top-right AlertAction. Any tinted message with an icon and a title is this component, never a hand-built subtle-tinted box.",
+      "purpose": "The one tinted callout. Any message in a tinted box with an icon and a title — a notice, a warning, an error, a confirmation that stays on the page — is this component, so every callout in the product reads the same and adapts to dark on its own.",
+      "useWhen": [
+        "A message belongs to the content it sits beside and stays until the condition clears — a meter offline, a tariff change coming, a reconciliation done.",
+        "The message carries a status: the tone says what kind of thing happened before the title is read."
+      ],
+      "dontUseWhen": [
+        "The message is page-wide and above the content — that is `banner`.",
+        "The message is transient confirmation of an action — that is `toast`.",
+        "Nothing has happened; the box would only decorate a paragraph."
+      ],
       "variants": [
         {
           "name": "variant",
@@ -63,7 +70,7 @@
         "AlertAction"
       ],
       "status": "stable",
-      "authored": false,
+      "authored": true,
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/alert",
       "registryItem": "edgecom-ai/design-system/alert",
       "docs": "https://design.edgecom.ai/components/alert/",
@@ -460,10 +467,15 @@
       "aliases": [
         "chart-container"
       ],
-      "summary": null,
-      "purpose": null,
-      "useWhen": [],
-      "dontUseWhen": [],
+      "summary": "The chart surface — ChartContainer with its config, colours and the chart theme — and the one header composition every chart card follows.",
+      "purpose": "The chart surface: `ChartContainer` sets the plot's config, colours and the chart theme — grid, axis labels, the neutral reference line — so every Recharts plot in a consuming app reads as one system, and the same tokens theme a plot drawn by any other library.",
+      "useWhen": [
+        "A reading over time, a breakdown, a ranking — anything the eye should compare.",
+        "A single figure against a ceiling is not a chart: that is `radial-gauge`."
+      ],
+      "dontUseWhen": [
+        "The data is a handful of numbers — a stat tile or a table says it faster."
+      ],
       "variants": [],
       "parts": [
         "ChartContainer",
@@ -474,10 +486,10 @@
         "ChartStyle"
       ],
       "status": "stable",
-      "authored": false,
+      "authored": true,
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/chart",
       "registryItem": "edgecom-ai/design-system/chart",
-      "docs": "https://design.edgecom.ai/foundations/charts/",
+      "docs": "https://design.edgecom.ai/components/chart/",
       "contract": "https://design.edgecom.ai/contracts/chart.json"
     },
     {
@@ -1366,10 +1378,16 @@
       "id": "radial-gauge",
       "label": "Radial gauge",
       "aliases": [],
-      "summary": null,
-      "purpose": null,
-      "useWhen": [],
-      "dontUseWhen": [],
+      "summary": "A radial gauge — one figure against its ceiling, drawn as an arc on a 100-unit ring with a 10-unit stroke and a 15% track, both in currentColor, at card and tile sizes.",
+      "purpose": "A radial gauge — one figure against its ceiling, drawn as an arc on a 100-unit ring with a 10-unit stroke and a 15% track in the same colour, so the ring reads as one hue and follows the element's text colour.",
+      "useWhen": [
+        "One percentage that has a ceiling and a target — responses received against a goal, devices backed up against the fleet.",
+        "A list of such figures, one glanceable ring per row, at `size=\"tile\"`."
+      ],
+      "dontUseWhen": [
+        "A progress of a job in time — that is `progress` or `circular-progress`.",
+        "Several values to compare — that is a chart."
+      ],
       "variants": [
         {
           "name": "size",
@@ -1384,10 +1402,10 @@
         "RadialGauge"
       ],
       "status": "stable",
-      "authored": false,
+      "authored": true,
       "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/radial-gauge",
       "registryItem": "edgecom-ai/design-system/radial-gauge",
-      "docs": null,
+      "docs": "https://design.edgecom.ai/components/radial-gauge/",
       "contract": "https://design.edgecom.ai/contracts/radial-gauge.json"
     },
     {
@@ -1791,7 +1809,7 @@
       "id": "table",
       "label": "Table",
       "aliases": [],
-      "summary": "A styled HTML table wrapped for horizontal overflow — header, body, optional footer, rows, cells, and a caption.",
+      "summary": "A styled HTML table wrapped for horizontal overflow — header, body, optional footer, rows, cells, and a caption. In a card it follows one recipe: CardContent without horizontal padding, a strong header, edge cells on --card-spacing, right-aligned tabular numbers.",
       "purpose": "The data grid for text-first rows. It ships the row hover and the alignment that make every table in the product match.",
       "useWhen": [
         "Data reads as rows and columns.",
@@ -2061,7 +2079,7 @@
       "id": "toggle",
       "label": "Toggle",
       "aliases": [],
-      "summary": "A two-state button that holds a pressed/on state.",
+      "summary": "A two-state button that holds a pressed/on state — the control for a horizon or overlay switch (\"Previous week\", \"Compare\"), never a Button swapping variants to fake one.",
       "purpose": null,
       "useWhen": [],
       "dontUseWhen": [],
@@ -2106,7 +2124,7 @@
       "id": "toggle-group",
       "label": "Toggle group",
       "aliases": [],
-      "summary": "A set of toggles sharing one pressed value, spaced in a frame or joined into a segmented control.",
+      "summary": "A set of toggles sharing one pressed value — joined into one connected strip, or spaced inside a padded frame.",
       "purpose": null,
       "useWhen": [],
       "dontUseWhen": [],
@@ -2118,6 +2136,31 @@
             "spaced"
           ],
           "default": null
+        },
+        {
+          "name": "variant",
+          "options": [
+            "default",
+            "outline"
+          ],
+          "default": "default"
+        },
+        {
+          "name": "size",
+          "options": [
+            "default",
+            "sm",
+            "lg"
+          ],
+          "default": "default"
+        },
+        {
+          "name": "surface",
+          "options": [
+            "default",
+            "page"
+          ],
+          "default": "default"
         }
       ],
       "parts": [

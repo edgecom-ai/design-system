@@ -146,6 +146,14 @@ export const staticParams: { group: string; slug: string }[] = [
   },
   {
     "group": "components",
+    "slug": "radial-gauge"
+  },
+  {
+    "group": "components",
+    "slug": "chart"
+  },
+  {
+    "group": "components",
     "slug": "avatar"
   },
   {

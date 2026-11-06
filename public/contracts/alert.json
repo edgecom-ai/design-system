@@ -1,6 +1,6 @@
 {
   "version": "v3.0.0",
-  "digest": "b6c810f3d864d860",
+  "digest": "bd469331f5691761",
   "contract": {
     "id": "alert",
     "label": "Alert",
@@ -9,10 +9,17 @@
     "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/alert",
     "docs": "https://design.edgecom.ai/components/alert/",
     "source": "src/components/ui/alert.tsx",
-    "summary": "A callout box laying out an optional icon, AlertTitle, AlertDescription, and a top-right AlertAction.",
-    "purpose": null,
-    "useWhen": [],
-    "dontUseWhen": [],
+    "summary": "The one tinted callout: a box laying out an optional icon, AlertTitle, AlertDescription, and a top-right AlertAction. Any tinted message with an icon and a title is this component, never a hand-built subtle-tinted box.",
+    "purpose": "The one tinted callout. Any message in a tinted box with an icon and a title — a notice, a warning, an error, a confirmation that stays on the page — is this component, so every callout in the product reads the same and adapts to dark on its own.",
+    "useWhen": [
+      "A message belongs to the content it sits beside and stays until the condition clears — a meter offline, a tariff change coming, a reconciliation done.",
+      "The message carries a status: the tone says what kind of thing happened before the title is read."
+    ],
+    "dontUseWhen": [
+      "The message is page-wide and above the content — that is `banner`.",
+      "The message is transient confirmation of an action — that is `toast`.",
+      "Nothing has happened; the box would only decorate a paragraph."
+    ],
     "base": null,
     "parts": [
       {
@@ -38,7 +45,7 @@
         "name": "variant",
         "type": "\"default\" | \"destructive\" | \"success\" | \"warning\" | \"info\"",
         "default": "\"default\"",
-        "description": "Tone: default, destructive, success, warning, or info."
+        "description": "Tone: default, destructive, success, warning, or info. A status tone tints the surface with the status colour and sets the text to its -emphasis token — the only text colour on a tint."
       }
     ],
     "variants": [
@@ -120,21 +127,41 @@
         "family": "status"
       }
     ],
-    "requires": [],
-    "forbids": [],
-    "rules": [],
-    "behavior": {},
+    "requires": [
+      "A title; a description where the title alone does not say what to do.",
+      "A status `variant` chosen by meaning — `destructive` only for an error, `warning` for a condition to act on, `info` for a notice, `success` for a done thing."
+    ],
+    "forbids": [
+      "A hand-built callout — a `div` with `bg-warning-subtle`, an icon and a bold line. It is this component.",
+      "Text on a tint in any colour but the tone's `-emphasis` token: never the base fill colour, never `foreground` on a status tint.",
+      "A coloured strip along an edge to signal the status — the tint and the icon carry it."
+    ],
+    "rules": [
+      "**Any tinted callout with an icon and a title is `Alert`**, never a hand-built `bg-*-subtle` box. The component tints the surface, draws the icon in the tone and sets the text to the tone's `-emphasis` token — the only text colour on a tint.",
+      "Status tones are picked by meaning, as everywhere: `destructive` is an error, `warning` a condition to act on, `info` a notice, `success` a done thing."
+    ],
+    "behavior": {
+      "error": "An error that has a retry carries it in `AlertAction` or in the description, so the alert is not a dead end."
+    },
     "a11y": {
       "attributes": [
         "role=alert"
       ],
-      "requirements": []
+      "requirements": [
+        "The root carries `role=\"alert\"`; a message that is not an interruption and only informs may be given `role=\"status\"` instead.",
+        "The tone is never the only signal: the title says what happened in words."
+      ]
     },
-    "examples": [],
-    "antiPatterns": [],
+    "examples": [
+      "`<Alert variant=\"warning\"><TriangleAlertIcon /><AlertTitle>Approaching demand threshold</AlertTitle><AlertDescription>Meter MTR-4471-0092 is at 94% of the 1,200 kW monthly peak.</AlertDescription></Alert>`"
+    ],
+    "antiPatterns": [
+      "A `div className=\"bg-warning-subtle rounded-lg p-3\"` with an icon and a bold title — a redrawn `Alert`, which will drift from the real one on the next token change.",
+      "`text-warning` or `text-foreground` on a warning tint — text on a tint is `text-warning-emphasis`."
+    ],
     "status": "stable",
     "replaces": null,
     "deprecated": null,
-    "authored": false
+    "authored": true
   }
 }
