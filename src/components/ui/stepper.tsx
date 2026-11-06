@@ -259,7 +259,7 @@ function StepperItem({
       <div
         data-slot='stepper-item'
         className={cn(
-          'group/step flex items-center justify-center not-last:flex-1 group-data-[orientation=horizontal]/stepper-nav:flex-row group-data-[orientation=vertical]/stepper-nav:flex-col group-data-[orientation=vertical]/stepper-nav:items-start',
+          'group/step flex flex-1 items-center justify-center group-data-[orientation=horizontal]/stepper-nav:flex-row group-data-[orientation=vertical]/stepper-nav:flex-col group-data-[orientation=vertical]/stepper-nav:items-start',
           className
         )}
         data-state={state}
@@ -452,7 +452,9 @@ function StepperNav({ children, className }: React.ComponentProps<'nav'>) {
       data-state={stepper.current.id}
       data-orientation={orientation}
       className={cn(
-        'group/stepper-nav inline-flex data-[orientation=horizontal]:w-full data-[orientation=horizontal]:flex-row data-[orientation=vertical]:flex-col',
+        // The last step does not stretch — read off the last child, and off an
+        // item inside a wrapper, since a Design canvas wraps every mounted item.
+        'group/stepper-nav inline-flex data-[orientation=horizontal]:w-full data-[orientation=horizontal]:flex-row data-[orientation=vertical]:flex-col [&>:last-child]:flex-none [&>:last-child>[data-slot=stepper-item]]:flex-none',
         responsiveNavClasses,
         className
       )}

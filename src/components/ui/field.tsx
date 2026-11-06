@@ -138,8 +138,11 @@ function FieldDescription({ className, ...props }: React.ComponentProps<"p">) {
     <p
       data-slot="field-description"
       className={cn(
-        "text-left text-body font-normal text-muted-foreground group-data-[orientation=horizontal]/field:text-balance [[data-variant=legend]+&]:-mt-1.5",
-        "last:mt-0 nth-last-2:-mt-1",
+        "text-left text-body font-normal text-muted-foreground group-data-[orientation=horizontal]/field:text-balance",
+        // Each nudge reads the description's own position and, for a Design
+        // canvas that wraps every mounted child, the wrapper's.
+        "[[data-variant=legend]+&]:-mt-1.5 [:has(>[data-variant=legend])+*>&]:-mt-1.5",
+        "last:mt-0 [:last-child>&]:mt-0 nth-last-2:-mt-1 [:nth-last-child(2)>&]:-mt-1",
         "[&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-primary dark:[&>a:hover]:text-primary-emphasis",
         className
       )}

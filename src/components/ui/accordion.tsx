@@ -7,7 +7,13 @@ function Accordion({ className, ...props }: AccordionPrimitive.Root.Props) {
   return (
     <AccordionPrimitive.Root
       data-slot="accordion"
-      className={cn("flex w-full flex-col", className)}
+      // The last item's rule is hidden by the root, written for the item as
+      // a direct child and for an item inside a wrapper (a Design canvas
+      // wraps every mounted item, so `not-last:` on the item drew no rules).
+      className={cn(
+        "flex w-full flex-col [&>:last-child]:border-b-0 [&>:last-child>[data-slot=accordion-item]]:border-b-0",
+        className
+      )}
       {...props}
     />
   )
@@ -17,7 +23,7 @@ function AccordionItem({ className, ...props }: AccordionPrimitive.Item.Props) {
   return (
     <AccordionPrimitive.Item
       data-slot="accordion-item"
-      className={cn("not-last:border-b", className)}
+      className={cn("border-b", className)}
       {...props}
     />
   )

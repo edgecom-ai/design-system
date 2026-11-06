@@ -160,13 +160,7 @@ function TableHeader({
 }
 
 function TableBody({ className, ...props }: React.ComponentProps<"tbody">) {
-  return (
-    <tbody
-      data-slot="table-body"
-      className={cn("[&_tr:last-child]:border-0", className)}
-      {...props}
-    />
-  )
+  return <tbody data-slot="table-body" className={className} {...props} />
 }
 
 function TableFooter({ className, ...props }: React.ComponentProps<"tfoot">) {
@@ -174,7 +168,7 @@ function TableFooter({ className, ...props }: React.ComponentProps<"tfoot">) {
     <tfoot
       data-slot="table-footer"
       className={cn(
-        "border-t bg-muted/50 font-medium [&>tr]:last:border-b-0 [&_td]:[--table-tint:color-mix(in_oklab,var(--color-muted)_50%,transparent)]",
+        "border-t bg-muted/50 font-medium [&_td]:[--table-tint:color-mix(in_oklab,var(--color-muted)_50%,transparent)]",
         className
       )}
       {...props}
@@ -182,12 +176,17 @@ function TableFooter({ className, ...props }: React.ComponentProps<"tfoot">) {
   )
 }
 
+// Each row draws its own top rule, so the look owes nothing to sibling
+// position: a Design canvas wraps every mounted row in an element of its own,
+// which made each row the last child and a `last-child` reset strip every
+// divider. The collapsed border model merges the first body row's top rule
+// with the header's bottom one, and the last row needs no bottom rule.
 function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
   return (
     <tr
       data-slot="table-row"
       className={cn(
-        "border-b transition-colors hover:bg-muted/50 has-aria-expanded:bg-muted/50 data-[state=selected]:bg-muted",
+        "border-t transition-colors hover:bg-muted/50 has-aria-expanded:bg-muted/50 data-[state=selected]:bg-muted",
         "hover:[--table-tint:color-mix(in_oklab,var(--color-muted)_50%,transparent)] has-aria-expanded:[--table-tint:color-mix(in_oklab,var(--color-muted)_50%,transparent)] data-[state=selected]:[--table-tint:var(--color-muted)]",
         className
       )}
