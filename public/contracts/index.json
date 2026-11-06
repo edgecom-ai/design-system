@@ -1,6 +1,6 @@
 {
   "version": "v3.0.0",
-  "digest": "a40101934083632d",
+  "digest": "a48719b7ef58bad5",
   "contracts": "https://design.edgecom.ai/contracts.json",
   "docs": "https://design.edgecom.ai/design.md",
   "guide": "https://design.edgecom.ai/agents.md",
@@ -2084,29 +2084,12 @@
       "dontUseWhen": [],
       "variants": [
         {
-          "name": "variant",
+          "name": "layout",
           "options": [
-            "default",
-            "outline"
+            "connected",
+            "spaced"
           ],
-          "default": "default"
-        },
-        {
-          "name": "size",
-          "options": [
-            "default",
-            "sm",
-            "lg"
-          ],
-          "default": "default"
-        },
-        {
-          "name": "surface",
-          "options": [
-            "default",
-            "page"
-          ],
-          "default": "default"
+          "default": null
         }
       ],
       "parts": [

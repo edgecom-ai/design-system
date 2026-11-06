@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "toggle",
   "title": "Toggle",
-  "description": "A two-state button that holds a pressed/on state — the control for a horizon or overlay switch (\"14-day forecast\", \"Compare\"), never a Button swapping variants to fake one.",
+  "description": "A two-state button that holds a pressed/on state.",
   "dependencies": [
     "@base-ui/react@^1.6.0",
     "class-variance-authority@^0.7.1"

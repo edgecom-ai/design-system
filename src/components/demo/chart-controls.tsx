@@ -126,7 +126,6 @@ function ChartMetricToggle<Metric extends string>({
   return (
     <ToggleGroup
       variant="outline"
-      spacing={0}
       aria-label={label}
       value={[value]}
       onValueChange={(next) => {
@@ -185,7 +184,6 @@ function ChartRangePicker<Preset extends string>({
     <div role="group" aria-label={label} className="flex items-center gap-2">
       <ToggleGroup
         variant="outline"
-        spacing={0}
         aria-label="Range presets"
         value={preset === undefined ? [] : [preset]}
         onValueChange={(next) => {
@@ -330,7 +328,6 @@ function ChartCurveToggle({
   return (
     <ToggleGroup
       variant="outline"
-      spacing={0}
       aria-label="Interpolation"
       value={[curve]}
       onValueChange={(next) => {

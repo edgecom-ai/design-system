@@ -1,14 +1,16 @@
 // ToggleGroup preview — exclusive and multi-select groups. Docs demos for
-// the size sweep and the icon layout; composed cells for the padded (default
-// spacing) shape, multi-select and disabled.
+// the toolbar composition (connected presets beside a toggle, and the spaced
+// frame), the size sweep and the icon layout; composed cells for the spaced
+// ghost shape, multi-select and disabled.
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 
+export { ToggleGroupToolbarDemo as Toolbar } from "@/components/demo/toggle-group-toolbar-demo"
 export { ToggleGroupSizesDemo as Sizes } from "@/components/demo/toggle-group-sizes-demo"
 export { default as ConnectedIcons } from "@/components/shadcn-studio/toggle-group/toggle-group-08"
 
-export function PaddedRange() {
+export function SpacedRange() {
   return (
-    <ToggleGroup defaultValue={["7d"]}>
+    <ToggleGroup layout="spaced" defaultValue={["7d"]}>
       <ToggleGroupItem value="1d">Today</ToggleGroupItem>
       <ToggleGroupItem value="7d">7D</ToggleGroupItem>
       <ToggleGroupItem value="30d">30D</ToggleGroupItem>
@@ -19,7 +21,7 @@ export function PaddedRange() {
 
 export function MultipleSelection() {
   return (
-    <ToggleGroup variant="outline" spacing={0} multiple defaultValue={["electricity", "gas"]}>
+    <ToggleGroup variant="outline" multiple defaultValue={["electricity", "gas"]}>
       <ToggleGroupItem value="electricity">Electricity</ToggleGroupItem>
       <ToggleGroupItem value="gas">Gas</ToggleGroupItem>
       <ToggleGroupItem value="water">Water</ToggleGroupItem>
@@ -30,7 +32,7 @@ export function MultipleSelection() {
 
 export function Disabled() {
   return (
-    <ToggleGroup variant="outline" spacing={0} defaultValue={["kwh"]} disabled>
+    <ToggleGroup variant="outline" defaultValue={["kwh"]} disabled>
       <ToggleGroupItem value="kwh">kWh</ToggleGroupItem>
       <ToggleGroupItem value="kw">kW</ToggleGroupItem>
       <ToggleGroupItem value="cost">Cost</ToggleGroupItem>
