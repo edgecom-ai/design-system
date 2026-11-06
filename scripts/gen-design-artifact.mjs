@@ -316,9 +316,17 @@ const usage = (t) => {
 }
 
 const colours = []
+const strokes = []
 const unplaced = []
 for (const t of published) {
   if (t.family === "typography" || t.family === "radius") continue
+  // A length (the chart stroke widths) is a `stroke` entry, in the same list
+  // shape; the colour family would drop it.
+  if (t.type === "dimension") {
+    if (!/^\d*\.?\d+(px|rem|em|%)$/.test(t.light) || t.dark != null) unplaced.push(t.id)
+    else strokes.push({ name: t.id, value: t.light, usage: `Stroke width. In markup: \`var(--${t.id})\`.` })
+    continue
+  }
   const light = colour(t.light, "light")
   const dark = t.dark == null ? null : colour(t.dark, "dark")
   if (!light || (t.dark != null && !dark)) {
@@ -381,6 +389,7 @@ const tokens = {
   color: { themes: [{ id: "light", name: "Light" }, { id: "dark", name: "Dark" }], tokens: colours },
   type: { fonts: [], families, groups: [{ name: "Type scale", family: "sans", styles }] },
   radius: { tokens: radii },
+  ...(strokes.length ? { stroke: { tokens: strokes } } : {}),
 }
 write("tokens.json", `${JSON.stringify(tokens, null, 2)}\n`)
 
@@ -436,5 +445,5 @@ const total = [...written.values()].reduce((a, b) => a + b, 0)
 console.log(
   `gen-design-artifact — ${written.size} files, ${(total / 1024 / 1024).toFixed(2)} MiB → ${relative(root, project)}/\n` +
     `  bundle ${(written.get("components/bundle.js") / 1024 / 1024).toFixed(2)} MiB, ${converted.length} components, ${previews.length} previews, ` +
-    `${colours.length} colours, ${styles.length} type steps, ${radii.length} radii`,
+    `${colours.length} colours, ${strokes.length} strokes, ${styles.length} type steps, ${radii.length} radii`,
 )
