@@ -62,6 +62,12 @@ import {
  * `user`, `buildings` and the page as children. The parts it is built from are
  * exported too, for an app that needs a different header cluster or a second
  * navigation group.
+ *
+ * The frame is bound to the viewport (`h-svh`): the
+ * header stays put and `ApplicationShellContent` is the one scrollport, so a
+ * page never scrolls the top bar away and a sticky table header has a
+ * container to stick to. The content area already pads the page (`p-4`,
+ * `md:p-6`) — a page adds no padding and no max-width of its own.
  */
 
 type ApplicationShellNavLeaf = {
@@ -150,6 +156,7 @@ function ApplicationShell({
   buildings,
   building,
   onBuildingChange,
+  heading,
   search = false,
   actions,
   themeToggle = true,
@@ -176,6 +183,8 @@ function ApplicationShell({
     buildings?: string[]
     building?: string
     onBuildingChange?: (building: string) => void
+    /** What the top bar says after the rail toggle — the page's breadcrumb. */
+    heading?: React.ReactNode
     /** Show the global search field in the top bar. */
     search?: boolean | { placeholder?: string; value?: string; onChange?: (value: string) => void }
     /** The app's own top-bar controls — notifications, help — placed before the theme toggle. */
@@ -200,7 +209,8 @@ function ApplicationShell({
         defaultOpen={defaultOpen}
         open={open}
         onOpenChange={onOpenChange}
-        className={className}
+        // Bound to the viewport, so the header stays and the content scrolls.
+        className={cn("h-svh overflow-hidden", className)}
         {...props}
       >
         <ApplicationShellSidebar collapsible={collapsible}>
@@ -216,7 +226,7 @@ function ApplicationShell({
           </ApplicationShellSidebarFooter>
         </ApplicationShellSidebar>
         <SidebarInset className="min-w-0 overflow-hidden">
-          <ApplicationShellHeader>
+          <ApplicationShellHeader heading={heading}>
             {search ? (
               <ApplicationShellSearch {...(typeof search === "object" ? search : {})} />
             ) : null}
@@ -483,12 +493,19 @@ function ApplicationShellUserMenu({
 // Main column
 // ---------------------------------------------------------------------------
 
-/** The top bar: the rail toggle, then whatever is passed — search, actions. */
+/**
+ * The top bar: the rail toggle, the page's `heading` (its breadcrumb) beside
+ * it, then whatever is passed — search, actions.
+ */
 function ApplicationShellHeader({
   className,
+  heading,
   children,
   ...props
-}: React.ComponentProps<"header">) {
+}: React.ComponentProps<"header"> & {
+  /** The page's breadcrumb, after the rail toggle. The page itself carries no breadcrumb. */
+  heading?: React.ReactNode
+}) {
   return (
     <header
       data-slot="application-shell-header"
@@ -499,6 +516,15 @@ function ApplicationShellHeader({
       {...props}
     >
       <SidebarTrigger aria-label="Toggle navigation" />
+      {heading != null ? (
+        // One line: a breadcrumb in the top bar never wraps, it truncates.
+        <div
+          data-slot="application-shell-heading"
+          className="flex min-w-0 flex-1 items-center gap-2 overflow-hidden whitespace-nowrap [&_[data-slot=breadcrumb-list]]:flex-nowrap"
+        >
+          {heading}
+        </div>
+      ) : null}
       {children}
     </header>
   )
@@ -626,7 +652,11 @@ function ApplicationShellThemeToggle({
   )
 }
 
-/** The scrolling page area beside the rail, on `muted` so the page's cards stand off it. */
+/**
+ * The scrolling page area beside the rail — the frame's one scrollport — on
+ * `muted` so the page's cards stand off it. It pads the page (`p-4`, `md:p-6`);
+ * the page adds no padding and no max-width of its own.
+ */
 function ApplicationShellContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
