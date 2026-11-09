@@ -154,6 +154,55 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* The pill scrollbar — a 3px thumb that shows on hover and otherwise hides,
+   for any scrollport inside a card. Written as a utility rather than as classes
+   on the element, since `::-webkit-scrollbar` can't be spelled as a class. */
+@utility scrollbar-pill {
+  /* Hovered on the element rather than as `:hover::-webkit-scrollbar-thumb`:
+     Chrome repaints the bar only when its element's own style changes. */
+  --scrollbar-thumb: transparent;
+
+  &:hover {
+    --scrollbar-thumb: color-mix(in oklab, var(--muted-foreground) 35%, transparent);
+  }
+
+  /* Chrome drops every `::-webkit-scrollbar` rule once either of these is set,
+     so only a browser without the pseudo-elements gets them. */
+  @supports not selector(::-webkit-scrollbar) {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) transparent;
+  }
+
+  &::-webkit-scrollbar { width: 3px; height: 3px; }
+  &::-webkit-scrollbar-track { background: transparent; }
+  &::-webkit-scrollbar-thumb {
+    border-radius: calc(infinity * 1px);
+    background: var(--scrollbar-thumb);
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: color-mix(in oklab, var(--muted-foreground) 50%, transparent);
+  }
+}
+
+/* No edge fade, unlike the pane: a rail pages by whole tiles, so the tile at its
+   edge is a full day rather than a cut one, and the fade would grey it out. */
+@utility scroll-rail {
+  @apply scrollbar-pill;
+  overflow-x: auto;
+  /* A rail that has hit its end shouldn't hand the gesture to the page. */
+  overscroll-behavior-x: contain;
+}
+
+/* A pane scrolling down beside another. Its gutter is held whether or not it
+   overflows, so the content doesn't narrow the moment the bar appears.
+   `scroll-fade-y` comes with shadcn's stylesheet (imported above): content
+   fades into an edge only while more lies past it. */
+@utility scroll-pane {
+  @apply scrollbar-pill scroll-fade-y;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
 /* Skeleton motion. Both animate a `foreground`-tinted overlay rather than the
    block's own opacity: `muted` sits within a hair of its host in both themes
    (0.968 on white, 0.27 on 0.205), so fading it toward the host is invisible,

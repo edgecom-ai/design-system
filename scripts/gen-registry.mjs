@@ -16,7 +16,8 @@
 //   src/hooks/registry.json          -> hooks: ships <hook>.ts
 //
 // Source of truth:
-//   - theme       <- src/app/globals.css (@theme mappings + :root/.dark tokens) + lib/utils
+//   - theme       <- src/app/globals.css (@theme mappings + :root/.dark tokens, the
+//     @keyframes and @utility blocks on its `css` field) + lib/utils
 //   - one item per src/components/ui/*.tsx, with package dependencies, cross-component
 //     registryDependencies and hook registryDependencies derived from its imports.
 //     Every component depends on the theme. Package dependencies carry the
@@ -32,6 +33,8 @@
 import { readFileSync, writeFileSync, readdirSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+
+import postcss from "postcss";
 
 import { specifiersOf, classify } from "./lib/imports.mjs";
 import { withVersion, typesFor } from "./lib/deps.mjs";
@@ -76,7 +79,31 @@ function keyframeRules() {
   }
   return rules;
 }
-const themeCss = keyframeRules();
+
+// Top-level `@utility` blocks ship on the same field, so a consumer that installs
+// the theme gets the design system's own utilities — the pill scrollbar and the
+// `scroll-rail` / `scroll-pane` recipes built on it — rather than copying them
+// from the docs. Shape per shadcn's updater: a declaration is `prop: value`, a
+// nested rule is `{ "&:hover": { … } }`, a bodiless at-rule is `{ "@apply x": {} }`,
+// and a nested at-rule with a body is a nested object under its own key. Comments
+// stay here in the source; JSON carries none.
+function utilityRules() {
+  const toObject = (node) => {
+    const out = {};
+    for (const child of node.nodes ?? []) {
+      if (child.type === "decl") out[child.prop] = child.value.replace(/\s+/g, " ");
+      else if (child.type === "rule") out[child.selector.replace(/\s+/g, " ")] = toObject(child);
+      else if (child.type === "atrule") out[`@${child.name} ${child.params}`.trim()] = child.nodes ? toObject(child) : {};
+    }
+    return out;
+  };
+  const rules = {};
+  for (const node of postcss.parse(css).nodes) {
+    if (node.type === "atrule" && node.name === "utility") rules[`@utility ${node.params.trim()}`] = toObject(node);
+  }
+  return rules;
+}
+const themeCss = { ...keyframeRules(), ...utilityRules() };
 
 // The theme item is copy-on-install: a consuming app keeps the token values it
 // received until someone re-syncs. Stamp the system identity into `:root` as
@@ -280,5 +307,5 @@ console.log(
     `(1 theme + ${uiFiles.length} components + ${hookItems.length} hooks), ` +
     `${described}/${uiFiles.length} component descriptions from contracts, ` +
     `${Object.keys(lightVars).length} light / ${Object.keys(darkVars).length} dark / ` +
-    `${Object.keys(themeVars).length} theme vars, ${Object.keys(themeCss).length} keyframes`
+    `${Object.keys(themeVars).length} theme vars, ${Object.keys(themeCss).length} css rules (keyframes + utilities)`
 );
