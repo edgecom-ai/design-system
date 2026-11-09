@@ -382,6 +382,8 @@ export const apiHighlight: Record<string, string> = {
   "ApplicationShellBuildingSwitcher": "<span style=\"--shiki-light:#24292E;--shiki-dark:#E1E4E8\">ApplicationShellBuildingSwitcher</span>",
   "ApplicationShellThemeToggle": "<span style=\"--shiki-light:#24292E;--shiki-dark:#E1E4E8\">ApplicationShellThemeToggle</span>",
   "ApplicationShellContent": "<span style=\"--shiki-light:#24292E;--shiki-dark:#E1E4E8\">ApplicationShellContent</span>",
+  "ScrollRail": "<span style=\"--shiki-light:#24292E;--shiki-dark:#E1E4E8\">ScrollRail</span>",
+  "ScrollRailItem": "<span style=\"--shiki-light:#24292E;--shiki-dark:#E1E4E8\">ScrollRailItem</span>",
   "\"top\" | \"bottom\" | \"left\" | \"right\"": "<span style=\"--shiki-light:#032F62;--shiki-dark:#9ECBFF\">\"top\"</span><span style=\"--shiki-light:#D73A49;--shiki-dark:#F97583\"> |</span><span style=\"--shiki-light:#032F62;--shiki-dark:#9ECBFF\"> \"bottom\"</span><span style=\"--shiki-light:#D73A49;--shiki-dark:#F97583\"> |</span><span style=\"--shiki-light:#032F62;--shiki-dark:#9ECBFF\"> \"left\"</span><span style=\"--shiki-light:#D73A49;--shiki-dark:#F97583\"> |</span><span style=\"--shiki-light:#032F62;--shiki-dark:#9ECBFF\"> \"right\"</span>",
   "\"bottom\"": "<span style=\"--shiki-light:#032F62;--shiki-dark:#9ECBFF\">\"bottom\"</span>",
   "\"start\" | \"center\" | \"end\"": "<span style=\"--shiki-light:#032F62;--shiki-dark:#9ECBFF\">\"start\"</span><span style=\"--shiki-light:#D73A49;--shiki-dark:#F97583\"> |</span><span style=\"--shiki-light:#032F62;--shiki-dark:#9ECBFF\"> \"center\"</span><span style=\"--shiki-light:#D73A49;--shiki-dark:#F97583\"> |</span><span style=\"--shiki-light:#032F62;--shiki-dark:#9ECBFF\"> \"end\"</span>",

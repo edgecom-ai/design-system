@@ -771,6 +771,16 @@ export const curatedApi: Record<string, CuratedApi> = {
       "TableCell.pinned": "Sticks the cell to the left or right edge of the table's scroll container, painting the host surface under the row tint. Several pinned columns on one side stack on their own — the container measures each one.",
     },
   },
+  "scroll-rail": {
+    summary:
+      "A horizontal rail of `Card size=\"sm\"` tiles that snaps and pages by whole tiles, carries the pill scrollbar in its foot, and bleeds 2px so no tile's ring is clipped by the scroll box.",
+    parts: {
+      ScrollRail:
+        "The rail — a `ul` carrying the `scroll-rail` utility, `snap-x snap-mandatory`, the 2px bleed and the 6px foot the bar runs in. Give it a ref and page it with `scrollBy` from the host card's arrows.",
+      ScrollRailItem:
+        "One stop — an `li` that snaps at its start edge and sets the tile's width; it holds a `Card size=\"sm\"` at `h-full rounded-lg`.",
+    },
+  },
   timeline: {
     summary:
       "A vertical sequence of events. Each TimelineItem pairs a status TimelineDot with a TimelineHeading and TimelineContent, connected by a TimelineLine.",

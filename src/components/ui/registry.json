@@ -942,6 +942,22 @@
       ]
     },
     {
+      "name": "scroll-rail",
+      "type": "registry:ui",
+      "title": "Scroll Rail",
+      "description": "A horizontal rail of `Card size=\"sm\"` tiles that snaps and pages by whole tiles, carries the pill scrollbar in its foot, and bleeds 2px so no tile's ring is clipped by the scroll box.",
+      "docs": "Docs: https://design.edgecom.ai/blocks/scroll-rail/ · Contract: https://design.edgecom.ai/contracts/scroll-rail.json · Guardrails: https://design.edgecom.ai/design.md",
+      "registryDependencies": [
+        "edgecom-ai/design-system/theme"
+      ],
+      "files": [
+        {
+          "path": "scroll-rail.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "select",
       "type": "registry:ui",
       "title": "Select",

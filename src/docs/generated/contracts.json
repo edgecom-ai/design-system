@@ -1,7 +1,7 @@
 {
   "$schema": "../../../schemas/contracts.schema.json",
   "version": "v3.0.0",
-  "digest": "0b1a60a672e0ee8d",
+  "digest": "60f32496768ca240",
   "sources": [
     "src/components/ui/*.tsx",
     "src/app/sections.tsx",
@@ -10,8 +10,8 @@
   ],
   "generator": "scripts/gen-contracts.mjs",
   "counts": {
-    "total": 66,
-    "authored": 18,
+    "total": 67,
+    "authored": 19,
     "withVariants": 34,
     "withBaseUi": 26,
     "undocumented": 1,
@@ -5568,6 +5568,83 @@
       "replaces": null,
       "deprecated": null,
       "authored": false
+    },
+    {
+      "id": "scroll-rail",
+      "label": "Scroll rail",
+      "aliases": [],
+      "registryItem": "edgecom-ai/design-system/scroll-rail",
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/scroll-rail",
+      "docs": "https://design.edgecom.ai/blocks/scroll-rail/",
+      "source": "src/components/ui/scroll-rail.tsx",
+      "summary": "A horizontal rail of `Card size=\"sm\"` tiles that snaps and pages by whole tiles, carries the pill scrollbar in its foot, and bleeds 2px so no tile's ring is clipped by the scroll box.",
+      "purpose": "The horizontal rail of tiles — a fortnight of day tiles, a row of location cards — that snaps and pages by whole tiles. The rail carries the pill scrollbar (`scroll-rail`), bleeds 2px so the tiles' ring is never clipped by the scroll box, and gives the bar a foot of its own so it never overlaps the tiles' bottom edge.",
+      "useWhen": [
+        "A card shows a sequence of equal tiles wider than the card — days, locations, items — and each tile is read whole.",
+        "The content pages sideways: the reader steps through tiles rather than skimming a cut-off edge."
+      ],
+      "dontUseWhen": [
+        "The content is a vertical list or a table — that scrolls down in a `scroll-pane` or a `scroll-area`.",
+        "The tiles would be read as one strip rather than stepped through, or the whole set fits — then a `grid` of cards lays them out with no rail."
+      ],
+      "base": null,
+      "parts": [
+        {
+          "name": "ScrollRail",
+          "description": "The rail — a `ul` carrying the `scroll-rail` utility, `snap-x snap-mandatory`, the 2px bleed and the 6px foot the bar runs in. Give it a ref and page it with `scrollBy` from the host card's arrows."
+        },
+        {
+          "name": "ScrollRailItem",
+          "description": "One stop — an `li` that snaps at its start edge and sets the tile's width; it holds a `Card size=\"sm\"` at `h-full rounded-lg`."
+        }
+      ],
+      "props": [],
+      "variants": [],
+      "states": [],
+      "responsive": [],
+      "tokens": [],
+      "requires": [
+        "`Card size=\"sm\"` at `h-full rounded-lg` inside every `ScrollRailItem`, and a width on the item (`w-44`, say) so the rail pages by it.",
+        "Paging arrows as `Button variant=\"outline\" size=\"icon-sm\"` with an `aria-label` and a `tooltip`, in the host card's `CardAction`, each shown only while tiles are off screen on its side (`useScrollRailEdges` on the rail, or an `IntersectionObserver` on the first and last tile at threshold 0.95).",
+        "The loading state is the same rail with a `skeleton` at each tile's shape; empty and error hold the rail invisible under a centred `text-body text-muted-foreground` message, so the card keeps its height."
+      ],
+      "forbids": [
+        "A default OS scrollbar on the rail, or a hand-drawn 3px bar in page CSS — `scroll-rail` is the one scrollbar.",
+        "A hand-written bleed (`-m-0.5 p-0.5` on a plain `div`) or an `overflow-hidden` wrapper to hide the clipped ring — the rail already bleeds.",
+        "An edge fade on the rail: it pages by whole tiles, so the tile at its edge is a full one, and the fade would grey it out."
+      ],
+      "rules": [
+        "A horizontal rail of tiles is `scroll-rail`: tiles are `Card size=\"sm\"`, the rail snaps by tile, pages by whole tiles with no edge fade, carries the pill scrollbar, and bleeds 2px so the tiles' ring is never clipped.",
+        "The paging arrows live in the host card's `CardAction`, outline icon buttons with a tooltip, and each shows only while tiles are off screen on its side.",
+        "Past a threshold, a tile takes `bg-destructive-subtle ring-destructive/30` and its label `text-destructive-emphasis`; status is by meaning, never by position.",
+        "A vertical pane beside another is `scroll-pane`, not a rail."
+      ],
+      "behavior": {
+        "loading": "The same rail, with a `skeleton` at each tile's shape, so the card is already the height of the answer.",
+        "empty": "The skeleton rail held invisible under a centred `text-body text-muted-foreground` message; the card keeps its height.",
+        "error": "As empty, with the error's message; a retry, where there is one, is a `button` beside it."
+      },
+      "a11y": {
+        "attributes": [],
+        "requirements": [
+          "The rail is a `ul`; give it an `aria-label` naming what it lists. Each tile is an `li`.",
+          "Each paging arrow carries an `aria-label` and a `tooltip`; the rail stays keyboard-scrollable without them.",
+          "The loading rail sits under `aria-busy` with a visually hidden sentence; the held message is a `role=\"status\"` region."
+        ]
+      },
+      "examples": [
+        "`<ScrollRail ref={setRail} aria-label=\"Daily forecast\">{days.map((d) => <ScrollRailItem key={d.id} className=\"w-44\"><Card size=\"sm\" className=\"h-full rounded-lg\">…</Card></ScrollRailItem>)}</ScrollRail>`",
+        "`const { canScrollBack, canScrollForward } = useScrollRailEdges(rail, days.length)` — then `rail.scrollBy({ left: rail.clientWidth })` from the forward arrow."
+      ],
+      "antiPatterns": [
+        "A `flex overflow-x-auto` div of cards with the OS scrollbar showing under the tiles.",
+        "A rail whose edge tiles are faded with a mask, so the reader cannot tell a full day from a cut one.",
+        "Arrows that are always visible, or that sit beside the rail and shift the tiles when they appear."
+      ],
+      "status": "stable",
+      "replaces": null,
+      "deprecated": null,
+      "authored": true
     },
     {
       "id": "select",
