@@ -92,6 +92,7 @@ export const sectionContent: Record<string, () => Promise<{ default: SectionCont
   "statistics": () => import("./sections/statistics"),
   "widgets": () => import("./sections/widgets"),
   "application-shell": () => import("./sections/application-shell"),
+  "scroll-rail": () => import("./sections/scroll-rail"),
   "settings": () => import("./sections/settings"),
 };
 
@@ -809,6 +810,15 @@ export const sections: Section[] = [
     description:
       "The settings shell — a grouped section rail that folds to icons and then to a select — with a profile form on a sticky save bar, and preference cards that apply as they change.",
     install: "@edgecom/field @edgecom/input @edgecom/select @edgecom/combobox @edgecom/card @edgecom/tooltip @edgecom/empty @edgecom/sonner",
+    hasVariants: true,
+  },
+  {
+    id: "scroll-rail",
+    label: "Scroll rail",
+    group: "Blocks",
+    description:
+      "A horizontal rail of small-card tiles that snaps and pages by whole tiles, carries the pill scrollbar in its foot and bleeds so no tile's ring is clipped — with paging arrows in the host card's action slot that show only while tiles are off screen, and loading and empty states that keep the card's height.",
+    install: "@edgecom/scroll-rail @edgecom/card @edgecom/button @edgecom/tooltip @edgecom/skeleton @edgecom/radial-gauge",
     hasVariants: true,
   },
 ];

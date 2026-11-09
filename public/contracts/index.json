@@ -1,12 +1,12 @@
 {
   "version": "v3.0.0",
-  "digest": "0b1a60a672e0ee8d",
+  "digest": "60f32496768ca240",
   "contracts": "https://design.edgecom.ai/contracts.json",
   "docs": "https://design.edgecom.ai/design.md",
   "guide": "https://design.edgecom.ai/agents.md",
   "counts": {
-    "total": 66,
-    "authored": 18,
+    "total": 67,
+    "authored": 19,
     "withVariants": 34,
     "withBaseUi": 26,
     "undocumented": 1,
@@ -1477,6 +1477,32 @@
       "registryItem": "edgecom-ai/design-system/scroll-area",
       "docs": "https://design.edgecom.ai/components/scroll-area/",
       "contract": "https://design.edgecom.ai/contracts/scroll-area.json"
+    },
+    {
+      "id": "scroll-rail",
+      "label": "Scroll rail",
+      "aliases": [],
+      "summary": "A horizontal rail of `Card size=\"sm\"` tiles that snaps and pages by whole tiles, carries the pill scrollbar in its foot, and bleeds 2px so no tile's ring is clipped by the scroll box.",
+      "purpose": "The horizontal rail of tiles — a fortnight of day tiles, a row of location cards — that snaps and pages by whole tiles. The rail carries the pill scrollbar (`scroll-rail`), bleeds 2px so the tiles' ring is never clipped by the scroll box, and gives the bar a foot of its own so it never overlaps the tiles' bottom edge.",
+      "useWhen": [
+        "A card shows a sequence of equal tiles wider than the card — days, locations, items — and each tile is read whole.",
+        "The content pages sideways: the reader steps through tiles rather than skimming a cut-off edge."
+      ],
+      "dontUseWhen": [
+        "The content is a vertical list or a table — that scrolls down in a `scroll-pane` or a `scroll-area`.",
+        "The tiles would be read as one strip rather than stepped through, or the whole set fits — then a `grid` of cards lays them out with no rail."
+      ],
+      "variants": [],
+      "parts": [
+        "ScrollRail",
+        "ScrollRailItem"
+      ],
+      "status": "stable",
+      "authored": true,
+      "install": "pnpm dlx shadcn@latest add edgecom-ai/design-system/scroll-rail",
+      "registryItem": "edgecom-ai/design-system/scroll-rail",
+      "docs": "https://design.edgecom.ai/blocks/scroll-rail/",
+      "contract": "https://design.edgecom.ai/contracts/scroll-rail.json"
     },
     {
       "id": "select",

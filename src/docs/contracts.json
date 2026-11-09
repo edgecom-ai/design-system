@@ -545,6 +545,52 @@
       "A breadcrumb drawn inside the page above the H1 — inside the shell it goes in the `heading` slot."
     ]
   },
+  "scroll-rail": {
+    "purpose": "The horizontal rail of tiles — a fortnight of day tiles, a row of location cards — that snaps and pages by whole tiles. The rail carries the pill scrollbar (`scroll-rail`), bleeds 2px so the tiles' ring is never clipped by the scroll box, and gives the bar a foot of its own so it never overlaps the tiles' bottom edge.",
+    "useWhen": [
+      "A card shows a sequence of equal tiles wider than the card — days, locations, items — and each tile is read whole.",
+      "The content pages sideways: the reader steps through tiles rather than skimming a cut-off edge."
+    ],
+    "dontUseWhen": [
+      "The content is a vertical list or a table — that scrolls down in a `scroll-pane` or a `scroll-area`.",
+      "The tiles would be read as one strip rather than stepped through, or the whole set fits — then a `grid` of cards lays them out with no rail."
+    ],
+    "requires": [
+      "`Card size=\"sm\"` at `h-full rounded-lg` inside every `ScrollRailItem`, and a width on the item (`w-44`, say) so the rail pages by it.",
+      "Paging arrows as `Button variant=\"outline\" size=\"icon-sm\"` with an `aria-label` and a `tooltip`, in the host card's `CardAction`, each shown only while tiles are off screen on its side (`useScrollRailEdges` on the rail, or an `IntersectionObserver` on the first and last tile at threshold 0.95).",
+      "The loading state is the same rail with a `skeleton` at each tile's shape; empty and error hold the rail invisible under a centred `text-body text-muted-foreground` message, so the card keeps its height."
+    ],
+    "forbids": [
+      "A default OS scrollbar on the rail, or a hand-drawn 3px bar in page CSS — `scroll-rail` is the one scrollbar.",
+      "A hand-written bleed (`-m-0.5 p-0.5` on a plain `div`) or an `overflow-hidden` wrapper to hide the clipped ring — the rail already bleeds.",
+      "An edge fade on the rail: it pages by whole tiles, so the tile at its edge is a full one, and the fade would grey it out."
+    ],
+    "rules": [
+      "A horizontal rail of tiles is `scroll-rail`: tiles are `Card size=\"sm\"`, the rail snaps by tile, pages by whole tiles with no edge fade, carries the pill scrollbar, and bleeds 2px so the tiles' ring is never clipped.",
+      "The paging arrows live in the host card's `CardAction`, outline icon buttons with a tooltip, and each shows only while tiles are off screen on its side.",
+      "Past a threshold, a tile takes `bg-destructive-subtle ring-destructive/30` and its label `text-destructive-emphasis`; status is by meaning, never by position.",
+      "A vertical pane beside another is `scroll-pane`, not a rail."
+    ],
+    "behavior": {
+      "loading": "The same rail, with a `skeleton` at each tile's shape, so the card is already the height of the answer.",
+      "empty": "The skeleton rail held invisible under a centred `text-body text-muted-foreground` message; the card keeps its height.",
+      "error": "As empty, with the error's message; a retry, where there is one, is a `button` beside it."
+    },
+    "a11yRequirements": [
+      "The rail is a `ul`; give it an `aria-label` naming what it lists. Each tile is an `li`.",
+      "Each paging arrow carries an `aria-label` and a `tooltip`; the rail stays keyboard-scrollable without them.",
+      "The loading rail sits under `aria-busy` with a visually hidden sentence; the held message is a `role=\"status\"` region."
+    ],
+    "examples": [
+      "`<ScrollRail ref={setRail} aria-label=\"Daily forecast\">{days.map((d) => <ScrollRailItem key={d.id} className=\"w-44\"><Card size=\"sm\" className=\"h-full rounded-lg\">…</Card></ScrollRailItem>)}</ScrollRail>`",
+      "`const { canScrollBack, canScrollForward } = useScrollRailEdges(rail, days.length)` — then `rail.scrollBy({ left: rail.clientWidth })` from the forward arrow."
+    ],
+    "antiPatterns": [
+      "A `flex overflow-x-auto` div of cards with the OS scrollbar showing under the tiles.",
+      "A rail whose edge tiles are faded with a mask, so the reader cannot tell a full day from a cut one.",
+      "Arrows that are always visible, or that sit beside the rail and shift the tiles when they appear."
+    ]
+  },
   "input-group": {
     "rules": [
       "**Pick the surface by what is underneath.** A field placed straight on the shell's `muted` content area — a search box, a filter row — takes `surface=\"page\"`, the outline Button's resting face (`outline-surface`), so the row reads as one surface. Inside a `card`, `sheet`, `dialog` or table row it keeps `default`."

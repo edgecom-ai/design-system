@@ -1098,5 +1098,12 @@ export const generatedApi: Record<string, GeneratedApi> = {
       "ApplicationShellContent"
     ],
     "props": []
+  },
+  "scroll-rail": {
+    "parts": [
+      "ScrollRail",
+      "ScrollRailItem"
+    ],
+    "props": []
   }
 };

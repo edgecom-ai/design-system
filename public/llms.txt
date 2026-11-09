@@ -113,6 +113,7 @@ Browse every component in light/dark with copyable code at [design.edgecom.ai](h
 - [Widgets](https://design.edgecom.ai/blocks/widgets/): Composed dashboard widgets combining stats, charts, and lists.
 - [Application shell](https://design.edgecom.ai/blocks/application-shell/): The app's page frame — icon-rail sidebar with navigation and account menu, a viewport-bound top bar with the page's breadcrumb, search, building switcher and theme toggle, and the content area as the one scrollport — from data.
 - [Settings](https://design.edgecom.ai/blocks/settings/): The settings shell — a grouped section rail that folds to icons and then to a select — with a profile form on a sticky save bar, and preference cards that apply as they change.
+- [Scroll rail](https://design.edgecom.ai/blocks/scroll-rail/): A horizontal rail of small-card tiles that snaps and pages by whole tiles, carries the pill scrollbar in its foot and bleeds so no tile's ring is clipped — with paging arrows in the host card's action slot that show only while tiles are off screen, and loading and empty states that keep the card's height.
 
 <!-- @@GENERATED:catalog-end -->
 

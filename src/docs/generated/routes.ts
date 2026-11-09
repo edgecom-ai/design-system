@@ -315,5 +315,9 @@ export const staticParams: { group: string; slug: string }[] = [
   {
     "group": "blocks",
     "slug": "settings"
+  },
+  {
+    "group": "blocks",
+    "slug": "scroll-rail"
   }
 ];
