@@ -146,7 +146,7 @@
       "animate-skeleton-shimmer": "skeleton-shimmer 1.8s ease-in-out infinite"
     },
     "light": {
-      "edgecom-theme": "\"v3.0.0 0b1a60a672e0ee8d\"",
+      "edgecom-theme": "\"v3.0.0 3ee26090296baf96\"",
       "font-sans": "ui-sans-serif, -apple-system, \"SF Pro Text\", system-ui, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
       "font-mono": "ui-monospace, \"SF Mono\", SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace",
       "font-heading": "var(--font-sans)",
@@ -365,6 +365,43 @@
       "60%, 100%": {
         "transform": "translateX(100%)"
       }
+    },
+    "@utility tabular": {
+      "font-variant-numeric": "tabular-nums"
+    },
+    "@utility scrollbar-pill": {
+      "--scrollbar-thumb": "transparent",
+      "&:hover": {
+        "--scrollbar-thumb": "color-mix(in oklab, var(--muted-foreground) 35%, transparent)"
+      },
+      "@supports not selector(::-webkit-scrollbar)": {
+        "scrollbar-width": "thin",
+        "scrollbar-color": "var(--scrollbar-thumb) transparent"
+      },
+      "&::-webkit-scrollbar": {
+        "width": "3px",
+        "height": "3px"
+      },
+      "&::-webkit-scrollbar-track": {
+        "background": "transparent"
+      },
+      "&::-webkit-scrollbar-thumb": {
+        "border-radius": "calc(infinity * 1px)",
+        "background": "var(--scrollbar-thumb)"
+      },
+      "&::-webkit-scrollbar-thumb:hover": {
+        "background": "color-mix(in oklab, var(--muted-foreground) 50%, transparent)"
+      }
+    },
+    "@utility scroll-rail": {
+      "@apply scrollbar-pill": {},
+      "overflow-x": "auto",
+      "overscroll-behavior-x": "contain"
+    },
+    "@utility scroll-pane": {
+      "@apply scrollbar-pill scroll-fade-y": {},
+      "overflow-y": "auto",
+      "scrollbar-gutter": "stable"
     }
   },
   "type": "registry:theme"

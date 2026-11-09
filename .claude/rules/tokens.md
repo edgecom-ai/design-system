@@ -9,7 +9,7 @@ paths:
 
 - **Set both `:root` and `.dark`**, or confirm deliberately that the light value is meant to inherit. A token edited in one block only is a bug.
 - **Expose a new token to Tailwind** by adding its `--color-*: var(--…)` mapping in `@theme inline`. Omitting the mapping is how a token is deliberately made unreachable from a class — that is the mechanism guarding `--chart-legacy-*`.
-- **Some rules here are app-level CSS the `theme` registry item does _not_ ship**: the `cursor: pointer` base-layer rule, `color-scheme`, and the `@utility tabular` helper. Keep them; consuming apps add their own (see `public/agents.md`).
+- **Two rules here are app-level CSS the `theme` registry item does _not_ ship**: the `cursor: pointer` base-layer rule and `color-scheme`. Keep them; consuming apps add their own (see `public/agents.md`). Every top-level `@utility` block (`tabular`, `scrollbar-pill`, `scroll-rail`, `scroll-pane`) ships on the theme item's `css` field — `gen-registry` reads them with postcss — so a utility added here reaches every consumer on the next theme install.
 - **Run `pnpm registry:build`** after any token change so the `theme` item regenerates, and `pnpm docs:gen` so `design.md`'s generated token block follows.
 - **Verify on the live Foundations → Semantic colors page**, which has the contrast meter, in **both** light and dark.
 
