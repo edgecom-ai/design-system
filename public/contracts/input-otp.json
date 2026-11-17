@@ -1,6 +1,6 @@
 {
   "version": "v3.0.0",
-  "digest": "60f32496768ca240",
+  "digest": "74c2c28bfa269d76",
   "contract": {
     "id": "input-otp",
     "label": "Input OTP",
