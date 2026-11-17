@@ -8,6 +8,8 @@ const SidebarDemo = React.lazy(() => import("@/components/demo/sidebar-demo").th
 
 const SidebarSubmenuDemo = React.lazy(() => import("@/components/demo/sidebar-submenu-demo").then((m) => ({ default: m.SidebarSubmenuDemo })));
 
+const SidebarScrollDemo = React.lazy(() => import("@/components/demo/sidebar-scroll-demo").then((m) => ({ default: m.SidebarScrollDemo })));
+
 const content = {
   variants: [
       {
@@ -23,6 +25,13 @@ const content = {
         description: "A top-level item expanded into subpages (Energy, Bill, Production).",
         preview: <SidebarSubmenuDemo />,
         source: dm("sidebar-submenu-demo"),
+      },
+      {
+        id: "sidebar-scroll",
+        name: "Scrolling rail",
+        description: "A collapsed icon rail with more items than fit: the menu scrolls while the header and footer stay in place.",
+        preview: <SidebarScrollDemo />,
+        source: dm("sidebar-scroll-demo"),
       },
     ],
 };
