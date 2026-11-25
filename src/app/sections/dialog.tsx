@@ -2,7 +2,9 @@
 // sections.tsx and .claude/rules/docs-site.md.
 
 import * as React from "react"
-import { ss } from "./shared";
+import { dm, ss } from "./shared";
+
+const DialogLongIdentifierDemo = React.lazy(() => import("@/components/demo/dialog-long-identifier-demo").then((m) => ({ default: m.DialogLongIdentifierDemo })));
 
 const DialogStickyFooterDemo = React.lazy(() => import("@/components/shadcn-studio/dialog/dialog-06"));
 
@@ -12,6 +14,13 @@ const DialogOTPVerificationDemo = React.lazy(() => import("@/components/shadcn-s
 
 const content = {
   variants: [
+      {
+        id: "dialog-long-identifier",
+        name: "Long link or identifier",
+        description: "A long URL or id sits on its own monospace line and wraps inside the dialog instead of being cut off.",
+        preview: <DialogLongIdentifierDemo />,
+        source: dm("dialog-long-identifier-demo"),
+      },
       {
         id: "dialog-sticky-footer",
         name: "Dialog with sticky footer",

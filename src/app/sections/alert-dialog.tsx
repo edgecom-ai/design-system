@@ -8,6 +8,8 @@ const AlertDialogDemo = React.lazy(() => import("@/components/demo/alert-dialog-
 
 const AlertDialogTypeToConfirmDemo = React.lazy(() => import("@/components/demo/alert-dialog-type-to-confirm-demo").then((m) => ({ default: m.AlertDialogTypeToConfirmDemo })));
 
+const AlertDialogLongIdentifierDemo = React.lazy(() => import("@/components/demo/alert-dialog-long-identifier-demo").then((m) => ({ default: m.AlertDialogLongIdentifierDemo })));
+
 const AlertDialogBasicDemo = React.lazy(() => import("@/components/shadcn-studio/dialog/dialog-01"));
 
 const AlertDialogWithIconDemo = React.lazy(() => import("@/components/shadcn-studio/dialog/dialog-02"));
@@ -29,6 +31,13 @@ const content = {
         description: "The stronger barrier for a high-impact action: the confirm stays disabled until the resource is named exactly.",
         preview: <AlertDialogTypeToConfirmDemo />,
         source: dm("alert-dialog-type-to-confirm-demo"),
+      },
+      {
+        id: "alert-dialog-long-identifier",
+        name: "Long identifier",
+        description: "Naming the affected resource by a long URL or id: it takes its own monospace line and wraps inside the dialog.",
+        preview: <AlertDialogLongIdentifierDemo />,
+        source: dm("alert-dialog-long-identifier-demo"),
       },
       {
         id: "alert-dialog-basic",
