@@ -30,12 +30,16 @@ function SelectValue({ className, ...props }: SelectPrimitive.Value.Props) {
 }
 
 const selectTriggerVariants = cva(
-  "flex w-fit items-center justify-between gap-1.5 rounded-lg border border-input bg-input-surface py-2 pr-2 pl-2.5 text-body-sm whitespace-nowrap transition-colors outline-none select-none hover:bg-input-hover aria-expanded:bg-input-hover focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 data-placeholder:text-muted-foreground *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-1.5 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  "flex w-fit items-center justify-between gap-1.5 rounded-lg border border-input bg-input-surface py-2 pr-2 pl-2.5 text-body-sm whitespace-nowrap transition-colors outline-none select-none hover:bg-input-hover aria-expanded:bg-input-hover focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 data-placeholder:text-muted-foreground *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-1.5 in-[[data-slot$=dialog-content]]:h-auto in-[[data-slot$=dialog-content]]:whitespace-normal in-[[data-slot$=dialog-content]]:*:data-[slot=select-value]:line-clamp-none dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
+      // Inside a Dialog or AlertDialog popup the trigger grows with its value
+      // instead of clipping it: the popup is as wide as a phone allows, so a
+      // long value wraps onto a second line. The size's height becomes a floor
+      // and the block padding drops so one line still measures the same.
       size: {
-        default: "h-8",
-        sm: "h-7 rounded-[min(var(--radius-md),10px)]",
+        default: "h-8 in-[[data-slot$=dialog-content]]:min-h-8 in-[[data-slot$=dialog-content]]:py-1",
+        sm: "h-7 rounded-[min(var(--radius-md),10px)] in-[[data-slot$=dialog-content]]:min-h-7 in-[[data-slot$=dialog-content]]:py-0.5",
       },
       // What the trigger sits on. `default` rests on `input-surface`, clear in
       // light so a tinted row shows through. `page` is for a trigger straight
@@ -146,7 +150,7 @@ function SelectItem({
       )}
       {...props}
     >
-      <SelectPrimitive.ItemText className="flex flex-1 shrink-0 gap-2 whitespace-nowrap">
+      <SelectPrimitive.ItemText className="flex min-w-0 flex-1 gap-2">
         {children}
       </SelectPrimitive.ItemText>
     </SelectPrimitive.Item>
