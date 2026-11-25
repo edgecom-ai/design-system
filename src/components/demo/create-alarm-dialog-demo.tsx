@@ -470,11 +470,11 @@ export function CreateAlarmDialogDemo() {
               </div>
           </div>
           {/* Footer */}
-          <div className="bg-background sticky bottom-0 z-10 flex shrink-0 items-center justify-between gap-4 border-t px-6 py-4">
+          <div className="bg-background sticky bottom-0 z-10 flex shrink-0 flex-wrap items-center justify-between gap-x-4 gap-y-2 border-t px-6 py-4">
             <Badge variant="secondary" className="capitalize">
               {priority} priority
             </Badge>
-            <div className="flex items-center gap-2">
+            <div className="ml-auto flex items-center gap-2">
               <DialogClose render={<Button variant="outline" />}>
                 Cancel
               </DialogClose>

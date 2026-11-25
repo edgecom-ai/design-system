@@ -54,14 +54,14 @@ export function UserDetailsDialogDemo() {
               </DialogTitle>
             </DialogHeader>
 
-            <div className="flex items-center gap-6">
+            <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-6">
               <Avatar className="size-25 shrink-0 rounded-lg after:rounded-lg">
                 <AvatarFallback className="rounded-lg bg-muted text-lg font-medium text-muted-foreground">
                   MC
                 </AvatarFallback>
               </Avatar>
 
-              <div className="grid flex-1 grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-4">
+              <div className="grid w-full flex-1 grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-4">
                 <Input
                   type="text"
                   placeholder="Full name"
@@ -81,7 +81,7 @@ export function UserDetailsDialogDemo() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="flex flex-col gap-2">
                 <Label htmlFor="team">Team</Label>
                 <Input
@@ -131,7 +131,7 @@ export function UserDetailsDialogDemo() {
                 />
               </div>
 
-              <div className="flex flex-col gap-2 max-sm:col-span-2">
+              <div className="flex flex-col gap-2">
                 <Label htmlFor="user-id">User ID</Label>
                 <Input
                   id="user-id"
@@ -141,7 +141,7 @@ export function UserDetailsDialogDemo() {
                 />
               </div>
 
-              <div className="flex flex-col gap-2 max-sm:col-span-2">
+              <div className="flex flex-col gap-2">
                 <Label htmlFor="location">Location</Label>
                 <Input
                   id="location"
